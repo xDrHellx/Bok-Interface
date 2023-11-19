@@ -2,3 +2,4 @@ bin/
 obj/
 BizHawk/*
 !BizHawk/.KEEP
+!BokInterface.dll
