@@ -1,8 +1,7 @@
-// using System;
-// using BizHawk.Client.Common;
+using System;
+using System.Collections.Generic;
 using BizHawk.Client.EmuHawk;
-// using BokInterface;
-// using BokInterface.All;
+using BokInterface.Boktai;
 
 /**
  * File for the Boktai TSiiYH interface itself
@@ -11,6 +10,8 @@ using BizHawk.Client.EmuHawk;
 namespace BokInterface {
 	
 	partial class BokInterfaceMainForm {
+
+		private readonly BoktaiAddresses boktaiAddresses = new BoktaiAddresses();
 
         private void ShowBoktaiInterface() {
 			
