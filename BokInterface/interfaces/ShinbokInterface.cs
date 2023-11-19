@@ -1,9 +1,7 @@
 using System;
-using BizHawk.Client.EmuHawk;
 using System.Collections.Generic;
+using BizHawk.Client.EmuHawk;
 using BokInterface.Shinbok;
-// using BokInterface;
-// using BokInterface.All;
 
 /**
  * File for the Shinbok (Boktai 3) interface itself
@@ -71,7 +69,7 @@ namespace BokInterface {
 			this.ClientSize = new System.Drawing.Size(350, 500);
 			
 			// Adding fields
-            // this.Controls.Add(this.djangoCurrentHpField);
+            this.Controls.Add(this.djangoCurrentHpField);
 
 			this.ResumeLayout(false);
         }
