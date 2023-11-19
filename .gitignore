@@ -3,4 +3,3 @@ obj/
 BizHawk/*
 !BizHawk/.KEEP
 !BokInterface.dll
-BokInterface/BokInterface.sln

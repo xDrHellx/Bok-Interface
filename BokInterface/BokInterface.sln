@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.002.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BokInterface", "BokInterface.csproj", "{FB17273C-2BB4-4493-BD4A-650DB3412141}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FB17273C-2BB4-4493-BD4A-650DB3412141}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FB17273C-2BB4-4493-BD4A-650DB3412141}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FB17273C-2BB4-4493-BD4A-650DB3412141}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FB17273C-2BB4-4493-BD4A-650DB3412141}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {BE50F317-6DD7-402A-B1F0-9A94FFC007B2}
+	EndGlobalSection
+EndGlobal
