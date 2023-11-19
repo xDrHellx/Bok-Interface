@@ -29,15 +29,6 @@ namespace BokInterface.Shinbok {
         public IDictionary<string, uint> Bike = new Dictionary<string, uint>();
 
         /// <summary>
-        /// <para>Short memory addresses</para>
-        /// <para>
-        ///     These are used for some cases where the values we need are stored in different memory addresses <br/>
-        ///     For example the memory address for Django's current HP is different based on which "room sections" he is in
-        /// </para>
-        /// </summary>
-        // public IDictionary<string, uint> Short = new Dictionary<string, uint>();
-
-        /// <summary>
         /// <para>Misc memory addresses</para>
         /// <para>
         ///     These are used in combination with other memory addresses to get / set values that are "dynamic" <br/>
@@ -49,16 +40,12 @@ namespace BokInterface.Shinbok {
         public ShinbokAddresses() {
 
             // Add Django addresses
-            // Django.Add("hp", 0x03C428);
             // Django.Add("ene", 0x03C42C);
             // Django.Add("trc", 0x03CA08);
             // Django.Add("stat_points_to_allocate", 0x03C442);
             // Django.Add("level", 0x03C440);
             // Django.Add("current_exp", 0x03C448);
             // Django.Add("exp_until_next_level", 0x001BC8);
-            // Django.Add("vit", 0x03C418);
-            // Django.Add("spr", 0x03C41A);
-            // Django.Add("str", 0x03C41C);
 
             // Add Solls addresses
             // Solls.Add("solls_on_self", 0x03CBB0);
@@ -75,19 +62,15 @@ namespace BokInterface.Shinbok {
 
             // Add Django addresses
             Django.Add("hp", 0x424);
-            // Django.Add("ene", 0x428); // NEED TO FIND OTHER VALUE
-            Django.Add("vit", 0x41C);
-            Django.Add("spr", 0x41C);
-            Django.Add("str", 0x41C); //0x48B6
+
+            // 0x18 + 2 * stat_id
+            Django.Add("baseVit", 0x18);
+            Django.Add("baseSpr", 0x1A);
+            Django.Add("baseStr", 0x1C);
 
             // Add Misc addresses
             Misc.Add("room", 0x02000580);
-            Misc.Add("vit", 0x02004094);
-            Misc.Add("spr", 0x030067E0);
-            Misc.Add("str", 0x081753A5); //030033D0
-
-            // Short.Add("??? for maxHp", 0x0200B5E4); // Not correct 00BA0A = 0200B5E4 + 00000426
-            // Short.Add("django_maxHp", 0x426);
+            Misc.Add("stat", 0x02000710);
         }
     }
 }

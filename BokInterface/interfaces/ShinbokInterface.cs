@@ -44,7 +44,7 @@ namespace BokInterface {
 			this.AddShinbokCurrentStatusSection();
 
 			// Stats section
-			// this.AddShinbokCurrentStatsSection();
+			this.AddShinbokCurrentStatsSection();
 
 			// Inventory section
 			// this.inventoryGroupBox = this.CreateGroupBox("inventory", "Inventory", 5, 101, 250, 55, true);
@@ -68,6 +68,9 @@ namespace BokInterface {
 			 * So we need to combine multiple addresses to get the actual value all the time
 			 */
 			var djangoCurrentHp = ApiContainer.Memory.ReadU16(ApiContainer.Memory.ReadU32(shinbokAddresses.Misc["room"]) + shinbokAddresses.Django["hp"]);
+			var djangoCurrentBaseVit = ApiContainer.Memory.ReadU16(ApiContainer.Memory.ReadU32(shinbokAddresses.Misc["stat"]) + shinbokAddresses.Django["baseVit"]);
+			var djangoCurrentBaseSpr = ApiContainer.Memory.ReadU16(ApiContainer.Memory.ReadU32(shinbokAddresses.Misc["stat"]) + shinbokAddresses.Django["baseSpr"]);
+			var djangoCurrentBaseStr = ApiContainer.Memory.ReadU16(ApiContainer.Memory.ReadU32(shinbokAddresses.Misc["stat"]) + shinbokAddresses.Django["baseStr"]);
 
 			/**
 			 * Updating values by retrieving from memory addresses
@@ -77,6 +80,9 @@ namespace BokInterface {
 			 */
 			if(djangoCurrentHp >= 0 && djangoCurrentHp <= 1000) {
 				this.currentStatusHpValue.Text = djangoCurrentHp.ToString();
+				this.djangoBaseVit.Text = djangoCurrentBaseVit.ToString();
+				this.djangoBaseSpr.Text = djangoCurrentBaseSpr.ToString();
+				this.djangoBaseStr.Text = djangoCurrentBaseStr.ToString();
 			}
 		}
 
