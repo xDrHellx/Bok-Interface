@@ -44,22 +44,10 @@ namespace BokInterface {
 			this.AddShinbokCurrentStatusSection();
 
 			// Stats section
-			this.AddShinbokCurrentStatsSection();
+			// this.AddShinbokCurrentStatsSection();
 
 			// Inventory section
 			// this.inventoryGroupBox = this.CreateGroupBox("inventory", "Inventory", 5, 101, 250, 55, true);
-
-			// Current LIFE / HP
-			this.djangoCurrentHpField = new System.Windows.Forms.NumericUpDown();
-			this.djangoCurrentHpField.Name = "djangoCurrentHp";
-			this.djangoCurrentHpField.Minimum = 1;
-			this.djangoCurrentHpField.Maximum = 1000;
-			this.djangoCurrentHpField.Value = 100;
-			this.djangoCurrentHpField.AutoSize = true;
-			this.djangoCurrentHpField.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-			this.djangoCurrentHpField.Location = new System.Drawing.Point(70, 20);
-			this.djangoCurrentHpField.Size = new System.Drawing.Size(50, 20);
-			this.djangoCurrentHpField.TabIndex = 2;
 
 			// ToolboxMainForm
 			this.Name = "Bok Interface" + (shorterGameName != "" ? " - " + shorterGameName : "");
@@ -68,9 +56,6 @@ namespace BokInterface {
 			this.BackColor = System.Drawing.SystemColors.Control;
 			this.ClientSize = new System.Drawing.Size(350, 500);
 			
-			// Adding fields
-            this.Controls.Add(this.djangoCurrentHpField);
-
 			this.ResumeLayout(false);
         }
 
