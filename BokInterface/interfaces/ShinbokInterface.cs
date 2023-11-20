@@ -67,10 +67,10 @@ namespace BokInterface {
 			 * This is necessary because some memory addresses changes based on areas
 			 * So we need to combine multiple addresses to get the actual value all the time
 			 */
-			var djangoCurrentHp = ApiContainer.Memory.ReadU16(ApiContainer.Memory.ReadU32(shinbokAddresses.Misc["room"]) + shinbokAddresses.Django["hp"]);
-			var djangoCurrentBaseVit = ApiContainer.Memory.ReadU16(ApiContainer.Memory.ReadU32(shinbokAddresses.Misc["stat"]) + shinbokAddresses.Django["baseVit"]);
-			var djangoCurrentBaseSpr = ApiContainer.Memory.ReadU16(ApiContainer.Memory.ReadU32(shinbokAddresses.Misc["stat"]) + shinbokAddresses.Django["baseSpr"]);
-			var djangoCurrentBaseStr = ApiContainer.Memory.ReadU16(ApiContainer.Memory.ReadU32(shinbokAddresses.Misc["stat"]) + shinbokAddresses.Django["baseStr"]);
+			var djangoCurrentHp = utils.ReadDynamicAddress(shinbokAddresses.Misc["room"], shinbokAddresses.Django["hp"]);
+			var djangoCurrentBaseVit = utils.ReadDynamicAddress(shinbokAddresses.Misc["stat"], shinbokAddresses.Django["baseVit"]);
+			var djangoCurrentBaseSpr = utils.ReadDynamicAddress(shinbokAddresses.Misc["stat"], shinbokAddresses.Django["baseSpr"]);
+			var djangoCurrentBaseStr = utils.ReadDynamicAddress(shinbokAddresses.Misc["stat"], shinbokAddresses.Django["baseStr"]);
 
 			/**
 			 * Updating values by retrieving from memory addresses

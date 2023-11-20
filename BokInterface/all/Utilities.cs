@@ -12,5 +12,13 @@ namespace BokInterface.All {
         public uint GetGameCode() {
             return APIs.Memory.ReadU32(0x080000AC) & 0xFFFFFF;
         }
+
+        /// <summary>Shortcut method for retrieving the value of a dynamic memory address</summary>
+        /// <param name="firstAddress">First address to read (U32)</param>
+        /// <param name="secondAddress">Second address to read (U16)</param>
+        /// <returns><c>uint</c>Value</returns>
+        public uint ReadDynamicAddress(uint firstAddress, uint secondAddress){
+            return APIs.Memory.ReadU16(APIs.Memory.ReadU32(firstAddress) + secondAddress);
+        }
     }
 }
