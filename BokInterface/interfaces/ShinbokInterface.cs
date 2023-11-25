@@ -11,24 +11,18 @@ namespace BokInterface {
 	
 	partial class BokInterfaceMainForm {
 
-		private System.Windows.Forms.NumericUpDown djangoCurrentHpField = new System.Windows.Forms.NumericUpDown();
-		private System.Windows.Forms.GroupBox currentStatusGroupBox = new System.Windows.Forms.GroupBox();
-		private System.Windows.Forms.GroupBox currentStatsGroupBox = new System.Windows.Forms.GroupBox();
-		private System.Windows.Forms.GroupBox inventoryGroupBox = new System.Windows.Forms.GroupBox();
-		private List<System.Windows.Forms.Label> currentStatusLabels = new List<System.Windows.Forms.Label>();
-		private List<System.Windows.Forms.Label> currentStatsLabels = new List<System.Windows.Forms.Label>();
-		private System.Windows.Forms.Label currentStatusHpValue = new System.Windows.Forms.Label();
-		private System.Windows.Forms.Label currentStatusEneValue = new System.Windows.Forms.Label();
-		private System.Windows.Forms.Label currentStatusTrcValue = new System.Windows.Forms.Label();
-		private System.Windows.Forms.Label djangoBaseVit = new System.Windows.Forms.Label();
-		private System.Windows.Forms.Label djangoEquipsVit = new System.Windows.Forms.Label();
-		private System.Windows.Forms.Label djangoTotalVit = new System.Windows.Forms.Label();
-		private System.Windows.Forms.Label djangoBaseSpr = new System.Windows.Forms.Label();
-		private System.Windows.Forms.Label djangoEquipsSpr = new System.Windows.Forms.Label();
-		private System.Windows.Forms.Label djangoTotalSpr = new System.Windows.Forms.Label();
-		private System.Windows.Forms.Label djangoBaseStr = new System.Windows.Forms.Label();
-		private System.Windows.Forms.Label djangoEquipsStr = new System.Windows.Forms.Label();
-		private System.Windows.Forms.Label djangoTotalStr = new System.Windows.Forms.Label();
+		private System.Windows.Forms.Label bok3_currentStatusHpValue = new System.Windows.Forms.Label();
+		private System.Windows.Forms.Label bok3_currentStatusEneValue = new System.Windows.Forms.Label();
+		private System.Windows.Forms.Label bok3_currentStatusTrcValue = new System.Windows.Forms.Label();
+		private System.Windows.Forms.Label bok3_djangoBaseVit = new System.Windows.Forms.Label();
+		private System.Windows.Forms.Label bok3_djangoEquipsVit = new System.Windows.Forms.Label();
+		private System.Windows.Forms.Label bok3_djangoTotalVit = new System.Windows.Forms.Label();
+		private System.Windows.Forms.Label bok3_djangoBaseSpr = new System.Windows.Forms.Label();
+		private System.Windows.Forms.Label bok3_djangoEquipsSpr = new System.Windows.Forms.Label();
+		private System.Windows.Forms.Label bok3_djangoTotalSpr = new System.Windows.Forms.Label();
+		private System.Windows.Forms.Label bok3_djangoBaseStr = new System.Windows.Forms.Label();
+		private System.Windows.Forms.Label bok3_djangoEquipsStr = new System.Windows.Forms.Label();
+		private System.Windows.Forms.Label bok3_djangoTotalStr = new System.Windows.Forms.Label();
 
 		private readonly ShinbokAddresses shinbokAddresses = new ShinbokAddresses();
 		// private System.Windows.Forms.ProgressBar djangoCurrentHpBar = new System.Windows.Forms.ProgressBar();
@@ -79,10 +73,12 @@ namespace BokInterface {
 			 * For example Django's current HP goes below 0 or above 1000 when switching rooms, during bike races or on world map
 			 */
 			if(djangoCurrentHp >= 0 && djangoCurrentHp <= 1000) {
-				this.currentStatusHpValue.Text = djangoCurrentHp.ToString();
-				this.djangoBaseVit.Text = djangoCurrentBaseVit.ToString();
-				this.djangoBaseSpr.Text = djangoCurrentBaseSpr.ToString();
-				this.djangoBaseStr.Text = djangoCurrentBaseStr.ToString();
+				this.bok3_currentStatusHpValue.Text = djangoCurrentHp.ToString();
+				this.bok3_djangoBaseVit.Text = djangoCurrentBaseVit.ToString();
+				this.bok3_djangoBaseSpr.Text = djangoCurrentBaseSpr.ToString();
+				this.bok3_djangoBaseStr.Text = djangoCurrentBaseStr.ToString();
+
+				// utils.WriteDynamicAddress((uint)99, shinbokAddresses.Misc["room"], shinbokAddresses.Django["hp"]);
 			}
 		}
 
@@ -97,14 +93,14 @@ namespace BokInterface {
 			this.currentStatusLabels.Add(this.CreateLabel("currentGameNameTrcLabel", "TRC :", 7, 49, 34, 15));
 
 			// Current status values
-			this.currentStatusHpValue = this.CreateLabel("djangoCurrentHpValue", "", 44, 19, 31, 15);
-			this.currentStatusEneValue = this.CreateLabel("djangoCurrentHpValue", "", 44, 34, 31, 15);
-			this.currentStatusTrcValue = this.CreateLabel("djangoCurrentHpValue", "", 44, 49, 31, 15);
+			this.bok3_currentStatusHpValue = this.CreateLabel("djangoCurrentHpValue", "", 44, 19, 31, 15);
+			this.bok3_currentStatusEneValue = this.CreateLabel("djangoCurrentHpValue", "", 44, 34, 31, 15);
+			this.bok3_currentStatusTrcValue = this.CreateLabel("djangoCurrentHpValue", "", 44, 49, 31, 15);
 
 			// Add values labels to group
-			this.currentStatusLabels.Add(this.currentStatusHpValue);
-			this.currentStatusLabels.Add(this.currentStatusEneValue);
-			this.currentStatusLabels.Add(this.currentStatusTrcValue);
+			this.currentStatusLabels.Add(this.bok3_currentStatusHpValue);
+			this.currentStatusLabels.Add(this.bok3_currentStatusEneValue);
+			this.currentStatusLabels.Add(this.bok3_currentStatusTrcValue);
 
 			// Add elements to group
 			for(int i = 0; i < this.currentStatusLabels.Count; i++) {
@@ -124,32 +120,32 @@ namespace BokInterface {
 
 			// VIT
 			this.currentStatsLabels.Add(this.CreateLabel("vitRowLabel", "VIT", 6, 34, 27, 15));
-			this.djangoBaseVit = this.CreateLabel("djangoBaseVit", "", 35, 34, 31, 15, false, BokInterfaceMainForm.baseStatColor, new System.Windows.Forms.Padding(0), "MiddleRight");
-			this.djangoEquipsVit = this.CreateLabel("djangoEquipsVit", "", 66, 34, 42, 15, false, BokInterfaceMainForm.equipsStatColor, new System.Windows.Forms.Padding(0), "MiddleRight");
-			this.djangoTotalVit = this.CreateLabel("djangoTotalVit", "", 108, 34, 32, 15, false, BokInterfaceMainForm.totalStatColor, new System.Windows.Forms.Padding(0), "MiddleRight");
+			this.bok3_djangoBaseVit = this.CreateLabel("djangoBaseVit", "", 35, 34, 31, 15, false, BokInterfaceMainForm.baseStatColor, new System.Windows.Forms.Padding(0), "MiddleRight");
+			this.bok3_djangoEquipsVit = this.CreateLabel("djangoEquipsVit", "", 66, 34, 42, 15, false, BokInterfaceMainForm.equipsStatColor, new System.Windows.Forms.Padding(0), "MiddleRight");
+			this.bok3_djangoTotalVit = this.CreateLabel("djangoTotalVit", "", 108, 34, 32, 15, false, BokInterfaceMainForm.totalStatColor, new System.Windows.Forms.Padding(0), "MiddleRight");
 			
 			// SPR
 			this.currentStatsLabels.Add(this.CreateLabel("sprRowLabel", "SPR", 6, 49, 27, 15));
-			this.djangoBaseSpr = this.CreateLabel("djangoBaseSpr", "", 35, 49, 31, 15, false, BokInterfaceMainForm.baseStatColor, new System.Windows.Forms.Padding(0), "MiddleRight");
-			this.djangoEquipsSpr = this.CreateLabel("djangoEquipsSpr", "", 66, 49, 42, 15, false, BokInterfaceMainForm.equipsStatColor, new System.Windows.Forms.Padding(0), "MiddleRight");
-			this.djangoTotalSpr = this.CreateLabel("djangoTotalSpr", "", 108, 49, 32, 15, false, BokInterfaceMainForm.totalStatColor, new System.Windows.Forms.Padding(0), "MiddleRight");
+			this.bok3_djangoBaseSpr = this.CreateLabel("djangoBaseSpr", "", 35, 49, 31, 15, false, BokInterfaceMainForm.baseStatColor, new System.Windows.Forms.Padding(0), "MiddleRight");
+			this.bok3_djangoEquipsSpr = this.CreateLabel("djangoEquipsSpr", "", 66, 49, 42, 15, false, BokInterfaceMainForm.equipsStatColor, new System.Windows.Forms.Padding(0), "MiddleRight");
+			this.bok3_djangoTotalSpr = this.CreateLabel("djangoTotalSpr", "", 108, 49, 32, 15, false, BokInterfaceMainForm.totalStatColor, new System.Windows.Forms.Padding(0), "MiddleRight");
 			
 			// STR
 			this.currentStatsLabels.Add(this.CreateLabel("strRowLabel", "STR", 6, 64, 27, 15));
-			this.djangoBaseStr = this.CreateLabel("djangoBaseStr", "", 35, 64, 31, 15, false, BokInterfaceMainForm.baseStatColor, new System.Windows.Forms.Padding(0), "MiddleRight");
-			this.djangoEquipsStr = this.CreateLabel("djangoEquipsStr", "", 66, 64, 42, 15, false, BokInterfaceMainForm.equipsStatColor, new System.Windows.Forms.Padding(0), "MiddleRight");
-			this.djangoTotalStr = this.CreateLabel("djangoTotalStr", "", 108, 64, 32, 15, false, BokInterfaceMainForm.totalStatColor, new System.Windows.Forms.Padding(0), "MiddleRight");
+			this.bok3_djangoBaseStr = this.CreateLabel("djangoBaseStr", "", 35, 64, 31, 15, false, BokInterfaceMainForm.baseStatColor, new System.Windows.Forms.Padding(0), "MiddleRight");
+			this.bok3_djangoEquipsStr = this.CreateLabel("djangoEquipsStr", "", 66, 64, 42, 15, false, BokInterfaceMainForm.equipsStatColor, new System.Windows.Forms.Padding(0), "MiddleRight");
+			this.bok3_djangoTotalStr = this.CreateLabel("djangoTotalStr", "", 108, 64, 32, 15, false, BokInterfaceMainForm.totalStatColor, new System.Windows.Forms.Padding(0), "MiddleRight");
 			
 			// Add values labels to group
-			this.currentStatsLabels.Add(this.djangoBaseVit);
-			this.currentStatsLabels.Add(this.djangoEquipsVit);
-			this.currentStatsLabels.Add(this.djangoTotalVit);
-			this.currentStatsLabels.Add(this.djangoBaseSpr);
-			this.currentStatsLabels.Add(this.djangoEquipsSpr);
-			this.currentStatsLabels.Add(this.djangoTotalSpr);
-			this.currentStatsLabels.Add(this.djangoBaseStr);
-			this.currentStatsLabels.Add(this.djangoEquipsStr);
-			this.currentStatsLabels.Add(this.djangoTotalStr);
+			this.currentStatsLabels.Add(this.bok3_djangoBaseVit);
+			this.currentStatsLabels.Add(this.bok3_djangoEquipsVit);
+			this.currentStatsLabels.Add(this.bok3_djangoTotalVit);
+			this.currentStatsLabels.Add(this.bok3_djangoBaseSpr);
+			this.currentStatsLabels.Add(this.bok3_djangoEquipsSpr);
+			this.currentStatsLabels.Add(this.bok3_djangoTotalSpr);
+			this.currentStatsLabels.Add(this.bok3_djangoBaseStr);
+			this.currentStatsLabels.Add(this.bok3_djangoEquipsStr);
+			this.currentStatsLabels.Add(this.bok3_djangoTotalStr);
 
 			// Add elements to group
 			for(int i = 0; i < this.currentStatsLabels.Count; i++) {

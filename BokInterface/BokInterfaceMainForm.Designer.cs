@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
 
@@ -105,6 +106,8 @@ namespace BokInterface {
 
 		#endregion
 
+		#region Form elements generating methods
+
 		/// <summary>Simplified method for creating a group box</summary>
 		/// <param name="name">Group name</param>
 		/// <param name="text">Group text</param>
@@ -201,5 +204,18 @@ namespace BokInterface {
 
 			return label;
 		}
+
+		#endregion
+
+		// Interface elements that exists for all Boktai games
+		#region Common interface elements
+		
+		private System.Windows.Forms.GroupBox currentStatusGroupBox = new System.Windows.Forms.GroupBox();
+		private System.Windows.Forms.GroupBox currentStatsGroupBox = new System.Windows.Forms.GroupBox();
+		private System.Windows.Forms.GroupBox inventoryGroupBox = new System.Windows.Forms.GroupBox();
+		private List<System.Windows.Forms.Label> currentStatusLabels = new List<System.Windows.Forms.Label>();
+		private List<System.Windows.Forms.Label> currentStatsLabels = new List<System.Windows.Forms.Label>();
+
+		#endregion
 	}
 }

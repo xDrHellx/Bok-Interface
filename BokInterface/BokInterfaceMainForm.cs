@@ -27,14 +27,12 @@ namespace BokInterface {
 		protected int count = 0;
 		protected bool interfaceActivated = false;
 
-		
-
 		public ApiContainer ApiContainer {
 			get => APIs.ApiContainer;
 			set => APIs.Update(value);
 		}
 
-		// #endregion
+		#region Main methods
 		
 		public BokInterfaceMainForm() {
 
@@ -132,6 +130,8 @@ namespace BokInterface {
 					break;
 			}
 		}
+
+		#endregion
 
 		#region Events
 
