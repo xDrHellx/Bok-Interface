@@ -22,16 +22,7 @@ namespace BokInterface {
 			this.CreateLabel("currentGameName", currentGameName, 5, 5, 35, 15, true);
 
 			// Current status section
-			this.currentStatusGroupBox = this.CreateGroupBox("currentStatus", "Current status", 5, 25, 250, 70, true);
-
-			// Current status labels
-			this.currentStatusLabels.Add(this.CreateLabel("djangoCurrentHp", "LIFE :", 7, 19, 34, 15));
-			this.currentStatusLabels.Add(this.CreateLabel("djangoCurrentEne", "ENE :", 7, 34, 34, 15));
-
-			// Add elements to group
-			for(int i = 0; i < this.currentStatusLabels.Count; i++) {
-				this.currentStatusGroupBox.Controls.Add(this.currentStatusLabels[i]);
-			}
+			this.AddBoktaiCurrentStatusSection();
 			
 			// ToolboxMainForm
 			this.Name = "Bok Interface" + (shorterGameName != "" ? " - " + shorterGameName : "");
@@ -45,6 +36,29 @@ namespace BokInterface {
 
 		private void UpdateBoktaiInterface() {
 
+		}
+
+		private void AddBoktaiCurrentStatusSection() {
+			
+			// Section
+			this.currentStatusGroupBox = this.CreateGroupBox("currentStatus", "Current status", 5, 25, 250, 70, true);
+
+			// Current status labels
+			this.currentStatusLabels.Add(this.CreateLabel("djangoCurrentHpLabel", "LIFE :", 7, 19, 34, 15));
+			this.currentStatusLabels.Add(this.CreateLabel("djangoCurrentEneLabel", "ENE :", 7, 34, 34, 15));
+
+			// Current status values
+			this.bok1_currentStatusHpValue = this.CreateLabel("djangoCurrentHpValue", "", 44, 19, 31, 15);
+			this.bok1_currentStatusEneValue = this.CreateLabel("djangoCurrentHpValue", "", 44, 34, 31, 15);
+
+			// Add values labels to group
+			this.currentStatusLabels.Add(this.bok1_currentStatusHpValue);
+			this.currentStatusLabels.Add(this.bok1_currentStatusEneValue);
+
+			// Add elements to group
+			for(int i = 0; i < this.currentStatusLabels.Count; i++) {
+				this.currentStatusGroupBox.Controls.Add(this.currentStatusLabels[i]);
+			}
 		}
     }
 }
