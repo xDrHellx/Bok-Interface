@@ -82,7 +82,11 @@ namespace BokInterface {
 		/// <summary>Clears the interface window and all other sections within it</summary>
 		private void ClearInterface() {
 			this.Controls.Clear();
+			this.currentStatusGroupBox.Controls.Clear();
+			this.currentStatsGroupBox.Controls.Clear();
+			this.inventoryGroupBox.Controls.Clear();
 			this.currentStatusLabels.Clear();
+			this.currentStatsLabels.Clear();
 		}
 
 		/// <summary>Shows the "Game not recognized" window</summary>
