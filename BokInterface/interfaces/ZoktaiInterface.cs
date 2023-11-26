@@ -23,7 +23,7 @@ namespace BokInterface {
         private void ShowZoktaiInterface() {
 
 			// Current game name
-			this.CreateLabel("currentGameName", currentGameName, 5, 5, 176, 15, true);
+			this.CreateLabel("currentGameName", currentGameName, 5, 5, 145, 20, true);
 
 			// Current status section
 			this.AddZoktaiCurrentStatusSection();

@@ -24,7 +24,6 @@ namespace BokInterface {
 		public uint currentGameId;
 		public string currentGameName = "";
 		public string shorterGameName = "";
-		protected int count = 0;
 		protected bool interfaceActivated = false;
 
 		public ApiContainer ApiContainer {
@@ -91,6 +90,9 @@ namespace BokInterface {
 						case "Shinbok":
 							UpdateShinbokInterface();
 							break;
+						case "LunarKnights":
+							UpdateLunarKnightsInterface();
+							break;
 						default:
 							// Nothing to do here
 							break;
@@ -131,7 +133,7 @@ namespace BokInterface {
 				case 1347112001:	// EU 1.0
 				case 1162562625:	// US
 				case 1246448705:	// JP
-					currentGameName = "Boktai DS | Lunar Knights";
+					currentGameName = "Boktai DS - Lunar Knights";
 					shorterGameName = "LunarKnights";
 					interfaceActivated = true;
 					break;

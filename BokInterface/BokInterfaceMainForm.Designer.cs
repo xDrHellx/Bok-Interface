@@ -96,7 +96,7 @@ namespace BokInterface {
 		private void GameNotRecognizedWindow() {
 			
 			// Current game name
-			this.CreateLabel("currentGameName", "Game not recognized!", 5, 5, 176, 15, true);
+			this.CreateLabel("currentGameName", "Game not recognized!", 5, 5, 123, 20, true);
 
 			// Window
 			this.SetMainWindow("Bok Interface" + (shorterGameName != "" ? " - " + shorterGameName : ""), 350, 100);
