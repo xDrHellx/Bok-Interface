@@ -1,10 +1,14 @@
 # Bok-Interface
-External tool for Boktai games on GBA.
+External tool for Boktai games.
 
 This is a tool mainly meant for making testing & routing easier.  
 *For example testing impact from stats points in Boktai 2 & 3 can take a long time, as having higher stats can save time in multiple situations, which may end up being worth doing when all the time saved is accumulated.*
 
 -------------------------------------
+
+# Which versions of the games is this compatible with ?
+The interface can detect all versions for each games.
+However it is currently aimed at the **japanese versions**.
 
 # Which BizHawk version is this compatible with ?
 This interface is meant for BizHawk 2.9 and above.
