@@ -23,7 +23,6 @@ namespace BokInterface {
         private void ShowZoktaiInterface() {
 
 			// Current game name
-			this.CreateLabel("currentGameName", currentGameName, 5, 5, 176, 15, true);
 
 			// Current status section
 			this.AddZoktaiCurrentStatusSection();
@@ -31,12 +30,8 @@ namespace BokInterface {
 			// Stats section
 			this.AddZoktaiCurrentStatsSection();
 			
-			// ToolboxMainForm
-			this.Name = "Bok Interface" + (shorterGameName != "" ? " - " + shorterGameName : "");
-			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 15F);
-			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.BackColor = System.Drawing.SystemColors.Control;
-			this.ClientSize = new System.Drawing.Size(350, 500);
+			// Main window
+			this.SetMainWindow("Bok Interface" + (shorterGameName != "" ? " - " + shorterGameName : ""), 350, 500);
 			
 			this.ResumeLayout(false);
         }

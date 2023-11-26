@@ -43,12 +43,8 @@ namespace BokInterface {
 			// Inventory section
 			// this.inventoryGroupBox = this.CreateGroupBox("inventory", "Inventory", 5, 101, 250, 55, true);
 
-			// ToolboxMainForm
-			this.Name = "Bok Interface" + (shorterGameName != "" ? " - " + shorterGameName : "");
-			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 15F);
-			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.BackColor = System.Drawing.SystemColors.Control;
-			this.ClientSize = new System.Drawing.Size(350, 500);
+			// Main window
+			this.SetMainWindow("Bok Interface" + (shorterGameName != "" ? " - " + shorterGameName : ""), 350, 500);
 			
 			this.ResumeLayout(false);
         }

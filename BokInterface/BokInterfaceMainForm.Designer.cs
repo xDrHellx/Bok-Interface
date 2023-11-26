@@ -14,7 +14,7 @@ namespace BokInterface {
 		/// <summary>Required designer variable</summary>
 		private IContainer components = null;
 
-		/// <summary>Color for pure stat points (Boktai 2 and 3)</summary>
+		/// <summary>Color for pure stat points (Boktai 2, 3, LK)</summary>
 		private static string baseStatColor = "#FFE600";
 
 		/// <summary>
@@ -24,7 +24,7 @@ namespace BokInterface {
 		/// </summary>
 		private static string equipsStatColor = "#FFA529";
 
-		/// <summary>Color for the total stat points for a specific stat (Boktai 2 and 3)</summary>
+		/// <summary>Color for the total stat points for a specific stat (Boktai 2, 3, LK)</summary>
 		private static string totalStatColor = "#FFD3D3D3";
 
 		/// <summary>Clean up any resources being used</summary>
@@ -44,7 +44,7 @@ namespace BokInterface {
 
 			/**
 			 * Clear the external tool window
-			 * The Bok Interface supports all 3 GBA games, so we need to do that
+			 * The Bok Interface supports all 4 games, so we need to do that
 			 */
 			this.ClearInterface();
 
@@ -71,6 +71,9 @@ namespace BokInterface {
 					case "Shinbok":
 						ShowShinbokInterface();
 						break;
+					case "LunarKnights":
+						ShowLunarKnightsInterface();
+						break;
 					default:
 						// Just in case, show the "Game not recognized" window if the game is not handled via the switch
 						GameNotRecognizedWindow();
@@ -96,16 +99,24 @@ namespace BokInterface {
 			this.CreateLabel("currentGameName", "Game not recognized!", 5, 5, 176, 15, true);
 
 			// Window
-			this.Name = "Bok Interface" + (shorterGameName != "" ? " - " + shorterGameName : "");
-			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.BackColor = System.Drawing.SystemColors.Control;
-			this.ClientSize = new System.Drawing.Size(350, 100);
+			this.SetMainWindow("Bok Interface" + (shorterGameName != "" ? " - " + shorterGameName : ""), 350, 100);
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
 			this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.BokInterfaceMainForm_FormClosing);
 			this.Load += new System.EventHandler(this.BokInterfaceMainForm_Load);
 
 			this.ResumeLayout(false);
+		}
+
+		/// <summary>Simplified method for setting the main window of the interface</summary>
+		/// <param name="name">Window name</param>
+		/// <param name="width">Width</param>
+		/// <param name="height">Height</param>
+		private void SetMainWindow(string name, Int32 width, Int32 height) {
+			this.Name = name;
+			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 15F);
+			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+			this.BackColor = System.Drawing.SystemColors.Control;
+			this.ClientSize = new System.Drawing.Size(width, height);
 		}
 
 		#endregion
