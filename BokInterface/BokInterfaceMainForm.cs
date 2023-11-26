@@ -132,7 +132,7 @@ namespace BokInterface {
 				case 1162562625:	// US
 				case 1246448705:	// JP
 					currentGameName = "Boktai DS | Lunar Knights";
-					shorterGameName = "Lunar Knights";
+					shorterGameName = "LunarKnights";
 					interfaceActivated = true;
 					break;
 				default:
