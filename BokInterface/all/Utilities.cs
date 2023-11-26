@@ -10,7 +10,14 @@ namespace BokInterface.All {
         /// <summary>Retrieve the code for the current game running on BizHawk</summary>
         /// <returns><c>uint</c>Game code</returns>
         public uint GetGameCode() {
-            return APIs.Memory.ReadU32(0x080000AC) & 0xFFFFFF;
+            var code = APIs.Memory.ReadU32(0x080000AC);
+
+            // If the code is 0, it's not a GBA game & we need to try different memory addresses
+            if(code == 0){
+                code = APIs.Memory.ReadU32(0x3FFE0C, "Main RAM");
+            }
+
+            return code;
         }
 
         /// <summary>Shortcut method for retrieving the value of a dynamic memory address</summary>

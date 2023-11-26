@@ -106,21 +106,33 @@ namespace BokInterface {
 		protected void DetectCurrentGame() {
 			
 			currentGameId = utils.GetGameCode();
-
+			
 			switch(currentGameId) {
-				case 4797269:
+				case 1346974549:	// EU
+				case 1162425173:	// US
+				case 1246311253: 	// JP
 					currentGameName = "Boktai: The Sun is in Your Hand";
 					shorterGameName = "Boktai";
 					interfaceActivated = true;
 					break;
-				case 3289941:
+				case 1345467221:	// EU
+				case 1160917845:	// US
+				case 1244803925:	// JP 1.0 & 1.1
 					currentGameName = "Boktai 2: Solar Boy Django";
 					shorterGameName = "Zoktai";
 					interfaceActivated = true;
 					break;
-				case 3355477:
+				case 1244869461:
 					currentGameName = "Boktai 3: Sabata's Counterattack";
 					shorterGameName = "Shinbok";
+					interfaceActivated = true;
+					break;
+				case 1481329729:	// EU 1.1
+				case 1347112001:	// EU 1.0
+				case 1162562625:	// US
+				case 1246448705:	// JP
+					currentGameName = "Boktai DS | Lunar Knights";
+					shorterGameName = "Lunar Knights";
 					interfaceActivated = true;
 					break;
 				default:
