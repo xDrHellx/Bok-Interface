@@ -58,24 +58,29 @@ namespace BokInterface {
 			 * If not a Boktai game, shows the "Game not recognized" window
 			 * Otherwise, shows the window for the corresponding game
 			 */
-			if(interfaceActivated == false) {
+			if(supportedGame == false) {
 				GameNotRecognizedWindow();
 			} else {
 				switch(shorterGameName) {
 					case "Boktai":
+						interfaceActivated = true;
 						ShowBoktaiInterface();
 						break;
 					case "Zoktai":
+						interfaceActivated = true;
 						ShowZoktaiInterface();
 						break;
 					case "Shinbok":
+						interfaceActivated = true;
 						ShowShinbokInterface();
 						break;
 					case "LunarKnights":
+						interfaceActivated = true;
 						ShowLunarKnightsInterface();
 						break;
 					default:
 						// Just in case, show the "Game not recognized" window if the game is not handled via the switch
+						interfaceActivated = false;
 						GameNotRecognizedWindow();
 						break;
 				}

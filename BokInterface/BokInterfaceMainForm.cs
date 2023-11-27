@@ -2,10 +2,11 @@
 using BizHawk.Client.EmuHawk;
 using System;
 using System.Windows.Forms;
+using System.Drawing;
+using System.Linq;
 using System.Diagnostics;
 using System.Runtime.CompilerServices;
 using BokInterface.All;
-using System.Drawing;
 
 /**
  * File for the main / initialization part of the Bok interface
@@ -24,7 +25,10 @@ namespace BokInterface {
 		public uint currentGameId;
 		public string currentGameName = "";
 		public string shorterGameName = "";
+		protected bool supportedGame = false;
 		protected bool interfaceActivated = false;
+		protected bool isDS = false;
+		protected int retryCount = 0;
 
 		public ApiContainer ApiContainer {
 			get => APIs.ApiContainer;
@@ -38,17 +42,8 @@ namespace BokInterface {
 			// Get / instanciate utilities
 			utils = new Utilities();
 			
-			/**
-			 * We use a try - catch to prevent the tool from returning an error when no ROM is loaded
-			 * When no ROM is loaded, memory domains aren't accessible
-			 */
-			try {
-	            // Get & set the infos about the game currently running on BizHawk
-				DetectCurrentGame();
-				ShowInterfaceIndicator();
-			} catch {}
-
-			InitializeComponent();
+			// Try initializing the interface
+			InitializeInterface();
 		}
 
 		/// <summary>Executed once after the constructor, and again every time a rom is loaded or reloaded</summary>
@@ -57,6 +52,21 @@ namespace BokInterface {
 			// Update the APIs, as some of them might not be available if a game is not loaded
 			APIs.Update(MainForm);
 
+			// Reset the retry count & isDS indicator
+			retryCount = 0;
+			isDS = false;
+
+			// Try initializing the interface
+			InitializeInterface();
+		}
+
+		/// <summary>Method used for initializing the interface</summary>
+		protected void InitializeInterface() {
+
+			// Reset variables used for initializing
+			supportedGame = false;
+			interfaceActivated = false;
+
 			/**
 			 * We use a try - catch to prevent the tool from returning an error when no ROM is loaded
 			 * When no ROM is loaded, memory domains aren't accessible
@@ -66,6 +76,17 @@ namespace BokInterface {
 				DetectCurrentGame();
 				if(interfaceActivated == true) {
 					ShowInterfaceIndicator();
+				} else {
+					/**
+					 * Retry getting the game code
+					 * For DS games, because of the DS bootup screen, the game code is not always accessible after switching games
+					 * 
+					 * 10 frames should be enough for this
+					 */
+					if(retryCount < 10){
+						retryCount++;
+						DetectCurrentGame();
+					}
 				}
 			} catch {}
 
@@ -74,11 +95,16 @@ namespace BokInterface {
 
 		/// <summary>Executed after every frame (except while turboing, use FastUpdateAfter for that)</summary>
 		protected override void UpdateAfter() {
-
+			
 			try {
-				if(interfaceActivated == true) {
+				if(supportedGame == true) {
 					ShowInterfaceIndicator();
-					
+
+					// If the interface is not activated, reinitialize it
+					if(interfaceActivated == false){
+						InitializeComponent();
+					}
+
 					// Run the corresponding method to update values in the interface
 					switch(shorterGameName) {
 						case "Boktai":
@@ -97,6 +123,18 @@ namespace BokInterface {
 							// Nothing to do here
 							break;
 					}
+				} else {
+					
+					/**
+					 * Retry getting the game code
+					 * For DS games, because of the DS bootup screen, the game code is not always accessible after switching games
+					 * 
+					 * 10 frames should be enough for this
+					 */
+					if(retryCount < 10){
+						retryCount++;
+						DetectCurrentGame();
+					}
 				}
 			} catch {}
 		}
@@ -107,27 +145,37 @@ namespace BokInterface {
 		/// </summary>
 		protected void DetectCurrentGame() {
 			
-			currentGameId = utils.GetGameCode();
-			
+			/**
+			 * Try getting the game code
+			 * If the game code is 0 or 4267703902, it's most likely not a GBA game & we need to try different memory addresses
+			 */
+			currentGameId = utils.GetGbaGameCode();
+			if(new string[] {"4267703902", "0"}.Contains(currentGameId.ToString()) == true){
+				currentGameId = utils.GetDsGameCode();
+			}
+
 			switch(currentGameId) {
 				case 1346974549:	// EU
 				case 1162425173:	// US
 				case 1246311253: 	// JP
 					currentGameName = "Boktai: The Sun is in Your Hand";
 					shorterGameName = "Boktai";
-					interfaceActivated = true;
+					supportedGame = true;
+					isDS = false;
 					break;
 				case 1345467221:	// EU
 				case 1160917845:	// US
 				case 1244803925:	// JP 1.0 & 1.1
 					currentGameName = "Boktai 2: Solar Boy Django";
 					shorterGameName = "Zoktai";
-					interfaceActivated = true;
+					supportedGame = true;
+					isDS = false;
 					break;
 				case 1244869461:
 					currentGameName = "Boktai 3: Sabata's Counterattack";
 					shorterGameName = "Shinbok";
-					interfaceActivated = true;
+					supportedGame = true;
+					isDS = false;
 					break;
 				case 1481329729:	// EU 1.1
 				case 1347112001:	// EU 1.0
@@ -135,12 +183,13 @@ namespace BokInterface {
 				case 1246448705:	// JP
 					currentGameName = "Boktai DS - Lunar Knights";
 					shorterGameName = "LunarKnights";
-					interfaceActivated = true;
+					supportedGame = true;
+					isDS = true;
 					break;
 				default:
 					currentGameName = "";
 					shorterGameName = "";
-					interfaceActivated = false;
+					supportedGame = false;
 					break;
 			}
 		}
