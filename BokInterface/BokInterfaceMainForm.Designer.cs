@@ -48,11 +48,8 @@ namespace BokInterface {
 			 */
 			this.ClearInterface();
 
-			// Set the icon if it exists
-			string iconPath = "../BokInterface/icon/ringo.ico";
-        	if(File.Exists(iconPath) == true) {
-				this.Icon = new System.Drawing.Icon(iconPath);
-			}
+			// Sets default icon if available
+			SetIcon("nero");
 
 			/**
 			 * If not a Boktai game, shows the "Game not recognized" window
@@ -64,18 +61,22 @@ namespace BokInterface {
 				switch(shorterGameName) {
 					case "Boktai":
 						interfaceActivated = true;
+						SetIcon("lita");
 						ShowBoktaiInterface();
 						break;
 					case "Zoktai":
 						interfaceActivated = true;
+						SetIcon("ringo");
 						ShowZoktaiInterface();
 						break;
 					case "Shinbok":
 						interfaceActivated = true;
+						SetIcon("trinity");
 						ShowShinbokInterface();
 						break;
 					case "LunarKnights":
 						interfaceActivated = true;
+						SetIcon("lucian");
 						ShowLunarKnightsInterface();
 						break;
 					default:
@@ -122,6 +123,16 @@ namespace BokInterface {
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.BackColor = System.Drawing.SystemColors.Control;
 			this.ClientSize = new System.Drawing.Size(width, height);
+		}
+
+		/// <summary>Sets the icon for the interface (if the file exists)</summary>
+		/// <param name="fileName">File name (without the extension)</param>
+		private void SetIcon(string fileName) {
+			string iconPath = "../BokInterface/icon/" + fileName + ".ico";
+        	if(File.Exists(iconPath) == true) {
+				this.Icon = new System.Drawing.Icon(iconPath);
+			}
+
 		}
 
 		#endregion
