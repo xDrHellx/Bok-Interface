@@ -90,8 +90,8 @@ namespace BokInterface {
 
 			// Current status values
 			this.bok3_currentStatusHpValue = this.CreateLabel("djangoCurrentHpValue", "", 44, 19, 31, 15);
-			this.bok3_currentStatusEneValue = this.CreateLabel("djangoCurrentHpValue", "", 44, 34, 31, 15);
-			this.bok3_currentStatusTrcValue = this.CreateLabel("djangoCurrentHpValue", "", 44, 49, 31, 15);
+			this.bok3_currentStatusEneValue = this.CreateLabel("djangoCurrentEneValue", "", 44, 34, 31, 15);
+			this.bok3_currentStatusTrcValue = this.CreateLabel("djangoCurrentTrcValue", "", 44, 49, 31, 15);
 
 			// Add values labels to group
 			this.currentStatusLabels.Add(this.bok3_currentStatusHpValue);
