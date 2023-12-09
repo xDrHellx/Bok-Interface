@@ -15,12 +15,8 @@ namespace BokInterface {
         protected int screenWidth;
         protected int screenHeight;
 
-        /// <summary>Shows the indicator, to tell that if interface is ON or OFF</summary>
+        /// <summary>Shows the indicator for the Bok Interface</summary>
         private void ShowInterfaceIndicator() {
-            
-            // screenWidth = APIs.Client.ScreenWidth();
-            // screenHeight = APIs.Client.ScreenHeight();
-
             APIs.Gui.Text(3, 1, interfaceActivated == true ? "Bok ON" : "Bok Off", System.Drawing.Color.Orange, "bottomright");
         }
 

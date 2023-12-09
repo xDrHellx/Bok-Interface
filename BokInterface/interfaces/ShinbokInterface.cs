@@ -81,7 +81,7 @@ namespace BokInterface {
 		private void AddShinbokCurrentStatusSection() {
 			
 			// Section
-			this.currentStatusGroupBox = this.CreateGroupBox("currentStatus", "Current status", 5, 25, 250, 70, true);
+			this.currentStatusGroupBox = this.CreateGroupBox("currentStatus", "Current status", 5, 25, 226, 70, true);
 
 			// Current status labels
 			this.currentStatusLabels.Add(this.CreateLabel("djangoCurrentHpLabel", "LIFE :", 7, 19, 34, 15));

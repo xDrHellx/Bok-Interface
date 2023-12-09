@@ -146,7 +146,7 @@ namespace BokInterface {
 		/// <param name="positionY">Y position</param>
 		/// <param name="width">Width (in pixels)</param>
 		/// <param name="height">Height (in pixels)</param>
-		/// <param name="addToWindow">Set to true to add the element directly to the window</param>
+		/// <param name="addToWindow">Set to true to add the element directly to the main interface window</param>
 		private System.Windows.Forms.GroupBox CreateGroupBox(string name, string text, Int32 positionX, Int32 positionY, Int32 width, Int32 height, bool addToWindow = false) {
 
 			System.Windows.Forms.GroupBox groupBox = new System.Windows.Forms.GroupBox();
@@ -156,7 +156,7 @@ namespace BokInterface {
 			groupBox.Size = new System.Drawing.Size(width, height);
 			groupBox.TabIndex = 1;
 			groupBox.Text = text;
-			groupBox.Font = new System.Drawing.Font("Segoe Ui", 9f);
+			groupBox.Font = new System.Drawing.Font("Segoe UI", 9f);
 
 			if(addToWindow == true) {
 				this.Controls.Add(groupBox);
@@ -172,7 +172,7 @@ namespace BokInterface {
 		/// <param name="positionY">Y position</param>
 		/// <param name="width">Width (in pixels)</param>
 		/// <param name="height">Height (in pixels)</param>
-		/// <param name="addToWindow">Set to true to add the element directly to the window</param>
+		/// <param name="addToWindow">Set to true to add the element directly to the main interface window</param>
 		/// <param name="colorHex">Set the background color for the label</param>
 		/// <param name="margin">Margin (by default System.Windows.Forms.Padding(0, 3, 0, 3), the default value in Visual Studio)</param>
 		/// <param name="textAlignment">Text alignment, by default "MiddleCenter" (see System.Drawing.ContentAlignment for possible values)</param
@@ -186,7 +186,7 @@ namespace BokInterface {
 			label.TabIndex = 2;
 			label.Text = text;
 			label.Margin = new System.Windows.Forms.Padding(3, 0, 3, 0);
-			label.Font = new System.Drawing.Font("Segoe Ui", 9f);
+			label.Font = new System.Drawing.Font("Segoe UI", 9f);
 			
 			if(colorHex != "") {
 				label.BackColor = System.Drawing.ColorTranslator.FromHtml(colorHex);

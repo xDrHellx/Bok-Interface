@@ -34,7 +34,7 @@ namespace BokInterface {
 		private void AddLunarKnightsCurrentStatusSection() {
 			
 			// Section
-			this.currentStatusGroupBox = this.CreateGroupBox("currentStatus", "Current status", 5, 25, 250, 70, true);
+			this.currentStatusGroupBox = this.CreateGroupBox("currentStatus", "Current status", 5, 25, 226, 70, true);
 		}
     }
 }
