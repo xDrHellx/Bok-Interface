@@ -13,8 +13,10 @@ namespace BokInterface {
 
 		/// <summary>Required designer variable</summary>
 		private IContainer components = null;
+		
+		#region Common interface variables
 
-		/// <summary>Color for pure stat points (Boktai 2, 3, LK)</summary>
+		/// <summary>Color for pure / base stat points (Boktai 2, 3, LK)</summary>
 		private static string baseStatColor = "#FFE600";
 
 		/// <summary>
@@ -24,10 +26,14 @@ namespace BokInterface {
 		/// </summary>
 		private static string equipsStatColor = "#FFA529";
 
-		/// <summary>Color for the total stat points for a specific stat (Boktai 2, 3, LK)</summary>
+		/// <summary>Color for the total amount of points for a specific stat (Boktai 2, 3, LK)</summary>
 		private static string totalStatColor = "#FFD3D3D3";
 
 		private static System.Drawing.Font defaultFont = new System.Drawing.Font("Segoe UI", 9, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+		private static System.Windows.Forms.Padding defaultMargin = new System.Windows.Forms.Padding(3, 0, 3, 0);
+		private static System.Windows.Forms.AnchorStyles defaultAnchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left;
+
+		#endregion
 
 		/// <summary>Clean up any resources being used</summary>
 		/// <param name="disposing">True if managed resources should be disposed; otherwise, false</param>
@@ -154,12 +160,12 @@ namespace BokInterface {
 
 			System.Windows.Forms.GroupBox groupBox = new System.Windows.Forms.GroupBox();
 			groupBox.Name = name;
-            groupBox.AutoSize = false;
-			groupBox.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left;
+			groupBox.Text = text;
 			groupBox.Location = new System.Drawing.Point(positionX, positionY);
 			groupBox.Size = new System.Drawing.Size(width, height);
+            groupBox.AutoSize = false;
 			groupBox.TabIndex = 1;
-			groupBox.Text = text;
+			groupBox.Anchor = BokInterfaceMainForm.defaultAnchor;
 			groupBox.Font = BokInterfaceMainForm.defaultFont;
 
 			if(addToWindow == true) {
@@ -184,13 +190,13 @@ namespace BokInterface {
 
 			System.Windows.Forms.Label label = new System.Windows.Forms.Label();
 			label.Name = name;
-            label.AutoSize = false;
-			label.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left;
+			label.Text = text;
 			label.Location = new System.Drawing.Point(positionX, positionY);
 			label.Size = new System.Drawing.Size(width, height);
+            label.AutoSize = false;
 			label.TabIndex = 2;
-			label.Text = text;
-			label.Margin = new System.Windows.Forms.Padding(3, 0, 3, 0);
+			label.Anchor = BokInterfaceMainForm.defaultAnchor;
+			label.Margin = BokInterfaceMainForm.defaultMargin;
 			label.Font = BokInterfaceMainForm.defaultFont;
 			
 			if(colorHex != "") {
@@ -256,13 +262,13 @@ namespace BokInterface {
 
 			System.Windows.Forms.Button btn = new System.Windows.Forms.Button();
 			btn.Name = name;
-			btn.AutoSize = false;
-			btn.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left;
+			btn.Text = text;
 			btn.Location = new System.Drawing.Point(positionX, positionY);
 			btn.Size = new System.Drawing.Size(width, height);
+			btn.AutoSize = false;
 			btn.TabIndex = 2;
-			btn.Text = text;
-			btn.Margin = new System.Windows.Forms.Padding(3, 0, 3, 0);
+			btn.Anchor = BokInterfaceMainForm.defaultAnchor;
+			btn.Margin = BokInterfaceMainForm.defaultMargin;
 			btn.Font = BokInterfaceMainForm.defaultFont;
 			
 			if(colorHex != "") {
