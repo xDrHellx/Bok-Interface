@@ -27,6 +27,8 @@ namespace BokInterface {
 		/// <summary>Color for the total stat points for a specific stat (Boktai 2, 3, LK)</summary>
 		private static string totalStatColor = "#FFD3D3D3";
 
+		private static System.Drawing.Font defaultFont = new System.Drawing.Font("Segoe UI", 9, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+
 		/// <summary>Clean up any resources being used</summary>
 		/// <param name="disposing">True if managed resources should be disposed; otherwise, false</param>
 		protected override void Dispose(bool disposing) {
@@ -106,7 +108,6 @@ namespace BokInterface {
 
 			// Window
 			this.SetMainWindow("Bok Interface" + (shorterGameName != "" ? " - " + shorterGameName : ""), 350, 100);
-			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
 			this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.BokInterfaceMainForm_FormClosing);
 			this.Load += new System.EventHandler(this.BokInterfaceMainForm_Load);
 
@@ -120,8 +121,10 @@ namespace BokInterface {
 		private void SetMainWindow(string name, Int32 width, Int32 height) {
 			this.Name = name;
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 15F);
-			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit;
+			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
 			this.BackColor = System.Drawing.SystemColors.Control;
+			this.Font = BokInterfaceMainForm.defaultFont;
 			this.ClientSize = new System.Drawing.Size(width, height);
 		}
 
@@ -152,11 +155,12 @@ namespace BokInterface {
 			System.Windows.Forms.GroupBox groupBox = new System.Windows.Forms.GroupBox();
 			groupBox.Name = name;
             groupBox.AutoSize = false;
+			groupBox.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left;
 			groupBox.Location = new System.Drawing.Point(positionX, positionY);
 			groupBox.Size = new System.Drawing.Size(width, height);
 			groupBox.TabIndex = 1;
 			groupBox.Text = text;
-			groupBox.Font = new System.Drawing.Font("Segoe UI", 9f);
+			groupBox.Font = BokInterfaceMainForm.defaultFont;
 
 			if(addToWindow == true) {
 				this.Controls.Add(groupBox);
@@ -181,12 +185,13 @@ namespace BokInterface {
 			System.Windows.Forms.Label label = new System.Windows.Forms.Label();
 			label.Name = name;
             label.AutoSize = false;
+			label.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left;
 			label.Location = new System.Drawing.Point(positionX, positionY);
 			label.Size = new System.Drawing.Size(width, height);
 			label.TabIndex = 2;
 			label.Text = text;
 			label.Margin = new System.Windows.Forms.Padding(3, 0, 3, 0);
-			label.Font = new System.Drawing.Font("Segoe UI", 9f);
+			label.Font = BokInterfaceMainForm.defaultFont;
 			
 			if(colorHex != "") {
 				label.BackColor = System.Drawing.ColorTranslator.FromHtml(colorHex);
@@ -234,6 +239,78 @@ namespace BokInterface {
 			}
 
 			return label;
+		}
+
+		/// <summary>Simplified method for creating a button</summary>
+		/// <param name="name">Label name</param>
+		/// <param name="text">Label text</param>
+		/// <param name="positionX">X position</param>
+		/// <param name="positionY">Y position</param>
+		/// <param name="width">Width (in pixels)</param>
+		/// <param name="height">Height (in pixels)</param>
+		/// <param name="addToWindow">Set to true to add the element directly to the main interface window</param>
+		/// <param name="colorHex">Set the background color for the label</param>
+		/// <param name="margin">Margin (by default System.Windows.Forms.Padding(0, 3, 0, 3), the default value in Visual Studio)</param>
+		/// <param name="textAlignment">Text alignment, by default "MiddleCenter" (see System.Drawing.ContentAlignment for possible values)</param
+		private System.Windows.Forms.Button CreateButton(string name, string text, Int32 positionX, Int32 positionY, Int32 width, Int32 height, bool addToWindow = false, string colorHex = "", System.Windows.Forms.Padding margin = new System.Windows.Forms.Padding(), string textAlignment = "MiddleCenter") {
+
+			System.Windows.Forms.Button btn = new System.Windows.Forms.Button();
+			btn.Name = name;
+			btn.AutoSize = false;
+			btn.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left;
+			btn.Location = new System.Drawing.Point(positionX, positionY);
+			btn.Size = new System.Drawing.Size(width, height);
+			btn.TabIndex = 2;
+			btn.Text = text;
+			btn.Margin = new System.Windows.Forms.Padding(3, 0, 3, 0);
+			btn.Font = BokInterfaceMainForm.defaultFont;
+			
+			if(colorHex != "") {
+				btn.BackColor = System.Drawing.ColorTranslator.FromHtml(colorHex);
+			}
+
+			// If no specific margin is passed, set defaults from Visual Studio
+			if(margin.All == 0) {
+				margin.Top = 3;
+				margin.Left = 3;
+			}
+
+			// Text alignment
+			switch(textAlignment){
+				case "BottomCenter" :
+					btn.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+					break;
+				case "BottomLeft" :
+					btn.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
+					break;
+				case "BottomRight" :
+					btn.TextAlign = System.Drawing.ContentAlignment.BottomRight;
+					break;
+				case "MiddleLeft" :
+					btn.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+					break;
+				case "MiddleRight" :
+					btn.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+					break;
+				case "TopCenter" :
+					btn.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+					break;
+				case "TopLeft" :
+					btn.TextAlign = System.Drawing.ContentAlignment.TopLeft;
+					break;
+				case "TopRight" :
+					btn.TextAlign = System.Drawing.ContentAlignment.TopRight;
+					break;
+				default:
+					btn.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+					break;
+			}
+
+			if(addToWindow == true) {
+				this.Controls.Add(btn);
+			}
+
+			return btn;
 		}
 
 		#endregion
