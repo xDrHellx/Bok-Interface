@@ -17,21 +17,21 @@ namespace BokInterface {
 		#region Common interface variables
 
 		/// <summary>Color for pure / base stat points (Boktai 2, 3, LK)</summary>
-		private static string baseStatColor = "#FFE600";
+		protected static string baseStatColor = "#FFE600";
 
 		/// <summary>
 		/// Color for stat points from equipments (Boktai 3)<br/>
 		/// These points does not affect as many things as pure stat points <br/><br/>
 		/// For example STR points from equipments does not affect coffin carrying speed
 		/// </summary>
-		private static string equipsStatColor = "#FFA529";
+		protected static string equipsStatColor = "#FFA529";
 
 		/// <summary>Color for the total amount of points for a specific stat (Boktai 2, 3, LK)</summary>
-		private static string totalStatColor = "#FFD3D3D3";
+		protected static string totalStatColor = "#FFD3D3D3";
 
-		private static System.Drawing.Font defaultFont = new System.Drawing.Font("Segoe UI", 9, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-		private static System.Windows.Forms.Padding defaultMargin = new System.Windows.Forms.Padding(3, 0, 3, 0);
-		private static System.Windows.Forms.AnchorStyles defaultAnchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left;
+		protected static System.Drawing.Font defaultFont = new System.Drawing.Font("Segoe UI", 9, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+		protected static System.Windows.Forms.Padding defaultMargin = new System.Windows.Forms.Padding(3, 0, 3, 0);
+		protected static System.Windows.Forms.AnchorStyles defaultAnchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left;
 
 		#endregion
 
@@ -156,6 +156,7 @@ namespace BokInterface {
 		/// <param name="width">Width (in pixels)</param>
 		/// <param name="height">Height (in pixels)</param>
 		/// <param name="addToWindow">Set to true to add the element directly to the main interface window</param>
+		/// <returns><c>System.Windows.Forms.GroupBox</c>Group box</returns>
 		private System.Windows.Forms.GroupBox CreateGroupBox(string name, string text, Int32 positionX, Int32 positionY, Int32 width, Int32 height, bool addToWindow = false) {
 
 			System.Windows.Forms.GroupBox groupBox = new System.Windows.Forms.GroupBox();
@@ -185,7 +186,8 @@ namespace BokInterface {
 		/// <param name="addToWindow">Set to true to add the element directly to the main interface window</param>
 		/// <param name="colorHex">Set the background color for the label</param>
 		/// <param name="margin">Margin (by default System.Windows.Forms.Padding(0, 3, 0, 3), the default value in Visual Studio)</param>
-		/// <param name="textAlignment">Text alignment, by default "MiddleCenter" (see System.Drawing.ContentAlignment for possible values)</param
+		/// <param name="textAlignment">Text alignment, by default "MiddleCenter" (see System.Drawing.ContentAlignment for possible values)</param>
+		/// <returns><c>System.Windows.Forms.Label</c>Label</returns>
 		private System.Windows.Forms.Label CreateLabel(string name, string text, Int32 positionX, Int32 positionY, Int32 width, Int32 height, bool addToWindow = false, string colorHex = "", System.Windows.Forms.Padding margin = new System.Windows.Forms.Padding(), string textAlignment = "MiddleCenter") {
 
 			System.Windows.Forms.Label label = new System.Windows.Forms.Label();
@@ -257,7 +259,8 @@ namespace BokInterface {
 		/// <param name="addToWindow">Set to true to add the element directly to the main interface window</param>
 		/// <param name="colorHex">Set the background color for the label</param>
 		/// <param name="margin">Margin (by default System.Windows.Forms.Padding(0, 3, 0, 3), the default value in Visual Studio)</param>
-		/// <param name="textAlignment">Text alignment, by default "MiddleCenter" (see System.Drawing.ContentAlignment for possible values)</param
+		/// <param name="textAlignment">Text alignment, by default "MiddleCenter" (see System.Drawing.ContentAlignment for possible values)</param>
+		/// <returns><c>System.Windows.Forms.Button</c>Button</returns>
 		private System.Windows.Forms.Button CreateButton(string name, string text, Int32 positionX, Int32 positionY, Int32 width, Int32 height, bool addToWindow = false, string colorHex = "", System.Windows.Forms.Padding margin = new System.Windows.Forms.Padding(), string textAlignment = "MiddleCenter") {
 
 			System.Windows.Forms.Button btn = new System.Windows.Forms.Button();
