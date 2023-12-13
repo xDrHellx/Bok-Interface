@@ -35,6 +35,12 @@ namespace BokInterface {
 
 		#endregion
 
+		#region Subwindows
+
+		private System.Windows.Forms.Form statusEditWindow = new System.Windows.Forms.Form();
+
+		#endregion
+
 		/// <summary>Clean up any resources being used</summary>
 		/// <param name="disposing">True if managed resources should be disposed; otherwise, false</param>
 		protected override void Dispose(bool disposing) {
@@ -57,7 +63,7 @@ namespace BokInterface {
 			this.ClearInterface();
 
 			// Sets default icon if available
-			SetIcon("nero");
+			this.Icon = this.GetIcon("nero");
 
 			/**
 			 * If not a Boktai game, shows the "Game not recognized" window
@@ -69,22 +75,22 @@ namespace BokInterface {
 				switch(shorterGameName) {
 					case "Boktai":
 						interfaceActivated = true;
-						SetIcon("lita");
+						this.Icon = this.GetIcon("lita");
 						ShowBoktaiInterface();
 						break;
 					case "Zoktai":
 						interfaceActivated = true;
-						SetIcon("ringo");
+						this.Icon = this.GetIcon("ringo");
 						ShowZoktaiInterface();
 						break;
 					case "Shinbok":
 						interfaceActivated = true;
-						SetIcon("trinity");
+						this.Icon = this.GetIcon("trinity");
 						ShowShinbokInterface();
 						break;
 					case "LunarKnights":
 						interfaceActivated = true;
-						SetIcon("lucian");
+						this.Icon = this.GetIcon("lucian");
 						ShowLunarKnightsInterface();
 						break;
 					default:
@@ -99,11 +105,19 @@ namespace BokInterface {
 		/// <summary>Clears the interface window and all other sections within it</summary>
 		private void ClearInterface() {
 			this.Controls.Clear();
+
 			this.currentStatusGroupBox.Controls.Clear();
 			this.currentStatsGroupBox.Controls.Clear();
 			this.inventoryGroupBox.Controls.Clear();
+			this.editGroupBox.Controls.Clear();
+			
 			this.currentStatusLabels.Clear();
 			this.currentStatsLabels.Clear();
+			this.editButtons.Clear();
+
+			this.statusEditWindow.Controls.Clear();
+			this.statusEditWindow.Close();
+			this.statusEditing = false;
 		}
 
 		/// <summary>Shows the "Game not recognized" window</summary>
@@ -134,14 +148,16 @@ namespace BokInterface {
 			this.ClientSize = new System.Drawing.Size(width, height);
 		}
 
-		/// <summary>Sets the icon for the interface (if the file exists)</summary>
-		/// <param name="fileName">File name (without the extension)</param>
-		private void SetIcon(string fileName) {
+		/// <summary>Get the specified icon if it exist</summary>
+		/// <param name="fileName">File name (without .ico extension)</param>
+		/// <returns><c>System.Drawing.Icon</c>Specified Icon instance (or default if the specified icon could not be found)</returns>
+		private System.Drawing.Icon GetIcon(string fileName) {
 			string iconPath = "../BokInterface/icon/" + fileName + ".ico";
-        	if(File.Exists(iconPath) == true) {
-				this.Icon = new System.Drawing.Icon(iconPath);
+			if(File.Exists(iconPath) == true) {
+				return new System.Drawing.Icon(iconPath);
+			} else {
+				return this.Icon;
 			}
-
 		}
 
 		#endregion
@@ -156,7 +172,7 @@ namespace BokInterface {
 		/// <param name="width">Width (in pixels)</param>
 		/// <param name="height">Height (in pixels)</param>
 		/// <param name="addToWindow">Set to true to add the element directly to the main interface window</param>
-		/// <returns><c>System.Windows.Forms.GroupBox</c>Group box</returns>
+		/// <returns><c>System.Windows.Forms.GroupBox</c>Group box instance</returns>
 		private System.Windows.Forms.GroupBox CreateGroupBox(string name, string text, Int32 positionX, Int32 positionY, Int32 width, Int32 height, bool addToWindow = false) {
 
 			System.Windows.Forms.GroupBox groupBox = new System.Windows.Forms.GroupBox();
@@ -187,7 +203,7 @@ namespace BokInterface {
 		/// <param name="colorHex">Set the background color for the label</param>
 		/// <param name="margin">Margin (by default System.Windows.Forms.Padding(0, 3, 0, 3), the default value in Visual Studio)</param>
 		/// <param name="textAlignment">Text alignment, by default "MiddleCenter" (see System.Drawing.ContentAlignment for possible values)</param>
-		/// <returns><c>System.Windows.Forms.Label</c>Label</returns>
+		/// <returns><c>System.Windows.Forms.Label</c>Label instance</returns>
 		private System.Windows.Forms.Label CreateLabel(string name, string text, Int32 positionX, Int32 positionY, Int32 width, Int32 height, bool addToWindow = false, string colorHex = "", System.Windows.Forms.Padding margin = new System.Windows.Forms.Padding(), string textAlignment = "MiddleCenter") {
 
 			System.Windows.Forms.Label label = new System.Windows.Forms.Label();
@@ -260,7 +276,7 @@ namespace BokInterface {
 		/// <param name="colorHex">Set the background color for the label</param>
 		/// <param name="margin">Margin (by default System.Windows.Forms.Padding(0, 3, 0, 3), the default value in Visual Studio)</param>
 		/// <param name="textAlignment">Text alignment, by default "MiddleCenter" (see System.Drawing.ContentAlignment for possible values)</param>
-		/// <returns><c>System.Windows.Forms.Button</c>Button</returns>
+		/// <returns><c>System.Windows.Forms.Button</c>Button instance</returns>
 		private System.Windows.Forms.Button CreateButton(string name, string text, Int32 positionX, Int32 positionY, Int32 width, Int32 height, bool addToWindow = false, string colorHex = "", System.Windows.Forms.Padding margin = new System.Windows.Forms.Padding(), string textAlignment = "MiddleCenter") {
 
 			System.Windows.Forms.Button btn = new System.Windows.Forms.Button();
@@ -322,6 +338,29 @@ namespace BokInterface {
 			return btn;
 		}
 
+		/// <summary>Simplified method for creating a new sub window (AKA windows form)</summary>
+		/// <param name="name">Subwindow name</param>
+		/// <param name="title">Subwindow title</param>
+		/// <param name="width">Width (in pixels)</param>
+		/// <param name="height">Height (in pixels)</param>
+		/// <param name="icon">Subwindow icon (by default retrieves the one from the main interface window)</param>
+		/// <returns><c>System.Windows.Forms.Form</c>Subwindow instance</returns>
+		private System.Windows.Forms.Form CreateSubWindow(string name, string title, Int32 width, Int32 height, string icon = "") {
+			
+			System.Windows.Forms.Form form = new System.Windows.Forms.Form();
+			form.Name = name;
+			form.Text = title;
+			form.Icon = this.GetIcon(icon);
+			form.AutoScaleDimensions = new System.Drawing.SizeF(6F, 15F);
+			form.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit;
+			form.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+			form.BackColor = System.Drawing.SystemColors.Control;
+			form.Font = BokInterfaceMainForm.defaultFont;
+			form.ClientSize = new System.Drawing.Size(width, height);
+
+			return form;
+		}
+
 		#endregion
 
 		// Interface elements that exists for all Boktai games
@@ -330,8 +369,10 @@ namespace BokInterface {
 		private System.Windows.Forms.GroupBox currentStatusGroupBox = new System.Windows.Forms.GroupBox();
 		private System.Windows.Forms.GroupBox currentStatsGroupBox = new System.Windows.Forms.GroupBox();
 		private System.Windows.Forms.GroupBox inventoryGroupBox = new System.Windows.Forms.GroupBox();
+		private System.Windows.Forms.GroupBox editGroupBox = new System.Windows.Forms.GroupBox();
 		private List<System.Windows.Forms.Label> currentStatusLabels = new List<System.Windows.Forms.Label>();
 		private List<System.Windows.Forms.Label> currentStatsLabels = new List<System.Windows.Forms.Label>();
+		private List<System.Windows.Forms.Button> editButtons = new List<System.Windows.Forms.Button>();
 
 		#endregion
 	}
