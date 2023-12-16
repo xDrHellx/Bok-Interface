@@ -8,9 +8,9 @@ using BokInterface.All;
 
 namespace BokInterface {
 
-	partial class BokInterfaceMainForm {
+    partial class BokInterfaceMainForm {
         
-		#region GUI related code
+        #region GUI related code
 
         protected int screenWidth;
         protected int screenHeight;
@@ -18,8 +18,38 @@ namespace BokInterface {
         /// <summary>Shows the indicator for the Bok Interface</summary>
         private void ShowInterfaceIndicator() {
             APIs.Gui.Text(3, 1, interfaceActivated == true ? "Bok ON" : "Bok Off", System.Drawing.Color.Orange, "bottomright");
+
+            // On DS add the indicator on the top screen too
+            if(this.isDS == true) {
+                APIs.Gui.Text(3, GetScreenHeight(true) + 1, interfaceActivated == true ? "Bok ON" : "Bok Off", System.Drawing.Color.Orange, "bottomright");
+            }
         }
 
-		#endregion
-	}
+        /// <summary>Simplified method for writing a message on in-game screen</summary>
+        /// <param name="message">Message</param>
+        /// <param name="duration">Duration (by default 10)</param>
+        private void AddMessage(string message, int duration = 10) {
+            APIs.Gui.AddMessage(message, duration);
+        }
+
+        /// <summary>Clears text on in-game screen</summary>
+        private void ClearText() {
+            APIs.Gui.ClearText();
+        }
+
+        /// <summary>Returns game screen height</summary>
+        /// <param name="top">Set to true to return the height of the top screen for DS games</param>
+        /// <returns><c>int</c>Height</returns>
+        private int GetScreenHeight(bool top = false) {
+            return top == true ? APIs.Client.ScreenHeight() / 2 : APIs.Client.ScreenHeight();
+        }
+
+        /// <summary>Returns game screen width</summary>
+        /// <returns><c>int</c>Width</returns>
+        private int GetScreenWidth() {
+            return APIs.Client.ScreenWidth();
+        }
+        
+        #endregion
+    }
 }
