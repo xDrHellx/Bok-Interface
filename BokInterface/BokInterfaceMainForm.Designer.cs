@@ -35,12 +35,6 @@ namespace BokInterface {
 
 		#endregion
 
-		#region Subwindows
-
-		private System.Windows.Forms.Form statusEditWindow = new System.Windows.Forms.Form();
-
-		#endregion
-
 		/// <summary>Clean up any resources being used</summary>
 		/// <param name="disposing">True if managed resources should be disposed; otherwise, false</param>
 		protected override void Dispose(bool disposing) {
@@ -175,7 +169,7 @@ namespace BokInterface {
 		/// <returns><c>System.Windows.Forms.GroupBox</c>Group box instance</returns>
 		private System.Windows.Forms.GroupBox CreateGroupBox(string name, string text, Int32 positionX, Int32 positionY, Int32 width, Int32 height, bool addToWindow = false) {
 
-			System.Windows.Forms.GroupBox groupBox = new System.Windows.Forms.GroupBox();
+			System.Windows.Forms.GroupBox groupBox = new();
 			groupBox.Name = name;
 			groupBox.Text = text;
 			groupBox.Location = new System.Drawing.Point(positionX, positionY);
@@ -206,7 +200,7 @@ namespace BokInterface {
 		/// <returns><c>System.Windows.Forms.Label</c>Label instance</returns>
 		private System.Windows.Forms.Label CreateLabel(string name, string text, Int32 positionX, Int32 positionY, Int32 width, Int32 height, bool addToWindow = false, string colorHex = "", System.Windows.Forms.Padding margin = new System.Windows.Forms.Padding(), string textAlignment = "MiddleCenter") {
 
-			System.Windows.Forms.Label label = new System.Windows.Forms.Label();
+			System.Windows.Forms.Label label = new();
 			label.Name = name;
 			label.Text = text;
 			label.Location = new System.Drawing.Point(positionX, positionY);
@@ -279,7 +273,7 @@ namespace BokInterface {
 		/// <returns><c>System.Windows.Forms.Button</c>Button instance</returns>
 		private System.Windows.Forms.Button CreateButton(string name, string text, Int32 positionX, Int32 positionY, Int32 width, Int32 height, bool addToWindow = false, string colorHex = "", System.Windows.Forms.Padding margin = new System.Windows.Forms.Padding(), string textAlignment = "MiddleCenter") {
 
-			System.Windows.Forms.Button btn = new System.Windows.Forms.Button();
+			System.Windows.Forms.Button btn = new();
 			btn.Name = name;
 			btn.Text = text;
 			btn.Location = new System.Drawing.Point(positionX, positionY);
@@ -347,7 +341,7 @@ namespace BokInterface {
 		/// <returns><c>System.Windows.Forms.Form</c>Subwindow instance</returns>
 		private System.Windows.Forms.Form CreateSubWindow(string name, string title, Int32 width, Int32 height, string icon = "") {
 			
-			System.Windows.Forms.Form form = new System.Windows.Forms.Form();
+			System.Windows.Forms.Form form = new();
 			form.Name = name;
 			form.Text = title;
 			form.Icon = this.GetIcon(icon);
@@ -366,13 +360,19 @@ namespace BokInterface {
 		// Interface elements that exists for all Boktai games
 		#region Common interface elements
 		
-		private System.Windows.Forms.GroupBox currentStatusGroupBox = new System.Windows.Forms.GroupBox();
-		private System.Windows.Forms.GroupBox currentStatsGroupBox = new System.Windows.Forms.GroupBox();
-		private System.Windows.Forms.GroupBox inventoryGroupBox = new System.Windows.Forms.GroupBox();
-		private System.Windows.Forms.GroupBox editGroupBox = new System.Windows.Forms.GroupBox();
-		private List<System.Windows.Forms.Label> currentStatusLabels = new List<System.Windows.Forms.Label>();
-		private List<System.Windows.Forms.Label> currentStatsLabels = new List<System.Windows.Forms.Label>();
-		private List<System.Windows.Forms.Button> editButtons = new List<System.Windows.Forms.Button>();
+		private System.Windows.Forms.GroupBox currentStatusGroupBox = new();
+		private System.Windows.Forms.GroupBox currentStatsGroupBox = new();
+		private System.Windows.Forms.GroupBox inventoryGroupBox = new();
+		private System.Windows.Forms.GroupBox editGroupBox = new();
+		private List<System.Windows.Forms.Label> currentStatusLabels = new();
+		private List<System.Windows.Forms.Label> currentStatsLabels = new();
+		private List<System.Windows.Forms.Button> editButtons = new();
+
+		#endregion
+
+		#region Subwindows
+
+		private System.Windows.Forms.Form statusEditWindow = new();
 
 		#endregion
 	}

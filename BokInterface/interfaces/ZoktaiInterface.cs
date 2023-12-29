@@ -11,14 +11,14 @@ namespace BokInterface {
 	
 	partial class BokInterfaceMainForm {
 
-		private System.Windows.Forms.Label bok2_currentStatusHpValue = new System.Windows.Forms.Label();
-		private System.Windows.Forms.Label bok2_currentStatusEneValue = new System.Windows.Forms.Label();
-		private System.Windows.Forms.Label bok2_djangoBaseVit = new System.Windows.Forms.Label();
-		private System.Windows.Forms.Label bok2_djangoBaseSpr = new System.Windows.Forms.Label();
-		private System.Windows.Forms.Label bok2_djangoBaseStr = new System.Windows.Forms.Label();
-		private System.Windows.Forms.Label bok2_djangoBaseAgi = new System.Windows.Forms.Label();
+		private System.Windows.Forms.Label bok2_currentStatusHpValue = new();
+		private System.Windows.Forms.Label bok2_currentStatusEneValue = new();
+		private System.Windows.Forms.Label bok2_djangoBaseVit = new();
+		private System.Windows.Forms.Label bok2_djangoBaseSpr = new();
+		private System.Windows.Forms.Label bok2_djangoBaseStr = new();
+		private System.Windows.Forms.Label bok2_djangoBaseAgi = new();
 		
-		private readonly ZoktaiAddresses zoktaiAddresses = new ZoktaiAddresses();
+		private readonly ZoktaiAddresses zoktaiAddresses = new();
 
         private void ShowZoktaiInterface() {
 

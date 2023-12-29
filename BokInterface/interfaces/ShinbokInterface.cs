@@ -11,23 +11,27 @@ namespace BokInterface {
 	
 	partial class BokInterfaceMainForm {
 
-		private System.Windows.Forms.Label bok3_currentStatusHpValue = new System.Windows.Forms.Label();
-		private System.Windows.Forms.Label bok3_currentStatusEneValue = new System.Windows.Forms.Label();
-		private System.Windows.Forms.Label bok3_currentStatusTrcValue = new System.Windows.Forms.Label();
-		private System.Windows.Forms.Label bok3_djangoBaseVit = new System.Windows.Forms.Label();
-		private System.Windows.Forms.Label bok3_djangoEquipsVit = new System.Windows.Forms.Label();
-		private System.Windows.Forms.Label bok3_djangoTotalVit = new System.Windows.Forms.Label();
-		private System.Windows.Forms.Label bok3_djangoBaseSpr = new System.Windows.Forms.Label();
-		private System.Windows.Forms.Label bok3_djangoEquipsSpr = new System.Windows.Forms.Label();
-		private System.Windows.Forms.Label bok3_djangoTotalSpr = new System.Windows.Forms.Label();
-		private System.Windows.Forms.Label bok3_djangoBaseStr = new System.Windows.Forms.Label();
-		private System.Windows.Forms.Label bok3_djangoEquipsStr = new System.Windows.Forms.Label();
-		private System.Windows.Forms.Label bok3_djangoTotalStr = new System.Windows.Forms.Label();
+		#region Variables
 
-		private readonly ShinbokAddresses shinbokAddresses = new ShinbokAddresses();
+		private System.Windows.Forms.Label bok3_currentStatusHpValue = new();
+		private System.Windows.Forms.Label bok3_currentStatusEneValue = new();
+		private System.Windows.Forms.Label bok3_currentStatusTrcValue = new();
+		private System.Windows.Forms.Label bok3_djangoBaseVit = new();
+		private System.Windows.Forms.Label bok3_djangoEquipsVit = new();
+		private System.Windows.Forms.Label bok3_djangoTotalVit = new();
+		private System.Windows.Forms.Label bok3_djangoBaseSpr = new();
+		private System.Windows.Forms.Label bok3_djangoEquipsSpr = new();
+		private System.Windows.Forms.Label bok3_djangoTotalSpr = new();
+		private System.Windows.Forms.Label bok3_djangoBaseStr = new();
+		private System.Windows.Forms.Label bok3_djangoEquipsStr = new();
+		private System.Windows.Forms.Label bok3_djangoTotalStr = new();
+
+		private readonly ShinbokAddresses shinbokAddresses = new();
 		// private System.Windows.Forms.ProgressBar djangoCurrentHpBar = new System.Windows.Forms.ProgressBar();
 		// private System.Windows.Forms.ProgressBar djangoCurrentEneBar = new System.Windows.Forms.ProgressBar();
 		// private System.Windows.Forms.ProgressBar djangoCurrentTrcBar = new System.Windows.Forms.ProgressBar();
+
+		#endregion
 
         private void ShowShinbokInterface() {
 
