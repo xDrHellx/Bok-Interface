@@ -355,6 +355,67 @@ namespace BokInterface {
 			return form;
 		}
 
+		/// <summary>Simplified method for creating a numeric input field</summary>
+		/// <param name="name">Field name</param>
+		/// <param name="defaultValue">Default value</param>
+		/// <param name="positionX">X position</param>
+		/// <param name="positionY">Y position</param>
+		/// <param name="width">Width (in pixels)</param>
+		/// <param name="height">Height (in pixels)</param>
+		/// <param name="minValue">Minimum settable value</param>
+		/// <param name="maxValue">Maximum settable value</param>
+		/// <param name="addToWindow">Set to true to add the element directly to the main interface window</param>
+		/// <param name="colorHex">Set the background color for the label</param>
+		/// <param name="margin">Margin (by default System.Windows.Forms.Padding(0, 3, 0, 3), the default value in Visual Studio)</param>
+		/// <param name="valueAlignment">Value alignment, by default "Left" (see System.Windows.Forms.HorizontalAlignment for possible values)</param>
+		/// <returns><c>System.Windows.Forms.NumericUpDown</c>NumericUpDown instance</returns>
+		private System.Windows.Forms.NumericUpDown CreateNumericUpDown(string name, decimal defaultValue, Int32 positionX, Int32 positionY, Int32 width, Int32 height, decimal minValue = 1, decimal maxValue = 100, bool addToWindow = false, string colorHex = "", System.Windows.Forms.Padding margin = new System.Windows.Forms.Padding(), string valueAlignment = "Left") {
+			
+			System.Windows.Forms.NumericUpDown field = new();
+			field.Name = name;
+			field.Minimum = minValue;
+			field.Maximum = maxValue;
+			field.Value = defaultValue;
+			field.Location = new System.Drawing.Point(positionX, positionY);
+			field.Size = new System.Drawing.Size(width, height);
+			field.AutoSize = false;
+			field.TabIndex = 2;
+			field.Anchor = BokInterfaceMainForm.defaultAnchor;
+			field.Margin = BokInterfaceMainForm.defaultMargin;
+			field.Font = BokInterfaceMainForm.defaultFont;
+			field.Increment = (maxValue > 500 ? 10 : 1);
+			field.DecimalPlaces = 0;
+			
+			if(colorHex != "") {
+				field.BackColor = System.Drawing.ColorTranslator.FromHtml(colorHex);
+			}
+
+			// If no specific margin is passed, set defaults from Visual Studio
+			if(margin.All == 0) {
+				margin.Top = 3;
+				margin.Left = 3;
+			}
+
+			// Value alignment
+			switch(valueAlignment){
+				case "Right" :
+					field.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+					break;
+				case "Center" :
+					field.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+					break;
+				default:
+					field.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
+					break;
+			}
+
+			if(addToWindow == true) {
+				this.Controls.Add(field);
+			}
+
+			return field;
+		}
+
 		#endregion
 
 		// Interface elements that exists for all Boktai games
