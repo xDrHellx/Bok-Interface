@@ -21,7 +21,6 @@ namespace BokInterface {
 		protected override string WindowTitleStatic => "Bok Interface";
 		public override bool BlocksInputWhenFocused => false;
 		protected Icon icon;
-		protected Utilities utils;
 		public uint currentGameId;
 		public string currentGameName = "";
 		public string shorterGameName = "";
@@ -38,9 +37,6 @@ namespace BokInterface {
 		#region Main methods
 		
 		public BokInterfaceMainForm() {
-
-			// Get / instanciate utilities
-			utils = new Utilities();
 			
 			// Try initializing the interface
 			InitializeInterface();
@@ -149,9 +145,9 @@ namespace BokInterface {
 			 * Try getting the game code
 			 * If the game code is 0 or 4267703902, it's most likely not a GBA game & we need to try different memory addresses
 			 */
-			currentGameId = utils.GetGbaGameCode();
+			currentGameId = Utilities.GetGbaGameCode();
 			if(new string[] {"4267703902", "0"}.Contains(currentGameId.ToString()) == true){
-				currentGameId = utils.GetDsGameCode();
+				currentGameId = Utilities.GetDsGameCode();
 			}
 
 			switch(currentGameId) {
