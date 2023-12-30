@@ -29,6 +29,8 @@ namespace BokInterface {
 		protected bool isDS = false;
 		protected int retryCount = 0;
 
+		private MemoryValues memoryValues;
+
 		public ApiContainer ApiContainer {
 			get => APIs.ApiContainer;
 			set => APIs.Update(value);

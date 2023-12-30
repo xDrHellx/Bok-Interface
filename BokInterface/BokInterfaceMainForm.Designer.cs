@@ -59,6 +59,9 @@ namespace BokInterface {
 			// Sets default icon if available
 			this.Icon = this.GetIcon("nero");
 
+			// Try initializing list of memory values instances
+			this.memoryValues = new(shorterGameName);
+
 			/**
 			 * If not a Boktai game, shows the "Game not recognized" window
 			 * Otherwise, shows the window for the corresponding game
@@ -110,6 +113,8 @@ namespace BokInterface {
 			this.editButtons.Clear();
 
 			this.statusEditWindow.Controls.Clear();
+			this.statusEditLabels.Clear();
+			this.statusEditButtons.Clear();
 			this.statusEditWindow.Close();
 			this.statusEditing = false;
 		}
@@ -434,6 +439,18 @@ namespace BokInterface {
 		#region Subwindows
 
 		private System.Windows.Forms.Form statusEditWindow = new();
+		private System.Windows.Forms.Form inventoryEditWindow = new();
+		private System.Windows.Forms.Form equipsEditWindow = new();
+		private System.Windows.Forms.Form solarGunEditWindow = new();
+		private System.Windows.Forms.Form weaponsEditWindow = new();
+		private System.Windows.Forms.Form magicsEditWindow = new();
+		
+		#endregion
+
+		#region Common subwindows elements
+
+		private List<System.Windows.Forms.Label> statusEditLabels = new();
+		private List<System.Windows.Forms.Button> statusEditButtons = new();
 
 		#endregion
 	}

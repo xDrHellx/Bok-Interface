@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using BizHawk.Client.EmuHawk;
+using BokInterface.All;
 using BokInterface.Shinbok;
 
 /**
@@ -25,6 +26,11 @@ namespace BokInterface {
 		private System.Windows.Forms.Label bok3_djangoBaseStr = new();
 		private System.Windows.Forms.Label bok3_djangoEquipsStr = new();
 		private System.Windows.Forms.Label bok3_djangoTotalStr = new();
+		private System.Windows.Forms.Button bok3_editStatusBtn = new();
+		private System.Windows.Forms.Button bok3_editInventoryBtn = new();
+		private System.Windows.Forms.Button bok3_editEquipsBtn = new();
+		private System.Windows.Forms.Button bok3_editWeaponsBtn = new();
+		private System.Windows.Forms.Button bok3_editSolarGunBtn = new();
 
 		private readonly ShinbokAddresses shinbokAddresses = new();
 		// private System.Windows.Forms.ProgressBar djangoCurrentHpBar = new System.Windows.Forms.ProgressBar();
@@ -44,6 +50,9 @@ namespace BokInterface {
 			// Stats section
 			this.AddShinbokCurrentStatsSection();
 
+			// Values setting / editing section
+			this.AddShinbokEditSection();
+
 			// Inventory section
 			// this.inventoryGroupBox = this.CreateGroupBox("inventory", "Inventory", 5, 101, 250, 55, true);
 
@@ -61,10 +70,7 @@ namespace BokInterface {
 			 * This is necessary because some memory addresses changes based on areas
 			 * So we need to combine multiple addresses to get the actual value all the time
 			 */
-			var djangoCurrentHp = utils.ReadDynamicAddress(shinbokAddresses.Misc["room"], shinbokAddresses.Django["hp"]);
-			var djangoCurrentBaseVit = utils.ReadDynamicAddress(shinbokAddresses.Misc["stat"], shinbokAddresses.Django["baseVit"]);
-			var djangoCurrentBaseSpr = utils.ReadDynamicAddress(shinbokAddresses.Misc["stat"], shinbokAddresses.Django["baseSpr"]);
-			var djangoCurrentBaseStr = utils.ReadDynamicAddress(shinbokAddresses.Misc["stat"], shinbokAddresses.Django["baseStr"]);
+			var djangoCurrentHp = this.memoryValues.Django["currentHp"].Value;
 
 			/**
 			 * Updating values by retrieving from memory addresses
@@ -74,11 +80,9 @@ namespace BokInterface {
 			 */
 			if(djangoCurrentHp >= 0 && djangoCurrentHp <= 1000) {
 				this.bok3_currentStatusHpValue.Text = djangoCurrentHp.ToString();
-				this.bok3_djangoBaseVit.Text = djangoCurrentBaseVit.ToString();
-				this.bok3_djangoBaseSpr.Text = djangoCurrentBaseSpr.ToString();
-				this.bok3_djangoBaseStr.Text = djangoCurrentBaseStr.ToString();
-
-				// utils.WriteDynamicAddress((uint)99, shinbokAddresses.Misc["room"], shinbokAddresses.Django["hp"]);
+				this.bok3_djangoBaseVit.Text = this.memoryValues.Django["baseVit"].Value.ToString();
+				this.bok3_djangoBaseSpr.Text = this.memoryValues.Django["baseSpr"].Value.ToString();
+				this.bok3_djangoBaseStr.Text = this.memoryValues.Django["baseStr"].Value.ToString();
 			}
 		}
 
@@ -150,6 +154,42 @@ namespace BokInterface {
 			// Add elements to group
 			for(int i = 0; i < this.currentStatsLabels.Count; i++) {
 				this.currentStatsGroupBox.Controls.Add(this.currentStatsLabels[i]);
+			}
+		}
+
+		private void AddShinbokEditSection() {
+
+			// Section
+			this.editGroupBox = this.CreateGroupBox("editButtons", "Edit", 237, 25, 87, 157, true);
+
+			this.bok3_editStatusBtn = CreateButton("editStatuts", "Status", 6, 19, 75, 23);
+			this.bok3_editInventoryBtn = CreateButton("editItems", "Items", 6, 46, 75, 23);
+			this.bok3_editEquipsBtn = CreateButton("editEquips", "Equips", 6, 73, 75, 23);
+			this.bok3_editWeaponsBtn = CreateButton("editWeapons", "Weapons", 6, 100, 75, 23);
+			this.bok3_editSolarGunBtn = CreateButton("editSolarGun", "Solar gun", 6, 127, 75, 23);
+
+			// WIP features are disabled for now
+			this.bok3_editInventoryBtn.Enabled = false;
+			this.bok3_editEquipsBtn.Enabled = false;
+			this.bok3_editWeaponsBtn.Enabled = false;
+			this.bok3_editSolarGunBtn.Enabled = false;
+
+			// Add onclick events
+			this.bok3_editStatusBtn.Click += new System.EventHandler(this.OpenStatusEditor);
+			// this.bok3_editInventoryBtn.Click += new System.EventHandler(this.OpenInventoryEditor);
+			// this.bok3_editEquipsBtn.Click += new System.EventHandler(this.OpenEquipsEditor);
+			// this.bok3_editWeaponsBtn.Click += new System.EventHandler(this.OpenWeaponsEditor);
+			// this.bok3_editSolarGunBtn.Click += new System.EventHandler(this.OpenSolarGunEditor);
+
+			// Add buttons to group
+			this.editButtons.Add(this.bok3_editStatusBtn);
+			this.editButtons.Add(this.bok3_editInventoryBtn);
+			this.editButtons.Add(this.bok3_editEquipsBtn);
+			this.editButtons.Add(this.bok3_editWeaponsBtn);
+			this.editButtons.Add(this.bok3_editSolarGunBtn);
+
+			for(int i = 0; i < this.editButtons.Count; i++) {
+				this.editGroupBox.Controls.Add(this.editButtons[i]);
 			}
 		}
 	}
