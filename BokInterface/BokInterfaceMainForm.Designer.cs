@@ -117,20 +117,7 @@ namespace BokInterface {
 			this.statusEditButtons.Clear();
 			this.statusEditWindow.Close();
 			this.statusEditing = false;
-		}
 
-		/// <summary>Shows the "Game not recognized" window</summary>
-		private void GameNotRecognizedWindow() {
-			
-			// Current game name
-			this.CreateLabel("currentGameName", "Game not recognized!", 5, 5, 123, 20, true);
-
-			// Window
-			this.SetMainWindow("Bok Interface" + (shorterGameName != "" ? " - " + shorterGameName : ""), 350, 100);
-			this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.BokInterfaceMainForm_FormClosing);
-			this.Load += new System.EventHandler(this.BokInterfaceMainForm_Load);
-
-			this.ResumeLayout(false);
 		}
 
 		/// <summary>Simplified method for setting the main window of the interface</summary>
