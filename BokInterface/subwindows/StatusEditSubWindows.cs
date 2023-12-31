@@ -163,26 +163,28 @@ namespace BokInterface {
 				var value = (uint)fields[i].Value;
 
 				// Indicate which sublist to use for setting the value, based on the input field's name
-				string subList = fields[i].Name.Split('-')[0];
+				var fieldParts = fields[i].Name.Split('_');
+				string subList = fieldParts[0];
+				string memoryValueKey = fieldParts[1];
 				switch(subList) {
 					case "django":
-						if(memoryValues.Django.ContainsKey(fields[i].Name) == true) {
-							memoryValues.Django[fields[i].Name].Value = value;
+						if(memoryValues.Django.ContainsKey(memoryValueKey) == true) {
+							memoryValues.Django[memoryValueKey].Value = value;
 						}
 						break;
 					case "solls":
-						if(memoryValues.Solls.ContainsKey(fields[i].Name) == true) {
-							memoryValues.Solls[fields[i].Name].Value = value;
+						if(memoryValues.Solls.ContainsKey(memoryValueKey) == true) {
+							memoryValues.Solls[memoryValueKey].Value = value;
 						}
 						break;
 					case "bike":
-						if(memoryValues.Bike.ContainsKey(fields[i].Name) == true) {
-							memoryValues.Bike[fields[i].Name].Value = value;
+						if(memoryValues.Bike.ContainsKey(memoryValueKey) == true) {
+							memoryValues.Bike[memoryValueKey].Value = value;
 						}
 						break;
 					case "misc":
-						if(memoryValues.Misc.ContainsKey(fields[i].Name) == true) {
-							memoryValues.Misc[fields[i].Name].Value = value;
+						if(memoryValues.Misc.ContainsKey(memoryValueKey) == true) {
+							memoryValues.Misc[memoryValueKey].Value = value;
 						}
 						break;
 					default:
