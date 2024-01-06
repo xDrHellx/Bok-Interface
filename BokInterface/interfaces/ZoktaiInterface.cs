@@ -30,9 +30,12 @@ namespace BokInterface {
 
 			// Stats section
 			this.AddZoktaiCurrentStatsSection();
+
+			// Extras / misc tools section
+			this.AddToolsSection();
 			
 			// Main window
-			this.SetMainWindow("Bok Interface" + (shorterGameName != "" ? " - " + shorterGameName : ""), 350, 500);
+			this.SetMainWindow("Bok Interface" + (shorterGameName != "" ? " - " + shorterGameName : ""), 345, 500);
 			
 			this.ResumeLayout(false);
         }

@@ -101,23 +101,31 @@ namespace BokInterface {
 
 		/// <summary>Clears the interface window and all other sections within it</summary>
 		private void ClearInterface() {
+
+			// Main window-related
 			this.Controls.Clear();
 
 			this.currentStatusGroupBox.Controls.Clear();
 			this.currentStatsGroupBox.Controls.Clear();
 			this.inventoryGroupBox.Controls.Clear();
 			this.editGroupBox.Controls.Clear();
-			
+			this.extrasGroupBox.Controls.Clear();
+
 			this.currentStatusLabels.Clear();
 			this.currentStatsLabels.Clear();
 			this.editButtons.Clear();
 
+			// Status edit subwindow-related
 			this.statusEditWindow.Controls.Clear();
 			this.statusEditLabels.Clear();
 			this.statusEditButtons.Clear();
 			this.statusEditWindow.Close();
 			this.statusEditing = false;
 
+			// Tools selection subwindow-related
+			this.miscToolsSelectionWindow.Controls.Clear();
+			this.miscToolsSelectionWindow.Close();
+			this.miscToolsSelecting = false;
 		}
 
 		/// <summary>Simplified method for setting the main window of the interface</summary>
@@ -132,6 +140,33 @@ namespace BokInterface {
 			this.BackColor = System.Drawing.SystemColors.Control;
 			this.Font = BokInterfaceMainForm.defaultFont;
 			this.ClientSize = new System.Drawing.Size(width, height);
+		}
+
+		/// <summary>Adds Tools section for the corresponding game</summary>
+		private void AddToolsSection() {
+
+			switch(shorterGameName) {
+				case "Boktai":
+					this.extrasGroupBox = this.CreateGroupBox("extraTools", "Tools", 237, 25, 87, 52, true);
+					break;
+				case "Zoktai":
+					this.extrasGroupBox = this.CreateGroupBox("extraTools", "Tools", 237, 25, 87, 52, true);
+					break;
+				case "Shinbok":
+					this.extrasGroupBox = this.CreateGroupBox("extraTools", "Tools", 237, 187, 87, 52, true);
+					break;
+				case "LunarKnights":
+					this.extrasGroupBox = this.CreateGroupBox("extraTools", "Tools", 237, 25, 87, 52, true);
+					break;
+				default:
+					// If game is not handled, don't add anything & stop here
+					return;
+			}
+
+			// Add Misc Tools button
+			System.Windows.Forms.Button miscToolsBtn = CreateButton("showExtraTools", "Misc tools", 6, 21, 75, 23);
+			miscToolsBtn.Click += new System.EventHandler(this.OpenMiscToolsSelection);
+			this.extrasGroupBox.Controls.Add(miscToolsBtn);
 		}
 
 		/// <summary>Get the specified icon if it exist</summary>
@@ -417,6 +452,7 @@ namespace BokInterface {
 		private System.Windows.Forms.GroupBox currentStatsGroupBox = new();
 		private System.Windows.Forms.GroupBox inventoryGroupBox = new();
 		private System.Windows.Forms.GroupBox editGroupBox = new();
+		private System.Windows.Forms.GroupBox extrasGroupBox = new();
 		private List<System.Windows.Forms.Label> currentStatusLabels = new();
 		private List<System.Windows.Forms.Label> currentStatsLabels = new();
 		private List<System.Windows.Forms.Button> editButtons = new();
@@ -431,6 +467,7 @@ namespace BokInterface {
 		private System.Windows.Forms.Form solarGunEditWindow = new();
 		private System.Windows.Forms.Form weaponsEditWindow = new();
 		private System.Windows.Forms.Form magicsEditWindow = new();
+		private System.Windows.Forms.Form miscToolsSelectionWindow = new();
 		
 		#endregion
 

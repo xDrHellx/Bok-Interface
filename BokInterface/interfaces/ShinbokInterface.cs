@@ -53,11 +53,14 @@ namespace BokInterface {
 			// Values setting / editing section
 			this.AddShinbokEditSection();
 
+			// Extras / misc tools section
+			this.AddToolsSection();
+
 			// Inventory section
 			// this.inventoryGroupBox = this.CreateGroupBox("inventory", "Inventory", 5, 101, 250, 55, true);
 
 			// Main window
-			this.SetMainWindow("Bok Interface" + (shorterGameName != "" ? " - " + shorterGameName : ""), 350, 500);
+			this.SetMainWindow("Bok Interface" + (shorterGameName != "" ? " - " + shorterGameName : ""), 345, 500);
 			
 			this.ResumeLayout(false);
         }

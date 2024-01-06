@@ -4,6 +4,7 @@ using System;
 using System.Windows.Forms;
 using System.Drawing;
 using System.Linq;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Runtime.CompilerServices;
 using BokInterface.All;
@@ -20,7 +21,7 @@ namespace BokInterface {
 
 		protected override string WindowTitleStatic => "Bok Interface";
 		public override bool BlocksInputWhenFocused => false;
-		protected Icon icon;
+		protected Icon? icon;
 		public uint currentGameId;
 		public string currentGameName = "";
 		public string shorterGameName = "";
@@ -30,6 +31,9 @@ namespace BokInterface {
 		protected int retryCount = 0;
 
 		private MemoryValues memoryValues;
+
+		/// <summary>List of functions to call each frame</summary>
+		public static List<Action> functionsList = new();
 
 		public ApiContainer ApiContainer {
 			get => APIs.ApiContainer;
@@ -120,6 +124,11 @@ namespace BokInterface {
 						default:
 							// Nothing to do here
 							break;
+					}
+
+					// Loop on the list of functions to call each frame
+					foreach(Action function in functionsList) {
+						function();
 					}
 				} else {
 					

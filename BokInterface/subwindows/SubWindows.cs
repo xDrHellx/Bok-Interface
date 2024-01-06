@@ -16,6 +16,7 @@ namespace BokInterface {
         protected bool solarGunEditing = false;
         protected bool weaponsEditing = false;
         protected bool magicsEditing = false;
+        protected bool miscToolsSelecting = false;
 
         #endregion
 
@@ -98,6 +99,35 @@ namespace BokInterface {
             }
         }
 
+        protected void OpenMiscToolsSelection(object sender, EventArgs e) {
+            if(this.miscToolsSelecting == false) {
+                this.miscToolsSelectionWindow = CreateSubWindow("miscToolsSelectWindow", "Bok Tools - Select", 200, 100);
+                this.miscToolsSelectionWindow.FormClosing += new FormClosingEventHandler(this.MisctToolsSelectWindow_FormClosing);
+
+                // Add subwindow elements corresponding to the current game
+                switch(shorterGameName) {
+                    case "Boktai":
+                        BoktaiToolsSubwindow();
+                        break;
+                    case "Zoktai":
+                        ZoktaiToolsSubwindow();
+                        break;
+                    case "Shinbok":
+                        ShinbokToolsSubwindow();
+                        break;
+                    case "LunarKnights":
+                        LunarKnightsToolsSubwindow();
+                        break;
+                    default:
+                        // If game is not handled, stop
+                        return;
+                }
+
+                this.miscToolsSelectionWindow.Show();
+                this.miscToolsSelecting = true;
+            }
+        }
+
         #endregion
 
         #region Subwindows events
@@ -130,6 +160,11 @@ namespace BokInterface {
         protected void MagicsEditWindow_FormClosing(object sender, FormClosingEventArgs e) {
             this.magicsEditing = false;
             this.magicsEditWindow.Controls.Clear();
+        }
+
+        protected void MisctToolsSelectWindow_FormClosing(object sender, FormClosingEventArgs e) {
+            this.miscToolsSelecting = false;
+            this.miscToolsSelectionWindow.Controls.Clear();
         }
 
         #endregion
