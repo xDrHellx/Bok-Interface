@@ -30,7 +30,7 @@ namespace BokInterface {
 		protected bool isDS = false;
 		protected int retryCount = 0;
 
-		private MemoryValues memoryValues;
+		private MemoryValues memoryValues = new("");
 
 		/// <summary>List of functions to call each frame</summary>
 		public static List<Action> functionsList = new();
