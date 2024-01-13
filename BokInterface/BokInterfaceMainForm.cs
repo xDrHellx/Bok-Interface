@@ -126,9 +126,18 @@ namespace BokInterface {
 							break;
 					}
 
-					// Loop on the list of functions to call each frame
-					foreach(Action function in functionsList) {
-						function();
+					/**
+					 * Check if we're past the GBA boot up screen
+					 * 
+					 * Otherwise the emulator can crash if we try reading values from memory addresses,
+					 * most likely because it reads "garbage" data
+					 */
+					if(APIs.Emulation.FrameCount() >= 400) {
+
+						// Loop on the list of functions to call each frame
+						foreach(Action function in functionsList) {
+							function();
+						}
 					}
 				} else {
 					

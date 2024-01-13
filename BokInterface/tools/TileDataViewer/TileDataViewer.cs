@@ -86,14 +86,6 @@ namespace BokInterface.Tools.TileDataViewer {
         protected override void OnPaint(PaintEventArgs e) {
             base.OnPaint(e);
 
-            /**
-             * Check if we're past the GBA boot up screen
-             * Otherwise the emulator will crash, most likely because it reads "garbage" data
-             */
-            if(APIs.Emulation.FrameCount() < 400) {
-                return;
-            }
-
             // 1. Get map data
             uint mapData = APIs.Memory.ReadU32(boktaiAddresses.Misc["mapData"]);
             if(mapData == 0) {
