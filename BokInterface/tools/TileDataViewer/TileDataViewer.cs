@@ -7,7 +7,11 @@ using BokInterface.All;
 using BokInterface.Boktai;
 
 namespace BokInterface.Tools.TileDataViewer {
-    /// <summary>Subwindow for the tile data viewer</summary>
+    /// <summary>
+    /// <para>Subwindow for the Tile Data Viewer</para>
+    /// <para>Prints and show Tile Data (AKA Map)</para>
+    /// <para>Made by Raphi, converted from Lua to C# by Doc</para>
+    /// </summary>
     class TileDataViewer : Form {
 
         public int index = 0;
@@ -46,16 +50,16 @@ namespace BokInterface.Tools.TileDataViewer {
         }
 
         /// <summary>Get the specified icon if it exist</summary>
-		/// <param name="fileName">File name (without .ico extension)</param>
-		/// <returns><c>System.Drawing.Icon</c>Specified Icon instance (or default if the specified icon could not be found)</returns>
-		protected System.Drawing.Icon GetIcon(string fileName) {
-			string iconPath = "../BokInterface/icon/" + fileName + ".ico";
-			if(File.Exists(iconPath) == true) {
-				return new System.Drawing.Icon(iconPath);
-			} else {
-				return this.Icon;
-			}
-		}
+        /// <param name="fileName">File name (without .ico extension)</param>
+        /// <returns><c>System.Drawing.Icon</c>Specified Icon instance (or default if the specified icon could not be found)</returns>
+        protected System.Drawing.Icon GetIcon(string fileName) {
+            string iconPath = "../BokInterface/icon/" + fileName + ".ico";
+            if(File.Exists(iconPath) == true) {
+                return new System.Drawing.Icon(iconPath);
+            } else {
+                return this.Icon;
+            }
+        }
 
         /// <summary>Sets the subwindow's size</summary>
         /// <param name="width">Width</param>
