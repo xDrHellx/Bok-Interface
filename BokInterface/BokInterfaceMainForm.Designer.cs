@@ -29,7 +29,7 @@ namespace BokInterface {
 		/// <summary>Color for the total amount of points for a specific stat (Boktai 2, 3, LK)</summary>
 		protected static string totalStatColor = "#FFD3D3D3";
 
-		protected static System.Drawing.Font defaultFont = new System.Drawing.Font("Segoe UI", 9, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+		public static System.Drawing.Font defaultFont = new System.Drawing.Font("Segoe UI", 9, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
 		protected static System.Windows.Forms.Padding defaultMargin = new System.Windows.Forms.Padding(3, 0, 3, 0);
 		protected static System.Windows.Forms.AnchorStyles defaultAnchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left;
 

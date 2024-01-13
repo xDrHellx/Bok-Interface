@@ -31,6 +31,11 @@ namespace BokInterface.Boktai {
 
         public BoktaiAddresses() {
 
+            Django.Add("xPosition", 0x0203d8f0);
+            Django.Add("yPosition", 0x0203d8f4);
+
+            // Add Misc addresses
+            Misc.Add("mapData", 0x03004610);
         }
     }
 }
