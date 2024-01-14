@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using BokInterface.All;
 
 /**
- * Main file for status edit subwindows
+ * Main file for status editing subwindows
  */
 
 namespace BokInterface {
@@ -88,10 +88,15 @@ namespace BokInterface {
 			this.statusEditWindow.Controls.Add(this.edit_statusGroupBox);
 			this.statusEditWindow.Controls.Add(this.edit_statsGroupBox);
 
-			// Button for setting values
+			// Button for setting values & its events
 			System.Windows.Forms.Button setValuesButton = this.CreateButton("setStatusButton", "Set values", 123, 116, 75, 23);
-			setValuesButton.Click += new System.EventHandler(this.SetValuesButton_Click);
+			setValuesButton.Click += new System.EventHandler(delegate(object sender, EventArgs e) {
+				for(int i = 0; i < 10; i++) {
+					this.SetStatusValues();
+				}
+			});
 			
+			// Add button to subwindow
 			this.statusEditWindow.Controls.Add(setValuesButton);
 		}
 
@@ -194,16 +199,6 @@ namespace BokInterface {
 					default:
 						break;
 				}
-			}
-		}
-
-		#endregion
-
-		#region Buttons events
-
-		void SetValuesButton_Click(object sender, EventArgs e) {
-			for(int i = 0; i < 10; i++) {
-				this.SetStatusValues();
 			}
 		}
 

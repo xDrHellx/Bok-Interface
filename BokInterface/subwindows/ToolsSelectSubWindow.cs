@@ -47,10 +47,6 @@ namespace BokInterface {
             this.miscToolsSelectionWindow.Controls.Add(tileDataBtn);
         }
 
-        protected void TileDataViewerSubwindow_OnPaint() {
-
-        }
-
         private void ZoktaiToolsSubwindow() {
 
         }
