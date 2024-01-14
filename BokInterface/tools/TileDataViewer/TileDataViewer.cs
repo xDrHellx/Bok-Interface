@@ -86,12 +86,12 @@ namespace BokInterface.Tools.TileDataViewer {
             base.OnPaint(e);
 
             // 1. Get map data
-            uint mapData = APIs.Memory.ReadU32(boktaiAddresses.Misc["map_data"]);
-            if(mapData == 0) {
+            uint mapDataPointers = APIs.Memory.ReadU32(boktaiAddresses.Misc["map_data"]);
+            if(mapDataPointers == 0) {
                 return;
             }
 
-            mapData = APIs.Memory.ReadU32(mapData + 4);
+            uint mapData = APIs.Memory.ReadU32(mapDataPointers + 4);
             if(mapData == 0) {
                 return;
             }
@@ -107,7 +107,10 @@ namespace BokInterface.Tools.TileDataViewer {
             // 2. Draw map tiles data
             this.DrawTileData(e, mapData, tileWidth, tileHeight, tileShift);
 
-            // 3. Draw Django on map
+            // 3. Draw zones
+            this.DrawZones(e, APIs.Memory.ReadU32(mapDataPointers + 12));
+
+            // 4. Draw Django on map
             uint djangoX = APIs.Memory.ReadU16(boktaiAddresses.Django["x_position"]);
             uint djangoY = APIs.Memory.ReadU16(boktaiAddresses.Django["y_position"]);
             this.DrawDjangoIcon(e, djangoX, djangoY);
@@ -153,6 +156,32 @@ namespace BokInterface.Tools.TileDataViewer {
                 (int)(tileWidth * scale) -5,
                 (int)(tileHeight * scale) -5
             );
+        }
+
+        private static Pen zonePen = new Pen(Color.LimeGreen);
+        /// <summary>
+        /// Draw zones. For example loading zones, but not necessarily. The map data only defines the position/size of
+        /// the zone, but not what it does.
+        /// </summary>
+        /// <param name="e"></param>
+        /// <param name="zonesData"></param>
+        protected void DrawZones(PaintEventArgs e, uint zonesData)
+        {
+            var zoneScale = scale/256.0f;
+            var zoneCount = APIs.Memory.ReadU8(zonesData);
+            var zonePtr = zonesData + 4;
+            for (var i = 0; i < zoneCount; i++)
+            {
+                var startX = APIs.Memory.ReadS16(zonePtr);
+                var startY = APIs.Memory.ReadS16(zonePtr+2);
+                var endX = APIs.Memory.ReadS16(zonePtr+4);
+                var endY = APIs.Memory.ReadS16(zonePtr+6);
+                // start height (u8), end height (u8), and zone id (u16) follows, but these don't matter for drawing.
+
+                e.Graphics.DrawRectangle(zonePen, 5 + startX*zoneScale, 5 + startY*zoneScale,
+                    (endX-startX)*zoneScale, (endY-startY)*zoneScale);
+                zonePtr += 12;
+            }
         }
 
         /// <summary>Draws Django icon on tilemap</summary>
