@@ -63,14 +63,14 @@ namespace BokInterface.Shinbok {
             // Add Django addresses
             Django.Add("hp", 0x424);
 
-            Django.Add("xPosition", 0x03C430);
-            Django.Add("yPosition", 0x03C434);
-            Django.Add("zPosition", 0x03C432);
+            Django.Add("x_position", 0x03C430);
+            Django.Add("y_position", 0x03C434);
+            Django.Add("z_position", 0x03C432);
 
             // 0x18 + 2 * stat_id
-            Django.Add("baseVit", 0x18);
-            Django.Add("baseSpr", 0x1A);
-            Django.Add("baseStr", 0x1C);
+            Django.Add("base_vit", 0x18);
+            Django.Add("base_spr", 0x1A);
+            Django.Add("base_str", 0x1C);
 
             // Add Misc addresses
             Misc.Add("room", 0x02000580);

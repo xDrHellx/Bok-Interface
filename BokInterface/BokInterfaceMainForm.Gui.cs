@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.ComponentModel;
 using BizHawk.Client.Common;
 using BokInterface.All;
@@ -23,18 +24,6 @@ namespace BokInterface {
             if(this.isDS == true) {
                 APIs.Gui.Text(3, GetScreenHeight(true) + 1, interfaceActivated == true ? "Bok ON" : "Bok Off", System.Drawing.Color.Orange, "bottomright");
             }
-        }
-
-        /// <summary>Simplified method for writing a message on in-game screen</summary>
-        /// <param name="message">Message</param>
-        /// <param name="duration">Duration (by default 10)</param>
-        private void AddMessage(string message, int duration = 10) {
-            APIs.Gui.AddMessage(message, duration);
-        }
-
-        /// <summary>Clears text on in-game screen</summary>
-        private void ClearText() {
-            APIs.Gui.ClearText();
         }
 
         /// <summary>Returns game screen height</summary>

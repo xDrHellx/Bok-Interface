@@ -17,17 +17,17 @@ namespace BokInterface {
 		#region Common interface variables
 
 		/// <summary>Color for pure / base stat points (Boktai 2, 3, LK)</summary>
-		protected static string baseStatColor = "#FFE600";
+		public static string baseStatColor = "#FFE600";
 
 		/// <summary>
 		/// Color for stat points from equipments (Boktai 3)<br/>
 		/// These points does not affect as many things as pure stat points <br/><br/>
 		/// For example STR points from equipments does not affect coffin carrying speed
 		/// </summary>
-		protected static string equipsStatColor = "#FFA529";
+		public static string equipsStatColor = "#FFA529";
 
 		/// <summary>Color for the total amount of points for a specific stat (Boktai 2, 3, LK)</summary>
-		protected static string totalStatColor = "#FFD3D3D3";
+		public static string totalStatColor = "#FFD3D3D3";
 
 		public static System.Drawing.Font defaultFont = new System.Drawing.Font("Segoe UI", 9, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
 		protected static System.Windows.Forms.Padding defaultMargin = new System.Windows.Forms.Padding(3, 0, 3, 0);

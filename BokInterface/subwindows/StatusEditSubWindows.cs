@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using BokInterface.All;
 
 /**
  * Main file for status edit subwindows
@@ -48,9 +49,9 @@ namespace BokInterface {
 			// this.edit_statusLabels.Add(this.CreateLabel("djangoEditEneLabel", "ENE :", 7, 47, 34, 15));
 			// this.edit_statusLabels.Add(this.CreateLabel("djangoEditTrcLabel", "TRC :", 7, 76, 34, 15));
 
-			this.edit_statusNumericUpDowns.Add(this.CreateNumericUpDown("django_currentHp", defaultValues["django_currentHp"], 47, 16, 50, 23, 1, 1000));
-			// this.edit_statusNumericUpDowns.Add(this.CreateNumericUpDown("django_currentEne", defaultValues["django_currentEne"], 47, 45, 50, 23, 1, 1000));
-			// this.edit_statusNumericUpDowns.Add(this.CreateNumericUpDown("django_currentTrc", defaultValues["django_currentTrc"], 47, 74, 50, 23, 1, 1000));
+			this.edit_statusNumericUpDowns.Add(this.CreateNumericUpDown("django_current_hp", defaultValues["django_current_hp"], 47, 16, 50, 23, 1, 1000));
+			// this.edit_statusNumericUpDowns.Add(this.CreateNumericUpDown("django_current_ene", defaultValues["django_current_ene"], 47, 45, 50, 23, 1, 1000));
+			// this.edit_statusNumericUpDowns.Add(this.CreateNumericUpDown("django_current_trc", defaultValues["django_current_trc"], 47, 74, 50, 23, 1, 1000));
 
 			// Add elements to group
 			for(int i = 0; i < this.edit_statusLabels.Count; i++) {
@@ -68,9 +69,9 @@ namespace BokInterface {
 			this.edit_statusLabels.Add(this.CreateLabel("djangoEditEneLabel", "SPR", 8, 47, 27, 15));
 			this.edit_statusLabels.Add(this.CreateLabel("djangoEditTrcLabel", "STR", 8, 76, 27, 15));
 
-			this.edit_statusNumericUpDowns.Add(this.CreateNumericUpDown("django_baseVit", defaultValues["django_baseVit"], 36, 16, 41, 23));
-			this.edit_statusNumericUpDowns.Add(this.CreateNumericUpDown("django_baseSpr", defaultValues["django_baseSpr"], 36, 45, 41, 23));
-			this.edit_statusNumericUpDowns.Add(this.CreateNumericUpDown("django_baseStr", defaultValues["django_baseStr"], 36, 74, 41, 23));
+			this.edit_statusNumericUpDowns.Add(this.CreateNumericUpDown("django_base_vit", defaultValues["django_base_vit"], 36, 16, 41, 23));
+			this.edit_statusNumericUpDowns.Add(this.CreateNumericUpDown("django_base_spr", defaultValues["django_base_spr"], 36, 45, 41, 23));
+			this.edit_statusNumericUpDowns.Add(this.CreateNumericUpDown("django_base_str", defaultValues["django_base_str"], 36, 74, 41, 23));
 
 			// Add elements to group
 			for(int i = l; i < this.edit_statusLabels.Count; i++) {
@@ -123,22 +124,22 @@ namespace BokInterface {
 					break;
 				case "Shinbok":
 
-					djangoCurrentHp = this.memoryValues.Django["currentHp"].Value;
+					djangoCurrentHp = this.memoryValues.Django["current_hp"].Value;
 
 					// If HP value is valid, get the other in-game values
 					if(djangoCurrentHp >= 0 && djangoCurrentHp <= 1000) {
-						defaultValues.Add("django_currentHp", djangoCurrentHp);
-						defaultValues.Add("django_baseVit", this.memoryValues.Django["baseVit"].Value);
-						defaultValues.Add("django_baseSpr", this.memoryValues.Django["baseSpr"].Value);
-						defaultValues.Add("django_baseStr", this.memoryValues.Django["baseStr"].Value);
+						defaultValues.Add("django_current_hp", djangoCurrentHp);
+						defaultValues.Add("django_base_vit", this.memoryValues.Django["base_vit"].Value);
+						defaultValues.Add("django_base_spr", this.memoryValues.Django["base_spr"].Value);
+						defaultValues.Add("django_base_str", this.memoryValues.Django["base_str"].Value);
 					} else {
 						// If HP is unvalid (for example if we are on the title screen or in bike races), use specific values
-						defaultValues.Add("django_currentHp", 100);
-						// defaultValues.Add("django_currentEne", 100);
-						// defaultValues.Add("django_currentTrc", 1000);
-						defaultValues.Add("django_baseVit", 10);
-						defaultValues.Add("django_baseSpr", 10);
-						defaultValues.Add("django_baseStr", 10);
+						defaultValues.Add("django_current_hp", 100);
+						// defaultValues.Add("django_current_ene", 100);
+						// defaultValues.Add("django_current_trc", 1000);
+						defaultValues.Add("django_base_vit", 10);
+						defaultValues.Add("django_base_spr", 10);
+						defaultValues.Add("django_base_str", 10);
 					}
 
 					break;
@@ -162,8 +163,11 @@ namespace BokInterface {
 			for(int i = 0; i < fields.Count; i++) {
 				var value = (uint)fields[i].Value;
 
-				// Indicate which sublist to use for setting the value, based on the input field's name
-				var fieldParts = fields[i].Name.Split('_');
+				/**
+				 * Indicate which sublist to use for setting the value, based on the input field's name
+				 * We only split on the first "_"
+				 */
+				var fieldParts = fields[i].Name.Split(new char[]{'_'}, 2);
 				string subList = fieldParts[0];
 				string memoryValueKey = fieldParts[1];
 				switch(subList) {

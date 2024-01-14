@@ -87,7 +87,7 @@ namespace BokInterface.Tools.TileDataViewer {
             base.OnPaint(e);
 
             // 1. Get map data
-            uint mapData = APIs.Memory.ReadU32(boktaiAddresses.Misc["mapData"]);
+            uint mapData = APIs.Memory.ReadU32(boktaiAddresses.Misc["map_data"]);
             if(mapData == 0) {
                 return;
             }
@@ -109,8 +109,8 @@ namespace BokInterface.Tools.TileDataViewer {
             this.DrawTileData(e, mapData, tileWidth, tileHeight, tileShift);
 
             // 3. Draw Django on map
-            uint djangoX = APIs.Memory.ReadU16(boktaiAddresses.Django["xPosition"]);
-            uint djangoY = APIs.Memory.ReadU16(boktaiAddresses.Django["yPosition"]);
+            uint djangoX = APIs.Memory.ReadU16(boktaiAddresses.Django["x_position"]);
+            uint djangoY = APIs.Memory.ReadU16(boktaiAddresses.Django["y_position"]);
             this.DrawDjangoIcon(e, djangoX, djangoY);
 
             // Write tile address on screen

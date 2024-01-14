@@ -73,7 +73,7 @@ namespace BokInterface {
 			 * This is necessary because some memory addresses changes based on areas
 			 * So we need to combine multiple addresses to get the actual value all the time
 			 */
-			var djangoCurrentHp = this.memoryValues.Django["currentHp"].Value;
+			var djangoCurrentHp = this.memoryValues.Django["current_hp"].Value;
 
 			/**
 			 * Updating values by retrieving from memory addresses
@@ -83,9 +83,9 @@ namespace BokInterface {
 			 */
 			if(djangoCurrentHp >= 0 && djangoCurrentHp <= 1000) {
 				this.bok3_currentStatusHpValue.Text = djangoCurrentHp.ToString();
-				this.bok3_djangoBaseVit.Text = this.memoryValues.Django["baseVit"].Value.ToString();
-				this.bok3_djangoBaseSpr.Text = this.memoryValues.Django["baseSpr"].Value.ToString();
-				this.bok3_djangoBaseStr.Text = this.memoryValues.Django["baseStr"].Value.ToString();
+				this.bok3_djangoBaseVit.Text = this.memoryValues.Django["base_vit"].Value.ToString();
+				this.bok3_djangoBaseSpr.Text = this.memoryValues.Django["base_spr"].Value.ToString();
+				this.bok3_djangoBaseStr.Text = this.memoryValues.Django["base_str"].Value.ToString();
 			}
 		}
 

@@ -31,9 +31,9 @@ namespace BokInterface.Zoktai {
 
         public ZoktaiAddresses() {
             
-            Django.Add("xPosition", 0x03C430);
-            Django.Add("yPosition", 0x03C434);
-            Django.Add("zPosition", 0x03C432);
+            Django.Add("x_position", 0x03C430);
+            Django.Add("y_position", 0x03C434);
+            Django.Add("z_position", 0x03C432);
         }
     }
 }

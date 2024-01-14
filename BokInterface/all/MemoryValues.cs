@@ -68,10 +68,10 @@ namespace BokInterface {
 
         private void InitializeShinbokList() {
 
-            this.Django.Add("currentHp", new DynamicMemoryValue("currentHp", shinbokAddresses.Misc["room"], shinbokAddresses.Django["hp"]));
-            this.Django.Add("baseVit", new DynamicMemoryValue("baseVit", shinbokAddresses.Misc["stat"], shinbokAddresses.Django["baseVit"]));
-            this.Django.Add("baseSpr", new DynamicMemoryValue("baseSpr", shinbokAddresses.Misc["stat"], shinbokAddresses.Django["baseSpr"]));
-            this.Django.Add("baseStr", new DynamicMemoryValue("baseStr", shinbokAddresses.Misc["stat"], shinbokAddresses.Django["baseStr"]));
+            this.Django.Add("current_hp", new DynamicMemoryValue("current_hp", shinbokAddresses.Misc["room"], shinbokAddresses.Django["hp"]));
+            this.Django.Add("base_vit", new DynamicMemoryValue("base_vit", shinbokAddresses.Misc["stat"], shinbokAddresses.Django["base_vit"]));
+            this.Django.Add("base_spr", new DynamicMemoryValue("base_spr", shinbokAddresses.Misc["stat"], shinbokAddresses.Django["base_spr"]));
+            this.Django.Add("base_str", new DynamicMemoryValue("base_str", shinbokAddresses.Misc["stat"], shinbokAddresses.Django["base_str"]));
         }
 
         private void InitializeLunarKnightsList() {

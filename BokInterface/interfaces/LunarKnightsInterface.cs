@@ -11,7 +11,11 @@ namespace BokInterface {
 	
 	partial class BokInterfaceMainForm {
 
+		#region Variables
+
 		private readonly LunarKnightsAddresses lunarKnightsAddresses = new();
+
+		#endregion
 
         private void ShowLunarKnightsInterface() {
 			

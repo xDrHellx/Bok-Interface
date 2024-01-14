@@ -11,6 +11,8 @@ namespace BokInterface {
 	
 	partial class BokInterfaceMainForm {
 
+		#region Variables
+		
 		private System.Windows.Forms.Label bok2_currentStatusHpValue = new();
 		private System.Windows.Forms.Label bok2_currentStatusEneValue = new();
 		private System.Windows.Forms.Label bok2_djangoBaseVit = new();
@@ -19,6 +21,8 @@ namespace BokInterface {
 		private System.Windows.Forms.Label bok2_djangoBaseAgi = new();
 		
 		private readonly ZoktaiAddresses zoktaiAddresses = new();
+		
+		#endregion
 
         private void ShowZoktaiInterface() {
 

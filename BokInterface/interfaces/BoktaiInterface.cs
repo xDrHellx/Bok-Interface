@@ -11,10 +11,14 @@ namespace BokInterface {
 	
 	partial class BokInterfaceMainForm {
 
+		#region Variables
+
 		private System.Windows.Forms.Label bok1_currentStatusHpValue = new();
 		private System.Windows.Forms.Label bok1_currentStatusEneValue = new();
 
 		private readonly BoktaiAddresses boktaiAddresses = new();
+
+		#endregion
 
         private void ShowBoktaiInterface() {
 			
