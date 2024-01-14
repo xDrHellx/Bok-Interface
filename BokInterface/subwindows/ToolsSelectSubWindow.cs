@@ -11,6 +11,7 @@ namespace BokInterface {
     partial class BokInterfaceMainForm {
 
         protected bool tileDataViewerActive = false;
+        private TileDataViewer? TileDataViewer;
 
         private void BoktaiToolsSubwindow() {
 
@@ -25,10 +26,10 @@ namespace BokInterface {
 
                 this.tileDataViewerActive = true;
 
-                TileDataViewer? TileDataViewer = new("tileDateViewer", "Tile data viewer", 500, 500, "lita");
-                TileDataViewer.InitializeFrameLoop();
+                this.TileDataViewer = new("tileDateViewer", "Tile data viewer", 500, 500, "lita");
+                this.TileDataViewer.InitializeFrameLoop();
 
-                TileDataViewer.FormClosing += new FormClosingEventHandler(delegate(object sender, FormClosingEventArgs e) {
+                this.TileDataViewer.FormClosing += new FormClosingEventHandler(delegate(object sender, FormClosingEventArgs e) {
 
                     this.tileDataViewerActive = false;
                     
@@ -37,10 +38,10 @@ namespace BokInterface {
                     BokInterfaceMainForm.functionsList.RemoveAt(functionIndex);
                     
                     // Just in case, replace instance with null to prevent it from doing anything else
-                    TileDataViewer = null;
+                    this.TileDataViewer = null;
                 });
 
-                TileDataViewer.Show();
+                this.TileDataViewer.Show();
             });
 
             this.miscToolsSelectionWindow.Controls.Add(availableToolsLabel);

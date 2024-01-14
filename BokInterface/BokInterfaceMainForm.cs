@@ -58,6 +58,9 @@ namespace BokInterface {
 			retryCount = 0;
 			isDS = false;
 
+			// Clear subwindows related to extra tools to prevent errors caused by switching between games
+			this.ClearExtraTools();
+
 			// Try initializing the interface
 			InitializeInterface();
 		}

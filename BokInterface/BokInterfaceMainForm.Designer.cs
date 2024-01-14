@@ -126,6 +126,20 @@ namespace BokInterface {
 			this.miscToolsSelectionWindow.Controls.Clear();
 			this.miscToolsSelectionWindow.Close();
 			this.miscToolsSelecting = false;
+
+			// Extra tools-related
+			this.ClearExtraTools();
+		}
+
+		/// <summary>Clears subwindows related to extra tools</summary>
+		private void ClearExtraTools() {
+
+			// Tile Data Viewer-related
+			if(this.TileDataViewer != null) {
+				this.TileDataViewer.Controls.Clear();
+				this.TileDataViewer.Close();
+				this.tileDataViewerActive = false;
+			}
 		}
 
 		/// <summary>Simplified method for setting the main window of the interface</summary>
