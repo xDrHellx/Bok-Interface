@@ -53,12 +53,11 @@ namespace BokInterface.Tools.TileDataViewer {
         /// <param name="fileName">File name (without .ico extension)</param>
         /// <returns><c>System.Drawing.Icon</c>Specified Icon instance (or default if the specified icon could not be found)</returns>
         protected System.Drawing.Icon GetIcon(string fileName) {
-            string iconPath = "../BokInterface/icon/" + fileName + ".ico";
-            if(File.Exists(iconPath) == true) {
-                return new System.Drawing.Icon(iconPath);
-            } else {
-                return this.Icon;
-            }
+            if(fileName == "") {
+				return this.Icon;
+			} else {
+				return (Icon)Properties.Resources.ResourceManager.GetObject(fileName);
+			}
         }
 
         /// <summary>Sets the subwindow's size</summary>
@@ -166,7 +165,7 @@ namespace BokInterface.Tools.TileDataViewer {
             this.UpdateImgNb();
             
             // Set the upper-left corner of the img & draw it
-            Image djangoImg = Image.FromFile("../BokInterface/tools/tileDataViewer/img/django" + imgNb + ".png");
+            Image djangoImg = (Image)Properties.Resources.ResourceManager.GetObject("django" + imgNb);
             Point imgCorner = new(
                 (int)(10 + posX / 256 * scale - scale / 4),
                 (int)(9 + posY / 256 * scale - scale / 4)

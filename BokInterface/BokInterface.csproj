@@ -3,12 +3,14 @@
         <LangVersion>9.0</LangVersion>
         <Nullable>enable</Nullable>
         <TargetFramework>net4.8</TargetFramework>
+        <GenerateResourceUsePreserializedResources>true</GenerateResourceUsePreserializedResources>
     </PropertyGroup>
     <ItemGroup>
         <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
         <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.0" PrivateAssets="all" />
         <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
         <PackageReference Include="WebSocketSharp" Version="1.0.3-rc11" />
+        <PackageReference Include="System.Resources.Extensions" Version="4.6.0" />
         <Reference Include="System.Windows.Forms" />
         <Reference Include="BizHawk.Client.Common" HintPath="$(ProjectDir)../BizHawk/dll/BizHawk.Client.Common.dll" />
         <Reference Include="BizHawk.Emulation.Common" HintPath="$(ProjectDir)../BizHawk/dll/BizHawk.Emulation.Common.dll" />

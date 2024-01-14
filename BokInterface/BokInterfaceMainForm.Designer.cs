@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Drawing;
 using System.IO;
+using  System.Resources.Extensions;
 
 /**
  * File for the external window part of the Bok interface
@@ -187,11 +189,10 @@ namespace BokInterface {
 		/// <param name="fileName">File name (without .ico extension)</param>
 		/// <returns><c>System.Drawing.Icon</c>Specified Icon instance (or default if the specified icon could not be found)</returns>
 		private System.Drawing.Icon GetIcon(string fileName) {
-			string iconPath = "../BokInterface/icon/" + fileName + ".ico";
-			if(File.Exists(iconPath) == true) {
-				return new System.Drawing.Icon(iconPath);
-			} else {
+			if(fileName == "") {
 				return this.Icon;
+			} else {
+				return (Icon)Properties.Resources.ResourceManager.GetObject(fileName);
 			}
 		}
 
