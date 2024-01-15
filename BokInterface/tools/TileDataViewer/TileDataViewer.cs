@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.IO;
 using System.Windows.Forms;
 using BokInterface.All;
 using BokInterface.Boktai;
@@ -14,6 +13,8 @@ namespace BokInterface.Tools.TileDataViewer {
     /// </summary>
     class TileDataViewer : Form {
 
+        #region Variables
+
         public int index = 0;
         private readonly BoktaiAddresses boktaiAddresses = new();
         protected uint scale = 16; // 14
@@ -24,7 +25,12 @@ namespace BokInterface.Tools.TileDataViewer {
         protected static int imgNb = 1;
         protected static int n = 0;
         protected List<System.Drawing.Color> colorPalette;
+        private static readonly Pen zonePen = new(Color.LimeGreen);
 
+        #endregion
+
+        #region Subwindow & loop-related methods
+        
         public TileDataViewer(string name, string title, Int32 width, Int32 height, string icon = "") {
             this.Name = name;
             this.Text = title;
@@ -82,6 +88,10 @@ namespace BokInterface.Tools.TileDataViewer {
             this.index = BokInterfaceMainForm.functionsList.Count -1;
         }
 
+        #endregion
+
+        #region Drawing methods
+
         protected override void OnPaint(PaintEventArgs e) {
             base.OnPaint(e);
 
@@ -116,7 +126,7 @@ namespace BokInterface.Tools.TileDataViewer {
             this.DrawDjangoIcon(e, djangoX, djangoY);
 
             // Write tile address on screen
-            uint tileAddress = mapData + 0xc + ((djangoY >> 8) * tileWidth + (djangoX >> 8)) * 4;
+            // uint tileAddress = mapData + 0xc + ((djangoY >> 8) * tileWidth + (djangoX >> 8)) * 4;
             // this.WriteText(String.Format("Tile address: {0} (={0})", tileAddress, APIs.Memory.ReadU32(tileAddress)));
         }
 
@@ -158,28 +168,30 @@ namespace BokInterface.Tools.TileDataViewer {
             );
         }
 
-        private static Pen zonePen = new Pen(Color.LimeGreen);
         /// <summary>
-        /// Draw zones. For example loading zones, but not necessarily. The map data only defines the position/size of
-        /// the zone, but not what it does.
+        /// Draw zones. <br/>
+        /// For example loading zones, but not necessarily. <br/>
+        /// The map data only defines the position/size of the zone, but not what it does.
         /// </summary>
-        /// <param name="e"></param>
-        /// <param name="zonesData"></param>
-        protected void DrawZones(PaintEventArgs e, uint zonesData)
-        {
-            var zoneScale = scale/256.0f;
-            var zoneCount = APIs.Memory.ReadU8(zonesData);
-            var zonePtr = zonesData + 4;
-            for (var i = 0; i < zoneCount; i++)
-            {
-                var startX = APIs.Memory.ReadS16(zonePtr);
-                var startY = APIs.Memory.ReadS16(zonePtr+2);
-                var endX = APIs.Memory.ReadS16(zonePtr+4);
-                var endY = APIs.Memory.ReadS16(zonePtr+6);
+        /// <param name="e">Painting event using for drawing</param>
+        /// <param name="zonesData">Zones-related data</param>
+        protected void DrawZones(PaintEventArgs e, uint zonesData) {
+
+            float zoneScale = scale/256.0f;
+            uint zoneCount = APIs.Memory.ReadU8(zonesData);
+            uint zonePtr = zonesData + 4;
+
+            for (int i = 0; i < zoneCount; i++) {
+                int startX = APIs.Memory.ReadS16(zonePtr);
+                int startY = APIs.Memory.ReadS16(zonePtr + 2);
+                int endX = APIs.Memory.ReadS16(zonePtr + 4);
+                int endY = APIs.Memory.ReadS16(zonePtr + 6);
                 // start height (u8), end height (u8), and zone id (u16) follows, but these don't matter for drawing.
 
-                e.Graphics.DrawRectangle(zonePen, 5 + startX*zoneScale, 5 + startY*zoneScale,
-                    (endX-startX)*zoneScale, (endY-startY)*zoneScale);
+                e.Graphics.DrawRectangle(
+                    zonePen, 5 + startX * zoneScale, 5 + startY * zoneScale,
+                    (endX - startX) * zoneScale, (endY-startY) * zoneScale
+                );
                 zonePtr += 12;
             }
         }
@@ -201,6 +213,10 @@ namespace BokInterface.Tools.TileDataViewer {
             );
             e.Graphics.DrawImage(djangoImg, imgCorner);
         }
+
+        #endregion
+
+        #region Utilities & misc methods
 
         /// <summary>Updates imgNb variable, used for Django icons (see DrawDjangoIcon)</summary>
         protected void UpdateImgNb() {
@@ -278,4 +294,6 @@ namespace BokInterface.Tools.TileDataViewer {
             }
         }
     }
+
+    #endregion
 }
