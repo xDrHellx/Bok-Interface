@@ -4,6 +4,9 @@ using System.Drawing;
 using System.Windows.Forms;
 using BokInterface.All;
 using BokInterface.Boktai;
+using BokInterface.Zoktai;
+using BokInterface.Shinbok;
+using BokInterface.LunarKnights;
 
 namespace BokInterface.Tools.TileDataViewer {
     /// <summary>
@@ -16,7 +19,7 @@ namespace BokInterface.Tools.TileDataViewer {
         #region Variables
 
         public int index = 0;
-        private readonly BoktaiAddresses boktaiAddresses = new();
+        protected string currentGame = "";
         protected uint scale = 16; // 14
         protected uint alpha = 0xa0;
         /// <summary>Byte of the 32 bit tile data that should be rendered</summary>
@@ -29,9 +32,21 @@ namespace BokInterface.Tools.TileDataViewer {
 
         #endregion
 
+        #region Memory addresses
+
+        private readonly BoktaiAddresses boktaiAddresses = new();
+        private readonly ZoktaiAddresses zoktaiAddresses = new();
+        private readonly ShinbokAddresses shinbokAddresses = new();
+        private readonly LunarKnightsAddresses lunarKnightsAddresses = new();
+        private uint mapDataAddress = 0;
+        private uint djangoXposAddress = 0;
+        private uint djangoYposAddress = 0;
+
+        #endregion
+
         #region Subwindow & loop-related methods
         
-        public TileDataViewer(string name, string title, Int32 width, Int32 height, string icon = "") {
+        public TileDataViewer(string name, string title, Int32 width, Int32 height, string currentGame, string icon = "") {
             this.Name = name;
             this.Text = title;
             this.Icon = this.GetIcon(icon);
@@ -42,6 +57,7 @@ namespace BokInterface.Tools.TileDataViewer {
             this.Font = BokInterfaceMainForm.defaultFont;
             this.AutoScroll = true;
             this.SetSubwindowSize(width, height);
+            this.currentGame = currentGame;
 
             // Prevent flickering
             this.SetStyle(
@@ -53,6 +69,39 @@ namespace BokInterface.Tools.TileDataViewer {
 
             // Generate color palette
             this.colorPalette = this.GenerateRandomColorPalette();
+
+            // Sets memory addresses to use based on the current game
+            this.SetGameAddresses(this.currentGame);
+        }
+
+        /// <summary>Sets memory addresses used depending n the current game</summary>
+        /// <param name="gameName"></param>
+        protected void SetGameAddresses(string gameName) {
+            APIs.Gui.AddMessage(gameName);
+            switch(gameName) {
+                case "Boktai":
+                    this.mapDataAddress = boktaiAddresses.Misc["map_data"];
+                    this.djangoXposAddress = boktaiAddresses.Django["x_position"];
+                    this.djangoYposAddress = boktaiAddresses.Django["y_position"];
+                    break;
+                case "Zoktai":
+                    this.mapDataAddress = zoktaiAddresses.Misc["map_data"];
+                    this.djangoXposAddress = zoktaiAddresses.Django["x_position"];
+                    this.djangoYposAddress = zoktaiAddresses.Django["y_position"];
+                    break;
+                case "Shinbok":
+                    this.mapDataAddress = shinbokAddresses.Misc["map_data"];
+                    this.djangoXposAddress = shinbokAddresses.Django["x_position"];
+                    this.djangoYposAddress = shinbokAddresses.Django["y_position"];
+                    break;
+                case "LunarKnights":
+                    // Currently not handled, not enough data available
+                    this.mapDataAddress = this.djangoXposAddress = this.djangoYposAddress = 0;
+                    break;
+                default:
+                    this.mapDataAddress = this.djangoXposAddress = this.djangoYposAddress = 0;
+                    break;
+            }
         }
 
         /// <summary>Get the specified icon if it exist</summary>
@@ -95,8 +144,13 @@ namespace BokInterface.Tools.TileDataViewer {
         protected override void OnPaint(PaintEventArgs e) {
             base.OnPaint(e);
 
+            // If current game is not handled, stop
+            if(this.currentGame == "") {
+                return;
+            }
+
             // 1. Get map data
-            uint mapDataPointers = APIs.Memory.ReadU32(boktaiAddresses.Misc["map_data"]);
+            uint mapDataPointers = APIs.Memory.ReadU32(this.mapDataAddress);
             if(mapDataPointers == 0) {
                 return;
             }
@@ -121,8 +175,8 @@ namespace BokInterface.Tools.TileDataViewer {
             this.DrawZones(e, APIs.Memory.ReadU32(mapDataPointers + 12));
 
             // 4. Draw Django on map
-            uint djangoX = APIs.Memory.ReadU16(boktaiAddresses.Django["x_position"]);
-            uint djangoY = APIs.Memory.ReadU16(boktaiAddresses.Django["y_position"]);
+            uint djangoX = APIs.Memory.ReadU16(this.djangoXposAddress);
+            uint djangoY = APIs.Memory.ReadU16(this.djangoYposAddress);
             this.DrawDjangoIcon(e, djangoX, djangoY);
 
             // Write tile address on screen

@@ -75,6 +75,7 @@ namespace BokInterface.Shinbok {
             // Add Misc addresses
             Misc.Add("room", 0x02000580);
             Misc.Add("stat", 0x02000710);
+            Misc.Add("map_data", 0x030052f4);
         }
     }
 }
