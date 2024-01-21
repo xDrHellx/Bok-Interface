@@ -22,8 +22,6 @@ namespace BokInterface.Tools.TileDataViewer {
         protected string currentGame = "";
         protected uint scale = 16; // 14
         protected uint alpha = 0xa0;
-        /// <summary>Byte of the 32 bit tile data that should be rendered</summary>
-        protected int tileByte = 0;
         protected int textY = 0;
         protected static int imgNb = 1;
         protected static int n = 0;
@@ -95,7 +93,7 @@ namespace BokInterface.Tools.TileDataViewer {
                     this.djangoYposAddress = shinbokAddresses.Django["y_position"];
                     break;
                 case "LunarKnights":
-                    // Currently not handled, not enough data available
+                    // Currently not handled, not enough addresses available
                     this.mapDataAddress = this.djangoXposAddress = this.djangoYposAddress = 0;
                     break;
                 default:
@@ -149,7 +147,7 @@ namespace BokInterface.Tools.TileDataViewer {
                 return;
             }
 
-            // 1. Get map data
+            // 1. Get map data & pointers
             uint mapDataPointers = APIs.Memory.ReadU32(this.mapDataAddress);
             if(mapDataPointers == 0) {
                 return;
@@ -164,12 +162,8 @@ namespace BokInterface.Tools.TileDataViewer {
             uint tileWidth = APIs.Memory.ReadU16(mapData + 4);
             uint tileHeight = APIs.Memory.ReadU16(mapData + 6);
 
-            // Set tile shift
-            int tileShift = this.tileByte * 8;
-            // this.WriteText(String.Format("Visualizing tile data with mask {0}", 0xff << tileShift));
-
             // 2. Draw map tiles data
-            this.DrawTileData(e, mapData, tileWidth, tileHeight, tileShift);
+            this.DrawTileData(e, mapData, tileWidth, tileHeight);
 
             // 3. Draw zones
             this.DrawZones(e, APIs.Memory.ReadU32(mapDataPointers + 12));
@@ -181,22 +175,20 @@ namespace BokInterface.Tools.TileDataViewer {
 
             // Write tile address on screen
             // uint tileAddress = mapData + 0xc + ((djangoY >> 8) * tileWidth + (djangoX >> 8)) * 4;
-            // this.WriteText(String.Format("Tile address: {0} (={0})", tileAddress, APIs.Memory.ReadU32(tileAddress)));
         }
 
         /// <summary>Draws a tile and its data</summary>
-        /// <param name="e">Painting event using for drawing</param>
+        /// <param name="e">Painting event used for drawing</param>
         /// <param name="mapData">Map data</param>
         /// <param name="tileWidth">Tile width</param>
         /// <param name="tileHeight">Tile height</param>
-        /// <param name="tileShift">Tile shift</param>
-        protected void DrawTileData(PaintEventArgs e, uint mapData, uint tileWidth, uint tileHeight, int tileShift) {
+        protected void DrawTileData(PaintEventArgs e, uint mapData, uint tileWidth, uint tileHeight) {
 
             for(int tileY = 0; tileY < tileHeight -1; tileY++) {
                 for(int tileX = 0; tileX < tileWidth -1; tileX++) {
 
                     uint tile = APIs.Memory.ReadU32(mapData + 0xc + (tileY * tileWidth + tileX) * 4);
-                    uint value = (tile >> tileShift) & 0xff;
+                    uint value = tile & 0xff;
 
                     System.Drawing.Color tileColor = this.colorPalette[(int)value + 1];
                     using (Pen pen = new(tileColor, 1)) {
@@ -206,12 +198,15 @@ namespace BokInterface.Tools.TileDataViewer {
                             (int)scale,
                             (int)scale
                         );
-                        e.Graphics.DrawRectangle(pen, rectangle);
 
+                        e.Graphics.DrawRectangle(pen, rectangle);
                         using (System.Drawing.SolidBrush brush = new(tileColor)) {
                             e.Graphics.FillRectangle(brush, rectangle);
                         }
                     }
+
+                    // Draws the stairs icon if stairs are present on the tile
+                    this.DrawStairsIcon(e, (tile & 0xf0) >> 4, tileX, tileY, (int)scale);
                 }
             }
 
@@ -222,12 +217,33 @@ namespace BokInterface.Tools.TileDataViewer {
             );
         }
 
+        /// <summary>Draws stairs icon on the tile if there are any</summary>
+        /// <param name="e">Painting event used for drawing</param>
+        /// <param name="stairsValue">Value for the stairs on the tile</param>
+        /// <param name="posX">X position of the tile</param>
+        /// <param name="posY">Y position of the tile</param>
+        /// <param name="scale">Scale (used for drawing)</param>
+        protected void DrawStairsIcon(PaintEventArgs e, uint stairsValue, int posX, int posY, int scale) {
+
+            if(stairsValue == 0) {
+                return;
+            }
+
+            // Set the upper-left corner of the img & draw it
+            Image stairsImg = (Image)Properties.Resources.ResourceManager.GetObject("stairs" + stairsValue);
+            Point imgCorner = new(
+                5 + posX * scale,
+                6 + posY * scale
+            );
+            e.Graphics.DrawImage(stairsImg, imgCorner);
+        }
+
         /// <summary>
         /// Draw zones. <br/>
         /// For example loading zones, but not necessarily. <br/>
         /// The map data only defines the position/size of the zone, but not what it does.
         /// </summary>
-        /// <param name="e">Painting event using for drawing</param>
+        /// <param name="e">Painting event used for drawing</param>
         /// <param name="zonesData">Zones-related data</param>
         protected void DrawZones(PaintEventArgs e, uint zonesData) {
 
@@ -243,15 +259,19 @@ namespace BokInterface.Tools.TileDataViewer {
                 // start height (u8), end height (u8), and zone id (u16) follows, but these don't matter for drawing.
 
                 e.Graphics.DrawRectangle(
-                    zonePen, 5 + startX * zoneScale, 5 + startY * zoneScale,
-                    (endX - startX) * zoneScale, (endY-startY) * zoneScale
+                    zonePen,
+                    5 + startX * zoneScale,
+                    5 + startY * zoneScale,
+                    (endX - startX) * zoneScale,
+                    (endY - startY) * zoneScale
                 );
+                
                 zonePtr += 12;
             }
         }
 
         /// <summary>Draws Django icon on tilemap</summary>
-        /// <param name="e">Painting event using for drawing</param>
+        /// <param name="e">Painting event used for drawing</param>
         /// <param name="posX">X position</param>
         /// <param name="posY">Y position</param>
         protected void DrawDjangoIcon(PaintEventArgs e, uint posX, uint posY) {
@@ -290,8 +310,6 @@ namespace BokInterface.Tools.TileDataViewer {
         /// <returns><c>List (System.Drawing.Color)</c>Palette</returns>
         protected List<System.Drawing.Color> GenerateRandomColorPalette() {
 
-            // Initializing an array with a single value shifted left by 24 bits
-            // uint[] result = {alpha << 24};
             List<System.Drawing.Color> result = new();
             uint seed = 0x803049d;
 
