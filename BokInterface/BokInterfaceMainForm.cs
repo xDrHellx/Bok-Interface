@@ -19,6 +19,8 @@ namespace BokInterface {
 	[ExternalTool("BokInterface")]
 	public partial class BokInterfaceMainForm : ToolFormBase, IExternalToolForm {
 
+		#region Variables
+
 		protected override string WindowTitleStatic => "Bok Interface";
 		public override bool BlocksInputWhenFocused => false;
 		protected Icon? icon;
@@ -29,7 +31,12 @@ namespace BokInterface {
 		protected bool interfaceActivated = false;
 		protected bool isDS = false;
 		protected int retryCount = 0;
+		private bool previousDisplayMessagesSetting = true;
 
+		/// <summary>
+		/// List of MemoryValues instances <br/>
+		/// These are used for simplyfing getting and setting values from memory addresses, especially the ones that are "dynamic"
+		/// </summary>
 		private MemoryValues memoryValues = new("");
 
 		/// <summary>List of functions to call each frame</summary>
@@ -39,6 +46,8 @@ namespace BokInterface {
 			get => APIs.ApiContainer;
 			set => APIs.Update(value);
 		}
+
+		#endregion
 
 		#region Main methods
 		
@@ -77,6 +86,10 @@ namespace BokInterface {
 			 * When no ROM is loaded, memory domains aren't accessible
 			 */
 			try {
+
+				// Get the current setting for displaying messages
+				this.previousDisplayMessagesSetting = APIs.Config.DisplayMessages;
+
 	            // Get & set the infos about the game currently running on BizHawk
 				DetectCurrentGame();
 				if(interfaceActivated == true) {
@@ -110,6 +123,9 @@ namespace BokInterface {
 						InitializeComponent();
 					}
 
+					// Force messages to be displayed
+					APIs.Client.DisplayMessages(true);
+
 					// Run the corresponding method to update values in the interface
 					switch(shorterGameName) {
 						case "Boktai":
@@ -125,7 +141,8 @@ namespace BokInterface {
 							UpdateLunarKnightsInterface();
 							break;
 						default:
-							// Nothing to do here
+							// If game is not handled, put back the old setting for displaying messages
+							APIs.Client.DisplayMessages(this.previousDisplayMessagesSetting);
 							break;
 					}
 
@@ -219,7 +236,11 @@ namespace BokInterface {
 
 		protected void BokInterfaceMainForm_Load(object sender, EventArgs e) { }
 
-		protected void BokInterfaceMainForm_FormClosing(object sender, FormClosingEventArgs e) { }
+		protected void BokInterfaceMainForm_FormClosing(object sender, FormClosingEventArgs e) {
+			
+			// Put back the old setting for displaying messages
+			APIs.Client.DisplayMessages(this.previousDisplayMessagesSetting);
+		}
 		
 		#endregion
 	}
