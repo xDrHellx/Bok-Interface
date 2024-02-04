@@ -380,8 +380,9 @@ namespace BokInterface {
 		/// <param name="width">Width (in pixels)</param>
 		/// <param name="height">Height (in pixels)</param>
 		/// <param name="icon">Subwindow icon (by default retrieves the one from the main interface window)</param>
+		/// <param name="parentForm">Form the subwindow is attached to (this will make the subwindow always show in front of its parent, by default it shows in front of the main window)</param>
 		/// <returns><c>System.Windows.Forms.Form</c>Subwindow instance</returns>
-		private System.Windows.Forms.Form CreateSubWindow(string name, string title, Int32 width, Int32 height, string icon = "") {
+		private System.Windows.Forms.Form CreateSubWindow(string name, string title, Int32 width, Int32 height, string icon = "", System.Windows.Forms.Form parentForm = null) {
 			
 			System.Windows.Forms.Form form = new();
 			form.Name = name;
@@ -393,6 +394,10 @@ namespace BokInterface {
 			form.BackColor = System.Drawing.SystemColors.Control;
 			form.Font = BokInterfaceMainForm.defaultFont;
 			form.ClientSize = new System.Drawing.Size(width, height);
+
+			if(parentForm == null) {
+				form.Owner = this;
+			}
 
 			return form;
 		}
