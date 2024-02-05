@@ -397,6 +397,8 @@ namespace BokInterface {
 
 			if(parentForm == null) {
 				form.Owner = this;
+			} else {
+				form.Owner = parentForm;
 			}
 
 			return form;
