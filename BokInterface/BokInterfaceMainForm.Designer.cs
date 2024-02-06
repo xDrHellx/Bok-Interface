@@ -74,22 +74,22 @@ namespace BokInterface {
 				switch(shorterGameName) {
 					case "Boktai":
 						interfaceActivated = true;
-						this.Icon = this.GetIcon("lita");
+						this.Icon = this.GetIcon(this.GetGameIconName());
 						ShowBoktaiInterface();
 						break;
 					case "Zoktai":
 						interfaceActivated = true;
-						this.Icon = this.GetIcon("ringo");
+						this.Icon = this.GetIcon(this.GetGameIconName());
 						ShowZoktaiInterface();
 						break;
 					case "Shinbok":
 						interfaceActivated = true;
-						this.Icon = this.GetIcon("trinity");
+						this.Icon = this.GetIcon(this.GetGameIconName());
 						ShowShinbokInterface();
 						break;
 					case "LunarKnights":
 						interfaceActivated = true;
-						this.Icon = this.GetIcon("lucian");
+						this.Icon = this.GetIcon(this.GetGameIconName());
 						ShowLunarKnightsInterface();
 						break;
 					default:
@@ -193,6 +193,24 @@ namespace BokInterface {
 				return this.Icon;
 			} else {
 				return (Icon)Properties.Resources.ResourceManager.GetObject(fileName);
+			}
+		}
+
+		/// <summary>Get the name of the icon corresponding to the current game</summary>
+		/// <returns><c>string</c>Icon name (empty if the current game is not a Boktai game)</returns>
+		/// 
+		private string GetGameIconName() {
+			switch(shorterGameName) {
+				case "Boktai":
+					return "lita";
+				case "Zoktai":
+					return "ringo";
+				case "Shinbok":
+					return "trinity";
+				case "LunarKnights":
+					return "lucian";
+				default:
+					return "";
 			}
 		}
 
