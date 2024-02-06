@@ -255,7 +255,6 @@ namespace BokInterface.Tools.TileDataViewer {
                     case "8":                   /// ??? (something right before Garmr cutscene)
                         break;
                     case "C":                   /// ??? (sometimes used for downward stairs that also have an exit, can be seen in Dark Castle)
-                        this.DrawFilledRectangle(e, Color.LightCyan, 5 + posX * scale, 5 + posY * scale, scale);
                         break;
                     case "20":                  /// Noise tile (makes sound)
                         this.DrawTileImage(e, "sound", 5 + posX * scale, 5 + posY * scale);
