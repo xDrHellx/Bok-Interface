@@ -1,3 +1,5 @@
+using System;
+
 namespace BokInterface.All {
 
     /// <summary>Main class for utilities</summary>
@@ -33,6 +35,20 @@ namespace BokInterface.All {
         /// <param name="secondAddress">Second address (U16)</param>
         public static void WriteDynamicAddress(uint value, uint firstAddress, uint secondAddress) {
             APIs.Memory.WriteU16(APIs.Memory.ReadU32(firstAddress) + secondAddress, value);
+        }
+
+        /// <summary>Convert an hexadecimal value to an integer</summary>
+        /// <param name="value">Hexadecimal value</param>
+        /// <returns><c>int</c>Decimal</returns>
+        public static int HexToInt(string value) {
+            return Int32.Parse(value, System.Globalization.NumberStyles.HexNumber);
+        }
+
+        /// <summary>Convert an integer to a hexadecimal value</summary>
+        /// <param name="value">Integer</param>
+        /// <returns><c>string</c>Hexadecimal</returns>
+        public static string IntToHex(uint value) {
+            return value.ToString("X");
         }
     }
 }
