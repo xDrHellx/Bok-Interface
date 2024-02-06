@@ -20,13 +20,14 @@ namespace BokInterface.Tools.TileDataViewer {
 
         public int index = 0;
         protected string currentGame = "";
-        protected uint scale = 16; // 14
+        protected uint scale = 16;
         protected uint alpha = 0xa0;
         protected int textY = 0;
         protected static int imgNb = 1;
         protected static int n = 0;
-        protected List<System.Drawing.Color> colorPalette;
+        protected List<Color> colorPalette;
         private static readonly Pen zonePen = new(Color.LimeGreen);
+        private static readonly Color blackColor = ColorTranslator.FromHtml("#0f0f0f");
 
         #endregion
 
@@ -44,14 +45,14 @@ namespace BokInterface.Tools.TileDataViewer {
 
         #region Subwindow & loop-related methods
         
-        public TileDataViewer(string name, string title, Int32 width, Int32 height, string currentGame, string icon = "", System.Windows.Forms.Form? parentForm = null) {
+        public TileDataViewer(string name, string title, Int32 width, Int32 height, string currentGame, string icon = "", Form? parentForm = null) {
             this.Name = name;
             this.Text = title;
             this.Icon = this.GetIcon(icon);
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 15F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit;
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.BackColor = System.Drawing.SystemColors.Control;
+            this.AutoScaleDimensions = new SizeF(6F, 15F);
+            this.AutoScaleMode = AutoScaleMode.Inherit;
+            this.FormBorderStyle = FormBorderStyle.FixedSingle;
+            this.BackColor = SystemColors.Control;
             this.Font = BokInterfaceMainForm.defaultFont;
             this.AutoScroll = true;
             this.SetSubwindowSize(width, height);
@@ -63,9 +64,7 @@ namespace BokInterface.Tools.TileDataViewer {
 
             // Prevent flickering
             this.SetStyle(
-                System.Windows.Forms.ControlStyles.UserPaint | 
-                System.Windows.Forms.ControlStyles.AllPaintingInWmPaint | 
-                System.Windows.Forms.ControlStyles.OptimizedDoubleBuffer, 
+                ControlStyles.UserPaint | ControlStyles.AllPaintingInWmPaint | ControlStyles.OptimizedDoubleBuffer, 
                 true
             );
 
@@ -109,7 +108,7 @@ namespace BokInterface.Tools.TileDataViewer {
         /// <summary>Get the specified icon if it exist</summary>
         /// <param name="fileName">File name (without .ico extension)</param>
         /// <returns><c>System.Drawing.Icon</c>Specified Icon instance (or default if the specified icon could not be found)</returns>
-        protected System.Drawing.Icon GetIcon(string fileName) {
+        protected Icon GetIcon(string fileName) {
             if(fileName == "") {
 				return this.Icon;
 			} else {
@@ -121,7 +120,7 @@ namespace BokInterface.Tools.TileDataViewer {
         /// <param name="width">Width</param>
         /// <param name="height">Height</param>
         protected void SetSubwindowSize(int width, int height) {
-            this.ClientSize = new System.Drawing.Size(width, height);
+            this.ClientSize = new Size(width, height);
         }
 
         /// <summary>
@@ -166,7 +165,7 @@ namespace BokInterface.Tools.TileDataViewer {
             uint tileWidth = APIs.Memory.ReadU16(mapData + 4);
             uint tileHeight = APIs.Memory.ReadU16(mapData + 6);
 
-            // 2. Draw map tiles data
+            // 2. Draw map tiles data (effects, stairs, ...)
             this.DrawTileData(e, mapData, tileWidth, tileHeight);
 
             // 3. Draw zones
@@ -194,31 +193,95 @@ namespace BokInterface.Tools.TileDataViewer {
                     uint tile = APIs.Memory.ReadU32(mapData + 0xc + (tileY * tileWidth + tileX) * 4);
                     uint value = tile & 0xff;
 
-                    System.Drawing.Color tileColor = this.colorPalette[(int)value + 1];
-                    using (Pen pen = new(tileColor, 1)) {
-                        System.Drawing.Rectangle rectangle = new(
-                            (int)(5 + tileX * scale),
-                            (int)(5 + tileY * scale),
-                            (int)scale,
-                            (int)scale
-                        );
+                    Color tileColor = this.colorPalette[(int)value + 1];
+                    this.DrawFilledRectangle(
+                        e,
+                        tileColor,
+                        (int)(5 + tileX * scale),
+                        (int)(5 + tileY * scale),
+                        (int)scale
+                    );
 
-                        e.Graphics.DrawRectangle(pen, rectangle);
-                        using (System.Drawing.SolidBrush brush = new(tileColor)) {
-                            e.Graphics.FillRectangle(brush, rectangle);
-                        }
-                    }
+                    // Draw the tile's effect if it has any
+                    this.DrawTileEffect(e, (tile & 0xffff0000) >> 16, tileX, tileY, (int)scale);
 
-                    // Draws the stairs icon if stairs are present on the tile
+                    // Draw the stairs icon if stairs are present on the tile
                     this.DrawStairsIcon(e, (tile & 0xf0) >> 4, tileX, tileY, (int)scale);
                 }
             }
 
-            // Adjusts subwindow size based on the number of tiles to show
+            // Adjust subwindow size based on the number of tiles to show
             this.SetSubwindowSize(
                 (int)(tileWidth * scale) -5,
                 (int)(tileHeight * scale) -5
             );
+        }
+
+        /// <summary>Draws icons related to tile effects if there are any</summary>
+        /// <param name="e">Painting event used for drawing</param>
+        /// <param name="tileEffect">Value for the tile's effect</param>
+        /// <param name="posX">X position of the tile</param>
+        /// <param name="posY">Y position of the tile</param>
+        /// <param name="scale">Scale (used for drawing)</param>
+        protected void DrawTileEffect(PaintEventArgs e, uint tileEffect, int posX, int posY, int scale) {
+
+            // Only handle values between a certain range (4096 = 1000 in hexadecimal)
+            if(tileEffect > 0 && tileEffect < 4096) {
+
+                /**
+                 * Get the hexadecimal value of the tile effect
+                 * We'll use this for comparison because of current findings
+                 */
+                string hex = Utilities.IntToHex(tileEffect);
+
+                // Handle the tile effect
+                switch(hex) {
+                    case "1":                   /// ??? (Something on stairs in the first room of Deserted Arsenal)
+                        break;
+                    case "2":                   /// Wall
+                        /**
+                         * Commented because if a block is pushed where the "wall" is,
+                         * you can walk on it, making the tilemap misleading
+                         * 
+                         * For example the first area of Firetop Mountain has a "wall" that can be "filled" with a pushable block
+                         */
+                        // this.DrawFilledRectangle(e, blackColor, 5 + posX * scale, 5 + posY * scale, scale);
+                        break;
+                    case "3":                   /// Levers in Bloodrust Mansion before the garden
+                        break;
+                    case "4":                   // Exit / entry (inconsistent)
+                        this.DrawTileImage(e, "exit", 5 + posX * scale, 5 + posY * scale);
+                        break;
+                    case "8":                   /// ??? (something right before Garmr cutscene)
+                        break;
+                    case "C":                   /// ??? (sometimes used for downward stairs that also have an exit, can be seen in Dark Castle)
+                        this.DrawFilledRectangle(e, Color.LightCyan, 5 + posX * scale, 5 + posY * scale, scale);
+                        break;
+                    case "20":                  /// Noise tile (makes sound)
+                        this.DrawTileImage(e, "sound", 5 + posX * scale, 5 + posY * scale);
+                        break;
+                    case "40":                  /// Ice
+                        this.DrawTileImage(e, "ice", 5 + posX * scale, 5 + posY * scale);
+                        break;
+                    case "80":                  /// Lava
+                    case "84":
+                    case "86":
+                        this.DrawTileImage(e, "lava", 5 + posX * scale, 5 + posY * scale);
+                        break;
+                    case "100":                 /// Void (fall & die)
+                        this.DrawFilledRectangle(e, blackColor, 5 + posX * scale, 5 + posY * scale, scale);
+                        break;
+                    case "203":                 /// Unwalkable parts of the roofs in Bloodrust Mansion
+                        break;
+                    case "802":                 /// ??? (something in Permafrost before Garmr)
+                        break;
+                    default:
+                        // If tile effect is currently not handled, print its values on-screen & show its position on the tilemap to study it
+                        APIs.Gui.AddMessage("hex : " + hex.ToString() + " ( uint : " + tileEffect + ")");
+                        this.DrawTileImage(e, "qmark", 5 + posX * scale, 5 + posY * scale);
+                        break;
+                }
+            }
         }
 
         /// <summary>Draws stairs icon on the tile if there are any</summary>
@@ -228,18 +291,12 @@ namespace BokInterface.Tools.TileDataViewer {
         /// <param name="posY">Y position of the tile</param>
         /// <param name="scale">Scale (used for drawing)</param>
         protected void DrawStairsIcon(PaintEventArgs e, uint stairsValue, int posX, int posY, int scale) {
-
             if(stairsValue == 0) {
                 return;
             }
 
-            // Set the upper-left corner of the img & draw it
-            Image stairsImg = (Image)Properties.Resources.ResourceManager.GetObject("stairs" + stairsValue);
-            Point imgCorner = new(
-                5 + posX * scale,
-                6 + posY * scale
-            );
-            e.Graphics.DrawImage(stairsImg, imgCorner);
+            // Draw the stairs img
+            this.DrawTileImage(e, "stairs" + stairsValue, 5 + posX * scale, 6 + posY * scale);
         }
 
         /// <summary>
@@ -280,21 +337,52 @@ namespace BokInterface.Tools.TileDataViewer {
         /// <param name="posY">Y position</param>
         protected void DrawDjangoIcon(PaintEventArgs e, uint posX, uint posY) {
 
-            // Update imgNb to switch between images for Django
+            // Update imgNb to switch between images for Django & draw it
             this.UpdateImgNb();
-            
-            // Set the upper-left corner of the img & draw it
-            Image djangoImg = (Image)Properties.Resources.ResourceManager.GetObject("django" + imgNb);
-            Point imgCorner = new(
+            this.DrawTileImage(
+                e,
+                "django" + imgNb,
                 (int)(10 + posX / 256 * scale - scale / 4),
                 (int)(9 + posY / 256 * scale - scale / 4)
             );
-            e.Graphics.DrawImage(djangoImg, imgCorner);
         }
 
         #endregion
 
         #region Utilities & misc methods
+
+        /// <summary>Simplified method for drawing a filled rectangle</summary>
+        /// <param name="e">Painting event used for drawing</param>
+        /// <param name="color">Rectangle color</param>
+        /// <param name="posX">X position</param>
+        /// <param name="posY">Y position</param>
+        /// <param name="scale">Scale (used for drawing)</param>
+        protected void DrawFilledRectangle(PaintEventArgs e, Color color, int posX, int posY, int scale) {
+            using (Pen pen = new(color, 1)) {
+                Rectangle rectangle = new(
+                    posX,
+                    posY,
+                    scale,
+                    scale
+                );
+
+                e.Graphics.DrawRectangle(pen, rectangle);
+                using (SolidBrush brush = new(color)) {
+                    e.Graphics.FillRectangle(brush, rectangle);
+                }
+            }
+        }
+
+        /// <summary>Simplified method for drawing an image on a tile</summary>
+        /// <param name="e">Painting event used for drawing</param>
+        /// <param name="imgName">Image name</param>
+        /// <param name="posX">X position of the image</param>
+        /// <param name="posY">Y position of the image</param>
+        protected void DrawTileImage(PaintEventArgs e, string imgName, int posX, int posY) {
+            Image tileImg = (Image)Properties.Resources.ResourceManager.GetObject(imgName);
+            Point imgCorner = new(posX, posY);
+            e.Graphics.DrawImage(tileImg, imgCorner);
+        }
 
         /// <summary>Updates imgNb variable, used for Django icons (see DrawDjangoIcon)</summary>
         protected void UpdateImgNb() {
@@ -312,9 +400,9 @@ namespace BokInterface.Tools.TileDataViewer {
 
         /// <summary>Generate a random color palette</summary>
         /// <returns><c>List (System.Drawing.Color)</c>Palette</returns>
-        protected List<System.Drawing.Color> GenerateRandomColorPalette() {
+        protected List<Color> GenerateRandomColorPalette() {
 
-            List<System.Drawing.Color> result = new();
+            List<Color> result = new();
             uint seed = 0x803049d;
 
             for(int i = 0; i < 255; i++) {
@@ -326,7 +414,7 @@ namespace BokInterface.Tools.TileDataViewer {
 
                 // Generate color & convert to System.Drawing.Color
                 uint color = (alpha << 24) | (r << 19) | (g << 11) | (b << 3);
-                System.Drawing.Color generatedColor = System.Drawing.Color.FromArgb((int)color);
+                Color generatedColor = Color.FromArgb((int)color);
 
                 result.Add(generatedColor);
             }
