@@ -1,3 +1,4 @@
+using System.Drawing;
 using System.Windows.Forms;
 using BokInterface.All;
 
@@ -27,6 +28,49 @@ namespace BokInterface.Tools.TileDataViewer {
 
                 // Handle the tile effect
                 switch(hex) {
+                    case "2":                   /// ??? (sometimes on stairs going downard, walkable areas or walls)
+                        break;
+                    case "3":                   /// Wall
+                        break;
+                    case "7":                   /// ??? (decorative tree roots on tiles before Cathedral)
+                        break;
+                    case "8":                   /// Walkable area (Aqueduct)
+                        break;
+                    case "9":                   /// Water
+                        break;
+                    case "10":                  /// Walkable area (San Miguel outskirts, inconsistent, sometimes have a lever or dark root on it)
+                        break;
+                    case "13":                  /// ??? (prevent on walls in Ruins undead dungeon, before hidden sunny clog area, and Cathedral in library)
+                        break;
+                    case "17":                  /// Wall (Aqueduct, room with green chest after boss)
+                        break;
+                    case "21":                  /// Torch (Duneyrr boss room in Cathedral)
+                        break;
+                    case "A":                   /// Exit / entry (inconsistent)
+                        this.DrawTileImage(e, "exit", 5 + posX * scale, 5 + posY * scale);
+                        break;
+                    case "B":                   /// ??? (2-heights wall in Aqueduct)
+                        break;
+                    case "F":                   /// Wall (San Miguel)
+                        break;
+                    case "40A":                 /// Walkable area (San Miguel)
+                        break;
+                    case "40B":                 /// Wall
+                        break;
+                    case "40F":                 /// ??? (solar tree)
+                        break;
+                    case "42":                  /// Void (fall & die)
+                        break;
+                    case "43":                  /// Thin passage on void (Cathedral undergrounds)
+                        break;
+                    case "80":                  /// Noise tile (makes sound)
+                        this.DrawTileImage(e, "sound", 5 + posX * scale, 5 + posY * scale);
+                        break;
+                    case "400":                 /// Walkable area (Remains)
+                        break;
+                    case "800":                 /// Fall-able ground (Cathedral main room around Spear chest)
+                    case "802":
+                        break;
                     default:
                         // If tile effect is currently not handled, print its values on-screen & show its position on the tilemap to study it
                         // APIs.Gui.AddMessage("hex : " + hex.ToString() + " ( uint : " + tileEffect + ")");

@@ -1,3 +1,4 @@
+using System.Drawing;
 using System.Windows.Forms;
 using BokInterface.All;
 
@@ -67,8 +68,8 @@ namespace BokInterface.Tools.TileDataViewer {
                         break;
                     default:
                         // If tile effect is currently not handled, print its values on-screen & show its position on the tilemap to study it
-                        APIs.Gui.AddMessage("hex : " + hex.ToString() + " ( uint : " + tileEffect + ")");
-                        this.DrawTileImage(e, "qmark", 5 + posX * scale, 5 + posY * scale);
+                        // APIs.Gui.AddMessage("hex : " + hex.ToString() + " ( uint : " + tileEffect + ")");
+                        // this.DrawTileImage(e, "qmark", 5 + posX * scale, 5 + posY * scale);
                         break;
                 }
             }
