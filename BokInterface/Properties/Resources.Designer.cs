@@ -153,6 +153,16 @@ namespace BokInterface.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap solar_panel {
+            get {
+                object obj = ResourceManager.GetObject("solar_panel", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap qmark {
             get {
                 object obj = ResourceManager.GetObject("qmark", resourceCulture);
