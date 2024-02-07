@@ -9,14 +9,14 @@ using BokInterface.Tools.TileDataViewer;
 namespace BokInterface {
     partial class BokInterfaceMainForm {
 
-        #region Variables
+        #region Properties
 
         protected bool tileDataViewerActive = false;
         private TileDataViewer? TileDataViewer;
 
         #endregion
 
-        #region Subwindows for each game
+        #region Subwindows methods for each game
 
         private void BoktaiToolsSubwindow() {
             this.AddToolsLabel();

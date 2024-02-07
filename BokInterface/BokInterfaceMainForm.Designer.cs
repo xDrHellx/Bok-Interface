@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
-using System.IO;
-using  System.Resources.Extensions;
 
 /**
  * File for the external window part of the Bok interface
@@ -13,27 +11,59 @@ namespace BokInterface {
 
 	partial class BokInterfaceMainForm {
 
+		#region Main interface properties
+
 		/// <summary>Required designer variable</summary>
 		private IContainer components = null;
-		
-		#region Common interface variables
 
 		/// <summary>Color for pure / base stat points (Boktai 2, 3, LK)</summary>
 		public static string baseStatColor = "#FFE600";
 
 		/// <summary>
-		/// Color for stat points from equipments (Boktai 3)<br/>
+		/// Color for stat points from equipments (Boktai 3) <br/>
 		/// These points does not affect as many things as pure stat points <br/><br/>
 		/// For example STR points from equipments does not affect coffin carrying speed
 		/// </summary>
 		public static string equipsStatColor = "#FFA529";
 
 		/// <summary>Color for the total amount of points for a specific stat (Boktai 2, 3, LK)</summary>
-		public static string totalStatColor = "#FFD3D3D3";
+		public static string totalStatColor = "#D3D3D3";
 
-		public static System.Drawing.Font defaultFont = new System.Drawing.Font("Segoe UI", 9, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-		protected static System.Windows.Forms.Padding defaultMargin = new System.Windows.Forms.Padding(3, 0, 3, 0);
+		public static System.Drawing.Font defaultFont = new("Segoe UI", 9, System.Drawing.FontStyle.Regular, GraphicsUnit.Point);
+		protected static System.Windows.Forms.Padding defaultMargin = new(3, 0, 3, 0);
 		protected static System.Windows.Forms.AnchorStyles defaultAnchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left;
+
+		#endregion
+
+		#region Common interface elements properties
+		
+		private System.Windows.Forms.GroupBox currentStatusGroupBox = new();
+		private System.Windows.Forms.GroupBox currentStatsGroupBox = new();
+		private System.Windows.Forms.GroupBox inventoryGroupBox = new();
+		private System.Windows.Forms.GroupBox editGroupBox = new();
+		private System.Windows.Forms.GroupBox extrasGroupBox = new();
+		private List<System.Windows.Forms.Label> currentStatusLabels = new();
+		private List<System.Windows.Forms.Label> currentStatsLabels = new();
+		private List<System.Windows.Forms.Button> editButtons = new();
+
+		#endregion
+
+		#region Subwindows properties
+
+		private System.Windows.Forms.Form statusEditWindow = new();
+		private System.Windows.Forms.Form inventoryEditWindow = new();
+		private System.Windows.Forms.Form equipsEditWindow = new();
+		private System.Windows.Forms.Form solarGunEditWindow = new();
+		private System.Windows.Forms.Form weaponsEditWindow = new();
+		private System.Windows.Forms.Form magicsEditWindow = new();
+		private System.Windows.Forms.Form miscToolsSelectionWindow = new();
+		
+		#endregion
+
+		#region Common subwindows elements properties
+
+		private List<System.Windows.Forms.Label> statusEditLabels = new();
+		private List<System.Windows.Forms.Button> statusEditButtons = new();
 
 		#endregion
 
@@ -71,25 +101,26 @@ namespace BokInterface {
 			if(supportedGame == false) {
 				GameNotRecognizedWindow();
 			} else {
+
+				// Set corresponding game icon
+				this.Icon = this.GetIcon(this.GetGameIconName());
+
+				// Show corresponding interface
 				switch(shorterGameName) {
 					case "Boktai":
 						interfaceActivated = true;
-						this.Icon = this.GetIcon(this.GetGameIconName());
 						ShowBoktaiInterface();
 						break;
 					case "Zoktai":
 						interfaceActivated = true;
-						this.Icon = this.GetIcon(this.GetGameIconName());
 						ShowZoktaiInterface();
 						break;
 					case "Shinbok":
 						interfaceActivated = true;
-						this.Icon = this.GetIcon(this.GetGameIconName());
 						ShowShinbokInterface();
 						break;
 					case "LunarKnights":
 						interfaceActivated = true;
-						this.Icon = this.GetIcon(this.GetGameIconName());
 						ShowLunarKnightsInterface();
 						break;
 					default:
@@ -122,12 +153,12 @@ namespace BokInterface {
 			this.statusEditLabels.Clear();
 			this.statusEditButtons.Clear();
 			this.statusEditWindow.Close();
-			this.statusEditing = false;
+			this.statusEditorOpened = false;
 
 			// Tools selection subwindow-related
 			this.miscToolsSelectionWindow.Controls.Clear();
 			this.miscToolsSelectionWindow.Close();
-			this.miscToolsSelecting = false;
+			this.miscToolsSelectorOpened = false;
 
 			// Extra tools-related
 			this.ClearExtraTools();
@@ -181,7 +212,7 @@ namespace BokInterface {
 
 			// Add Misc Tools button
 			System.Windows.Forms.Button miscToolsBtn = CreateButton("showExtraTools", "Misc tools", 6, 21, 75, 23);
-			miscToolsBtn.Click += new System.EventHandler(this.OpenMiscToolsSelection);
+			miscToolsBtn.Click += new System.EventHandler(this.OpenMiscToolsSelector);
 			this.extrasGroupBox.Controls.Add(miscToolsBtn);
 		}
 
@@ -193,24 +224,6 @@ namespace BokInterface {
 				return this.Icon;
 			} else {
 				return (Icon)Properties.Resources.ResourceManager.GetObject(fileName);
-			}
-		}
-
-		/// <summary>Get the name of the icon corresponding to the current game</summary>
-		/// <returns><c>string</c>Icon name (empty if the current game is not a Boktai game)</returns>
-		/// 
-		private string GetGameIconName() {
-			switch(shorterGameName) {
-				case "Boktai":
-					return "lita";
-				case "Zoktai":
-					return "ringo";
-				case "Shinbok":
-					return "trinity";
-				case "LunarKnights":
-					return "lucian";
-				default:
-					return "";
 			}
 		}
 
@@ -239,6 +252,7 @@ namespace BokInterface {
 			groupBox.Anchor = BokInterfaceMainForm.defaultAnchor;
 			groupBox.Font = BokInterfaceMainForm.defaultFont;
 
+			// Add to main window
 			if(addToWindow == true) {
 				this.Controls.Add(groupBox);
 			}
@@ -282,36 +296,9 @@ namespace BokInterface {
 			}
 
 			// Text alignment
-			switch(textAlignment){
-				case "BottomCenter" :
-					label.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-					break;
-				case "BottomLeft" :
-					label.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
-					break;
-				case "BottomRight" :
-					label.TextAlign = System.Drawing.ContentAlignment.BottomRight;
-					break;
-				case "MiddleLeft" :
-					label.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-					break;
-				case "MiddleRight" :
-					label.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-					break;
-				case "TopCenter" :
-					label.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-					break;
-				case "TopLeft" :
-					label.TextAlign = System.Drawing.ContentAlignment.TopLeft;
-					break;
-				case "TopRight" :
-					label.TextAlign = System.Drawing.ContentAlignment.TopRight;
-					break;
-				default:
-					label.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-					break;
-			}
+			label.TextAlign = this.GetTextAlignment(textAlignment);
 
+			// Add to main window
 			if(addToWindow == true) {
 				this.Controls.Add(label);
 			}
@@ -355,36 +342,9 @@ namespace BokInterface {
 			}
 
 			// Text alignment
-			switch(textAlignment){
-				case "BottomCenter" :
-					btn.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-					break;
-				case "BottomLeft" :
-					btn.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
-					break;
-				case "BottomRight" :
-					btn.TextAlign = System.Drawing.ContentAlignment.BottomRight;
-					break;
-				case "MiddleLeft" :
-					btn.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-					break;
-				case "MiddleRight" :
-					btn.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-					break;
-				case "TopCenter" :
-					btn.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-					break;
-				case "TopLeft" :
-					btn.TextAlign = System.Drawing.ContentAlignment.TopLeft;
-					break;
-				case "TopRight" :
-					btn.TextAlign = System.Drawing.ContentAlignment.TopRight;
-					break;
-				default:
-					btn.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-					break;
-			}
+			btn.TextAlign = this.GetTextAlignment(textAlignment);
 
+			// Add to main window
 			if(addToWindow == true) {
 				this.Controls.Add(btn);
 			}
@@ -413,6 +373,7 @@ namespace BokInterface {
 			form.Font = BokInterfaceMainForm.defaultFont;
 			form.ClientSize = new System.Drawing.Size(width, height);
 
+			// Form parent / owner
 			if(parentForm == null) {
 				form.Owner = this;
 			} else {
@@ -485,36 +446,50 @@ namespace BokInterface {
 
 		#endregion
 
-		// Interface elements that exists for all Boktai games
-		#region Common interface elements
-		
-		private System.Windows.Forms.GroupBox currentStatusGroupBox = new();
-		private System.Windows.Forms.GroupBox currentStatsGroupBox = new();
-		private System.Windows.Forms.GroupBox inventoryGroupBox = new();
-		private System.Windows.Forms.GroupBox editGroupBox = new();
-		private System.Windows.Forms.GroupBox extrasGroupBox = new();
-		private List<System.Windows.Forms.Label> currentStatusLabels = new();
-		private List<System.Windows.Forms.Label> currentStatsLabels = new();
-		private List<System.Windows.Forms.Button> editButtons = new();
+		#region Simplified checks methods
 
-		#endregion
+		/// <summary>Get the name of the icon corresponding to the current game</summary>
+		/// <returns><c>string</c>Icon name</returns>
+		private string GetGameIconName() {
+			switch(shorterGameName) {
+				case "Boktai":
+					return "lita";
+				case "Zoktai":
+					return "ringo";
+				case "Shinbok":
+					return "trinity";
+				case "LunarKnights":
+					return "lucian";
+				default:
+					return "nero";
+			}
+		}
 
-		#region Subwindows
-
-		private System.Windows.Forms.Form statusEditWindow = new();
-		private System.Windows.Forms.Form inventoryEditWindow = new();
-		private System.Windows.Forms.Form equipsEditWindow = new();
-		private System.Windows.Forms.Form solarGunEditWindow = new();
-		private System.Windows.Forms.Form weaponsEditWindow = new();
-		private System.Windows.Forms.Form magicsEditWindow = new();
-		private System.Windows.Forms.Form miscToolsSelectionWindow = new();
-		
-		#endregion
-
-		#region Common subwindows elements
-
-		private List<System.Windows.Forms.Label> statusEditLabels = new();
-		private List<System.Windows.Forms.Button> statusEditButtons = new();
+		/// <summary>Get the corresponding text alignment based on a string</summary>
+		/// <param name="value">Text alignment string</param>
+		/// <returns><c>System.Drawing.ContentAlignment</c>Text alignment object</returns>
+		private System.Drawing.ContentAlignment GetTextAlignment(string value) {
+			switch(value){
+				case "BottomCenter" :
+					return System.Drawing.ContentAlignment.BottomCenter;
+				case "BottomLeft" :
+					return System.Drawing.ContentAlignment.BottomLeft;
+				case "BottomRight" :
+					return System.Drawing.ContentAlignment.BottomRight;
+				case "MiddleLeft" :
+					return System.Drawing.ContentAlignment.MiddleLeft;
+				case "MiddleRight" :
+					return System.Drawing.ContentAlignment.MiddleRight;
+				case "TopCenter" :
+					return System.Drawing.ContentAlignment.TopCenter;
+				case "TopLeft" :
+					return System.Drawing.ContentAlignment.TopLeft;
+				case "TopRight" :
+					return System.Drawing.ContentAlignment.TopRight;
+				default:
+					return System.Drawing.ContentAlignment.MiddleCenter;
+			}
+		}
 
 		#endregion
 	}

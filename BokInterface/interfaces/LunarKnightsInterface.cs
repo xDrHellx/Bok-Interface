@@ -1,6 +1,3 @@
-using System;
-using System.Collections.Generic;
-using BizHawk.Client.EmuHawk;
 using BokInterface.LunarKnights;
 
 /**
@@ -11,7 +8,7 @@ namespace BokInterface {
 	
 	partial class BokInterfaceMainForm {
 
-		#region Variables
+		#region Properties
 
 		private readonly LunarKnightsAddresses lunarKnightsAddresses = new();
 

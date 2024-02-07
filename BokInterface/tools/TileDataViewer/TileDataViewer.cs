@@ -16,7 +16,7 @@ namespace BokInterface.Tools.TileDataViewer {
     /// </summary>
     class TileDataViewer : Form {
 
-        #region Variables
+        #region Main properties
 
         public int index = 0;
         protected string currentGame = "";
@@ -31,7 +31,7 @@ namespace BokInterface.Tools.TileDataViewer {
 
         #endregion
 
-        #region Memory addresses
+        #region Memory addresses properties
 
         private readonly BoktaiAddresses boktaiAddresses = new();
         private readonly ZoktaiAddresses zoktaiAddresses = new();

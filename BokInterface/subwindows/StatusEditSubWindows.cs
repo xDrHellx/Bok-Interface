@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using BokInterface.All;
 
 /**
  * Main file for status editing subwindows
@@ -106,7 +105,7 @@ namespace BokInterface {
 
 		#endregion
 
-		#region Setting, getting, default values-related code
+		#region Setting & getting default values-related methods
 
 		/// <summary>
 		/// <para>Get default values for the "Edit Status" subwindow</para>

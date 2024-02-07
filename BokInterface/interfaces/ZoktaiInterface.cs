@@ -1,6 +1,3 @@
-using System;
-using System.Collections.Generic;
-using BizHawk.Client.EmuHawk;
 using BokInterface.Zoktai;
 
 /**
@@ -11,7 +8,7 @@ namespace BokInterface {
 	
 	partial class BokInterfaceMainForm {
 
-		#region Variables
+		#region Properties
 		
 		private System.Windows.Forms.Label bok2_currentStatusHpValue = new();
 		private System.Windows.Forms.Label bok2_currentStatusEneValue = new();

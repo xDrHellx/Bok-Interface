@@ -1,7 +1,3 @@
-using System;
-using System.Collections.Generic;
-using BizHawk.Client.EmuHawk;
-using BokInterface.All;
 using BokInterface.Shinbok;
 
 /**
@@ -12,7 +8,7 @@ namespace BokInterface {
 	
 	partial class BokInterfaceMainForm {
 
-		#region Variables
+		#region Properties
 
 		private System.Windows.Forms.Label bok3_currentStatusHpValue = new();
 		private System.Windows.Forms.Label bok3_currentStatusEneValue = new();
@@ -33,9 +29,6 @@ namespace BokInterface {
 		private System.Windows.Forms.Button bok3_editSolarGunBtn = new();
 
 		private readonly ShinbokAddresses shinbokAddresses = new();
-		// private System.Windows.Forms.ProgressBar djangoCurrentHpBar = new System.Windows.Forms.ProgressBar();
-		// private System.Windows.Forms.ProgressBar djangoCurrentEneBar = new System.Windows.Forms.ProgressBar();
-		// private System.Windows.Forms.ProgressBar djangoCurrentTrcBar = new System.Windows.Forms.ProgressBar();
 
 		#endregion
 
