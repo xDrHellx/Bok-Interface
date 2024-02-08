@@ -47,8 +47,7 @@ namespace BokInterface.Tools.TileDataViewer {
                         break;
                     case "40B":                 /// Wall
                         break;
-                    case "40F":                 /// ???
-                        this.DrawFilledRectangle(e, Color.Orange, 5 + posX * scale, 5 + posY * scale, scale);
+                    case "40F":                 /// Wall (San Miguel)
                         break;
                     case "42F":                 /// ??? (Sealed Dungeon)
                         break;
