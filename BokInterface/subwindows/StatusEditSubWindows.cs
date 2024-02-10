@@ -6,7 +6,7 @@ using System.Collections.Generic;
  */
 
 namespace BokInterface {
-    partial class BokInterfaceMainForm {
+	partial class BokInterfaceMainForm {
 
 		private System.Windows.Forms.GroupBox edit_statusGroupBox = new();
 		private System.Windows.Forms.GroupBox edit_statsGroupBox = new();
@@ -41,7 +41,7 @@ namespace BokInterface {
 
 			// Sections
 			this.edit_statusGroupBox = this.CreateGroupBox("editStatusGroup", "Status", 5, 5, 103, 105, true);
-			this.edit_statsGroupBox = this.CreateGroupBox("editStatsGroup", "Stats", 114, 5, 83, 105, true);
+			this.edit_statsGroupBox = this.CreateGroupBox("editStatsGroup", "Stats", 114, 5, 107, 105, true);
 
 			// Status
 			this.edit_statusLabels.Add(this.CreateLabel("djangoEditHpLabel", "LIFE :", 7, 19, 34, 15));
@@ -52,7 +52,7 @@ namespace BokInterface {
 			// this.edit_statusNumericUpDowns.Add(this.CreateNumericUpDown("django_current_ene", defaultValues["django_current_ene"], 47, 45, 50, 23, 1, 1000));
 			// this.edit_statusNumericUpDowns.Add(this.CreateNumericUpDown("django_current_trc", defaultValues["django_current_trc"], 47, 74, 50, 23, 1, 1000));
 
-			// Add elements to group
+			// Add elements to group boxes / sections
 			for(int i = 0; i < this.edit_statusLabels.Count; i++) {
 				l++;
 				this.edit_statusGroupBox.Controls.Add(this.edit_statusLabels[i]);
@@ -72,6 +72,18 @@ namespace BokInterface {
 			this.edit_statusNumericUpDowns.Add(this.CreateNumericUpDown("django_base_spr", defaultValues["django_base_spr"], 36, 45, 41, 23));
 			this.edit_statusNumericUpDowns.Add(this.CreateNumericUpDown("django_base_str", defaultValues["django_base_str"], 36, 74, 41, 23));
 
+			// Tooltips & warnings
+			List<System.Windows.Forms.Label> warningLabels = new() {
+				this.CreateImageLabel("tooltip", "warning", 83, 18),
+				this.CreateImageLabel("tooltip", "warning", 83, 47),
+				this.CreateImageLabel("tooltip", "warning", 83, 76)
+			};
+
+			// Add tooltips to labels group
+			for(int i = 0; i < warningLabels.Count; i++) {
+				this.edit_statusLabels.Add(warningLabels[i]);
+			}
+
 			// Add elements to group
 			for(int i = l; i < this.edit_statusLabels.Count; i++) {
 				l++;
@@ -90,13 +102,17 @@ namespace BokInterface {
 			// Button for setting values & its events
 			System.Windows.Forms.Button setValuesButton = this.CreateButton("setStatusButton", "Set values", 123, 116, 75, 23);
 			setValuesButton.Click += new System.EventHandler(delegate(object sender, EventArgs e) {
+				// Write the values for 10 frames
 				for(int i = 0; i < 10; i++) {
 					this.SetStatusValues();
 				}
 			});
 			
-			// Add button to subwindow
+			// Add button to subwindow, we do this here because the elements need to be added to the form already
 			this.statusEditWindow.Controls.Add(setValuesButton);
+
+			// Add tooltips
+			BokInterfaceMainForm.AddValuesWarningToolTip(warningLabels);
 		}
 
 		private void LunarKnightsStatusEditSubwindow() {

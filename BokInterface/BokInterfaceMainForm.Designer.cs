@@ -45,6 +45,9 @@ namespace BokInterface {
 		private List<System.Windows.Forms.Label> currentStatusLabels = new();
 		private List<System.Windows.Forms.Label> currentStatsLabels = new();
 		private List<System.Windows.Forms.Button> editButtons = new();
+		
+		/// <summary>Tooltip for values that only updates after switching rooms</summary>
+		public static System.Windows.Forms.ToolTip toolTip = BokInterfaceMainForm.CreateToolTip();
 
 		#endregion
 
@@ -442,6 +445,66 @@ namespace BokInterface {
 			}
 
 			return field;
+		}
+
+		/// <summary>Simplified method for creating a label containing an image</summary>
+		/// <param name="name">Label name</param>
+		/// <param name="imgName">Image name</param>
+		/// <param name="positionX">X position</param>
+		/// <param name="positionY">Y position</param>
+		/// <param name="addToWindow">Set to true to add the element directly to the main interface window</param>
+		/// <returns><c>System.Windows.Forms.Label</c>Label instance</returns>
+		private System.Windows.Forms.Label CreateImageLabel(string name, string imgName, Int32 positionX, Int32 positionY, bool addToWindow = false) {
+
+			// Get image
+			Image img = (Image)Properties.Resources.ResourceManager.GetObject(imgName);
+			
+			// Create label
+			System.Windows.Forms.Label label = new();
+			label.Name = name;
+			label.Text = "";
+			label.Location = new System.Drawing.Point(positionX, positionY);
+			label.Size = new Size(img.Width, img.Height);
+			label.Image = img;
+			label.AutoSize = false;
+			label.TabIndex = 2;
+			label.ImageAlign = ContentAlignment.MiddleCenter;
+			label.Anchor = BokInterfaceMainForm.defaultAnchor;
+			label.Margin = BokInterfaceMainForm.defaultMargin;
+			label.Font = BokInterfaceMainForm.defaultFont;
+			
+			// Add to main window
+			if(addToWindow == true) {
+				this.Controls.Add(label);
+			}
+
+			return label;
+		}
+
+		/// <summary>Simplified method for creating a tooltip</summary>
+		/// <returns><c>System.Windows.Forms.ToolTip<c/>Tooltip instance</returns>
+		private static System.Windows.Forms.ToolTip CreateToolTip() {
+
+			System.Windows.Forms.ToolTip toolTip = new();
+			
+			// Always shows tooltip even if window isn't focused
+			toolTip.ShowAlways = true;
+
+			// Set tooltip delays
+			toolTip.AutoPopDelay = 5000;
+			toolTip.InitialDelay = 1000;
+			toolTip.ReshowDelay = 500;
+
+			return toolTip;
+		}
+
+		/// <summary>Simplified method for adding the values warning tooltip to a list of labels</summary>
+		/// <param name="labels">List of labels</param>
+		public static void AddValuesWarningToolTip(List<System.Windows.Forms.Label> labels) {
+			for(int i = 0; i < labels.Count; i++) {
+				BokInterfaceMainForm.toolTip.SetToolTip(labels[i], "Requires switching room to be fully updated");
+				labels[i].Cursor = System.Windows.Forms.Cursors.Help;
+			}
 		}
 
 		#endregion
