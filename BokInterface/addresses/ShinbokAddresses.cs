@@ -72,9 +72,9 @@ namespace BokInterface.Addresses {
             Django.Add("base_spr", 0x1A);
             Django.Add("base_str", 0x1C);
 
-            Django.Add("equips_vit", 0x18);
-            Django.Add("equips_spr", 0x32C);
-            Django.Add("equips_str", 0x1C);
+            // Django.Add("equips_vit", 0x18);
+            // Django.Add("equips_spr", 0x32C);
+            // Django.Add("equips_str", 0x1C);
 
             /*
             equips vit
@@ -92,7 +92,7 @@ namespace BokInterface.Addresses {
             */
 
             // Add Misc addresses
-            Misc.Add("equips_stat", 0x02004094);
+            // Misc.Add("equips_stat", 0x02004094);
             // 02004094
             Misc.Add("room", 0x02000580);
             Misc.Add("stat", 0x02000710);
