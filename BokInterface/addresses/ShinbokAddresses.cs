@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace BokInterface.Shinbok {
+namespace BokInterface.Addresses {
 
     /// <summary>Main class for Boktai 3 / Shinbok memory addresses</summary>
     public class ShinbokAddresses {
@@ -72,7 +72,28 @@ namespace BokInterface.Shinbok {
             Django.Add("base_spr", 0x1A);
             Django.Add("base_str", 0x1C);
 
+            Django.Add("equips_vit", 0x18);
+            Django.Add("equips_spr", 0x32C);
+            Django.Add("equips_str", 0x1C);
+
+            /*
+            equips vit
+            00B55
+            
+            equips spr
+
+            0200b918 => 0813EDFA => 0813F062
+
+            00B558
+            00C8B8
+
+            equips str
+            00B55A
+            */
+
             // Add Misc addresses
+            Misc.Add("equips_stat", 0x02004094);
+            // 02004094
             Misc.Add("room", 0x02000580);
             Misc.Add("stat", 0x02000710);
             Misc.Add("map_data", 0x030052f4);

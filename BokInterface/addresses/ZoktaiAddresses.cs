@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace BokInterface.Zoktai {
+namespace BokInterface.Addresses {
 
     /// <summary>Main class for Boktai 2: Solar Boy Django / Zoktai memory addresses</summary>
     public class ZoktaiAddresses {
@@ -38,6 +38,16 @@ namespace BokInterface.Zoktai {
 
             // Add Misc addresses
             Misc.Add("map_data", 0x030046a4);
+
+            // 0x203C650 django's current form
+            /*
+                0 - Django
+                1 - Black Django
+                2 - Bat
+                3 - Mouse
+                4 - Unused
+                5 - Sabata
+            */
         }
     }
 }

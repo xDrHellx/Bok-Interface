@@ -1,9 +1,6 @@
 using System.Collections.Generic;
 using BokInterface.All;
-using BokInterface.Boktai;
-using BokInterface.Zoktai;
-using BokInterface.Shinbok;
-using BokInterface.LunarKnights;
+using BokInterface.Addresses;
 
 namespace BokInterface {
 

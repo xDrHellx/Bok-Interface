@@ -1,4 +1,4 @@
-using BokInterface.LunarKnights;
+using BokInterface.Addresses;
 
 /**
  * File for the Boktai DS / Lunar Knights interface itself

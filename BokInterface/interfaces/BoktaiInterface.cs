@@ -1,4 +1,4 @@
-using BokInterface.Boktai;
+using BokInterface.Addresses;
 
 /**
  * File for the Boktai TSiiYH interface itself

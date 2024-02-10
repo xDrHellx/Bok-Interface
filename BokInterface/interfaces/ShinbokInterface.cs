@@ -1,4 +1,4 @@
-using BokInterface.Shinbok;
+using BokInterface.Addresses;
 
 /**
  * File for the Shinbok (Boktai 3) interface itself
@@ -135,7 +135,7 @@ namespace BokInterface {
 			this.bok3_djangoBaseStr = this.CreateLabel("djangoBaseStr", "", 35, 64, 31, 15, false, BokInterfaceMainForm.baseStatColor, new System.Windows.Forms.Padding(0), "MiddleRight");
 			this.bok3_djangoEquipsStr = this.CreateLabel("djangoEquipsStr", "", 66, 64, 42, 15, false, BokInterfaceMainForm.equipsStatColor, new System.Windows.Forms.Padding(0), "MiddleRight");
 			this.bok3_djangoTotalStr = this.CreateLabel("djangoTotalStr", "", 108, 64, 32, 15, false, BokInterfaceMainForm.totalStatColor, new System.Windows.Forms.Padding(0), "MiddleRight");
-			
+
 			// Add values labels to group
 			this.currentStatsLabels.Add(this.bok3_djangoBaseVit);
 			this.currentStatsLabels.Add(this.bok3_djangoEquipsVit);

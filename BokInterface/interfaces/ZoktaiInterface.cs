@@ -1,4 +1,4 @@
-using BokInterface.Zoktai;
+using BokInterface.Addresses;
 
 /**
  * File for the Zoktai (Boktai 2) interface itself
