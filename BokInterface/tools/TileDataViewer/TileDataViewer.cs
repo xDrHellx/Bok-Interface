@@ -75,7 +75,6 @@ namespace BokInterface.Tools.TileDataViewer {
         /// <summary>Sets memory addresses used depending n the current game</summary>
         /// <param name="gameName"></param>
         protected void SetGameAddresses(string gameName) {
-            APIs.Gui.AddMessage(gameName);
             switch(gameName) {
                 case "Boktai":
                     this.mapDataAddress = boktaiAddresses.Misc["map_data"];
