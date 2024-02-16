@@ -1,4 +1,6 @@
 using BokInterface.Addresses;
+using BokInterface.All;
+using BokInterface.Tools.TextToWorldSpace;
 
 /**
  * File for the Boktai TSiiYH interface itself
@@ -36,6 +38,8 @@ namespace BokInterface {
 
 		private void UpdateBoktaiInterface() {
 
+			// Write on screen
+			new TextToWorldSpace(this.shorterGameName, "^ Django", APIs.Memory.ReadU16(this.boktaiAddresses.Django["x_position"]), APIs.Memory.ReadU16(this.boktaiAddresses.Django["y_position"]));
 		}
 
 		private void AddBoktaiCurrentStatusSection() {
