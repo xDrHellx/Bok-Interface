@@ -1,4 +1,5 @@
 # Bok-Interface
+
 External tool for Boktai games.
 
 This is a tool mainly meant for making testing & routing easier.  
@@ -6,14 +7,17 @@ This is a tool mainly meant for making testing & routing easier.
 
 -------------------------------------
 
-## Which versions of the games is this compatible with ?
+## Which versions of the games is this compatible with?
+
 The interface can detect all versions for each games.
 However it is currently aimed at the **japanese versions**.
 
-## Which BizHawk version is this compatible with ?
+## Which BizHawk version is this compatible with?
+
 This interface is meant for BizHawk 2.9 and above.
 
-## How do i add it to BizHawk ?
+## How do i add it to BizHawk?
+
 Download the release ZIP file and extract it directly inside your *BizHawk* folder.
 It should add the *ExternalTools* folder if it doesn't already exists and also put the other files inside it.
 
@@ -22,6 +26,7 @@ The Bok Interface should now be available within BizHawk under *Tools > External
 -------------------------------------
 
 ## The objectives
+
 - Having a simple interface that shows useful information while playing
 - Being able to change values "on the fly" via the external tool
 - Simulations (damage calculation, etc)
@@ -31,13 +36,15 @@ The Bok Interface should now be available within BizHawk under *Tools > External
 
 ## Development
 
-### How can i test changes to the interface ?
+### How can i test changes to the interface?
+
 Either regenerate a new dll file or use the following command lines in VS Code (in this case you must fill the BizHawk folder with your version).
-```
-// Inside the BokInterface folder :
+
+```console
+// Inside the BokInterface folder:
 dotnet build
 
-// Then go inside your BizHawk folder and type :
+// Then go inside your BizHawk folder and type:
 .\EmuHawk.exe --open-ext-tool-dll=BokInterface
 ```
 

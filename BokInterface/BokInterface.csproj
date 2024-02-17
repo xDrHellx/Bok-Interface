@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
     <PropertyGroup>
         <LangVersion>9.0</LangVersion>
         <Nullable>enable</Nullable>
@@ -8,8 +8,6 @@
     <ItemGroup>
         <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
         <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.0" PrivateAssets="all" />
-        <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
-        <PackageReference Include="WebSocketSharp" Version="1.0.3-rc11" />
         <PackageReference Include="System.Resources.Extensions" Version="4.6.0" />
         <Reference Include="System.Windows.Forms" />
         <Reference Include="BizHawk.Client.Common" HintPath="$(ProjectDir)../BizHawk/dll/BizHawk.Client.Common.dll" />
@@ -25,6 +23,5 @@
     </ItemGroup>
     <Target Name="PostBuild" AfterTargets="PostBuildEvent">
         <Copy SourceFiles="$(OutputPath)$(MSBuildProjectName).dll" DestinationFolder="$(ProjectDir)../BizHawk/ExternalTools" />
-        <Copy SourceFiles="$(OutputPath)websocket-sharp.dll" DestinationFolder="$(ProjectDir)../BizHawk/ExternalTools" />
     </Target>
 </Project>
