@@ -14,7 +14,9 @@ However it is currently aimed at the **japanese versions**.
 This interface is meant for BizHawk 2.9 and above.
 
 ## How do i add it to BizHawk ?
-Create a *ExternalTools* folder inside your *BizHawk* folder and put the content of the release ZIP inside of it.
+Download the release ZIP file and extract it directly inside your *BizHawk* folder.
+It should add the *ExternalTools* folder if it doesn't already exists and also put the other files inside it.
+
 The Bok Interface should now be available within BizHawk under *Tools > External Tool > BokInterface*.
 
 -------------------------------------
