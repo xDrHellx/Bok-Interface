@@ -1,15 +1,17 @@
 using System.Collections.Generic;
 
-namespace BokInterface.Addresses {
+namespace BokInterface.Addresses
+{
 
     /// <summary>Main class for Boktai: The Sun is in Your Hand memory addresses</summary>
-    public class BoktaiAddresses {
+    public class BoktaiAddresses
+    {
 
         /// <summary>
         /// <para>Django-related memory addresses</para>
         /// </summary>
         public IDictionary<string, uint> Django = new Dictionary<string, uint>();
-        
+
         /// <summary>
         /// <para>Inventory-related memory addresses</para>
         /// </summary>
@@ -29,13 +31,14 @@ namespace BokInterface.Addresses {
         /// </summary>
         public IDictionary<string, uint> Misc = new Dictionary<string, uint>();
 
-        public BoktaiAddresses() {
+        public BoktaiAddresses()
+        {
 
             // Add Django addresses
             Django.Add("x_position", 0x0203D8F0);
             Django.Add("y_position", 0x0203D8F4);
             Django.Add("z_position", 0x0203D8F2);
-            
+
             // Add Misc addresses
             Misc.Add("map_data", 0x03004610);
             Misc.Add("x_camera", 0x030046E8);

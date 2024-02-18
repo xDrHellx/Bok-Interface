@@ -5,13 +5,15 @@ using System.Windows.Forms;
 using BokInterface.All;
 using BokInterface.Addresses;
 
-namespace BokInterface.Tools.TileDataViewer {
+namespace BokInterface.Tools.TileDataViewer
+{
     /// <summary>
     /// <para>Subwindow for the Tile Data Viewer</para>
     /// <para>Prints and show Tile Data (AKA Map)</para>
     /// <para>Made by Raphi, converted from Lua to C# by Doc</para>
     /// </summary>
-    partial class TileDataViewer : Form {
+    partial class TileDataViewer : Form
+    {
 
         #region Main properties
 
@@ -41,8 +43,9 @@ namespace BokInterface.Tools.TileDataViewer {
         #endregion
 
         #region Subwindow & loop-related methods
-        
-        public TileDataViewer(string name, string title, Int32 width, Int32 height, string currentGame, string icon = "", Form? parentForm = null) {
+
+        public TileDataViewer(string name, string title, Int32 width, Int32 height, string currentGame, string icon = "", Form? parentForm = null)
+        {
             this.Name = name;
             this.Text = title;
             this.Icon = this.GetIcon(icon);
@@ -55,13 +58,14 @@ namespace BokInterface.Tools.TileDataViewer {
             this.SetSubwindowSize(width, height);
             this.currentGame = currentGame;
 
-            if(parentForm != null) {
+            if (parentForm != null)
+            {
                 this.Owner = parentForm;
             }
 
             // Prevent flickering
             this.SetStyle(
-                ControlStyles.UserPaint | ControlStyles.AllPaintingInWmPaint | ControlStyles.OptimizedDoubleBuffer, 
+                ControlStyles.UserPaint | ControlStyles.AllPaintingInWmPaint | ControlStyles.OptimizedDoubleBuffer,
                 true
             );
 
@@ -74,8 +78,10 @@ namespace BokInterface.Tools.TileDataViewer {
 
         /// <summary>Sets memory addresses used depending n the current game</summary>
         /// <param name="gameName"></param>
-        protected void SetGameAddresses(string gameName) {
-            switch(gameName) {
+        protected void SetGameAddresses(string gameName)
+        {
+            switch (gameName)
+            {
                 case "Boktai":
                     this.mapDataAddress = boktaiAddresses.Misc["map_data"];
                     this.djangoXposAddress = boktaiAddresses.Django["x_position"];
@@ -104,18 +110,23 @@ namespace BokInterface.Tools.TileDataViewer {
         /// <summary>Get the specified icon if it exist</summary>
         /// <param name="fileName">File name (without .ico extension)</param>
         /// <returns><c>System.Drawing.Icon</c>Specified Icon instance (or default if the specified icon could not be found)</returns>
-        protected Icon GetIcon(string fileName) {
-            if(fileName == "") {
-				return this.Icon;
-			} else {
-				return (Icon)Properties.Resources.ResourceManager.GetObject(fileName);
-			}
+        protected Icon GetIcon(string fileName)
+        {
+            if (fileName == "")
+            {
+                return this.Icon;
+            }
+            else
+            {
+                return (Icon)Properties.Resources.ResourceManager.GetObject(fileName);
+            }
         }
 
         /// <summary>Sets the subwindow's size</summary>
         /// <param name="width">Width</param>
         /// <param name="height">Height</param>
-        protected void SetSubwindowSize(int width, int height) {
+        protected void SetSubwindowSize(int width, int height)
+        {
             this.ClientSize = new Size(width, height);
         }
 
@@ -124,36 +135,41 @@ namespace BokInterface.Tools.TileDataViewer {
         /// <para>Adds the corresponding methods to BokInterfaceMainForm.functionsList to have them be executed every frame</para>
         /// <para>Also get the index from that list for removing the methods when closing the Tile Data Viewer</para>
         /// </summary>
-        public void InitializeFrameLoop() {
+        public void InitializeFrameLoop()
+        {
             BokInterfaceMainForm.functionsList.Add(this.Refresh);
 
             /**
              * Get the index of the added function,
              * used for removing the method from BokInterfaceMainForm.functionsList when the subwindow is closed
-             */ 
-            this.index = BokInterfaceMainForm.functionsList.Count -1;
+             */
+            this.index = BokInterfaceMainForm.functionsList.Count - 1;
         }
 
         #endregion
 
         #region Drawing methods
 
-        protected override void OnPaint(PaintEventArgs e) {
+        protected override void OnPaint(PaintEventArgs e)
+        {
             base.OnPaint(e);
 
             // If current game is not handled, stop
-            if(this.currentGame == "") {
+            if (this.currentGame == "")
+            {
                 return;
             }
 
             // 1. Get map data & pointers
             uint mapDataPointers = APIs.Memory.ReadU32(this.mapDataAddress);
-            if(mapDataPointers == 0) {
+            if (mapDataPointers == 0)
+            {
                 return;
             }
 
             uint mapData = APIs.Memory.ReadU32(mapDataPointers + 4);
-            if(mapData == 0) {
+            if (mapData == 0)
+            {
                 return;
             }
 
@@ -181,10 +197,13 @@ namespace BokInterface.Tools.TileDataViewer {
         /// <param name="mapData">Map data</param>
         /// <param name="tileWidth">Tile width</param>
         /// <param name="tileHeight">Tile height</param>
-        protected void DrawTileData(PaintEventArgs e, uint mapData, uint tileWidth, uint tileHeight) {
+        protected void DrawTileData(PaintEventArgs e, uint mapData, uint tileWidth, uint tileHeight)
+        {
 
-            for(int tileY = 0; tileY < tileHeight -1; tileY++) {
-                for(int tileX = 0; tileX < tileWidth -1; tileX++) {
+            for (int tileY = 0; tileY < tileHeight - 1; tileY++)
+            {
+                for (int tileX = 0; tileX < tileWidth - 1; tileX++)
+                {
 
                     uint tile = APIs.Memory.ReadU32(mapData + 0xC + (tileY * tileWidth + tileX) * 4);
                     uint value = tile & 0xFF;
@@ -208,8 +227,8 @@ namespace BokInterface.Tools.TileDataViewer {
 
             // Adjust subwindow size based on the number of tiles to show
             this.SetSubwindowSize(
-                (int)(tileWidth * scale) -5,
-                (int)(tileHeight * scale) -5
+                (int)(tileWidth * scale) - 5,
+                (int)(tileHeight * scale) - 5
             );
         }
 
@@ -219,13 +238,15 @@ namespace BokInterface.Tools.TileDataViewer {
         /// <param name="posX">X position of the tile</param>
         /// <param name="posY">Y position of the tile</param>
         /// <param name="scale">Scale (used for drawing)</param>
-        protected void DrawTileEffect(PaintEventArgs e, uint tileEffect, int posX, int posY, int scale) {
+        protected void DrawTileEffect(PaintEventArgs e, uint tileEffect, int posX, int posY, int scale)
+        {
 
             /**
              * Call the corresponding method for handling the tile effect
              * The values we're checking on can be different for each game
              */
-            switch(this.currentGame) {
+            switch (this.currentGame)
+            {
                 case "Boktai":
                     this.DrawBoktaiTileEffect(e, tileEffect, posX, posY, scale);
                     break;
@@ -250,8 +271,10 @@ namespace BokInterface.Tools.TileDataViewer {
         /// <param name="posX">X position of the tile</param>
         /// <param name="posY">Y position of the tile</param>
         /// <param name="scale">Scale (used for drawing)</param>
-        protected void DrawStairsIcon(PaintEventArgs e, uint stairsValue, int posX, int posY, int scale) {
-            if(stairsValue == 0) {
+        protected void DrawStairsIcon(PaintEventArgs e, uint stairsValue, int posX, int posY, int scale)
+        {
+            if (stairsValue == 0)
+            {
                 return;
             }
 
@@ -266,13 +289,15 @@ namespace BokInterface.Tools.TileDataViewer {
         /// </summary>
         /// <param name="e">Painting event used for drawing</param>
         /// <param name="zonesData">Zones-related data</param>
-        protected void DrawZones(PaintEventArgs e, uint zonesData) {
+        protected void DrawZones(PaintEventArgs e, uint zonesData)
+        {
 
-            float zoneScale = scale/256.0f;
+            float zoneScale = scale / 256.0f;
             uint zoneCount = APIs.Memory.ReadU8(zonesData);
             uint zonePtr = zonesData + 4;
 
-            for (int i = 0; i < zoneCount; i++) {
+            for (int i = 0; i < zoneCount; i++)
+            {
                 int startX = APIs.Memory.ReadS16(zonePtr);
                 int startY = APIs.Memory.ReadS16(zonePtr + 2);
                 int endX = APIs.Memory.ReadS16(zonePtr + 4);
@@ -286,7 +311,7 @@ namespace BokInterface.Tools.TileDataViewer {
                     (endX - startX) * zoneScale,
                     (endY - startY) * zoneScale
                 );
-                
+
                 zonePtr += 12;
             }
         }
@@ -295,7 +320,8 @@ namespace BokInterface.Tools.TileDataViewer {
         /// <param name="e">Painting event used for drawing</param>
         /// <param name="posX">X position</param>
         /// <param name="posY">Y position</param>
-        protected void DrawDjangoIcon(PaintEventArgs e, uint posX, uint posY) {
+        protected void DrawDjangoIcon(PaintEventArgs e, uint posX, uint posY)
+        {
 
             // Update imgNb to switch between images for Django & draw it
             this.UpdateImgNb();
@@ -317,8 +343,10 @@ namespace BokInterface.Tools.TileDataViewer {
         /// <param name="posX">X position</param>
         /// <param name="posY">Y position</param>
         /// <param name="scale">Scale (used for drawing)</param>
-        protected void DrawFilledRectangle(PaintEventArgs e, Color color, int posX, int posY, int scale) {
-            using (Pen pen = new(color, 1)) {
+        protected void DrawFilledRectangle(PaintEventArgs e, Color color, int posX, int posY, int scale)
+        {
+            using (Pen pen = new(color, 1))
+            {
                 Rectangle rectangle = new(
                     posX,
                     posY,
@@ -327,7 +355,8 @@ namespace BokInterface.Tools.TileDataViewer {
                 );
 
                 e.Graphics.DrawRectangle(pen, rectangle);
-                using (SolidBrush brush = new(color)) {
+                using (SolidBrush brush = new(color))
+                {
                     e.Graphics.FillRectangle(brush, rectangle);
                 }
             }
@@ -338,36 +367,44 @@ namespace BokInterface.Tools.TileDataViewer {
         /// <param name="imgName">Image name</param>
         /// <param name="posX">X position of the image</param>
         /// <param name="posY">Y position of the image</param>
-        protected void DrawTileImage(PaintEventArgs e, string imgName, int posX, int posY) {
+        protected void DrawTileImage(PaintEventArgs e, string imgName, int posX, int posY)
+        {
             Image tileImg = (Image)Properties.Resources.ResourceManager.GetObject(imgName);
             Point imgCorner = new(posX, posY);
             e.Graphics.DrawImage(tileImg, imgCorner);
         }
 
         /// <summary>Updates imgNb variable, used for Django icons (see DrawDjangoIcon)</summary>
-        protected void UpdateImgNb() {
+        protected void UpdateImgNb()
+        {
             n++;
-            if(n >= 0 && n < 30) {
+            if (n >= 0 && n < 30)
+            {
                 imgNb = 1;
-            } else {
+            }
+            else
+            {
                 imgNb = 2;
             }
 
-            if(n >= 60) {
+            if (n >= 60)
+            {
                 n = 0;
             }
         }
 
         /// <summary>Generate a random color palette</summary>
         /// <returns><c>List (System.Drawing.Color)</c>Palette</returns>
-        protected List<Color> GenerateRandomColorPalette() {
+        protected List<Color> GenerateRandomColorPalette()
+        {
 
             List<Color> result = new();
             uint seed = 0x803049d;
 
-            for(int i = 0; i < 255; i++) {
+            for (int i = 0; i < 255; i++)
+            {
                 seed = (seed * 0x41C64E6D + 12345) & 0xFFFFFFFF;
-                
+
                 uint r = (seed >> 8) & 0x1F;
                 uint g = (seed >> 13) & 0x1F;
                 uint b = (seed >> 18) & 0x1F;
@@ -384,22 +421,26 @@ namespace BokInterface.Tools.TileDataViewer {
 
         /// <summary>Write text on GUI</summary>
         /// <param name="text">Text</param>
-        protected void WriteText(string text) {
+        protected void WriteText(string text)
+        {
             APIs.Gui.Text(0, this.textY, text);
             this.textY += 20;
         }
 
         /// <summary>Dump actors infos on screen</summary>
-        protected void DumpActors() {
+        protected void DumpActors()
+        {
 
             uint globalEnable = APIs.Memory.ReadU32(0x03004438);
 
-            for(int groupIndex = 0; groupIndex < 0xc; groupIndex++) {
+            for (int groupIndex = 0; groupIndex < 0xc; groupIndex++)
+            {
 
                 uint actor = APIs.Memory.ReadU32(0x03004480 + groupIndex * 8);
                 uint enableFlags = APIs.Memory.ReadU32(0x03004480 + groupIndex * 8 + 4);
 
-                while(actor != 0){
+                while (actor != 0)
+                {
                     // this.WriteText(String.Format(
                     //     "  {0} (flags: {1}, {2}, {3}) @ ({4}, {5}, {6})",
                     //     actor,
