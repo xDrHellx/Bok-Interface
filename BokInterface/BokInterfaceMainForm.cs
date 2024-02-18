@@ -16,7 +16,7 @@ using BokInterface.All;
 namespace BokInterface {
 
 	/// <summary>Main class for the Bok Interface</summary>
-	[ExternalTool("BokInterface")]
+	[ExternalTool("Bok Interface")]
 	public partial class BokInterfaceMainForm : ToolFormBase, IExternalToolForm {
 
 		#region Variables
@@ -25,8 +25,8 @@ namespace BokInterface {
 		public override bool BlocksInputWhenFocused => false;
 		protected Icon? icon;
 		public uint currentGameId;
-		public string currentGameName = "";
-		public string shorterGameName = "";
+		public static string currentGameName = "";
+		public static string shorterGameName = "";
 		protected bool supportedGame = false;
 		protected bool interfaceActivated = false;
 		protected bool isDS = false;

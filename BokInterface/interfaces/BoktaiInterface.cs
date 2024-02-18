@@ -39,7 +39,7 @@ namespace BokInterface {
 		private void UpdateBoktaiInterface() {
 
 			// Write on screen
-			new TextToWorldSpace(this.shorterGameName, "^ Django", APIs.Memory.ReadU16(this.boktaiAddresses.Django["x_position"]), APIs.Memory.ReadU16(this.boktaiAddresses.Django["y_position"]));
+			new TextToWorldSpace("^ Django", APIs.Memory.ReadU16(this.boktaiAddresses.Django["x_position"]), APIs.Memory.ReadU16(this.boktaiAddresses.Django["y_position"]), APIs.Memory.ReadU16(this.boktaiAddresses.Django["z_position"]));
 		}
 
 		private void AddBoktaiCurrentStatusSection() {
