@@ -1,44 +1,32 @@
-# Bok-Interface
-External tool for Boktai games.
+# Bok Interface
 
-This is a tool mainly meant for making testing & routing easier.  
-*For example testing impact from stats points in Boktai 2 & 3 can take a long time, as having higher stats can save time in multiple situations, which may end up being worth doing when all the time saved is accumulated.*
+External tool to aid with routing and the research of Boktai games.
 
--------------------------------------
+Our goals are to provide a
 
-## Which versions of the games is this compatible with ?
-The interface can detect all versions for each games.
-However it is currently aimed at the **japanese versions**.
+- simple interface that shows useful information while playing
+- modify stats, inventory, etc.
+- simulate damage calculations, forging, etc
+- unlock and trigger events & other locked content
 
-## Which BizHawk version is this compatible with ?
-This interface is meant for BizHawk 2.9 and above.
+## What games and emulators are compatible?
 
-## How do i add it to BizHawk ?
-Download the release ZIP file and extract it directly inside your *BizHawk* folder.
-It should add the *ExternalTools* folder if it doesn't already exists and also put the other files inside it.
+The interface can detect all known versions of all Boktai games.  
+It is mainly made for the japanese releases since those are relevant for the speedrun but it should work on all releases.
 
-The Bok Interface should now be available within BizHawk under *Tools > External Tool > BokInterface*.
+Bok Interface is made for BizHawk 2.9 and above but with [some adjustments](https://github.com/shenef/Bok-Interface/tree/GBAHawk) it can also be compiled for GBAHawk.
 
--------------------------------------
+## Usage
 
-## The objectives
-- Having a simple interface that shows useful information while playing
-- Being able to change values "on the fly" via the external tool
-- Simulations (damage calculation, etc)
-- Enabling events & other locked contents
+Download the latest release from the Assets section [here](https://github.com/xDrHellx/Bok-Interface/releases/latest) and extract it into your BizHawk folder.  
+You should now have an "ExternalTools" folder with a "BokInterface.dll" file inside it.
 
--------------------------------------
+The Bok Interface should now be available in BizHawk under "Tools" > "External Tool" > "Bok Interface".
 
 ## Development
 
-### How can i test changes to the interface ?
-Either regenerate a new dll file or use the following command lines in VS Code (in this case you must fill the BizHawk folder with your version).
-```
-// Inside the BokInterface folder :
-dotnet build
+Clone this repo, copy the BizHawk folder into the root, install the .NET SDK and run `./build.bat`.  
+That will compile the code, copy the result to BizHawk and launch BizHawk with the Interface already loaded.
 
-// Then go inside your BizHawk folder and type :
-.\EmuHawk.exe --open-ext-tool-dll=BokInterface
-```
-
-*BizHawk should now start and automatically ask you if it can enable the Bok Interface.*
+- BizHawk: <https://tasvideos.org/Bizhawk>
+- .NET SDK: Run `winget install Microsoft.DotNet.SDK.8` or the installer from [here](https://dotnet.microsoft.com/en-us/download).
