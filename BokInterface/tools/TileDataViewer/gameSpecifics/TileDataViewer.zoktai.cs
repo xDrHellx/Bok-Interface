@@ -1,4 +1,3 @@
-using System.Drawing;
 using System.Windows.Forms;
 
 using BokInterface.All;
@@ -53,7 +52,7 @@ namespace BokInterface.Tools.TileDataViewer
                     case "21":                  /// Torch (Duneyrr boss room in Cathedral)
                         break;
                     case "A":                   /// Exit / entry (inconsistent)
-                        this.DrawTileImage(e, "exit", 5 + posX * scale, 5 + posY * scale);
+                        DrawTileImage(e, "exit", 5 + posX * scale, 5 + posY * scale);
                         break;
                     case "B":                   /// ??? (2-heights wall in Aqueduct)
                         break;
@@ -70,7 +69,7 @@ namespace BokInterface.Tools.TileDataViewer
                     case "43":                  /// Thin passage on void (Cathedral undergrounds)
                         break;
                     case "80":                  /// Noise tile (makes sound)
-                        this.DrawTileImage(e, "sound", 5 + posX * scale, 5 + posY * scale);
+                        DrawTileImage(e, "sound", 5 + posX * scale, 5 + posY * scale);
                         break;
                     case "400":                 /// Walkable area (Remains)
                         break;

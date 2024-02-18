@@ -20,18 +20,18 @@ namespace BokInterface
         {
 
             // Current game name
-            this.CreateLabel("currentGameName", currentGameName, 5, 5, 141, 20, true);
+            CreateLabel("currentGameName", currentGameName, 5, 5, 141, 20, true);
 
             // Current status section
-            this.AddLunarKnightsCurrentStatusSection();
+            AddLunarKnightsCurrentStatusSection();
 
             // Extras / misc tools section
-            this.AddToolsSection();
+            AddToolsSection();
 
             // Main window
-            this.SetMainWindow("Bok Interface" + (shorterGameName != "" ? " - " + shorterGameName : ""), 345, 500);
+            SetMainWindow("Bok Interface" + (shorterGameName != "" ? " - " + shorterGameName : ""), 345, 500);
 
-            this.ResumeLayout(false);
+            ResumeLayout(false);
         }
 
         private void UpdateLunarKnightsInterface()
@@ -43,7 +43,7 @@ namespace BokInterface
         {
 
             // Section
-            this.currentStatusGroupBox = this.CreateGroupBox("currentStatus", "Current status", 5, 25, 226, 70, true);
+            currentStatusGroupBox = CreateGroupBox("currentStatus", "Current status", 5, 25, 226, 70, true);
         }
     }
 }

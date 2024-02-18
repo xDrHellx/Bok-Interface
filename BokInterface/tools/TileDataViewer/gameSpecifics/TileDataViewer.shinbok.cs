@@ -1,4 +1,3 @@
-using System.Drawing;
 using System.Windows.Forms;
 
 using BokInterface.All;
@@ -37,15 +36,15 @@ namespace BokInterface.Tools.TileDataViewer
                     case "3":                   /// Wall
                         break;
                     case "A":                   /// Exit / entry (inconsistent)
-                        this.DrawTileImage(e, "exit", 5 + posX * scale, 5 + posY * scale);
+                        DrawTileImage(e, "exit", 5 + posX * scale, 5 + posY * scale);
                         break;
                     case "C6A":                 /// Void (fall & die)
-                        this.DrawFilledRectangle(e, blackColor, 5 + posX * scale, 5 + posY * scale, scale);
+                        DrawFilledRectangle(e, blackColor, 5 + posX * scale, 5 + posY * scale, scale);
                         break;
                     case "F":                   /// Wall (San Miguel)
                         break;
                     case "40":                  /// Solar panel
-                        this.DrawTileImage(e, "solar_panel", 5 + posX * scale, 5 + posY * scale);
+                        DrawTileImage(e, "solar_panel", 5 + posX * scale, 5 + posY * scale);
                         break;
                     case "403":                 /// Wall (Ancient Tree)
                         break;

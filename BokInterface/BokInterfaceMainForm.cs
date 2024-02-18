@@ -5,8 +5,6 @@ using System.Windows.Forms;
 using System.Drawing;
 using System.Linq;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.Runtime.CompilerServices;
 using BokInterface.All;
 
 /**
@@ -73,7 +71,7 @@ namespace BokInterface
             isDS = false;
 
             // Clear subwindows related to extra tools to prevent errors caused by switching between games
-            this.ClearExtraTools();
+            ClearExtraTools();
 
             // Try initializing the interface
             InitializeInterface();
@@ -95,7 +93,7 @@ namespace BokInterface
             {
 
                 // Get the current setting for displaying messages
-                this.previousDisplayMessagesSetting = APIs.Config.DisplayMessages;
+                previousDisplayMessagesSetting = APIs.Config.DisplayMessages;
 
                 // Get & set the infos about the game currently running on BizHawk
                 DetectCurrentGame();
@@ -108,7 +106,7 @@ namespace BokInterface
                     /**
 					 * Retry getting the game code
 					 * For DS games, because of the DS bootup screen, the game code is not always accessible after switching games
-					 * 
+					 *
 					 * 10 frames should be enough for this
 					 */
                     if (retryCount < 10)
@@ -159,13 +157,13 @@ namespace BokInterface
                             break;
                         default:
                             // If game is not handled, put back the old setting for displaying messages
-                            APIs.Client.DisplayMessages(this.previousDisplayMessagesSetting);
+                            APIs.Client.DisplayMessages(previousDisplayMessagesSetting);
                             break;
                     }
 
                     /**
 					 * Check if we're past the GBA boot up screen
-					 * 
+					 *
 					 * Otherwise the emulator can crash if we try reading values from memory addresses,
 					 * most likely because it reads "garbage" data
 					 */
@@ -185,7 +183,7 @@ namespace BokInterface
                     /**
 					 * Retry getting the game code
 					 * For DS games, because of the DS bootup screen, the game code is not always accessible after switching games
-					 * 
+					 *
 					 * 10 frames should be enough for this
 					 */
                     if (retryCount < 10)
@@ -266,7 +264,7 @@ namespace BokInterface
         {
 
             // Put back the old setting for displaying messages
-            APIs.Client.DisplayMessages(this.previousDisplayMessagesSetting);
+            APIs.Client.DisplayMessages(previousDisplayMessagesSetting);
         }
 
         #endregion

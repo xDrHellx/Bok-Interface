@@ -1,5 +1,3 @@
-using System;
-
 namespace BokInterface.All
 {
 
@@ -49,7 +47,7 @@ namespace BokInterface.All
         /// <returns><c>int</c>Decimal</returns>
         public static int HexToInt(string value)
         {
-            return Int32.Parse(value, System.Globalization.NumberStyles.HexNumber);
+            return int.Parse(value, System.Globalization.NumberStyles.HexNumber);
         }
 
         /// <summary>Convert an integer to a hexadecimal value</summary>

@@ -23,10 +23,10 @@ namespace BokInterface
         /// <summary>Clears the Status editing subwindow and all other sections within it</summary>
         private void ClearStatusEditControls()
         {
-            this.edit_statusGroupBox.Controls.Clear();
-            this.edit_statsGroupBox.Controls.Clear();
-            this.edit_statusLabels.Clear();
-            this.edit_statusNumericUpDowns.Clear();
+            edit_statusGroupBox.Controls.Clear();
+            edit_statsGroupBox.Controls.Clear();
+            edit_statusLabels.Clear();
+            edit_statusNumericUpDowns.Clear();
         }
 
         /// <summary>
@@ -42,13 +42,13 @@ namespace BokInterface
             switch (shorterGameName)
             {
                 case "Boktai":
-                    return this.GetBoktaiDefaultValues();
+                    return GetBoktaiDefaultValues();
                 case "Zoktai":
-                    return this.GetZoktaiDefaultValues();
+                    return GetZoktaiDefaultValues();
                 case "Shinbok":
-                    return this.GetShinbokDefaultValues();
+                    return GetShinbokDefaultValues();
                 case "LunarKnights":
-                    return this.GetLunarKnightsDefaultValues();
+                    return GetLunarKnightsDefaultValues();
                 default:
                     return new Dictionary<string, uint>();
             }
@@ -59,7 +59,7 @@ namespace BokInterface
         {
 
             // Retrieve all input fields
-            var fields = this.edit_statusNumericUpDowns;
+            var fields = edit_statusNumericUpDowns;
 
             // Sets values based on fields for the current game
             for (int i = 0; i < fields.Count; i++)

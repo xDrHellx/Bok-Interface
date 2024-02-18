@@ -21,7 +21,7 @@ namespace BokInterface
             APIs.Gui.Text(3, 1, interfaceActivated == true ? "Bok ON" : "Bok Off", System.Drawing.Color.Orange, "bottomright");
 
             // On DS add the indicator on the top screen too
-            if (this.isDS == true)
+            if (isDS == true)
             {
                 APIs.Gui.Text(3, GetScreenHeight(true) + 1, interfaceActivated == true ? "Bok ON" : "Bok Off", System.Drawing.Color.Orange, "bottomright");
             }

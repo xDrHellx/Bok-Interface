@@ -25,15 +25,15 @@ namespace BokInterface
         #region Subwindows generation methods
         protected void OpenStatusEditor(object sender, EventArgs e)
         {
-            if (this.statusEditorOpened == false)
+            if (statusEditorOpened == false)
             {
 
                 // Create subwindow & add on close event
-                this.statusEditWindow = CreateSubWindow("statusEditWindow", "Bok Edit - Status", 203, 144);
-                this.statusEditWindow.FormClosing += new FormClosingEventHandler(delegate (object sender, FormClosingEventArgs e)
+                statusEditWindow = CreateSubWindow("statusEditWindow", "Bok Edit - Status", 203, 144);
+                statusEditWindow.FormClosing += new FormClosingEventHandler(delegate (object sender, FormClosingEventArgs e)
                 {
-                    this.statusEditorOpened = false;
-                    this.statusEditWindow.Controls.Clear();
+                    statusEditorOpened = false;
+                    statusEditWindow.Controls.Clear();
                 });
 
                 // Clears subwindow
@@ -49,7 +49,7 @@ namespace BokInterface
                         ZoktaiStatusEditSubwindow();
                         break;
                     case "Shinbok":
-                        this.statusEditWindow.ClientSize = new System.Drawing.Size(227, 144);
+                        statusEditWindow.ClientSize = new System.Drawing.Size(227, 144);
                         ShinbokStatusEditSubwindow();
                         break;
                     case "LunarKnights":
@@ -61,112 +61,112 @@ namespace BokInterface
                 }
 
                 // statusEditWindow.ShowDialog(); // focus & stops BizHawk
-                this.statusEditWindow.Show(); // focus & let BizHawk continue
-                this.statusEditorOpened = true;
+                statusEditWindow.Show(); // focus & let BizHawk continue
+                statusEditorOpened = true;
             }
         }
 
         protected void OpenInventoryEditor(object sender, EventArgs e)
         {
-            if (this.inventoryEditorOpened == false)
+            if (inventoryEditorOpened == false)
             {
 
                 // Create subwindow & add on close event
-                this.inventoryEditWindow = CreateSubWindow("inventoryEditWindow", "Bok Edit - Inventory", 200, 100);
-                this.inventoryEditWindow.FormClosing += new FormClosingEventHandler(delegate (object sender, FormClosingEventArgs e)
+                inventoryEditWindow = CreateSubWindow("inventoryEditWindow", "Bok Edit - Inventory", 200, 100);
+                inventoryEditWindow.FormClosing += new FormClosingEventHandler(delegate (object sender, FormClosingEventArgs e)
                 {
-                    this.inventoryEditorOpened = false;
-                    this.inventoryEditWindow.Controls.Clear();
+                    inventoryEditorOpened = false;
+                    inventoryEditWindow.Controls.Clear();
                 });
 
-                this.inventoryEditWindow.Show();
-                this.inventoryEditorOpened = true;
+                inventoryEditWindow.Show();
+                inventoryEditorOpened = true;
             }
         }
 
         protected void OpenEquipsEditor(object sender, EventArgs e)
         {
-            if (this.equipsEditorOpened == false)
+            if (equipsEditorOpened == false)
             {
 
                 // Create subwindow & add on close event
-                this.equipsEditWindow = CreateSubWindow("equipsEditWindow", "Bok Edit - Equips", 200, 100);
-                this.equipsEditWindow.FormClosing += new FormClosingEventHandler(delegate (object sender, FormClosingEventArgs e)
+                equipsEditWindow = CreateSubWindow("equipsEditWindow", "Bok Edit - Equips", 200, 100);
+                equipsEditWindow.FormClosing += new FormClosingEventHandler(delegate (object sender, FormClosingEventArgs e)
                 {
-                    this.equipsEditorOpened = false;
-                    this.equipsEditWindow.Controls.Clear();
+                    equipsEditorOpened = false;
+                    equipsEditWindow.Controls.Clear();
                 });
 
-                this.equipsEditWindow.Show();
-                this.equipsEditorOpened = true;
+                equipsEditWindow.Show();
+                equipsEditorOpened = true;
             }
         }
 
         protected void OpenSolarGunEditor(object sender, EventArgs e)
         {
-            if (this.solarGunEditorOpened == false)
+            if (solarGunEditorOpened == false)
             {
 
                 // Create subwindow & add on close event
-                this.solarGunEditWindow = CreateSubWindow("solarGunEditWindow", "Bok Edit - Solar Gun", 200, 100);
-                this.solarGunEditWindow.FormClosing += new FormClosingEventHandler(delegate (object sender, FormClosingEventArgs e)
+                solarGunEditWindow = CreateSubWindow("solarGunEditWindow", "Bok Edit - Solar Gun", 200, 100);
+                solarGunEditWindow.FormClosing += new FormClosingEventHandler(delegate (object sender, FormClosingEventArgs e)
                 {
-                    this.solarGunEditorOpened = false;
-                    this.solarGunEditWindow.Controls.Clear();
+                    solarGunEditorOpened = false;
+                    solarGunEditWindow.Controls.Clear();
                 });
 
-                this.solarGunEditWindow.Show();
-                this.solarGunEditorOpened = true;
+                solarGunEditWindow.Show();
+                solarGunEditorOpened = true;
             }
         }
 
         protected void OpenWeaponsEditor(object sender, EventArgs e)
         {
-            if (this.weaponsEditorOpened == false)
+            if (weaponsEditorOpened == false)
             {
 
                 // Create subwindow & add on close event
-                this.weaponsEditWindow = CreateSubWindow("weaponsEditWindow", "Bok Edit - Weapons", 200, 100);
-                this.weaponsEditWindow.FormClosing += new FormClosingEventHandler(delegate (object sender, FormClosingEventArgs e)
+                weaponsEditWindow = CreateSubWindow("weaponsEditWindow", "Bok Edit - Weapons", 200, 100);
+                weaponsEditWindow.FormClosing += new FormClosingEventHandler(delegate (object sender, FormClosingEventArgs e)
                 {
-                    this.weaponsEditorOpened = false;
-                    this.weaponsEditWindow.Controls.Clear();
+                    weaponsEditorOpened = false;
+                    weaponsEditWindow.Controls.Clear();
                 });
 
-                this.weaponsEditWindow.Show();
-                this.weaponsEditorOpened = true;
+                weaponsEditWindow.Show();
+                weaponsEditorOpened = true;
             }
         }
 
         protected void OpenMagicsEditor(object sender, EventArgs e)
         {
-            if (this.magicsEditorOpened == false)
+            if (magicsEditorOpened == false)
             {
 
                 // Create subwindow & add on close event
-                this.magicsEditWindow = CreateSubWindow("magicsEditWindow", "Bok Edit - Magics", 200, 100);
-                this.magicsEditWindow.FormClosing += new FormClosingEventHandler(delegate (object sender, FormClosingEventArgs e)
+                magicsEditWindow = CreateSubWindow("magicsEditWindow", "Bok Edit - Magics", 200, 100);
+                magicsEditWindow.FormClosing += new FormClosingEventHandler(delegate (object sender, FormClosingEventArgs e)
                 {
-                    this.magicsEditorOpened = false;
-                    this.magicsEditWindow.Controls.Clear();
+                    magicsEditorOpened = false;
+                    magicsEditWindow.Controls.Clear();
                 });
 
-                this.magicsEditWindow.Show();
-                this.magicsEditorOpened = true;
+                magicsEditWindow.Show();
+                magicsEditorOpened = true;
             }
         }
 
         protected void OpenMiscToolsSelector(object sender, EventArgs e)
         {
-            if (this.miscToolsSelectorOpened == false)
+            if (miscToolsSelectorOpened == false)
             {
 
                 // Create subwindow & add on close event
-                this.miscToolsSelectionWindow = CreateSubWindow("miscToolsSelectWindow", "Bok Tools - Select", 200, 100);
-                this.miscToolsSelectionWindow.FormClosing += new FormClosingEventHandler(delegate (object sender, FormClosingEventArgs e)
+                miscToolsSelectionWindow = CreateSubWindow("miscToolsSelectWindow", "Bok Tools - Select", 200, 100);
+                miscToolsSelectionWindow.FormClosing += new FormClosingEventHandler(delegate (object sender, FormClosingEventArgs e)
                 {
-                    this.miscToolsSelectorOpened = false;
-                    this.miscToolsSelectionWindow.Controls.Clear();
+                    miscToolsSelectorOpened = false;
+                    miscToolsSelectionWindow.Controls.Clear();
                 });
 
                 // Add subwindow elements corresponding to the current game
@@ -189,8 +189,8 @@ namespace BokInterface
                         return;
                 }
 
-                this.miscToolsSelectionWindow.Show();
-                this.miscToolsSelectorOpened = true;
+                miscToolsSelectionWindow.Show();
+                miscToolsSelectorOpened = true;
             }
         }
 
