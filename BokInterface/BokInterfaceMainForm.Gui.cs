@@ -10,8 +10,8 @@ namespace BokInterface {
         
         #region GUI related code
 
-        protected int screenWidth;
-        protected int screenHeight;
+        public static int gbaScreenWidth = 0xF0;
+        public static int gbaScreenHeight = 0xA0;
 
         /// <summary>Shows the indicator for the Bok Interface</summary>
         private void ShowInterfaceIndicator() {

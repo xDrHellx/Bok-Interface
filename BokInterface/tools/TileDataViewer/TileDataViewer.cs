@@ -18,7 +18,7 @@ namespace BokInterface.Tools.TileDataViewer {
         public int index = 0;
         protected string currentGame = "";
         protected uint scale = 16;
-        protected uint alpha = 0xa0;
+        protected uint alpha = 0xA0;
         protected int textY = 0;
         protected static int imgNb = 1;
         protected static int n = 0;
@@ -186,8 +186,8 @@ namespace BokInterface.Tools.TileDataViewer {
             for(int tileY = 0; tileY < tileHeight -1; tileY++) {
                 for(int tileX = 0; tileX < tileWidth -1; tileX++) {
 
-                    uint tile = APIs.Memory.ReadU32(mapData + 0xc + (tileY * tileWidth + tileX) * 4);
-                    uint value = tile & 0xff;
+                    uint tile = APIs.Memory.ReadU32(mapData + 0xC + (tileY * tileWidth + tileX) * 4);
+                    uint value = tile & 0xFF;
 
                     Color tileColor = this.colorPalette[(int)value + 1];
                     this.DrawFilledRectangle(
@@ -199,10 +199,10 @@ namespace BokInterface.Tools.TileDataViewer {
                     );
 
                     // Draw the tile's effect if it has any
-                    this.DrawTileEffect(e, (tile & 0xffff0000) >> 16, tileX, tileY, (int)scale);
+                    this.DrawTileEffect(e, (tile & 0xFFFF0000) >> 16, tileX, tileY, (int)scale);
 
                     // Draw the stairs icon if stairs are present on the tile
-                    this.DrawStairsIcon(e, (tile & 0xf0) >> 4, tileX, tileY, (int)scale);
+                    this.DrawStairsIcon(e, (tile & 0xF0) >> 4, tileX, tileY, (int)scale);
                 }
             }
 
@@ -366,11 +366,11 @@ namespace BokInterface.Tools.TileDataViewer {
             uint seed = 0x803049d;
 
             for(int i = 0; i < 255; i++) {
-                seed = (seed * 0x41c64e6d + 12345) & 0xffffffff;
+                seed = (seed * 0x41C64E6D + 12345) & 0xFFFFFFFF;
                 
-                uint r = (seed >> 8) & 0x1f;
-                uint g = (seed >> 13) & 0x1f;
-                uint b = (seed >> 18) & 0x1f;
+                uint r = (seed >> 8) & 0x1F;
+                uint g = (seed >> 13) & 0x1F;
+                uint b = (seed >> 18) & 0x1F;
 
                 // Generate color & convert to System.Drawing.Color
                 uint color = (alpha << 24) | (r << 19) | (g << 11) | (b << 3);
@@ -398,8 +398,6 @@ namespace BokInterface.Tools.TileDataViewer {
 
                 uint actor = APIs.Memory.ReadU32(0x03004480 + groupIndex * 8);
                 uint enableFlags = APIs.Memory.ReadU32(0x03004480 + groupIndex * 8 + 4);
-
-                // this.WriteText(String.Format("Group {0} ({1} & {2} = {3})", groupIndex, enableFlags, globalEnable, enableFlags & globalEnable));
 
                 while(actor != 0){
                     // this.WriteText(String.Format(

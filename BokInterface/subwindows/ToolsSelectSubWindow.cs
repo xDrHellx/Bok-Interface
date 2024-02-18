@@ -68,7 +68,7 @@ namespace BokInterface {
 
                 this.tileDataViewerActive = true;
 
-                this.TileDataViewer = new("tileDateViewer", "Tile data viewer", 500, 500, this.shorterGameName, this.GetGameIconName(), this);
+                this.TileDataViewer = new("tileDateViewer", "Tile data viewer", 500, 500, BokInterfaceMainForm.shorterGameName, this.GetGameIconName(), this);
                 this.TileDataViewer.InitializeFrameLoop();
 
                 this.TileDataViewer.FormClosing += new FormClosingEventHandler(delegate(object sender, FormClosingEventArgs e) {

@@ -32,11 +32,15 @@ namespace BokInterface.Addresses {
         public BoktaiAddresses() {
 
             // Add Django addresses
-            Django.Add("x_position", 0x0203d8f0);
-            Django.Add("y_position", 0x0203d8f4);
-
+            Django.Add("x_position", 0x0203D8F0);
+            Django.Add("y_position", 0x0203D8F4);
+            Django.Add("z_position", 0x0203D8F2);
+            
             // Add Misc addresses
             Misc.Add("map_data", 0x03004610);
+            Misc.Add("x_camera", 0x030046E8);
+            Misc.Add("y_camera", 0x030046EA);
+            Misc.Add("z_camera", 0x030046EC);
         }
     }
 }

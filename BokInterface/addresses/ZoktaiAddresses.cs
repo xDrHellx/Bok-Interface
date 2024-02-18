@@ -37,7 +37,10 @@ namespace BokInterface.Addresses {
             Django.Add("z_position", 0x0203C432);
 
             // Add Misc addresses
-            Misc.Add("map_data", 0x030046a4);
+            Misc.Add("map_data", 0x030046A4);
+            Misc.Add("x_camera", 0x030047C8);
+            Misc.Add("y_camera", 0x030047CA);
+            Misc.Add("z_camera", 0x030047CC);
 
             // 0x203C650 django's current form
             /*

@@ -42,7 +42,7 @@ namespace BokInterface {
         }
 
 		private void UpdateZoktaiInterface() {
-			
+
 		}
 
 		private void AddZoktaiCurrentStatusSection() {
