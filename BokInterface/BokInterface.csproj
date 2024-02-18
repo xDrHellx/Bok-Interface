@@ -5,20 +5,20 @@
         <TargetFramework>net48</TargetFramework>
         <GenerateResourceUsePreserializedResources>true</GenerateResourceUsePreserializedResources>
     </PropertyGroup>
-    <PropertyGroup Condition=" '$(BIZHAWK_DIR)' == '' ">
-        <BIZHAWK_DIR>$(ProjectDir)../BizHawk</BIZHAWK_DIR>
+    <PropertyGroup Condition=" '$(GBAHAWK_DIR)' == '' ">
+        <GBAHAWK_DIR>$(ProjectDir)../GBAHawk</GBAHAWK_DIR>
     </PropertyGroup>
     <ItemGroup>
         <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.3" PrivateAssets="all" />
         <PackageReference Include="System.Resources.Extensions" Version="4.7.0" />
         <Reference Include="System.Windows.Forms" />
-        <Reference Include="BizHawk.Client.Common" HintPath="$(BIZHAWK_DIR)/dll/BizHawk.Client.Common.dll" />
-        <Reference Include="BizHawk.Client.EmuHawk" HintPath="$(BIZHAWK_DIR)/EmuHawk.exe" />
-        <Reference Include="BizHawk.Common" HintPath="$(BIZHAWK_DIR)/dll/BizHawk.Common.dll" />
-        <Reference Include="BizHawk.Emulation.Common" HintPath="$(BIZHAWK_DIR)/dll/BizHawk.Emulation.Common.dll" />
-        <Reference Include="BizHawk.WinForms.Controls" HintPath="$(BIZHAWK_DIR)/dll/BizHawk.WinForms.Controls.dll" />
+        <Reference Include="BizHawk.Client.Common" HintPath="$(GBAHAWK_DIR)/dll/BizHawk.Client.Common.dll" />
+        <Reference Include="BizHawk.Client.EmuHawk" HintPath="$(GBAHAWK_DIR)/GBAHawk.exe" />
+        <Reference Include="BizHawk.Common" HintPath="$(GBAHAWK_DIR)/dll/BizHawk.Common.dll" />
+        <Reference Include="BizHawk.Emulation.Common" HintPath="$(GBAHAWK_DIR)/dll/BizHawk.Emulation.Common.dll" />
+        <Reference Include="BizHawk.WinForms.Controls" HintPath="$(GBAHAWK_DIR)/dll/BizHawk.WinForms.Controls.dll" />
     </ItemGroup>
     <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-        <Copy SourceFiles="$(OutputPath)$(MSBuildProjectName).dll" DestinationFolder="$(BIZHAWK_DIR)/ExternalTools" />
+        <Copy SourceFiles="$(OutputPath)$(MSBuildProjectName).dll" DestinationFolder="$(ProjectDir)../GBAHawk/ExternalTools" />
     </Target>
 </Project>
