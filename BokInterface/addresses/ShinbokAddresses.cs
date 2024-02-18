@@ -96,10 +96,10 @@ namespace BokInterface.Addresses {
             // 02004094
             Misc.Add("room", 0x02000580);
             Misc.Add("stat", 0x02000710);
-            Misc.Add("map_data", 0x030052f4);
-            Misc.Add("x_camera", 0x030046e8);
-            Misc.Add("y_camera", 0x030046ea);
-            Misc.Add("z_camera", 0x030046ec);
+            Misc.Add("map_data", 0x030052F4);
+            Misc.Add("x_camera", 0x03005418);
+            Misc.Add("y_camera", 0x0300541A);
+            Misc.Add("z_camera", 0x0300541C);
         }
     }
 }

@@ -83,7 +83,7 @@ namespace BokInterface {
 				this.bok3_djangoBaseStr.Text = this.memoryValues.Django["base_str"].Value.ToString();
 
 				// Write on screen
-				new TextToWorldSpace("^ Django", APIs.Memory.ReadU16(this.shinbokAddresses.Django["x_position"]), APIs.Memory.ReadU16(this.shinbokAddresses.Django["y_position"]), APIs.Memory.ReadU16(this.boktaiAddresses.Django["z_position"]));
+				new TextToWorldSpace("^ Django", APIs.Memory.ReadU16(this.shinbokAddresses.Django["x_position"]), APIs.Memory.ReadU16(this.shinbokAddresses.Django["y_position"]), APIs.Memory.ReadU16(this.shinbokAddresses.Django["z_position"]));
 			}
 		}
 
