@@ -1,7 +1,7 @@
 ﻿using System;
 
 using BizHawk.Client.Common;
-using BizHawk.Client.EmuHawk;
+using BizHawk.Client.GBAHawk;
 
 namespace BokInterface.All {
 

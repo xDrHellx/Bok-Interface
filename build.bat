@@ -1,4 +1,4 @@
 cd BokInterface
 dotnet build
-cd ../BizHawk
-start EmuHawk.exe --open-ext-tool-dll=BokInterface
+cd ../GBAHawk
+start GBAHawk.exe --open-ext-tool-dll=BokInterface

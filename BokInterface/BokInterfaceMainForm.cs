@@ -1,5 +1,5 @@
 ﻿using BizHawk.Client.Common;
-using BizHawk.Client.EmuHawk;
+using BizHawk.Client.GBAHawk;
 using System;
 using System.Windows.Forms;
 using System.Drawing;
