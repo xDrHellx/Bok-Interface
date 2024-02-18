@@ -19,7 +19,7 @@ Bok Interface is made for BizHawk 2.9 and above but with [some adjustments](http
 ## Usage
 
 Download the latest release from the Assets section [here](https://github.com/xDrHellx/Bok-Interface/releases/latest) and extract it into your BizHawk folder.  
-You should now have an "ExternalTools" folder with a "BokInterface.dll" inside it.
+You should now have an "ExternalTools" folder with a "BokInterface.dll" file inside it.
 
 The Bok Interface should now be available in BizHawk under "Tools" > "External Tool" > "Bok Interface".
 
