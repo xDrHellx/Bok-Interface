@@ -1,6 +1,4 @@
 using BokInterface.Addresses;
-using BokInterface.All;
-using BokInterface.Tools.TextToWorldSpace;
 
 /**
  * File for the Shinbok (Boktai 3) interface itself
@@ -81,9 +79,6 @@ namespace BokInterface {
 				this.bok3_djangoBaseVit.Text = this.memoryValues.Django["base_vit"].Value.ToString();
 				this.bok3_djangoBaseSpr.Text = this.memoryValues.Django["base_spr"].Value.ToString();
 				this.bok3_djangoBaseStr.Text = this.memoryValues.Django["base_str"].Value.ToString();
-
-				// Write on screen
-				new TextToWorldSpace("^ Django", APIs.Memory.ReadU16(this.shinbokAddresses.Django["x_position"]), APIs.Memory.ReadU16(this.shinbokAddresses.Django["y_position"]), APIs.Memory.ReadU16(this.shinbokAddresses.Django["z_position"]));
 			}
 		}
 

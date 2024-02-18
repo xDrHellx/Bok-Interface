@@ -1,6 +1,4 @@
 using BokInterface.Addresses;
-using BokInterface.All;
-using BokInterface.Tools.TextToWorldSpace;
 
 /**
  * File for the Zoktai (Boktai 2) interface itself
@@ -44,10 +42,7 @@ namespace BokInterface {
         }
 
 		private void UpdateZoktaiInterface() {
-			
 
-			// Write on screen
-			new TextToWorldSpace("^ Django", APIs.Memory.ReadU16(this.zoktaiAddresses.Django["x_position"]), APIs.Memory.ReadU16(this.zoktaiAddresses.Django["y_position"]), APIs.Memory.ReadU16(this.zoktaiAddresses.Django["z_position"]));
 		}
 
 		private void AddZoktaiCurrentStatusSection() {

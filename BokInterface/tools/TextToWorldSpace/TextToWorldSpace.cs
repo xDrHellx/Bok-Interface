@@ -5,14 +5,14 @@ using BokInterface.All;
 namespace BokInterface.Tools.TextToWorldSpace {
     /// <summary>
     /// <para>Allows printing text and data to world space</para>
-    /// <para>Made by Raphi, converted from Lua to C# by Doc</para>
+    /// <para>Made by Raphi, Doc & Shenef</para>
     /// </summary>
     class TextToWorldSpace {
 
         #region Main properties
 
-        protected double planeScale = (double)0x30/0x100;
-        protected double heightScale = (double)0x18/0x100;
+        protected double planeScale = (double)0x30 / 0x100;
+        protected double heightScale = (double)0x18 / 0x100;
         protected Color textColor = new();
 
         #endregion
@@ -92,8 +92,8 @@ namespace BokInterface.Tools.TextToWorldSpace {
         protected (double, double, double) WorldToView(double x, double y, double z) {
 
             double scaledWorldZ = z * heightScale;
-            double worldX = x/2;
-            double worldY = y/2;
+            double worldX = x / 2;
+            double worldY = y / 2;
 
             double worldY2 = (worldX + worldY) * planeScale;
 
