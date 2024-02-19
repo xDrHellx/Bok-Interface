@@ -7,10 +7,8 @@ using BokInterface.Tools.TileDataViewer;
  * Main file for tools selection subwindows
  */
 
-namespace BokInterface
-{
-    partial class BokInterfaceMainForm
-    {
+namespace BokInterface {
+    partial class BokInterfaceMainForm {
 
         #region Properties
 
@@ -21,26 +19,22 @@ namespace BokInterface
 
         #region Subwindows methods for each game
 
-        private void BoktaiToolsSubwindow()
-        {
+        private void BoktaiToolsSubwindow() {
             AddToolsLabel();
             AddTileDataViewerBtn();
         }
 
-        private void ZoktaiToolsSubwindow()
-        {
+        private void ZoktaiToolsSubwindow() {
             AddToolsLabel();
             AddTileDataViewerBtn();
         }
 
-        private void ShinbokToolsSubwindow()
-        {
+        private void ShinbokToolsSubwindow() {
             AddToolsLabel();
             AddTileDataViewerBtn();
         }
 
-        private void LunarKnightsToolsSubwindow()
-        {
+        private void LunarKnightsToolsSubwindow() {
             // this.AddToolsLabel();
         }
 
@@ -53,8 +47,7 @@ namespace BokInterface
 		/// <param name="posY">Y position</param>
 		/// <param name="width">Width (in pixels)</param>
 		/// <param name="height">Height (in pixels)</param>
-        private void AddToolsLabel(int posX = 5, int posY = 5, int width = 176, int height = 15)
-        {
+        private void AddToolsLabel(int posX = 5, int posY = 5, int width = 176, int height = 15) {
             Label availableToolsLabel = CreateLabel("availableToolsLabel", "-- Tools available --", 5, 5, 176, 15);
             miscToolsSelectionWindow.Controls.Add(availableToolsLabel);
         }
@@ -64,16 +57,13 @@ namespace BokInterface
 		/// <param name="posY">Y position</param>
 		/// <param name="width">Width (in pixels)</param>
 		/// <param name="height">Height (in pixels)</param>
-        private void AddTileDataViewerBtn(int posX = 5, int posY = 23, int width = 176, int height = 23)
-        {
+        private void AddTileDataViewerBtn(int posX = 5, int posY = 23, int width = 176, int height = 23) {
 
             Button tileDataBtn = CreateButton("tileDataBtn", "Tile data", posX, posY, width, height);
-            tileDataBtn.Click += new EventHandler(delegate (object sender, EventArgs e)
-            {
+            tileDataBtn.Click += new EventHandler(delegate (object sender, EventArgs e) {
 
                 // If tool is already active, stop
-                if (tileDataViewerActive == true)
-                {
+                if (tileDataViewerActive == true) {
                     return;
                 }
 
@@ -82,8 +72,7 @@ namespace BokInterface
                 TileDataViewer = new("tileDateViewer", "Tile data viewer", 500, 500, shorterGameName, GetGameIconName(), this);
                 TileDataViewer.InitializeFrameLoop();
 
-                TileDataViewer.FormClosing += new FormClosingEventHandler(delegate (object sender, FormClosingEventArgs e)
-                {
+                TileDataViewer.FormClosing += new FormClosingEventHandler(delegate (object sender, FormClosingEventArgs e) {
 
                     tileDataViewerActive = false;
 

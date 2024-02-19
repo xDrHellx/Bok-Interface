@@ -3,12 +3,10 @@
 using BizHawk.Client.Common;
 using BizHawk.Client.EmuHawk;
 
-namespace BokInterface.All
-{
+namespace BokInterface.All {
 
     /// <summary>Main class for BizHawk APIs</summary>
-    public static class APIs
-    {
+    public static class APIs {
 
         // Hack-ish way to make these APIs available outside of the main tool form
         private static IMainFormForTools? mainFormForTools;
@@ -36,8 +34,7 @@ namespace BokInterface.All
 
         public static Config Config => ((EmulationApi)Emulation).ForbiddenConfigReference;
 
-        internal static void Update(ApiContainer container)
-        {
+        internal static void Update(ApiContainer container) {
 
             apiContainer = container;
             Fill(out clientApi);
@@ -47,31 +44,24 @@ namespace BokInterface.All
             Fill(out memoryApi);
             Fill(out guiApi);
 
-            void Fill<T>(out T? field) where T : class, IExternalApi
-            {
-                if (apiContainer.Libraries.TryGetValue(typeof(T), out var api))
-                {
+            void Fill<T>(out T? field) where T : class, IExternalApi {
+                if (apiContainer.Libraries.TryGetValue(typeof(T), out var api)) {
                     field = api as T;
-                }
-                else
-                {
+                } else {
                     field = null;
                 }
             }
         }
 
-        internal static void Update(IMainFormForTools mainForm)
-        {
+        internal static void Update(IMainFormForTools mainForm) {
             mainFormForTools = mainForm;
         }
 
-        private static T Require<T>(T? value) where T : class
-        {
+        private static T Require<T>(T? value) where T : class {
             return value ?? throw new InvalidOperationException($"{typeof(T).Name} is not available. Accessed before tool has been initialized?");
         }
 
-        public static bool LoadRom(string path)
-        {
+        public static bool LoadRom(string path) {
 
             // Copy what the OpenRom API does because `IEmuClientApi.OpenRom` does not return the success bool
             // https://github.com/TASVideos/BizHawk/blob/b8f5050d6c426ba81ec1b1e1265b9b6cb9a40d3a/src/BizHawk.Client.Common/Api/Classes/EmuClientApi.cs#L141

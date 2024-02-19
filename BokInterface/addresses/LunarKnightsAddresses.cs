@@ -1,11 +1,9 @@
 using System.Collections.Generic;
 
-namespace BokInterface.Addresses
-{
+namespace BokInterface.Addresses {
 
     /// <summary>Main class for Boktai DS / Lunar Knights memory addresses</summary>
-    public class LunarKnightsAddresses
-    {
+    public class LunarKnightsAddresses {
 
         /// <summary>
         /// <para>Aaron-related memory addresses</para>
@@ -31,8 +29,7 @@ namespace BokInterface.Addresses
         /// </summary>
         public IDictionary<string, uint> Misc = new Dictionary<string, uint>();
 
-        public LunarKnightsAddresses()
-        {
+        public LunarKnightsAddresses() {
 
         }
     }

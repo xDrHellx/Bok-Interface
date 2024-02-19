@@ -5,10 +5,8 @@ using System.Windows.Forms;
  * Main file for subwindows
  */
 
-namespace BokInterface
-{
-    partial class BokInterfaceMainForm
-    {
+namespace BokInterface {
+    partial class BokInterfaceMainForm {
 
         #region Properties indicating if subwindows are opened or not
 
@@ -23,15 +21,12 @@ namespace BokInterface
         #endregion
 
         #region Subwindows generation methods
-        protected void OpenStatusEditor(object sender, EventArgs e)
-        {
-            if (statusEditorOpened == false)
-            {
+        protected void OpenStatusEditor(object sender, EventArgs e) {
+            if (statusEditorOpened == false) {
 
                 // Create subwindow & add on close event
                 statusEditWindow = CreateSubWindow("statusEditWindow", "Bok Edit - Status", 203, 144);
-                statusEditWindow.FormClosing += new FormClosingEventHandler(delegate (object sender, FormClosingEventArgs e)
-                {
+                statusEditWindow.FormClosing += new FormClosingEventHandler(delegate (object sender, FormClosingEventArgs e) {
                     statusEditorOpened = false;
                     statusEditWindow.Controls.Clear();
                 });
@@ -40,8 +35,7 @@ namespace BokInterface
                 ClearStatusEditControls();
 
                 // Add subwindow elements corresponding to the current game
-                switch (shorterGameName)
-                {
+                switch (shorterGameName) {
                     case "Boktai":
                         BoktaiStatusEditSubwindow();
                         break;
@@ -66,15 +60,12 @@ namespace BokInterface
             }
         }
 
-        protected void OpenInventoryEditor(object sender, EventArgs e)
-        {
-            if (inventoryEditorOpened == false)
-            {
+        protected void OpenInventoryEditor(object sender, EventArgs e) {
+            if (inventoryEditorOpened == false) {
 
                 // Create subwindow & add on close event
                 inventoryEditWindow = CreateSubWindow("inventoryEditWindow", "Bok Edit - Inventory", 200, 100);
-                inventoryEditWindow.FormClosing += new FormClosingEventHandler(delegate (object sender, FormClosingEventArgs e)
-                {
+                inventoryEditWindow.FormClosing += new FormClosingEventHandler(delegate (object sender, FormClosingEventArgs e) {
                     inventoryEditorOpened = false;
                     inventoryEditWindow.Controls.Clear();
                 });
@@ -84,15 +75,12 @@ namespace BokInterface
             }
         }
 
-        protected void OpenEquipsEditor(object sender, EventArgs e)
-        {
-            if (equipsEditorOpened == false)
-            {
+        protected void OpenEquipsEditor(object sender, EventArgs e) {
+            if (equipsEditorOpened == false) {
 
                 // Create subwindow & add on close event
                 equipsEditWindow = CreateSubWindow("equipsEditWindow", "Bok Edit - Equips", 200, 100);
-                equipsEditWindow.FormClosing += new FormClosingEventHandler(delegate (object sender, FormClosingEventArgs e)
-                {
+                equipsEditWindow.FormClosing += new FormClosingEventHandler(delegate (object sender, FormClosingEventArgs e) {
                     equipsEditorOpened = false;
                     equipsEditWindow.Controls.Clear();
                 });
@@ -102,15 +90,12 @@ namespace BokInterface
             }
         }
 
-        protected void OpenSolarGunEditor(object sender, EventArgs e)
-        {
-            if (solarGunEditorOpened == false)
-            {
+        protected void OpenSolarGunEditor(object sender, EventArgs e) {
+            if (solarGunEditorOpened == false) {
 
                 // Create subwindow & add on close event
                 solarGunEditWindow = CreateSubWindow("solarGunEditWindow", "Bok Edit - Solar Gun", 200, 100);
-                solarGunEditWindow.FormClosing += new FormClosingEventHandler(delegate (object sender, FormClosingEventArgs e)
-                {
+                solarGunEditWindow.FormClosing += new FormClosingEventHandler(delegate (object sender, FormClosingEventArgs e) {
                     solarGunEditorOpened = false;
                     solarGunEditWindow.Controls.Clear();
                 });
@@ -120,15 +105,12 @@ namespace BokInterface
             }
         }
 
-        protected void OpenWeaponsEditor(object sender, EventArgs e)
-        {
-            if (weaponsEditorOpened == false)
-            {
+        protected void OpenWeaponsEditor(object sender, EventArgs e) {
+            if (weaponsEditorOpened == false) {
 
                 // Create subwindow & add on close event
                 weaponsEditWindow = CreateSubWindow("weaponsEditWindow", "Bok Edit - Weapons", 200, 100);
-                weaponsEditWindow.FormClosing += new FormClosingEventHandler(delegate (object sender, FormClosingEventArgs e)
-                {
+                weaponsEditWindow.FormClosing += new FormClosingEventHandler(delegate (object sender, FormClosingEventArgs e) {
                     weaponsEditorOpened = false;
                     weaponsEditWindow.Controls.Clear();
                 });
@@ -138,15 +120,12 @@ namespace BokInterface
             }
         }
 
-        protected void OpenMagicsEditor(object sender, EventArgs e)
-        {
-            if (magicsEditorOpened == false)
-            {
+        protected void OpenMagicsEditor(object sender, EventArgs e) {
+            if (magicsEditorOpened == false) {
 
                 // Create subwindow & add on close event
                 magicsEditWindow = CreateSubWindow("magicsEditWindow", "Bok Edit - Magics", 200, 100);
-                magicsEditWindow.FormClosing += new FormClosingEventHandler(delegate (object sender, FormClosingEventArgs e)
-                {
+                magicsEditWindow.FormClosing += new FormClosingEventHandler(delegate (object sender, FormClosingEventArgs e) {
                     magicsEditorOpened = false;
                     magicsEditWindow.Controls.Clear();
                 });
@@ -156,22 +135,18 @@ namespace BokInterface
             }
         }
 
-        protected void OpenMiscToolsSelector(object sender, EventArgs e)
-        {
-            if (miscToolsSelectorOpened == false)
-            {
+        protected void OpenMiscToolsSelector(object sender, EventArgs e) {
+            if (miscToolsSelectorOpened == false) {
 
                 // Create subwindow & add on close event
                 miscToolsSelectionWindow = CreateSubWindow("miscToolsSelectWindow", "Bok Tools - Select", 200, 100);
-                miscToolsSelectionWindow.FormClosing += new FormClosingEventHandler(delegate (object sender, FormClosingEventArgs e)
-                {
+                miscToolsSelectionWindow.FormClosing += new FormClosingEventHandler(delegate (object sender, FormClosingEventArgs e) {
                     miscToolsSelectorOpened = false;
                     miscToolsSelectionWindow.Controls.Clear();
                 });
 
                 // Add subwindow elements corresponding to the current game
-                switch (shorterGameName)
-                {
+                switch (shorterGameName) {
                     case "Boktai":
                         BoktaiToolsSubwindow();
                         break;

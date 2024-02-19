@@ -6,10 +6,8 @@ using BokInterface.All;
  * File for handling Zoktai-specific values
  */
 
-namespace BokInterface.Tools.TileDataViewer
-{
-    partial class TileDataViewer : Form
-    {
+namespace BokInterface.Tools.TileDataViewer {
+    partial class TileDataViewer : Form {
 
         /// <summary>Draws tile effect icons for Zoktai</summary>
         /// <param name="e">Painting event used for drawing</param>
@@ -17,12 +15,10 @@ namespace BokInterface.Tools.TileDataViewer
         /// <param name="posX">X position of the tile</param>
         /// <param name="posY">Y position of the tile</param>
         /// <param name="scale">Scale (used for drawing)</param>
-        protected void DrawZoktaiTileEffect(PaintEventArgs e, uint tileEffect, int posX, int posY, int scale)
-        {
+        protected void DrawZoktaiTileEffect(PaintEventArgs e, uint tileEffect, int posX, int posY, int scale) {
 
             // Only handle values between a certain range (4096 = 1000 in hexadecimal)
-            if (tileEffect > 0 && tileEffect < 4096)
-            {
+            if (tileEffect > 0 && tileEffect < 4096) {
 
                 /**
                  * Get the hexadecimal value of the tile effect
@@ -31,8 +27,7 @@ namespace BokInterface.Tools.TileDataViewer
                 string hex = Utilities.IntToHex(tileEffect);
 
                 // Handle the tile effect
-                switch (hex)
-                {
+                switch (hex) {
                     case "2":                   /// ??? (sometimes on stairs going downard, walkable areas or walls)
                         break;
                     case "3":                   /// Wall

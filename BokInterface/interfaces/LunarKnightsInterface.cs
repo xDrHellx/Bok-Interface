@@ -4,11 +4,9 @@ using BokInterface.Addresses;
  * File for the Boktai DS / Lunar Knights interface itself
  */
 
-namespace BokInterface
-{
+namespace BokInterface {
 
-    partial class BokInterfaceMainForm
-    {
+    partial class BokInterfaceMainForm {
 
         #region Properties
 
@@ -16,8 +14,7 @@ namespace BokInterface
 
         #endregion
 
-        private void ShowLunarKnightsInterface()
-        {
+        private void ShowLunarKnightsInterface() {
 
             // Current game name
             CreateLabel("currentGameName", currentGameName, 5, 5, 141, 20, true);
@@ -34,13 +31,11 @@ namespace BokInterface
             ResumeLayout(false);
         }
 
-        private void UpdateLunarKnightsInterface()
-        {
+        private void UpdateLunarKnightsInterface() {
 
         }
 
-        private void AddLunarKnightsCurrentStatusSection()
-        {
+        private void AddLunarKnightsCurrentStatusSection() {
 
             // Section
             currentStatusGroupBox = CreateGroupBox("currentStatus", "Current status", 5, 25, 226, 70, true);

@@ -5,13 +5,10 @@ using System.Collections.Generic;
  * File for Shinbok's status edit subwindow
  */
 
-namespace BokInterface
-{
-    partial class BokInterfaceMainForm
-    {
+namespace BokInterface {
+    partial class BokInterfaceMainForm {
 
-        private void ShinbokStatusEditSubwindow()
-        {
+        private void ShinbokStatusEditSubwindow() {
 
             int l = 0;
             int n = 0;
@@ -33,14 +30,12 @@ namespace BokInterface
             // this.edit_statusNumericUpDowns.Add(this.CreateNumericUpDown("django_current_trc", defaultValues["django_current_trc"], 47, 74, 50, 23, 1, 1000));
 
             // Add elements to group boxes / sections
-            for (int i = 0; i < edit_statusLabels.Count; i++)
-            {
+            for (int i = 0; i < edit_statusLabels.Count; i++) {
                 l++;
                 edit_statusGroupBox.Controls.Add(edit_statusLabels[i]);
             }
 
-            for (int i = 0; i < edit_statusNumericUpDowns.Count; i++)
-            {
+            for (int i = 0; i < edit_statusNumericUpDowns.Count; i++) {
                 n++;
                 edit_statusGroupBox.Controls.Add(edit_statusNumericUpDowns[i]);
             }
@@ -62,20 +57,17 @@ namespace BokInterface
             };
 
             // Add tooltips to labels group
-            for (int i = 0; i < warningLabels.Count; i++)
-            {
+            for (int i = 0; i < warningLabels.Count; i++) {
                 edit_statusLabels.Add(warningLabels[i]);
             }
 
             // Add elements to group
-            for (int i = l; i < edit_statusLabels.Count; i++)
-            {
+            for (int i = l; i < edit_statusLabels.Count; i++) {
                 l++;
                 edit_statsGroupBox.Controls.Add(edit_statusLabels[i]);
             }
 
-            for (int i = n; i < edit_statusNumericUpDowns.Count; i++)
-            {
+            for (int i = n; i < edit_statusNumericUpDowns.Count; i++) {
                 n++;
                 edit_statsGroupBox.Controls.Add(edit_statusNumericUpDowns[i]);
             }
@@ -86,11 +78,9 @@ namespace BokInterface
 
             // Button for setting values & its events
             System.Windows.Forms.Button setValuesButton = CreateButton("setStatusButton", "Set values", 123, 116, 75, 23);
-            setValuesButton.Click += new EventHandler(delegate (object sender, EventArgs e)
-            {
+            setValuesButton.Click += new EventHandler(delegate (object sender, EventArgs e) {
                 // Write the values for 10 frames
-                for (int i = 0; i < 10; i++)
-                {
+                for (int i = 0; i < 10; i++) {
                     SetStatusValues();
                 }
             });
@@ -105,22 +95,18 @@ namespace BokInterface
 
         /// <summary>Get default values for Shinbok</summary>
         /// <returns><c>IDictionary<string, uint></c>Default values</returns>
-        private IDictionary<string, uint> GetShinbokDefaultValues()
-        {
+        private IDictionary<string, uint> GetShinbokDefaultValues() {
 
             IDictionary<string, uint> defaultValues = new Dictionary<string, uint>();
             uint djangoCurrentHp = memoryValues.Django["current_hp"].Value;
 
             // If HP value is valid, get the other in-game values
-            if (djangoCurrentHp >= 0 && djangoCurrentHp <= 1000)
-            {
+            if (djangoCurrentHp >= 0 && djangoCurrentHp <= 1000) {
                 defaultValues.Add("django_current_hp", djangoCurrentHp);
                 defaultValues.Add("django_base_vit", memoryValues.Django["base_vit"].Value);
                 defaultValues.Add("django_base_spr", memoryValues.Django["base_spr"].Value);
                 defaultValues.Add("django_base_str", memoryValues.Django["base_str"].Value);
-            }
-            else
-            {
+            } else {
                 // If HP is unvalid (for example if we are on the title screen or in bike races), use specific values
                 defaultValues.Add("django_current_hp", 100);
                 // defaultValues.Add("django_current_ene", 100);

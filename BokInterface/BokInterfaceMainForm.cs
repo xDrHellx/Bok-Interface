@@ -11,13 +11,11 @@ using BokInterface.All;
  * File for the main / initialization part of the Bok interface
  */
 
-namespace BokInterface
-{
+namespace BokInterface {
 
     /// <summary>Main class for the Bok Interface</summary>
     [ExternalTool("Bok Interface")]
-    public partial class BokInterfaceMainForm : ToolFormBase, IExternalToolForm
-    {
+    public partial class BokInterfaceMainForm : ToolFormBase, IExternalToolForm {
 
         #region Variables
 
@@ -42,8 +40,7 @@ namespace BokInterface
         /// <summary>List of functions to call each frame</summary>
         public static List<Action> functionsList = new();
 
-        public ApiContainer ApiContainer
-        {
+        public ApiContainer ApiContainer {
             get => APIs.ApiContainer;
             set => APIs.Update(value);
         }
@@ -52,16 +49,14 @@ namespace BokInterface
 
         #region Main methods
 
-        public BokInterfaceMainForm()
-        {
+        public BokInterfaceMainForm() {
 
             // Try initializing the interface
             InitializeInterface();
         }
 
         /// <summary>Executed once after the constructor, and again every time a rom is loaded or reloaded</summary>
-        public override void Restart()
-        {
+        public override void Restart() {
 
             // Update the APIs, as some of them might not be available if a game is not loaded
             APIs.Update(MainForm);
@@ -78,8 +73,7 @@ namespace BokInterface
         }
 
         /// <summary>Method used for initializing the interface</summary>
-        protected void InitializeInterface()
-        {
+        protected void InitializeInterface() {
 
             // Reset variables used for initializing
             supportedGame = false;
@@ -89,51 +83,41 @@ namespace BokInterface
 			 * We use a try - catch to prevent the tool from returning an error when no ROM is loaded
 			 * When no ROM is loaded, memory domains aren't accessible
 			 */
-            try
-            {
+            try {
 
                 // Get the current setting for displaying messages
                 previousDisplayMessagesSetting = APIs.Config.DisplayMessages;
 
                 // Get & set the infos about the game currently running on BizHawk
                 DetectCurrentGame();
-                if (interfaceActivated == true)
-                {
+                if (interfaceActivated == true) {
                     ShowInterfaceIndicator();
-                }
-                else
-                {
+                } else {
                     /**
 					 * Retry getting the game code
 					 * For DS games, because of the DS bootup screen, the game code is not always accessible after switching games
 					 *
 					 * 10 frames should be enough for this
 					 */
-                    if (retryCount < 10)
-                    {
+                    if (retryCount < 10) {
                         retryCount++;
                         DetectCurrentGame();
                     }
                 }
-            }
-            catch { }
+            } catch { }
 
             InitializeComponent();
         }
 
         /// <summary>Executed after every frame (except while turboing, use FastUpdateAfter for that)</summary>
-        protected override void UpdateAfter()
-        {
+        protected override void UpdateAfter() {
 
-            try
-            {
-                if (supportedGame == true)
-                {
+            try {
+                if (supportedGame == true) {
                     ShowInterfaceIndicator();
 
                     // If the interface is not activated, reinitialize it
-                    if (interfaceActivated == false)
-                    {
+                    if (interfaceActivated == false) {
                         InitializeComponent();
                     }
 
@@ -141,8 +125,7 @@ namespace BokInterface
                     APIs.Client.DisplayMessages(true);
 
                     // Run the corresponding method to update values in the interface
-                    switch (shorterGameName)
-                    {
+                    switch (shorterGameName) {
                         case "Boktai":
                             UpdateBoktaiInterface();
                             break;
@@ -167,18 +150,14 @@ namespace BokInterface
 					 * Otherwise the emulator can crash if we try reading values from memory addresses,
 					 * most likely because it reads "garbage" data
 					 */
-                    if (APIs.Emulation.FrameCount() >= 400)
-                    {
+                    if (APIs.Emulation.FrameCount() >= 400) {
 
                         // Loop on the list of functions to call each frame
-                        foreach (Action function in functionsList)
-                        {
+                        foreach (Action function in functionsList) {
                             function();
                         }
                     }
-                }
-                else
-                {
+                } else {
 
                     /**
 					 * Retry getting the game code
@@ -186,35 +165,30 @@ namespace BokInterface
 					 *
 					 * 10 frames should be enough for this
 					 */
-                    if (retryCount < 10)
-                    {
+                    if (retryCount < 10) {
                         retryCount++;
                         DetectCurrentGame();
                     }
                 }
-            }
-            catch { }
+            } catch { }
         }
 
         /// <summary>
         /// Detects the current game <br/>
         /// This stores the game's ID in currentGameId and its name in currentGameName
         /// </summary>
-        protected void DetectCurrentGame()
-        {
+        protected void DetectCurrentGame() {
 
             /**
 			 * Try getting the game code
 			 * If the game code is 0 or 4267703902, it's most likely not a GBA game & we need to try different memory addresses
 			 */
             currentGameId = Utilities.GetGbaGameCode();
-            if (new string[] { "4267703902", "0" }.Contains(currentGameId.ToString()) == true)
-            {
+            if (new string[] { "4267703902", "0" }.Contains(currentGameId.ToString()) == true) {
                 currentGameId = Utilities.GetDsGameCode();
             }
 
-            switch (currentGameId)
-            {
+            switch (currentGameId) {
                 case 1346974549:    // EU
                 case 1162425173:    // US
                 case 1246311253:    // JP
@@ -260,8 +234,7 @@ namespace BokInterface
 
         protected void BokInterfaceMainForm_Load(object sender, EventArgs e) { }
 
-        protected void BokInterfaceMainForm_FormClosing(object sender, FormClosingEventArgs e)
-        {
+        protected void BokInterfaceMainForm_FormClosing(object sender, FormClosingEventArgs e) {
 
             // Put back the old setting for displaying messages
             APIs.Client.DisplayMessages(previousDisplayMessagesSetting);

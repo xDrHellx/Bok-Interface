@@ -2,12 +2,10 @@ using System.Collections.Generic;
 using BokInterface.All;
 using BokInterface.Addresses;
 
-namespace BokInterface
-{
+namespace BokInterface {
 
     /// <summary>Class containing instances of memory values for the current game</summary>
-    class MemoryValues
-    {
+    class MemoryValues {
 
         private readonly BoktaiAddresses boktaiAddresses = new();
         private readonly ZoktaiAddresses zoktaiAddresses = new();
@@ -28,13 +26,11 @@ namespace BokInterface
 
         /// <summary>Constructor</summary>
         /// <param name="shorterGameName">Shortened game name (used for setting the lists containing the memory values instances)</param>
-        public MemoryValues(string shorterGameName)
-        {
+        public MemoryValues(string shorterGameName) {
 
             ClearLists();
 
-            switch (shorterGameName)
-            {
+            switch (shorterGameName) {
                 case "Boktai":
                     InitializeBoktaiList();
                     break;
@@ -52,26 +48,22 @@ namespace BokInterface
             }
         }
 
-        private void ClearLists()
-        {
+        private void ClearLists() {
             Django.Clear();
             Solls.Clear();
             Bike.Clear();
             Misc.Clear();
         }
 
-        private void InitializeBoktaiList()
-        {
+        private void InitializeBoktaiList() {
 
         }
 
-        private void InitializeZoktaiList()
-        {
+        private void InitializeZoktaiList() {
 
         }
 
-        private void InitializeShinbokList()
-        {
+        private void InitializeShinbokList() {
 
             Django.Add("current_hp", new DynamicMemoryValue("current_hp", shinbokAddresses.Misc["room"], shinbokAddresses.Django["hp"]));
             Django.Add("base_vit", new DynamicMemoryValue("base_vit", shinbokAddresses.Misc["stat"], shinbokAddresses.Django["base_vit"]));
@@ -79,8 +71,7 @@ namespace BokInterface
             Django.Add("base_str", new DynamicMemoryValue("base_str", shinbokAddresses.Misc["stat"], shinbokAddresses.Django["base_str"]));
         }
 
-        private void InitializeLunarKnightsList()
-        {
+        private void InitializeLunarKnightsList() {
 
         }
     }

@@ -1,11 +1,9 @@
 using System.Collections.Generic;
 
-namespace BokInterface.Addresses
-{
+namespace BokInterface.Addresses {
 
     /// <summary>Main class for Boktai 3 / Shinbok memory addresses</summary>
-    public class ShinbokAddresses
-    {
+    public class ShinbokAddresses {
 
         /// <summary>
         /// <para>Django-related memory addresses</para>
@@ -39,8 +37,7 @@ namespace BokInterface.Addresses
         /// </summary>
         public IDictionary<string, uint> Misc = new Dictionary<string, uint>();
 
-        public ShinbokAddresses()
-        {
+        public ShinbokAddresses() {
 
             // Add Django addresses
             // Django.Add("ene", 0x03C42C);

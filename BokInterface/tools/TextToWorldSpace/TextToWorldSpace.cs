@@ -3,14 +3,12 @@ using System.Drawing;
 using BokInterface.Addresses;
 using BokInterface.All;
 
-namespace BokInterface.Tools.TextToWorldSpace
-{
+namespace BokInterface.Tools.TextToWorldSpace {
     /// <summary>
     /// <para>Allows printing text and data to world space</para>
     /// <para>Made by Raphi, Doc & Shenef</para>
     /// </summary>
-    class TextToWorldSpace
-    {
+    class TextToWorldSpace {
 
         #region Main properties
 
@@ -31,10 +29,8 @@ namespace BokInterface.Tools.TextToWorldSpace
 
         #endregion
 
-        public TextToWorldSpace(string text, double x, double y, double z, Color? textColor = null)
-        {
-            if (text == "")
-            {
+        public TextToWorldSpace(string text, double x, double y, double z, Color? textColor = null) {
+            if (text == "") {
                 return;
             }
 
@@ -49,10 +45,8 @@ namespace BokInterface.Tools.TextToWorldSpace
         /// <summary>Set camera memory addresses used for writing position</summary>
         /// <param name="gameName">Current game name</param>
         /// <returns><c>uint, uint, uint</c>Camera memory addresses (X, Y, Z)</returns>
-        private void SetCameraAddresses(string gameName)
-        {
-            switch (gameName)
-            {
+        private void SetCameraAddresses(string gameName) {
+            switch (gameName) {
                 case "Boktai":
                     cameraXposAddress = boktaiAddresses.Misc["x_camera"];
                     cameraYposAddress = boktaiAddresses.Misc["y_camera"];
@@ -80,8 +74,7 @@ namespace BokInterface.Tools.TextToWorldSpace
         /// <param name="x">X coordinate</param>
         /// <param name="y">Y coordinate</param>
         /// <param name="z">Z coordinate</param>
-        protected void WriteTextToCoordinates(string text, double x, double y, double z)
-        {
+        protected void WriteTextToCoordinates(string text, double x, double y, double z) {
 
             // Convert world to screen coordinates
             var screenCoordinates = WorldToScreen(x, y, z);
@@ -97,8 +90,7 @@ namespace BokInterface.Tools.TextToWorldSpace
         /// <param name="y">Y coordinate</param>
         /// <param name="z">Z coordinate</param>
         /// <returns><c>double, double, double</c>View coordinates(X, Y, Z)</returns>
-        protected (double, double, double) WorldToView(double x, double y, double z)
-        {
+        protected (double, double, double) WorldToView(double x, double y, double z) {
 
             double scaledWorldZ = z * heightScale;
             double worldX = x / 2;
@@ -118,8 +110,7 @@ namespace BokInterface.Tools.TextToWorldSpace
         /// <param name="y">Y coordinate</param>
         /// <param name="z">Z coordinate</param>
         /// <returns><c>int, int</c>Emulator screen points</returns>
-        protected (int, int) ViewToScreen(double x, double y)
-        {
+        protected (int, int) ViewToScreen(double x, double y) {
 
             // Get camera coordinates
             double camX = APIs.Memory.ReadS16(cameraXposAddress);
@@ -139,8 +130,7 @@ namespace BokInterface.Tools.TextToWorldSpace
         /// <param name="y">Y coordinate</param>
         /// <param name="z">Z coordinate</param>
         /// <returns><c>double, double</c>Screen coordinates (X, Y)</returns>
-        protected (double, double) WorldToScreen(double x, double y, double z)
-        {
+        protected (double, double) WorldToScreen(double x, double y, double z) {
             var viewCoordinates = WorldToView(x, y, z);
             return ViewToScreen(viewCoordinates.Item1, viewCoordinates.Item2);
         }

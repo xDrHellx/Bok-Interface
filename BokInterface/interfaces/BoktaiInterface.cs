@@ -4,11 +4,9 @@ using BokInterface.Addresses;
  * File for the Boktai TSiiYH interface itself
  */
 
-namespace BokInterface
-{
+namespace BokInterface {
 
-    partial class BokInterfaceMainForm
-    {
+    partial class BokInterfaceMainForm {
 
         #region Properties
 
@@ -19,8 +17,7 @@ namespace BokInterface
 
         #endregion
 
-        private void ShowBoktaiInterface()
-        {
+        private void ShowBoktaiInterface() {
 
             // Current game name
             CreateLabel("currentGameName", currentGameName, 5, 5, 171, 20, true);
@@ -37,13 +34,11 @@ namespace BokInterface
             ResumeLayout(false);
         }
 
-        private void UpdateBoktaiInterface()
-        {
+        private void UpdateBoktaiInterface() {
 
         }
 
-        private void AddBoktaiCurrentStatusSection()
-        {
+        private void AddBoktaiCurrentStatusSection() {
 
             // Section
             currentStatusGroupBox = CreateGroupBox("currentStatus", "Current status", 5, 25, 226, 70, true);
@@ -61,8 +56,7 @@ namespace BokInterface
             currentStatusLabels.Add(bok1_currentStatusEneValue);
 
             // Add elements to group
-            for (int i = 0; i < currentStatusLabels.Count; i++)
-            {
+            for (int i = 0; i < currentStatusLabels.Count; i++) {
                 currentStatusGroupBox.Controls.Add(currentStatusLabels[i]);
             }
         }

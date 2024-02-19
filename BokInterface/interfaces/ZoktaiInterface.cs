@@ -4,11 +4,9 @@ using BokInterface.Addresses;
  * File for the Zoktai (Boktai 2) interface itself
  */
 
-namespace BokInterface
-{
+namespace BokInterface {
 
-    partial class BokInterfaceMainForm
-    {
+    partial class BokInterfaceMainForm {
 
         #region Properties
 
@@ -23,8 +21,7 @@ namespace BokInterface
 
         #endregion
 
-        private void ShowZoktaiInterface()
-        {
+        private void ShowZoktaiInterface() {
 
             // Current game name
             CreateLabel("currentGameName", currentGameName, 5, 5, 145, 20, true);
@@ -44,13 +41,11 @@ namespace BokInterface
             ResumeLayout(false);
         }
 
-        private void UpdateZoktaiInterface()
-        {
+        private void UpdateZoktaiInterface() {
 
         }
 
-        private void AddZoktaiCurrentStatusSection()
-        {
+        private void AddZoktaiCurrentStatusSection() {
 
             // Section
             currentStatusGroupBox = CreateGroupBox("currentStatus", "Current status", 5, 25, 226, 55, true);
@@ -68,14 +63,12 @@ namespace BokInterface
             currentStatusLabels.Add(bok2_currentStatusEneValue);
 
             // Add elements to group
-            for (int i = 0; i < currentStatusLabels.Count; i++)
-            {
+            for (int i = 0; i < currentStatusLabels.Count; i++) {
                 currentStatusGroupBox.Controls.Add(currentStatusLabels[i]);
             }
         }
 
-        private void AddZoktaiCurrentStatsSection()
-        {
+        private void AddZoktaiCurrentStatsSection() {
 
             // Section
             currentStatsGroupBox = CreateGroupBox("currentStats", "Stats", 5, 86, 75, 90, true);
@@ -103,8 +96,7 @@ namespace BokInterface
             currentStatsLabels.Add(bok2_djangoBaseAgi);
 
             // Add elements to group
-            for (int i = 0; i < currentStatsLabels.Count; i++)
-            {
+            for (int i = 0; i < currentStatsLabels.Count; i++) {
                 currentStatsGroupBox.Controls.Add(currentStatsLabels[i]);
             }
         }

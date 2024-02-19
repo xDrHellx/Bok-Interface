@@ -4,11 +4,9 @@ using BokInterface.Addresses;
  * File for the Shinbok (Boktai 3) interface itself
  */
 
-namespace BokInterface
-{
+namespace BokInterface {
 
-    partial class BokInterfaceMainForm
-    {
+    partial class BokInterfaceMainForm {
 
         #region Properties
 
@@ -34,8 +32,7 @@ namespace BokInterface
 
         #endregion
 
-        private void ShowShinbokInterface()
-        {
+        private void ShowShinbokInterface() {
 
             // Current game name
             CreateLabel("currentGameName", currentGameName, 5, 5, 176, 20, true);
@@ -61,8 +58,7 @@ namespace BokInterface
             ResumeLayout(false);
         }
 
-        private void UpdateShinbokInterface()
-        {
+        private void UpdateShinbokInterface() {
 
             /**
 			 * Preparing memory addresses
@@ -78,8 +74,7 @@ namespace BokInterface
 			 * In some cases we only update when the value is "valid"
 			 * For example Django's current HP goes below 0 or above 1000 when switching rooms, during bike races or on world map
 			 */
-            if (djangoCurrentHp >= 0 && djangoCurrentHp <= 1000)
-            {
+            if (djangoCurrentHp >= 0 && djangoCurrentHp <= 1000) {
                 bok3_currentStatusHpValue.Text = djangoCurrentHp.ToString();
                 bok3_djangoBaseVit.Text = memoryValues.Django["base_vit"].Value.ToString();
                 bok3_djangoBaseSpr.Text = memoryValues.Django["base_spr"].Value.ToString();
@@ -87,8 +82,7 @@ namespace BokInterface
             }
         }
 
-        private void AddShinbokCurrentStatusSection()
-        {
+        private void AddShinbokCurrentStatusSection() {
 
             // Section
             currentStatusGroupBox = CreateGroupBox("currentStatus", "Current status", 5, 25, 226, 70, true);
@@ -109,14 +103,12 @@ namespace BokInterface
             currentStatusLabels.Add(bok3_currentStatusTrcValue);
 
             // Add elements to group
-            for (int i = 0; i < currentStatusLabels.Count; i++)
-            {
+            for (int i = 0; i < currentStatusLabels.Count; i++) {
                 currentStatusGroupBox.Controls.Add(currentStatusLabels[i]);
             }
         }
 
-        private void AddShinbokCurrentStatsSection()
-        {
+        private void AddShinbokCurrentStatsSection() {
 
             // Section
             currentStatsGroupBox = CreateGroupBox("currentStats", "Stats", 5, 101, 150, 90, true);
@@ -156,14 +148,12 @@ namespace BokInterface
             currentStatsLabels.Add(bok3_djangoTotalStr);
 
             // Add elements to group
-            for (int i = 0; i < currentStatsLabels.Count; i++)
-            {
+            for (int i = 0; i < currentStatsLabels.Count; i++) {
                 currentStatsGroupBox.Controls.Add(currentStatsLabels[i]);
             }
         }
 
-        private void AddShinbokEditSection()
-        {
+        private void AddShinbokEditSection() {
 
             // Section
             editGroupBox = CreateGroupBox("editButtons", "Edit", 237, 25, 87, 157, true);
@@ -194,8 +184,7 @@ namespace BokInterface
             editButtons.Add(bok3_editWeaponsBtn);
             editButtons.Add(bok3_editSolarGunBtn);
 
-            for (int i = 0; i < editButtons.Count; i++)
-            {
+            for (int i = 0; i < editButtons.Count; i++) {
                 editGroupBox.Controls.Add(editButtons[i]);
             }
         }
