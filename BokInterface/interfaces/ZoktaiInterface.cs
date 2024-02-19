@@ -1,3 +1,5 @@
+using System.Windows.Forms;
+
 using BokInterface.Addresses;
 
 /**
@@ -10,12 +12,12 @@ namespace BokInterface {
 
         #region Properties
 
-        private System.Windows.Forms.Label bok2_currentStatusHpValue = new();
-        private System.Windows.Forms.Label bok2_currentStatusEneValue = new();
-        private System.Windows.Forms.Label bok2_djangoBaseVit = new();
-        private System.Windows.Forms.Label bok2_djangoBaseSpr = new();
-        private System.Windows.Forms.Label bok2_djangoBaseStr = new();
-        private System.Windows.Forms.Label bok2_djangoBaseAgi = new();
+        private Label bok2_currentStatusHpValue = new();
+        private Label bok2_currentStatusEneValue = new();
+        private Label bok2_djangoBaseVit = new();
+        private Label bok2_djangoBaseSpr = new();
+        private Label bok2_djangoBaseStr = new();
+        private Label bok2_djangoBaseAgi = new();
 
         private readonly ZoktaiAddresses zoktaiAddresses = new();
 
@@ -75,19 +77,19 @@ namespace BokInterface {
 
             // VIT
             currentStatsLabels.Add(CreateLabel("vitRowLabel", "VIT", 6, 19, 27, 15));
-            bok2_djangoBaseVit = CreateLabel("djangoBaseVit", "", 35, 19, 31, 15, false, baseStatColor, new System.Windows.Forms.Padding(0), "MiddleRight");
+            bok2_djangoBaseVit = CreateLabel("djangoBaseVit", "", 35, 19, 31, 15, colorHex: baseStatColor, textAlignment: "MiddleRight");
 
             // SPR
             currentStatsLabels.Add(CreateLabel("sprRowLabel", "SPR", 6, 34, 27, 15));
-            bok2_djangoBaseSpr = CreateLabel("djangoBaseSpr", "", 35, 34, 31, 15, false, baseStatColor, new System.Windows.Forms.Padding(0), "MiddleRight");
+            bok2_djangoBaseSpr = CreateLabel("djangoBaseSpr", "", 35, 34, 31, 15, colorHex: baseStatColor, textAlignment: "MiddleRight");
 
             // STR
             currentStatsLabels.Add(CreateLabel("strRowLabel", "STR", 6, 49, 27, 15));
-            bok2_djangoBaseStr = CreateLabel("djangoBaseStr", "", 35, 49, 31, 15, false, baseStatColor, new System.Windows.Forms.Padding(0), "MiddleRight");
+            bok2_djangoBaseStr = CreateLabel("djangoBaseStr", "", 35, 49, 31, 15, colorHex: baseStatColor, textAlignment: "MiddleRight");
 
             // AGI
             currentStatsLabels.Add(CreateLabel("strRowLabel", "AGI", 6, 64, 27, 15));
-            bok2_djangoBaseAgi = CreateLabel("djangoBaseAgi", "", 35, 64, 31, 15, false, baseStatColor, new System.Windows.Forms.Padding(0), "MiddleRight");
+            bok2_djangoBaseAgi = CreateLabel("djangoBaseAgi", "", 35, 64, 31, 15, colorHex: baseStatColor, textAlignment: "MiddleRight");
 
             // Add values labels to group
             currentStatsLabels.Add(bok2_djangoBaseVit);

@@ -1,3 +1,5 @@
+using System.Windows.Forms;
+
 using BokInterface.Addresses;
 
 /**
@@ -10,23 +12,23 @@ namespace BokInterface {
 
         #region Properties
 
-        private System.Windows.Forms.Label bok3_currentStatusHpValue = new();
-        private System.Windows.Forms.Label bok3_currentStatusEneValue = new();
-        private System.Windows.Forms.Label bok3_currentStatusTrcValue = new();
-        private System.Windows.Forms.Label bok3_djangoBaseVit = new();
-        private System.Windows.Forms.Label bok3_djangoEquipsVit = new();
-        private System.Windows.Forms.Label bok3_djangoTotalVit = new();
-        private System.Windows.Forms.Label bok3_djangoBaseSpr = new();
-        private System.Windows.Forms.Label bok3_djangoEquipsSpr = new();
-        private System.Windows.Forms.Label bok3_djangoTotalSpr = new();
-        private System.Windows.Forms.Label bok3_djangoBaseStr = new();
-        private System.Windows.Forms.Label bok3_djangoEquipsStr = new();
-        private System.Windows.Forms.Label bok3_djangoTotalStr = new();
-        private System.Windows.Forms.Button bok3_editStatusBtn = new();
-        private System.Windows.Forms.Button bok3_editInventoryBtn = new();
-        private System.Windows.Forms.Button bok3_editEquipsBtn = new();
-        private System.Windows.Forms.Button bok3_editWeaponsBtn = new();
-        private System.Windows.Forms.Button bok3_editSolarGunBtn = new();
+        private Label bok3_currentStatusHpValue = new();
+        private Label bok3_currentStatusEneValue = new();
+        private Label bok3_currentStatusTrcValue = new();
+        private Label bok3_djangoBaseVit = new();
+        private Label bok3_djangoEquipsVit = new();
+        private Label bok3_djangoTotalVit = new();
+        private Label bok3_djangoBaseSpr = new();
+        private Label bok3_djangoEquipsSpr = new();
+        private Label bok3_djangoTotalSpr = new();
+        private Label bok3_djangoBaseStr = new();
+        private Label bok3_djangoEquipsStr = new();
+        private Label bok3_djangoTotalStr = new();
+        private Button bok3_editStatusBtn = new();
+        private Button bok3_editInventoryBtn = new();
+        private Button bok3_editEquipsBtn = new();
+        private Button bok3_editWeaponsBtn = new();
+        private Button bok3_editSolarGunBtn = new();
 
         private readonly ShinbokAddresses shinbokAddresses = new();
 
@@ -114,27 +116,27 @@ namespace BokInterface {
             currentStatsGroupBox = CreateGroupBox("currentStats", "Stats", 5, 101, 150, 90, true);
 
             // Column names
-            currentStatsLabels.Add(CreateLabel("baseStatColumnName", "Base", 35, 19, 31, 15, false, baseStatColor, new System.Windows.Forms.Padding(0)));
-            currentStatsLabels.Add(CreateLabel("equipsStatColumnName", "Equips", 66, 19, 42, 15, false, equipsStatColor, new System.Windows.Forms.Padding(0)));
-            currentStatsLabels.Add(CreateLabel("totalStatColumnName", "Total", 108, 19, 32, 15, false, totalStatColor, new System.Windows.Forms.Padding(0)));
+            currentStatsLabels.Add(CreateLabel("baseStatColumnName", "Base", 35, 19, 31, 15, colorHex: baseStatColor));
+            currentStatsLabels.Add(CreateLabel("equipsStatColumnName", "Equips", 66, 19, 42, 15, colorHex: equipsStatColor));
+            currentStatsLabels.Add(CreateLabel("totalStatColumnName", "Total", 108, 19, 32, 15, colorHex: totalStatColor));
 
             // VIT
             currentStatsLabels.Add(CreateLabel("vitRowLabel", "VIT", 6, 34, 27, 15));
-            bok3_djangoBaseVit = CreateLabel("djangoBaseVit", "", 35, 34, 31, 15, false, baseStatColor, new System.Windows.Forms.Padding(0), "MiddleRight");
-            bok3_djangoEquipsVit = CreateLabel("djangoEquipsVit", "", 66, 34, 42, 15, false, equipsStatColor, new System.Windows.Forms.Padding(0), "MiddleRight");
-            bok3_djangoTotalVit = CreateLabel("djangoTotalVit", "", 108, 34, 32, 15, false, totalStatColor, new System.Windows.Forms.Padding(0), "MiddleRight");
+            bok3_djangoBaseVit = CreateLabel("djangoBaseVit", "", 35, 34, 31, 15, colorHex: baseStatColor, textAlignment: "MiddleRight");
+            bok3_djangoEquipsVit = CreateLabel("djangoEquipsVit", "", 66, 34, 42, 15, colorHex: equipsStatColor, textAlignment: "MiddleRight");
+            bok3_djangoTotalVit = CreateLabel("djangoTotalVit", "", 108, 34, 32, 15, colorHex: totalStatColor, textAlignment: "MiddleRight");
 
             // SPR
             currentStatsLabels.Add(CreateLabel("sprRowLabel", "SPR", 6, 49, 27, 15));
-            bok3_djangoBaseSpr = CreateLabel("djangoBaseSpr", "", 35, 49, 31, 15, false, baseStatColor, new System.Windows.Forms.Padding(0), "MiddleRight");
-            bok3_djangoEquipsSpr = CreateLabel("djangoEquipsSpr", "", 66, 49, 42, 15, false, equipsStatColor, new System.Windows.Forms.Padding(0), "MiddleRight");
-            bok3_djangoTotalSpr = CreateLabel("djangoTotalSpr", "", 108, 49, 32, 15, false, totalStatColor, new System.Windows.Forms.Padding(0), "MiddleRight");
+            bok3_djangoBaseSpr = CreateLabel("djangoBaseSpr", "", 35, 49, 31, 15, colorHex: baseStatColor, textAlignment: "MiddleRight");
+            bok3_djangoEquipsSpr = CreateLabel("djangoEquipsSpr", "", 66, 49, 42, 15, colorHex: equipsStatColor, textAlignment: "MiddleRight");
+            bok3_djangoTotalSpr = CreateLabel("djangoTotalSpr", "", 108, 49, 32, 15, colorHex: totalStatColor, textAlignment: "MiddleRight");
 
             // STR
             currentStatsLabels.Add(CreateLabel("strRowLabel", "STR", 6, 64, 27, 15));
-            bok3_djangoBaseStr = CreateLabel("djangoBaseStr", "", 35, 64, 31, 15, false, baseStatColor, new System.Windows.Forms.Padding(0), "MiddleRight");
-            bok3_djangoEquipsStr = CreateLabel("djangoEquipsStr", "", 66, 64, 42, 15, false, equipsStatColor, new System.Windows.Forms.Padding(0), "MiddleRight");
-            bok3_djangoTotalStr = CreateLabel("djangoTotalStr", "", 108, 64, 32, 15, false, totalStatColor, new System.Windows.Forms.Padding(0), "MiddleRight");
+            bok3_djangoBaseStr = CreateLabel("djangoBaseStr", "", 35, 64, 31, 15, colorHex: baseStatColor, textAlignment: "MiddleRight");
+            bok3_djangoEquipsStr = CreateLabel("djangoEquipsStr", "", 66, 64, 42, 15, colorHex: equipsStatColor, textAlignment: "MiddleRight");
+            bok3_djangoTotalStr = CreateLabel("djangoTotalStr", "", 108, 64, 32, 15, colorHex: totalStatColor, textAlignment: "MiddleRight");
 
             // Add values labels to group
             currentStatsLabels.Add(bok3_djangoBaseVit);
