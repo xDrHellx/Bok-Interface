@@ -7,6 +7,7 @@ namespace BokInterface {
     /// <summary>Class containing instances of memory values for the current game</summary>
     class MemoryValues {
 
+        private readonly ZoktaiAddresses zoktaiAddresses = new();
         private readonly ShinbokAddresses shinbokAddresses = new();
 
         /// <summary>Django-related memory values</summary>
@@ -57,12 +58,20 @@ namespace BokInterface {
         }
 
         private void InitializeZoktaiList() {
+            Django.Add("current_hp", new DynamicMemoryValue("current_hp", zoktaiAddresses.Django["persistent_hp"], zoktaiAddresses.Django["current_hp"]));
+            Django.Add("current_ene", new DynamicMemoryValue("current_ene", zoktaiAddresses.Django["persistent_ene"], zoktaiAddresses.Django["current_ene"]));
 
+            // Stats
+            Django.Add("vit", new DynamicMemoryValue("vit", zoktaiAddresses.Django["vit"], zoktaiAddresses.Django["vit"]));
+            Django.Add("spr", new DynamicMemoryValue("spr", zoktaiAddresses.Django["spr"], zoktaiAddresses.Django["spr"]));
+            Django.Add("str", new DynamicMemoryValue("str", zoktaiAddresses.Django["str"], zoktaiAddresses.Django["str"]));
+            Django.Add("agi", new DynamicMemoryValue("agi", zoktaiAddresses.Django["agi"], zoktaiAddresses.Django["agi"]));
         }
 
         private void InitializeShinbokList() {
-
             Django.Add("current_hp", new DynamicMemoryValue("current_hp", shinbokAddresses.Misc["room"], shinbokAddresses.Django["hp"]));
+
+            // Stats
             Django.Add("base_vit", new DynamicMemoryValue("base_vit", shinbokAddresses.Misc["stat"], shinbokAddresses.Django["base_vit"]));
             Django.Add("base_spr", new DynamicMemoryValue("base_spr", shinbokAddresses.Misc["stat"], shinbokAddresses.Django["base_spr"]));
             Django.Add("base_str", new DynamicMemoryValue("base_str", shinbokAddresses.Misc["stat"], shinbokAddresses.Django["base_str"]));

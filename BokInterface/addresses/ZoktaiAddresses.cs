@@ -36,6 +36,36 @@ namespace BokInterface.Addresses {
             Django.Add("y_position", 0x0203C434);
             Django.Add("z_position", 0x0203C432);
 
+            /**
+             * Used for setting "current" values (which are used for damage calculations)
+             * These must be combined with their "persistent" counterpart
+             */
+            Django.Add("current_hp", 0x364);
+            Django.Add("current_ene", 0x368);
+            Django.Add("current_vit", 0x35b);
+            Django.Add("current_spr", 0x35e);
+            Django.Add("current_str", 0x360);
+            Django.Add("current_agi", 0x362);
+
+            /**
+             * "Persistent" values, these also correspond to the values from save data
+             * "current" values will be copied to these on screen transition
+             * 
+             * Note : for some stats, "current" is 1 higher than "persistent", unsure why
+             */
+            Django.Add("persistent_hp", 0x0203c428);
+            Django.Add("persistent_ene", 0x0203c42c);
+            Django.Add("persistent_vit", 0x0203c418);
+            Django.Add("persistent_spr", 0x0203c41a);
+            Django.Add("persistent_str", 0x0203c41c);
+            Django.Add("persistent_agi", 0x0203c41e);
+
+            Django.Add("sword_skill", 0x0203c446);
+            Django.Add("spear_skill", 0x0203c448);
+            Django.Add("hammer_skill", 0x0203c44a);
+            Django.Add("fists_skill", 0x0203c44c);
+            Django.Add("gun_skill", 0x0203c44e);
+
             // Add Misc addresses
             Misc.Add("map_data", 0x030046A4);
             Misc.Add("x_camera", 0x030047C8);
