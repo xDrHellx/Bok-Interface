@@ -1,4 +1,5 @@
 using System.Drawing;
+
 using BokInterface.Addresses;
 using BokInterface.All;
 
@@ -22,48 +23,47 @@ namespace BokInterface.Tools.TextToWorldSpace {
         private readonly BoktaiAddresses boktaiAddresses = new();
         private readonly ZoktaiAddresses zoktaiAddresses = new();
         private readonly ShinbokAddresses shinbokAddresses = new();
-        private readonly LunarKnightsAddresses lunarKnightsAddresses = new();
         private uint cameraXposAddress = 0;
         private uint cameraYposAddress = 0;
 
         #endregion
-        
+
         public TextToWorldSpace(string text, double x, double y, double z, Color? textColor = null) {
-            if(text == "") {
+            if (text == "") {
                 return;
             }
 
             // Set memory addresses used for getting the camera coordinates
-            this.SetCameraAddresses(BokInterfaceMainForm.shorterGameName);
+            SetCameraAddresses(BokInterfaceMainForm.shorterGameName);
 
             // Set text color & write to coordinates
             this.textColor = textColor == null ? Color.LimeGreen : (Color)textColor;
-            this.WriteTextToCoordinates(text, x, y, z);
+            WriteTextToCoordinates(text, x, y, z);
         }
 
         /// <summary>Set camera memory addresses used for writing position</summary>
         /// <param name="gameName">Current game name</param>
         /// <returns><c>uint, uint, uint</c>Camera memory addresses (X, Y, Z)</returns>
         private void SetCameraAddresses(string gameName) {
-            switch(gameName) {
+            switch (gameName) {
                 case "Boktai":
-                    this.cameraXposAddress = boktaiAddresses.Misc["x_camera"];
-                    this.cameraYposAddress = boktaiAddresses.Misc["y_camera"];
+                    cameraXposAddress = boktaiAddresses.Misc["x_camera"];
+                    cameraYposAddress = boktaiAddresses.Misc["y_camera"];
                     break;
                 case "Zoktai":
-                    this.cameraXposAddress = zoktaiAddresses.Misc["x_camera"];
-                    this.cameraYposAddress = zoktaiAddresses.Misc["y_camera"];
+                    cameraXposAddress = zoktaiAddresses.Misc["x_camera"];
+                    cameraYposAddress = zoktaiAddresses.Misc["y_camera"];
                     break;
                 case "Shinbok":
-                    this.cameraXposAddress = shinbokAddresses.Misc["x_camera"];
-                    this.cameraYposAddress = shinbokAddresses.Misc["y_camera"];
+                    cameraXposAddress = shinbokAddresses.Misc["x_camera"];
+                    cameraYposAddress = shinbokAddresses.Misc["y_camera"];
                     break;
                 case "LunarKnights":
                     // Current not handled, not enough data available
-                    this.cameraXposAddress = this.cameraYposAddress = 0;
+                    cameraXposAddress = cameraYposAddress = 0;
                     break;
                 default:
-                    this.cameraXposAddress = this.cameraYposAddress = 0;
+                    cameraXposAddress = cameraYposAddress = 0;
                     break;
             }
         }
@@ -76,12 +76,12 @@ namespace BokInterface.Tools.TextToWorldSpace {
         protected void WriteTextToCoordinates(string text, double x, double y, double z) {
 
             // Convert world to screen coordinates
-            var screenCoordinates = this.WorldToScreen(x, y, z);
+            var screenCoordinates = WorldToScreen(x, y, z);
             double posX = screenCoordinates.Item1;
             double posY = screenCoordinates.Item2;
-            
+
             // Print text on screen at screen coordinates
-            APIs.Gui.Text((int)posX, (int)posY, text, this.textColor);
+            APIs.Gui.Text((int)posX, (int)posY, text, textColor);
         }
 
         /// <summary>Convert world coordinates to view coordinates</summary>
@@ -112,9 +112,9 @@ namespace BokInterface.Tools.TextToWorldSpace {
         protected (int, int) ViewToScreen(double x, double y) {
 
             // Get camera coordinates
-            double camX = APIs.Memory.ReadS16(this.cameraXposAddress);
-            double camY = APIs.Memory.ReadS16(this.cameraYposAddress);
-            
+            double camX = APIs.Memory.ReadS16(cameraXposAddress);
+            double camY = APIs.Memory.ReadS16(cameraYposAddress);
+
             // Adjusts position
             x = x - camX + (BokInterfaceMainForm.gbaScreenWidth / 2);
             y = y - camY + (BokInterfaceMainForm.gbaScreenHeight / 2);
@@ -130,8 +130,8 @@ namespace BokInterface.Tools.TextToWorldSpace {
         /// <param name="z">Z coordinate</param>
         /// <returns><c>double, double</c>Screen coordinates (X, Y)</returns>
         protected (double, double) WorldToScreen(double x, double y, double z) {
-            var viewCoordinates = this.WorldToView(x, y, z);
-            return this.ViewToScreen(viewCoordinates.Item1, viewCoordinates.Item2);
+            var viewCoordinates = WorldToView(x, y, z);
+            return ViewToScreen(viewCoordinates.Item1, viewCoordinates.Item2);
         }
     }
 }

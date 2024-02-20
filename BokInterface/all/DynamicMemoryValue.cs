@@ -6,7 +6,7 @@ namespace BokInterface.All {
         public string name;
         private readonly uint firstAddress;
         private readonly uint secondAddress;
-        
+
         public uint Value {
             get => Utilities.ReadDynamicAddress(firstAddress, secondAddress);
             set => Utilities.WriteDynamicAddress(value, firstAddress, secondAddress);

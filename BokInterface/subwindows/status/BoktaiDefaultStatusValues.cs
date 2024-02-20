@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 
 /**
@@ -6,10 +5,10 @@ using System.Collections.Generic;
  */
 
 namespace BokInterface {
-	partial class BokInterfaceMainForm {
+    partial class BokInterfaceMainForm {
 
         private void BoktaiStatusEditSubwindow() {
-            
+
         }
 
         /// <summary>Get default values for Boktai</summary>

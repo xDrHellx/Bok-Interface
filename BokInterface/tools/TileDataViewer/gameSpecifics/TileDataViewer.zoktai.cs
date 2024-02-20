@@ -1,10 +1,10 @@
-using System.Drawing;
 using System.Windows.Forms;
+
 using BokInterface.All;
 
 /**
  * File for handling Zoktai-specific values
- */ 
+ */
 
 namespace BokInterface.Tools.TileDataViewer {
     partial class TileDataViewer : Form {
@@ -18,7 +18,7 @@ namespace BokInterface.Tools.TileDataViewer {
         protected void DrawZoktaiTileEffect(PaintEventArgs e, uint tileEffect, int posX, int posY, int scale) {
 
             // Only handle values between a certain range (4096 = 1000 in hexadecimal)
-            if(tileEffect > 0 && tileEffect < 4096) {
+            if (tileEffect > 0 && tileEffect < 4096) {
 
                 /**
                  * Get the hexadecimal value of the tile effect
@@ -27,7 +27,7 @@ namespace BokInterface.Tools.TileDataViewer {
                 string hex = Utilities.IntToHex(tileEffect);
 
                 // Handle the tile effect
-                switch(hex) {
+                switch (hex) {
                     case "2":                   /// ??? (sometimes on stairs going downard, walkable areas or walls)
                         break;
                     case "3":                   /// Wall
@@ -47,7 +47,7 @@ namespace BokInterface.Tools.TileDataViewer {
                     case "21":                  /// Torch (Duneyrr boss room in Cathedral)
                         break;
                     case "A":                   /// Exit / entry (inconsistent)
-                        this.DrawTileImage(e, "exit", 5 + posX * scale, 5 + posY * scale);
+                        DrawTileImage(e, "exit", 5 + posX * scale, 5 + posY * scale);
                         break;
                     case "B":                   /// ??? (2-heights wall in Aqueduct)
                         break;
@@ -64,7 +64,7 @@ namespace BokInterface.Tools.TileDataViewer {
                     case "43":                  /// Thin passage on void (Cathedral undergrounds)
                         break;
                     case "80":                  /// Noise tile (makes sound)
-                        this.DrawTileImage(e, "sound", 5 + posX * scale, 5 + posY * scale);
+                        DrawTileImage(e, "sound", 5 + posX * scale, 5 + posY * scale);
                         break;
                     case "400":                 /// Walkable area (Remains)
                         break;

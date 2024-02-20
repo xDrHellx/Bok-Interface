@@ -14,10 +14,10 @@ namespace BokInterface.Addresses {
         /// </para>
         /// </summary>
         public IDictionary<string, uint> Django = new Dictionary<string, uint>();
-        
+
         /// <summary>Solls-related memory addresses</summary>
         public IDictionary<string, uint> Solls = new Dictionary<string, uint>();
-        
+
         /// <summary>
         /// <para>Bike-related memory addresses</para>
         /// <para>

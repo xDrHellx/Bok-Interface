@@ -7,17 +7,14 @@ namespace BokInterface {
     /// <summary>Class containing instances of memory values for the current game</summary>
     class MemoryValues {
 
-        private readonly BoktaiAddresses boktaiAddresses = new();
-        private readonly ZoktaiAddresses zoktaiAddresses = new();
         private readonly ShinbokAddresses shinbokAddresses = new();
-        private readonly LunarKnightsAddresses lunarKnightsAddresses = new();
 
         /// <summary>Django-related memory values</summary>
         public IDictionary<string, DynamicMemoryValue> Django = new Dictionary<string, DynamicMemoryValue>();
-        
+
         /// <summary>Solls-related memory values</summary>
         public IDictionary<string, DynamicMemoryValue> Solls = new Dictionary<string, DynamicMemoryValue>();
-        
+
         /// <summary>Bike-related memory values</summary>
         public IDictionary<string, DynamicMemoryValue> Bike = new Dictionary<string, DynamicMemoryValue>();
 
@@ -28,20 +25,20 @@ namespace BokInterface {
         /// <param name="shorterGameName">Shortened game name (used for setting the lists containing the memory values instances)</param>
         public MemoryValues(string shorterGameName) {
 
-            this.ClearLists();
-            
-            switch(shorterGameName) {
+            ClearLists();
+
+            switch (shorterGameName) {
                 case "Boktai":
-                    this.InitializeBoktaiList();
+                    InitializeBoktaiList();
                     break;
                 case "Zoktai":
-                    this.InitializeZoktaiList();
+                    InitializeZoktaiList();
                     break;
                 case "Shinbok":
-                    this.InitializeShinbokList();
+                    InitializeShinbokList();
                     break;
                 case "LunarKnights":
-                    this.InitializeLunarKnightsList();
+                    InitializeLunarKnightsList();
                     break;
                 default:
                     break;
@@ -49,10 +46,10 @@ namespace BokInterface {
         }
 
         private void ClearLists() {
-            this.Django.Clear();
-            this.Solls.Clear();
-            this.Bike.Clear();
-            this.Misc.Clear();
+            Django.Clear();
+            Solls.Clear();
+            Bike.Clear();
+            Misc.Clear();
         }
 
         private void InitializeBoktaiList() {
@@ -60,15 +57,15 @@ namespace BokInterface {
         }
 
         private void InitializeZoktaiList() {
-            
+
         }
 
         private void InitializeShinbokList() {
 
-            this.Django.Add("current_hp", new DynamicMemoryValue("current_hp", shinbokAddresses.Misc["room"], shinbokAddresses.Django["hp"]));
-            this.Django.Add("base_vit", new DynamicMemoryValue("base_vit", shinbokAddresses.Misc["stat"], shinbokAddresses.Django["base_vit"]));
-            this.Django.Add("base_spr", new DynamicMemoryValue("base_spr", shinbokAddresses.Misc["stat"], shinbokAddresses.Django["base_spr"]));
-            this.Django.Add("base_str", new DynamicMemoryValue("base_str", shinbokAddresses.Misc["stat"], shinbokAddresses.Django["base_str"]));
+            Django.Add("current_hp", new DynamicMemoryValue("current_hp", shinbokAddresses.Misc["room"], shinbokAddresses.Django["hp"]));
+            Django.Add("base_vit", new DynamicMemoryValue("base_vit", shinbokAddresses.Misc["stat"], shinbokAddresses.Django["base_vit"]));
+            Django.Add("base_spr", new DynamicMemoryValue("base_spr", shinbokAddresses.Misc["stat"], shinbokAddresses.Django["base_spr"]));
+            Django.Add("base_str", new DynamicMemoryValue("base_str", shinbokAddresses.Misc["stat"], shinbokAddresses.Django["base_str"]));
         }
 
         private void InitializeLunarKnightsList() {

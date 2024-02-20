@@ -1,10 +1,10 @@
-using System.Drawing;
 using System.Windows.Forms;
+
 using BokInterface.All;
 
 /**
  * File for handling Lunar Knights / Boktai DS-specific values
- */ 
+ */
 
 namespace BokInterface.Tools.TileDataViewer {
     partial class TileDataViewer : Form {
@@ -18,7 +18,7 @@ namespace BokInterface.Tools.TileDataViewer {
         protected void DrawLunarKnightsTileEffect(PaintEventArgs e, uint tileEffect, int posX, int posY, int scale) {
 
             // Only handle values between a certain range (4096 = 1000 in hexadecimal)
-            if(tileEffect > 0 && tileEffect < 4096) {
+            if (tileEffect > 0 && tileEffect < 4096) {
 
                 /**
                  * Get the hexadecimal value of the tile effect
@@ -27,7 +27,7 @@ namespace BokInterface.Tools.TileDataViewer {
                 string hex = Utilities.IntToHex(tileEffect);
 
                 // Handle the tile effect
-                switch(hex) {
+                switch (hex) {
                     default:
                         // If tile effect is currently not handled, print its values on-screen & show its position on the tilemap to study it
                         // APIs.Gui.AddMessage("hex : " + hex.ToString() + " ( uint : " + tileEffect + ")");

@@ -1,44 +1,40 @@
-using BokInterface.Addresses;
-
 /**
  * File for the Boktai DS / Lunar Knights interface itself
  */
 
 namespace BokInterface {
-	
-	partial class BokInterfaceMainForm {
 
-		#region Properties
+    partial class BokInterfaceMainForm {
 
-		private readonly LunarKnightsAddresses lunarKnightsAddresses = new();
+        #region Properties
 
-		#endregion
+        #endregion
 
         private void ShowLunarKnightsInterface() {
-			
-			// Current game name
-			this.CreateLabel("currentGameName", currentGameName, 5, 5, 141, 20, true);
 
-			// Current status section
-			this.AddLunarKnightsCurrentStatusSection();
+            // Current game name
+            CreateLabel("currentGameName", currentGameName, 5, 5, 141, 20, true);
 
-			// Extras / misc tools section
-			this.AddToolsSection();
-			
-			// Main window
-			this.SetMainWindow("Bok Interface" + (shorterGameName != "" ? " - " + shorterGameName : ""), 345, 500);
-			
-			this.ResumeLayout(false);
+            // Current status section
+            AddLunarKnightsCurrentStatusSection();
+
+            // Extras / misc tools section
+            AddToolsSection();
+
+            // Main window
+            SetMainWindow("Bok Interface" + (shorterGameName != "" ? " - " + shorterGameName : ""), 345, 500);
+
+            ResumeLayout(false);
         }
 
-		private void UpdateLunarKnightsInterface() {
+        private void UpdateLunarKnightsInterface() {
 
-		}
+        }
 
-		private void AddLunarKnightsCurrentStatusSection() {
-			
-			// Section
-			this.currentStatusGroupBox = this.CreateGroupBox("currentStatus", "Current status", 5, 25, 226, 70, true);
-		}
+        private void AddLunarKnightsCurrentStatusSection() {
+
+            // Section
+            currentStatusGroupBox = CreateGroupBox("currentStatus", "Current status", 5, 25, 226, 70, true);
+        }
     }
 }

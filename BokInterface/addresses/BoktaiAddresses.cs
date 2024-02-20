@@ -9,7 +9,7 @@ namespace BokInterface.Addresses {
         /// <para>Django-related memory addresses</para>
         /// </summary>
         public IDictionary<string, uint> Django = new Dictionary<string, uint>();
-        
+
         /// <summary>
         /// <para>Inventory-related memory addresses</para>
         /// </summary>
@@ -35,7 +35,7 @@ namespace BokInterface.Addresses {
             Django.Add("x_position", 0x0203D8F0);
             Django.Add("y_position", 0x0203D8F4);
             Django.Add("z_position", 0x0203D8F2);
-            
+
             // Add Misc addresses
             Misc.Add("map_data", 0x03004610);
             Misc.Add("x_camera", 0x030046E8);

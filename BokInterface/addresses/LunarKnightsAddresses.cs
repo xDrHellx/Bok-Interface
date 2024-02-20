@@ -14,7 +14,7 @@ namespace BokInterface.Addresses {
         /// <para>Lucian-related memory addresses</para>
         /// </summary>
         public IDictionary<string, uint> Lucian = new Dictionary<string, uint>();
-        
+
         /// <summary>
         /// <para>Inventory-related memory addresses</para>
         /// </summary>

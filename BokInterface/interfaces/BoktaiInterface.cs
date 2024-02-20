@@ -1,64 +1,60 @@
-using BokInterface.Addresses;
-
 /**
  * File for the Boktai TSiiYH interface itself
  */
 
 namespace BokInterface {
-	
-	partial class BokInterfaceMainForm {
 
-		#region Properties
+    partial class BokInterfaceMainForm {
 
-		private System.Windows.Forms.Label bok1_currentStatusHpValue = new();
-		private System.Windows.Forms.Label bok1_currentStatusEneValue = new();
+        #region Properties
 
-		private readonly BoktaiAddresses boktaiAddresses = new();
+        private System.Windows.Forms.Label bok1_currentStatusHpValue = new();
+        private System.Windows.Forms.Label bok1_currentStatusEneValue = new();
 
-		#endregion
+        #endregion
 
         private void ShowBoktaiInterface() {
-			
-			// Current game name
-			this.CreateLabel("currentGameName", currentGameName, 5, 5, 171, 20, true);
 
-			// Current status section
-			this.AddBoktaiCurrentStatusSection();
+            // Current game name
+            CreateLabel("currentGameName", currentGameName, 5, 5, 171, 20, true);
 
-			// Extras / misc tools section
-			this.AddToolsSection();
-			
-			// Main window
-			this.SetMainWindow("Bok Interface" + (shorterGameName != "" ? " - " + shorterGameName : ""), 345, 500);
-			
-			this.ResumeLayout(false);
+            // Current status section
+            AddBoktaiCurrentStatusSection();
+
+            // Extras / misc tools section
+            AddToolsSection();
+
+            // Main window
+            SetMainWindow("Bok Interface" + (shorterGameName != "" ? " - " + shorterGameName : ""), 345, 500);
+
+            ResumeLayout(false);
         }
 
-		private void UpdateBoktaiInterface() {
+        private void UpdateBoktaiInterface() {
 
-		}
+        }
 
-		private void AddBoktaiCurrentStatusSection() {
-			
-			// Section
-			this.currentStatusGroupBox = this.CreateGroupBox("currentStatus", "Current status", 5, 25, 226, 70, true);
+        private void AddBoktaiCurrentStatusSection() {
 
-			// Current status labels
-			this.currentStatusLabels.Add(this.CreateLabel("djangoCurrentHpLabel", "LIFE :", 7, 19, 34, 15));
-			this.currentStatusLabels.Add(this.CreateLabel("djangoCurrentEneLabel", "ENE :", 7, 34, 34, 15));
+            // Section
+            currentStatusGroupBox = CreateGroupBox("currentStatus", "Current status", 5, 25, 226, 70, true);
 
-			// Current status values
-			this.bok1_currentStatusHpValue = this.CreateLabel("djangoCurrentHpValue", "", 44, 19, 31, 15);
-			this.bok1_currentStatusEneValue = this.CreateLabel("djangoCurrentHpValue", "", 44, 34, 31, 15);
+            // Current status labels
+            currentStatusLabels.Add(CreateLabel("djangoCurrentHpLabel", "LIFE :", 7, 19, 34, 15));
+            currentStatusLabels.Add(CreateLabel("djangoCurrentEneLabel", "ENE :", 7, 34, 34, 15));
 
-			// Add values labels to group
-			this.currentStatusLabels.Add(this.bok1_currentStatusHpValue);
-			this.currentStatusLabels.Add(this.bok1_currentStatusEneValue);
+            // Current status values
+            bok1_currentStatusHpValue = CreateLabel("djangoCurrentHpValue", "", 44, 19, 31, 15);
+            bok1_currentStatusEneValue = CreateLabel("djangoCurrentHpValue", "", 44, 34, 31, 15);
 
-			// Add elements to group
-			for(int i = 0; i < this.currentStatusLabels.Count; i++) {
-				this.currentStatusGroupBox.Controls.Add(this.currentStatusLabels[i]);
-			}
-		}
+            // Add values labels to group
+            currentStatusLabels.Add(bok1_currentStatusHpValue);
+            currentStatusLabels.Add(bok1_currentStatusEneValue);
+
+            // Add elements to group
+            for (int i = 0; i < currentStatusLabels.Count; i++) {
+                currentStatusGroupBox.Controls.Add(currentStatusLabels[i]);
+            }
+        }
     }
 }

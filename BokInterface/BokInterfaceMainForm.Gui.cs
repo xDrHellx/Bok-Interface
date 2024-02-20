@@ -7,7 +7,7 @@ using BokInterface.All;
 namespace BokInterface {
 
     partial class BokInterfaceMainForm {
-        
+
         #region GUI related code
 
         public static int gbaScreenWidth = 0xF0;
@@ -18,7 +18,7 @@ namespace BokInterface {
             APIs.Gui.Text(3, 1, interfaceActivated == true ? "Bok ON" : "Bok Off", System.Drawing.Color.Orange, "bottomright");
 
             // On DS add the indicator on the top screen too
-            if(this.isDS == true) {
+            if (isDS == true) {
                 APIs.Gui.Text(3, GetScreenHeight(true) + 1, interfaceActivated == true ? "Bok ON" : "Bok Off", System.Drawing.Color.Orange, "bottomright");
             }
         }
@@ -35,7 +35,7 @@ namespace BokInterface {
         private int GetScreenWidth() {
             return APIs.Client.ScreenWidth();
         }
-        
+
         #endregion
     }
 }
