@@ -44,7 +44,7 @@ namespace BokInterface.All {
             Fill(out memoryApi);
             Fill(out guiApi);
 
-            void Fill<T>(out T? field) where T : class, IExternalApi {
+            static void Fill<T>(out T? field) where T : class, IExternalApi {
                 if (apiContainer.Libraries.TryGetValue(typeof(T), out var api)) {
                     field = api as T;
                 } else {

@@ -7,10 +7,7 @@ namespace BokInterface {
     /// <summary>Class containing instances of memory values for the current game</summary>
     class MemoryValues {
 
-        private readonly BoktaiAddresses boktaiAddresses = new();
-        private readonly ZoktaiAddresses zoktaiAddresses = new();
         private readonly ShinbokAddresses shinbokAddresses = new();
-        private readonly LunarKnightsAddresses lunarKnightsAddresses = new();
 
         /// <summary>Django-related memory values</summary>
         public IDictionary<string, DynamicMemoryValue> Django = new Dictionary<string, DynamicMemoryValue>();

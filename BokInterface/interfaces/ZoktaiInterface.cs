@@ -1,7 +1,5 @@
 using System.Windows.Forms;
 
-using BokInterface.Addresses;
-
 /**
  * File for the Zoktai (Boktai 2) interface itself
  */
@@ -18,8 +16,6 @@ namespace BokInterface {
         private Label bok2_djangoBaseSpr = new();
         private Label bok2_djangoBaseStr = new();
         private Label bok2_djangoBaseAgi = new();
-
-        private readonly ZoktaiAddresses zoktaiAddresses = new();
 
         #endregion
 

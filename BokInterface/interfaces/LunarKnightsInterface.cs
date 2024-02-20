@@ -1,5 +1,3 @@
-using BokInterface.Addresses;
-
 /**
  * File for the Boktai DS / Lunar Knights interface itself
  */
@@ -9,8 +7,6 @@ namespace BokInterface {
     partial class BokInterfaceMainForm {
 
         #region Properties
-
-        private readonly LunarKnightsAddresses lunarKnightsAddresses = new();
 
         #endregion
 

@@ -1,7 +1,5 @@
 using System.Windows.Forms;
 
-using BokInterface.Addresses;
-
 /**
  * File for the Shinbok (Boktai 3) interface itself
  */
@@ -29,8 +27,6 @@ namespace BokInterface {
         private Button bok3_editEquipsBtn = new();
         private Button bok3_editWeaponsBtn = new();
         private Button bok3_editSolarGunBtn = new();
-
-        private readonly ShinbokAddresses shinbokAddresses = new();
 
         #endregion
 

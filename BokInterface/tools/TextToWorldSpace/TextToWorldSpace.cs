@@ -23,7 +23,6 @@ namespace BokInterface.Tools.TextToWorldSpace {
         private readonly BoktaiAddresses boktaiAddresses = new();
         private readonly ZoktaiAddresses zoktaiAddresses = new();
         private readonly ShinbokAddresses shinbokAddresses = new();
-        private readonly LunarKnightsAddresses lunarKnightsAddresses = new();
         private uint cameraXposAddress = 0;
         private uint cameraYposAddress = 0;
 

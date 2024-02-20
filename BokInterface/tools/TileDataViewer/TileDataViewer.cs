@@ -32,7 +32,6 @@ namespace BokInterface.Tools.TileDataViewer {
         private readonly BoktaiAddresses boktaiAddresses = new();
         private readonly ZoktaiAddresses zoktaiAddresses = new();
         private readonly ShinbokAddresses shinbokAddresses = new();
-        private readonly LunarKnightsAddresses lunarKnightsAddresses = new();
         private uint mapDataAddress = 0;
         private uint djangoXposAddress = 0;
         private uint djangoYposAddress = 0;
