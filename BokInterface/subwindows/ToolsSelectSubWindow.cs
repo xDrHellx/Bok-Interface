@@ -48,7 +48,7 @@ namespace BokInterface {
 		/// <param name="width">Width (in pixels)</param>
 		/// <param name="height">Height (in pixels)</param>
         private void AddToolsLabel(int posX = 5, int posY = 5, int width = 176, int height = 15) {
-            Label availableToolsLabel = CreateLabel("availableToolsLabel", "-- Tools available --", 5, 5, 176, 15);
+            Label availableToolsLabel = CreateLabel("availableToolsLabel", "-- Tools available --", posX, posY, width, height);
             miscToolsSelectionWindow.Controls.Add(availableToolsLabel);
         }
 
