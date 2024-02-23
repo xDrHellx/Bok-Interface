@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Windows.Forms;
 
 /**
  * Main file for status editing subwindows
@@ -9,10 +10,10 @@ namespace BokInterface {
 
         #region Properties for subwindow elements
 
-        private System.Windows.Forms.GroupBox edit_statusGroupBox = new();
-        private System.Windows.Forms.GroupBox edit_statsGroupBox = new();
-        private List<System.Windows.Forms.Label> edit_statusLabels = new();
-        private List<System.Windows.Forms.NumericUpDown> edit_statusNumericUpDowns = new();
+        private GroupBox edit_statusGroupBox = new();
+        private GroupBox edit_statsGroupBox = new();
+        private List<Label> edit_statusLabels = new();
+        private List<NumericUpDown> edit_statusNumericUpDowns = new();
 
         #endregion
 
@@ -53,38 +54,46 @@ namespace BokInterface {
         private void SetStatusValues() {
 
             // Retrieve all input fields
-            var fields = edit_statusNumericUpDowns;
+            List<NumericUpDown> fields = edit_statusNumericUpDowns;
 
             // Sets values based on fields for the current game
             for (int i = 0; i < fields.Count; i++) {
-                var value = (uint)fields[i].Value;
+                uint value = (uint)fields[i].Value;
 
                 /**
 				 * Indicate which sublist to use for setting the value, based on the input field's name
 				 * We only split on the first "_"
 				 */
-                var fieldParts = fields[i].Name.Split(new char[] { '_' }, 2);
+                string[] fieldParts = fields[i].Name.Split(new char[] { '_' }, 2);
                 string subList = fieldParts[0];
                 string memoryValueKey = fieldParts[1];
                 switch (subList) {
                     case "django":
                         if (memoryValues.Django.ContainsKey(memoryValueKey) == true) {
                             memoryValues.Django[memoryValueKey].Value = value;
+                        } else if (memoryValues.U16.ContainsKey(memoryValueKey) == true) {
+                            memoryValues.U16[memoryValueKey].Value = value;
                         }
                         break;
                     case "solls":
                         if (memoryValues.Solls.ContainsKey(memoryValueKey) == true) {
                             memoryValues.Solls[memoryValueKey].Value = value;
+                        } else if (memoryValues.U16.ContainsKey(memoryValueKey) == true) {
+                            memoryValues.U16[memoryValueKey].Value = value;
                         }
                         break;
                     case "bike":
                         if (memoryValues.Bike.ContainsKey(memoryValueKey) == true) {
                             memoryValues.Bike[memoryValueKey].Value = value;
+                        } else if (memoryValues.U16.ContainsKey(memoryValueKey) == true) {
+                            memoryValues.U16[memoryValueKey].Value = value;
                         }
                         break;
                     case "misc":
                         if (memoryValues.Misc.ContainsKey(memoryValueKey) == true) {
                             memoryValues.Misc[memoryValueKey].Value = value;
+                        } else if (memoryValues.U16.ContainsKey(memoryValueKey) == true) {
+                            memoryValues.U16[memoryValueKey].Value = value;
                         }
                         break;
                     default:
