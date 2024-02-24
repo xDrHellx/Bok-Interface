@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Windows.Forms;
 
 /**
  * File for Shinbok's status edit subwindow
@@ -14,11 +15,11 @@ namespace BokInterface {
             int n = 0;
 
             // Get default values, depending on availability, these can be the current in-game values
-            var defaultValues = GetDefaultStatusValues();
+            IDictionary<string, uint> defaultValues = GetDefaultStatusValues();
 
             // Sections
-            edit_statusGroupBox = CreateGroupBox("editStatusGroup", "Status", 5, 5, 103, 105, true);
-            edit_statsGroupBox = CreateGroupBox("editStatsGroup", "Stats", 114, 5, 107, 105, true);
+            edit_statusGroupBox = CreateGroupBox("editStatusGroup", "Status", 5, 5, 103, 105);
+            edit_statsGroupBox = CreateGroupBox("editStatsGroup", "Stats", 114, 5, 107, 105);
 
             // Status
             edit_statusLabels.Add(CreateLabel("djangoEditHpLabel", "LIFE :", 7, 19, 34, 15));
@@ -50,7 +51,7 @@ namespace BokInterface {
             edit_statusNumericUpDowns.Add(CreateNumericUpDown("django_base_str", defaultValues["django_base_str"], 36, 74, 41, 23));
 
             // Tooltips & warnings
-            List<System.Windows.Forms.Label> warningLabels = new() {
+            List<Label> warningLabels = new() {
                 CreateImageLabel("tooltip", "warning", 83, 18),
                 CreateImageLabel("tooltip", "warning", 83, 47),
                 CreateImageLabel("tooltip", "warning", 83, 76)
@@ -77,7 +78,7 @@ namespace BokInterface {
             statusEditWindow.Controls.Add(edit_statsGroupBox);
 
             // Button for setting values & its events
-            System.Windows.Forms.Button setValuesButton = CreateButton("setStatusButton", "Set values", 123, 116, 75, 23);
+            Button setValuesButton = CreateButton("setStatusButton", "Set values", 123, 116, 75, 23);
             setValuesButton.Click += new EventHandler(delegate (object sender, EventArgs e) {
                 // Write the values for 10 frames
                 for (int i = 0; i < 10; i++) {

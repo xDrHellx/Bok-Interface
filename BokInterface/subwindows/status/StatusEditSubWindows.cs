@@ -61,9 +61,9 @@ namespace BokInterface {
                 uint value = (uint)fields[i].Value;
 
                 /**
-				 * Indicate which sublist to use for setting the value, based on the input field's name
-				 * We only split on the first "_"
-				 */
+                 * Indicate which sublist to use for setting the value, based on the input field's name
+                 * We only split on the first "_"
+                 */
                 string[] fieldParts = fields[i].Name.Split(new char[] { '_' }, 2);
                 string subList = fieldParts[0];
                 string memoryValueKey = fieldParts[1];
