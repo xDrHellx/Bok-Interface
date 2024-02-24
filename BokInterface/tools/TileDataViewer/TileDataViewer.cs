@@ -360,7 +360,7 @@ namespace BokInterface.Tools.TileDataViewer {
         /// <returns><c>List (System.Drawing.Color)</c>Palette</returns>
         protected List<Color> GenerateRandomColorPalette() {
 
-            List<Color> result = new();
+            List<Color> result = [];
             uint seed = 0x803049d;
 
             for (int i = 0; i < 255; i++) {
