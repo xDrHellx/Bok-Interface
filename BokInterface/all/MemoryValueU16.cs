@@ -3,7 +3,7 @@ namespace BokInterface.All {
     /// <summary>Class for representing a U16 memory address' value</summary>
     public class MemoryValueU16 {
 
-        public string Name;
+        public string name;
         private readonly uint address;
 
         public uint Value {
@@ -11,8 +11,8 @@ namespace BokInterface.All {
             set => APIs.Memory.WriteU16(value, address);
         }
 
-        public MemoryValueU16(string Name, uint address) {
-            this.Name = Name;
+        public MemoryValueU16(string name, uint address) {
+            this.name = name;
             this.address = address;
         }
     }
