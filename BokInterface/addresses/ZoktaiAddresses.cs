@@ -60,11 +60,12 @@ namespace BokInterface.Addresses {
             Django.Add("persistent_str", 0x0203C41C);
             Django.Add("persistent_agi", 0x0203C41E);
 
-            Django.Add("sword_skill", 0x0203C446);
-            Django.Add("spear_skill", 0x0203C448);
-            Django.Add("hammer_skill", 0x0203C44A);
-            Django.Add("fists_skill", 0x0203C44C);
-            Django.Add("gun_skill", 0x0203C44E);
+            // 100 exp = 1 lvl
+            Django.Add("sword_skill_exp", 0x0203C446);
+            Django.Add("spear_skill_exp", 0x0203C448);
+            Django.Add("hammer_skill_exp", 0x0203C44A);
+            Django.Add("fists_skill_exp", 0x0203C44C);
+            Django.Add("gun_skill_exp", 0x0203C44E);
 
             // Add Misc addresses
             Misc.Add("map_data", 0x030046A4);

@@ -75,11 +75,11 @@ namespace BokInterface {
             Django.Add("agi", new DynamicMemoryValue("agi", zoktaiAddresses.Misc["stat"], zoktaiAddresses.Django["current_agi"]));
 
             // U16
-            U16.Add("sword_skill", new U16MemoryValue("sword_skill", zoktaiAddresses.Django["sword_skill"]));
-            U16.Add("spear_skill", new U16MemoryValue("spear_skill", zoktaiAddresses.Django["spear_skill"]));
-            U16.Add("hammer_skill", new U16MemoryValue("hammer_skill", zoktaiAddresses.Django["hammer_skill"]));
-            U16.Add("fists_skill", new U16MemoryValue("fists_skill", zoktaiAddresses.Django["fists_skill"]));
-            U16.Add("gun_skill", new U16MemoryValue("gun_skill", zoktaiAddresses.Django["gun_skill"]));
+            U16.Add("sword_skill", new U16MemoryValue("sword_skill", zoktaiAddresses.Django["sword_skill_exp"]));
+            U16.Add("spear_skill", new U16MemoryValue("spear_skill", zoktaiAddresses.Django["spear_skill_exp"]));
+            U16.Add("hammer_skill", new U16MemoryValue("hammer_skill", zoktaiAddresses.Django["hammer_skill_exp"]));
+            U16.Add("fists_skill", new U16MemoryValue("fists_skill", zoktaiAddresses.Django["fists_skill_exp"]));
+            U16.Add("gun_skill", new U16MemoryValue("gun_skill", zoktaiAddresses.Django["gun_skill_exp"]));
         }
 
         private void InitializeShinbokList() {
