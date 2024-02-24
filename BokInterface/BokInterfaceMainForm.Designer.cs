@@ -200,7 +200,7 @@ namespace BokInterface {
 					this.extrasGroupBox = this.CreateGroupBox("extraTools", "Tools", 237, 25, 87, 52, true);
 					break;
 				case "Zoktai":
-					this.extrasGroupBox = this.CreateGroupBox("extraTools", "Tools", 237, 25, 87, 52, true);
+					this.extrasGroupBox = this.CreateGroupBox("extraTools", "Tools", 237, 187, 87, 52, true);
 					break;
 				case "Shinbok":
 					this.extrasGroupBox = this.CreateGroupBox("extraTools", "Tools", 237, 187, 87, 52, true);
