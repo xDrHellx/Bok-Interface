@@ -64,7 +64,7 @@ namespace BokInterface {
 			 * This is necessary because some memory addresses changes based on areas
 			 * So we need to combine multiple addresses to get the actual value all the time
 			 */
-            var djangoCurrentHp = memoryValues.Django["current_hp"].Value;
+            uint djangoCurrentHp = memoryValues.Django["current_hp"].Value;
 
             /**
 			 * Updating values by retrieving from memory addresses
@@ -117,19 +117,19 @@ namespace BokInterface {
             currentStatsLabels.Add(CreateLabel("totalStatColumnName", "Total", 108, 19, 32, 15, colorHex: totalStatColor));
 
             // VIT
-            currentStatsLabels.Add(CreateLabel("vitRowLabel", "VIT", 6, 34, 27, 15));
+            currentStatsLabels.Add(CreateLabel("vitRowLabel", "VIT", 6, 34, 27, 15, textAlignment: "MiddleLeft"));
             bok3_djangoBaseVit = CreateLabel("djangoBaseVit", "", 35, 34, 31, 15, colorHex: baseStatColor, textAlignment: "MiddleRight");
             bok3_djangoEquipsVit = CreateLabel("djangoEquipsVit", "", 66, 34, 42, 15, colorHex: equipsStatColor, textAlignment: "MiddleRight");
             bok3_djangoTotalVit = CreateLabel("djangoTotalVit", "", 108, 34, 32, 15, colorHex: totalStatColor, textAlignment: "MiddleRight");
 
             // SPR
-            currentStatsLabels.Add(CreateLabel("sprRowLabel", "SPR", 6, 49, 27, 15));
+            currentStatsLabels.Add(CreateLabel("sprRowLabel", "SPR", 6, 49, 27, 15, textAlignment: "MiddleLeft"));
             bok3_djangoBaseSpr = CreateLabel("djangoBaseSpr", "", 35, 49, 31, 15, colorHex: baseStatColor, textAlignment: "MiddleRight");
             bok3_djangoEquipsSpr = CreateLabel("djangoEquipsSpr", "", 66, 49, 42, 15, colorHex: equipsStatColor, textAlignment: "MiddleRight");
             bok3_djangoTotalSpr = CreateLabel("djangoTotalSpr", "", 108, 49, 32, 15, colorHex: totalStatColor, textAlignment: "MiddleRight");
 
             // STR
-            currentStatsLabels.Add(CreateLabel("strRowLabel", "STR", 6, 64, 27, 15));
+            currentStatsLabels.Add(CreateLabel("strRowLabel", "STR", 6, 64, 27, 15, textAlignment: "MiddleLeft"));
             bok3_djangoBaseStr = CreateLabel("djangoBaseStr", "", 35, 64, 31, 15, colorHex: baseStatColor, textAlignment: "MiddleRight");
             bok3_djangoEquipsStr = CreateLabel("djangoEquipsStr", "", 66, 64, 42, 15, colorHex: equipsStatColor, textAlignment: "MiddleRight");
             bok3_djangoTotalStr = CreateLabel("djangoTotalStr", "", 108, 64, 32, 15, colorHex: totalStatColor, textAlignment: "MiddleRight");
