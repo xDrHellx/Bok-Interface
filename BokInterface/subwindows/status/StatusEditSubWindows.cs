@@ -12,17 +12,10 @@ namespace BokInterface {
 
         #region Properties for subwindow elements
 
-<<<<<<< HEAD
         private GroupBox edit_statusGroupBox = new();
         private GroupBox edit_statsGroupBox = new();
-        private readonly List<Label> edit_statusLabels = new();
-        private readonly List<NumericUpDown> edit_statusNumericUpDowns = new();
-=======
-        private System.Windows.Forms.GroupBox edit_statusGroupBox = new();
-        private System.Windows.Forms.GroupBox edit_statsGroupBox = new();
-        private List<System.Windows.Forms.Label> edit_statusLabels = [];
-        private List<System.Windows.Forms.NumericUpDown> edit_statusNumericUpDowns = [];
->>>>>>> 11184bc (add new style rules and partially apply them)
+        private readonly List<Label> edit_statusLabels = [];
+        private readonly List<NumericUpDown> edit_statusNumericUpDowns = [];
 
         #endregion
 
