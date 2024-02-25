@@ -15,7 +15,7 @@ namespace BokInterface {
             int n = 0;
 
             // Get default values, depending on availability, these can be the current in-game values
-            IDictionary<string, uint> defaultValues = GetDefaultStatusValues();
+            IDictionary<string, decimal> defaultValues = GetDefaultStatusValues();
 
             // Sections
             edit_statusGroupBox = CreateGroupBox("editStatusGroup", "Status", 5, 5, 103, 105);
@@ -95,10 +95,10 @@ namespace BokInterface {
 
 
         /// <summary>Get default values for Shinbok</summary>
-        /// <returns><c>IDictionary<string, uint></c>Default values</returns>
-        private IDictionary<string, uint> GetShinbokDefaultValues() {
+        /// <returns><c>IDictionary<string, decimal></c>Default values</returns>
+        private IDictionary<string, decimal> GetShinbokDefaultValues() {
 
-            IDictionary<string, uint> defaultValues = new Dictionary<string, uint>();
+            IDictionary<string, decimal> defaultValues = new Dictionary<string, decimal>();
             uint djangoCurrentHp = memoryValues.Django["current_hp"].Value;
 
             // If HP value is valid, get the other in-game values

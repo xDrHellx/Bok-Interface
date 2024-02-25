@@ -53,9 +53,16 @@ namespace BokInterface.All {
 
         /// <summary>Convert EXP to Level</summary>
         /// <param name="exp">EXP amount</param>
-        /// <returns><c>uint</c>Level</returns>
-        public static uint ExpToLevel(uint exp) {
-            return (uint)(exp > 0 ? Math.Truncate(Convert.ToDecimal(exp / 100)) : 0);
+        /// <returns><c>decimal</c>Level</returns>
+        public static decimal ExpToLevel(uint exp) {
+            return exp > 0 ? Convert.ToDecimal(exp) / 100 : 0;
+        }
+
+        /// <summary>Convert Level to EXP</summary>
+        /// <param name="level">Level</param>
+        /// <returns><c>uint</c>EXP</returns>
+        public static uint LevelToExp(decimal level) {
+            return level > 0 ? (uint)(level * 100) : 0;
         }
     }
 }

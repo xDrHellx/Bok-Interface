@@ -32,7 +32,7 @@ namespace BokInterface {
         private Button bok2_editWeaponsBtn = new();
         private Button bok2_editMagicsBtn = new();
         private GroupBox bok2_currentSkillGroupBox = new();
-        private List<Label> bok2_currentSkillLabels = new();
+        private readonly List<Label> bok2_currentSkillLabels = new();
 
         #endregion
 
@@ -114,27 +114,21 @@ namespace BokInterface {
         private void AddZoktaiCurrentSkillSection() {
 
             // Section
-            bok2_currentSkillGroupBox = CreateGroupBox("currentSkill", "Skill", 92, 86, 100, 100, true);
 
             // Sword
             bok2_currentSkillLabels.Add(CreateLabel("swordSkillLabel", "Sword", 6, 20, 54, 15, textAlignment: "MiddleLeft"));
-            bok2_djangoSwordSkill = CreateLabel("djangoSwordSkill", "", 60, 19, 31, 15, colorHex: totalStatColor, textAlignment: "MiddleRight");
 
             // Spear
             bok2_currentSkillLabels.Add(CreateLabel("spearSkillLabel", "Spear", 6, 34, 54, 15, textAlignment: "MiddleLeft"));
-            bok2_djangoSpearSkill = CreateLabel("djangoSpearSkill", "", 60, 34, 31, 15, colorHex: totalStatColor, textAlignment: "MiddleRight");
 
             // Hammer
             bok2_currentSkillLabels.Add(CreateLabel("hammerSkillLabel", "Hammer", 6, 49, 54, 15, textAlignment: "MiddleLeft"));
-            bok2_djangoHammerSkill = CreateLabel("djangoHammerSkill", "", 60, 49, 31, 15, colorHex: totalStatColor, textAlignment: "MiddleRight");
 
             // Fists
             bok2_currentSkillLabels.Add(CreateLabel("fistsSkillLabel", "Fists", 6, 64, 54, 15, textAlignment: "MiddleLeft"));
-            bok2_djangoFistsSkill = CreateLabel("djangoFistsSkill", "", 60, 64, 31, 15, colorHex: totalStatColor, textAlignment: "MiddleRight");
 
             // Gun
             bok2_currentSkillLabels.Add(CreateLabel("gunSkillLabel", "Gun", 6, 79, 54, 15, textAlignment: "MiddleLeft"));
-            bok2_djangoGunSkill = CreateLabel("djangoGunSkill", "", 60, 79, 31, 15, colorHex: totalStatColor, textAlignment: "MiddleRight");
 
             // Add values labels to group
             bok2_currentSkillLabels.Add(bok2_djangoSwordSkill);

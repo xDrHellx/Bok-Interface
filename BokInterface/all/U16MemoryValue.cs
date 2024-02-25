@@ -8,7 +8,7 @@ namespace BokInterface.All {
 
         public uint Value {
             get => APIs.Memory.ReadU16(address);
-            set => APIs.Memory.WriteU16(value, address);
+            set => APIs.Memory.WriteU16(address, value);
         }
 
         public U16MemoryValue(string name, uint address) {
