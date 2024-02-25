@@ -402,7 +402,7 @@ namespace BokInterface {
 		/// <param name="margin">Margin (by default System.Windows.Forms.Padding(0, 3, 0, 3), the default value in Visual Studio)</param>
 		/// <param name="valueAlignment">Value alignment, by default "Left" (see System.Windows.Forms.HorizontalAlignment for possible values)</param>
 		/// <returns><c>System.Windows.Forms.NumericUpDown</c>NumericUpDown instance</returns>
-		private System.Windows.Forms.NumericUpDown CreateNumericUpDown(string name, decimal defaultValue, Int32 positionX, Int32 positionY, Int32 width, Int32 height, decimal minValue = 1, decimal maxValue = 100, int nbDecimals = 0, bool addToWindow = false, string colorHex = "", System.Windows.Forms.Padding margin = new System.Windows.Forms.Padding(), string valueAlignment = "Left") {
+		private System.Windows.Forms.NumericUpDown CreateNumericUpDown(string name, decimal defaultValue, Int32 positionX, Int32 positionY, Int32 width, Int32 height, decimal minValue = 0, decimal maxValue = 99, int nbDecimals = 0, bool addToWindow = false, string colorHex = "", System.Windows.Forms.Padding margin = new System.Windows.Forms.Padding(), string valueAlignment = "Left") {
 			
 			System.Windows.Forms.NumericUpDown field = new();
 			field.Name = name;

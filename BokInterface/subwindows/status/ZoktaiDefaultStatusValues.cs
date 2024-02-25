@@ -29,8 +29,8 @@ namespace BokInterface {
             edit_statusLabels.Add(CreateLabel("djangoEditHpLabel", "LIFE :", 7, 19, 34, 15));
             edit_statusLabels.Add(CreateLabel("djangoEditEneLabel", "ENE :", 7, 47, 34, 15));
 
-            edit_statusNumericUpDowns.Add(CreateNumericUpDown("django_current_hp", defaultValues["django_current_hp"], 47, 16, 50, 23, 1, 1000));
-            edit_statusNumericUpDowns.Add(CreateNumericUpDown("django_current_ene", defaultValues["django_current_ene"], 47, 45, 50, 23, 1, 1000));
+            edit_statusNumericUpDowns.Add(CreateNumericUpDown("django_current_hp", defaultValues["django_current_hp"], 47, 16, 50, 23, maxValue: 1000));
+            edit_statusNumericUpDowns.Add(CreateNumericUpDown("django_current_ene", defaultValues["django_current_ene"], 47, 45, 50, 23, maxValue: 1000));
 
             // Add elements to group boxes / sections
             for (int i = 0; i < edit_statusLabels.Count; i++) {
@@ -50,11 +50,11 @@ namespace BokInterface {
             edit_statusLabels.Add(CreateLabel("djangoEditFistsSkillLabel", "Fists", 121, 47, 36, 15));
             edit_statusLabels.Add(CreateLabel("djangoEditGunSkillLabel", "Gun", 8, 76, 54, 15));
 
-            edit_statusNumericUpDowns.Add(CreateNumericUpDown("django_sword_skill", defaultValues["django_sword_skill"], 64, 16, 51, 23, 0, 99, 2));
-            edit_statusNumericUpDowns.Add(CreateNumericUpDown("django_spear_skill", defaultValues["django_spear_skill"], 163, 16, 51, 23, 0, 99, 2));
-            edit_statusNumericUpDowns.Add(CreateNumericUpDown("django_hammer_skill", defaultValues["django_hammer_skill"], 64, 45, 51, 23, 0, 99, 2));
-            edit_statusNumericUpDowns.Add(CreateNumericUpDown("django_fists_skill", defaultValues["django_fists_skill"], 163, 45, 51, 23, 0, 99, 2));
-            edit_statusNumericUpDowns.Add(CreateNumericUpDown("django_gun_skill", defaultValues["django_gun_skill"], 64, 74, 51, 23, 0, 99, 2));
+            edit_statusNumericUpDowns.Add(CreateNumericUpDown("django_sword_skill", defaultValues["django_sword_skill"], 64, 16, 51, 23, nbDecimals: 2));
+            edit_statusNumericUpDowns.Add(CreateNumericUpDown("django_spear_skill", defaultValues["django_spear_skill"], 163, 16, 51, 23, nbDecimals: 2));
+            edit_statusNumericUpDowns.Add(CreateNumericUpDown("django_hammer_skill", defaultValues["django_hammer_skill"], 64, 45, 51, 23, nbDecimals: 2));
+            edit_statusNumericUpDowns.Add(CreateNumericUpDown("django_fists_skill", defaultValues["django_fists_skill"], 163, 45, 51, 23, nbDecimals: 2));
+            edit_statusNumericUpDowns.Add(CreateNumericUpDown("django_gun_skill", defaultValues["django_gun_skill"], 64, 74, 51, 23, nbDecimals: 2));
 
             // Add elements to group
             for (int i = l; i < edit_statusLabels.Count; i++) {
