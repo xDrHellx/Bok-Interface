@@ -74,6 +74,18 @@ namespace BokInterface {
                         if (memoryValues.Django.ContainsKey(memoryValueKey) == true) {
                             memoryValues.Django[memoryValueKey].Value = (uint)value;
                         } else if (memoryValues.U16.ContainsKey(memoryValueKey) == true) {
+                            switch (memoryValueKey) {
+                                case "sword_skill":
+                                case "spear_skill":
+                                case "hammer_skill":
+                                case "fists_skill":
+                                case "gun_skill":
+                                    memoryValues.U16[memoryValueKey].Value = Utilities.LevelToExp(value);
+                                    break;
+                                default:
+                                    memoryValues.U16[memoryValueKey].Value = (uint)value;
+                                    break;
+                            }
                         }
                         break;
                     case "solls":

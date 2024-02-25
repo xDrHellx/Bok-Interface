@@ -85,6 +85,13 @@ namespace BokInterface {
                 bok2_djangoHammerSkill.Text = Utilities.ExpToLevel(memoryValues.U16["hammer_skill"].Value).ToString();
                 bok2_djangoFistsSkill.Text = Utilities.ExpToLevel(memoryValues.U16["fists_skill"].Value).ToString();
                 bok2_djangoGunSkill.Text = Utilities.ExpToLevel(memoryValues.U16["gun_skill"].Value).ToString();
+
+                // Add / refresh tooltips for skill containing the EXP amount
+                AddToolTip(bok2_djangoSwordSkill, memoryValues.U16["sword_skill"].Value + " EXP");
+                AddToolTip(bok2_djangoSpearSkill, memoryValues.U16["spear_skill"].Value + " EXP");
+                AddToolTip(bok2_djangoHammerSkill, memoryValues.U16["hammer_skill"].Value + " EXP");
+                AddToolTip(bok2_djangoFistsSkill, memoryValues.U16["fists_skill"].Value + " EXP");
+                AddToolTip(bok2_djangoGunSkill, memoryValues.U16["gun_skill"].Value + " EXP");
             }
         }
 
@@ -114,21 +121,27 @@ namespace BokInterface {
         private void AddZoktaiCurrentSkillSection() {
 
             // Section
+            bok2_currentSkillGroupBox = CreateGroupBox("currentSkill", "Skill", 92, 86, 110, 104, true);
 
             // Sword
             bok2_currentSkillLabels.Add(CreateLabel("swordSkillLabel", "Sword", 6, 20, 54, 15, textAlignment: "MiddleLeft"));
+            bok2_djangoSwordSkill = CreateLabel("djangoSwordSkill", "", 60, 19, 41, 15, colorHex: totalStatColor, textAlignment: "MiddleLeft");
 
             // Spear
             bok2_currentSkillLabels.Add(CreateLabel("spearSkillLabel", "Spear", 6, 34, 54, 15, textAlignment: "MiddleLeft"));
+            bok2_djangoSpearSkill = CreateLabel("djangoSpearSkill", "", 60, 34, 41, 15, colorHex: totalStatColor, textAlignment: "MiddleLeft");
 
             // Hammer
             bok2_currentSkillLabels.Add(CreateLabel("hammerSkillLabel", "Hammer", 6, 49, 54, 15, textAlignment: "MiddleLeft"));
+            bok2_djangoHammerSkill = CreateLabel("djangoHammerSkill", "", 60, 49, 41, 15, colorHex: totalStatColor, textAlignment: "MiddleLeft");
 
             // Fists
             bok2_currentSkillLabels.Add(CreateLabel("fistsSkillLabel", "Fists", 6, 64, 54, 15, textAlignment: "MiddleLeft"));
+            bok2_djangoFistsSkill = CreateLabel("djangoFistsSkill", "", 60, 64, 41, 15, colorHex: totalStatColor, textAlignment: "MiddleLeft");
 
             // Gun
             bok2_currentSkillLabels.Add(CreateLabel("gunSkillLabel", "Gun", 6, 79, 54, 15, textAlignment: "MiddleLeft"));
+            bok2_djangoGunSkill = CreateLabel("djangoGunSkill", "", 60, 79, 41, 15, colorHex: totalStatColor, textAlignment: "MiddleLeft");
 
             // Add values labels to group
             bok2_currentSkillLabels.Add(bok2_djangoSwordSkill);
@@ -136,6 +149,10 @@ namespace BokInterface {
             bok2_currentSkillLabels.Add(bok2_djangoHammerSkill);
             bok2_currentSkillLabels.Add(bok2_djangoFistsSkill);
             bok2_currentSkillLabels.Add(bok2_djangoGunSkill);
+
+            for (int i = 0; i < bok2_currentSkillLabels.Count; i++) {
+                edit_statusLabels.Add(bok2_currentSkillLabels[i]);
+            }
 
             // Add elements to group
             for (int i = 0; i < bok2_currentSkillLabels.Count; i++) {
