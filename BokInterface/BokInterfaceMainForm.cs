@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Collections.Generic;
 using BokInterface.All;
+using System.Reflection;
 
 /**
  * File for the main / initialization part of the Bok interface
@@ -17,7 +18,7 @@ namespace BokInterface {
     [ExternalTool("Bok Interface")]
     public partial class BokInterfaceMainForm : ToolFormBase, IExternalToolForm {
 
-        #region Variables
+        #region Properties
 
         protected override string WindowTitleStatic => "Bok Interface";
         public override bool BlocksInputWhenFocused => false;
@@ -30,6 +31,10 @@ namespace BokInterface {
         protected bool isDS = false;
         protected int retryCount = 0;
         private bool previousDisplayMessagesSetting = true;
+
+        // Hack to get the list of logs
+        public static PropertyInfo? logsListProperty;
+        public static dynamic logsList = new List<string>();
 
         /// <summary>
         /// List of MemoryValues instances <br/>
@@ -155,6 +160,14 @@ namespace BokInterface {
                         // Loop on the list of functions to call each frame
                         foreach (Action function in functionsList) {
                             function();
+                        }
+                    }
+
+                    // If there are logs to show, open BizHawk's log window
+                    if (logsListProperty != null) {
+                        logsList = logsListProperty.GetValue(logsListProperty, null);
+                        if (logsList.Count > 0) {
+                            Tools.Load<LogWindow>(); // Currently does nothing
                         }
                     }
                 } else {

@@ -64,5 +64,18 @@ namespace BokInterface.All {
         public static uint LevelToExp(decimal level) {
             return level > 0 ? (uint)(level * 100) : 0;
         }
+
+        /// <summary>
+        /// <para>Write text to BizHawk's log window</para>
+        /// <para>See View => Open log window</para>
+        /// </summary>
+        /// <param name="text">Text to write</param>
+        public static void WriteToLog(string text) {
+            if (text == "") {
+                return;
+            }
+
+            Console.WriteLine(text); // Currently requires log window to be opened for Logs to be written
+        }
     }
 }
