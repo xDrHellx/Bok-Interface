@@ -38,18 +38,13 @@ namespace BokInterface {
         private IDictionary<string, decimal> GetDefaultStatusValues() {
 
             // Add default values according to current game
-            switch (shorterGameName) {
-                case "Boktai":
-                    return GetBoktaiDefaultValues();
-                case "Zoktai":
-                    return GetZoktaiDefaultValues();
-                case "Shinbok":
-                    return GetShinbokDefaultValues();
-                case "LunarKnights":
-                    return GetLunarKnightsDefaultValues();
-                default:
-                    return new Dictionary<string, decimal>();
-            }
+            return shorterGameName switch {
+                "Boktai" => GetBoktaiDefaultValues(),
+                "Zoktai" => GetZoktaiDefaultValues(),
+                "Shinbok" => GetShinbokDefaultValues(),
+                "LunarKnights" => GetLunarKnightsDefaultValues(),
+                _ => new Dictionary<string, decimal>(),
+            };
         }
 
         /// <summary>Sets values related to Django's status</summary>
@@ -66,7 +61,7 @@ namespace BokInterface {
                  * Indicate which sublist to use for setting the value, based on the input field's name
                  * We only split on the first "_"
                  */
-                string[] fieldParts = fields[i].Name.Split(new char[] { '_' }, 2);
+                string[] fieldParts = fields[i].Name.Split(['_'], 2);
                 string subList = fieldParts[0];
                 string memoryValueKey = fieldParts[1];
                 switch (subList) {
@@ -74,18 +69,10 @@ namespace BokInterface {
                         if (memoryValues.Django.ContainsKey(memoryValueKey) == true) {
                             memoryValues.Django[memoryValueKey].Value = (uint)value;
                         } else if (memoryValues.U16.ContainsKey(memoryValueKey) == true) {
-                            switch (memoryValueKey) {
-                                case "sword_skill":
-                                case "spear_skill":
-                                case "hammer_skill":
-                                case "fists_skill":
-                                case "gun_skill":
-                                    memoryValues.U16[memoryValueKey].Value = Utilities.LevelToExp(value);
-                                    break;
-                                default:
-                                    memoryValues.U16[memoryValueKey].Value = (uint)value;
-                                    break;
-                            }
+                            memoryValues.U16[memoryValueKey].Value = memoryValueKey switch {
+                                "sword_skill" or "spear_skill" or "hammer_skill" or "fists_skill" or "gun_skill" => Utilities.LevelToExp(value),
+                                _ => (uint)value,
+                            };
                         }
                         break;
                     case "solls":
