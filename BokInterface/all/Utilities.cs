@@ -1,3 +1,5 @@
+using System;
+
 namespace BokInterface.All {
 
     /// <summary>Main class for utilities</summary>
@@ -47,6 +49,20 @@ namespace BokInterface.All {
         /// <returns><c>string</c>Hexadecimal</returns>
         public static string IntToHex(uint value) {
             return value.ToString("X");
+        }
+
+        /// <summary>Convert EXP to Level</summary>
+        /// <param name="exp">EXP amount</param>
+        /// <returns><c>decimal</c>Level</returns>
+        public static decimal ExpToLevel(uint exp) {
+            return exp > 0 ? Convert.ToDecimal(exp) / 100 : 0;
+        }
+
+        /// <summary>Convert Level to EXP</summary>
+        /// <param name="level">Level</param>
+        /// <returns><c>uint</c>EXP</returns>
+        public static uint LevelToExp(decimal level) {
+            return level > 0 ? (uint)(level * 100) : 0;
         }
     }
 }

@@ -13,8 +13,8 @@ namespace BokInterface {
 
         /// <summary>Get default values for Lunar Knights / Boktai DS</summary>
         /// <returns><c>IDictionary<string, uint></c>Default values</returns>
-        private IDictionary<string, uint> GetLunarKnightsDefaultValues() {
-            IDictionary<string, uint> defaultValues = new Dictionary<string, uint>();
+        private IDictionary<string, decimal> GetLunarKnightsDefaultValues() {
+            IDictionary<string, decimal> defaultValues = new Dictionary<string, decimal>();
             return defaultValues;
         }
     }

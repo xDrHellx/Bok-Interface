@@ -40,6 +40,7 @@ namespace BokInterface {
                         BoktaiStatusEditSubwindow();
                         break;
                     case "Zoktai":
+                        statusEditWindow.ClientSize = new System.Drawing.Size(430, 172);
                         ZoktaiStatusEditSubwindow();
                         break;
                     case "Shinbok":

@@ -12,9 +12,9 @@ namespace BokInterface {
         }
 
         /// <summary>Get default values for Boktai</summary>
-        /// <returns><c>IDictionary<string, uint></c>Default values</returns>
-        private IDictionary<string, uint> GetBoktaiDefaultValues() {
-            IDictionary<string, uint> defaultValues = new Dictionary<string, uint>();
+        /// <returns><c>IDictionary<string, decimal></c>Default values</returns>
+        private IDictionary<string, decimal> GetBoktaiDefaultValues() {
+            IDictionary<string, decimal> defaultValues = new Dictionary<string, decimal>();
             return defaultValues;
         }
     }
