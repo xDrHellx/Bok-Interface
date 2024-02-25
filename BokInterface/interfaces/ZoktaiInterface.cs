@@ -32,7 +32,7 @@ namespace BokInterface {
         private Button bok2_editWeaponsBtn = new();
         private Button bok2_editMagicsBtn = new();
         private GroupBox bok2_currentSkillGroupBox = new();
-        private readonly List<Label> bok2_currentSkillLabels = new();
+        private readonly List<Label> bok2_currentSkillLabels = [];
 
         #endregion
 

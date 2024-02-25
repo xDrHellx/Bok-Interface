@@ -38,7 +38,7 @@ namespace BokInterface {
         private MemoryValues memoryValues = new("");
 
         /// <summary>List of functions to call each frame</summary>
-        public static List<Action> functionsList = new();
+        public static List<Action> functionsList = [];
 
         public ApiContainer ApiContainer {
             get => APIs.ApiContainer;

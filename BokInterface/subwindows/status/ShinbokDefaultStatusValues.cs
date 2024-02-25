@@ -51,11 +51,11 @@ namespace BokInterface {
             edit_statusNumericUpDowns.Add(CreateNumericUpDown("django_base_str", defaultValues["django_base_str"], 36, 74, 41, 23));
 
             // Tooltips & warnings
-            List<Label> warningLabels = new() {
+            List<Label> warningLabels = [
                 CreateImageLabel("tooltip", "warning", 83, 18),
                 CreateImageLabel("tooltip", "warning", 83, 47),
                 CreateImageLabel("tooltip", "warning", 83, 76)
-            };
+            ];
 
             // Add tooltips to labels group
             for (int i = 0; i < warningLabels.Count; i++) {

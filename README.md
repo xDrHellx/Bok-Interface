@@ -14,7 +14,7 @@ Our goals are to provide a
 The interface can detect all known versions of all Boktai games.  
 It is mainly made for the japanese releases since those are relevant for the speedrun but it should work on all releases.
 
-Bok Interface is made for BizHawk 2.9 and above but with [some adjustments](https://github.com/shenef/Bok-Interface/tree/GBAHawk) it can also be compiled for GBAHawk.
+Bok Interface is made for BizHawk 2.9 and above but with [some adjustments](https://github.com/xDrHellx/Bok-Interface/tree/GBAHawk) it can also be compiled for GBAHawk.
 
 ## Usage
 
