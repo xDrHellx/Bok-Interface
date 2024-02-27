@@ -96,7 +96,7 @@ namespace BokInterface {
 			this.Icon = this.GetIcon("nero");
 
 			// Try initializing list of memory values instances
-			this.memoryValues = new(shorterGameName);
+			this._memoryValues = new(shorterGameName);
 
 			/**
 			 * If not a Boktai game, shows the "Game not recognized" window
@@ -172,9 +172,9 @@ namespace BokInterface {
 		private void ClearExtraTools() {
 
 			// Tile Data Viewer-related
-			if(this.TileDataViewer != null) {
-				this.TileDataViewer.Controls.Clear();
-				this.TileDataViewer.Close();
+			if(this._tileDataViewer != null) {
+				this._tileDataViewer.Controls.Clear();
+				this._tileDataViewer.Close();
 				this.tileDataViewerActive = false;
 			}
 		}

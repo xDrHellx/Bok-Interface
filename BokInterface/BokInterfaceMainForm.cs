@@ -29,13 +29,13 @@ namespace BokInterface {
         protected bool interfaceActivated = false;
         protected bool isDS = false;
         protected int retryCount = 0;
-        private bool previousDisplayMessagesSetting = true;
+        private bool _previousDisplayMessagesSetting = true;
 
         /// <summary>
         /// List of MemoryValues instances <br/>
         /// These are used for simplyfing getting and setting values from memory addresses, especially the ones that are "dynamic"
         /// </summary>
-        private MemoryValues memoryValues = new("");
+        private MemoryValues _memoryValues = new("");
 
         /// <summary>List of functions to call each frame</summary>
         public static List<Action> functionsList = [];
@@ -86,7 +86,7 @@ namespace BokInterface {
             try {
 
                 // Get the current setting for displaying messages
-                previousDisplayMessagesSetting = APIs.Config.DisplayMessages;
+                _previousDisplayMessagesSetting = APIs.Config.DisplayMessages;
 
                 // Get & set the infos about the game currently running on BizHawk
                 DetectCurrentGame();
@@ -140,7 +140,7 @@ namespace BokInterface {
                             break;
                         default:
                             // If game is not handled, put back the old setting for displaying messages
-                            APIs.Client.DisplayMessages(previousDisplayMessagesSetting);
+                            APIs.Client.DisplayMessages(_previousDisplayMessagesSetting);
                             break;
                     }
 
@@ -237,7 +237,7 @@ namespace BokInterface {
         protected void BokInterfaceMainForm_FormClosing(object sender, FormClosingEventArgs e) {
 
             // Put back the old setting for displaying messages
-            APIs.Client.DisplayMessages(previousDisplayMessagesSetting);
+            APIs.Client.DisplayMessages(_previousDisplayMessagesSetting);
         }
 
         #endregion

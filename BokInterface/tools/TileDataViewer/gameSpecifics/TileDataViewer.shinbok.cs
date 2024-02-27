@@ -34,7 +34,7 @@ namespace BokInterface.Tools.TileDataViewer {
                         DrawTileImage(e, "exit", 5 + posX * scale, 5 + posY * scale);
                         break;
                     case "C6A":                 /// Void (fall & die)
-                        DrawFilledRectangle(e, blackColor, 5 + posX * scale, 5 + posY * scale, scale);
+                        DrawFilledRectangle(e, s_blackColor, 5 + posX * scale, 5 + posY * scale, scale);
                         break;
                     case "F":                   /// Wall (San Miguel)
                         break;

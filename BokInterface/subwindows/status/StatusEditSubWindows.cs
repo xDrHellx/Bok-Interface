@@ -12,10 +12,10 @@ namespace BokInterface {
 
         #region Properties for subwindow elements
 
-        private GroupBox edit_statusGroupBox = new();
-        private GroupBox edit_statsGroupBox = new();
-        private readonly List<Label> edit_statusLabels = [];
-        private readonly List<NumericUpDown> edit_statusNumericUpDowns = [];
+        private GroupBox _edit_statusGroupBox = new();
+        private GroupBox _edit_statsGroupBox = new();
+        private readonly List<Label> _edit_statusLabels = [];
+        private readonly List<NumericUpDown> _edit_statusNumericUpDowns = [];
 
         #endregion
 
@@ -23,10 +23,10 @@ namespace BokInterface {
 
         /// <summary>Clears the Status editing subwindow and all other sections within it</summary>
         private void ClearStatusEditControls() {
-            edit_statusGroupBox.Controls.Clear();
-            edit_statsGroupBox.Controls.Clear();
-            edit_statusLabels.Clear();
-            edit_statusNumericUpDowns.Clear();
+            _edit_statusGroupBox.Controls.Clear();
+            _edit_statsGroupBox.Controls.Clear();
+            _edit_statusLabels.Clear();
+            _edit_statusNumericUpDowns.Clear();
         }
 
         /// <summary>
@@ -51,7 +51,7 @@ namespace BokInterface {
         private void SetStatusValues() {
 
             // Retrieve all input fields
-            List<NumericUpDown> fields = edit_statusNumericUpDowns;
+            List<NumericUpDown> fields = _edit_statusNumericUpDowns;
 
             // Sets values based on fields for the current game
             for (int i = 0; i < fields.Count; i++) {
@@ -66,39 +66,39 @@ namespace BokInterface {
                 string memoryValueKey = fieldParts[1];
                 switch (subList) {
                     case "django":
-                        if (memoryValues.Django.ContainsKey(memoryValueKey) == true) {
-                            memoryValues.Django[memoryValueKey].Value = (uint)value;
-                        } else if (memoryValues.U16.ContainsKey(memoryValueKey) == true) {
-                            memoryValues.U16[memoryValueKey].Value = memoryValueKey switch {
+                        if (_memoryValues.Django.ContainsKey(memoryValueKey) == true) {
+                            _memoryValues.Django[memoryValueKey].Value = (uint)value;
+                        } else if (_memoryValues.U16.ContainsKey(memoryValueKey) == true) {
+                            _memoryValues.U16[memoryValueKey].Value = memoryValueKey switch {
                                 "sword_skill" or "spear_skill" or "hammer_skill" or "fists_skill" or "gun_skill" => Utilities.LevelToExp(value),
                                 _ => (uint)value,
                             };
                         }
                         break;
                     case "solls":
-                        if (memoryValues.Solls.ContainsKey(memoryValueKey) == true) {
-                            memoryValues.Solls[memoryValueKey].Value = (uint)value;
-                        } else if (memoryValues.U16.ContainsKey(memoryValueKey) == true) {
-                            memoryValues.U16[memoryValueKey].Value = (uint)value;
+                        if (_memoryValues.Solls.ContainsKey(memoryValueKey) == true) {
+                            _memoryValues.Solls[memoryValueKey].Value = (uint)value;
+                        } else if (_memoryValues.U16.ContainsKey(memoryValueKey) == true) {
+                            _memoryValues.U16[memoryValueKey].Value = (uint)value;
                         }
                         break;
                     case "bike":
-                        if (memoryValues.Bike.ContainsKey(memoryValueKey) == true) {
-                            memoryValues.Bike[memoryValueKey].Value = (uint)value;
-                        } else if (memoryValues.U16.ContainsKey(memoryValueKey) == true) {
-                            memoryValues.U16[memoryValueKey].Value = (uint)value;
+                        if (_memoryValues.Bike.ContainsKey(memoryValueKey) == true) {
+                            _memoryValues.Bike[memoryValueKey].Value = (uint)value;
+                        } else if (_memoryValues.U16.ContainsKey(memoryValueKey) == true) {
+                            _memoryValues.U16[memoryValueKey].Value = (uint)value;
                         }
                         break;
                     case "misc":
-                        if (memoryValues.Misc.ContainsKey(memoryValueKey) == true) {
-                            memoryValues.Misc[memoryValueKey].Value = (uint)value;
-                        } else if (memoryValues.U16.ContainsKey(memoryValueKey) == true) {
-                            memoryValues.U16[memoryValueKey].Value = (uint)value;
+                        if (_memoryValues.Misc.ContainsKey(memoryValueKey) == true) {
+                            _memoryValues.Misc[memoryValueKey].Value = (uint)value;
+                        } else if (_memoryValues.U16.ContainsKey(memoryValueKey) == true) {
+                            _memoryValues.U16[memoryValueKey].Value = (uint)value;
                         }
                         break;
                     default:
-                        if (memoryValues.U16.ContainsKey(memoryValueKey) == true) {
-                            memoryValues.U16[memoryValueKey].Value = (uint)value;
+                        if (_memoryValues.U16.ContainsKey(memoryValueKey) == true) {
+                            _memoryValues.U16[memoryValueKey].Value = (uint)value;
                         }
                         break;
                 }

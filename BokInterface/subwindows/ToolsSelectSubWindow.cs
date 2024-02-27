@@ -13,7 +13,7 @@ namespace BokInterface {
         #region Properties
 
         protected bool tileDataViewerActive = false;
-        private TileDataViewer? TileDataViewer;
+        private TileDataViewer? _tileDataViewer;
 
         #endregion
 
@@ -69,22 +69,22 @@ namespace BokInterface {
 
                 tileDataViewerActive = true;
 
-                TileDataViewer = new("tileDateViewer", "Tile data viewer", 500, 500, shorterGameName, GetGameIconName(), this);
-                TileDataViewer.InitializeFrameLoop();
+                _tileDataViewer = new("tileDateViewer", "Tile data viewer", 500, 500, shorterGameName, GetGameIconName(), this);
+                _tileDataViewer.InitializeFrameLoop();
 
-                TileDataViewer.FormClosing += new FormClosingEventHandler(delegate (object sender, FormClosingEventArgs e) {
+                _tileDataViewer.FormClosing += new FormClosingEventHandler(delegate (object sender, FormClosingEventArgs e) {
 
                     tileDataViewerActive = false;
 
                     // Remove the function from the list of functions to call each frame
-                    int functionIndex = TileDataViewer.index;
+                    int functionIndex = _tileDataViewer.index;
                     functionsList.RemoveAt(functionIndex);
 
                     // Just in case, replace instance with null to prevent it from doing anything else
-                    TileDataViewer = null;
+                    _tileDataViewer = null;
                 });
 
-                TileDataViewer.Show();
+                _tileDataViewer.Show();
             });
 
             miscToolsSelectionWindow.Controls.Add(tileDataBtn);
