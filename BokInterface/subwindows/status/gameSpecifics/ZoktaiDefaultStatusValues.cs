@@ -117,10 +117,10 @@ namespace BokInterface {
             if (stat > 0) {
                 defaultValues.Add("django_current_hp", memoryValues.Django["current_hp"].Value);
                 defaultValues.Add("django_current_ene", memoryValues.Django["current_ene"].Value);
-                defaultValues.Add("django_vit", memoryValues.Django["vit"].Value);
-                defaultValues.Add("django_spr", memoryValues.Django["spr"].Value);
-                defaultValues.Add("django_str", memoryValues.Django["str"].Value);
-                defaultValues.Add("django_agi", memoryValues.Django["agi"].Value);
+                defaultValues.Add("django_vit", memoryValues.U16["vit"].Value);
+                defaultValues.Add("django_spr", memoryValues.U16["spr"].Value);
+                defaultValues.Add("django_str", memoryValues.U16["str"].Value);
+                defaultValues.Add("django_agi", memoryValues.U16["agi"].Value);
 
                 defaultValues.Add("django_sword_skill", Utilities.ExpToLevel(memoryValues.U16["sword_skill"].Value));
                 defaultValues.Add("django_spear_skill", Utilities.ExpToLevel(memoryValues.U16["spear_skill"].Value));

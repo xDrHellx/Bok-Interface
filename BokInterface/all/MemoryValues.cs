@@ -68,13 +68,12 @@ namespace BokInterface {
             Django.Add("current_hp", new DynamicMemoryValue("current_hp", zoktaiAddresses.Misc["stat"], zoktaiAddresses.Django["current_hp"]));
             Django.Add("current_ene", new DynamicMemoryValue("current_ene", zoktaiAddresses.Misc["stat"], zoktaiAddresses.Django["current_ene"]));
 
-            // Stats
-            Django.Add("vit", new DynamicMemoryValue("vit", zoktaiAddresses.Misc["stat"], zoktaiAddresses.Django["current_vit"]));
-            Django.Add("spr", new DynamicMemoryValue("spr", zoktaiAddresses.Misc["stat"], zoktaiAddresses.Django["current_spr"]));
-            Django.Add("str", new DynamicMemoryValue("str", zoktaiAddresses.Misc["stat"], zoktaiAddresses.Django["current_str"]));
-            Django.Add("agi", new DynamicMemoryValue("agi", zoktaiAddresses.Misc["stat"], zoktaiAddresses.Django["current_agi"]));
-
             // U16
+            U16.Add("vit", new U16MemoryValue("vit", zoktaiAddresses.Django["persistent_vit"]));
+            U16.Add("spr", new U16MemoryValue("spr", zoktaiAddresses.Django["persistent_spr"]));
+            U16.Add("str", new U16MemoryValue("str", zoktaiAddresses.Django["persistent_str"]));
+            U16.Add("agi", new U16MemoryValue("agi", zoktaiAddresses.Django["persistent_agi"]));
+            
             U16.Add("sword_skill", new U16MemoryValue("sword_skill", zoktaiAddresses.Django["sword_skill_exp"]));
             U16.Add("spear_skill", new U16MemoryValue("spear_skill", zoktaiAddresses.Django["spear_skill_exp"]));
             U16.Add("hammer_skill", new U16MemoryValue("hammer_skill", zoktaiAddresses.Django["hammer_skill_exp"]));

@@ -76,10 +76,10 @@ namespace BokInterface {
             if (stat > 0) {
                 bok2_currentStatusHpValue.Text = memoryValues.Django["current_hp"].Value.ToString();
                 bok2_currentStatusEneValue.Text = memoryValues.Django["current_ene"].Value.ToString();
-                bok2_djangoVit.Text = memoryValues.Django["vit"].Value.ToString();
-                bok2_djangoSpr.Text = memoryValues.Django["spr"].Value.ToString();
-                bok2_djangoStr.Text = memoryValues.Django["str"].Value.ToString();
-                bok2_djangoAgi.Text = memoryValues.Django["agi"].Value.ToString();
+                bok2_djangoVit.Text = memoryValues.U16["vit"].Value.ToString();
+                bok2_djangoSpr.Text = memoryValues.U16["spr"].Value.ToString();
+                bok2_djangoStr.Text = memoryValues.U16["str"].Value.ToString();
+                bok2_djangoAgi.Text = memoryValues.U16["agi"].Value.ToString();
                 bok2_djangoSwordSkill.Text = Utilities.ExpToLevel(memoryValues.U16["sword_skill"].Value).ToString();
                 bok2_djangoSpearSkill.Text = Utilities.ExpToLevel(memoryValues.U16["spear_skill"].Value).ToString();
                 bok2_djangoHammerSkill.Text = Utilities.ExpToLevel(memoryValues.U16["hammer_skill"].Value).ToString();
