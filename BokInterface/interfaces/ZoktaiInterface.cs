@@ -40,8 +40,18 @@ namespace BokInterface {
 
         private void ShowZoktaiInterface() {
 
+            APIs.Gui.AddMessage(APIs.Memory.ReadU8(0x080000bc, "Main RAM").ToString());
+
+            // If JP version, update the game name label to add the version
+            string version = "";
+            int gameNameLabelWidth = 145;
+            if (currentGameId == 1244803925) {
+                version = Utilities.GetGameVersion() == 1 ? " (v1.1)" : " (v1.0)";
+                gameNameLabelWidth = 180;
+            }
+
             // Current game name
-            CreateLabel("currentGameName", currentGameName, 5, 5, 145, 20, true);
+            CreateLabel("currentGameName", currentGameName + version, 5, 5, gameNameLabelWidth, 20, true);
 
             // Current status section
             AddZoktaiCurrentStatusSection();
