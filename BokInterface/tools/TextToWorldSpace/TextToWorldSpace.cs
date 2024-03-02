@@ -76,7 +76,7 @@ namespace BokInterface.Tools.TextToWorldSpace {
         protected void WriteTextToCoordinates(string text, double x, double y, double z) {
 
             // Convert world to screen coordinates
-            var screenCoordinates = WorldToScreen(x, y, z);
+            (double, double) screenCoordinates = WorldToScreen(x, y, z);
             double posX = screenCoordinates.Item1;
             double posY = screenCoordinates.Item2;
 
@@ -130,7 +130,7 @@ namespace BokInterface.Tools.TextToWorldSpace {
         /// <param name="z">Z coordinate</param>
         /// <returns><c>double, double</c>Screen coordinates (X, Y)</returns>
         protected (double, double) WorldToScreen(double x, double y, double z) {
-            var viewCoordinates = WorldToView(x, y, z);
+            (double, double, double) viewCoordinates = WorldToView(x, y, z);
             return ViewToScreen(viewCoordinates.Item1, viewCoordinates.Item2);
         }
     }

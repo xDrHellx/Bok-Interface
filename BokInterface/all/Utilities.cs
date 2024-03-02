@@ -77,5 +77,11 @@ namespace BokInterface.All {
 
             Console.WriteLine(text); // Currently requires log window to be opened for Logs to be written
         }
+        
+        /// <summary>Get the value for the game's version</summary>
+        /// <returns><c>uint</c>Indicator (for example 0 for v1.0, 1 for v1.1, ...)</returns>
+        public static uint GetGameVersion() {
+            return APIs.Memory.ReadU8(0x080000bc, "Main RAM");
+        }
     }
 }
