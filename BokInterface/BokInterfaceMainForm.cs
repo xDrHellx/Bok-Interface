@@ -30,6 +30,7 @@ namespace BokInterface {
         protected bool isDS = false;
         protected int retryCount = 0;
         private bool previousDisplayMessagesSetting = true;
+        private bool previousIsPauseSetting = false;
 
         /// <summary>
         /// List of MemoryValues instances <br/>

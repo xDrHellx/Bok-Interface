@@ -53,6 +53,12 @@ namespace BokInterface {
             // Retrieve all input fields
             List<NumericUpDown> fields = edit_statusNumericUpDowns;
 
+            // Store the previous setting for BizHawk being paused
+            previousIsPauseSetting = APIs.Client.IsPaused();
+
+            // Pause BizHawk
+            APIs.Client.Pause();
+
             // Sets values based on fields for the current game
             for (int i = 0; i < fields.Count; i++) {
                 decimal value = fields[i].Value;
@@ -112,6 +118,14 @@ namespace BokInterface {
                         }
                         break;
                 }
+            }
+
+            /**
+             * If BizHawk was not paused before setting values, unpause it
+             * Otherwise keep it paused
+             */
+            if (previousIsPauseSetting == true) {
+                APIs.Client.Unpause();
             }
         }
 
