@@ -71,8 +71,10 @@ namespace BokInterface {
                         } else if (memoryValues.U16.ContainsKey(memoryValueKey) == true) {
                             memoryValues.U16[memoryValueKey].Value = memoryValueKey switch {
                                 "sword_skill" or "spear_skill" or "hammer_skill" or "fists_skill" or "gun_skill" => Utilities.LevelToExp(value),
-                                _ => (uint)value,
+                                _ => (uint)value
                             };
+                        } else if (memoryValues.U32.ContainsKey(memoryValueKey) == true) {
+                            memoryValues.U32[memoryValueKey].Value = (uint)value;
                         }
                         break;
                     case "solls":
@@ -80,6 +82,8 @@ namespace BokInterface {
                             memoryValues.Solls[memoryValueKey].Value = (uint)value;
                         } else if (memoryValues.U16.ContainsKey(memoryValueKey) == true) {
                             memoryValues.U16[memoryValueKey].Value = (uint)value;
+                        } else if (memoryValues.U32.ContainsKey(memoryValueKey) == true) {
+                            memoryValues.U32[memoryValueKey].Value = (uint)value;
                         }
                         break;
                     case "bike":
@@ -87,6 +91,8 @@ namespace BokInterface {
                             memoryValues.Bike[memoryValueKey].Value = (uint)value;
                         } else if (memoryValues.U16.ContainsKey(memoryValueKey) == true) {
                             memoryValues.U16[memoryValueKey].Value = (uint)value;
+                        } else if (memoryValues.U32.ContainsKey(memoryValueKey) == true) {
+                            memoryValues.U32[memoryValueKey].Value = (uint)value;
                         }
                         break;
                     case "misc":
@@ -94,11 +100,15 @@ namespace BokInterface {
                             memoryValues.Misc[memoryValueKey].Value = (uint)value;
                         } else if (memoryValues.U16.ContainsKey(memoryValueKey) == true) {
                             memoryValues.U16[memoryValueKey].Value = (uint)value;
+                        } else if (memoryValues.U32.ContainsKey(memoryValueKey) == true) {
+                            memoryValues.U32[memoryValueKey].Value = (uint)value;
                         }
                         break;
                     default:
                         if (memoryValues.U16.ContainsKey(memoryValueKey) == true) {
                             memoryValues.U16[memoryValueKey].Value = (uint)value;
+                        } else if (memoryValues.U32.ContainsKey(memoryValueKey) == true) {
+                            memoryValues.U32[memoryValueKey].Value = (uint)value;
                         }
                         break;
                 }
