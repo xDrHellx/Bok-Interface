@@ -64,5 +64,11 @@ namespace BokInterface.All {
         public static uint LevelToExp(decimal level) {
             return level > 0 ? (uint)(level * 100) : 0;
         }
+
+        /// <summary>Get the value for the game's version</summary>
+        /// <returns><c>uint</c>Indicator (for example 0 for v1.0, 1 for v1.1, ...)</returns>
+        public static uint GetGameVersion() {
+            return APIs.Memory.ReadU8(0x080000bc, "Main RAM");
+        }
     }
 }

@@ -27,6 +27,9 @@ namespace BokInterface {
         /// <summary>U16 memory values</summary>
         public IDictionary<string, U16MemoryValue> U16 = new Dictionary<string, U16MemoryValue>();
 
+        /// <summary>U32 memory values</summary>
+        public IDictionary<string, U32MemoryValue> U32 = new Dictionary<string, U32MemoryValue>();
+
         #endregion
 
         /// <summary>Constructor</summary>
@@ -68,18 +71,22 @@ namespace BokInterface {
             Django.Add("current_hp", new DynamicMemoryValue("current_hp", _zoktaiAddresses.Misc["stat"], _zoktaiAddresses.Django["current_hp"]));
             Django.Add("current_ene", new DynamicMemoryValue("current_ene", _zoktaiAddresses.Misc["stat"], _zoktaiAddresses.Django["current_ene"]));
 
-            // Stats
-            Django.Add("vit", new DynamicMemoryValue("vit", _zoktaiAddresses.Misc["stat"], _zoktaiAddresses.Django["current_vit"]));
-            Django.Add("spr", new DynamicMemoryValue("spr", _zoktaiAddresses.Misc["stat"], _zoktaiAddresses.Django["current_spr"]));
-            Django.Add("str", new DynamicMemoryValue("str", _zoktaiAddresses.Misc["stat"], _zoktaiAddresses.Django["current_str"]));
-            Django.Add("agi", new DynamicMemoryValue("agi", _zoktaiAddresses.Misc["stat"], _zoktaiAddresses.Django["current_agi"]));
-
             // U16
+            U16.Add("level", new U16MemoryValue("level", _zoktaiAddresses.Django["level"]));
+
+            U16.Add("vit", new U16MemoryValue("vit", _zoktaiAddresses.Django["persistent_vit"]));
+            U16.Add("spr", new U16MemoryValue("spr", _zoktaiAddresses.Django["persistent_spr"]));
+            U16.Add("str", new U16MemoryValue("str", _zoktaiAddresses.Django["persistent_str"]));
+            U16.Add("agi", new U16MemoryValue("agi", _zoktaiAddresses.Django["persistent_agi"]));
+
             U16.Add("sword_skill", new U16MemoryValue("sword_skill", _zoktaiAddresses.Django["sword_skill_exp"]));
             U16.Add("spear_skill", new U16MemoryValue("spear_skill", _zoktaiAddresses.Django["spear_skill_exp"]));
             U16.Add("hammer_skill", new U16MemoryValue("hammer_skill", _zoktaiAddresses.Django["hammer_skill_exp"]));
             U16.Add("fists_skill", new U16MemoryValue("fists_skill", _zoktaiAddresses.Django["fists_skill_exp"]));
             U16.Add("gun_skill", new U16MemoryValue("gun_skill", _zoktaiAddresses.Django["gun_skill_exp"]));
+
+            // U32
+            U32.Add("exp", new U32MemoryValue("exp", _zoktaiAddresses.Django["exp"]));
         }
 
         private void InitializeShinbokList() {

@@ -1,4 +1,4 @@
-﻿using BizHawk.Client.Common;
+using BizHawk.Client.Common;
 using BizHawk.Client.EmuHawk;
 using System;
 using System.Windows.Forms;
@@ -30,6 +30,7 @@ namespace BokInterface {
         protected bool isDS = false;
         protected int retryCount = 0;
         private bool _previousDisplayMessagesSetting = true;
+        private bool _previousIsPauseSetting = false;
 
         /// <summary>
         /// List of MemoryValues instances <br/>
@@ -80,9 +81,9 @@ namespace BokInterface {
             interfaceActivated = false;
 
             /**
-			 * We use a try - catch to prevent the tool from returning an error when no ROM is loaded
-			 * When no ROM is loaded, memory domains aren't accessible
-			 */
+             * We use a try - catch to prevent the tool from returning an error when no ROM is loaded
+             * When no ROM is loaded, memory domains aren't accessible
+             */
             try {
 
                 // Get the current setting for displaying messages
@@ -94,11 +95,11 @@ namespace BokInterface {
                     ShowInterfaceIndicator();
                 } else {
                     /**
-					 * Retry getting the game code
-					 * For DS games, because of the DS bootup screen, the game code is not always accessible after switching games
-					 *
-					 * 10 frames should be enough for this
-					 */
+                     * Retry getting the game code
+                     * For DS games, because of the DS bootup screen, the game code is not always accessible after switching games
+                     *
+                     * 10 frames should be enough for this
+                     */
                     if (retryCount < 10) {
                         retryCount++;
                         DetectCurrentGame();
@@ -145,11 +146,11 @@ namespace BokInterface {
                     }
 
                     /**
-					 * Check if we're past the GBA boot up screen
-					 *
-					 * Otherwise the emulator can crash if we try reading values from memory addresses,
-					 * most likely because it reads "garbage" data
-					 */
+                     * Check if we're past the GBA boot up screen
+                     *
+                     * Otherwise the emulator can crash if we try reading values from memory addresses,
+                     * most likely because it reads "garbage" data
+                     */
                     if (APIs.Emulation.FrameCount() >= 400) {
 
                         // Loop on the list of functions to call each frame
@@ -160,11 +161,11 @@ namespace BokInterface {
                 } else {
 
                     /**
-					 * Retry getting the game code
-					 * For DS games, because of the DS bootup screen, the game code is not always accessible after switching games
-					 *
-					 * 10 frames should be enough for this
-					 */
+                     * Retry getting the game code
+                     * For DS games, because of the DS bootup screen, the game code is not always accessible after switching games
+                     *
+                     * 10 frames should be enough for this
+                     */
                     if (retryCount < 10) {
                         retryCount++;
                         DetectCurrentGame();
@@ -180,9 +181,9 @@ namespace BokInterface {
         protected void DetectCurrentGame() {
 
             /**
-			 * Try getting the game code
-			 * If the game code is 0 or 4267703902, it's most likely not a GBA game & we need to try different memory addresses
-			 */
+             * Try getting the game code
+             * If the game code is 0 or 4267703902, it's most likely not a GBA game & we need to try different memory addresses
+             */
             currentGameId = Utilities.GetGbaGameCode();
             if (new string[] { "4267703902", "0" }.Contains(currentGameId.ToString()) == true) {
                 currentGameId = Utilities.GetDsGameCode();

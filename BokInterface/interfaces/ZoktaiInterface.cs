@@ -13,10 +13,12 @@ namespace BokInterface {
     partial class BokInterfaceMainForm {
 
         #region Properties
-
+        
         private readonly ZoktaiAddresses _zoktaiAddresses = new();
         private Label _bok2_currentStatusHpValue = new();
         private Label _bok2_currentStatusEneValue = new();
+        private Label _bok2_djangoLevel = new();
+        private Label _bok2_djangoExp = new();
         private Label _bok2_djangoVit = new();
         private Label _bok2_djangoSpr = new();
         private Label _bok2_djangoStr = new();
@@ -38,8 +40,16 @@ namespace BokInterface {
 
         private void ShowZoktaiInterface() {
 
+            // If JP version, update the game name label to add the version
+            string version = "";
+            int gameNameLabelWidth = 145;
+            if (currentGameId == 1244803925) {
+                version = Utilities.GetGameVersion() == 1 ? " (v1.1)" : " (v1.0)";
+                gameNameLabelWidth = 180;
+            }
+
             // Current game name
-            CreateLabel("currentGameName", currentGameName, 5, 5, 145, 20, true);
+            CreateLabel("currentGameName", currentGameName + version, 5, 5, gameNameLabelWidth, 20, true);
 
             // Current status section
             AddZoktaiCurrentStatusSection();
@@ -74,12 +84,15 @@ namespace BokInterface {
              * For example "stat" is 0 during room transitions or at the title screen
              */
             if (stat > 0) {
+
                 _bok2_currentStatusHpValue.Text = _memoryValues.Django["current_hp"].Value.ToString();
                 _bok2_currentStatusEneValue.Text = _memoryValues.Django["current_ene"].Value.ToString();
-                _bok2_djangoVit.Text = _memoryValues.Django["vit"].Value.ToString();
-                _bok2_djangoSpr.Text = _memoryValues.Django["spr"].Value.ToString();
-                _bok2_djangoStr.Text = _memoryValues.Django["str"].Value.ToString();
-                _bok2_djangoAgi.Text = _memoryValues.Django["agi"].Value.ToString();
+                _bok2_djangoLevel.Text = _memoryValues.U16["level"].Value.ToString();
+                _bok2_djangoExp.Text = _memoryValues.U32["exp"].Value.ToString();
+                _bok2_djangoVit.Text = _memoryValues.U16["vit"].Value.ToString();
+                _bok2_djangoSpr.Text = _memoryValues.U16["spr"].Value.ToString();
+                _bok2_djangoStr.Text = _memoryValues.U16["str"].Value.ToString();
+                _bok2_djangoAgi.Text = _memoryValues.U16["agi"].Value.ToString();
                 _bok2_djangoSwordSkill.Text = Utilities.ExpToLevel(_memoryValues.U16["sword_skill"].Value).ToString();
                 _bok2_djangoSpearSkill.Text = Utilities.ExpToLevel(_memoryValues.U16["spear_skill"].Value).ToString();
                 _bok2_djangoHammerSkill.Text = Utilities.ExpToLevel(_memoryValues.U16["hammer_skill"].Value).ToString();
@@ -103,14 +116,20 @@ namespace BokInterface {
             // Current status labels
             currentStatusLabels.Add(CreateLabel("djangoCurrentHpLabel", "LIFE :", 7, 19, 34, 15));
             currentStatusLabels.Add(CreateLabel("djangoCurrentEneLabel", "ENE :", 7, 34, 34, 15));
+            currentStatusLabels.Add(CreateLabel("djangoCurrentLevelLabel", "Level :", 93, 19, 40, 15));
+            currentStatusLabels.Add(CreateLabel("djangoCurrentExpLabel", "EXP :", 93, 34, 40, 15));
 
             // Current status values
             _bok2_currentStatusHpValue = CreateLabel("djangoCurrentHpValue", "", 44, 19, 31, 15);
             _bok2_currentStatusEneValue = CreateLabel("djangoCurrentHpValue", "", 44, 34, 31, 15);
+            _bok2_djangoLevel = CreateLabel("djangoCurrentLevelValue", "", 132, 19, 31, 15);
+            _bok2_djangoExp = CreateLabel("djangoCurrentExpValue", "", 132, 34, 43, 15);
 
             // Add values labels to group
             currentStatusLabels.Add(_bok2_currentStatusHpValue);
             currentStatusLabels.Add(_bok2_currentStatusEneValue);
+            currentStatusLabels.Add(_bok2_djangoLevel);
+            currentStatusLabels.Add(_bok2_djangoExp);
 
             // Add elements to group
             for (int i = 0; i < currentStatusLabels.Count; i++) {

@@ -21,24 +21,40 @@ namespace BokInterface {
             IDictionary<string, decimal> defaultValues = GetDefaultStatusValues();
 
             // Sections
-            _edit_statusGroupBox = CreateGroupBox("editStatusGroup", "Status", 5, 5, 103, 76);
+            _edit_statusGroupBox = CreateGroupBox("editStatusGroup", "Status", 5, 5, 103, 105);
             _edit_skillGroupBox = CreateGroupBox("editSkillGroup", "Skill", 114, 5, 220, 105);
             _edit_statsGroupBox = CreateGroupBox("editStatsGroup", "Stats", 340, 5, 84, 134);
 
-            // Status
-            _edit_statusLabels.Add(CreateLabel("djangoEditHpLabel", "LIFE :", 7, 19, 34, 15));
-            _edit_statusLabels.Add(CreateLabel("djangoEditEneLabel", "ENE :", 7, 47, 34, 15));
+            // EXP is separated for now
+            edit_statusLabels.Add(CreateLabel("djangoEditExpLabel", "EXP", 11, 118, 27, 15));
+            edit_statusNumericUpDowns.Add(CreateNumericUpDown("django_exp", defaultValues["django_exp"], 42, 116, 60, 23, minValue: 0, maxValue: 999999));
 
-            _edit_statusNumericUpDowns.Add(CreateNumericUpDown("django_current_hp", defaultValues["django_current_hp"], 47, 16, 50, 23, maxValue: 1000));
-            _edit_statusNumericUpDowns.Add(CreateNumericUpDown("django_current_ene", defaultValues["django_current_ene"], 47, 45, 50, 23, maxValue: 1000));
+            // Add elements to group (we do this here because EXP has to be set before Level if possible)
+            for (int i = 0; i < edit_statusLabels.Count; i++) {
+                l++;
+                statusEditWindow.Controls.Add(edit_statusLabels[i]);
+            }
+
+            for (int i = 0; i < edit_statusNumericUpDowns.Count; i++) {
+                n++;
+                statusEditWindow.Controls.Add(edit_statusNumericUpDowns[i]);
+            }
+
+            // Status
+            _edit_statusLabels.Add(CreateLabel("djangoEditLevelLabel", "Level", 7, 19, 34, 15));
+            _edit_statusLabels.Add(CreateLabel("djangoEditHpLabel", "LIFE :", 7, 47, 34, 15));
+            _edit_statusLabels.Add(CreateLabel("djangoEditEneLabel", "ENE :", 7, 81, 34, 15));
+
+            _edit_statusNumericUpDowns.Add(CreateNumericUpDown("django_level", defaultValues["django_level"], 47, 16, 50, 23));
+            _edit_statusNumericUpDowns.Add(CreateNumericUpDown("django_current_hp", defaultValues["django_current_hp"], 47, 45, 50, 23, maxValue: 1000));
+            _edit_statusNumericUpDowns.Add(CreateNumericUpDown("django_current_ene", defaultValues["django_current_ene"], 47, 79, 50, 23, maxValue: 1000));
 
             // Add elements to group boxes / sections
-            for (int i = 0; i < _edit_statusLabels.Count; i++) {
+            for (int i = l; i < _edit_statusLabels.Count; i++) {
                 l++;
                 _edit_statusGroupBox.Controls.Add(_edit_statusLabels[i]);
             }
-
-            for (int i = 0; i < _edit_statusNumericUpDowns.Count; i++) {
+            for (int i = n; i < _edit_statusNumericUpDowns.Count; i++) {
                 n++;
                 _edit_statusGroupBox.Controls.Add(_edit_statusNumericUpDowns[i]);
             }
@@ -94,6 +110,11 @@ namespace BokInterface {
             statusEditWindow.Controls.Add(_edit_skillGroupBox);
             statusEditWindow.Controls.Add(_edit_statsGroupBox);
 
+            // Add tooltips & warnings
+            Label expWarning = CreateImageLabel("tooltip", "warning", 108, 119);
+            AddToolTip(expWarning, "Level will be automatically adjusted if EXP is too high" + Environment.NewLine + "You might need to apply Level twice for it to be set properly because of this");
+            statusEditWindow.Controls.Add(expWarning);
+
             // Button for setting values & its events
             Button setValuesButton = CreateButton("setStatusButton", "Set values", 349, 145, 75, 23);
             setValuesButton.Click += new EventHandler(delegate (object sender, EventArgs e) {
@@ -117,10 +138,14 @@ namespace BokInterface {
             if (stat > 0) {
                 defaultValues.Add("django_current_hp", _memoryValues.Django["current_hp"].Value);
                 defaultValues.Add("django_current_ene", _memoryValues.Django["current_ene"].Value);
-                defaultValues.Add("django_vit", _memoryValues.Django["vit"].Value);
-                defaultValues.Add("django_spr", _memoryValues.Django["spr"].Value);
-                defaultValues.Add("django_str", _memoryValues.Django["str"].Value);
-                defaultValues.Add("django_agi", _memoryValues.Django["agi"].Value);
+
+                defaultValues.Add("django_exp", _memoryValues.U32["exp"].Value);
+                defaultValues.Add("django_level", _memoryValues.U16["level"].Value);
+
+                defaultValues.Add("django_vit", _memoryValues.U16["vit"].Value);
+                defaultValues.Add("django_spr", _memoryValues.U16["spr"].Value);
+                defaultValues.Add("django_str", _memoryValues.U16["str"].Value);
+                defaultValues.Add("django_agi", _memoryValues.U16["agi"].Value);
 
                 defaultValues.Add("django_sword_skill", Utilities.ExpToLevel(_memoryValues.U16["sword_skill"].Value));
                 defaultValues.Add("django_spear_skill", Utilities.ExpToLevel(_memoryValues.U16["spear_skill"].Value));
@@ -131,6 +156,10 @@ namespace BokInterface {
                 // If stat is unvalid (if we are on the title screen or in a room transition), use specific values
                 defaultValues.Add("django_current_hp", 100);
                 defaultValues.Add("django_current_ene", 100);
+
+                defaultValues.Add("django_exp", 0);
+                defaultValues.Add("django_level", 1);
+
                 defaultValues.Add("django_vit", 10);
                 defaultValues.Add("django_spr", 10);
                 defaultValues.Add("django_str", 10);

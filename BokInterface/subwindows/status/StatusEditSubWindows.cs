@@ -53,6 +53,12 @@ namespace BokInterface {
             // Retrieve all input fields
             List<NumericUpDown> fields = _edit_statusNumericUpDowns;
 
+            // Store the previous setting for BizHawk being paused
+            _previousIsPauseSetting = APIs.Client.IsPaused();
+
+            // Pause BizHawk
+            APIs.Client.Pause();
+
             // Sets values based on fields for the current game
             for (int i = 0; i < fields.Count; i++) {
                 decimal value = fields[i].Value;
@@ -71,8 +77,10 @@ namespace BokInterface {
                         } else if (_memoryValues.U16.ContainsKey(memoryValueKey) == true) {
                             _memoryValues.U16[memoryValueKey].Value = memoryValueKey switch {
                                 "sword_skill" or "spear_skill" or "hammer_skill" or "fists_skill" or "gun_skill" => Utilities.LevelToExp(value),
-                                _ => (uint)value,
+                                _ => (uint)value
                             };
+                        } else if (_memoryValues.U32.ContainsKey(memoryValueKey) == true) {
+                            _memoryValues.U32[memoryValueKey].Value = (uint)value;
                         }
                         break;
                     case "solls":
@@ -80,6 +88,8 @@ namespace BokInterface {
                             _memoryValues.Solls[memoryValueKey].Value = (uint)value;
                         } else if (_memoryValues.U16.ContainsKey(memoryValueKey) == true) {
                             _memoryValues.U16[memoryValueKey].Value = (uint)value;
+                        } else if (_memoryValues.U32.ContainsKey(memoryValueKey) == true) {
+                            _memoryValues.U32[memoryValueKey].Value = (uint)value;
                         }
                         break;
                     case "bike":
@@ -87,6 +97,8 @@ namespace BokInterface {
                             _memoryValues.Bike[memoryValueKey].Value = (uint)value;
                         } else if (_memoryValues.U16.ContainsKey(memoryValueKey) == true) {
                             _memoryValues.U16[memoryValueKey].Value = (uint)value;
+                        } else if (_memoryValues.U32.ContainsKey(memoryValueKey) == true) {
+                            _memoryValues.U32[memoryValueKey].Value = (uint)value;
                         }
                         break;
                     case "misc":
@@ -94,14 +106,26 @@ namespace BokInterface {
                             _memoryValues.Misc[memoryValueKey].Value = (uint)value;
                         } else if (_memoryValues.U16.ContainsKey(memoryValueKey) == true) {
                             _memoryValues.U16[memoryValueKey].Value = (uint)value;
+                        } else if (_memoryValues.U32.ContainsKey(memoryValueKey) == true) {
+                            _memoryValues.U32[memoryValueKey].Value = (uint)value;
                         }
                         break;
                     default:
                         if (_memoryValues.U16.ContainsKey(memoryValueKey) == true) {
                             _memoryValues.U16[memoryValueKey].Value = (uint)value;
+                        } else if (_memoryValues.U32.ContainsKey(memoryValueKey) == true) {
+                            _memoryValues.U32[memoryValueKey].Value = (uint)value;
                         }
                         break;
                 }
+            }
+
+            /**
+             * If BizHawk was not paused before setting values, unpause it
+             * Otherwise keep it paused
+             */
+            if (_previousIsPauseSetting == true) {
+                APIs.Client.Unpause();
             }
         }
 
