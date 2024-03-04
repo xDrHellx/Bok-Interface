@@ -40,8 +40,6 @@ namespace BokInterface {
 
         private void ShowZoktaiInterface() {
 
-            APIs.Gui.AddMessage(APIs.Memory.ReadU8(0x080000bc, "Main RAM").ToString());
-
             // If JP version, update the game name label to add the version
             string version = "";
             int gameNameLabelWidth = 145;
