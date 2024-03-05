@@ -60,16 +60,21 @@ namespace BokInterface.Addresses {
             Django.Add("persistent_str", 0x0203C41C);
             Django.Add("persistent_agi", 0x0203C41E);
 
-            // Test these
+            // EXP & level
             Django.Add("level", 0x0203C440);
             Django.Add("exp", 0x0203C450);
+            Django.Add("total_exp_until_next_level", 0x02002464);
 
-            // 100 exp = 1 lvl
+            // 100 skill exp = 1 lvl
             Django.Add("sword_skill_exp", 0x0203C446);
             Django.Add("spear_skill_exp", 0x0203C448);
             Django.Add("hammer_skill_exp", 0x0203C44A);
             Django.Add("fists_skill_exp", 0x0203C44C);
             Django.Add("gun_skill_exp", 0x0203C44E);
+
+            // Stat points
+            Django.Add("showned_stat_points_to_allocate", 0x02006E20); // useless
+            Django.Add("stat_points_to_allocate", 0x0203C442);
 
             // Add Misc addresses
             Misc.Add("map_data", 0x030046A4);
@@ -87,6 +92,12 @@ namespace BokInterface.Addresses {
                 4 - Unused
                 5 - Sabata
             */
+
+            /*
+             * US version 
+             */
+
+            // Misc.Add("exp_table", 0x08ce3238);
         }
     }
 }
