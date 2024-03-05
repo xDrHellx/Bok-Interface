@@ -113,7 +113,7 @@ namespace BokInterface {
 
             // Add tooltips & warnings
             Label expWarning = CreateImageLabel("tooltip", "warning", 108, 119);
-            AddToolTip(expWarning, "Level will be automatically adjusted if EXP is too high" + Environment.NewLine + "You might need to apply Level twice for it to be set properly because of this");
+            AddToolTip(expWarning, "Level will be automatically adjusted if EXP is high enough to reach higher levels");
             statusEditWindow.Controls.Add(expWarning);
 
             // Button for setting values & its events

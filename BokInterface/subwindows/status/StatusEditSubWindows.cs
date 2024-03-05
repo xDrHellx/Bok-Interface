@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Windows.Forms;
 
 using BokInterface.All;
+using BokInterface.ExpTables;
 
 /**
  * Main file for status editing subwindows
@@ -55,6 +56,16 @@ namespace BokInterface {
 
             // Store the previous setting for BizHawk being paused
             previousIsPauseSetting = APIs.Client.IsPaused();
+
+            /**
+             * If the total EXP until next level & current level are available,
+             * we'll use these to prevent the game from adjusting the level while setting new values
+             * 
+             * We'll set the total EXP until next level to the maximum possible to prevent that from happening
+             */
+            if (memoryValues.U32.ContainsKey("total_exp_until_next_level") == true) {
+                memoryValues.U32["total_exp_until_next_level"].Value = 99999999;
+            }
 
             // Pause BizHawk
             APIs.Client.Pause();
@@ -118,6 +129,15 @@ namespace BokInterface {
                         }
                         break;
                 }
+            }
+
+            /**
+             * If the total EXP until next level & current level were available before setting values,
+             * we set it to what it should be to reach the next level (except for lvl 99 which is always 0)
+             */
+            if (memoryValues.U32.ContainsKey("total_exp_until_next_level") == true && memoryValues.U16.ContainsKey("level")) {
+                int level = (int)memoryValues.U16["level"].Value;
+                memoryValues.U32["total_exp_until_next_level"].Value = level < 99 ? Django.zoktai[level] : 0;
             }
 
             /**

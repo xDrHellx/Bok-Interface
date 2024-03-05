@@ -87,6 +87,7 @@ namespace BokInterface {
 
             // U32
             U32.Add("exp", new U32MemoryValue("exp", zoktaiAddresses.Django["exp"]));
+            U32.Add("total_exp_until_next_level", new U32MemoryValue("total_exp_until_next_level", zoktaiAddresses.Django["total_exp_until_next_level"]));
         }
 
         private void InitializeShinbokList() {

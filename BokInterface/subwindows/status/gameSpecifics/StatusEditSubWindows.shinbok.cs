@@ -46,9 +46,9 @@ namespace BokInterface {
             edit_statusLabels.Add(CreateLabel("djangoEditEneLabel", "SPR", 8, 47, 27, 15));
             edit_statusLabels.Add(CreateLabel("djangoEditTrcLabel", "STR", 8, 76, 27, 15));
 
-            edit_statusNumericUpDowns.Add(CreateNumericUpDown("django_base_vit", defaultValues["django_base_vit"], 36, 16, 41, 23));
-            edit_statusNumericUpDowns.Add(CreateNumericUpDown("django_base_spr", defaultValues["django_base_spr"], 36, 45, 41, 23));
-            edit_statusNumericUpDowns.Add(CreateNumericUpDown("django_base_str", defaultValues["django_base_str"], 36, 74, 41, 23));
+            edit_statusNumericUpDowns.Add(CreateNumericUpDown("django_base_vit", defaultValues["django_base_vit"], 36, 16, 41, 23, maxValue: 100));
+            edit_statusNumericUpDowns.Add(CreateNumericUpDown("django_base_spr", defaultValues["django_base_spr"], 36, 45, 41, 23, maxValue: 100));
+            edit_statusNumericUpDowns.Add(CreateNumericUpDown("django_base_str", defaultValues["django_base_str"], 36, 74, 41, 23, maxValue: 100));
 
             // Tooltips & warnings
             List<Label> warningLabels = [
