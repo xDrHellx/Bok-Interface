@@ -13,6 +13,7 @@ namespace BokInterface {
 
         private CheckGroupBox edit_skillGroupBox = new();
         private CheckGroupBox edit_ExpGroupBox = new();
+        private CheckGroupBox edit_StatPointsGroupBox = new();
 
         private void ZoktaiStatusEditSubwindow() {
             int l = 0;
@@ -25,7 +26,8 @@ namespace BokInterface {
             edit_statusGroupBox = CreateCheckGroupBox("editStatusGroup", "Status", 5, 5, 103, 110);
             edit_skillGroupBox = CreateCheckGroupBox("editSkillGroup", "Skill", 114, 5, 220, 110);
             edit_statsGroupBox = CreateCheckGroupBox("editStatsGroup", "Stats", 340, 5, 84, 139);
-            edit_ExpGroupBox = CreateCheckGroupBox("editStatsGroup", "Stats", 5, 117, 127, 52);
+            edit_StatPointsGroupBox = CreateCheckGroupBox("editStatPointsGroup", "Points", 340, 144, 84, 53);
+            edit_ExpGroupBox = CreateCheckGroupBox("editExpGroup", "EXP", 5, 117, 97, 52);
 
             // Status
             edit_statusLabels.Add(CreateLabel("djangoEditLevelLabel", "Level", 7, 24, 34, 15));
@@ -93,16 +95,19 @@ namespace BokInterface {
                 edit_statsGroupBox.Controls.Add(edit_statusNumericUpDowns[i]);
             }
 
-            // EXP
-            edit_statusLabels.Add(CreateLabel("djangoEditExpLabel", "EXP", 8, 24, 27, 15));
-            edit_statusNumericUpDowns.Add(CreateNumericUpDown("django_exp", defaultValues["django_exp"], 39, 22, 60, 23, minValue: 0, maxValue: 999999));
+            // Stat points available
+            edit_statusNumericUpDowns.Add(CreateNumericUpDown("django_stat_points", defaultValues["django_stat_points"], 32, 22, 46, 23, minValue: 0, maxValue: 255));
 
             // Add elements to group
-            for (int i = l; i < edit_statusLabels.Count; i++) {
-                l++;
-                edit_ExpGroupBox.Controls.Add(edit_statusLabels[i]);
+            for (int i = n; i < edit_statusNumericUpDowns.Count; i++) {
+                n++;
+                edit_StatPointsGroupBox.Controls.Add(edit_statusNumericUpDowns[i]);
             }
 
+            // EXP
+            edit_statusNumericUpDowns.Add(CreateNumericUpDown("django_exp", defaultValues["django_exp"], 8, 22, 60, 23, minValue: 0, maxValue: 999999));
+
+            // Add elements to group
             for (int i = n; i < edit_statusNumericUpDowns.Count; i++) {
                 n++;
                 edit_ExpGroupBox.Controls.Add(edit_statusNumericUpDowns[i]);
@@ -112,15 +117,16 @@ namespace BokInterface {
             statusEditWindow.Controls.Add(edit_statusGroupBox);
             statusEditWindow.Controls.Add(edit_skillGroupBox);
             statusEditWindow.Controls.Add(edit_statsGroupBox);
+            statusEditWindow.Controls.Add(edit_StatPointsGroupBox);
             statusEditWindow.Controls.Add(edit_ExpGroupBox);
 
             // Add tooltips & warnings
-            Label expWarning = CreateImageLabel("tooltip", "warning", 105, 25);
+            Label expWarning = CreateImageLabel("tooltip", "warning", 75, 25);
             AddToolTip(expWarning, "Level will be automatically adjusted if EXP is high enough to reach higher levels");
             edit_ExpGroupBox.Controls.Add(expWarning);
 
             // Button for setting values & its events
-            Button setValuesButton = CreateButton("setStatusButton", "Set values", 349, 150, 75, 23);
+            Button setValuesButton = CreateButton("setStatusButton", "Set values", 350, 203, 75, 23);
             setValuesButton.Click += new EventHandler(delegate (object sender, EventArgs e) {
                 // Write the values for 10 frames
                 for (int i = 0; i < 10; i++) {
@@ -150,6 +156,7 @@ namespace BokInterface {
                 defaultValues.Add("django_spr", memoryValues.U16["spr"].Value);
                 defaultValues.Add("django_str", memoryValues.U16["str"].Value);
                 defaultValues.Add("django_agi", memoryValues.U16["agi"].Value);
+                defaultValues.Add("django_stat_points", memoryValues.U16["stat_points"].Value);
 
                 defaultValues.Add("django_sword_skill", Utilities.ExpToLevel(memoryValues.U16["sword_skill"].Value));
                 defaultValues.Add("django_spear_skill", Utilities.ExpToLevel(memoryValues.U16["spear_skill"].Value));
@@ -168,6 +175,8 @@ namespace BokInterface {
                 defaultValues.Add("django_spr", 10);
                 defaultValues.Add("django_str", 10);
                 defaultValues.Add("django_agi", 10);
+
+                defaultValues.Add("django_stat_points", 0);
 
                 defaultValues.Add("django_sword_skill", 1);
                 defaultValues.Add("django_spear_skill", 1);

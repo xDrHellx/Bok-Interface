@@ -23,6 +23,7 @@ namespace BokInterface {
         private Label bok2_djangoSpr = new();
         private Label bok2_djangoStr = new();
         private Label bok2_djangoAgi = new();
+        private Label bok2_djangoStatPoints = new();
         private Label bok2_djangoSwordSkill = new();
         private Label bok2_djangoSpearSkill = new();
         private Label bok2_djangoHammerSkill = new();
@@ -86,12 +87,16 @@ namespace BokInterface {
             if (stat > 0) {
                 bok2_currentStatusHpValue.Text = memoryValues.Django["current_hp"].Value.ToString();
                 bok2_currentStatusEneValue.Text = memoryValues.Django["current_ene"].Value.ToString();
+
                 bok2_djangoLevel.Text = memoryValues.U16["level"].Value.ToString();
                 bok2_djangoExp.Text = memoryValues.U32["exp"].Value.ToString();
+
                 bok2_djangoVit.Text = memoryValues.U16["vit"].Value.ToString();
                 bok2_djangoSpr.Text = memoryValues.U16["spr"].Value.ToString();
                 bok2_djangoStr.Text = memoryValues.U16["str"].Value.ToString();
                 bok2_djangoAgi.Text = memoryValues.U16["agi"].Value.ToString();
+                bok2_djangoStatPoints.Text = memoryValues.U16["stat_points"].Value.ToString();
+
                 bok2_djangoSwordSkill.Text = Utilities.ExpToLevel(memoryValues.U16["sword_skill"].Value).ToString();
                 bok2_djangoSpearSkill.Text = Utilities.ExpToLevel(memoryValues.U16["spear_skill"].Value).ToString();
                 bok2_djangoHammerSkill.Text = Utilities.ExpToLevel(memoryValues.U16["hammer_skill"].Value).ToString();
@@ -116,7 +121,7 @@ namespace BokInterface {
             currentStatusLabels.Add(CreateLabel("djangoCurrentHpLabel", "LIFE :", 7, 19, 34, 15));
             currentStatusLabels.Add(CreateLabel("djangoCurrentEneLabel", "ENE :", 7, 34, 34, 15));
             currentStatusLabels.Add(CreateLabel("djangoCurrentLevelLabel", "Level :", 93, 19, 40, 15));
-            currentStatusLabels.Add(CreateLabel("djangoCurrentExpLabel", "EXP :", 93, 34, 40, 15));
+            currentStatusLabels.Add(CreateLabel("djangoCurrentExpLabel", "EXP :", 93, 34, 33, 15));
 
             // Current status values
             bok2_currentStatusHpValue = CreateLabel("djangoCurrentHpValue", "", 44, 19, 31, 15);
@@ -181,7 +186,7 @@ namespace BokInterface {
         private void AddZoktaiCurrentStatsSection() {
 
             // Section
-            currentStatsGroupBox = CreateGroupBox("currentStats", "Stats", 5, 86, 75, 90, true);
+            currentStatsGroupBox = CreateGroupBox("currentStats", "Stats", 5, 86, 75, 106, true);
 
             // VIT
             currentStatsLabels.Add(CreateLabel("vitRowLabel", "VIT", 6, 19, 27, 15, textAlignment: "MiddleLeft"));
@@ -199,11 +204,16 @@ namespace BokInterface {
             currentStatsLabels.Add(CreateLabel("agiRowLabel", "AGI", 6, 64, 27, 15, textAlignment: "MiddleLeft"));
             bok2_djangoAgi = CreateLabel("djangoAgi", "", 35, 64, 31, 15, colorHex: baseStatColor, textAlignment: "MiddleRight");
 
+            // Stat points to allocate
+            currentStatsLabels.Add(CreateLabel("statPointsLabel", "Add", 6, 84, 29, 15, textAlignment: "MiddleLeft"));
+            bok2_djangoStatPoints = CreateLabel("djangoStatPoints", "", 35, 84, 31, 15, colorHex: totalStatColor, textAlignment: "MiddleRight");
+
             // Add values labels to group
             currentStatsLabels.Add(bok2_djangoVit);
             currentStatsLabels.Add(bok2_djangoSpr);
             currentStatsLabels.Add(bok2_djangoStr);
             currentStatsLabels.Add(bok2_djangoAgi);
+            currentStatsLabels.Add(bok2_djangoStatPoints);
 
             // Add elements to group
             for (int i = 0; i < currentStatsLabels.Count; i++) {

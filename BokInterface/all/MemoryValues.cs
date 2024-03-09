@@ -78,6 +78,7 @@ namespace BokInterface {
             U16.Add("spr", new U16MemoryValue("spr", zoktaiAddresses.Django["persistent_spr"]));
             U16.Add("str", new U16MemoryValue("str", zoktaiAddresses.Django["persistent_str"]));
             U16.Add("agi", new U16MemoryValue("agi", zoktaiAddresses.Django["persistent_agi"]));
+            U16.Add("stat_points", new U16MemoryValue("stat_points", zoktaiAddresses.Django["stat_points_to_allocate"]));
 
             U16.Add("sword_skill", new U16MemoryValue("sword_skill", zoktaiAddresses.Django["sword_skill_exp"]));
             U16.Add("spear_skill", new U16MemoryValue("spear_skill", zoktaiAddresses.Django["spear_skill_exp"]));
