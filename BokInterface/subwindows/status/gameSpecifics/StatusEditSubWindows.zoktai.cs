@@ -11,7 +11,8 @@ using BokInterface.All;
 namespace BokInterface {
     partial class BokInterfaceMainForm {
 
-        private GroupBox edit_skillGroupBox = new();
+        private CheckGroupBox edit_skillGroupBox = new();
+        private CheckGroupBox edit_ExpGroupBox = new();
 
         private void ZoktaiStatusEditSubwindow() {
             int l = 0;
@@ -21,57 +22,43 @@ namespace BokInterface {
             IDictionary<string, decimal> defaultValues = GetDefaultStatusValues();
 
             // Sections
-            edit_statusGroupBox = CreateGroupBox("editStatusGroup", "Status", 5, 5, 103, 105);
-            edit_skillGroupBox = CreateGroupBox("editSkillGroup", "Skill", 114, 5, 220, 105);
-            edit_statsGroupBox = CreateGroupBox("editStatsGroup", "Stats", 340, 5, 84, 134);
-
-            // EXP is separated for now
-            edit_statusLabels.Add(CreateLabel("djangoEditExpLabel", "EXP", 11, 118, 27, 15));
-            edit_statusNumericUpDowns.Add(CreateNumericUpDown("django_exp", defaultValues["django_exp"], 42, 116, 60, 23, minValue: 0, maxValue: 999999));
-
-            // Add elements to group (we do this here because EXP has to be set before Level if possible)
-            for (int i = 0; i < edit_statusLabels.Count; i++) {
-                l++;
-                statusEditWindow.Controls.Add(edit_statusLabels[i]);
-            }
-
-            for (int i = 0; i < edit_statusNumericUpDowns.Count; i++) {
-                n++;
-                statusEditWindow.Controls.Add(edit_statusNumericUpDowns[i]);
-            }
+            edit_statusGroupBox = CreateCheckGroupBox("editStatusGroup", "Status", 5, 5, 103, 110);
+            edit_skillGroupBox = CreateCheckGroupBox("editSkillGroup", "Skill", 114, 5, 220, 110);
+            edit_statsGroupBox = CreateCheckGroupBox("editStatsGroup", "Stats", 340, 5, 84, 139);
+            edit_ExpGroupBox = CreateCheckGroupBox("editStatsGroup", "Stats", 5, 117, 127, 52);
 
             // Status
-            edit_statusLabels.Add(CreateLabel("djangoEditLevelLabel", "Level", 7, 19, 34, 15));
-            edit_statusLabels.Add(CreateLabel("djangoEditHpLabel", "LIFE :", 7, 47, 34, 15));
+            edit_statusLabels.Add(CreateLabel("djangoEditLevelLabel", "Level", 7, 24, 34, 15));
+            edit_statusLabels.Add(CreateLabel("djangoEditHpLabel", "LIFE :", 7, 52, 34, 15));
             edit_statusLabels.Add(CreateLabel("djangoEditEneLabel", "ENE :", 7, 81, 34, 15));
 
-            edit_statusNumericUpDowns.Add(CreateNumericUpDown("django_level", defaultValues["django_level"], 47, 16, 50, 23));
-            edit_statusNumericUpDowns.Add(CreateNumericUpDown("django_current_hp", defaultValues["django_current_hp"], 47, 45, 50, 23, maxValue: 1000));
+            edit_statusNumericUpDowns.Add(CreateNumericUpDown("django_level", defaultValues["django_level"], 47, 21, 50, 23));
+            edit_statusNumericUpDowns.Add(CreateNumericUpDown("django_current_hp", defaultValues["django_current_hp"], 47, 50, 50, 23, maxValue: 1000));
             edit_statusNumericUpDowns.Add(CreateNumericUpDown("django_current_ene", defaultValues["django_current_ene"], 47, 79, 50, 23, maxValue: 1000));
 
             // Add elements to group boxes / sections
-            for (int i = l; i < edit_statusLabels.Count; i++) {
+            for (int i = 0; i < edit_statusLabels.Count; i++) {
                 l++;
                 edit_statusGroupBox.Controls.Add(edit_statusLabels[i]);
             }
 
-            for (int i = n; i < edit_statusNumericUpDowns.Count; i++) {
+            for (int i = 0; i < edit_statusNumericUpDowns.Count; i++) {
                 n++;
                 edit_statusGroupBox.Controls.Add(edit_statusNumericUpDowns[i]);
             }
 
             // Skill
-            edit_statusLabels.Add(CreateLabel("djangoEditSwordSkillLabel", "Sword", 8, 19, 54, 15));
-            edit_statusLabels.Add(CreateLabel("djangoEditSpearSkillLabel", "Spear", 121, 19, 36, 15));
-            edit_statusLabels.Add(CreateLabel("djangoEditHammerSkillLabel", "Hammer", 8, 47, 54, 15));
-            edit_statusLabels.Add(CreateLabel("djangoEditFistsSkillLabel", "Fists", 121, 47, 36, 15));
-            edit_statusLabels.Add(CreateLabel("djangoEditGunSkillLabel", "Gun", 8, 76, 54, 15));
+            edit_statusLabels.Add(CreateLabel("djangoEditSwordSkillLabel", "Sword", 8, 24, 54, 15, textAlignment: "MiddleLeft"));
+            edit_statusLabels.Add(CreateLabel("djangoEditSpearSkillLabel", "Spear", 121, 24, 36, 15, textAlignment: "MiddleLeft"));
+            edit_statusLabels.Add(CreateLabel("djangoEditHammerSkillLabel", "Hammer", 8, 52, 54, 15, textAlignment: "MiddleLeft"));
+            edit_statusLabels.Add(CreateLabel("djangoEditFistsSkillLabel", "Fists", 121, 52, 36, 15, textAlignment: "MiddleLeft"));
+            edit_statusLabels.Add(CreateLabel("djangoEditGunSkillLabel", "Gun", 8, 81, 54, 15, textAlignment: "MiddleLeft"));
 
-            edit_statusNumericUpDowns.Add(CreateNumericUpDown("django_sword_skill", defaultValues["django_sword_skill"], 64, 16, 51, 23, nbDecimals: 2));
-            edit_statusNumericUpDowns.Add(CreateNumericUpDown("django_spear_skill", defaultValues["django_spear_skill"], 163, 16, 51, 23, nbDecimals: 2));
-            edit_statusNumericUpDowns.Add(CreateNumericUpDown("django_hammer_skill", defaultValues["django_hammer_skill"], 64, 45, 51, 23, nbDecimals: 2));
-            edit_statusNumericUpDowns.Add(CreateNumericUpDown("django_fists_skill", defaultValues["django_fists_skill"], 163, 45, 51, 23, nbDecimals: 2));
-            edit_statusNumericUpDowns.Add(CreateNumericUpDown("django_gun_skill", defaultValues["django_gun_skill"], 64, 74, 51, 23, nbDecimals: 2));
+            edit_statusNumericUpDowns.Add(CreateNumericUpDown("django_sword_skill", defaultValues["django_sword_skill"], 64, 21, 51, 23, nbDecimals: 2));
+            edit_statusNumericUpDowns.Add(CreateNumericUpDown("django_spear_skill", defaultValues["django_spear_skill"], 163, 21, 51, 23, nbDecimals: 2));
+            edit_statusNumericUpDowns.Add(CreateNumericUpDown("django_hammer_skill", defaultValues["django_hammer_skill"], 64, 50, 51, 23, nbDecimals: 2));
+            edit_statusNumericUpDowns.Add(CreateNumericUpDown("django_fists_skill", defaultValues["django_fists_skill"], 163, 50, 51, 23, nbDecimals: 2));
+            edit_statusNumericUpDowns.Add(CreateNumericUpDown("django_gun_skill", defaultValues["django_gun_skill"], 64, 79, 51, 23, nbDecimals: 2));
 
             // Add elements to group
             for (int i = l; i < edit_statusLabels.Count; i++) {
@@ -85,15 +72,15 @@ namespace BokInterface {
             }
 
             // Stats
-            edit_statusLabels.Add(CreateLabel("djangoEditVitLabel", "VIT", 8, 19, 27, 15));
-            edit_statusLabels.Add(CreateLabel("djangoEditSprLabel", "SPR", 8, 47, 27, 15));
-            edit_statusLabels.Add(CreateLabel("djangoEditStrLabel", "STR", 8, 76, 27, 15));
-            edit_statusLabels.Add(CreateLabel("djangoEditAgiLabel", "AGI", 8, 105, 27, 15));
+            edit_statusLabels.Add(CreateLabel("djangoEditVitLabel", "VIT", 8, 24, 27, 15));
+            edit_statusLabels.Add(CreateLabel("djangoEditSprLabel", "SPR", 8, 52, 27, 15));
+            edit_statusLabels.Add(CreateLabel("djangoEditStrLabel", "STR", 8, 81, 27, 15));
+            edit_statusLabels.Add(CreateLabel("djangoEditAgiLabel", "AGI", 8, 110, 27, 15));
 
-            edit_statusNumericUpDowns.Add(CreateNumericUpDown("django_vit", defaultValues["django_vit"], 36, 16, 41, 23));
-            edit_statusNumericUpDowns.Add(CreateNumericUpDown("django_spr", defaultValues["django_spr"], 36, 45, 41, 23));
-            edit_statusNumericUpDowns.Add(CreateNumericUpDown("django_str", defaultValues["django_str"], 36, 74, 41, 23));
-            edit_statusNumericUpDowns.Add(CreateNumericUpDown("django_agi", defaultValues["django_agi"], 36, 105, 41, 23));
+            edit_statusNumericUpDowns.Add(CreateNumericUpDown("django_vit", defaultValues["django_vit"], 36, 21, 41, 23));
+            edit_statusNumericUpDowns.Add(CreateNumericUpDown("django_spr", defaultValues["django_spr"], 36, 50, 41, 23));
+            edit_statusNumericUpDowns.Add(CreateNumericUpDown("django_str", defaultValues["django_str"], 36, 79, 41, 23));
+            edit_statusNumericUpDowns.Add(CreateNumericUpDown("django_agi", defaultValues["django_agi"], 36, 110, 41, 23));
 
             // Add elements to group
             for (int i = l; i < edit_statusLabels.Count; i++) {
@@ -106,18 +93,34 @@ namespace BokInterface {
                 edit_statsGroupBox.Controls.Add(edit_statusNumericUpDowns[i]);
             }
 
+            // EXP
+            edit_statusLabels.Add(CreateLabel("djangoEditExpLabel", "EXP", 8, 24, 27, 15));
+            edit_statusNumericUpDowns.Add(CreateNumericUpDown("django_exp", defaultValues["django_exp"], 39, 22, 60, 23, minValue: 0, maxValue: 999999));
+
+            // Add elements to group
+            for (int i = l; i < edit_statusLabels.Count; i++) {
+                l++;
+                edit_ExpGroupBox.Controls.Add(edit_statusLabels[i]);
+            }
+
+            for (int i = n; i < edit_statusNumericUpDowns.Count; i++) {
+                n++;
+                edit_ExpGroupBox.Controls.Add(edit_statusNumericUpDowns[i]);
+            }
+
             // Add groups to subwindow
             statusEditWindow.Controls.Add(edit_statusGroupBox);
             statusEditWindow.Controls.Add(edit_skillGroupBox);
             statusEditWindow.Controls.Add(edit_statsGroupBox);
+            statusEditWindow.Controls.Add(edit_ExpGroupBox);
 
             // Add tooltips & warnings
-            Label expWarning = CreateImageLabel("tooltip", "warning", 108, 119);
+            Label expWarning = CreateImageLabel("tooltip", "warning", 105, 25);
             AddToolTip(expWarning, "Level will be automatically adjusted if EXP is high enough to reach higher levels");
-            statusEditWindow.Controls.Add(expWarning);
+            edit_ExpGroupBox.Controls.Add(expWarning);
 
             // Button for setting values & its events
-            Button setValuesButton = CreateButton("setStatusButton", "Set values", 349, 145, 75, 23);
+            Button setValuesButton = CreateButton("setStatusButton", "Set values", 349, 150, 75, 23);
             setValuesButton.Click += new EventHandler(delegate (object sender, EventArgs e) {
                 // Write the values for 10 frames
                 for (int i = 0; i < 10; i++) {

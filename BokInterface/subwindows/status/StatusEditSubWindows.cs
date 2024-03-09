@@ -13,8 +13,8 @@ namespace BokInterface {
 
         #region Properties for subwindow elements
 
-        private GroupBox edit_statusGroupBox = new();
-        private GroupBox edit_statsGroupBox = new();
+        private CheckGroupBox edit_statusGroupBox = new();
+        private CheckGroupBox edit_statsGroupBox = new();
         private readonly List<Label> edit_statusLabels = [];
         private readonly List<NumericUpDown> edit_statusNumericUpDowns = [];
 
@@ -72,6 +72,12 @@ namespace BokInterface {
 
             // Sets values based on fields for the current game
             for (int i = 0; i < fields.Count; i++) {
+
+                // If the field is disabled, skip it
+                if (fields[i].Enabled == false) {
+                    continue;
+                }
+
                 decimal value = fields[i].Value;
 
                 /**
