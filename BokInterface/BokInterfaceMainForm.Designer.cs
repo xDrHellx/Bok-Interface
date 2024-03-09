@@ -4,6 +4,8 @@ using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
 
+using BokInterface.All;
+
 /**
  * File for the external window part of the Bok interface
  */
@@ -447,6 +449,36 @@ namespace BokInterface {
 			}
 
 			return field;
+		}
+
+		/// <summary>Simplified method for creating a CheckGroupBox</summary>
+		/// <param name="positionX">X position</param>
+		/// <param name="positionY">Y position</param>
+		/// <param name="width">Width (in pixels)</param>
+		/// <param name="height">Height (in pixels)</param>
+		/// <param name="isCheckedByDefault">Set to true if the CheckGroupBox has to be checked when initiated</param>
+		/// <param name="addToWindow">Set to true to add the element directly to the main interface window</param>
+		/// <returns><c>CheckGroupBox</c>CheckGroupBox instance</returns>
+		private CheckGroupBox CreateCheckGroupBox(string name, string text, Int32 positionX, Int32 positionY, Int32 width, Int32 height, bool isCheckedByDefault = false,  bool addToWindow = false) {
+
+			CheckGroupBox checkGroupBox = new();
+			checkGroupBox.Name = name;
+			checkGroupBox.Text = text;
+			checkGroupBox.Checked = isCheckedByDefault;
+			checkGroupBox.Location = new System.Drawing.Point(positionX, positionY);
+			checkGroupBox.Size = new System.Drawing.Size(width, height);
+			checkGroupBox.TabIndex = 1;
+			checkGroupBox.AutoSize = false;
+			checkGroupBox.Anchor = BokInterfaceMainForm.defaultAnchor;
+			checkGroupBox.Margin = BokInterfaceMainForm.defaultMargin;
+			checkGroupBox.Font = BokInterfaceMainForm.defaultFont;
+
+			// Add to main window
+			if(addToWindow == true) {
+				this.Controls.Add(checkGroupBox);
+			}
+
+			return checkGroupBox;
 		}
 
 		/// <summary>Simplified method for creating a label containing an image</summary>
