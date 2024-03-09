@@ -2,9 +2,6 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
-using System.Windows.Forms;
-
-using BokInterface.All;
 
 /**
  * File for the external window part of the Bok interface
@@ -12,7 +9,7 @@ using BokInterface.All;
 
 namespace BokInterface {
 
-	partial class BokInterfaceMainForm {
+	partial class BokInterface {
 
 		#region Main interface properties
 
@@ -50,7 +47,7 @@ namespace BokInterface {
 		private List<System.Windows.Forms.Button> editButtons = new();
 		
 		/// <summary>Tooltip for values that only updates after switching rooms</summary>
-		public static System.Windows.Forms.ToolTip toolTip = BokInterfaceMainForm.CreateToolTip();
+		public static System.Windows.Forms.ToolTip toolTip = BokInterface.CreateToolTip();
 
 		#endregion
 
@@ -191,7 +188,7 @@ namespace BokInterface {
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit;
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
 			this.BackColor = System.Drawing.SystemColors.Control;
-			this.Font = BokInterfaceMainForm.defaultFont;
+			this.Font = BokInterface.defaultFont;
 			this.ClientSize = new System.Drawing.Size(width, height);
 		}
 

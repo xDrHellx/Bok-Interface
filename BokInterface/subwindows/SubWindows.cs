@@ -6,7 +6,7 @@ using System.Windows.Forms;
  */
 
 namespace BokInterface {
-    partial class BokInterfaceMainForm {
+    partial class BokInterface {
 
         #region Properties indicating if subwindows are opened or not
 

@@ -15,7 +15,7 @@ namespace BokInterface {
 
     /// <summary>Main class for the Bok Interface</summary>
     [ExternalTool("Bok Interface")]
-    public partial class BokInterfaceMainForm : ToolFormBase, IExternalToolForm {
+    public partial class BokInterface : ToolFormBase, IExternalToolForm {
 
         #region Variables
 
@@ -50,7 +50,7 @@ namespace BokInterface {
 
         #region Main methods
 
-        public BokInterfaceMainForm() {
+        public BokInterface() {
 
             // Try initializing the interface
             InitializeInterface();

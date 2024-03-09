@@ -4,7 +4,7 @@
 
 namespace BokInterface {
 
-    partial class BokInterfaceMainForm {
+    partial class BokInterface {
 
         /// <summary>Shows the "Game not recognized" window</summary>
         private void GameNotRecognizedWindow() {

@@ -9,7 +9,7 @@ using BokInterface.ExpTables;
  */
 
 namespace BokInterface {
-    partial class BokInterfaceMainForm {
+    partial class BokInterface {
 
         #region Properties for subwindow elements
 
