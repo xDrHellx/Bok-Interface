@@ -152,10 +152,10 @@ namespace BokInterface {
                 defaultValues.Add("django_exp", memoryValues.U32["exp"].Value);
                 defaultValues.Add("django_level", memoryValues.U16["level"].Value);
 
-                defaultValues.Add("django_vit", memoryValues.U16["vit"].Value);
-                defaultValues.Add("django_spr", memoryValues.U16["spr"].Value);
-                defaultValues.Add("django_str", memoryValues.U16["str"].Value);
-                defaultValues.Add("django_agi", memoryValues.U16["agi"].Value);
+                defaultValues.Add("django_vit", memoryValues.Django["vit"].Value);
+                defaultValues.Add("django_spr", memoryValues.Django["spr"].Value);
+                defaultValues.Add("django_str", memoryValues.Django["str"].Value);
+                defaultValues.Add("django_agi", memoryValues.Django["agi"].Value);
                 defaultValues.Add("django_stat_points", memoryValues.U16["stat_points"].Value);
 
                 defaultValues.Add("django_sword_skill", Utilities.ExpToLevel(memoryValues.U16["sword_skill"].Value));
@@ -186,6 +186,18 @@ namespace BokInterface {
             }
 
             return defaultValues;
+        }
+
+        /// <summary>
+        /// Specific method for Bok 2 to update both "current" and "persistent" stats addresses at once <br>
+        /// For some reason updating "current" is not enough, when switching room the game sets back the old values
+        /// </summary>
+        /// <param name="stat">Stat name</param>
+        /// <param name="value">Value to set</param>
+        private void ZoktaiUpdateStats(string stat, uint value) {
+            if (memoryValues.U16.ContainsKey(stat) == true) {
+                memoryValues.U16[stat].Value = value;
+            }
         }
     }
 }

@@ -91,6 +91,19 @@ namespace BokInterface {
                     case "django":
                         if (memoryValues.Django.ContainsKey(memoryValueKey) == true) {
                             memoryValues.Django[memoryValueKey].Value = (uint)value;
+
+                            // Specific treatment for stats in Bok 2
+                            switch (memoryValueKey) {
+                                case "vit":
+                                case "spr":
+                                case "str":
+                                case "agi":
+                                    ZoktaiUpdateStats(memoryValueKey, (uint)value);
+                                    break;
+                                default:
+                                    // Do nothing
+                                    break;
+                            }
                         } else if (memoryValues.U16.ContainsKey(memoryValueKey) == true) {
                             memoryValues.U16[memoryValueKey].Value = memoryValueKey switch {
                                 "sword_skill" or "spear_skill" or "hammer_skill" or "fists_skill" or "gun_skill" => Utilities.LevelToExp(value),
