@@ -9,7 +9,7 @@ using BokInterface.All;
  */
 
 namespace BokInterface {
-    partial class BokInterfaceMainForm {
+    partial class BokInterface {
 
         private CheckGroupBox edit_skillGroupBox = new();
         private CheckGroupBox edit_ExpGroupBox = new();

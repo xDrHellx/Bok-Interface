@@ -6,7 +6,7 @@ using BokInterface.All;
 
 namespace BokInterface {
 
-    partial class BokInterfaceMainForm {
+    partial class BokInterface {
 
         #region GUI related code
 

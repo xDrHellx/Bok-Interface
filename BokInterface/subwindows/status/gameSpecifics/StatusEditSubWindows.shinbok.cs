@@ -7,7 +7,7 @@ using System.Windows.Forms;
  */
 
 namespace BokInterface {
-    partial class BokInterfaceMainForm {
+    partial class BokInterface {
 
         private void ShinbokStatusEditSubwindow() {
 

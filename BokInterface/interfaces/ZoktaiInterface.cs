@@ -10,7 +10,7 @@ using BokInterface.All;
 
 namespace BokInterface {
 
-    partial class BokInterfaceMainForm {
+    partial class BokInterface {
 
         #region Properties
 
