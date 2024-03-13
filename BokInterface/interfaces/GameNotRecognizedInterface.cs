@@ -14,8 +14,8 @@ namespace BokInterface {
 
             // Window
             SetMainWindow("Bok Interface" + (shorterGameName != "" ? " - " + shorterGameName : ""), 350, 100);
-            FormClosing += new System.Windows.Forms.FormClosingEventHandler(BokInterfaceMainForm_FormClosing);
-            Load += new System.EventHandler(BokInterfaceMainForm_Load);
+            FormClosing += new System.Windows.Forms.FormClosingEventHandler(BokInterface_FormClosing);
+            Load += new System.EventHandler(BokInterface_Load);
 
             ResumeLayout(false);
         }
