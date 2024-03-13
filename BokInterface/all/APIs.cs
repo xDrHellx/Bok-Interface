@@ -9,43 +9,43 @@ namespace BokInterface.All {
     public static class APIs {
 
         // Hack-ish way to make these APIs available outside of the main tool form
-        private static IMainFormForTools? mainFormForTools;
-        private static ApiContainer? apiContainer;
-        private static IEmuClientApi? clientApi;
-        private static IEmulationApi? emulationApi;
+        private static IMainFormForTools? s_mainFormForTools;
+        private static ApiContainer? s_apiContainer;
+        private static IEmuClientApi? s_clientApi;
+        private static IEmulationApi? s_emulationApi;
         // private static IGameInfoApi? gameInfoApi; // deprecated
-        private static ISaveStateApi? saveStateApi;
-        private static IMemoryApi? memoryApi;
+        private static ISaveStateApi? s_saveStateApi;
+        private static IMemoryApi? s_memoryApi;
 
-        private static IGuiApi? guiApi;
+        private static IGuiApi? s_guiApi;
 
-        public static IMainFormForTools MainFormForTools => Require(mainFormForTools);
+        public static IMainFormForTools MainFormForTools => Require(s_mainFormForTools);
         public static MainForm MainForm => (MainForm)MainFormForTools;
 
-        public static ApiContainer ApiContainer => Require(apiContainer);
+        public static ApiContainer ApiContainer => Require(s_apiContainer);
 
         // These seem to always be available even when no ROM is loaded
-        public static IEmuClientApi Client => Require(clientApi);
-        public static IEmulationApi Emulation => Require(emulationApi);
+        public static IEmuClientApi Client => Require(s_clientApi);
+        public static IEmulationApi Emulation => Require(s_emulationApi);
         // public static IGameInfoApi GameInfo => Require(gameInfoApi); // deprecated
-        public static ISaveStateApi SaveState => Require(saveStateApi);
-        public static IMemoryApi Memory => Require(memoryApi);
-        public static IGuiApi Gui => Require(guiApi);
+        public static ISaveStateApi SaveState => Require(s_saveStateApi);
+        public static IMemoryApi Memory => Require(s_memoryApi);
+        public static IGuiApi Gui => Require(s_guiApi);
 
         public static Config Config => ((EmulationApi)Emulation).ForbiddenConfigReference;
 
         internal static void Update(ApiContainer container) {
 
-            apiContainer = container;
-            Fill(out clientApi);
-            Fill(out emulationApi);
+            s_apiContainer = container;
+            Fill(out s_clientApi);
+            Fill(out s_emulationApi);
             // Fill(out gameInfoApi); // deprecated
-            Fill(out saveStateApi);
-            Fill(out memoryApi);
-            Fill(out guiApi);
+            Fill(out s_saveStateApi);
+            Fill(out s_memoryApi);
+            Fill(out s_guiApi);
 
             static void Fill<T>(out T? field) where T : class, IExternalApi {
-                if (apiContainer.Libraries.TryGetValue(typeof(T), out var api)) {
+                if (s_apiContainer.Libraries.TryGetValue(typeof(T), out var api)) {
                     field = api as T;
                 } else {
                     field = null;
@@ -54,7 +54,7 @@ namespace BokInterface.All {
         }
 
         internal static void Update(IMainFormForTools mainForm) {
-            mainFormForTools = mainForm;
+            s_mainFormForTools = mainForm;
         }
 
         private static T Require<T>(T? value) where T : class {

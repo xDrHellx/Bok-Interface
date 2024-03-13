@@ -11,9 +11,9 @@ using BokInterface.All;
 namespace BokInterface {
     partial class BokInterface {
 
-        private CheckGroupBox edit_skillGroupBox = new();
-        private CheckGroupBox edit_ExpGroupBox = new();
-        private CheckGroupBox edit_StatPointsGroupBox = new();
+        private CheckGroupBox _edit_skillGroupBox = new();
+        private CheckGroupBox _edit_ExpGroupBox = new();
+        private CheckGroupBox _edit_StatPointsGroupBox = new();
 
         private void ZoktaiStatusEditSubwindow() {
             int l = 0;
@@ -23,76 +23,76 @@ namespace BokInterface {
             IDictionary<string, decimal> defaultValues = GetDefaultStatusValues();
 
             // Sections
-            edit_statusGroupBox = CreateCheckGroupBox("editStatusGroup", "Status", 5, 5, 103, 110);
-            edit_skillGroupBox = CreateCheckGroupBox("editSkillGroup", "Skill", 114, 5, 220, 110);
-            edit_statsGroupBox = CreateCheckGroupBox("editStatsGroup", "Stats", 340, 5, 84, 139);
-            edit_StatPointsGroupBox = CreateCheckGroupBox("editStatPointsGroup", "Points", 340, 144, 84, 53);
-            edit_ExpGroupBox = CreateCheckGroupBox("editExpGroup", "EXP", 5, 117, 97, 52);
+            _edit_statusGroupBox = CreateCheckGroupBox("editStatusGroup", "Status", 5, 5, 103, 110);
+            _edit_skillGroupBox = CreateCheckGroupBox("editSkillGroup", "Skill", 114, 5, 220, 110);
+            _edit_statsGroupBox = CreateCheckGroupBox("editStatsGroup", "Stats", 340, 5, 84, 139);
+            _edit_StatPointsGroupBox = CreateCheckGroupBox("editStatPointsGroup", "Points", 340, 144, 84, 53);
+            _edit_ExpGroupBox = CreateCheckGroupBox("editExpGroup", "EXP", 5, 117, 97, 52);
 
             // Status
-            edit_statusLabels.Add(CreateLabel("djangoEditLevelLabel", "Level", 7, 24, 34, 15));
-            edit_statusLabels.Add(CreateLabel("djangoEditHpLabel", "LIFE :", 7, 52, 34, 15));
-            edit_statusLabels.Add(CreateLabel("djangoEditEneLabel", "ENE :", 7, 81, 34, 15));
+            _edit_statusLabels.Add(CreateLabel("djangoEditLevelLabel", "Level", 7, 24, 34, 15));
+            _edit_statusLabels.Add(CreateLabel("djangoEditHpLabel", "LIFE :", 7, 52, 34, 15));
+            _edit_statusLabels.Add(CreateLabel("djangoEditEneLabel", "ENE :", 7, 81, 34, 15));
 
-            edit_statusNumericUpDowns.Add(CreateNumericUpDown("django_level", defaultValues["django_level"], 47, 21, 50, 23));
-            edit_statusNumericUpDowns.Add(CreateNumericUpDown("django_current_hp", defaultValues["django_current_hp"], 47, 50, 50, 23, maxValue: 1000));
-            edit_statusNumericUpDowns.Add(CreateNumericUpDown("django_current_ene", defaultValues["django_current_ene"], 47, 79, 50, 23, maxValue: 1000));
+            _edit_statusNumericUpDowns.Add(CreateNumericUpDown("django_level", defaultValues["django_level"], 47, 21, 50, 23));
+            _edit_statusNumericUpDowns.Add(CreateNumericUpDown("django_current_hp", defaultValues["django_current_hp"], 47, 50, 50, 23, maxValue: 1000));
+            _edit_statusNumericUpDowns.Add(CreateNumericUpDown("django_current_ene", defaultValues["django_current_ene"], 47, 79, 50, 23, maxValue: 1000));
 
             // Add elements to group boxes / sections
-            for (int i = 0; i < edit_statusLabels.Count; i++) {
+            for (int i = 0; i < _edit_statusLabels.Count; i++) {
                 l++;
-                edit_statusGroupBox.Controls.Add(edit_statusLabels[i]);
+                _edit_statusGroupBox.Controls.Add(_edit_statusLabels[i]);
             }
 
-            for (int i = 0; i < edit_statusNumericUpDowns.Count; i++) {
+            for (int i = 0; i < _edit_statusNumericUpDowns.Count; i++) {
                 n++;
-                edit_statusGroupBox.Controls.Add(edit_statusNumericUpDowns[i]);
+                _edit_statusGroupBox.Controls.Add(_edit_statusNumericUpDowns[i]);
             }
 
             // Skill
-            edit_statusLabels.Add(CreateLabel("djangoEditSwordSkillLabel", "Sword", 8, 24, 54, 15, textAlignment: "MiddleLeft"));
-            edit_statusLabels.Add(CreateLabel("djangoEditSpearSkillLabel", "Spear", 121, 24, 36, 15, textAlignment: "MiddleLeft"));
-            edit_statusLabels.Add(CreateLabel("djangoEditHammerSkillLabel", "Hammer", 8, 52, 54, 15, textAlignment: "MiddleLeft"));
-            edit_statusLabels.Add(CreateLabel("djangoEditFistsSkillLabel", "Fists", 121, 52, 36, 15, textAlignment: "MiddleLeft"));
-            edit_statusLabels.Add(CreateLabel("djangoEditGunSkillLabel", "Gun", 8, 81, 54, 15, textAlignment: "MiddleLeft"));
+            _edit_statusLabels.Add(CreateLabel("djangoEditSwordSkillLabel", "Sword", 8, 24, 54, 15, textAlignment: "MiddleLeft"));
+            _edit_statusLabels.Add(CreateLabel("djangoEditSpearSkillLabel", "Spear", 121, 24, 36, 15, textAlignment: "MiddleLeft"));
+            _edit_statusLabels.Add(CreateLabel("djangoEditHammerSkillLabel", "Hammer", 8, 52, 54, 15, textAlignment: "MiddleLeft"));
+            _edit_statusLabels.Add(CreateLabel("djangoEditFistsSkillLabel", "Fists", 121, 52, 36, 15, textAlignment: "MiddleLeft"));
+            _edit_statusLabels.Add(CreateLabel("djangoEditGunSkillLabel", "Gun", 8, 81, 54, 15, textAlignment: "MiddleLeft"));
 
-            edit_statusNumericUpDowns.Add(CreateNumericUpDown("django_sword_skill", defaultValues["django_sword_skill"], 64, 21, 51, 23, nbDecimals: 2));
-            edit_statusNumericUpDowns.Add(CreateNumericUpDown("django_spear_skill", defaultValues["django_spear_skill"], 163, 21, 51, 23, nbDecimals: 2));
-            edit_statusNumericUpDowns.Add(CreateNumericUpDown("django_hammer_skill", defaultValues["django_hammer_skill"], 64, 50, 51, 23, nbDecimals: 2));
-            edit_statusNumericUpDowns.Add(CreateNumericUpDown("django_fists_skill", defaultValues["django_fists_skill"], 163, 50, 51, 23, nbDecimals: 2));
-            edit_statusNumericUpDowns.Add(CreateNumericUpDown("django_gun_skill", defaultValues["django_gun_skill"], 64, 79, 51, 23, nbDecimals: 2));
+            _edit_statusNumericUpDowns.Add(CreateNumericUpDown("django_sword_skill", defaultValues["django_sword_skill"], 64, 21, 51, 23, nbDecimals: 2));
+            _edit_statusNumericUpDowns.Add(CreateNumericUpDown("django_spear_skill", defaultValues["django_spear_skill"], 163, 21, 51, 23, nbDecimals: 2));
+            _edit_statusNumericUpDowns.Add(CreateNumericUpDown("django_hammer_skill", defaultValues["django_hammer_skill"], 64, 50, 51, 23, nbDecimals: 2));
+            _edit_statusNumericUpDowns.Add(CreateNumericUpDown("django_fists_skill", defaultValues["django_fists_skill"], 163, 50, 51, 23, nbDecimals: 2));
+            _edit_statusNumericUpDowns.Add(CreateNumericUpDown("django_gun_skill", defaultValues["django_gun_skill"], 64, 79, 51, 23, nbDecimals: 2));
 
             // Add elements to group
-            for (int i = l; i < edit_statusLabels.Count; i++) {
+            for (int i = l; i < _edit_statusLabels.Count; i++) {
                 l++;
-                edit_skillGroupBox.Controls.Add(edit_statusLabels[i]);
+                _edit_skillGroupBox.Controls.Add(_edit_statusLabels[i]);
             }
 
-            for (int i = n; i < edit_statusNumericUpDowns.Count; i++) {
+            for (int i = n; i < _edit_statusNumericUpDowns.Count; i++) {
                 n++;
-                edit_skillGroupBox.Controls.Add(edit_statusNumericUpDowns[i]);
+                _edit_skillGroupBox.Controls.Add(_edit_statusNumericUpDowns[i]);
             }
 
             // Stats
-            edit_statusLabels.Add(CreateLabel("djangoEditVitLabel", "VIT", 8, 24, 27, 15));
-            edit_statusLabels.Add(CreateLabel("djangoEditSprLabel", "SPR", 8, 52, 27, 15));
-            edit_statusLabels.Add(CreateLabel("djangoEditStrLabel", "STR", 8, 81, 27, 15));
-            edit_statusLabels.Add(CreateLabel("djangoEditAgiLabel", "AGI", 8, 110, 27, 15));
+            _edit_statusLabels.Add(CreateLabel("djangoEditVitLabel", "VIT", 8, 24, 27, 15));
+            _edit_statusLabels.Add(CreateLabel("djangoEditSprLabel", "SPR", 8, 52, 27, 15));
+            _edit_statusLabels.Add(CreateLabel("djangoEditStrLabel", "STR", 8, 81, 27, 15));
+            _edit_statusLabels.Add(CreateLabel("djangoEditAgiLabel", "AGI", 8, 110, 27, 15));
 
-            edit_statusNumericUpDowns.Add(CreateNumericUpDown("django_vit", defaultValues["django_vit"], 36, 21, 41, 23));
-            edit_statusNumericUpDowns.Add(CreateNumericUpDown("django_spr", defaultValues["django_spr"], 36, 50, 41, 23));
-            edit_statusNumericUpDowns.Add(CreateNumericUpDown("django_str", defaultValues["django_str"], 36, 79, 41, 23));
-            edit_statusNumericUpDowns.Add(CreateNumericUpDown("django_agi", defaultValues["django_agi"], 36, 110, 41, 23));
+            _edit_statusNumericUpDowns.Add(CreateNumericUpDown("django_vit", defaultValues["django_vit"], 36, 21, 41, 23));
+            _edit_statusNumericUpDowns.Add(CreateNumericUpDown("django_spr", defaultValues["django_spr"], 36, 50, 41, 23));
+            _edit_statusNumericUpDowns.Add(CreateNumericUpDown("django_str", defaultValues["django_str"], 36, 79, 41, 23));
+            _edit_statusNumericUpDowns.Add(CreateNumericUpDown("django_agi", defaultValues["django_agi"], 36, 110, 41, 23));
 
             // Add elements to group
-            for (int i = l; i < edit_statusLabels.Count; i++) {
+            for (int i = l; i < _edit_statusLabels.Count; i++) {
                 l++;
-                edit_statsGroupBox.Controls.Add(edit_statusLabels[i]);
+                _edit_statsGroupBox.Controls.Add(_edit_statusLabels[i]);
             }
 
-            for (int i = n; i < edit_statusNumericUpDowns.Count; i++) {
+            for (int i = n; i < _edit_statusNumericUpDowns.Count; i++) {
                 n++;
-                edit_statsGroupBox.Controls.Add(edit_statusNumericUpDowns[i]);
+                _edit_statsGroupBox.Controls.Add(_edit_statusNumericUpDowns[i]);
             }
 
             // Stat points available
@@ -114,11 +114,11 @@ namespace BokInterface {
             }
 
             // Add groups to subwindow
-            statusEditWindow.Controls.Add(edit_statusGroupBox);
-            statusEditWindow.Controls.Add(edit_skillGroupBox);
-            statusEditWindow.Controls.Add(edit_statsGroupBox);
-            statusEditWindow.Controls.Add(edit_StatPointsGroupBox);
-            statusEditWindow.Controls.Add(edit_ExpGroupBox);
+            statusEditWindow.Controls.Add(_edit_statusGroupBox);
+            statusEditWindow.Controls.Add(_edit_skillGroupBox);
+            statusEditWindow.Controls.Add(_edit_statsGroupBox);
+            statusEditWindow.Controls.Add(_edit_StatPointsGroupBox);
+            statusEditWindow.Controls.Add(_edit_ExpGroupBox);
 
             // Add tooltips & warnings
             Label expWarning = CreateImageLabel("tooltip", "warning", 75, 25);
@@ -142,27 +142,27 @@ namespace BokInterface {
         /// <returns><c>IDictionary<string, decimal></c>Default values</returns>
         private IDictionary<string, decimal> GetZoktaiDefaultValues() {
             IDictionary<string, decimal> defaultValues = new Dictionary<string, decimal>();
-            uint stat = APIs.Memory.ReadU32(zoktaiAddresses.Misc["stat"]);
+            uint stat = APIs.Memory.ReadU32(_zoktaiAddresses.Misc["stat"]);
 
             // If stat is a valid value
             if (stat > 0) {
-                defaultValues.Add("django_current_hp", memoryValues.Django["current_hp"].Value);
-                defaultValues.Add("django_current_ene", memoryValues.Django["current_ene"].Value);
+                defaultValues.Add("django_current_hp", _memoryValues.Django["current_hp"].Value);
+                defaultValues.Add("django_current_ene", _memoryValues.Django["current_ene"].Value);
 
-                defaultValues.Add("django_exp", memoryValues.U32["exp"].Value);
-                defaultValues.Add("django_level", memoryValues.U16["level"].Value);
+                defaultValues.Add("django_exp", _memoryValues.U32["exp"].Value);
+                defaultValues.Add("django_level", _memoryValues.U16["level"].Value);
 
-                defaultValues.Add("django_vit", memoryValues.Django["vit"].Value);
-                defaultValues.Add("django_spr", memoryValues.Django["spr"].Value);
-                defaultValues.Add("django_str", memoryValues.Django["str"].Value);
-                defaultValues.Add("django_agi", memoryValues.Django["agi"].Value);
-                defaultValues.Add("django_stat_points", memoryValues.U16["stat_points"].Value);
+                defaultValues.Add("django_vit", _memoryValues.Django["vit"].Value);
+                defaultValues.Add("django_spr", _memoryValues.Django["spr"].Value);
+                defaultValues.Add("django_str", _memoryValues.Django["str"].Value);
+                defaultValues.Add("django_agi", _memoryValues.Django["agi"].Value);
+                defaultValues.Add("django_stat_points", _memoryValues.U16["stat_points"].Value);
 
-                defaultValues.Add("django_sword_skill", Utilities.ExpToLevel(memoryValues.U16["sword_skill"].Value));
-                defaultValues.Add("django_spear_skill", Utilities.ExpToLevel(memoryValues.U16["spear_skill"].Value));
-                defaultValues.Add("django_hammer_skill", Utilities.ExpToLevel(memoryValues.U16["hammer_skill"].Value));
-                defaultValues.Add("django_fists_skill", Utilities.ExpToLevel(memoryValues.U16["fists_skill"].Value));
-                defaultValues.Add("django_gun_skill", Utilities.ExpToLevel(memoryValues.U16["gun_skill"].Value));
+                defaultValues.Add("django_sword_skill", Utilities.ExpToLevel(_memoryValues.U16["sword_skill"].Value));
+                defaultValues.Add("django_spear_skill", Utilities.ExpToLevel(_memoryValues.U16["spear_skill"].Value));
+                defaultValues.Add("django_hammer_skill", Utilities.ExpToLevel(_memoryValues.U16["hammer_skill"].Value));
+                defaultValues.Add("django_fists_skill", Utilities.ExpToLevel(_memoryValues.U16["fists_skill"].Value));
+                defaultValues.Add("django_gun_skill", Utilities.ExpToLevel(_memoryValues.U16["gun_skill"].Value));
             } else {
                 // If stat is unvalid (if we are on the title screen or in a room transition), use specific values
                 defaultValues.Add("django_current_hp", 100);
