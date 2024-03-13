@@ -233,9 +233,9 @@ namespace BokInterface {
 
         #region Events
 
-        protected void BokInterfaceMainForm_Load(object sender, EventArgs e) { }
+        protected void BokInterface_Load(object sender, EventArgs e) { }
 
-        protected void BokInterfaceMainForm_FormClosing(object sender, FormClosingEventArgs e) {
+        protected void BokInterface_FormClosing(object sender, FormClosingEventArgs e) {
 
             // Put back the old setting for displaying messages
             APIs.Client.DisplayMessages(previousDisplayMessagesSetting);
