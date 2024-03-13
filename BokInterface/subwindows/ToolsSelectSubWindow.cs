@@ -8,7 +8,7 @@ using BokInterface.Tools.TileDataViewer;
  */
 
 namespace BokInterface {
-    partial class BokInterfaceMainForm {
+    partial class BokInterface {
 
         #region Properties
 

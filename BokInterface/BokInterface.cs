@@ -16,11 +16,11 @@ namespace BokInterface {
 
     /// <summary>Main class for the Bok Interface</summary>
     [ExternalTool("Bok Interface")]
-    public partial class BokInterfaceMainForm : ToolFormBase, IExternalToolForm {
+    public partial class BokInterface : ToolFormBase, IExternalToolForm {
 
         #region Properties
 
-        protected override string WindowTitleStatic => "Bok Interface";
+        protected override string WindowTitleStatic => "Bok Interface v0.1.4a";
         public override bool BlocksInputWhenFocused => false;
         protected Icon? icon;
         public uint currentGameId;
@@ -55,7 +55,7 @@ namespace BokInterface {
 
         #region Main methods
 
-        public BokInterfaceMainForm() {
+        public BokInterface() {
 
             // Try initializing the interface
             InitializeInterface();
@@ -246,9 +246,9 @@ namespace BokInterface {
 
         #region Events
 
-        protected void BokInterfaceMainForm_Load(object sender, EventArgs e) { }
+        protected void BokInterface_Load(object sender, EventArgs e) { }
 
-        protected void BokInterfaceMainForm_FormClosing(object sender, FormClosingEventArgs e) {
+        protected void BokInterface_FormClosing(object sender, FormClosingEventArgs e) {
 
             // Put back the old setting for displaying messages
             APIs.Client.DisplayMessages(previousDisplayMessagesSetting);

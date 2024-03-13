@@ -5,7 +5,7 @@ using System.Collections.Generic;
  */
 
 namespace BokInterface {
-    partial class BokInterfaceMainForm {
+    partial class BokInterface {
 
         private void BoktaiStatusEditSubwindow() {
 

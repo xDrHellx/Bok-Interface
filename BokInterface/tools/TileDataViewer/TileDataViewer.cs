@@ -48,7 +48,7 @@ namespace BokInterface.Tools.TileDataViewer {
             AutoScaleMode = AutoScaleMode.Inherit;
             FormBorderStyle = FormBorderStyle.FixedSingle;
             BackColor = SystemColors.Control;
-            Font = BokInterfaceMainForm.defaultFont;
+            Font = BokInterface.defaultFont;
             AutoScroll = true;
             SetSubwindowSize(width, height);
             this.currentGame = currentGame;
@@ -119,17 +119,17 @@ namespace BokInterface.Tools.TileDataViewer {
 
         /// <summary>
         /// <para>Initialize frame loop</para>
-        /// <para>Adds the corresponding methods to BokInterfaceMainForm.functionsList to have them be executed every frame</para>
+        /// <para>Adds the corresponding methods to BokInterface.functionsList to have them be executed every frame</para>
         /// <para>Also get the index from that list for removing the methods when closing the Tile Data Viewer</para>
         /// </summary>
         public void InitializeFrameLoop() {
-            BokInterfaceMainForm.functionsList.Add(Refresh);
+            BokInterface.functionsList.Add(Refresh);
 
             /**
              * Get the index of the added function,
-             * used for removing the method from BokInterfaceMainForm.functionsList when the subwindow is closed
+             * used for removing the method from BokInterface.functionsList when the subwindow is closed
              */
-            index = BokInterfaceMainForm.functionsList.Count - 1;
+            index = BokInterface.functionsList.Count - 1;
         }
 
         #endregion

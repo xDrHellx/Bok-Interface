@@ -6,7 +6,7 @@ using System.Windows.Forms;
  */
 
 namespace BokInterface {
-    partial class BokInterfaceMainForm {
+    partial class BokInterface {
 
         #region Properties indicating if subwindows are opened or not
 
@@ -40,11 +40,11 @@ namespace BokInterface {
                         BoktaiStatusEditSubwindow();
                         break;
                     case "Zoktai":
-                        statusEditWindow.ClientSize = new System.Drawing.Size(430, 172);
+                        statusEditWindow.ClientSize = new System.Drawing.Size(430, 231);
                         ZoktaiStatusEditSubwindow();
                         break;
                     case "Shinbok":
-                        statusEditWindow.ClientSize = new System.Drawing.Size(227, 144);
+                        statusEditWindow.ClientSize = new System.Drawing.Size(227, 149);
                         ShinbokStatusEditSubwindow();
                         break;
                     case "LunarKnights":
