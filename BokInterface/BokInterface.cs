@@ -15,11 +15,11 @@ namespace BokInterface {
 
     /// <summary>Main class for the Bok Interface</summary>
     [ExternalTool("Bok Interface")]
-    public partial class BokInterfaceMainForm : ToolFormBase, IExternalToolForm {
+    public partial class BokInterface : ToolFormBase, IExternalToolForm {
 
         #region Variables
 
-        protected override string WindowTitleStatic => "Bok Interface";
+        protected override string WindowTitleStatic => "Bok Interface v0.1.4a";
         public override bool BlocksInputWhenFocused => false;
         protected Icon? icon;
         public uint currentGameId;
@@ -50,7 +50,7 @@ namespace BokInterface {
 
         #region Main methods
 
-        public BokInterfaceMainForm() {
+        public BokInterface() {
 
             // Try initializing the interface
             InitializeInterface();

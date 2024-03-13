@@ -34,7 +34,7 @@ namespace BokInterface.Tools.TextToWorldSpace {
             }
 
             // Set memory addresses used for getting the camera coordinates
-            SetCameraAddresses(BokInterfaceMainForm.shorterGameName);
+            SetCameraAddresses(BokInterface.shorterGameName);
 
             // Set text color & write to coordinates
             this.textColor = textColor == null ? Color.LimeGreen : (Color)textColor;
@@ -116,8 +116,8 @@ namespace BokInterface.Tools.TextToWorldSpace {
             double camY = APIs.Memory.ReadS16(_cameraYposAddress);
 
             // Adjusts position
-            x = x - camX + (BokInterfaceMainForm.gbaScreenWidth / 2);
-            y = y - camY + (BokInterfaceMainForm.gbaScreenHeight / 2);
+            x = x - camX + (BokInterface.gbaScreenWidth / 2);
+            y = y - camY + (BokInterface.gbaScreenHeight / 2);
 
             // Transforms GBA screen point to Emulator screen point
             Point screenPoint = APIs.Client.TransformPoint(new Point((int)x, (int)y));

@@ -2,18 +2,19 @@ using System.Collections.Generic;
 using System.Windows.Forms;
 
 using BokInterface.All;
+using BokInterface.ExpTables;
 
 /**
  * Main file for status editing subwindows
  */
 
 namespace BokInterface {
-    partial class BokInterfaceMainForm {
+    partial class BokInterface {
 
         #region Properties for subwindow elements
 
-        private GroupBox _edit_statusGroupBox = new();
-        private GroupBox _edit_statsGroupBox = new();
+        private CheckGroupBox _edit_statusGroupBox = new();
+        private CheckGroupBox _edit_statsGroupBox = new();
         private readonly List<Label> _edit_statusLabels = [];
         private readonly List<NumericUpDown> _edit_statusNumericUpDowns = [];
 
@@ -56,11 +57,27 @@ namespace BokInterface {
             // Store the previous setting for BizHawk being paused
             _previousIsPauseSetting = APIs.Client.IsPaused();
 
+            /**
+             * If the total EXP until next level & current level are available,
+             * we'll use these to prevent the game from adjusting the level while setting new values
+             * 
+             * We'll set the total EXP until next level to the maximum possible to prevent that from happening
+             */
+            if (memoryValues.U32.ContainsKey("total_exp_until_next_level") == true) {
+                memoryValues.U32["total_exp_until_next_level"].Value = 99999999;
+            }
+
             // Pause BizHawk
             APIs.Client.Pause();
 
             // Sets values based on fields for the current game
             for (int i = 0; i < fields.Count; i++) {
+
+                // If the field is disabled, skip it
+                if (fields[i].Enabled == false) {
+                    continue;
+                }
+
                 decimal value = fields[i].Value;
 
                 /**
@@ -74,6 +91,19 @@ namespace BokInterface {
                     case "django":
                         if (_memoryValues.Django.ContainsKey(memoryValueKey) == true) {
                             _memoryValues.Django[memoryValueKey].Value = (uint)value;
+
+                            // Specific treatment for stats in Bok 2
+                            switch (memoryValueKey) {
+                                case "vit":
+                                case "spr":
+                                case "str":
+                                case "agi":
+                                    ZoktaiUpdateStats(memoryValueKey, (uint)value);
+                                    break;
+                                default:
+                                    // Do nothing
+                                    break;
+                            }
                         } else if (_memoryValues.U16.ContainsKey(memoryValueKey) == true) {
                             _memoryValues.U16[memoryValueKey].Value = memoryValueKey switch {
                                 "sword_skill" or "spear_skill" or "hammer_skill" or "fists_skill" or "gun_skill" => Utilities.LevelToExp(value),
@@ -118,6 +148,15 @@ namespace BokInterface {
                         }
                         break;
                 }
+            }
+
+            /**
+             * If the total EXP until next level & current level were available before setting values,
+             * we set it to what it should be to reach the next level (except for lvl 99 which is always 0)
+             */
+            if (_memoryValues.U32.ContainsKey("total_exp_until_next_level") == true && _memoryValues.U16.ContainsKey("level")) {
+                int level = (int)_memoryValues.U16["level"].Value;
+                _memoryValues.U32["total_exp_until_next_level"].Value = level < 99 ? Django.zoktai[level] : 0;
             }
 
             /**

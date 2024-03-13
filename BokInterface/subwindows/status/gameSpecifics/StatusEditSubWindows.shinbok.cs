@@ -7,7 +7,7 @@ using System.Windows.Forms;
  */
 
 namespace BokInterface {
-    partial class BokInterfaceMainForm {
+    partial class BokInterface {
 
         private void ShinbokStatusEditSubwindow() {
 
@@ -18,17 +18,17 @@ namespace BokInterface {
             IDictionary<string, decimal> defaultValues = GetDefaultStatusValues();
 
             // Sections
-            _edit_statusGroupBox = CreateGroupBox("editStatusGroup", "Status", 5, 5, 103, 105);
-            _edit_statsGroupBox = CreateGroupBox("editStatsGroup", "Stats", 114, 5, 107, 105);
+            _edit_statusGroupBox = CreateCheckGroupBox("editStatusGroup", "Status", 5, 5, 103, 110);
+            _edit_statsGroupBox = CreateCheckGroupBox("editStatsGroup", "Stats", 114, 5, 107, 110);
 
             // Status
-            _edit_statusLabels.Add(CreateLabel("djangoEditHpLabel", "LIFE :", 7, 19, 34, 15));
-            // this.edit_statusLabels.Add(this.CreateLabel("djangoEditEneLabel", "ENE :", 7, 47, 34, 15));
-            // this.edit_statusLabels.Add(this.CreateLabel("djangoEditTrcLabel", "TRC :", 7, 76, 34, 15));
+            _edit_statusLabels.Add(CreateLabel("djangoEditHpLabel", "LIFE :", 7, 24, 34, 15));
+            // _edit_statusLabels.Add(this.CreateLabel("djangoEditEneLabel", "ENE :", 7, 52, 34, 15));
+            // _edit_statusLabels.Add(this.CreateLabel("djangoEditTrcLabel", "TRC :", 7, 81, 34, 15));
 
-            _edit_statusNumericUpDowns.Add(CreateNumericUpDown("django_current_hp", defaultValues["django_current_hp"], 47, 16, 50, 23, maxValue: 1000));
-            // this.edit_statusNumericUpDowns.Add(this.CreateNumericUpDown("django_current_ene", defaultValues["django_current_ene"], 47, 45, 50, 23, maxValue: 1000));
-            // this.edit_statusNumericUpDowns.Add(this.CreateNumericUpDown("django_current_trc", defaultValues["django_current_trc"], 47, 74, 50, 23, maxValue: 1000));
+            _edit_statusNumericUpDowns.Add(CreateNumericUpDown("django_current_hp", defaultValues["django_current_hp"], 47, 21, 50, 23, maxValue: 1000));
+            // _edit_statusNumericUpDowns.Add(this.CreateNumericUpDown("django_current_ene", defaultValues["django_current_ene"], 47, 50, 50, 23, maxValue: 1000));
+            // _edit_statusNumericUpDowns.Add(this.CreateNumericUpDown("django_current_trc", defaultValues["django_current_trc"], 47, 79, 50, 23, maxValue: 1000));
 
             // Add elements to group boxes / sections
             for (int i = 0; i < _edit_statusLabels.Count; i++) {
@@ -42,19 +42,19 @@ namespace BokInterface {
             }
 
             // Stats
-            _edit_statusLabels.Add(CreateLabel("djangoEditHpLabel", "VIT", 8, 19, 27, 15));
-            _edit_statusLabels.Add(CreateLabel("djangoEditEneLabel", "SPR", 8, 47, 27, 15));
-            _edit_statusLabels.Add(CreateLabel("djangoEditTrcLabel", "STR", 8, 76, 27, 15));
+            _edit_statusLabels.Add(CreateLabel("djangoEditHpLabel", "VIT", 8, 24, 27, 15));
+            _edit_statusLabels.Add(CreateLabel("djangoEditEneLabel", "SPR", 8, 51, 27, 15));
+            _edit_statusLabels.Add(CreateLabel("djangoEditTrcLabel", "STR", 8, 81, 27, 15));
 
-            _edit_statusNumericUpDowns.Add(CreateNumericUpDown("django_base_vit", defaultValues["django_base_vit"], 36, 16, 41, 23));
-            _edit_statusNumericUpDowns.Add(CreateNumericUpDown("django_base_spr", defaultValues["django_base_spr"], 36, 45, 41, 23));
-            _edit_statusNumericUpDowns.Add(CreateNumericUpDown("django_base_str", defaultValues["django_base_str"], 36, 74, 41, 23));
+            _edit_statusNumericUpDowns.Add(CreateNumericUpDown("django_base_vit", defaultValues["django_base_vit"], 36, 21, 41, 23, maxValue: 100));
+            _edit_statusNumericUpDowns.Add(CreateNumericUpDown("django_base_spr", defaultValues["django_base_spr"], 36, 50, 41, 23, maxValue: 100));
+            _edit_statusNumericUpDowns.Add(CreateNumericUpDown("django_base_str", defaultValues["django_base_str"], 36, 79, 41, 23, maxValue: 100));
 
             // Tooltips & warnings
             List<Label> warningLabels = [
-                CreateImageLabel("tooltip", "warning", 83, 18),
-                CreateImageLabel("tooltip", "warning", 83, 47),
-                CreateImageLabel("tooltip", "warning", 83, 76)
+                CreateImageLabel("tooltip", "warning", 83, 23),
+                CreateImageLabel("tooltip", "warning", 83, 52),
+                CreateImageLabel("tooltip", "warning", 83, 81)
             ];
 
             // Add tooltips to labels group
@@ -78,7 +78,7 @@ namespace BokInterface {
             statusEditWindow.Controls.Add(_edit_statsGroupBox);
 
             // Button for setting values & its events
-            Button setValuesButton = CreateButton("setStatusButton", "Set values", 123, 116, 75, 23);
+            Button setValuesButton = CreateButton("setStatusButton", "Set values", 147, 121, 75, 23);
             setValuesButton.Click += new EventHandler(delegate (object sender, EventArgs e) {
                 // Write the values for 10 frames
                 for (int i = 0; i < 10; i++) {
