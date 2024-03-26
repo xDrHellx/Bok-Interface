@@ -154,10 +154,12 @@ namespace BokInterface {
              * If the total EXP until next level & current level were available before setting values,
              * we set it to what it should be to reach the next level (except for lvl 99 which is always 0)
              */
-            if (memoryValues.U32.ContainsKey("total_exp_until_next_level") == true && memoryValues.U16.ContainsKey("level")) {
-                int level = (int)memoryValues.U16["level"].Value;
+            if (memoryValues.U32.ContainsKey("total_exp_until_next_level") == true && memoryValues.Django.ContainsKey("level")) {
+                int level = (int)memoryValues.Django["level"].Value;
                 memoryValues.U32["total_exp_until_next_level"].Value = level < 99 ? Django.zoktai[level] : 0;
             }
+
+            APIs.Gui.AddMessage(memoryValues.U32["exp"].Value.ToString() + " (" + memoryValues.U32["total_exp_until_next_level"].Value.ToString() + ")");
 
             /**
              * If BizHawk was not paused before setting values, unpause it

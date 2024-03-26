@@ -142,7 +142,7 @@ namespace BokInterface {
         /// <returns><c>IDictionary<string, decimal></c>Default values</returns>
         private IDictionary<string, decimal> GetZoktaiDefaultValues() {
             IDictionary<string, decimal> defaultValues = new Dictionary<string, decimal>();
-            uint stat = APIs.Memory.ReadU32(zoktaiAddresses.Misc["stat"]);
+            uint stat = APIs.Memory.ReadU32(zoktaiAddresses.Misc["current_stat"]);
 
             // If stat is a valid value
             if (stat > 0) {
@@ -150,19 +150,19 @@ namespace BokInterface {
                 defaultValues.Add("django_current_ene", memoryValues.Django["current_ene"].Value);
 
                 defaultValues.Add("django_exp", memoryValues.U32["exp"].Value);
-                defaultValues.Add("django_level", memoryValues.U16["level"].Value);
+                defaultValues.Add("django_level", memoryValues.Django["level"].Value);
 
                 defaultValues.Add("django_vit", memoryValues.Django["vit"].Value);
                 defaultValues.Add("django_spr", memoryValues.Django["spr"].Value);
                 defaultValues.Add("django_str", memoryValues.Django["str"].Value);
                 defaultValues.Add("django_agi", memoryValues.Django["agi"].Value);
-                defaultValues.Add("django_stat_points", memoryValues.U16["stat_points"].Value);
+                defaultValues.Add("django_stat_points", memoryValues.Django["stat_points"].Value);
 
-                defaultValues.Add("django_sword_skill", Utilities.ExpToLevel(memoryValues.U16["sword_skill"].Value));
-                defaultValues.Add("django_spear_skill", Utilities.ExpToLevel(memoryValues.U16["spear_skill"].Value));
-                defaultValues.Add("django_hammer_skill", Utilities.ExpToLevel(memoryValues.U16["hammer_skill"].Value));
-                defaultValues.Add("django_fists_skill", Utilities.ExpToLevel(memoryValues.U16["fists_skill"].Value));
-                defaultValues.Add("django_gun_skill", Utilities.ExpToLevel(memoryValues.U16["gun_skill"].Value));
+                defaultValues.Add("django_sword_skill", Utilities.ExpToLevel(memoryValues.Django["sword_skill"].Value));
+                defaultValues.Add("django_spear_skill", Utilities.ExpToLevel(memoryValues.Django["spear_skill"].Value));
+                defaultValues.Add("django_hammer_skill", Utilities.ExpToLevel(memoryValues.Django["hammer_skill"].Value));
+                defaultValues.Add("django_fists_skill", Utilities.ExpToLevel(memoryValues.Django["fists_skill"].Value));
+                defaultValues.Add("django_gun_skill", Utilities.ExpToLevel(memoryValues.Django["gun_skill"].Value));
             } else {
                 // If stat is unvalid (if we are on the title screen or in a room transition), use specific values
                 defaultValues.Add("django_current_hp", 100);
@@ -195,8 +195,8 @@ namespace BokInterface {
         /// <param name="stat">Stat name</param>
         /// <param name="value">Value to set</param>
         private void ZoktaiUpdateStats(string stat, uint value) {
-            if (memoryValues.U16.ContainsKey(stat) == true) {
-                memoryValues.U16[stat].Value = value;
+            if (memoryValues.Misc.ContainsKey(stat) == true) {
+                memoryValues.Misc[stat].Value = value;
             }
         }
     }
