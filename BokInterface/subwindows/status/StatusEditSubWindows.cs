@@ -90,25 +90,30 @@ namespace BokInterface {
                 switch (subList) {
                     case "django":
                         if (memoryValues.Django.ContainsKey(memoryValueKey) == true) {
-                            memoryValues.Django[memoryValueKey].Value = (uint)value;
 
-                            // Specific treatment for stats in Bok 2
+                            // Depending on the key, we treat the value setting differently
                             switch (memoryValueKey) {
-                                case "vit":
+                                case "vit":                     // Stats
                                 case "spr":
                                 case "str":
                                 case "agi":
+                                    memoryValues.Django[memoryValueKey].Value = (uint)value;
                                     ZoktaiUpdateStats(memoryValueKey, (uint)value);
                                     break;
-                                default:
-                                    // Do nothing
+                                case "sword_skill":             // Skill
+                                case "spear_skill":
+                                case "hammer_skill":
+                                case "fists_skill":
+                                case "gun_skill":
+                                    memoryValues.Django[memoryValueKey].Value = Utilities.LevelToExp(value);
+                                    break;
+                                default:                        // Default treatment
+                                    memoryValues.Django[memoryValueKey].Value = (uint)value;
                                     break;
                             }
+
                         } else if (memoryValues.U16.ContainsKey(memoryValueKey) == true) {
-                            memoryValues.U16[memoryValueKey].Value = memoryValueKey switch {
-                                "sword_skill" or "spear_skill" or "hammer_skill" or "fists_skill" or "gun_skill" => Utilities.LevelToExp(value),
-                                _ => (uint)value
-                            };
+                            memoryValues.U16[memoryValueKey].Value = (uint)value;
                         } else if (memoryValues.U32.ContainsKey(memoryValueKey) == true) {
                             memoryValues.U32[memoryValueKey].Value = (uint)value;
                         }
