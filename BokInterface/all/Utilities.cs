@@ -9,6 +9,8 @@ namespace BokInterface.All {
 
         }
 
+        #region Game code & region methods
+
         /// <summary>Retrieve the code for the current GBA game running on BizHawk</summary>
         /// <returns><c>uint</c>Game code</returns>
         public static uint GetGbaGameCode() {
@@ -20,6 +22,16 @@ namespace BokInterface.All {
         public static uint GetDsGameCode() {
             return APIs.Memory.ReadU32(0x3FFE0C, "Main RAM");
         }
+
+        /// <summary>Get the value for the game's version</summary>
+        /// <returns><c>uint</c>Indicator (for example 0 for v1.0, 1 for v1.1, ...)</returns>
+        public static uint GetGameVersion() {
+            return APIs.Memory.ReadU8(0x080000bc, "Main RAM");
+        }
+
+        #endregion
+
+        #region Simplified memory addresses methods
 
         /// <summary>Shortcut method for retrieving the value of a dynamic memory address</summary>
         /// <param name="firstAddress">First address to read (U32)</param>
@@ -51,6 +63,10 @@ namespace BokInterface.All {
             return value.ToString("X");
         }
 
+        #endregion
+
+        #region EXP & level conversions methods
+
         /// <summary>Convert EXP to Level</summary>
         /// <param name="exp">EXP amount</param>
         /// <returns><c>decimal</c>Level</returns>
@@ -65,10 +81,6 @@ namespace BokInterface.All {
             return level > 0 ? (uint)(level * 100) : 0;
         }
 
-        /// <summary>Get the value for the game's version</summary>
-        /// <returns><c>uint</c>Indicator (for example 0 for v1.0, 1 for v1.1, ...)</returns>
-        public static uint GetGameVersion() {
-            return APIs.Memory.ReadU8(0x080000bc, "Main RAM");
-        }
+        #endregion
     }
 }
