@@ -159,8 +159,6 @@ namespace BokInterface {
                 memoryValues.U32["total_exp_until_next_level"].Value = level < 99 ? Django.zoktai[level] : 0;
             }
 
-            APIs.Gui.AddMessage(memoryValues.U32["exp"].Value.ToString() + " (" + memoryValues.U32["total_exp_until_next_level"].Value.ToString() + ")");
-
             /**
              * If BizHawk was not paused before setting values, unpause it
              * Otherwise keep it paused
