@@ -119,5 +119,74 @@ namespace BokInterface {
 
             return defaultValues;
         }
+
+        /// <summary>Specific method for setting status values</summary>
+        /// <param name="fields">List of fields to parse through</param>
+        private void SetShinbokStatusValues(List<NumericUpDown> fields) {
+
+            // Sets values based on fields
+            for (int i = 0; i < fields.Count; i++) {
+
+                // If the field is disabled, skip it
+                if (fields[i].Enabled == false) {
+                    continue;
+                }
+
+                decimal value = fields[i].Value;
+
+                /**
+                 * Indicate which sublist to use for setting the value, based on the input field's name
+                 * We only split on the first "_"
+                 */
+                string[] fieldParts = fields[i].Name.Split(['_'], 2);
+                string subList = fieldParts[0];
+                string memoryValueKey = fieldParts[1];
+                switch (subList) {
+                    case "django":
+                        if (memoryValues.Django.ContainsKey(memoryValueKey) == true) {
+                            memoryValues.Django[memoryValueKey].Value = (uint)value;
+                        } else if (memoryValues.U16.ContainsKey(memoryValueKey) == true) {
+                            memoryValues.U16[memoryValueKey].Value = (uint)value;
+                        } else if (memoryValues.U32.ContainsKey(memoryValueKey) == true) {
+                            memoryValues.U32[memoryValueKey].Value = (uint)value;
+                        }
+                        break;
+                    case "solls":
+                        if (memoryValues.Solls.ContainsKey(memoryValueKey) == true) {
+                            memoryValues.Solls[memoryValueKey].Value = (uint)value;
+                        } else if (memoryValues.U16.ContainsKey(memoryValueKey) == true) {
+                            memoryValues.U16[memoryValueKey].Value = (uint)value;
+                        } else if (memoryValues.U32.ContainsKey(memoryValueKey) == true) {
+                            memoryValues.U32[memoryValueKey].Value = (uint)value;
+                        }
+                        break;
+                    case "bike":
+                        if (memoryValues.Bike.ContainsKey(memoryValueKey) == true) {
+                            memoryValues.Bike[memoryValueKey].Value = (uint)value;
+                        } else if (memoryValues.U16.ContainsKey(memoryValueKey) == true) {
+                            memoryValues.U16[memoryValueKey].Value = (uint)value;
+                        } else if (memoryValues.U32.ContainsKey(memoryValueKey) == true) {
+                            memoryValues.U32[memoryValueKey].Value = (uint)value;
+                        }
+                        break;
+                    case "misc":
+                        if (memoryValues.Misc.ContainsKey(memoryValueKey) == true) {
+                            memoryValues.Misc[memoryValueKey].Value = (uint)value;
+                        } else if (memoryValues.U16.ContainsKey(memoryValueKey) == true) {
+                            memoryValues.U16[memoryValueKey].Value = (uint)value;
+                        } else if (memoryValues.U32.ContainsKey(memoryValueKey) == true) {
+                            memoryValues.U32[memoryValueKey].Value = (uint)value;
+                        }
+                        break;
+                    default:
+                        if (memoryValues.U16.ContainsKey(memoryValueKey) == true) {
+                            memoryValues.U16[memoryValueKey].Value = (uint)value;
+                        } else if (memoryValues.U32.ContainsKey(memoryValueKey) == true) {
+                            memoryValues.U32[memoryValueKey].Value = (uint)value;
+                        }
+                        break;
+                }
+            }
+        }
     }
 }
