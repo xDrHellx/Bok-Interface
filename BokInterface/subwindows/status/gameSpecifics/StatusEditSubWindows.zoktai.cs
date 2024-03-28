@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Windows.Forms;
 
 using BokInterface.All;
+using BokInterface.ExpTables;
 
 /**
  * File for Zoktai's status edit subwindow
@@ -142,27 +143,27 @@ namespace BokInterface {
         /// <returns><c>IDictionary<string, decimal></c>Default values</returns>
         private IDictionary<string, decimal> GetZoktaiDefaultValues() {
             IDictionary<string, decimal> defaultValues = new Dictionary<string, decimal>();
-            uint stat = APIs.Memory.ReadU32(_zoktaiAddresses.Misc["stat"]);
+            uint stat = APIs.Memory.ReadU32(_zoktaiAddresses.Misc["current_stat"]);
 
             // If stat is a valid value
             if (stat > 0) {
                 defaultValues.Add("django_current_hp", _memoryValues.Django["current_hp"].Value);
                 defaultValues.Add("django_current_ene", _memoryValues.Django["current_ene"].Value);
 
-                defaultValues.Add("django_exp", _memoryValues.U32["exp"].Value);
-                defaultValues.Add("django_level", _memoryValues.U16["level"].Value);
+                defaultValues.Add("django_exp", _memoryValues.Django["exp"].Value);
+                defaultValues.Add("django_level", _memoryValues.Django["level"].Value);
 
                 defaultValues.Add("django_vit", _memoryValues.Django["vit"].Value);
                 defaultValues.Add("django_spr", _memoryValues.Django["spr"].Value);
                 defaultValues.Add("django_str", _memoryValues.Django["str"].Value);
                 defaultValues.Add("django_agi", _memoryValues.Django["agi"].Value);
-                defaultValues.Add("django_stat_points", _memoryValues.U16["stat_points"].Value);
+                defaultValues.Add("django_stat_points", _memoryValues.Django["stat_points"].Value);
 
-                defaultValues.Add("django_sword_skill", Utilities.ExpToLevel(_memoryValues.U16["sword_skill"].Value));
-                defaultValues.Add("django_spear_skill", Utilities.ExpToLevel(_memoryValues.U16["spear_skill"].Value));
-                defaultValues.Add("django_hammer_skill", Utilities.ExpToLevel(_memoryValues.U16["hammer_skill"].Value));
-                defaultValues.Add("django_fists_skill", Utilities.ExpToLevel(_memoryValues.U16["fists_skill"].Value));
-                defaultValues.Add("django_gun_skill", Utilities.ExpToLevel(_memoryValues.U16["gun_skill"].Value));
+                defaultValues.Add("django_sword_skill", Utilities.ExpToLevel(_memoryValues.Django["sword_skill"].Value));
+                defaultValues.Add("django_spear_skill", Utilities.ExpToLevel(_memoryValues.Django["spear_skill"].Value));
+                defaultValues.Add("django_hammer_skill", Utilities.ExpToLevel(_memoryValues.Django["hammer_skill"].Value));
+                defaultValues.Add("django_fists_skill", Utilities.ExpToLevel(_memoryValues.Django["fists_skill"].Value));
+                defaultValues.Add("django_gun_skill", Utilities.ExpToLevel(_memoryValues.Django["gun_skill"].Value));
             } else {
                 // If stat is unvalid (if we are on the title screen or in a room transition), use specific values
                 defaultValues.Add("django_current_hp", 100);
@@ -188,15 +189,111 @@ namespace BokInterface {
             return defaultValues;
         }
 
-        /// <summary>
-        /// Specific method for Bok 2 to update both "current" and "persistent" stats addresses at once <br>
-        /// For some reason updating "current" is not enough, when switching room the game sets back the old values
-        /// </summary>
-        /// <param name="stat">Stat name</param>
-        /// <param name="value">Value to set</param>
-        private void ZoktaiUpdateStats(string stat, uint value) {
-            if (memoryValues.U16.ContainsKey(stat) == true) {
-                memoryValues.U16[stat].Value = value;
+        /// <summary>Specific method for setting status values</summary>
+        /// <param name="fields">List of fields to parse through</param>
+        private void SetZoktaiStatusValues(List<NumericUpDown> fields) {
+
+            /**
+             * If the total EXP until next level & current level are available,
+             * we'll use these to prevent the game from adjusting the level while setting new values
+             * 
+             * We'll set the total EXP until next level to the maximum possible to prevent that from happening
+             */
+            if (memoryValues.U32.ContainsKey("total_exp_until_next_level") == true) {
+                memoryValues.U32["total_exp_until_next_level"].Value = 99999999;
+            }
+
+            // Sets values based on fields
+            for (int i = 0; i < fields.Count; i++) {
+
+                // If the field is disabled, skip it
+                if (fields[i].Enabled == false) {
+                    continue;
+                }
+
+                decimal value = fields[i].Value;
+
+                /**
+                 * Indicate which sublist to use for setting the value, based on the input field's name
+                 * We only split on the first "_"
+                 */
+                string[] fieldParts = fields[i].Name.Split(['_'], 2);
+                string subList = fieldParts[0];
+                string memoryValueKey = fieldParts[1];
+                switch (subList) {
+                    case "django":
+                        if (memoryValues.Django.ContainsKey(memoryValueKey) == true) {
+
+                            // Depending on the key, we treat the value setting differently
+                            switch (memoryValueKey) {
+                                case "vit":                     // Stats
+                                case "spr":
+                                case "str":
+                                case "agi":
+                                    /**
+                                     * For stats wz also update the "persistent" stat address
+                                     * 
+                                     * We do this because updating "current" stat value is not enough,
+                                     * when switching room the game would set back the old values
+                                     */
+                                    memoryValues.Django[memoryValueKey].Value = (uint)value;
+                                    if (memoryValues.Misc.ContainsKey(memoryValueKey) == true) {
+                                        memoryValues.Misc[memoryValueKey].Value = (uint)value;
+                                    }
+                                    break;
+                                case "sword_skill":             // Skill
+                                case "spear_skill":
+                                case "hammer_skill":
+                                case "fists_skill":
+                                case "gun_skill":
+                                    memoryValues.Django[memoryValueKey].Value = Utilities.LevelToExp(value);
+                                    break;
+                                default:                        // Default treatment
+                                    memoryValues.Django[memoryValueKey].Value = (uint)value;
+                                    break;
+                            }
+
+                        } else if (memoryValues.U16.ContainsKey(memoryValueKey) == true) {
+                            memoryValues.U16[memoryValueKey].Value = (uint)value;
+                        } else if (memoryValues.U32.ContainsKey(memoryValueKey) == true) {
+                            memoryValues.U32[memoryValueKey].Value = (uint)value;
+                        }
+                        break;
+                    case "solls":
+                        if (memoryValues.Solls.ContainsKey(memoryValueKey) == true) {
+                            memoryValues.Solls[memoryValueKey].Value = (uint)value;
+                        } else if (memoryValues.U16.ContainsKey(memoryValueKey) == true) {
+                            memoryValues.U16[memoryValueKey].Value = (uint)value;
+                        } else if (memoryValues.U32.ContainsKey(memoryValueKey) == true) {
+                            memoryValues.U32[memoryValueKey].Value = (uint)value;
+                        }
+                        break;
+                    case "misc":
+                        if (memoryValues.Misc.ContainsKey(memoryValueKey) == true) {
+                            memoryValues.Misc[memoryValueKey].Value = (uint)value;
+                        } else if (memoryValues.U16.ContainsKey(memoryValueKey) == true) {
+                            memoryValues.U16[memoryValueKey].Value = (uint)value;
+                        } else if (memoryValues.U32.ContainsKey(memoryValueKey) == true) {
+                            memoryValues.U32[memoryValueKey].Value = (uint)value;
+                        }
+                        break;
+                    default:
+                        if (memoryValues.U16.ContainsKey(memoryValueKey) == true) {
+                            memoryValues.U16[memoryValueKey].Value = (uint)value;
+                        } else if (memoryValues.U32.ContainsKey(memoryValueKey) == true) {
+                            memoryValues.U32[memoryValueKey].Value = (uint)value;
+                        }
+                        break;
+                }
+            }
+
+            /**
+             * If the total EXP until next level & current level were available before setting values,
+             * we set it to what it should be to reach the next level (except for lvl 99 which is always 0)
+             */
+            if (memoryValues.U32.ContainsKey("total_exp_until_next_level") == true && memoryValues.Django.ContainsKey("level")) {
+                int level = (int)memoryValues.Django["level"].Value;
+                memoryValues.U32["total_exp_until_next_level"].Value = level < 99 ? Django.zoktai[level] : 0;
             }
         }
     }

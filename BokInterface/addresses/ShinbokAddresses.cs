@@ -63,9 +63,9 @@ namespace BokInterface.Addresses {
             // Add Django addresses
             Django.Add("hp", 0x424);
 
-            Django.Add("x_position", 0x0203C430);
-            Django.Add("y_position", 0x0203C434);
-            Django.Add("z_position", 0x0203C432);
+            Django.Add("x_position", 0x30);
+            Django.Add("y_position", 0x34);
+            Django.Add("z_position", 0x32);
 
             // 0x18 + 2 * stat_id
             Django.Add("base_vit", 0x18);
@@ -95,7 +95,9 @@ namespace BokInterface.Addresses {
             // Misc.Add("equips_stat", 0x02004094);
             // 02004094
             Misc.Add("room", 0x02000580);
-            Misc.Add("stat", 0x02000710);
+            Misc.Add("stat", 0x02000710); // inventory too
+            Misc.Add("world_state", 0x0203DB08); // Story progress, dungeon states, ...
+            Misc.Add("scratch", 0x0203E308);
             Misc.Add("map_data", 0x030052F4);
             Misc.Add("x_camera", 0x03005418);
             Misc.Add("y_camera", 0x0300541A);

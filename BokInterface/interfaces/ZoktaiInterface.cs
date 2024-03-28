@@ -76,7 +76,7 @@ namespace BokInterface {
         private void UpdateZoktaiInterface() {
 
             // Get one of the values used for reading stats
-            uint stat = APIs.Memory.ReadU32(_zoktaiAddresses.Misc["stat"]);
+            uint stat = APIs.Memory.ReadU32(_zoktaiAddresses.Misc["current_stat"]);
 
             /**
              * Update values by retrieving from memory addresses
@@ -88,27 +88,27 @@ namespace BokInterface {
                 _bok2_currentStatusHpValue.Text = _memoryValues.Django["current_hp"].Value.ToString();
                 _bok2_currentStatusEneValue.Text = _memoryValues.Django["current_ene"].Value.ToString();
 
-                _bok2_djangoLevel.Text = _memoryValues.U16["level"].Value.ToString();
-                _bok2_djangoExp.Text = _memoryValues.U32["exp"].Value.ToString();
+                _bok2_djangoLevel.Text = _memoryValues.Django["level"].Value.ToString();
+                _bok2_djangoExp.Text = _memoryValues.Django["exp"].Value.ToString();
 
-                _bok2_djangoVit.Text = _memoryValues.U16["vit"].Value.ToString();
-                _bok2_djangoSpr.Text = _memoryValues.U16["spr"].Value.ToString();
-                _bok2_djangoStr.Text = _memoryValues.U16["str"].Value.ToString();
-                _bok2_djangoAgi.Text = _memoryValues.U16["agi"].Value.ToString();
-                _bok2_djangoStatPoints.Text = _memoryValues.U16["stat_points"].Value.ToString();
+                _bok2_djangoVit.Text = _memoryValues.Misc["vit"].Value.ToString();
+                _bok2_djangoSpr.Text = _memoryValues.Misc["spr"].Value.ToString();
+                _bok2_djangoStr.Text = _memoryValues.Misc["str"].Value.ToString();
+                _bok2_djangoAgi.Text = _memoryValues.Misc["agi"].Value.ToString();
+                _bok2_djangoStatPoints.Text = _memoryValues.Django["stat_points"].Value.ToString();
 
-                _bok2_djangoSwordSkill.Text = Utilities.ExpToLevel(_memoryValues.U16["sword_skill"].Value).ToString();
-                _bok2_djangoSpearSkill.Text = Utilities.ExpToLevel(_memoryValues.U16["spear_skill"].Value).ToString();
-                _bok2_djangoHammerSkill.Text = Utilities.ExpToLevel(_memoryValues.U16["hammer_skill"].Value).ToString();
-                _bok2_djangoFistsSkill.Text = Utilities.ExpToLevel(_memoryValues.U16["fists_skill"].Value).ToString();
-                _bok2_djangoGunSkill.Text = Utilities.ExpToLevel(_memoryValues.U16["gun_skill"].Value).ToString();
+                _bok2_djangoSwordSkill.Text = Utilities.ExpToLevel(_memoryValues.Django["sword_skill"].Value).ToString();
+                _bok2_djangoSpearSkill.Text = Utilities.ExpToLevel(_memoryValues.Django["spear_skill"].Value).ToString();
+                _bok2_djangoHammerSkill.Text = Utilities.ExpToLevel(_memoryValues.Django["hammer_skill"].Value).ToString();
+                _bok2_djangoFistsSkill.Text = Utilities.ExpToLevel(_memoryValues.Django["fists_skill"].Value).ToString();
+                _bok2_djangoGunSkill.Text = Utilities.ExpToLevel(_memoryValues.Django["gun_skill"].Value).ToString();
 
                 // Add / refresh tooltips for skill containing the EXP amount
-                AddToolTip(_bok2_djangoSwordSkill, _memoryValues.U16["sword_skill"].Value + " EXP");
-                AddToolTip(_bok2_djangoSpearSkill, _memoryValues.U16["spear_skill"].Value + " EXP");
-                AddToolTip(_bok2_djangoHammerSkill, _memoryValues.U16["hammer_skill"].Value + " EXP");
-                AddToolTip(_bok2_djangoFistsSkill, _memoryValues.U16["fists_skill"].Value + " EXP");
-                AddToolTip(_bok2_djangoGunSkill, _memoryValues.U16["gun_skill"].Value + " EXP");
+                AddToolTip(_bok2_djangoSwordSkill, _memoryValues.Django["sword_skill"].Value + " EXP");
+                AddToolTip(_bok2_djangoSpearSkill, _memoryValues.Django["spear_skill"].Value + " EXP");
+                AddToolTip(_bok2_djangoHammerSkill, _memoryValues.Django["hammer_skill"].Value + " EXP");
+                AddToolTip(_bok2_djangoFistsSkill, _memoryValues.Django["fists_skill"].Value + " EXP");
+                AddToolTip(_bok2_djangoGunSkill, _memoryValues.Django["gun_skill"].Value + " EXP");
             }
         }
 
