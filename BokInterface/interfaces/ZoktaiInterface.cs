@@ -76,7 +76,7 @@ namespace BokInterface {
         private void UpdateZoktaiInterface() {
 
             // Get one of the values used for reading stats
-            uint stat = APIs.Memory.ReadU32(zoktaiAddresses.Misc["stat"]);
+            uint stat = APIs.Memory.ReadU32(zoktaiAddresses.Misc["current_stat"]);
 
             /**
              * Update values by retrieving from memory addresses
@@ -88,27 +88,27 @@ namespace BokInterface {
                 bok2_currentStatusHpValue.Text = memoryValues.Django["current_hp"].Value.ToString();
                 bok2_currentStatusEneValue.Text = memoryValues.Django["current_ene"].Value.ToString();
 
-                bok2_djangoLevel.Text = memoryValues.U16["level"].Value.ToString();
-                bok2_djangoExp.Text = memoryValues.U32["exp"].Value.ToString();
+                bok2_djangoLevel.Text = memoryValues.Django["level"].Value.ToString();
+                bok2_djangoExp.Text = memoryValues.Django["exp"].Value.ToString();
 
-                bok2_djangoVit.Text = memoryValues.U16["vit"].Value.ToString();
-                bok2_djangoSpr.Text = memoryValues.U16["spr"].Value.ToString();
-                bok2_djangoStr.Text = memoryValues.U16["str"].Value.ToString();
-                bok2_djangoAgi.Text = memoryValues.U16["agi"].Value.ToString();
-                bok2_djangoStatPoints.Text = memoryValues.U16["stat_points"].Value.ToString();
+                bok2_djangoVit.Text = memoryValues.Misc["vit"].Value.ToString();
+                bok2_djangoSpr.Text = memoryValues.Misc["spr"].Value.ToString();
+                bok2_djangoStr.Text = memoryValues.Misc["str"].Value.ToString();
+                bok2_djangoAgi.Text = memoryValues.Misc["agi"].Value.ToString();
+                bok2_djangoStatPoints.Text = memoryValues.Django["stat_points"].Value.ToString();
 
-                bok2_djangoSwordSkill.Text = Utilities.ExpToLevel(memoryValues.U16["sword_skill"].Value).ToString();
-                bok2_djangoSpearSkill.Text = Utilities.ExpToLevel(memoryValues.U16["spear_skill"].Value).ToString();
-                bok2_djangoHammerSkill.Text = Utilities.ExpToLevel(memoryValues.U16["hammer_skill"].Value).ToString();
-                bok2_djangoFistsSkill.Text = Utilities.ExpToLevel(memoryValues.U16["fists_skill"].Value).ToString();
-                bok2_djangoGunSkill.Text = Utilities.ExpToLevel(memoryValues.U16["gun_skill"].Value).ToString();
+                bok2_djangoSwordSkill.Text = Utilities.ExpToLevel(memoryValues.Django["sword_skill"].Value).ToString();
+                bok2_djangoSpearSkill.Text = Utilities.ExpToLevel(memoryValues.Django["spear_skill"].Value).ToString();
+                bok2_djangoHammerSkill.Text = Utilities.ExpToLevel(memoryValues.Django["hammer_skill"].Value).ToString();
+                bok2_djangoFistsSkill.Text = Utilities.ExpToLevel(memoryValues.Django["fists_skill"].Value).ToString();
+                bok2_djangoGunSkill.Text = Utilities.ExpToLevel(memoryValues.Django["gun_skill"].Value).ToString();
 
                 // Add / refresh tooltips for skill containing the EXP amount
-                AddToolTip(bok2_djangoSwordSkill, memoryValues.U16["sword_skill"].Value + " EXP");
-                AddToolTip(bok2_djangoSpearSkill, memoryValues.U16["spear_skill"].Value + " EXP");
-                AddToolTip(bok2_djangoHammerSkill, memoryValues.U16["hammer_skill"].Value + " EXP");
-                AddToolTip(bok2_djangoFistsSkill, memoryValues.U16["fists_skill"].Value + " EXP");
-                AddToolTip(bok2_djangoGunSkill, memoryValues.U16["gun_skill"].Value + " EXP");
+                AddToolTip(bok2_djangoSwordSkill, memoryValues.Django["sword_skill"].Value + " EXP");
+                AddToolTip(bok2_djangoSpearSkill, memoryValues.Django["spear_skill"].Value + " EXP");
+                AddToolTip(bok2_djangoHammerSkill, memoryValues.Django["hammer_skill"].Value + " EXP");
+                AddToolTip(bok2_djangoFistsSkill, memoryValues.Django["fists_skill"].Value + " EXP");
+                AddToolTip(bok2_djangoGunSkill, memoryValues.Django["gun_skill"].Value + " EXP");
             }
         }
 

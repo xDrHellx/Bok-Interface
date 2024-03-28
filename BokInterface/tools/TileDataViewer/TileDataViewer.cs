@@ -81,13 +81,13 @@ namespace BokInterface.Tools.TileDataViewer {
                     break;
                 case "Zoktai":
                     mapDataAddress = zoktaiAddresses.Misc["map_data"];
-                    djangoXposAddress = zoktaiAddresses.Django["x_position"];
-                    djangoYposAddress = zoktaiAddresses.Django["y_position"];
+                    djangoXposAddress = APIs.Memory.ReadU32(zoktaiAddresses.Misc["stat"]) + zoktaiAddresses.Django["x_position"];
+                    djangoYposAddress = APIs.Memory.ReadU32(zoktaiAddresses.Misc["stat"]) + zoktaiAddresses.Django["y_position"];
                     break;
                 case "Shinbok":
                     mapDataAddress = shinbokAddresses.Misc["map_data"];
-                    djangoXposAddress = shinbokAddresses.Django["x_position"];
-                    djangoYposAddress = shinbokAddresses.Django["y_position"];
+                    djangoXposAddress = APIs.Memory.ReadU32(shinbokAddresses.Misc["stat"]) + shinbokAddresses.Django["x_position"];
+                    djangoYposAddress = APIs.Memory.ReadU32(shinbokAddresses.Misc["stat"]) + shinbokAddresses.Django["y_position"];
                     break;
                 case "LunarKnights":
                     // Currently not handled, not enough addresses available
@@ -168,6 +168,14 @@ namespace BokInterface.Tools.TileDataViewer {
             // 4. Draw Django on map
             uint djangoX = APIs.Memory.ReadU16(djangoXposAddress);
             uint djangoY = APIs.Memory.ReadU16(djangoYposAddress);
+
+            // If both values are at 0, it might be due to a soft reset, so we get the addresses again
+            if (djangoX == 0 && djangoY == 0) {
+                SetGameAddresses(currentGame);
+                djangoX = APIs.Memory.ReadU16(djangoXposAddress);
+                djangoY = APIs.Memory.ReadU16(djangoYposAddress);
+            }
+
             DrawDjangoIcon(e, djangoX, djangoY);
 
             // Write tile address on screen
