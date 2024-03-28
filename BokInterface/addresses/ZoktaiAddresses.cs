@@ -32,9 +32,9 @@ namespace BokInterface.Addresses {
         public ZoktaiAddresses() {
 
             // Add Django addresses
-            Django.Add("x_position", 0x30); // A
-            Django.Add("y_position", 0x34); // A
-            Django.Add("z_position", 0x32); // A
+            Django.Add("x_position", 0x30);
+            Django.Add("y_position", 0x34);
+            Django.Add("z_position", 0x32);
 
             /**
              * Used for setting "current" values (which are used for damage calculations)
@@ -53,28 +53,28 @@ namespace BokInterface.Addresses {
              * 
              * Note : For some stats, "current" can be 1 higher than "persistent", unsure why
              */
-            Django.Add("persistent_hp", 0x28); // A
-            Django.Add("persistent_ene", 0x2C); // A
-            Django.Add("persistent_vit", 0x18); // A
-            Django.Add("persistent_spr", 0x1A); // A
-            Django.Add("persistent_str", 0x1C); // A
-            Django.Add("persistent_agi", 0x1E); // A
+            Django.Add("persistent_hp", 0x28);
+            Django.Add("persistent_ene", 0x2C);
+            Django.Add("persistent_vit", 0x18);
+            Django.Add("persistent_spr", 0x1A);
+            Django.Add("persistent_str", 0x1C);
+            Django.Add("persistent_agi", 0x1E);
 
             // EXP & level
-            Django.Add("level", 0x40); // A
-            Django.Add("exp", 0x50); // A
+            Django.Add("level", 0x40);
+            Django.Add("exp", 0x50);
             Django.Add("total_exp_until_next_level", 0x02002464);
 
             // 100 skill exp = 1 lvl
-            Django.Add("sword_skill_exp", 0x46); // A
-            Django.Add("spear_skill_exp", 0x48); // A
-            Django.Add("hammer_skill_exp", 0x4A); // A
-            Django.Add("fists_skill_exp", 0x4C); // A
-            Django.Add("gun_skill_exp", 0x4E); // A
+            Django.Add("sword_skill_exp", 0x46);
+            Django.Add("spear_skill_exp", 0x48);
+            Django.Add("hammer_skill_exp", 0x4A);
+            Django.Add("fists_skill_exp", 0x4C);
+            Django.Add("gun_skill_exp", 0x4E);
 
             // Stat points
             Django.Add("showned_stat_points_to_allocate", 0x02006E20); // useless
-            Django.Add("stat_points_to_allocate", 0x42); // A
+            Django.Add("stat_points_to_allocate", 0x42);
 
             // Add Misc addresses
             Misc.Add("stat", 0x030046A0); // inventory too

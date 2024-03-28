@@ -63,9 +63,9 @@ namespace BokInterface.Addresses {
             // Add Django addresses
             Django.Add("hp", 0x424);
 
-            Django.Add("x_position", 0x30); // A
-            Django.Add("y_position", 0x34); // A
-            Django.Add("z_position", 0x32); // A
+            Django.Add("x_position", 0x30);
+            Django.Add("y_position", 0x34);
+            Django.Add("z_position", 0x32);
 
             // 0x18 + 2 * stat_id
             Django.Add("base_vit", 0x18);
