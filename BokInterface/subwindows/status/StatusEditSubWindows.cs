@@ -48,7 +48,6 @@ namespace BokInterface {
         }
 
         /// <summary>Sets values related to Django's status</summary>
-        /// TODO explode into smaller game-specific functions
         private void SetStatusValues() {
 
             // Retrieve all input fields
