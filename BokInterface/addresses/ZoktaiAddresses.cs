@@ -62,7 +62,7 @@ namespace BokInterface.Addresses {
 
             // EXP & level
             Django.Add("level", 0x40); // A
-            Django.Add("exp", 0x0203C450); // A
+            Django.Add("exp", 0x50); // A
             Django.Add("total_exp_until_next_level", 0x02002464);
 
             // 100 skill exp = 1 lvl

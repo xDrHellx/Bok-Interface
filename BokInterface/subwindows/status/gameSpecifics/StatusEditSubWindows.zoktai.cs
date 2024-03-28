@@ -150,7 +150,7 @@ namespace BokInterface {
                 defaultValues.Add("django_current_hp", memoryValues.Django["current_hp"].Value);
                 defaultValues.Add("django_current_ene", memoryValues.Django["current_ene"].Value);
 
-                defaultValues.Add("django_exp", memoryValues.U32["exp"].Value);
+                defaultValues.Add("django_exp", memoryValues.Django["exp"].Value);
                 defaultValues.Add("django_level", memoryValues.Django["level"].Value);
 
                 defaultValues.Add("django_vit", memoryValues.Django["vit"].Value);

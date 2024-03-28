@@ -89,7 +89,7 @@ namespace BokInterface {
                 bok2_currentStatusEneValue.Text = memoryValues.Django["current_ene"].Value.ToString();
 
                 bok2_djangoLevel.Text = memoryValues.Django["level"].Value.ToString();
-                bok2_djangoExp.Text = memoryValues.U32["exp"].Value.ToString();
+                bok2_djangoExp.Text = memoryValues.Django["exp"].Value.ToString();
 
                 bok2_djangoVit.Text = memoryValues.Misc["vit"].Value.ToString();
                 bok2_djangoSpr.Text = memoryValues.Misc["spr"].Value.ToString();

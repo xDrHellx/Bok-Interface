@@ -72,6 +72,7 @@ namespace BokInterface {
             Django.Add("current_ene", new DynamicMemoryValue("current_ene", zoktaiAddresses.Misc["current_stat"], zoktaiAddresses.Django["current_ene"]));
 
             Django.Add("level", new DynamicMemoryValue("level", zoktaiAddresses.Misc["stat"], zoktaiAddresses.Django["level"]));
+            Django.Add("exp", new DynamicMemoryValue("exp", zoktaiAddresses.Misc["stat"], zoktaiAddresses.Django["exp"], "U32"));
             Django.Add("stat_points", new DynamicMemoryValue("stat_points", zoktaiAddresses.Misc["stat"], zoktaiAddresses.Django["stat_points_to_allocate"]));
 
             // Stats applied in the current room
@@ -94,7 +95,6 @@ namespace BokInterface {
             Misc.Add("agi", new DynamicMemoryValue("agi", zoktaiAddresses.Misc["stat"], zoktaiAddresses.Django["persistent_agi"]));
 
             // U32
-            U32.Add("exp", new U32MemoryValue("exp", zoktaiAddresses.Django["exp"]));
             U32.Add("total_exp_until_next_level", new U32MemoryValue("total_exp_until_next_level", zoktaiAddresses.Django["total_exp_until_next_level"]));
         }
 
