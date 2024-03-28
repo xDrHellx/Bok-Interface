@@ -206,7 +206,7 @@ namespace BokInterface {
 
             // Stat points to allocate
             currentStatsLabels.Add(CreateLabel("statPointsLabel", "Add", 6, 84, 29, 15, textAlignment: "MiddleLeft"));
-            bok2_djangoStatPoints = CreateLabel("djangoStatPoints", "", 35, 84, 31, 15, colorHex: totalStatColor, textAlignment: "MiddleRight");
+            _bok2_djangoStatPoints = CreateLabel("djangoStatPoints", "", 35, 84, 31, 15, colorHex: totalStatColor, textAlignment: "MiddleRight");
 
             // Add values labels to group
             currentStatsLabels.Add(_bok2_djangoVit);

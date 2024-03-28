@@ -143,46 +143,46 @@ namespace BokInterface {
                 string memoryValueKey = fieldParts[1];
                 switch (subList) {
                     case "django":
-                        if (memoryValues.Django.ContainsKey(memoryValueKey) == true) {
-                            memoryValues.Django[memoryValueKey].Value = (uint)value;
-                        } else if (memoryValues.U16.ContainsKey(memoryValueKey) == true) {
-                            memoryValues.U16[memoryValueKey].Value = (uint)value;
-                        } else if (memoryValues.U32.ContainsKey(memoryValueKey) == true) {
-                            memoryValues.U32[memoryValueKey].Value = (uint)value;
+                        if (_memoryValues.Django.ContainsKey(memoryValueKey) == true) {
+                            _memoryValues.Django[memoryValueKey].Value = (uint)value;
+                        } else if (_memoryValues.U16.ContainsKey(memoryValueKey) == true) {
+                            _memoryValues.U16[memoryValueKey].Value = (uint)value;
+                        } else if (_memoryValues.U32.ContainsKey(memoryValueKey) == true) {
+                            _memoryValues.U32[memoryValueKey].Value = (uint)value;
                         }
                         break;
                     case "solls":
-                        if (memoryValues.Solls.ContainsKey(memoryValueKey) == true) {
-                            memoryValues.Solls[memoryValueKey].Value = (uint)value;
-                        } else if (memoryValues.U16.ContainsKey(memoryValueKey) == true) {
-                            memoryValues.U16[memoryValueKey].Value = (uint)value;
-                        } else if (memoryValues.U32.ContainsKey(memoryValueKey) == true) {
-                            memoryValues.U32[memoryValueKey].Value = (uint)value;
+                        if (_memoryValues.Solls.ContainsKey(memoryValueKey) == true) {
+                            _memoryValues.Solls[memoryValueKey].Value = (uint)value;
+                        } else if (_memoryValues.U16.ContainsKey(memoryValueKey) == true) {
+                            _memoryValues.U16[memoryValueKey].Value = (uint)value;
+                        } else if (_memoryValues.U32.ContainsKey(memoryValueKey) == true) {
+                            _memoryValues.U32[memoryValueKey].Value = (uint)value;
                         }
                         break;
                     case "bike":
-                        if (memoryValues.Bike.ContainsKey(memoryValueKey) == true) {
-                            memoryValues.Bike[memoryValueKey].Value = (uint)value;
-                        } else if (memoryValues.U16.ContainsKey(memoryValueKey) == true) {
-                            memoryValues.U16[memoryValueKey].Value = (uint)value;
-                        } else if (memoryValues.U32.ContainsKey(memoryValueKey) == true) {
-                            memoryValues.U32[memoryValueKey].Value = (uint)value;
+                        if (_memoryValues.Bike.ContainsKey(memoryValueKey) == true) {
+                            _memoryValues.Bike[memoryValueKey].Value = (uint)value;
+                        } else if (_memoryValues.U16.ContainsKey(memoryValueKey) == true) {
+                            _memoryValues.U16[memoryValueKey].Value = (uint)value;
+                        } else if (_memoryValues.U32.ContainsKey(memoryValueKey) == true) {
+                            _memoryValues.U32[memoryValueKey].Value = (uint)value;
                         }
                         break;
                     case "misc":
-                        if (memoryValues.Misc.ContainsKey(memoryValueKey) == true) {
-                            memoryValues.Misc[memoryValueKey].Value = (uint)value;
-                        } else if (memoryValues.U16.ContainsKey(memoryValueKey) == true) {
-                            memoryValues.U16[memoryValueKey].Value = (uint)value;
-                        } else if (memoryValues.U32.ContainsKey(memoryValueKey) == true) {
-                            memoryValues.U32[memoryValueKey].Value = (uint)value;
+                        if (_memoryValues.Misc.ContainsKey(memoryValueKey) == true) {
+                            _memoryValues.Misc[memoryValueKey].Value = (uint)value;
+                        } else if (_memoryValues.U16.ContainsKey(memoryValueKey) == true) {
+                            _memoryValues.U16[memoryValueKey].Value = (uint)value;
+                        } else if (_memoryValues.U32.ContainsKey(memoryValueKey) == true) {
+                            _memoryValues.U32[memoryValueKey].Value = (uint)value;
                         }
                         break;
                     default:
-                        if (memoryValues.U16.ContainsKey(memoryValueKey) == true) {
-                            memoryValues.U16[memoryValueKey].Value = (uint)value;
-                        } else if (memoryValues.U32.ContainsKey(memoryValueKey) == true) {
-                            memoryValues.U32[memoryValueKey].Value = (uint)value;
+                        if (_memoryValues.U16.ContainsKey(memoryValueKey) == true) {
+                            _memoryValues.U16[memoryValueKey].Value = (uint)value;
+                        } else if (_memoryValues.U32.ContainsKey(memoryValueKey) == true) {
+                            _memoryValues.U32[memoryValueKey].Value = (uint)value;
                         }
                         break;
                 }

@@ -42,10 +42,10 @@ namespace BokInterface {
                 string memoryValueKey = fieldParts[1];
                 switch (subList) {
                     default:
-                        if (memoryValues.U16.ContainsKey(memoryValueKey) == true) {
-                            memoryValues.U16[memoryValueKey].Value = (uint)value;
-                        } else if (memoryValues.U32.ContainsKey(memoryValueKey) == true) {
-                            memoryValues.U32[memoryValueKey].Value = (uint)value;
+                        if (_memoryValues.U16.ContainsKey(memoryValueKey) == true) {
+                            _memoryValues.U16[memoryValueKey].Value = (uint)value;
+                        } else if (_memoryValues.U32.ContainsKey(memoryValueKey) == true) {
+                            _memoryValues.U32[memoryValueKey].Value = (uint)value;
                         }
                         break;
                 }

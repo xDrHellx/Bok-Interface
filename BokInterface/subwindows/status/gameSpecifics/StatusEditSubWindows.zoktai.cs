@@ -97,21 +97,21 @@ namespace BokInterface {
             }
 
             // Stat points available
-            edit_statusNumericUpDowns.Add(CreateNumericUpDown("django_stat_points", defaultValues["django_stat_points"], 32, 22, 46, 23, minValue: 0, maxValue: 255));
+            _edit_statusNumericUpDowns.Add(CreateNumericUpDown("django_stat_points", defaultValues["django_stat_points"], 32, 22, 46, 23, minValue: 0, maxValue: 255));
 
             // Add elements to group
-            for (int i = n; i < edit_statusNumericUpDowns.Count; i++) {
+            for (int i = n; i < _edit_statusNumericUpDowns.Count; i++) {
                 n++;
-                edit_StatPointsGroupBox.Controls.Add(edit_statusNumericUpDowns[i]);
+                _edit_StatPointsGroupBox.Controls.Add(_edit_statusNumericUpDowns[i]);
             }
 
             // EXP
-            edit_statusNumericUpDowns.Add(CreateNumericUpDown("django_exp", defaultValues["django_exp"], 8, 22, 60, 23, minValue: 0, maxValue: 999999));
+            _edit_statusNumericUpDowns.Add(CreateNumericUpDown("django_exp", defaultValues["django_exp"], 8, 22, 60, 23, minValue: 0, maxValue: 999999));
 
             // Add elements to group
-            for (int i = n; i < edit_statusNumericUpDowns.Count; i++) {
+            for (int i = n; i < _edit_statusNumericUpDowns.Count; i++) {
                 n++;
-                edit_ExpGroupBox.Controls.Add(edit_statusNumericUpDowns[i]);
+                _edit_ExpGroupBox.Controls.Add(_edit_statusNumericUpDowns[i]);
             }
 
             // Add groups to subwindow
@@ -124,7 +124,7 @@ namespace BokInterface {
             // Add tooltips & warnings
             Label expWarning = CreateImageLabel("tooltip", "warning", 75, 25);
             AddToolTip(expWarning, "Level will be automatically adjusted if EXP is high enough to reach higher levels");
-            edit_ExpGroupBox.Controls.Add(expWarning);
+            _edit_ExpGroupBox.Controls.Add(expWarning);
 
             // Button for setting values & its events
             Button setValuesButton = CreateButton("setStatusButton", "Set values", 350, 203, 75, 23);
@@ -199,8 +199,8 @@ namespace BokInterface {
              * 
              * We'll set the total EXP until next level to the maximum possible to prevent that from happening
              */
-            if (memoryValues.U32.ContainsKey("total_exp_until_next_level") == true) {
-                memoryValues.U32["total_exp_until_next_level"].Value = 99999999;
+            if (_memoryValues.U32.ContainsKey("total_exp_until_next_level") == true) {
+                _memoryValues.U32["total_exp_until_next_level"].Value = 99999999;
             }
 
             // Sets values based on fields
@@ -222,7 +222,7 @@ namespace BokInterface {
                 string memoryValueKey = fieldParts[1];
                 switch (subList) {
                     case "django":
-                        if (memoryValues.Django.ContainsKey(memoryValueKey) == true) {
+                        if (_memoryValues.Django.ContainsKey(memoryValueKey) == true) {
 
                             // Depending on the key, we treat the value setting differently
                             switch (memoryValueKey) {
@@ -236,9 +236,9 @@ namespace BokInterface {
                                      * We do this because updating "current" stat value is not enough,
                                      * when switching room the game would set back the old values
                                      */
-                                    memoryValues.Django[memoryValueKey].Value = (uint)value;
-                                    if (memoryValues.Misc.ContainsKey(memoryValueKey) == true) {
-                                        memoryValues.Misc[memoryValueKey].Value = (uint)value;
+                                    _memoryValues.Django[memoryValueKey].Value = (uint)value;
+                                    if (_memoryValues.Misc.ContainsKey(memoryValueKey) == true) {
+                                        _memoryValues.Misc[memoryValueKey].Value = (uint)value;
                                     }
                                     break;
                                 case "sword_skill":             // Skill
@@ -246,42 +246,42 @@ namespace BokInterface {
                                 case "hammer_skill":
                                 case "fists_skill":
                                 case "gun_skill":
-                                    memoryValues.Django[memoryValueKey].Value = Utilities.LevelToExp(value);
+                                    _memoryValues.Django[memoryValueKey].Value = Utilities.LevelToExp(value);
                                     break;
                                 default:                        // Default treatment
-                                    memoryValues.Django[memoryValueKey].Value = (uint)value;
+                                    _memoryValues.Django[memoryValueKey].Value = (uint)value;
                                     break;
                             }
 
-                        } else if (memoryValues.U16.ContainsKey(memoryValueKey) == true) {
-                            memoryValues.U16[memoryValueKey].Value = (uint)value;
-                        } else if (memoryValues.U32.ContainsKey(memoryValueKey) == true) {
-                            memoryValues.U32[memoryValueKey].Value = (uint)value;
+                        } else if (_memoryValues.U16.ContainsKey(memoryValueKey) == true) {
+                            _memoryValues.U16[memoryValueKey].Value = (uint)value;
+                        } else if (_memoryValues.U32.ContainsKey(memoryValueKey) == true) {
+                            _memoryValues.U32[memoryValueKey].Value = (uint)value;
                         }
                         break;
                     case "solls":
-                        if (memoryValues.Solls.ContainsKey(memoryValueKey) == true) {
-                            memoryValues.Solls[memoryValueKey].Value = (uint)value;
-                        } else if (memoryValues.U16.ContainsKey(memoryValueKey) == true) {
-                            memoryValues.U16[memoryValueKey].Value = (uint)value;
-                        } else if (memoryValues.U32.ContainsKey(memoryValueKey) == true) {
-                            memoryValues.U32[memoryValueKey].Value = (uint)value;
+                        if (_memoryValues.Solls.ContainsKey(memoryValueKey) == true) {
+                            _memoryValues.Solls[memoryValueKey].Value = (uint)value;
+                        } else if (_memoryValues.U16.ContainsKey(memoryValueKey) == true) {
+                            _memoryValues.U16[memoryValueKey].Value = (uint)value;
+                        } else if (_memoryValues.U32.ContainsKey(memoryValueKey) == true) {
+                            _memoryValues.U32[memoryValueKey].Value = (uint)value;
                         }
                         break;
                     case "misc":
-                        if (memoryValues.Misc.ContainsKey(memoryValueKey) == true) {
-                            memoryValues.Misc[memoryValueKey].Value = (uint)value;
-                        } else if (memoryValues.U16.ContainsKey(memoryValueKey) == true) {
-                            memoryValues.U16[memoryValueKey].Value = (uint)value;
-                        } else if (memoryValues.U32.ContainsKey(memoryValueKey) == true) {
-                            memoryValues.U32[memoryValueKey].Value = (uint)value;
+                        if (_memoryValues.Misc.ContainsKey(memoryValueKey) == true) {
+                            _memoryValues.Misc[memoryValueKey].Value = (uint)value;
+                        } else if (_memoryValues.U16.ContainsKey(memoryValueKey) == true) {
+                            _memoryValues.U16[memoryValueKey].Value = (uint)value;
+                        } else if (_memoryValues.U32.ContainsKey(memoryValueKey) == true) {
+                            _memoryValues.U32[memoryValueKey].Value = (uint)value;
                         }
                         break;
                     default:
-                        if (memoryValues.U16.ContainsKey(memoryValueKey) == true) {
-                            memoryValues.U16[memoryValueKey].Value = (uint)value;
-                        } else if (memoryValues.U32.ContainsKey(memoryValueKey) == true) {
-                            memoryValues.U32[memoryValueKey].Value = (uint)value;
+                        if (_memoryValues.U16.ContainsKey(memoryValueKey) == true) {
+                            _memoryValues.U16[memoryValueKey].Value = (uint)value;
+                        } else if (_memoryValues.U32.ContainsKey(memoryValueKey) == true) {
+                            _memoryValues.U32[memoryValueKey].Value = (uint)value;
                         }
                         break;
                 }
@@ -291,9 +291,9 @@ namespace BokInterface {
              * If the total EXP until next level & current level were available before setting values,
              * we set it to what it should be to reach the next level (except for lvl 99 which is always 0)
              */
-            if (memoryValues.U32.ContainsKey("total_exp_until_next_level") == true && memoryValues.Django.ContainsKey("level")) {
-                int level = (int)memoryValues.Django["level"].Value;
-                memoryValues.U32["total_exp_until_next_level"].Value = level < 99 ? Django.zoktai[level] : 0;
+            if (_memoryValues.U32.ContainsKey("total_exp_until_next_level") == true && _memoryValues.Django.ContainsKey("level")) {
+                int level = (int)_memoryValues.Django["level"].Value;
+                _memoryValues.U32["total_exp_until_next_level"].Value = level < 99 ? Django.zoktai[level] : 0;
             }
         }
     }

@@ -4,11 +4,11 @@ namespace BokInterface.All {
     public class U32MemoryValue(string name, uint address) {
 
         public string name = name;
-        private readonly uint address = address;
+        private readonly uint _address = address;
 
         public uint Value {
-            get => APIs.Memory.ReadU32(address);
-            set => APIs.Memory.WriteU32(address, value);
+            get => APIs.Memory.ReadU32(_address);
+            set => APIs.Memory.WriteU32(_address, value);
         }
     }
 }
