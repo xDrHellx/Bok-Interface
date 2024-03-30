@@ -140,7 +140,7 @@ namespace BokInterface {
             if (miscToolsSelectorOpened == false) {
 
                 // Create subwindow & add on close event
-                miscToolsSelectionWindow = CreateSubWindow("miscToolsSelectWindow", "Bok Tools - Select", 200, 100);
+                miscToolsSelectionWindow = CreateSubWindow("miscToolsSelectWindow", "Bok Tools - Select", 186, 78);
                 miscToolsSelectionWindow.FormClosing += new FormClosingEventHandler(delegate (object sender, FormClosingEventArgs e) {
                     miscToolsSelectorOpened = false;
                     miscToolsSelectionWindow.Controls.Clear();

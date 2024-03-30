@@ -1,6 +1,7 @@
 using System;
 using System.Windows.Forms;
 
+using BokInterface.Tools.MemoryValuesListing;
 using BokInterface.Tools.TileDataViewer;
 
 /**
@@ -14,6 +15,8 @@ namespace BokInterface {
 
         protected bool tileDataViewerActive = false;
         private TileDataViewer? TileDataViewer;
+        protected bool memAddrTableActive = false;
+        private MemoryValuesListing? MemoryValuesListing;
 
         #endregion
 
@@ -22,16 +25,19 @@ namespace BokInterface {
         private void BoktaiToolsSubwindow() {
             AddToolsLabel();
             AddTileDataViewerBtn();
+            AddMemoryAddressesTableBtn();
         }
 
         private void ZoktaiToolsSubwindow() {
             AddToolsLabel();
             AddTileDataViewerBtn();
+            AddMemoryAddressesTableBtn();
         }
 
         private void ShinbokToolsSubwindow() {
             AddToolsLabel();
             AddTileDataViewerBtn();
+            AddMemoryAddressesTableBtn();
         }
 
         private void LunarKnightsToolsSubwindow() {
@@ -59,7 +65,7 @@ namespace BokInterface {
 		/// <param name="height">Height (in pixels)</param>
         private void AddTileDataViewerBtn(int posX = 5, int posY = 23, int width = 176, int height = 23) {
 
-            Button tileDataBtn = CreateButton("tileDataBtn", "Tile data", posX, posY, width, height);
+            Button tileDataBtn = CreateButton("tileDataBtn", "Tile data viewer", posX, posY, width, height);
             tileDataBtn.Click += new EventHandler(delegate (object sender, EventArgs e) {
 
                 // If tool is already active, stop
@@ -88,6 +94,44 @@ namespace BokInterface {
             });
 
             miscToolsSelectionWindow.Controls.Add(tileDataBtn);
+        }
+
+        /// <summary>Simplified method for adding the Memory Addresses Table tool button to the tools selection subwindow</summary>
+		/// <param name="posX">X position</param>
+		/// <param name="posY">Y position</param>
+		/// <param name="width">Width (in pixels)</param>
+		/// <param name="height">Height (in pixels)</param>
+        private void AddMemoryAddressesTableBtn(int posX = 5, int posY = 50, int width = 176, int height = 23) {
+
+            Button memAddrBtn = CreateButton("memAddrTableBtn", "Memory values list", posX, posY, width, height);
+            memAddrBtn.Click += new EventHandler(delegate (object sender, EventArgs e) {
+
+                // If tool is already active, stop
+                if (memAddrTableActive == true) {
+                    return;
+                }
+
+                memAddrTableActive = true;
+
+                MemoryValuesListing = new("memAddrTable", "Memory values list", 500, 500, shorterGameName, GetGameIconName(), this);
+                MemoryValuesListing.InitializeFrameLoop();
+
+                MemoryValuesListing.FormClosing += new FormClosingEventHandler(delegate (object sender, FormClosingEventArgs e) {
+
+                    memAddrTableActive = false;
+
+                    // Remove the function from the list of functions to call each frame
+                    int functionIndex = MemoryValuesListing.index;
+                    functionsList.RemoveAt(functionIndex);
+
+                    // Just in case, replace instance with null to prevent it from doing anything else
+                    MemoryValuesListing = null;
+                });
+
+                MemoryValuesListing.Show();
+            });
+
+            miscToolsSelectionWindow.Controls.Add(memAddrBtn);
         }
 
         #endregion
