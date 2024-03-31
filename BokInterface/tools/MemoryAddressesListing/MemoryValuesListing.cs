@@ -105,13 +105,13 @@ namespace BokInterface.Tools.MemoryValuesListing {
         private void GenerateRows(IDictionary<string, uint> dictionnary) {
             foreach (KeyValuePair<string, uint> memAddress in dictionnary) {
 
-                if (memAddress.Key == "" || memAddress.Value.ToString() == "") {
+                if (memAddress.Key == "" || memAddress.Value.ToString("X") == "") {
                     continue;
                 }
 
                 dataTable.Rows.Add(
                     memAddress.Key,
-                    memAddress.Value.ToString(),
+                    "0x" + memAddress.Value.ToString("X"),
                     "Value",
                     "Type",
                     "Domain",
