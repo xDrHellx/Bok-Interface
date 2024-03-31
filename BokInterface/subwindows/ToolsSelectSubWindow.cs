@@ -15,7 +15,7 @@ namespace BokInterface {
 
         protected bool tileDataViewerActive = false;
         private TileDataViewer? TileDataViewer;
-        protected bool memAddrTableActive = false;
+        protected bool memValuesListingActive = false;
         private MemoryValuesListing? MemoryValuesListing;
 
         #endregion
@@ -107,22 +107,16 @@ namespace BokInterface {
             memAddrBtn.Click += new EventHandler(delegate (object sender, EventArgs e) {
 
                 // If tool is already active, stop
-                if (memAddrTableActive == true) {
+                if (memValuesListingActive == true) {
                     return;
                 }
 
-                memAddrTableActive = true;
+                memValuesListingActive = true;
 
                 MemoryValuesListing = new("memAddrTable", "Memory values list", 500, 500, shorterGameName, GetGameIconName(), this);
-                MemoryValuesListing.InitializeFrameLoop();
-
                 MemoryValuesListing.FormClosing += new FormClosingEventHandler(delegate (object sender, FormClosingEventArgs e) {
 
-                    memAddrTableActive = false;
-
-                    // Remove the function from the list of functions to call each frame
-                    int functionIndex = MemoryValuesListing.index;
-                    functionsList.RemoveAt(functionIndex);
+                    memValuesListingActive = false;
 
                     // Just in case, replace instance with null to prevent it from doing anything else
                     MemoryValuesListing = null;

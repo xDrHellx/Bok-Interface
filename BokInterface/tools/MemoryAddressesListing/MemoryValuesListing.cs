@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
@@ -13,8 +12,8 @@ namespace BokInterface.Tools.MemoryValuesListing {
         #region Main properties
 
         public int index = 0;
-        private DataTable dataTable = new();
-        private string currentGame = "";
+        private readonly DataTable dataTable = new();
+        private readonly string currentGame = "";
 
         #endregion
 
@@ -45,12 +44,6 @@ namespace BokInterface.Tools.MemoryValuesListing {
             if (parentForm != null) {
                 Owner = parentForm;
             }
-
-            // Prevent flickering
-            // SetStyle(
-            //     ControlStyles.UserPaint | ControlStyles.AllPaintingInWmPaint | ControlStyles.OptimizedDoubleBuffer,
-            //     true
-            // );
         }
 
         /// <summary>Get the specified icon if it exist</summary>
@@ -67,19 +60,15 @@ namespace BokInterface.Tools.MemoryValuesListing {
             ClientSize = new Size(width, height);
         }
 
-        /// <summary>
-        /// <para>Initialize frame loop</para>
-        /// <para>Adds the corresponding methods to BokInterface.functionsList to have them be executed every frame</para>
-        /// <para>Also get the index from that list for removing the methods when closing the Tile Data Viewer</para>
-        /// </summary>
-        public void InitializeFrameLoop() {
-            BokInterface.functionsList.Add(Refresh);
+        protected override void OnPaint(PaintEventArgs e) {
+            base.OnPaint(e);
 
-            /**
-             * Get the index of the added function,
-             * used for removing the method from BokInterface.functionsList when the subwindow is closed
-             */
-            index = BokInterface.functionsList.Count - 1;
+            // If current game is not handled, stop
+            if (currentGame == "") {
+                return;
+            }
+
+            GenerateDataTable();
         }
 
         #endregion
@@ -89,11 +78,17 @@ namespace BokInterface.Tools.MemoryValuesListing {
         /// <summary>Generate the Data Table containing the memory addresses, values and infos</summary>
         private void GenerateDataTable() {
 
-            // Clear the table
+            // Clear the table & subwindow
+            dataTable.Columns.Clear();
+            dataTable.Rows.Clear();
             dataTable.Clear();
 
-            // Generate table columns
+            // Generate table data for the current game
             GenerateColumns();
+            GenerateTableData(currentGame);
+
+            // Show table in subwindow
+            CreateDataGridView("memValuesGrid", dataTable, 5, 5, ClientSize.Width - 10, ClientSize.Height - 10, true);
         }
 
         /// <summary>Simplified method for generating columns for the data table</summary>
@@ -106,11 +101,92 @@ namespace BokInterface.Tools.MemoryValuesListing {
             dataTable.Columns.Add("Notes");
         }
 
-        /// <summary>Simplified method for generating a row for the data table</summary>
-        /// <returns><c>List<object></c>Row data</returns>
-        private List<object> GenerateRow() {
-            List<object> row = [];
-            return row;
+        /// <summary>Simplified method for generating rows for the data table from a dictionnary</summary>
+        private void GenerateRows(IDictionary<string, uint> dictionnary) {
+            foreach (KeyValuePair<string, uint> memAddress in dictionnary) {
+
+                if (memAddress.Key == "" || memAddress.Value.ToString() == "") {
+                    continue;
+                }
+
+                dataTable.Rows.Add(
+                    memAddress.Key,
+                    memAddress.Value.ToString(),
+                    "Value",
+                    "Type",
+                    "Domain",
+                    "Notes"
+                );
+            }
+        }
+
+        /// <summary>Generate the table data for the corresponding game</summary>
+        /// <param name="gameName">Current game name</param>
+        private void GenerateTableData(string gameName) {
+            switch (gameName) {
+                case "Boktai":
+                    GenerateRows(boktaiAddresses.Django);
+                    GenerateRows(boktaiAddresses.Inventory);
+                    GenerateRows(boktaiAddresses.Gardening);
+                    GenerateRows(boktaiAddresses.Misc);
+                    break;
+                case "Zoktai":
+                    GenerateRows(zoktaiAddresses.Django);
+                    GenerateRows(zoktaiAddresses.Inventory);
+                    GenerateRows(zoktaiAddresses.Magics);
+                    GenerateRows(zoktaiAddresses.Misc);
+                    break;
+                case "Shinbok":
+                    GenerateRows(shinbokAddresses.Django);
+                    GenerateRows(shinbokAddresses.Solls);
+                    GenerateRows(shinbokAddresses.Bike);
+                    GenerateRows(shinbokAddresses.Misc);
+                    break;
+                case "LunarKnights":
+                    GenerateRows(lunarKnightsAddresses.Aaron);
+                    GenerateRows(lunarKnightsAddresses.Lucian);
+                    GenerateRows(lunarKnightsAddresses.Inventory);
+                    GenerateRows(lunarKnightsAddresses.Misc);
+                    break;
+                default:
+                    // If game is not handled, do nothing
+                    break;
+            }
+        }
+
+        #endregion
+
+        #region Subwindow elements creation methods
+
+        /// <summary>Simplified method for creating a data grid view</summary>
+        /// <param name="name">Group name</param>
+        /// <param name="data">Data to show</param>
+        /// <param name="positionX">X position</param>
+        /// <param name="positionY">Y position</param>
+        /// <param name="width">Width (in pixels)</param>
+        /// <param name="height">Height (in pixels)</param>
+        /// <param name="addToWindow">Set to true to add the element directly to the subwindow</param>
+        /// <returns><c>System.Windows.Forms.GroupBox</c>Data grid view instance</returns>
+        private DataGridView CreateDataGridView(string name, DataTable data, int positionX, int positionY, int width, int height, bool addToWindow = false) {
+
+            DataGridView grid = new() {
+                Name = name,
+                DataSource = data,
+                Location = new Point(positionX, positionY),
+                Size = new Size(width, height),
+                AutoSize = false,
+                TabIndex = 1,
+                Anchor = BokInterface.defaultAnchor,
+                Font = BokInterface.defaultFont,
+                AllowUserToAddRows = false
+            };
+
+            // Add to subwindow
+            if (addToWindow == true) {
+                Controls.Add(grid);
+            }
+
+            return grid;
         }
 
         #endregion
