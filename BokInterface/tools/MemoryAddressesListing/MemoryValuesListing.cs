@@ -1,3 +1,5 @@
+using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
 using System.Windows.Forms;
@@ -5,7 +7,7 @@ using System.Windows.Forms;
 using BokInterface.Addresses;
 
 namespace BokInterface.Tools.MemoryValuesListing {
-    /// <summary>Shows the list of all memory addresses listed for a game, based on the ones added in the Bok Interface itself</summary>
+    /// <summary>Shows the list of all memory addresses listed for a game with their values, based on the ones added in the Bok Interface itself</summary>
     class MemoryValuesListing : Form {
 
         #region Main properties
@@ -55,11 +57,7 @@ namespace BokInterface.Tools.MemoryValuesListing {
         /// <param name="fileName">File name (without .ico extension)</param>
         /// <returns><c>System.Drawing.Icon</c>Specified Icon instance (or default if the specified icon could not be found)</returns>
         protected Icon GetIcon(string fileName) {
-            if (fileName == "") {
-                return Icon;
-            } else {
-                return (Icon)Properties.Resources.ResourceManager.GetObject(fileName);
-            }
+            return fileName == "" ? Icon : (Icon)Properties.Resources.ResourceManager.GetObject(fileName);
         }
 
         /// <summary>Sets the subwindow's size</summary>
@@ -82,6 +80,37 @@ namespace BokInterface.Tools.MemoryValuesListing {
              * used for removing the method from BokInterface.functionsList when the subwindow is closed
              */
             index = BokInterface.functionsList.Count - 1;
+        }
+
+        #endregion
+
+        #region Data Table generation methods
+
+        /// <summary>Generate the Data Table containing the memory addresses, values and infos</summary>
+        private void GenerateDataTable() {
+
+            // Clear the table
+            dataTable.Clear();
+
+            // Generate table columns
+            GenerateColumns();
+        }
+
+        /// <summary>Simplified method for generating columns for the data table</summary>
+        private void GenerateColumns() {
+            dataTable.Columns.Add("Name");
+            dataTable.Columns.Add("Address");
+            dataTable.Columns.Add("Value");
+            dataTable.Columns.Add("Type");
+            dataTable.Columns.Add("Domain");
+            dataTable.Columns.Add("Notes");
+        }
+
+        /// <summary>Simplified method for generating a row for the data table</summary>
+        /// <returns><c>List<object></c>Row data</returns>
+        private List<object> GenerateRow() {
+            List<object> row = [];
+            return row;
         }
 
         #endregion
