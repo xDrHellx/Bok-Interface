@@ -103,11 +103,7 @@ namespace BokInterface.Tools.TileDataViewer {
         /// <param name="fileName">File name (without .ico extension)</param>
         /// <returns><c>System.Drawing.Icon</c>Specified Icon instance (or default if the specified icon could not be found)</returns>
         protected Icon GetIcon(string fileName) {
-            if (fileName == "") {
-                return Icon;
-            } else {
-                return (Icon)Properties.Resources.ResourceManager.GetObject(fileName);
-            }
+            return fileName == "" ? Icon : (Icon)Properties.Resources.ResourceManager.GetObject(fileName);
         }
 
         /// <summary>Sets the subwindow's size</summary>

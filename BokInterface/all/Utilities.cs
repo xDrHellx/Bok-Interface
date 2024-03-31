@@ -46,7 +46,7 @@ namespace BokInterface.All {
                 "u8" => APIs.Memory.ReadU8(APIs.Memory.ReadU32(firstAddress) + secondAddress),
                 "u24" => APIs.Memory.ReadU24(APIs.Memory.ReadU32(firstAddress) + secondAddress),
                 "u32" => APIs.Memory.ReadU32(APIs.Memory.ReadU32(firstAddress) + secondAddress),
-                _ => APIs.Memory.ReadU16(APIs.Memory.ReadU32(firstAddress) + secondAddress),
+                _ => APIs.Memory.ReadU16(APIs.Memory.ReadU32(firstAddress) + secondAddress)
             };
         }
 

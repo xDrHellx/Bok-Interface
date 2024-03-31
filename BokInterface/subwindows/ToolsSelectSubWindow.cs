@@ -1,8 +1,8 @@
 using System;
 using System.Windows.Forms;
 
-using BokInterface.Tools.MemoryValuesListing;
 using BokInterface.Tools.TileDataViewer;
+using BokInterface.Tools.MemoryValuesListing;
 
 /**
  * Main file for tools selection subwindows
