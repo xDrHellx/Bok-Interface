@@ -39,11 +39,8 @@ namespace BokInterface.Addresses {
             Django.Add("y_position", new MemoryAddress(0x34, note: "Django Y position"));
             Django.Add("z_position", new MemoryAddress(0x32, note: "Django Z position"));
 
-            /**
-             * Used for setting "current" values (which are used for damage calculations)
-             * These must be combined with the "stat" memory address' value
-             */
-            note = "Used for damage calculations will be copied to its Persistent equivalent on screen transition";
+            // Current stats
+            note = "Used for damage calculations, will be copied to its Persistent equivalent on screen transition. Must be combined with the \"stat\" memory address' value";
             Django.Add("current_hp", new MemoryAddress(0x364, note: note));
             Django.Add("current_ene", new MemoryAddress(0x368, note: note));
             Django.Add("current_vit", new MemoryAddress(0x35C, note: note));
@@ -52,9 +49,7 @@ namespace BokInterface.Addresses {
             Django.Add("current_agi", new MemoryAddress(0x362, note: note));
 
             /**
-             * "Persistent" values, these also correspond to the values from save data
-             * "Current" values will be copied to these on screen transition
-             * 
+             * Persistent stats (used on screen transitions & save data)
              * Note : For some stats, "current" can be 1 higher than "persistent", unsure why
              */
             note = "Also corresponds to values from Save Data";
