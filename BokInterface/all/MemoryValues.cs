@@ -68,43 +68,43 @@ namespace BokInterface {
         }
 
         private void InitializeZoktaiList() {
-            Django.Add("current_hp", new DynamicMemoryValue("current_hp", zoktaiAddresses.Misc["current_stat"], zoktaiAddresses.Django["current_hp"]));
-            Django.Add("current_ene", new DynamicMemoryValue("current_ene", zoktaiAddresses.Misc["current_stat"], zoktaiAddresses.Django["current_ene"]));
+            Django.Add("current_hp", new DynamicMemoryValue("current_hp", zoktaiAddresses.Misc["current_stat"].address, zoktaiAddresses.Django["current_hp"].address));
+            Django.Add("current_ene", new DynamicMemoryValue("current_ene", zoktaiAddresses.Misc["current_stat"].address, zoktaiAddresses.Django["current_ene"].address));
 
-            Django.Add("level", new DynamicMemoryValue("level", zoktaiAddresses.Misc["stat"], zoktaiAddresses.Django["level"]));
-            Django.Add("exp", new DynamicMemoryValue("exp", zoktaiAddresses.Misc["stat"], zoktaiAddresses.Django["exp"], "U32"));
-            Django.Add("stat_points", new DynamicMemoryValue("stat_points", zoktaiAddresses.Misc["stat"], zoktaiAddresses.Django["stat_points_to_allocate"]));
+            Django.Add("level", new DynamicMemoryValue("level", zoktaiAddresses.Misc["stat"].address, zoktaiAddresses.Django["level"].address));
+            Django.Add("exp", new DynamicMemoryValue("exp", zoktaiAddresses.Misc["stat"].address, zoktaiAddresses.Django["exp"].address, "U32"));
+            Django.Add("stat_points", new DynamicMemoryValue("stat_points", zoktaiAddresses.Misc["stat"].address, zoktaiAddresses.Django["stat_points_to_allocate"].address));
 
             // Stats applied in the current room
-            Django.Add("vit", new DynamicMemoryValue("vit", zoktaiAddresses.Misc["current_stat"], zoktaiAddresses.Django["current_vit"]));
-            Django.Add("spr", new DynamicMemoryValue("spr", zoktaiAddresses.Misc["current_stat"], zoktaiAddresses.Django["current_spr"]));
-            Django.Add("str", new DynamicMemoryValue("str", zoktaiAddresses.Misc["current_stat"], zoktaiAddresses.Django["current_str"]));
-            Django.Add("agi", new DynamicMemoryValue("agi", zoktaiAddresses.Misc["current_stat"], zoktaiAddresses.Django["current_agi"]));
+            Django.Add("vit", new DynamicMemoryValue("vit", zoktaiAddresses.Misc["current_stat"].address, zoktaiAddresses.Django["current_vit"].address));
+            Django.Add("spr", new DynamicMemoryValue("spr", zoktaiAddresses.Misc["current_stat"].address, zoktaiAddresses.Django["current_spr"].address));
+            Django.Add("str", new DynamicMemoryValue("str", zoktaiAddresses.Misc["current_stat"].address, zoktaiAddresses.Django["current_str"].address));
+            Django.Add("agi", new DynamicMemoryValue("agi", zoktaiAddresses.Misc["current_stat"].address, zoktaiAddresses.Django["current_agi"].address));
 
             // Skill
-            Django.Add("sword_skill", new DynamicMemoryValue("sword_skill", zoktaiAddresses.Misc["stat"], zoktaiAddresses.Django["sword_skill_exp"]));
-            Django.Add("spear_skill", new DynamicMemoryValue("spear_skill", zoktaiAddresses.Misc["stat"], zoktaiAddresses.Django["spear_skill_exp"]));
-            Django.Add("hammer_skill", new DynamicMemoryValue("hammer_skill", zoktaiAddresses.Misc["stat"], zoktaiAddresses.Django["hammer_skill_exp"]));
-            Django.Add("fists_skill", new DynamicMemoryValue("fists_skill", zoktaiAddresses.Misc["stat"], zoktaiAddresses.Django["fists_skill_exp"]));
-            Django.Add("gun_skill", new DynamicMemoryValue("gun_skill", zoktaiAddresses.Misc["stat"], zoktaiAddresses.Django["gun_skill_exp"]));
+            Django.Add("sword_skill", new DynamicMemoryValue("sword_skill", zoktaiAddresses.Misc["stat"].address, zoktaiAddresses.Django["sword_skill_exp"].address));
+            Django.Add("spear_skill", new DynamicMemoryValue("spear_skill", zoktaiAddresses.Misc["stat"].address, zoktaiAddresses.Django["spear_skill_exp"].address));
+            Django.Add("hammer_skill", new DynamicMemoryValue("hammer_skill", zoktaiAddresses.Misc["stat"].address, zoktaiAddresses.Django["hammer_skill_exp"].address));
+            Django.Add("fists_skill", new DynamicMemoryValue("fists_skill", zoktaiAddresses.Misc["stat"].address, zoktaiAddresses.Django["fists_skill_exp"].address));
+            Django.Add("gun_skill", new DynamicMemoryValue("gun_skill", zoktaiAddresses.Misc["stat"].address, zoktaiAddresses.Django["gun_skill_exp"].address));
 
             // Stats that will be applied when switching room
-            Misc.Add("vit", new DynamicMemoryValue("vit", zoktaiAddresses.Misc["stat"], zoktaiAddresses.Django["persistent_vit"]));
-            Misc.Add("spr", new DynamicMemoryValue("spr", zoktaiAddresses.Misc["stat"], zoktaiAddresses.Django["persistent_spr"]));
-            Misc.Add("str", new DynamicMemoryValue("str", zoktaiAddresses.Misc["stat"], zoktaiAddresses.Django["persistent_str"]));
-            Misc.Add("agi", new DynamicMemoryValue("agi", zoktaiAddresses.Misc["stat"], zoktaiAddresses.Django["persistent_agi"]));
+            Misc.Add("vit", new DynamicMemoryValue("vit", zoktaiAddresses.Misc["stat"].address, zoktaiAddresses.Django["persistent_vit"].address));
+            Misc.Add("spr", new DynamicMemoryValue("spr", zoktaiAddresses.Misc["stat"].address, zoktaiAddresses.Django["persistent_spr"].address));
+            Misc.Add("str", new DynamicMemoryValue("str", zoktaiAddresses.Misc["stat"].address, zoktaiAddresses.Django["persistent_str"].address));
+            Misc.Add("agi", new DynamicMemoryValue("agi", zoktaiAddresses.Misc["stat"].address, zoktaiAddresses.Django["persistent_agi"].address));
 
             // U32
-            U32.Add("total_exp_until_next_level", new U32MemoryValue("total_exp_until_next_level", zoktaiAddresses.Django["total_exp_until_next_level"]));
+            U32.Add("total_exp_until_next_level", new U32MemoryValue("total_exp_until_next_level", zoktaiAddresses.Django["total_exp_until_next_level"].address));
         }
 
         private void InitializeShinbokList() {
-            Django.Add("current_hp", new DynamicMemoryValue("current_hp", shinbokAddresses.Misc["room"], shinbokAddresses.Django["hp"]));
+            Django.Add("current_hp", new DynamicMemoryValue("current_hp", shinbokAddresses.Misc["room"].address, shinbokAddresses.Django["hp"].address));
 
             // Stats
-            Django.Add("base_vit", new DynamicMemoryValue("base_vit", shinbokAddresses.Misc["stat"], shinbokAddresses.Django["base_vit"]));
-            Django.Add("base_spr", new DynamicMemoryValue("base_spr", shinbokAddresses.Misc["stat"], shinbokAddresses.Django["base_spr"]));
-            Django.Add("base_str", new DynamicMemoryValue("base_str", shinbokAddresses.Misc["stat"], shinbokAddresses.Django["base_str"]));
+            Django.Add("base_vit", new DynamicMemoryValue("base_vit", shinbokAddresses.Misc["stat"].address, shinbokAddresses.Django["base_vit"].address));
+            Django.Add("base_spr", new DynamicMemoryValue("base_spr", shinbokAddresses.Misc["stat"].address, shinbokAddresses.Django["base_spr"].address));
+            Django.Add("base_str", new DynamicMemoryValue("base_str", shinbokAddresses.Misc["stat"].address, shinbokAddresses.Django["base_str"].address));
         }
 
         private void InitializeLunarKnightsList() {

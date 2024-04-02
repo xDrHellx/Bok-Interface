@@ -38,7 +38,7 @@ namespace BokInterface.Tools.MemoryValuesListing {
             BackColor = SystemColors.Control;
             Font = BokInterface.defaultFont;
             AutoScroll = true;
-            SetSubwindowSize(width, height);
+            ClientSize = new Size(width, height);
             this.currentGame = currentGame;
 
             if (parentForm != null) {
@@ -51,13 +51,6 @@ namespace BokInterface.Tools.MemoryValuesListing {
         /// <returns><c>System.Drawing.Icon</c>Specified Icon instance (or default if the specified icon could not be found)</returns>
         protected Icon GetIcon(string fileName) {
             return fileName == "" ? Icon : (Icon)Properties.Resources.ResourceManager.GetObject(fileName);
-        }
-
-        /// <summary>Sets the subwindow's size</summary>
-        /// <param name="width">Width</param>
-        /// <param name="height">Height</param>
-        protected void SetSubwindowSize(int width, int height) {
-            ClientSize = new Size(width, height);
         }
 
         protected override void OnPaint(PaintEventArgs e) {
@@ -102,21 +95,23 @@ namespace BokInterface.Tools.MemoryValuesListing {
         }
 
         /// <summary>Simplified method for generating rows for the data table from a dictionnary</summary>
-        private void GenerateRows(IDictionary<string, uint> dictionnary) {
-            foreach (KeyValuePair<string, uint> memAddress in dictionnary) {
-
-                if (memAddress.Key == "" || memAddress.Value.ToString("X") == "") {
+        private void GenerateRows(IDictionary<string, MemoryAddress> dictionnary) {
+            foreach (KeyValuePair<string, MemoryAddress> row in dictionnary) {
+                try {
+                    // Try getting the MemoryAddress instance & adding the row
+                    MemoryAddress memAddress = row.Value;
+                    dataTable.Rows.Add(
+                        row.Key,
+                        "0x" + memAddress.address.ToString("X"),
+                        "Value",
+                        memAddress.type,
+                        memAddress.domain,
+                        memAddress.note
+                    );
+                } catch {
+                    // If anything fails just skip to the next dictionnary entry
                     continue;
                 }
-
-                dataTable.Rows.Add(
-                    memAddress.Key,
-                    "0x" + memAddress.Value.ToString("X"),
-                    "Value",
-                    "Type",
-                    "Domain",
-                    "Notes"
-                );
             }
         }
 
@@ -178,8 +173,14 @@ namespace BokInterface.Tools.MemoryValuesListing {
                 TabIndex = 1,
                 Anchor = BokInterface.defaultAnchor,
                 Font = BokInterface.defaultFont,
-                AllowUserToAddRows = false
+                AllowUserToAddRows = false,
+                AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill,
+                Dock = DockStyle.Fill,
+                EnableHeadersVisualStyles = false,
             };
+
+            // Set a specific color for the header
+            grid.ColumnHeadersDefaultCellStyle.BackColor = Color.LightGray;
 
             // Add to subwindow
             if (addToWindow == true) {

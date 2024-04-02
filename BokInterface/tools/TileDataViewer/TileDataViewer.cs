@@ -75,19 +75,19 @@ namespace BokInterface.Tools.TileDataViewer {
         protected void SetGameAddresses(string gameName) {
             switch (gameName) {
                 case "Boktai":
-                    mapDataAddress = boktaiAddresses.Misc["map_data"];
-                    djangoXposAddress = boktaiAddresses.Django["x_position"];
-                    djangoYposAddress = boktaiAddresses.Django["y_position"];
+                    mapDataAddress = boktaiAddresses.Misc["map_data"].address;
+                    djangoXposAddress = boktaiAddresses.Django["x_position"].address;
+                    djangoYposAddress = boktaiAddresses.Django["y_position"].address;
                     break;
                 case "Zoktai":
-                    mapDataAddress = zoktaiAddresses.Misc["map_data"];
-                    djangoXposAddress = APIs.Memory.ReadU32(zoktaiAddresses.Misc["stat"]) + zoktaiAddresses.Django["x_position"];
-                    djangoYposAddress = APIs.Memory.ReadU32(zoktaiAddresses.Misc["stat"]) + zoktaiAddresses.Django["y_position"];
+                    mapDataAddress = zoktaiAddresses.Misc["map_data"].address;
+                    djangoXposAddress = APIs.Memory.ReadU32(zoktaiAddresses.Misc["stat"].address) + zoktaiAddresses.Django["x_position"].address;
+                    djangoYposAddress = APIs.Memory.ReadU32(zoktaiAddresses.Misc["stat"].address) + zoktaiAddresses.Django["y_position"].address;
                     break;
                 case "Shinbok":
-                    mapDataAddress = shinbokAddresses.Misc["map_data"];
-                    djangoXposAddress = APIs.Memory.ReadU32(shinbokAddresses.Misc["stat"]) + shinbokAddresses.Django["x_position"];
-                    djangoYposAddress = APIs.Memory.ReadU32(shinbokAddresses.Misc["stat"]) + shinbokAddresses.Django["y_position"];
+                    mapDataAddress = shinbokAddresses.Misc["map_data"].address;
+                    djangoXposAddress = APIs.Memory.ReadU32(shinbokAddresses.Misc["stat"].address) + shinbokAddresses.Django["x_position"].address;
+                    djangoYposAddress = APIs.Memory.ReadU32(shinbokAddresses.Misc["stat"].address) + shinbokAddresses.Django["y_position"].address;
                     break;
                 case "LunarKnights":
                     // Currently not handled, not enough addresses available
