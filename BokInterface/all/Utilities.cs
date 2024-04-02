@@ -108,5 +108,22 @@ namespace BokInterface.All {
         }
 
         #endregion
+
+        #region Formatting methods
+
+        /// <summary>Format a memory address name for better readability</summary>
+        /// <example>"django_first_slot" => "Django first slot"</example
+        /// <param name="name">Name to format</param>
+        /// <returns><c>String</c>Formatted name</returns>
+        public static string FormatMemoryAddressName(string name) {
+            if (name == "") {
+                return name;
+            }
+
+            string formattedName = name.Replace("_", " ");
+            return string.Concat(formattedName[0].ToString().ToUpper(), formattedName.Substring(1));
+        }
+
+        #endregion
     }
 }

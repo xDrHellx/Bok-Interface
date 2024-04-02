@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Windows.Forms;
 
 using BokInterface.Addresses;
+using BokInterface.All;
 
 namespace BokInterface.Tools.MemoryValuesListing {
     /// <summary>Shows the list of all memory addresses listed for a game with their values, based on the ones added in the Bok Interface itself</summary>
@@ -101,7 +102,7 @@ namespace BokInterface.Tools.MemoryValuesListing {
                     // Try getting the MemoryAddress instance & adding the row
                     MemoryAddress memAddress = row.Value;
                     dataTable.Rows.Add(
-                        row.Key,
+                        Utilities.FormatMemoryAddressName(row.Key),
                         "0x" + memAddress.address.ToString("X"),
                         "Value",
                         memAddress.type,
