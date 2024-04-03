@@ -25,10 +25,10 @@ namespace BokInterface {
         public IDictionary<string, DynamicMemoryValue> Misc = new Dictionary<string, DynamicMemoryValue>();
 
         /// <summary>U16 memory values</summary>
-        public IDictionary<string, U16MemoryValue> U16 = new Dictionary<string, U16MemoryValue>();
+        public IDictionary<string, MemoryValue> U16 = new Dictionary<string, MemoryValue>();
 
         /// <summary>U32 memory values</summary>
-        public IDictionary<string, U32MemoryValue> U32 = new Dictionary<string, U32MemoryValue>();
+        public IDictionary<string, MemoryValue> U32 = new Dictionary<string, MemoryValue>();
 
         #endregion
 
@@ -95,7 +95,7 @@ namespace BokInterface {
             Misc.Add("agi", new DynamicMemoryValue("agi", zoktaiAddresses.Misc["stat"].address, zoktaiAddresses.Django["persistent_agi"].address));
 
             // U32
-            U32.Add("total_exp_until_next_level", new U32MemoryValue("total_exp_until_next_level", zoktaiAddresses.Django["total_exp_until_next_level"].address));
+            U32.Add("total_exp_until_next_level", new MemoryValue("total_exp_until_next_level", zoktaiAddresses.Django["total_exp_until_next_level"].address, zoktaiAddresses.Django["total_exp_until_next_level"].type, zoktaiAddresses.Django["total_exp_until_next_level"].domain));
         }
 
         private void InitializeShinbokList() {

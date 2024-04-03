@@ -63,7 +63,7 @@ namespace BokInterface.Addresses {
             // EXP & level
             Django.Add("level", new MemoryAddress(0x40));
             Django.Add("exp", new MemoryAddress(0x50, type: "U32"));
-            Django.Add("total_exp_until_next_level", new MemoryAddress(0x02002464, type: "U32"));
+            Django.Add("total_exp_until_next_level", new MemoryAddress(0x02002464, type: "U32", domain: ""));
 
             // Skill
             note = "100 skill exp = 1 lvl";
@@ -74,7 +74,7 @@ namespace BokInterface.Addresses {
             Django.Add("gun_skill_exp", new MemoryAddress(0x4E, note: note));
 
             // Stat points
-            Django.Add("showned_stat_points_to_allocate", new MemoryAddress(0x02006E20)); // useless
+            // Django.Add("showned_stat_points_to_allocate", new MemoryAddress(0x02006E20)); // useless
             Django.Add("stat_points_to_allocate", new MemoryAddress(0x42));
 
             // Add Misc addresses
