@@ -104,7 +104,7 @@ namespace BokInterface.Tools.MemoryValuesListing {
                     dataTable.Rows.Add(
                         Utilities.FormatMemoryAddressName(row.Key),
                         "0x" + memAddress.address.ToString("X"),
-                        "Value",
+                        Utilities.ReadMemoryAddress(memAddress.address, memAddress.type, memAddress.domain),
                         memAddress.type,
                         memAddress.domain,
                         memAddress.note
