@@ -47,16 +47,16 @@ namespace BokInterface.Tools.TextToWorldSpace {
         private void SetCameraAddresses(string gameName) {
             switch (gameName) {
                 case "Boktai":
-                    cameraXposAddress = boktaiAddresses.Misc["x_camera"].address;
-                    cameraYposAddress = boktaiAddresses.Misc["y_camera"].address;
+                    cameraXposAddress = boktaiAddresses.Misc["x_camera"].Address;
+                    cameraYposAddress = boktaiAddresses.Misc["y_camera"].Address;
                     break;
                 case "Zoktai":
-                    cameraXposAddress = zoktaiAddresses.Misc["x_camera"].address;
-                    cameraYposAddress = zoktaiAddresses.Misc["y_camera"].address;
+                    cameraXposAddress = zoktaiAddresses.Misc["x_camera"].Address;
+                    cameraYposAddress = zoktaiAddresses.Misc["y_camera"].Address;
                     break;
                 case "Shinbok":
-                    cameraXposAddress = shinbokAddresses.Misc["x_camera"].address;
-                    cameraYposAddress = shinbokAddresses.Misc["y_camera"].address;
+                    cameraXposAddress = shinbokAddresses.Misc["x_camera"].Address;
+                    cameraYposAddress = shinbokAddresses.Misc["y_camera"].Address;
                     break;
                 case "LunarKnights":
                     // Current not handled, not enough data available

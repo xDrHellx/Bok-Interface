@@ -103,11 +103,11 @@ namespace BokInterface.Tools.MemoryValuesListing {
                     MemoryAddress memAddress = row.Value;
                     dataTable.Rows.Add(
                         Utilities.FormatMemoryAddressName(row.Key),
-                        "0x" + memAddress.address.ToString("X"),
-                        Utilities.ReadMemoryAddress(memAddress.address, memAddress.type, memAddress.domain),
-                        memAddress.type,
-                        memAddress.domain,
-                        memAddress.note
+                        "0x" + memAddress.Address.ToString("X"),
+                        Utilities.ReadMemoryAddress(memAddress.Address, memAddress.Type, memAddress.Domain),
+                        memAddress.Type,
+                        memAddress.Domain,
+                        memAddress.Note
                     );
                 } catch {
                     // If anything fails just skip to the next dictionnary entry

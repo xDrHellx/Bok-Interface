@@ -143,7 +143,7 @@ namespace BokInterface {
         /// <returns><c>IDictionary<string, decimal></c>Default values</returns>
         private IDictionary<string, decimal> GetZoktaiDefaultValues() {
             IDictionary<string, decimal> defaultValues = new Dictionary<string, decimal>();
-            uint stat = APIs.Memory.ReadU32(zoktaiAddresses.Misc["current_stat"].address);
+            uint stat = APIs.Memory.ReadU32(zoktaiAddresses.Misc["current_stat"].Address);
 
             // If stat is a valid value
             if (stat > 0) {
