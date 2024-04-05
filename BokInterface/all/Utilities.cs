@@ -36,9 +36,9 @@ namespace BokInterface.All {
         /// <summary>Shortcut method for retrieving the value of a memory address</summary>
         /// <param name="address">Address to read</param>
         /// <param name="type">Type of method to use for reading the address (by default "U16" because it is the most common one)</param>
-        /// <param name="domain">Domain the address belongs to (by default "EWRAM" because it is the most common on)</param>
+        /// <param name="domain">Domain the address belongs to (by default none is specified because it is not always necessary)</param>
         /// <returns><c>uint</c>Value</returns>
-        public static uint ReadMemoryAddress(uint address, string type = "U16", string domain = "EWRAM") {
+        public static uint ReadMemoryAddress(uint address, string type = "U16", string? domain = null) {
             return type.ToLower() switch {
                 "u8" => APIs.Memory.ReadU8(address, domain),
                 "u24" => APIs.Memory.ReadU24(address, domain),
@@ -50,9 +50,9 @@ namespace BokInterface.All {
         /// <summary>Shortcut method for retrieving the value of a memory address</summary>
         /// <param name="address">Address to read</param>
         /// <param name="type">Type of method to use for reading the address (by default "S16" because it is the most common one)</param>
-        /// <param name="domain">Domain the address belongs to (by default "EWRAM" because it is the most common on)</param>
+        /// <param name="domain">Domain the address belongs to (by default none is specified because it is not always necessary)</param>
         /// <returns><c>int</c>Value</returns>
-        public static int ReadMemoryAddress(int address, string type = "S16", string domain = "EWRAM") {
+        public static int ReadMemoryAddress(int address, string type = "S16", string? domain = null) {
             return type.ToLower() switch {
                 "s8" => APIs.Memory.ReadS8(address, domain),
                 "s24" => APIs.Memory.ReadS24(address, domain),
@@ -65,9 +65,9 @@ namespace BokInterface.All {
         /// <param name="address">Address to write to</param>
         /// <param name="value">Value to set</param>
         /// <param name="type">Type of method to use for writing to the address (by default "U16" because it is the most common one)</param>
-        /// <param name="domain">Domain the address belongs to (by default "EWRAM" because it is the most common one)</param>
+        /// <param name="domain">Domain the address belongs to (by default none is specified because it is not always necessary)</param>
         /// <returns><c>uint</c>Value</returns>
-        public static void WriteMemoryAddress(uint address, uint value, string type = "U16", string domain = "EWRAM") {
+        public static void WriteMemoryAddress(uint address, uint value, string type = "U16", string? domain = null) {
             switch (type.ToLower()) {
                 case "u8":
                     APIs.Memory.WriteU8(address, value, domain);
@@ -88,9 +88,9 @@ namespace BokInterface.All {
         /// <param name="address">Address to write to</param>
         /// <param name="value">Value to set</param>
         /// <param name="type">Type of method to use for writing to the address (by default "S16" because it is the most common one)</param>
-        /// <param name="domain">Domain the address belongs to (by default "EWRAM" because it is the most common one)</param>
+        /// <param name="domain">Domain the address belongs to (by default none is specified because it is not always necessary)</param>
         /// <returns><c>uint</c>Value</returns>
-        public static void WriteMemoryAddress(uint address, int value, string type = "S16", string domain = "EWRAM") {
+        public static void WriteMemoryAddress(uint address, int value, string type = "S16", string? domain = null) {
             switch (type.ToLower()) {
                 case "s8":
                     APIs.Memory.WriteS8(address, value, domain);

@@ -89,7 +89,6 @@ namespace BokInterface.Tools.MemoryValuesListing {
         private void GenerateColumns() {
             dataTable.Columns.Add("Name");
             dataTable.Columns.Add("Address");
-            dataTable.Columns.Add("Value");
             dataTable.Columns.Add("Type");
             dataTable.Columns.Add("Domain");
             dataTable.Columns.Add("Notes");
@@ -104,7 +103,6 @@ namespace BokInterface.Tools.MemoryValuesListing {
                     dataTable.Rows.Add(
                         Utilities.FormatMemoryAddressName(row.Key),
                         "0x" + memAddress.Address.ToString("X"),
-                        Utilities.ReadMemoryAddress(memAddress.Address, memAddress.Type, memAddress.Domain),
                         memAddress.Type,
                         memAddress.Domain,
                         memAddress.Note
