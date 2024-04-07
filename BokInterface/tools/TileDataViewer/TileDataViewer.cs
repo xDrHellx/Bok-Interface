@@ -421,7 +421,7 @@ namespace BokInterface.Tools.TileDataViewer {
                 }
             }
         }
-    }
 
-    #endregion
+        #endregion
+    }
 }
