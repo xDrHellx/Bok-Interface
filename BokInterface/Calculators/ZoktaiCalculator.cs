@@ -113,5 +113,43 @@ namespace BokInterface.Tools.Calculator {
         }
 
         #endregion
+
+        #region Misc damage calculations
+
+        /// <summary>Get the damage done by C-Wolf magic</summary>
+        /// <remarks>
+        ///     <para>
+        ///         Bypasses enemy's defense.<br/>
+        ///         Only a select group of enemies can be damaged by C-Wolf.
+        ///     </para>
+        /// </remarks>
+        /// <param name="vitality">VIT stat points</param>
+        /// <param name="strength">STR stat points</param>
+        /// <returns><c>Float</c>Damage</returns>
+        public static float GetWolfDamage(int vitality, int strength) {
+            return (vitality + strength) / 2;
+        }
+
+        /// <summary>Get the damage done by Justice card</summary>
+        /// <param name="maxLife">Max player life</param>
+        /// <param name="currentLife">Current player life</param>
+        /// <param name="defensePower">Enemy defense power (enemy defense value)</param>
+        /// <returns><c>Float</c>Damage</returns>
+        public static float GetJusticeCardDamage(int maxLife, int currentLife, float defensePower) {
+            return (maxLife - currentLife) - defensePower;
+        }
+
+        /// <summary>Get the damage done by The Tower card</summary>
+        /// <remarks>
+        ///     <para>Damages all enemies on screen.</para>
+        ///     <para>If an enemy has multiple active body parts, each part will be damaged.</para>
+        /// </remarks>
+        /// <param name="level">Player level</param>
+        /// <returns><c>Float</c>Damage</returns>
+        public static float GetTowerCardDamage(int level) {
+            return level * 8;
+        }
+
+        #endregion
     }
 }
