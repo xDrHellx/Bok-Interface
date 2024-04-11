@@ -2,12 +2,27 @@ namespace BokInterface.Tools.Calculator {
     /// <summary>Class for calculations related to Boktai 2</summary>
     partial class ZoktaiCalculator {
 
+        /// <summary>Calculate damage</summary>
+        /// <param name="attackDefenseDifference">Difference in Attack and Defense</param>
+        /// <param name="enchantmentMultiplier">Enchantment multiplier</param>
+        /// <param name="nightOrBackMultiplier">Multiplier from Back attack or Enchant Dark at night</param>
+        /// <param name="knockoutMultiplier">Knock-Out multiplier</param>
+        /// <param name="spDamageIncrease">Increase in damage from "increases damage" SP effects</param>
+        /// <returns><c>double</c>Damage dealt</returns>
+        public static double CalculateDamage(double attackDefenseDifference, double enchantmentMultiplier, double nightOrBackMultiplier, double knockoutMultiplier, double spDamageIncrease) {
+            double damage = attackDefenseDifference * enchantmentMultiplier;
+            damage *= nightOrBackMultiplier;
+            damage *= knockoutMultiplier;
+            damage *= spDamageIncrease;
+            return damage;
+        }
+
         /// <summary>Get the difference in attack and defense</summary>
         /// <param name="attack">Attack</param>
         /// <param name="defense">Defense</param>
-        /// <returns><c>Float</c>Difference (minimum is always 1)</returns>
-        public static float GetAttackDefenseDifference(float attack, float defense) {
-            float difference = attack - defense;
+        /// <returns><c>double</c>Difference (minimum is always 1)</returns>
+        public static double GetAttackDefenseDifference(double attack, double defense) {
+            double difference = attack - defense;
             return difference <= 0 ? 1 : difference;
         }
 
@@ -18,8 +33,8 @@ namespace BokInterface.Tools.Calculator {
         /// <param name="strength">STR stat points</param>
         /// <param name="weaponPower">Weapon base damage</param>
         /// <param name="attackPowerIncrease">Effects affecting damage output</param>
-        /// <returns><c>Float</c>Attack power</returns>
-        public static float GetPlayerAttackPower(int level, int strength, int weaponPower, float attackPowerIncrease) {
+        /// <returns><c>double</c>Attack power</returns>
+        public static double GetPlayerAttackPower(int level, int strength, int weaponPower, double attackPowerIncrease) {
             return (level + strength) / 2 + weaponPower + attackPowerIncrease;
         }
 
@@ -28,8 +43,8 @@ namespace BokInterface.Tools.Calculator {
         /// <param name="strength">STR stat< points/param>
         /// <param name="fistSkillLevel">Fists skill level</param>
         /// <param name="attackPowerIncrease">Effects affecting damage output</param>
-        /// <returns><c>Float</c>Attack power</returns>
-        public static float GetPlayerFistsAttackPower(int level, int strength, int fistSkillLevel, float attackPowerIncrease) {
+        /// <returns><c>double</c>Attack power</returns>
+        public static double GetPlayerFistsAttackPower(int level, int strength, int fistSkillLevel, double attackPowerIncrease) {
             return (level + strength) / 2 + (level + fistSkillLevel) / 4 + attackPowerIncrease;
         }
 
@@ -38,8 +53,8 @@ namespace BokInterface.Tools.Calculator {
         /// <param name="weaponPower">Weapon base damage</param>
         /// <param name="attackPowerIncrease">Effects affecting damage output</param>
         /// <param name="charge">Gun charge (1, 1.5 or 2) (be default 1)</param>
-        /// <returns><c>Float</c>Attack power</returns>
-        public static float GetPlayerGunAttackPower(int gunSkillLevel, int weaponPower, int attackPowerIncrease, float charge = 1) {
+        /// <returns><c>double</c>Attack power</returns>
+        public static double GetPlayerGunAttackPower(int gunSkillLevel, int weaponPower, int attackPowerIncrease, double charge = 1) {
 
             // If charge is invalid, set it to the default
             charge = charge != 1.5 || charge != 2 ? 1 : charge;
@@ -64,8 +79,8 @@ namespace BokInterface.Tools.Calculator {
         /// <param name="level">Player level</param>
         /// <param name="agility">AGI stat points</param>
         /// <param name="protectorDurability">Protector durability (defense from armor)</param>
-        /// <returns><c>Float</c>Defense power</returns>
-        public static float GetPlayerDefensePower(int level, int agility, int protectorDurability) {
+        /// <returns><c>double</c>Defense power</returns>
+        public static double GetPlayerDefensePower(int level, int agility, int protectorDurability) {
             return (level + agility) / 2 + protectorDurability;
         }
 
@@ -75,11 +90,11 @@ namespace BokInterface.Tools.Calculator {
 
         /// <summary>Get the enchantment multiplier related to elemental weaknesses</summary>
         /// <param name="matchup">Result of matchup (neutral, resisted, effective, or not prevent) (by default not present)</param>
-        /// <returns><c>Float</c>Multiplier</returns>
-        public static float GetEnchantmentMultiplier(string matchup = "") {
+        /// <returns><c>double</c>Multiplier</returns>
+        public static double GetEnchantmentMultiplier(string matchup = "") {
             return (object)matchup switch {
-                "neutral" => (float)1.25,
-                "resisted" => (float)0.25,
+                "neutral" => (double)1.25,
+                "resisted" => (double)0.25,
                 "effective" => 4,
                 _ => 1,
             };
@@ -94,9 +109,9 @@ namespace BokInterface.Tools.Calculator {
         ///     </para>
         /// </remarks>
         /// <param name="effective">True if hitting the back of an enemy of using Enchant Dark at night</param>
-        /// <returns><c>Float</c>Multiplier</returns>
-        public static float GetNightOrBackMultiplier(bool effective = false) {
-            return (float)(effective == true ? 1.5 : 1);
+        /// <returns><c>double</c>Multiplier</returns>
+        public static double GetNightOrBackMultiplier(bool effective = false) {
+            return (double)(effective == true ? 1.5 : 1);
         }
 
         /// <summary>Get the knock-out multiplier</summary>
@@ -125,8 +140,8 @@ namespace BokInterface.Tools.Calculator {
         /// </remarks>
         /// <param name="vitality">VIT stat points</param>
         /// <param name="strength">STR stat points</param>
-        /// <returns><c>Float</c>Damage</returns>
-        public static float GetWolfDamage(int vitality, int strength) {
+        /// <returns><c>double</c>Damage</returns>
+        public static double GetWolfDamage(int vitality, int strength) {
             return (vitality + strength) / 2;
         }
 
@@ -134,8 +149,8 @@ namespace BokInterface.Tools.Calculator {
         /// <param name="maxLife">Max player life</param>
         /// <param name="currentLife">Current player life</param>
         /// <param name="defensePower">Enemy defense power (enemy defense value)</param>
-        /// <returns><c>Float</c>Damage</returns>
-        public static float GetJusticeCardDamage(int maxLife, int currentLife, float defensePower) {
+        /// <returns><c>double</c>Damage</returns>
+        public static double GetJusticeCardDamage(int maxLife, int currentLife, double defensePower) {
             return (maxLife - currentLife) - defensePower;
         }
 
@@ -145,8 +160,8 @@ namespace BokInterface.Tools.Calculator {
         ///     <para>If an enemy has multiple active body parts, each part will be damaged.</para>
         /// </remarks>
         /// <param name="level">Player level</param>
-        /// <returns><c>Float</c>Damage</returns>
-        public static float GetTowerCardDamage(int level) {
+        /// <returns><c>double</c>Damage</returns>
+        public static double GetTowerCardDamage(int level) {
             return level * 8;
         }
 
