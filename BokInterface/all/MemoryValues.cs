@@ -1,8 +1,8 @@
 using System.Collections.Generic;
-using BokInterface.All;
+
 using BokInterface.Addresses;
 
-namespace BokInterface {
+namespace BokInterface.All {
 
     /// <summary>Class containing instances of memory values for the current game</summary>
     class MemoryValues {
