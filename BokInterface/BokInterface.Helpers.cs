@@ -23,7 +23,7 @@ namespace BokInterface {
         /// <param name="height">Height (in pixels)</param>
         /// <param name="addToWindow">Set to true to add the element directly to the main interface window</param>
         /// <returns><c>System.Windows.Forms.GroupBox</c>Group box instance</returns>
-        private GroupBox CreateGroupBox(string name, string text, int positionX, int positionY, int width, int height, bool addToWindow = false) {
+        public GroupBox CreateGroupBox(string name, string text, int positionX, int positionY, int width, int height, bool addToWindow = false) {
 
             GroupBox groupBox = new() {
                 Name = name,
@@ -56,7 +56,7 @@ namespace BokInterface {
         /// <param name="margin">Margin (by default System.Windows.Forms.Padding(0, 3, 0, 3), the default value in Visual Studio)</param>
         /// <param name="textAlignment">Text alignment, by default "MiddleCenter" (see System.Drawing.ContentAlignment for possible values)</param>
         /// <returns><c>System.Windows.Forms.Label</c>Label instance</returns>
-        private Label CreateLabel(string name, string text, int positionX, int positionY, int width, int height, bool addToWindow = false, string colorHex = "", Padding margin = new Padding(), string textAlignment = "MiddleCenter") {
+        public Label CreateLabel(string name, string text, int positionX, int positionY, int width, int height, bool addToWindow = false, string colorHex = "", Padding margin = new Padding(), string textAlignment = "MiddleCenter") {
 
             Label label = new() {
                 Name = name,
@@ -103,7 +103,7 @@ namespace BokInterface {
         /// <param name="margin">Margin (by default System.Windows.Forms.Padding(0, 3, 0, 3), the default value in Visual Studio)</param>
         /// <param name="textAlignment">Text alignment, by default "MiddleCenter" (see System.Drawing.ContentAlignment for possible values)</param>
         /// <returns><c>System.Windows.Forms.Button</c>Button instance</returns>
-        private Button CreateButton(string name, string text, int positionX, int positionY, int width, int height, bool addToWindow = false, string colorHex = "", Padding margin = new Padding(), string textAlignment = "MiddleCenter") {
+        public Button CreateButton(string name, string text, int positionX, int positionY, int width, int height, bool addToWindow = false, string colorHex = "", Padding margin = new Padding(), string textAlignment = "MiddleCenter") {
 
             Button btn = new() {
                 Name = name,
@@ -157,15 +157,9 @@ namespace BokInterface {
                 FormBorderStyle = FormBorderStyle.FixedSingle,
                 BackColor = SystemColors.Control,
                 Font = defaultFont,
-                ClientSize = new Size(width, height)
+                ClientSize = new Size(width, height),
+                Owner = parentForm ?? this
             };
-
-            // Form parent / owner
-            if (parentForm == null) {
-                form.Owner = this;
-            } else {
-                form.Owner = parentForm;
-            }
 
             return form;
         }
@@ -185,7 +179,7 @@ namespace BokInterface {
         /// <param name="margin">Margin (by default System.Windows.Forms.Padding(0, 3, 0, 3), the default value in Visual Studio)</param>
         /// <param name="valueAlignment">Value alignment, by default "Left" (see System.Windows.Forms.HorizontalAlignment for possible values)</param>
         /// <returns><c>System.Windows.Forms.NumericUpDown</c>NumericUpDown instance</returns>
-        private NumericUpDown CreateNumericUpDown(string name, decimal defaultValue, int positionX, int positionY, int width, int height, decimal minValue = 0, decimal maxValue = 99, int nbDecimals = 0, bool addToWindow = false, string colorHex = "", Padding margin = new Padding(), string valueAlignment = "Left") {
+        public NumericUpDown CreateNumericUpDown(string name, decimal defaultValue, int positionX, int positionY, int width, int height, decimal minValue = 0, decimal maxValue = 99, int nbDecimals = 0, bool addToWindow = false, string colorHex = "", Padding margin = new Padding(), string valueAlignment = "Left") {
 
             NumericUpDown field = new() {
                 Name = name,
@@ -235,7 +229,7 @@ namespace BokInterface {
         /// <param name="isCheckedByDefault">Set to true if the CheckGroupBox has to be checked when initiated</param>
         /// <param name="addToWindow">Set to true to add the element directly to the main interface window</param>
         /// <returns><c>CheckGroupBox</c>CheckGroupBox instance</returns>
-        private CheckGroupBox CreateCheckGroupBox(string name, string text, int positionX, int positionY, int width, int height, bool isCheckedByDefault = false, bool addToWindow = false) {
+        public CheckGroupBox CreateCheckGroupBox(string name, string text, int positionX, int positionY, int width, int height, bool isCheckedByDefault = false, bool addToWindow = false) {
 
             CheckGroupBox checkGroupBox = new() {
                 Name = name,
@@ -265,7 +259,7 @@ namespace BokInterface {
         /// <param name="positionY">Y position</param>
         /// <param name="addToWindow">Set to true to add the element directly to the main interface window</param>
         /// <returns><c>System.Windows.Forms.Label</c>Label instance</returns>
-        private Label CreateImageLabel(string name, string imgName, int positionX, int positionY, bool addToWindow = false) {
+        public Label CreateImageLabel(string name, string imgName, int positionX, int positionY, bool addToWindow = false) {
 
             // Get image
             Image img = (Image)Properties.Resources.ResourceManager.GetObject(imgName);
@@ -295,7 +289,7 @@ namespace BokInterface {
 
         /// <summary>Simplified method for creating a tooltip</summary>
         /// <returns><c>System.Windows.Forms.ToolTip<c/>Tooltip instance</returns>
-        private static ToolTip CreateToolTip() {
+        public static ToolTip CreateToolTip() {
 
             ToolTip toolTip = new() {
                 // Always shows tooltip even if window isn't focused
