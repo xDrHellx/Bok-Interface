@@ -1,4 +1,4 @@
-namespace BokInterface.Tools.Calculator {
+namespace BokInterface.Tools.Calculators {
     /// <summary>Class for calculations related to Boktai 3</summary>
     partial class ShinbokCalculator {
 
