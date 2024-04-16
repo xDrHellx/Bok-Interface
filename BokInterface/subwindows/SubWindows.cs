@@ -8,7 +8,7 @@ using System.Windows.Forms;
 namespace BokInterface {
     partial class BokInterface {
 
-        #region Properties indicating if subwindows are opened or not
+        #region Properties indicating if subwindows are opened
 
         protected bool statusEditorOpened = false;
         protected bool inventoryEditorOpened = false;
@@ -17,6 +17,7 @@ namespace BokInterface {
         protected bool weaponsEditorOpened = false;
         protected bool magicsEditorOpened = false;
         protected bool miscToolsSelectorOpened = false;
+        protected bool calculatorsSelectorOpened = false;
 
         #endregion
 
@@ -167,6 +168,40 @@ namespace BokInterface {
 
                 miscToolsSelectionWindow.Show();
                 miscToolsSelectorOpened = true;
+            }
+        }
+
+        protected void OpenCalculatorsSelector(object sender, EventArgs e) {
+            if (calculatorsSelectorOpened == false) {
+
+                // Create subwindow & add on close event
+                calculatorsSelectionWindow = CreateSubWindow("calculatorsSelectWindow", "Bok Calculators - Select", 200, 100);
+                calculatorsSelectionWindow.FormClosing += new FormClosingEventHandler(delegate (object sender, FormClosingEventArgs e) {
+                    calculatorsSelectorOpened = false;
+                    calculatorsSelectionWindow.Controls.Clear();
+                });
+
+                // Add subwindow elements corresponding to the current game
+                switch (shorterGameName) {
+                    case "Boktai":
+                        BoktaiCalculatorsSubwindow();
+                        break;
+                    case "Zoktai":
+                        ZoktaiCalculatorsSubwindow();
+                        break;
+                    case "Shinbok":
+                        ShinbokCalculatorsSubwindow();
+                        break;
+                    case "LunarKnights":
+                        LunarKnightsCalculatorsSubwindow();
+                        break;
+                    default:
+                        // If game is not handled, stop
+                        return;
+                }
+
+                calculatorsSelectionWindow.Show();
+                calculatorsSelectorOpened = true;
             }
         }
 

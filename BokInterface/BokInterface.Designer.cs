@@ -60,6 +60,7 @@ namespace BokInterface {
 		private System.Windows.Forms.Form weaponsEditWindow = new();
 		private System.Windows.Forms.Form magicsEditWindow = new();
 		private System.Windows.Forms.Form miscToolsSelectionWindow = new();
+		private System.Windows.Forms.Form calculatorsSelectionWindow = new();
 		
 		#endregion
 
@@ -163,8 +164,21 @@ namespace BokInterface {
 			this.miscToolsSelectionWindow.Close();
 			this.miscToolsSelectorOpened = false;
 
+			// Calculators selection subwindow-related
+			this.calculatorsSelectionWindow.Controls.Clear();
+			this.calculatorsSelectionWindow.Close();
+			this.calculatorsSelectorOpened = false;
+
+			// Calculators-related
+			ClearCalculators();
+
 			// Extra tools-related
 			this.ClearExtraTools();
+		}
+
+		/// <summary>Clears subwindows related to calculators</summary>
+		private void ClearCalculators() {
+
 		}
 
 		/// <summary>Clears subwindows related to extra tools</summary>

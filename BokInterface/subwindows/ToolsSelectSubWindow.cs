@@ -43,21 +43,21 @@ namespace BokInterface {
         #region Subwindow elements generating methods
 
         /// <summary>Simplified method for adding the label in the tools selection subwindow</summary>
-		/// <param name="posX">X position</param>
-		/// <param name="posY">Y position</param>
-		/// <param name="width">Width (in pixels)</param>
-		/// <param name="height">Height (in pixels)</param>
-        private void AddToolsLabel(int posX = 5, int posY = 5, int width = 176, int height = 15) {
+        /// <param name="posX">X position</param>
+        /// <param name="posY">Y position</param>
+        /// <param name="width">Width (in pixels)</param>
+        /// <param name="height">Height (in pixels)</param>
+        private void AddToolsLabel(int posX = 5, int posY = 5, int width = 188, int height = 15) {
             Label availableToolsLabel = CreateLabel("availableToolsLabel", "-- Tools available --", posX, posY, width, height);
             miscToolsSelectionWindow.Controls.Add(availableToolsLabel);
         }
 
         /// <summary>Simplified method for adding the Tile Data Viewer tool button to the tools selection subwindow</summary>
-		/// <param name="posX">X position</param>
-		/// <param name="posY">Y position</param>
-		/// <param name="width">Width (in pixels)</param>
-		/// <param name="height">Height (in pixels)</param>
-        private void AddTileDataViewerBtn(int posX = 5, int posY = 23, int width = 176, int height = 23) {
+        /// <param name="posX">X position</param>
+        /// <param name="posY">Y position</param>
+        /// <param name="width">Width (in pixels)</param>
+        /// <param name="height">Height (in pixels)</param>
+        private void AddTileDataViewerBtn(int posX = 5, int posY = 23, int width = 188, int height = 23) {
 
             Button tileDataBtn = CreateButton("tileDataBtn", "Tile data", posX, posY, width, height);
             tileDataBtn.Click += new EventHandler(delegate (object sender, EventArgs e) {

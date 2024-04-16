@@ -335,16 +335,16 @@ namespace BokInterface {
 
             switch (shorterGameName) {
                 case "Boktai":
-                    extrasGroupBox = CreateGroupBox("extraTools", "Tools", 237, 25, 87, 52, true);
+                    extrasGroupBox = CreateGroupBox("extraTools", "Tools", 237, 25, 87, 78, true);
                     break;
                 case "Zoktai":
-                    extrasGroupBox = CreateGroupBox("extraTools", "Tools", 237, 187, 87, 52, true);
+                    extrasGroupBox = CreateGroupBox("extraTools", "Tools", 237, 187, 87, 78, true);
                     break;
                 case "Shinbok":
-                    extrasGroupBox = CreateGroupBox("extraTools", "Tools", 237, 187, 87, 52, true);
+                    extrasGroupBox = CreateGroupBox("extraTools", "Tools", 237, 187, 87, 78, true);
                     break;
                 case "LunarKnights":
-                    extrasGroupBox = CreateGroupBox("extraTools", "Tools", 237, 25, 87, 52, true);
+                    extrasGroupBox = CreateGroupBox("extraTools", "Tools", 237, 25, 87, 78, true);
                     break;
                 default:
                     // If game is not handled, don't add anything & stop here
@@ -355,6 +355,11 @@ namespace BokInterface {
             Button miscToolsBtn = CreateButton("showExtraTools", "Misc tools", 6, 21, 75, 23);
             miscToolsBtn.Click += new System.EventHandler(OpenMiscToolsSelector);
             extrasGroupBox.Controls.Add(miscToolsBtn);
+
+            // Add Calculators button
+            Button calculatorsBtn = CreateButton("showCalculators", "Calculators", 6, 48, 75, 23);
+            calculatorsBtn.Click += new System.EventHandler(OpenCalculatorsSelector);
+            extrasGroupBox.Controls.Add(calculatorsBtn);
         }
 
         #endregion

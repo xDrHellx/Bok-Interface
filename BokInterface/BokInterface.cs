@@ -66,7 +66,8 @@ namespace BokInterface {
             retryCount = 0;
             isDS = false;
 
-            // Clear subwindows related to extra tools to prevent errors caused by switching between games
+            // Clear subwindows related to calculators & extra tools to prevent errors caused by switching between games
+            ClearCalculators();
             ClearExtraTools();
 
             // Try initializing the interface
