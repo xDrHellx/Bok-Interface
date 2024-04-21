@@ -113,7 +113,7 @@ namespace BokInterface {
 
                 memValuesListingActive = true;
 
-                MemoryValuesListing = new("memAddrTable", "Memory values list", 500, 500, shorterGameName, GetGameIconName(), this);
+                MemoryValuesListing = new("memAddrTable", "Memory values list", 650, 500, shorterGameName, GetGameIconName(), this);
                 MemoryValuesListing.FormClosing += new FormClosingEventHandler(delegate (object sender, FormClosingEventArgs e) {
 
                     memValuesListingActive = false;

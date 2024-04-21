@@ -14,6 +14,7 @@ namespace BokInterface.Tools.MemoryValuesListing {
 
         public int index = 0;
         private readonly DataTable dataTable = new();
+        private DataGridView? dataGridView;
         private readonly string currentGame = "";
 
         #endregion
@@ -56,6 +57,7 @@ namespace BokInterface.Tools.MemoryValuesListing {
 
         protected override void OnPaint(PaintEventArgs e) {
             base.OnPaint(e);
+            dataGridView = null;
 
             // If current game is not handled, stop
             if (currentGame == "") {
@@ -81,8 +83,9 @@ namespace BokInterface.Tools.MemoryValuesListing {
             GenerateColumns();
             GenerateTableData(currentGame);
 
-            // Show table in subwindow
-            CreateDataGridView("memValuesGrid", dataTable, 5, 5, ClientSize.Width - 10, ClientSize.Height - 10, true);
+            // Show table in subwindow & set columns styles
+            dataGridView = CreateDataGridView("memValuesGrid", dataTable, 5, 5, ClientSize.Width - 10, ClientSize.Height - 10, true);
+            SetColumnsStyle();
         }
 
         /// <summary>Simplified method for generating columns for the data table</summary>
@@ -92,6 +95,22 @@ namespace BokInterface.Tools.MemoryValuesListing {
             dataTable.Columns.Add("Type");
             dataTable.Columns.Add("Domain");
             dataTable.Columns.Add("Notes");
+        }
+
+        /// <summary>Set columns styles (width, text-alignment, ...)</summary>
+        private void SetColumnsStyle() {
+            if (dataGridView != null) {
+
+                // Width
+                dataGridView.Columns[1].Width = 70; // Address
+                dataGridView.Columns[2].Width = 40; // Type
+                dataGridView.Columns[3].Width = 60; // Domain
+
+                // Text alignment
+                dataGridView.Columns[1].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
+                dataGridView.Columns[2].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+                dataGridView.Columns[3].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            }
         }
 
         /// <summary>Simplified method for generating rows for the data table from a dictionnary</summary>
@@ -176,6 +195,7 @@ namespace BokInterface.Tools.MemoryValuesListing {
                 AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill,
                 Dock = DockStyle.Fill,
                 EnableHeadersVisualStyles = false,
+                ReadOnly = true
             };
 
             // Set a specific color for the header
