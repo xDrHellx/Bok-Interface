@@ -76,8 +76,7 @@ namespace BokInterface {
         private void UpdateZoktaiInterface() {
 
             // Get one of the values used for reading current stats
-            uint currentStat = APIs.Memory.ReadU32(zoktaiAddresses.Misc["current_stat"].Address);
-
+            uint currentStat = zoktaiAddresses.Misc["current_stat"].Value;
             /**
              * Update values by retrieving from memory addresses
              * 

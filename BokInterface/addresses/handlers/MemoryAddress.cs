@@ -7,13 +7,18 @@ namespace BokInterface.Addresses {
     /// <param name="type">Type (by default U16)</param>
     /// <param name="domain">Domain (by default none is specified because it is not always necessary)</param>
     public class MemoryAddress(uint address, string note = "", string type = "U16", string? domain = null) {
-        public readonly uint Address = address;
+        public uint Address = address;
         public readonly string Type = type;
+        /// <summary>
+        /// <para>If the address is 8 characters or more, it already specifies the domain.</para>
+        /// <para>In that case the domain will not be passed to the value reading and writing methods to prevent issues.</para>
+        /// </summary>
         public readonly string? Domain = domain;
         public readonly string Note = note;
+        private readonly int Length = address.ToString().Length;
         public uint Value {
-            get => Utilities.ReadMemoryAddress(Address, Type, Domain);
-            set => Utilities.WriteMemoryAddress(Address, value, Type, Domain);
+            get => Utilities.ReadMemoryAddress(Address, Type, Length >= 8 ? null : Domain);
+            set => Utilities.WriteMemoryAddress(Address, value, Type, Length >= 8 ? null : Domain);
         }
     }
 }
