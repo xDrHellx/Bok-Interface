@@ -8,13 +8,13 @@ namespace BokInterface.All {
     public class DynamicMemoryValue(string name, uint firstAddress, uint secondAddress, string type = "U16") {
 
         public string name = name;
-        private readonly uint firstAddress = firstAddress;
-        private readonly uint secondAddress = secondAddress;
-        public string type = type;
+        private readonly uint _firstAddress = firstAddress;
+        private readonly uint _secondAddress = secondAddress;
+        public string _type = type;
 
         public uint Value {
-            get => Utilities.ReadDynamicAddress(firstAddress, secondAddress, type);
-            set => Utilities.WriteDynamicAddress(value, firstAddress, secondAddress, type);
+            get => Utilities.ReadDynamicAddress(_firstAddress, _secondAddress, _type);
+            set => Utilities.WriteDynamicAddress(value, _firstAddress, _secondAddress, _type);
         }
     }
 }

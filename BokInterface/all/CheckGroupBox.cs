@@ -8,44 +8,44 @@ namespace BokInterface.All {
     public class CheckGroupBox : GroupBox {
 
         /// <summary>CheckBox instance</summary>
-        private readonly CheckBox CheckBoxInstance;
+        private readonly CheckBox _checkBoxInstance;
         /// <summary>Event handler for checking or unchecking</summary>
         public event EventHandler? CheckedChanged;
 
         /// <summary>Add the CheckBox to the control</summary>
         public CheckGroupBox() {
-            CheckBoxInstance = new CheckBox {
+            _checkBoxInstance = new CheckBox {
                 Location = new Point(8, 0)
             };
 
-            CheckBoxInstance.CheckedChanged += CheckBoxInstance_CheckedChanged;
-            CheckBoxInstance.Layout += CheckBoxInstance_Layout;
+            _checkBoxInstance.CheckedChanged += CheckBoxInstance_CheckedChanged;
+            _checkBoxInstance.Layout += CheckBoxInstance_Layout;
 
-            Controls.Add(CheckBoxInstance);
+            Controls.Add(_checkBoxInstance);
         }
 
         /// <summary>Keep the CheckBox text synced with our text</summary>
         public override string Text {
             get { return base.Text; }
             set {
-                base.Text = CheckBoxInstance.Text = value;
-                CheckBoxInstance.TabIndex = TabIndex + 1;
-                CheckBoxInstance.AutoSize = true;
+                base.Text = _checkBoxInstance.Text = value;
+                _checkBoxInstance.TabIndex = TabIndex + 1;
+                _checkBoxInstance.AutoSize = true;
             }
         }
 
         /// <summary>Delegate to CheckBox.Checked</summary>
         public bool Checked {
-            get { return CheckBoxInstance.Checked; }
-            set { CheckBoxInstance.Checked = value; }
+            get { return _checkBoxInstance.Checked; }
+            set { _checkBoxInstance.Checked = value; }
         }
 
         /// <summary>Enable/disable contained controls</summary>
         private void EnableDisableControls() {
             foreach (Control control in Controls) {
-                if (control != CheckBoxInstance) {
+                if (control != _checkBoxInstance) {
                     try {
-                        control.Enabled = CheckBoxInstance.Checked;
+                        control.Enabled = _checkBoxInstance.Checked;
                     } catch (Exception) { }
                 }
             }
@@ -72,7 +72,7 @@ namespace BokInterface.All {
             base.OnPaint(e);
 
             // If unchecked, disable all elements within the CheckGroupBox
-            if (CheckBoxInstance.Checked == false) {
+            if (_checkBoxInstance.Checked == false) {
                 foreach (Label subElement in Controls.OfType<Label>()) {
                     subElement.Enabled = false;
                 }
