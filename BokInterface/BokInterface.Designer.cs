@@ -177,9 +177,9 @@ namespace BokInterface {
 				this.tileDataViewerActive = false;
 			}
 
-			if(this.MemoryValuesListing != null) {
-				this.MemoryValuesListing.Controls.Clear();
-				this.MemoryValuesListing.Close();
+			if(this._memValuesListing != null) {
+				this._memValuesListing.Controls.Clear();
+				this._memValuesListing.Close();
 				this.memValuesListingActive = false;
 			}
 		}
