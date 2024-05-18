@@ -13,18 +13,18 @@ namespace BokInterface.Tools.MemoryValuesListing {
         #region Main properties
 
         public int index = 0;
-        private readonly DataTable dataTable = new();
-        private DataGridView? dataGridView;
-        private readonly string currentGame = "";
+        private readonly DataTable _dataTable = new();
+        private DataGridView? _dataGridView;
+        private readonly string _currentGame = "";
 
         #endregion
 
         #region Memory addresses properties
 
-        private readonly BoktaiAddresses boktaiAddresses = new();
-        private readonly ZoktaiAddresses zoktaiAddresses = new();
-        private readonly ShinbokAddresses shinbokAddresses = new();
-        private readonly LunarKnightsAddresses lunarKnightsAddresses = new();
+        private readonly BoktaiAddresses _boktaiAddresses = new();
+        private readonly ZoktaiAddresses _zoktaiAddresses = new();
+        private readonly ShinbokAddresses _shinbokAddresses = new();
+        private readonly LunarKnightsAddresses _lunarKnightsAddresses = new();
 
         #endregion
 
@@ -41,7 +41,7 @@ namespace BokInterface.Tools.MemoryValuesListing {
             Font = BokInterface.defaultFont;
             AutoScroll = true;
             ClientSize = new Size(width, height);
-            this.currentGame = currentGame;
+            _currentGame = currentGame;
 
             if (parentForm != null) {
                 Owner = parentForm;
@@ -57,10 +57,10 @@ namespace BokInterface.Tools.MemoryValuesListing {
 
         protected override void OnPaint(PaintEventArgs e) {
             base.OnPaint(e);
-            dataGridView = null;
+            _dataGridView = null;
 
             // If current game is not handled, stop
-            if (currentGame == "") {
+            if (_currentGame == "") {
                 return;
             }
 
@@ -75,41 +75,41 @@ namespace BokInterface.Tools.MemoryValuesListing {
         private void GenerateDataTable() {
 
             // Clear the table & subwindow
-            dataTable.Columns.Clear();
-            dataTable.Rows.Clear();
-            dataTable.Clear();
+            _dataTable.Columns.Clear();
+            _dataTable.Rows.Clear();
+            _dataTable.Clear();
 
             // Generate table data for the current game
             GenerateColumns();
-            GenerateTableData(currentGame);
+            GenerateTableData(_currentGame);
 
             // Show table in subwindow & set columns styles
-            dataGridView = CreateDataGridView("memValuesGrid", dataTable, 5, 5, ClientSize.Width - 10, ClientSize.Height - 10, true);
+            _dataGridView = CreateDataGridView("memValuesGrid", _dataTable, 5, 5, ClientSize.Width - 10, ClientSize.Height - 10, true);
             SetColumnsStyle();
         }
 
         /// <summary>Simplified method for generating columns for the data table</summary>
         private void GenerateColumns() {
-            dataTable.Columns.Add("Name");
-            dataTable.Columns.Add("Address");
-            dataTable.Columns.Add("Type");
-            dataTable.Columns.Add("Domain");
-            dataTable.Columns.Add("Notes");
+            _dataTable.Columns.Add("Name");
+            _dataTable.Columns.Add("Address");
+            _dataTable.Columns.Add("Type");
+            _dataTable.Columns.Add("Domain");
+            _dataTable.Columns.Add("Notes");
         }
 
         /// <summary>Set columns styles (width, text-alignment, ...)</summary>
         private void SetColumnsStyle() {
-            if (dataGridView != null) {
+            if (_dataGridView != null) {
 
                 // Width
-                dataGridView.Columns[1].Width = 70; // Address
-                dataGridView.Columns[2].Width = 40; // Type
-                dataGridView.Columns[3].Width = 60; // Domain
+                _dataGridView.Columns[1].Width = 70; // Address
+                _dataGridView.Columns[2].Width = 40; // Type
+                _dataGridView.Columns[3].Width = 60; // Domain
 
                 // Text alignment
-                dataGridView.Columns[1].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
-                dataGridView.Columns[2].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-                dataGridView.Columns[3].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+                _dataGridView.Columns[1].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
+                _dataGridView.Columns[2].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+                _dataGridView.Columns[3].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             }
         }
 
@@ -119,7 +119,7 @@ namespace BokInterface.Tools.MemoryValuesListing {
                 try {
                     // Try getting the MemoryAddress instance & adding the row
                     MemoryAddress memAddress = row.Value;
-                    dataTable.Rows.Add(
+                    _dataTable.Rows.Add(
                         Utilities.FormatMemoryAddressName(row.Key),
                         "0x" + memAddress.Address.ToString("X"),
                         memAddress.Type,
@@ -138,28 +138,28 @@ namespace BokInterface.Tools.MemoryValuesListing {
         private void GenerateTableData(string gameName) {
             switch (gameName) {
                 case "Boktai":
-                    GenerateRows(boktaiAddresses.Django);
-                    GenerateRows(boktaiAddresses.Inventory);
-                    GenerateRows(boktaiAddresses.Gardening);
-                    GenerateRows(boktaiAddresses.Misc);
+                    GenerateRows(_boktaiAddresses.Django);
+                    GenerateRows(_boktaiAddresses.Inventory);
+                    GenerateRows(_boktaiAddresses.Gardening);
+                    GenerateRows(_boktaiAddresses.Misc);
                     break;
                 case "Zoktai":
-                    GenerateRows(zoktaiAddresses.Django);
-                    GenerateRows(zoktaiAddresses.Inventory);
-                    GenerateRows(zoktaiAddresses.Magics);
-                    GenerateRows(zoktaiAddresses.Misc);
+                    GenerateRows(_zoktaiAddresses.Django);
+                    GenerateRows(_zoktaiAddresses.Inventory);
+                    GenerateRows(_zoktaiAddresses.Magics);
+                    GenerateRows(_zoktaiAddresses.Misc);
                     break;
                 case "Shinbok":
-                    GenerateRows(shinbokAddresses.Django);
-                    GenerateRows(shinbokAddresses.Solls);
-                    GenerateRows(shinbokAddresses.Bike);
-                    GenerateRows(shinbokAddresses.Misc);
+                    GenerateRows(_shinbokAddresses.Django);
+                    GenerateRows(_shinbokAddresses.Solls);
+                    GenerateRows(_shinbokAddresses.Bike);
+                    GenerateRows(_shinbokAddresses.Misc);
                     break;
                 case "LunarKnights":
-                    GenerateRows(lunarKnightsAddresses.Aaron);
-                    GenerateRows(lunarKnightsAddresses.Lucian);
-                    GenerateRows(lunarKnightsAddresses.Inventory);
-                    GenerateRows(lunarKnightsAddresses.Misc);
+                    GenerateRows(_lunarKnightsAddresses.Aaron);
+                    GenerateRows(_lunarKnightsAddresses.Lucian);
+                    GenerateRows(_lunarKnightsAddresses.Inventory);
+                    GenerateRows(_lunarKnightsAddresses.Misc);
                     break;
                 default:
                     // If game is not handled, do nothing

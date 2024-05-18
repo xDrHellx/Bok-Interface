@@ -15,10 +15,10 @@ namespace BokInterface.Addresses {
         /// </summary>
         public readonly string? Domain = domain;
         public readonly string Note = note;
-        private readonly int Length = address.ToString().Length;
+        private readonly int _length = address.ToString().Length;
         public uint Value {
-            get => Utilities.ReadMemoryAddress(Address, Type, Length >= 8 ? null : Domain);
-            set => Utilities.WriteMemoryAddress(Address, value, Type, Length >= 8 ? null : Domain);
+            get => Utilities.ReadMemoryAddress(Address, Type, _length >= 8 ? null : Domain);
+            set => Utilities.WriteMemoryAddress(Address, value, Type, _length >= 8 ? null : Domain);
         }
     }
 }
