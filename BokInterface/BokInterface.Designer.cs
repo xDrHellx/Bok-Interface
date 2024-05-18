@@ -30,8 +30,8 @@ namespace BokInterface {
 		public static string totalStatColor = "#D3D3D3";
 
 		public static System.Drawing.Font defaultFont = new("Segoe UI", 9, System.Drawing.FontStyle.Regular, GraphicsUnit.Point);
-		protected static System.Windows.Forms.Padding defaultMargin = new(3, 0, 3, 0);
-		protected static System.Windows.Forms.AnchorStyles defaultAnchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left;
+		public static System.Windows.Forms.Padding defaultMargin = new(3, 0, 3, 0);
+		public static System.Windows.Forms.AnchorStyles defaultAnchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left;
 
 		#endregion
 
@@ -175,6 +175,12 @@ namespace BokInterface {
 				this.TileDataViewer.Controls.Clear();
 				this.TileDataViewer.Close();
 				this.tileDataViewerActive = false;
+			}
+
+			if(this.MemoryValuesListing != null) {
+				this.MemoryValuesListing.Controls.Clear();
+				this.MemoryValuesListing.Close();
+				this.memValuesListingActive = false;
 			}
 		}
 

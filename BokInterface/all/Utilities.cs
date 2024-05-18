@@ -31,7 +31,81 @@ namespace BokInterface.All {
 
         #endregion
 
-        #region Simplified memory addresses methods
+        #region Simplified memory addresses-related methods
+
+        /// <summary>Shortcut method for retrieving the value of a memory address</summary>
+        /// <param name="address">Address to read</param>
+        /// <param name="type">Type of method to use for reading the address (by default "U16" because it is the most common one)</param>
+        /// <param name="domain">Domain the address belongs to (by default none is specified because it is not always necessary)</param>
+        /// <returns><c>uint</c>Value</returns>
+        public static uint ReadMemoryAddress(uint address, string type = "U16", string? domain = null) {
+            return type.ToLower() switch {
+                "u8" => APIs.Memory.ReadU8(address, domain),
+                "u24" => APIs.Memory.ReadU24(address, domain),
+                "u32" => APIs.Memory.ReadU32(address, domain),
+                _ => APIs.Memory.ReadU16(address, domain)
+            };
+        }
+
+        /// <summary>Shortcut method for retrieving the value of a memory address</summary>
+        /// <param name="address">Address to read</param>
+        /// <param name="type">Type of method to use for reading the address (by default "S16" because it is the most common one)</param>
+        /// <param name="domain">Domain the address belongs to (by default none is specified because it is not always necessary)</param>
+        /// <returns><c>int</c>Value</returns>
+        public static int ReadMemoryAddress(int address, string type = "S16", string? domain = null) {
+            return type.ToLower() switch {
+                "s8" => APIs.Memory.ReadS8(address, domain),
+                "s24" => APIs.Memory.ReadS24(address, domain),
+                "s32" => APIs.Memory.ReadS32(address, domain),
+                _ => APIs.Memory.ReadS16(address, domain)
+            };
+        }
+
+        /// <summary>Shortcut method for setting the value of a memory address</summary>
+        /// <param name="address">Address to write to</param>
+        /// <param name="value">Value to set</param>
+        /// <param name="type">Type of method to use for writing to the address (by default "U16" because it is the most common one)</param>
+        /// <param name="domain">Domain the address belongs to (by default none is specified because it is not always necessary)</param>
+        /// <returns><c>uint</c>Value</returns>
+        public static void WriteMemoryAddress(uint address, uint value, string type = "U16", string? domain = null) {
+            switch (type.ToLower()) {
+                case "u8":
+                    APIs.Memory.WriteU8(address, value, domain);
+                    break;
+                case "u24":
+                    APIs.Memory.WriteU24(address, value, domain);
+                    break;
+                case "u32":
+                    APIs.Memory.WriteU32(address, value, domain);
+                    break;
+                default:
+                    APIs.Memory.WriteU16(address, value, domain);
+                    break;
+            };
+        }
+
+        /// <summary>Shortcut method for setting the value of a memory address</summary>
+        /// <param name="address">Address to write to</param>
+        /// <param name="value">Value to set</param>
+        /// <param name="type">Type of method to use for writing to the address (by default "S16" because it is the most common one)</param>
+        /// <param name="domain">Domain the address belongs to (by default none is specified because it is not always necessary)</param>
+        /// <returns><c>uint</c>Value</returns>
+        public static void WriteMemoryAddress(uint address, int value, string type = "S16", string? domain = null) {
+            switch (type.ToLower()) {
+                case "s8":
+                    APIs.Memory.WriteS8(address, value, domain);
+                    break;
+                case "s24":
+                    APIs.Memory.WriteS24(address, value, domain);
+                    break;
+                case "s32":
+                    APIs.Memory.WriteS32(address, value, domain);
+                    break;
+                default:
+                    APIs.Memory.WriteS16(address, value, domain);
+                    break;
+            };
+        }
 
         /// <summary>Shortcut method for retrieving the value of a dynamic memory address</summary>
         /// <param name="firstAddress">First address to read (U32)</param>
@@ -39,14 +113,11 @@ namespace BokInterface.All {
         /// <param name="type">Type of method to use for reading the result of both addresses (by default "U16" because it is the most common one)</param>
         /// <returns><c>uint</c>Value</returns>
         public static uint ReadDynamicAddress(uint firstAddress, uint secondAddress, string type = "U16") {
-
-            // We convert the type to lowercase to make the switch simpler
-            string lowerType = type.ToLower();
-            return lowerType switch {
+            return type.ToLower() switch {
                 "u8" => APIs.Memory.ReadU8(APIs.Memory.ReadU32(firstAddress) + secondAddress),
                 "u24" => APIs.Memory.ReadU24(APIs.Memory.ReadU32(firstAddress) + secondAddress),
                 "u32" => APIs.Memory.ReadU32(APIs.Memory.ReadU32(firstAddress) + secondAddress),
-                _ => APIs.Memory.ReadU16(APIs.Memory.ReadU32(firstAddress) + secondAddress),
+                _ => APIs.Memory.ReadU16(APIs.Memory.ReadU32(firstAddress) + secondAddress)
             };
         }
 
@@ -56,10 +127,7 @@ namespace BokInterface.All {
         /// <param name="secondAddress">Second address (U16)</param>
         /// <param name="type">Type of method to use for writing to the result of both addresses (by default "U16" because it is the most common one)</param>
         public static void WriteDynamicAddress(uint value, uint firstAddress, uint secondAddress, string type = "U16") {
-
-            // We convert the type to lowercase to make the switch simpler
-            string lowerType = type.ToLower();
-            switch (lowerType) {
+            switch (type.ToLower()) {
                 case "u8":
                     APIs.Memory.WriteU8(APIs.Memory.ReadU32(firstAddress) + secondAddress, value);
                     break;
@@ -105,6 +173,23 @@ namespace BokInterface.All {
         /// <returns><c>uint</c>EXP</returns>
         public static uint LevelToExp(decimal level) {
             return level > 0 ? (uint)(level * 100) : 0;
+        }
+
+        #endregion
+
+        #region Formatting methods
+
+        /// <summary>Format a memory address name for better readability</summary>
+        /// <example>"django_first_slot" => "Django first slot"</example
+        /// <param name="name">Name to format</param>
+        /// <returns><c>String</c>Formatted name</returns>
+        public static string FormatMemoryAddressName(string name) {
+            if (name == "") {
+                return name;
+            }
+
+            string formattedName = name.Replace("_", " ");
+            return string.Concat(formattedName[0].ToString().ToUpper(), formattedName.Substring(1));
         }
 
         #endregion

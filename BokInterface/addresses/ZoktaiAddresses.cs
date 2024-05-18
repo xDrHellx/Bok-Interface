@@ -8,17 +8,17 @@ namespace BokInterface.Addresses {
         /// <summary>
         /// <para>Django-related memory addresses</para>
         /// </summary>
-        public IDictionary<string, uint> Django = new Dictionary<string, uint>();
+        public IDictionary<string, MemoryAddress> Django = new Dictionary<string, MemoryAddress>();
 
         /// <summary>
         /// <para>Inventory-related memory addresses</para>
         /// </summary>
-        public IDictionary<string, uint> Inventory = new Dictionary<string, uint>();
+        public IDictionary<string, MemoryAddress> Inventory = new Dictionary<string, MemoryAddress>();
 
         /// <summary>
         /// <para>Magics-related memory addresses</para>
         /// </summary>
-        public IDictionary<string, uint> Magics = new Dictionary<string, uint>();
+        public IDictionary<string, MemoryAddress> Magics = new Dictionary<string, MemoryAddress>();
 
         /// <summary>
         /// <para>Misc memory addresses</para>
@@ -27,64 +27,65 @@ namespace BokInterface.Addresses {
         ///     For example the memory address for Django's current HP is different based on which "room sections" he is in
         /// </para>
         /// </summary>
-        public IDictionary<string, uint> Misc = new Dictionary<string, uint>();
+        public IDictionary<string, MemoryAddress> Misc = new Dictionary<string, MemoryAddress>();
 
         public ZoktaiAddresses() {
 
+            // For less repetition
+            string note = "";
+
             // Add Django addresses
-            Django.Add("x_position", 0x30);
-            Django.Add("y_position", 0x34);
-            Django.Add("z_position", 0x32);
+            Django.Add("x_position", new MemoryAddress(0x30, note: "Django X position", domain: "EWRAM"));
+            Django.Add("y_position", new MemoryAddress(0x34, note: "Django Y position", domain: "EWRAM"));
+            Django.Add("z_position", new MemoryAddress(0x32, note: "Django Z position", domain: "EWRAM"));
+
+            // Current stats
+            note = "Used for damage calculations, will be copied to its Persistent equivalent on screen transition. Must be combined with the \"stat\" memory address' value";
+            Django.Add("current_hp", new MemoryAddress(0x364, note: note, domain: "EWRAM"));
+            Django.Add("current_ene", new MemoryAddress(0x368, note: note, domain: "EWRAM"));
+            Django.Add("current_vit", new MemoryAddress(0x35C, note: note, domain: "EWRAM"));
+            Django.Add("current_spr", new MemoryAddress(0x35E, note: note, domain: "EWRAM"));
+            Django.Add("current_str", new MemoryAddress(0x360, note: note, domain: "EWRAM"));
+            Django.Add("current_agi", new MemoryAddress(0x362, note: note, domain: "EWRAM"));
 
             /**
-             * Used for setting "current" values (which are used for damage calculations)
-             * These must be combined with the "stat" memory address' value
-             */
-            Django.Add("current_hp", 0x364);
-            Django.Add("current_ene", 0x368);
-            Django.Add("current_vit", 0x35C);
-            Django.Add("current_spr", 0x35E);
-            Django.Add("current_str", 0x360);
-            Django.Add("current_agi", 0x362);
-
-            /**
-             * "Persistent" values, these also correspond to the values from save data
-             * "Current" values will be copied to these on screen transition
-             * 
+             * Persistent stats (used on screen transitions & save data)
              * Note : For some stats, "current" can be 1 higher than "persistent", unsure why
              */
-            Django.Add("persistent_hp", 0x28);
-            Django.Add("persistent_ene", 0x2C);
-            Django.Add("persistent_vit", 0x18);
-            Django.Add("persistent_spr", 0x1A);
-            Django.Add("persistent_str", 0x1C);
-            Django.Add("persistent_agi", 0x1E);
+            note = "Also corresponds to values from Save Data";
+            Django.Add("persistent_hp", new MemoryAddress(0x28, note: note, domain: "EWRAM"));
+            Django.Add("persistent_ene", new MemoryAddress(0x2C, note: note, domain: "EWRAM"));
+            Django.Add("persistent_vit", new MemoryAddress(0x18, note: note, domain: "EWRAM"));
+            Django.Add("persistent_spr", new MemoryAddress(0x1A, note: note, domain: "EWRAM"));
+            Django.Add("persistent_str", new MemoryAddress(0x1C, note: note, domain: "EWRAM"));
+            Django.Add("persistent_agi", new MemoryAddress(0x1E, note: note, domain: "EWRAM"));
 
             // EXP & level
-            Django.Add("level", 0x40);
-            Django.Add("exp", 0x50);
-            Django.Add("total_exp_until_next_level", 0x02002464);
+            Django.Add("level", new MemoryAddress(0x40, domain: "EWRAM"));
+            Django.Add("exp", new MemoryAddress(0x50, type: "U32", domain: "EWRAM"));
+            Django.Add("total_exp_until_next_level", new MemoryAddress(0x2464, type: "U32", domain: "EWRAM"));
 
-            // 100 skill exp = 1 lvl
-            Django.Add("sword_skill_exp", 0x46);
-            Django.Add("spear_skill_exp", 0x48);
-            Django.Add("hammer_skill_exp", 0x4A);
-            Django.Add("fists_skill_exp", 0x4C);
-            Django.Add("gun_skill_exp", 0x4E);
+            // Skill
+            note = "100 skill exp = 1 lvl";
+            Django.Add("sword_skill_exp", new MemoryAddress(0x46, note: note, domain: "EWRAM"));
+            Django.Add("spear_skill_exp", new MemoryAddress(0x48, note: note, domain: "EWRAM"));
+            Django.Add("hammer_skill_exp", new MemoryAddress(0x4A, note: note, domain: "EWRAM"));
+            Django.Add("fists_skill_exp", new MemoryAddress(0x4C, note: note, domain: "EWRAM"));
+            Django.Add("gun_skill_exp", new MemoryAddress(0x4E, note: note, domain: "EWRAM"));
 
             // Stat points
-            Django.Add("showned_stat_points_to_allocate", 0x02006E20); // useless
-            Django.Add("stat_points_to_allocate", 0x42);
+            // Django.Add("showned_stat_points_to_allocate", new MemoryAddress(0x02006E20)); // useless
+            Django.Add("stat_points_to_allocate", new MemoryAddress(0x42, domain: "EWRAM"));
 
             // Add Misc addresses
-            Misc.Add("stat", 0x030046A0); // inventory too
-            Misc.Add("world_state", 0x03004698); // Story progress, dungeon states, ...
-            Misc.Add("scratch", 0x03004690);
-            Misc.Add("map_data", 0x030046A4);
-            Misc.Add("x_camera", 0x030047C8);
-            Misc.Add("y_camera", 0x030047CA);
-            Misc.Add("z_camera", 0x030047CC);
-            Misc.Add("current_stat", 0x03002BE0);
+            Misc.Add("stat", new MemoryAddress(0x030046A0, note: "For persistent stats & inventory", type: "U32", domain: "IWRAM"));
+            Misc.Add("world_state", new MemoryAddress(0x03004698, note: "Story progress & dungeon states", type: "U32", domain: "IWRAM"));
+            Misc.Add("scratch", new MemoryAddress(0x03004690, type: "U32", domain: "IWRAM"));
+            Misc.Add("map_data", new MemoryAddress(0x030046A4, type: "U32", domain: "IWRAM"));
+            Misc.Add("x_camera", new MemoryAddress(0x030047C8, note: "Camera X position", domain: "IWRAM"));
+            Misc.Add("y_camera", new MemoryAddress(0x030047CA, note: "Camera Y position", domain: "IWRAM"));
+            Misc.Add("z_camera", new MemoryAddress(0x030047CC, note: "Camera Z position", domain: "IWRAM"));
+            Misc.Add("current_stat", new MemoryAddress(0x03002BE0, note: "For current stats", type: "U32", domain: "IWRAM"));
 
             // 0x203C650 django's current form
             /*
@@ -100,7 +101,7 @@ namespace BokInterface.Addresses {
              * US version 
              */
 
-            // Misc.Add("exp_table", 0x08ce3238);
+            // Misc.Add("exp_table", new MemoryAddress(0x08ce3238));
         }
     }
 }

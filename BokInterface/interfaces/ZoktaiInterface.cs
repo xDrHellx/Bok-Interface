@@ -75,16 +75,15 @@ namespace BokInterface {
 
         private void UpdateZoktaiInterface() {
 
-            // Get one of the values used for reading stats
-            uint stat = APIs.Memory.ReadU32(zoktaiAddresses.Misc["current_stat"]);
-
+            // Get one of the values used for reading current stats
+            uint currentStat = zoktaiAddresses.Misc["current_stat"].Value;
             /**
              * Update values by retrieving from memory addresses
              * 
              * In some cases we only update when the values are "valid"
              * For example "stat" is 0 during room transitions or at the title screen
              */
-            if (stat > 0) {
+            if (currentStat > 0) {
                 bok2_currentStatusHpValue.Text = memoryValues.Django["current_hp"].Value.ToString();
                 bok2_currentStatusEneValue.Text = memoryValues.Django["current_ene"].Value.ToString();
 
