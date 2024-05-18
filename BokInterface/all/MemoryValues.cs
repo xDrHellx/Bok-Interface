@@ -9,8 +9,8 @@ namespace BokInterface.All {
 
         #region Properties
 
-        private readonly _zoktaiAddresses __zoktaiAddresses = new();
-        private readonly _shinbokAddresses __shinbokAddresses = new();
+        private readonly ZoktaiAddresses _zoktaiAddresses = new();
+        private readonly ShinbokAddresses _shinbokAddresses = new();
 
         /// <summary>Django-related memory values</summary>
         public IDictionary<string, DynamicMemoryValue> Django = new Dictionary<string, DynamicMemoryValue>();
