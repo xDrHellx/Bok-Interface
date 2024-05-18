@@ -143,10 +143,10 @@ namespace BokInterface {
         /// <returns><c>IDictionary<string, decimal></c>Default values</returns>
         private IDictionary<string, decimal> GetZoktaiDefaultValues() {
             IDictionary<string, decimal> defaultValues = new Dictionary<string, decimal>();
-            uint stat = APIs.Memory.ReadU32(_zoktaiAddresses.Misc["current_stat"]);
+            uint currentStat = APIs.Memory.ReadU32(_zoktaiAddresses.Misc["current_stat"].Address);
 
-            // If stat is a valid value
-            if (stat > 0) {
+            // If "current stat" is a valid value
+            if (currentStat > 0) {
                 defaultValues.Add("django_current_hp", _memoryValues.Django["current_hp"].Value);
                 defaultValues.Add("django_current_ene", _memoryValues.Django["current_ene"].Value);
 

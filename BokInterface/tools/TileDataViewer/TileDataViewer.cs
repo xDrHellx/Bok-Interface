@@ -75,19 +75,19 @@ namespace BokInterface.Tools.TileDataViewer {
         protected void SetGameAddresses(string gameName) {
             switch (gameName) {
                 case "Boktai":
-                    _mapDataAddress = _boktaiAddresses.Misc["map_data"];
-                    _djangoXposAddress = _boktaiAddresses.Django["x_position"];
-                    _djangoYposAddress = _boktaiAddresses.Django["y_position"];
+                    _mapDataAddress = _boktaiAddresses.Misc["map_data"].Address;
+                    _djangoXposAddress = _boktaiAddresses.Django["x_position"].Address;
+                    _djangoYposAddress = _boktaiAddresses.Django["y_position"].Address;
                     break;
                 case "Zoktai":
-                    _mapDataAddress = _zoktaiAddresses.Misc["map_data"];
-                    _djangoXposAddress = APIs.Memory.ReadU32(_zoktaiAddresses.Misc["stat"]) + _zoktaiAddresses.Django["x_position"];
-                    _djangoYposAddress = APIs.Memory.ReadU32(_zoktaiAddresses.Misc["stat"]) + _zoktaiAddresses.Django["y_position"];
+                    _mapDataAddress = _zoktaiAddresses.Misc["map_data"].Address;
+                    _djangoXposAddress = APIs.Memory.ReadU32(_zoktaiAddresses.Misc["stat"].Address) + _zoktaiAddresses.Django["x_position"].Address;
+                    _djangoYposAddress = APIs.Memory.ReadU32(_zoktaiAddresses.Misc["stat"].Address) + _zoktaiAddresses.Django["y_position"].Address;
                     break;
                 case "Shinbok":
-                    _mapDataAddress = _shinbokAddresses.Misc["map_data"];
-                    _djangoXposAddress = APIs.Memory.ReadU32(_shinbokAddresses.Misc["stat"]) + _shinbokAddresses.Django["x_position"];
-                    _djangoYposAddress = APIs.Memory.ReadU32(_shinbokAddresses.Misc["stat"]) + _shinbokAddresses.Django["y_position"];
+                    _mapDataAddress = _shinbokAddresses.Misc["map_data"].Address;
+                    _djangoXposAddress = APIs.Memory.ReadU32(_shinbokAddresses.Misc["stat"].Address) + _shinbokAddresses.Django["x_position"].Address;
+                    _djangoYposAddress = APIs.Memory.ReadU32(_shinbokAddresses.Misc["stat"].Address) + _shinbokAddresses.Django["y_position"].Address;
                     break;
                 case "LunarKnights":
                     // Currently not handled, not enough addresses available
@@ -103,11 +103,7 @@ namespace BokInterface.Tools.TileDataViewer {
         /// <param name="fileName">File name (without .ico extension)</param>
         /// <returns><c>System.Drawing.Icon</c>Specified Icon instance (or default if the specified icon could not be found)</returns>
         protected Icon GetIcon(string fileName) {
-            if (fileName == "") {
-                return Icon;
-            } else {
-                return (Icon)Properties.Resources.ResourceManager.GetObject(fileName);
-            }
+            return fileName == "" ? Icon : (Icon)Properties.Resources.ResourceManager.GetObject(fileName);
         }
 
         /// <summary>Sets the subwindow's size</summary>
