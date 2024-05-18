@@ -8,17 +8,17 @@ namespace BokInterface.Addresses {
         /// <summary>
         /// <para>Aaron-related memory addresses</para>
         /// </summary>
-        public IDictionary<string, uint> Aaron = new Dictionary<string, uint>();
+        public IDictionary<string, MemoryAddress> Aaron = new Dictionary<string, MemoryAddress>();
 
         /// <summary>
         /// <para>Lucian-related memory addresses</para>
         /// </summary>
-        public IDictionary<string, uint> Lucian = new Dictionary<string, uint>();
+        public IDictionary<string, MemoryAddress> Lucian = new Dictionary<string, MemoryAddress>();
 
         /// <summary>
         /// <para>Inventory-related memory addresses</para>
         /// </summary>
-        public IDictionary<string, uint> Inventory = new Dictionary<string, uint>();
+        public IDictionary<string, MemoryAddress> Inventory = new Dictionary<string, MemoryAddress>();
 
         /// <summary>
         /// <para>Misc memory addresses</para>
@@ -27,7 +27,7 @@ namespace BokInterface.Addresses {
         ///     For example the memory address for Django's current HP is different based on which "room sections" he is in
         /// </para>
         /// </summary>
-        public IDictionary<string, uint> Misc = new Dictionary<string, uint>();
+        public IDictionary<string, MemoryAddress> Misc = new Dictionary<string, MemoryAddress>();
 
         public LunarKnightsAddresses() {
 

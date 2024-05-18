@@ -22,19 +22,19 @@ namespace BokInterface.Tools.TileDataViewer {
         protected static int imgNb = 1;
         protected static int n = 0;
         protected List<Color> colorPalette;
-        private static readonly Pen zonePen = new(Color.LimeGreen);
-        private static readonly Color blackColor = ColorTranslator.FromHtml("#0f0f0f");
+        private static readonly Pen s_zonePen = new(Color.LimeGreen);
+        private static readonly Color s_blackColor = ColorTranslator.FromHtml("#0f0f0f");
 
         #endregion
 
         #region Memory addresses properties
 
-        private readonly BoktaiAddresses boktaiAddresses = new();
-        private readonly ZoktaiAddresses zoktaiAddresses = new();
-        private readonly ShinbokAddresses shinbokAddresses = new();
-        private uint mapDataAddress = 0;
-        private uint djangoXposAddress = 0;
-        private uint djangoYposAddress = 0;
+        private readonly BoktaiAddresses _boktaiAddresses = new();
+        private readonly ZoktaiAddresses _zoktaiAddresses = new();
+        private readonly ShinbokAddresses _shinbokAddresses = new();
+        private uint _mapDataAddress = 0;
+        private uint _djangoXposAddress = 0;
+        private uint _djangoYposAddress = 0;
 
         #endregion
 
@@ -75,26 +75,26 @@ namespace BokInterface.Tools.TileDataViewer {
         protected void SetGameAddresses(string gameName) {
             switch (gameName) {
                 case "Boktai":
-                    mapDataAddress = boktaiAddresses.Misc["map_data"];
-                    djangoXposAddress = boktaiAddresses.Django["x_position"];
-                    djangoYposAddress = boktaiAddresses.Django["y_position"];
+                    _mapDataAddress = _boktaiAddresses.Misc["map_data"].Address;
+                    _djangoXposAddress = _boktaiAddresses.Django["x_position"].Address;
+                    _djangoYposAddress = _boktaiAddresses.Django["y_position"].Address;
                     break;
                 case "Zoktai":
-                    mapDataAddress = zoktaiAddresses.Misc["map_data"];
-                    djangoXposAddress = APIs.Memory.ReadU32(zoktaiAddresses.Misc["stat"]) + zoktaiAddresses.Django["x_position"];
-                    djangoYposAddress = APIs.Memory.ReadU32(zoktaiAddresses.Misc["stat"]) + zoktaiAddresses.Django["y_position"];
+                    _mapDataAddress = _zoktaiAddresses.Misc["map_data"].Address;
+                    _djangoXposAddress = APIs.Memory.ReadU32(_zoktaiAddresses.Misc["stat"].Address) + _zoktaiAddresses.Django["x_position"].Address;
+                    _djangoYposAddress = APIs.Memory.ReadU32(_zoktaiAddresses.Misc["stat"].Address) + _zoktaiAddresses.Django["y_position"].Address;
                     break;
                 case "Shinbok":
-                    mapDataAddress = shinbokAddresses.Misc["map_data"];
-                    djangoXposAddress = APIs.Memory.ReadU32(shinbokAddresses.Misc["stat"]) + shinbokAddresses.Django["x_position"];
-                    djangoYposAddress = APIs.Memory.ReadU32(shinbokAddresses.Misc["stat"]) + shinbokAddresses.Django["y_position"];
+                    _mapDataAddress = _shinbokAddresses.Misc["map_data"].Address;
+                    _djangoXposAddress = APIs.Memory.ReadU32(_shinbokAddresses.Misc["stat"].Address) + _shinbokAddresses.Django["x_position"].Address;
+                    _djangoYposAddress = APIs.Memory.ReadU32(_shinbokAddresses.Misc["stat"].Address) + _shinbokAddresses.Django["y_position"].Address;
                     break;
                 case "LunarKnights":
                     // Currently not handled, not enough addresses available
-                    mapDataAddress = djangoXposAddress = djangoYposAddress = 0;
+                    _mapDataAddress = _djangoXposAddress = _djangoYposAddress = 0;
                     break;
                 default:
-                    mapDataAddress = djangoXposAddress = djangoYposAddress = 0;
+                    _mapDataAddress = _djangoXposAddress = _djangoYposAddress = 0;
                     break;
             }
         }
@@ -141,7 +141,7 @@ namespace BokInterface.Tools.TileDataViewer {
             }
 
             // 1. Get map data & pointers
-            uint mapDataPointers = APIs.Memory.ReadU32(mapDataAddress);
+            uint mapDataPointers = APIs.Memory.ReadU32(_mapDataAddress);
             if (mapDataPointers == 0) {
                 return;
             }
@@ -162,14 +162,14 @@ namespace BokInterface.Tools.TileDataViewer {
             DrawZones(e, APIs.Memory.ReadU32(mapDataPointers + 12));
 
             // 4. Draw Django on map
-            uint djangoX = APIs.Memory.ReadU16(djangoXposAddress);
-            uint djangoY = APIs.Memory.ReadU16(djangoYposAddress);
+            uint djangoX = APIs.Memory.ReadU16(_djangoXposAddress);
+            uint djangoY = APIs.Memory.ReadU16(_djangoYposAddress);
 
             // If both values are at 0, it might be due to a soft reset, so we get the addresses again
             if (djangoX == 0 && djangoY == 0) {
                 SetGameAddresses(currentGame);
-                djangoX = APIs.Memory.ReadU16(djangoXposAddress);
-                djangoY = APIs.Memory.ReadU16(djangoYposAddress);
+                djangoX = APIs.Memory.ReadU16(_djangoXposAddress);
+                djangoY = APIs.Memory.ReadU16(_djangoYposAddress);
             }
 
             DrawDjangoIcon(e, djangoX, djangoY);
@@ -282,7 +282,7 @@ namespace BokInterface.Tools.TileDataViewer {
                 // start height (u8), end height (u8), and zone id (u16) follows, but these don't matter for drawing.
 
                 e.Graphics.DrawRectangle(
-                    zonePen,
+                    s_zonePen,
                     5 + startX * zoneScale,
                     5 + startY * zoneScale,
                     (endX - startX) * zoneScale,

@@ -12,10 +12,10 @@ namespace BokInterface {
 
         #region Properties for subwindow elements
 
-        private CheckGroupBox edit_statusGroupBox = new();
-        private CheckGroupBox edit_statsGroupBox = new();
-        private readonly List<Label> edit_statusLabels = [];
-        private readonly List<NumericUpDown> edit_statusNumericUpDowns = [];
+        private CheckGroupBox _edit_statusGroupBox = new();
+        private CheckGroupBox _edit_statsGroupBox = new();
+        private readonly List<Label> _edit_statusLabels = [];
+        private readonly List<NumericUpDown> _edit_statusNumericUpDowns = [];
 
         #endregion
 
@@ -23,10 +23,10 @@ namespace BokInterface {
 
         /// <summary>Clears the Status editing subwindow and all other sections within it</summary>
         private void ClearStatusEditControls() {
-            edit_statusGroupBox.Controls.Clear();
-            edit_statsGroupBox.Controls.Clear();
-            edit_statusLabels.Clear();
-            edit_statusNumericUpDowns.Clear();
+            _edit_statusGroupBox.Controls.Clear();
+            _edit_statsGroupBox.Controls.Clear();
+            _edit_statusLabels.Clear();
+            _edit_statusNumericUpDowns.Clear();
         }
 
         /// <summary>
@@ -51,10 +51,10 @@ namespace BokInterface {
         private void SetStatusValues() {
 
             // Retrieve all input fields
-            List<NumericUpDown> fields = edit_statusNumericUpDowns;
+            List<NumericUpDown> fields = _edit_statusNumericUpDowns;
 
             // Store the previous setting for BizHawk being paused
-            previousIsPauseSetting = APIs.Client.IsPaused();
+            _previousIsPauseSetting = APIs.Client.IsPaused();
 
             // Pause BizHawk
             APIs.Client.Pause();
@@ -82,7 +82,7 @@ namespace BokInterface {
              * If BizHawk was not paused before setting values, unpause it
              * Otherwise keep it paused
              */
-            if (previousIsPauseSetting == true) {
+            if (_previousIsPauseSetting == true) {
                 APIs.Client.Unpause();
             }
         }

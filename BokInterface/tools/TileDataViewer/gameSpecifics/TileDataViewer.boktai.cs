@@ -60,7 +60,7 @@ namespace BokInterface.Tools.TileDataViewer {
                         DrawTileImage(e, "lava", 5 + posX * scale, 5 + posY * scale);
                         break;
                     case "100":                 /// Void (fall & die)
-                        DrawFilledRectangle(e, blackColor, 5 + posX * scale, 5 + posY * scale, scale);
+                        DrawFilledRectangle(e, s_blackColor, 5 + posX * scale, 5 + posY * scale, scale);
                         break;
                     case "203":                 /// Unwalkable parts of the roofs in Bloodrust Mansion
                         break;

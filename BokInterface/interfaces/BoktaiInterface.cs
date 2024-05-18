@@ -8,8 +8,8 @@ namespace BokInterface {
 
         #region Properties
 
-        private System.Windows.Forms.Label bok1_currentStatusHpValue = new();
-        private System.Windows.Forms.Label bok1_currentStatusEneValue = new();
+        private System.Windows.Forms.Label _bok1_currentStatusHpValue = new();
+        private System.Windows.Forms.Label _bok1_currentStatusEneValue = new();
 
         #endregion
 
@@ -44,12 +44,12 @@ namespace BokInterface {
             currentStatusLabels.Add(CreateLabel("djangoCurrentEneLabel", "ENE :", 7, 34, 34, 15));
 
             // Current status values
-            bok1_currentStatusHpValue = CreateLabel("djangoCurrentHpValue", "", 44, 19, 31, 15);
-            bok1_currentStatusEneValue = CreateLabel("djangoCurrentHpValue", "", 44, 34, 31, 15);
+            _bok1_currentStatusHpValue = CreateLabel("djangoCurrentHpValue", "", 44, 19, 31, 15);
+            _bok1_currentStatusEneValue = CreateLabel("djangoCurrentHpValue", "", 44, 34, 31, 15);
 
             // Add values labels to group
-            currentStatusLabels.Add(bok1_currentStatusHpValue);
-            currentStatusLabels.Add(bok1_currentStatusEneValue);
+            currentStatusLabels.Add(_bok1_currentStatusHpValue);
+            currentStatusLabels.Add(_bok1_currentStatusEneValue);
 
             // Add elements to group
             for (int i = 0; i < currentStatusLabels.Count; i++) {

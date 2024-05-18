@@ -8,17 +8,17 @@ namespace BokInterface.Addresses {
         /// <summary>
         /// <para>Django-related memory addresses</para>
         /// </summary>
-        public IDictionary<string, uint> Django = new Dictionary<string, uint>();
+        public IDictionary<string, MemoryAddress> Django = new Dictionary<string, MemoryAddress>();
 
         /// <summary>
         /// <para>Inventory-related memory addresses</para>
         /// </summary>
-        public IDictionary<string, uint> Inventory = new Dictionary<string, uint>();
+        public IDictionary<string, MemoryAddress> Inventory = new Dictionary<string, MemoryAddress>();
 
         /// <summary>
         /// <para>Garding-related memory addresses</para>
         /// </summary>
-        public IDictionary<string, uint> Gardening = new Dictionary<string, uint>();
+        public IDictionary<string, MemoryAddress> Gardening = new Dictionary<string, MemoryAddress>();
 
         /// <summary>
         /// <para>Misc memory addresses</para>
@@ -27,20 +27,20 @@ namespace BokInterface.Addresses {
         ///     For example the memory address for Django's current HP is different based on which "room sections" he is in
         /// </para>
         /// </summary>
-        public IDictionary<string, uint> Misc = new Dictionary<string, uint>();
+        public IDictionary<string, MemoryAddress> Misc = new Dictionary<string, MemoryAddress>();
 
         public BoktaiAddresses() {
 
             // Add Django addresses
-            Django.Add("x_position", 0x0203D8F0);
-            Django.Add("y_position", 0x0203D8F4);
-            Django.Add("z_position", 0x0203D8F2);
+            Django.Add("x_position", new MemoryAddress(0x0203D8F0, note: "Django X position", domain: "EWRAM"));
+            Django.Add("y_position", new MemoryAddress(0x0203D8F4, note: "Django Y position", domain: "EWRAM"));
+            Django.Add("z_position", new MemoryAddress(0x0203D8F2, note: "Django Z position", domain: "EWRAM"));
 
             // Add Misc addresses
-            Misc.Add("map_data", 0x03004610);
-            Misc.Add("x_camera", 0x030046E8);
-            Misc.Add("y_camera", 0x030046EA);
-            Misc.Add("z_camera", 0x030046EC);
+            Misc.Add("map_data", new MemoryAddress(0x03004610, type: "U32", domain: "IWRAM"));
+            Misc.Add("x_camera", new MemoryAddress(0x030046E8, note: "Camera X position", domain: "IWRAM"));
+            Misc.Add("y_camera", new MemoryAddress(0x030046EA, note: "Camera Y position", domain: "IWRAM"));
+            Misc.Add("z_camera", new MemoryAddress(0x030046EC, note: "Camera Z position", domain: "IWRAM"));
         }
     }
 }

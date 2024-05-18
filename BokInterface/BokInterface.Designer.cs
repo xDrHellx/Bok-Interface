@@ -30,8 +30,8 @@ namespace BokInterface {
 		public static string totalStatColor = "#D3D3D3";
 
 		public static System.Drawing.Font defaultFont = new("Segoe UI", 9, System.Drawing.FontStyle.Regular, GraphicsUnit.Point);
-		protected static System.Windows.Forms.Padding defaultMargin = new(3, 0, 3, 0);
-		protected static System.Windows.Forms.AnchorStyles defaultAnchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left;
+		public static System.Windows.Forms.Padding defaultMargin = new(3, 0, 3, 0);
+		public static System.Windows.Forms.AnchorStyles defaultAnchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left;
 
 		#endregion
 
@@ -96,7 +96,7 @@ namespace BokInterface {
 			this.Icon = this.GetIcon("nero");
 
 			// Try initializing list of memory values instances
-			this.memoryValues = new(shorterGameName);
+			this._memoryValues = new(shorterGameName);
 
 			/**
 			 * If not a Boktai game, shows the "Game not recognized" window
@@ -185,10 +185,16 @@ namespace BokInterface {
 		private void ClearExtraTools() {
 
 			// Tile Data Viewer-related
-			if(this.TileDataViewer != null) {
-				this.TileDataViewer.Controls.Clear();
-				this.TileDataViewer.Close();
+			if(this._tileDataViewer != null) {
+				this._tileDataViewer.Controls.Clear();
+				this._tileDataViewer.Close();
 				this.tileDataViewerActive = false;
+			}
+
+			if(this._memValuesListing != null) {
+				this._memValuesListing.Controls.Clear();
+				this._memValuesListing.Close();
+				this.memValuesListingActive = false;
 			}
 		}
 

@@ -20,11 +20,11 @@ namespace BokInterface.Tools.TextToWorldSpace {
 
         #region Memory addresses properties
 
-        private readonly BoktaiAddresses boktaiAddresses = new();
-        private readonly ZoktaiAddresses zoktaiAddresses = new();
-        private readonly ShinbokAddresses shinbokAddresses = new();
-        private uint cameraXposAddress = 0;
-        private uint cameraYposAddress = 0;
+        private readonly BoktaiAddresses _boktaiAddresses = new();
+        private readonly ZoktaiAddresses _zoktaiAddresses = new();
+        private readonly ShinbokAddresses _shinbokAddresses = new();
+        private uint _cameraXposAddress = 0;
+        private uint _cameraYposAddress = 0;
 
         #endregion
 
@@ -47,23 +47,23 @@ namespace BokInterface.Tools.TextToWorldSpace {
         private void SetCameraAddresses(string gameName) {
             switch (gameName) {
                 case "Boktai":
-                    cameraXposAddress = boktaiAddresses.Misc["x_camera"];
-                    cameraYposAddress = boktaiAddresses.Misc["y_camera"];
+                    _cameraXposAddress = _boktaiAddresses.Misc["x_camera"].Address;
+                    _cameraYposAddress = _boktaiAddresses.Misc["y_camera"].Address;
                     break;
                 case "Zoktai":
-                    cameraXposAddress = zoktaiAddresses.Misc["x_camera"];
-                    cameraYposAddress = zoktaiAddresses.Misc["y_camera"];
+                    _cameraXposAddress = _zoktaiAddresses.Misc["x_camera"].Address;
+                    _cameraYposAddress = _zoktaiAddresses.Misc["y_camera"].Address;
                     break;
                 case "Shinbok":
-                    cameraXposAddress = shinbokAddresses.Misc["x_camera"];
-                    cameraYposAddress = shinbokAddresses.Misc["y_camera"];
+                    _cameraXposAddress = _shinbokAddresses.Misc["x_camera"].Address;
+                    _cameraYposAddress = _shinbokAddresses.Misc["y_camera"].Address;
                     break;
                 case "LunarKnights":
                     // Current not handled, not enough data available
-                    cameraXposAddress = cameraYposAddress = 0;
+                    _cameraXposAddress = _cameraYposAddress = 0;
                     break;
                 default:
-                    cameraXposAddress = cameraYposAddress = 0;
+                    _cameraXposAddress = _cameraYposAddress = 0;
                     break;
             }
         }
@@ -112,8 +112,8 @@ namespace BokInterface.Tools.TextToWorldSpace {
         protected (int, int) ViewToScreen(double x, double y) {
 
             // Get camera coordinates
-            double camX = APIs.Memory.ReadS16(cameraXposAddress);
-            double camY = APIs.Memory.ReadS16(cameraYposAddress);
+            double camX = APIs.Memory.ReadS16(_cameraXposAddress);
+            double camY = APIs.Memory.ReadS16(_cameraYposAddress);
 
             // Adjusts position
             x = x - camX + (BokInterface.gbaScreenWidth / 2);
