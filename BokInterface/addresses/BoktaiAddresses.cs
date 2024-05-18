@@ -32,9 +32,9 @@ namespace BokInterface.Addresses {
         public BoktaiAddresses() {
 
             // Add Django addresses
-            Django.Add("x_position", new MemoryAddress(0x0203D8F0, note: "Django X position"));
-            Django.Add("y_position", new MemoryAddress(0x0203D8F4, note: "Django Y position"));
-            Django.Add("z_position", new MemoryAddress(0x0203D8F2, note: "Django Z position"));
+            Django.Add("x_position", new MemoryAddress(0x0203D8F0, note: "Django X position", domain: "EWRAM"));
+            Django.Add("y_position", new MemoryAddress(0x0203D8F4, note: "Django Y position", domain: "EWRAM"));
+            Django.Add("z_position", new MemoryAddress(0x0203D8F2, note: "Django Z position", domain: "EWRAM"));
 
             // Add Misc addresses
             Misc.Add("map_data", new MemoryAddress(0x03004610, type: "U32", domain: "IWRAM"));
