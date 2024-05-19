@@ -209,6 +209,10 @@ namespace BokInterface {
             // Add Misc Tools button
             Button miscToolsBtn = WinFormHelpers.CreateButton("showExtraTools", "Misc tools", 6, 21, 75, 23, extrasGroupBox);
             miscToolsBtn.Click += new System.EventHandler(OpenMiscToolsSelector);
+
+			// Add Calculators button
+            Button calculatorsBtn = WinFormHelpers.CreateButton("showCalculators", "Calculators", 6, 48, 75, 23, extrasGroupBox);
+            calculatorsBtn.Click += new System.EventHandler(OpenCalculatorsSelector);
         }
 
 		#endregion
