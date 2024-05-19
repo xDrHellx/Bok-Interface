@@ -75,7 +75,7 @@ namespace BokInterface {
 
                 tileDataViewerActive = true;
 
-                _tileDataViewer = new("tileDateViewer", "Tile Data Viewer", 500, 500, shorterGameName, WinFormHelpers.GetGameIconName(), this);
+                _tileDataViewer = new("tileDateViewer", "Tile Data Viewer", 500, 500, shorterGameName, this);
                 _tileDataViewer.InitializeFrameLoop();
 
                 _tileDataViewer.FormClosing += new FormClosingEventHandler(delegate (object sender, FormClosingEventArgs e) {
@@ -113,7 +113,7 @@ namespace BokInterface {
 
                 memValuesListingActive = true;
 
-                _memValuesListing = new("mvl", "Memory Values List", 650, 500, shorterGameName, WinFormHelpers.GetGameIconName(), this);
+                _memValuesListing = new("mvl", "Memory Values List", 650, 500, shorterGameName, this);
                 _memValuesListing.FormClosing += new FormClosingEventHandler(delegate (object sender, FormClosingEventArgs e) {
 
                     memValuesListingActive = false;

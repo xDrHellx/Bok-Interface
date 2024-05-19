@@ -163,15 +163,15 @@ namespace BokInterface.All {
         /// <param name="title">Subwindow title</param>
         /// <param name="width">Width (in pixels)</param>
         /// <param name="height">Height (in pixels)</param>
-        /// <param name="icon">Subwindow icon (by default retrieves the one from the main interface window)</param>
         /// <param name="parentForm">Form the subwindow is attached to (this will make the subwindow always show in front of its parent, by default it shows in front of the main window)</param>
+        /// <param name="icon">Subwindow icon (by default retrieves the one from the main interface window)</param>
         /// <returns><c>System.Windows.Forms.Form</c>Subwindow instance</returns>
-        public static Form CreateSubWindow(string name, string title, int width, int height, string icon = "", Form? parentForm = null) {
+        public static Form CreateSubWindow(string name, string title, int width, int height, Form? parentForm = null, string icon = "") {
 
             Form form = new() {
                 Name = name,
                 Text = title,
-                Icon = GetIcon(icon),
+                Icon = icon == "" && parentForm != null && parentForm.Icon != null ? parentForm.Icon : GetIcon(icon),
                 AutoScaleDimensions = new SizeF(6F, 15F),
                 AutoScaleMode = AutoScaleMode.Inherit,
                 FormBorderStyle = FormBorderStyle.FixedSingle,

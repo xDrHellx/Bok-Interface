@@ -40,22 +40,19 @@ namespace BokInterface.Tools.TileDataViewer {
 
         #region Subwindow & loop-related methods
 
-        public TileDataViewer(string name, string title, int width, int height, string currentGame, string icon = "", Form? parentForm = null) {
+        public TileDataViewer(string name, string title, int width, int height, string currentGame, Form parentForm) {
             Name = name;
             Text = title;
-            Icon = WinFormHelpers.GetIcon(icon);
+            Icon = parentForm.Icon;
             AutoScaleDimensions = new SizeF(6F, 15F);
             AutoScaleMode = AutoScaleMode.Inherit;
             FormBorderStyle = FormBorderStyle.FixedSingle;
             BackColor = SystemColors.Control;
             Font = WinFormHelpers.defaultFont;
             AutoScroll = true;
+            Owner = parentForm;
             SetSubwindowSize(width, height);
             this.currentGame = currentGame;
-
-            if (parentForm != null) {
-                Owner = parentForm;
-            }
 
             // Prevent flickering
             SetStyle(
