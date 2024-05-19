@@ -1,5 +1,7 @@
 using System.Windows.Forms;
 
+using BokInterface.All;
+
 /**
  * File for the Shinbok (Boktai 3) interface itself
  */
@@ -33,7 +35,7 @@ namespace BokInterface {
         private void ShowShinbokInterface() {
 
             // Current game name
-            CreateLabel("currentGameName", currentGameName, 5, 5, 176, 20, true);
+            WinFormHelpers.CreateLabel("currentGameName", currentGameName, 5, 5, 176, 20, this);
 
             // Current status section
             AddShinbokCurrentStatusSection();
@@ -48,7 +50,7 @@ namespace BokInterface {
             AddToolsSection();
 
             // Inventory section
-            // this.inventoryGroupBox = this.CreateGroupBox("inventory", "Inventory", 5, 101, 250, 55, true);
+            // this.inventoryGroupBox = WinFormHelpers.WinFormHelpers.CreateGroupBox("inventory", "Inventory", 5, 101, 250, 55, this);
 
             // Main window
             SetMainWindow("Bok Interface" + (shorterGameName != "" ? " - " + shorterGameName : ""), 345, 500);
@@ -83,17 +85,17 @@ namespace BokInterface {
         private void AddShinbokCurrentStatusSection() {
 
             // Section
-            currentStatusGroupBox = CreateGroupBox("currentStatus", "Current status", 5, 25, 226, 70, true);
+            currentStatusGroupBox = WinFormHelpers.CreateGroupBox("currentStatus", "Current status", 5, 25, 226, 70, this);
 
             // Current status labels
-            currentStatusLabels.Add(CreateLabel("djangoCurrentHpLabel", "LIFE :", 7, 19, 34, 15));
-            currentStatusLabels.Add(CreateLabel("djangoCurrentEneLabel", "ENE :", 7, 34, 34, 15));
-            currentStatusLabels.Add(CreateLabel("currentGameNameTrcLabel", "TRC :", 7, 49, 34, 15));
+            currentStatusLabels.Add(WinFormHelpers.CreateLabel("djangoCurrentHpLabel", "LIFE :", 7, 19, 34, 15));
+            currentStatusLabels.Add(WinFormHelpers.CreateLabel("djangoCurrentEneLabel", "ENE :", 7, 34, 34, 15));
+            currentStatusLabels.Add(WinFormHelpers.CreateLabel("currentGameNameTrcLabel", "TRC :", 7, 49, 34, 15));
 
             // Current status values
-            _bok3_currentStatusHpValue = CreateLabel("djangoCurrentHpValue", "", 44, 19, 31, 15);
-            _bok3_currentStatusEneValue = CreateLabel("djangoCurrentEneValue", "", 44, 34, 31, 15);
-            _bok3_currentStatusTrcValue = CreateLabel("djangoCurrentTrcValue", "", 44, 49, 31, 15);
+            _bok3_currentStatusHpValue = WinFormHelpers.CreateLabel("djangoCurrentHpValue", "", 44, 19, 31, 15);
+            _bok3_currentStatusEneValue = WinFormHelpers.CreateLabel("djangoCurrentEneValue", "", 44, 34, 31, 15);
+            _bok3_currentStatusTrcValue = WinFormHelpers.CreateLabel("djangoCurrentTrcValue", "", 44, 49, 31, 15);
 
             // Add values labels to group
             currentStatusLabels.Add(_bok3_currentStatusHpValue);
@@ -109,30 +111,30 @@ namespace BokInterface {
         private void AddShinbokCurrentStatsSection() {
 
             // Section
-            currentStatsGroupBox = CreateGroupBox("currentStats", "Stats", 5, 101, 150, 90, true);
+            currentStatsGroupBox = WinFormHelpers.CreateGroupBox("currentStats", "Stats", 5, 101, 150, 90, this);
 
             // Column names
-            currentStatsLabels.Add(CreateLabel("baseStatColumnName", "Base", 35, 19, 31, 15, colorHex: baseStatColor));
-            currentStatsLabels.Add(CreateLabel("equipsStatColumnName", "Equips", 66, 19, 42, 15, colorHex: equipsStatColor));
-            currentStatsLabels.Add(CreateLabel("totalStatColumnName", "Total", 108, 19, 32, 15, colorHex: totalStatColor));
+            currentStatsLabels.Add(WinFormHelpers.CreateLabel("baseStatColumnName", "Base", 35, 19, 31, 15, colorHex: WinFormHelpers.baseStatColor));
+            currentStatsLabels.Add(WinFormHelpers.CreateLabel("equipsStatColumnName", "Equips", 66, 19, 42, 15, colorHex: WinFormHelpers.equipsStatColor));
+            currentStatsLabels.Add(WinFormHelpers.CreateLabel("totalStatColumnName", "Total", 108, 19, 32, 15, colorHex: WinFormHelpers.totalStatColor));
 
             // VIT
-            currentStatsLabels.Add(CreateLabel("vitRowLabel", "VIT", 6, 34, 27, 15, textAlignment: "MiddleLeft"));
-            _bok3_djangoBaseVit = CreateLabel("djangoBaseVit", "", 35, 34, 31, 15, colorHex: baseStatColor, textAlignment: "MiddleRight");
-            _bok3_djangoEquipsVit = CreateLabel("djangoEquipsVit", "", 66, 34, 42, 15, colorHex: equipsStatColor, textAlignment: "MiddleRight");
-            _bok3_djangoTotalVit = CreateLabel("djangoTotalVit", "", 108, 34, 32, 15, colorHex: totalStatColor, textAlignment: "MiddleRight");
+            currentStatsLabels.Add(WinFormHelpers.CreateLabel("vitRowLabel", "VIT", 6, 34, 27, 15, textAlignment: "MiddleLeft"));
+            _bok3_djangoBaseVit = WinFormHelpers.CreateLabel("djangoBaseVit", "", 35, 34, 31, 15, colorHex: WinFormHelpers.baseStatColor, textAlignment: "MiddleRight");
+            _bok3_djangoEquipsVit = WinFormHelpers.CreateLabel("djangoEquipsVit", "", 66, 34, 42, 15, colorHex: WinFormHelpers.equipsStatColor, textAlignment: "MiddleRight");
+            _bok3_djangoTotalVit = WinFormHelpers.CreateLabel("djangoTotalVit", "", 108, 34, 32, 15, colorHex: WinFormHelpers.totalStatColor, textAlignment: "MiddleRight");
 
             // SPR
-            currentStatsLabels.Add(CreateLabel("sprRowLabel", "SPR", 6, 49, 27, 15, textAlignment: "MiddleLeft"));
-            _bok3_djangoBaseSpr = CreateLabel("djangoBaseSpr", "", 35, 49, 31, 15, colorHex: baseStatColor, textAlignment: "MiddleRight");
-            _bok3_djangoEquipsSpr = CreateLabel("djangoEquipsSpr", "", 66, 49, 42, 15, colorHex: equipsStatColor, textAlignment: "MiddleRight");
-            _bok3_djangoTotalSpr = CreateLabel("djangoTotalSpr", "", 108, 49, 32, 15, colorHex: totalStatColor, textAlignment: "MiddleRight");
+            currentStatsLabels.Add(WinFormHelpers.CreateLabel("sprRowLabel", "SPR", 6, 49, 27, 15, textAlignment: "MiddleLeft"));
+            _bok3_djangoBaseSpr = WinFormHelpers.CreateLabel("djangoBaseSpr", "", 35, 49, 31, 15, colorHex: WinFormHelpers.baseStatColor, textAlignment: "MiddleRight");
+            _bok3_djangoEquipsSpr = WinFormHelpers.CreateLabel("djangoEquipsSpr", "", 66, 49, 42, 15, colorHex: WinFormHelpers.equipsStatColor, textAlignment: "MiddleRight");
+            _bok3_djangoTotalSpr = WinFormHelpers.CreateLabel("djangoTotalSpr", "", 108, 49, 32, 15, colorHex: WinFormHelpers.totalStatColor, textAlignment: "MiddleRight");
 
             // STR
-            currentStatsLabels.Add(CreateLabel("strRowLabel", "STR", 6, 64, 27, 15, textAlignment: "MiddleLeft"));
-            _bok3_djangoBaseStr = CreateLabel("djangoBaseStr", "", 35, 64, 31, 15, colorHex: baseStatColor, textAlignment: "MiddleRight");
-            _bok3_djangoEquipsStr = CreateLabel("djangoEquipsStr", "", 66, 64, 42, 15, colorHex: equipsStatColor, textAlignment: "MiddleRight");
-            _bok3_djangoTotalStr = CreateLabel("djangoTotalStr", "", 108, 64, 32, 15, colorHex: totalStatColor, textAlignment: "MiddleRight");
+            currentStatsLabels.Add(WinFormHelpers.CreateLabel("strRowLabel", "STR", 6, 64, 27, 15, textAlignment: "MiddleLeft"));
+            _bok3_djangoBaseStr = WinFormHelpers.CreateLabel("djangoBaseStr", "", 35, 64, 31, 15, colorHex: WinFormHelpers.baseStatColor, textAlignment: "MiddleRight");
+            _bok3_djangoEquipsStr = WinFormHelpers.CreateLabel("djangoEquipsStr", "", 66, 64, 42, 15, colorHex: WinFormHelpers.equipsStatColor, textAlignment: "MiddleRight");
+            _bok3_djangoTotalStr = WinFormHelpers.CreateLabel("djangoTotalStr", "", 108, 64, 32, 15, colorHex: WinFormHelpers.totalStatColor, textAlignment: "MiddleRight");
 
             // Add values labels to group
             currentStatsLabels.Add(_bok3_djangoBaseVit);
@@ -154,13 +156,13 @@ namespace BokInterface {
         private void AddShinbokEditSection() {
 
             // Section
-            editGroupBox = CreateGroupBox("editButtons", "Edit", 237, 25, 87, 157, true);
+            editGroupBox = WinFormHelpers.CreateGroupBox("editButtons", "Edit", 237, 25, 87, 157, this);
 
-            _bok3_editStatusBtn = CreateButton("editStatuts", "Status", 6, 19, 75, 23);
-            _bok3_editInventoryBtn = CreateButton("editItems", "Items", 6, 46, 75, 23);
-            _bok3_editEquipsBtn = CreateButton("editEquips", "Equips", 6, 73, 75, 23);
-            _bok3_editWeaponsBtn = CreateButton("editWeapons", "Weapons", 6, 100, 75, 23);
-            _bok3_editSolarGunBtn = CreateButton("editSolarGun", "Solar gun", 6, 127, 75, 23);
+            _bok3_editStatusBtn = WinFormHelpers.CreateButton("editStatuts", "Status", 6, 19, 75, 23);
+            _bok3_editInventoryBtn = WinFormHelpers.CreateButton("editItems", "Items", 6, 46, 75, 23);
+            _bok3_editEquipsBtn = WinFormHelpers.CreateButton("editEquips", "Equips", 6, 73, 75, 23);
+            _bok3_editWeaponsBtn = WinFormHelpers.CreateButton("editWeapons", "Weapons", 6, 100, 75, 23);
+            _bok3_editSolarGunBtn = WinFormHelpers.CreateButton("editSolarGun", "Solar gun", 6, 127, 75, 23);
 
             // WIP features are disabled for now
             _bok3_editInventoryBtn.Enabled = false;

@@ -1,7 +1,8 @@
+using BokInterface.All;
+
 /**
  * File for the Boktai TSiiYH interface itself
  */
-
 namespace BokInterface {
 
     partial class BokInterface {
@@ -16,7 +17,7 @@ namespace BokInterface {
         private void ShowBoktaiInterface() {
 
             // Current game name
-            CreateLabel("currentGameName", currentGameName, 5, 5, 171, 20, true);
+            WinFormHelpers.CreateLabel("currentGameName", currentGameName, 5, 5, 171, 20, this);
 
             // Current status section
             AddBoktaiCurrentStatusSection();
@@ -37,15 +38,15 @@ namespace BokInterface {
         private void AddBoktaiCurrentStatusSection() {
 
             // Section
-            currentStatusGroupBox = CreateGroupBox("currentStatus", "Current status", 5, 25, 226, 70, true);
+            currentStatusGroupBox = WinFormHelpers.CreateGroupBox("currentStatus", "Current status", 5, 25, 226, 70, this);
 
             // Current status labels
-            currentStatusLabels.Add(CreateLabel("djangoCurrentHpLabel", "LIFE :", 7, 19, 34, 15));
-            currentStatusLabels.Add(CreateLabel("djangoCurrentEneLabel", "ENE :", 7, 34, 34, 15));
+            currentStatusLabels.Add(WinFormHelpers.CreateLabel("djangoCurrentHpLabel", "LIFE :", 7, 19, 34, 15));
+            currentStatusLabels.Add(WinFormHelpers.CreateLabel("djangoCurrentEneLabel", "ENE :", 7, 34, 34, 15));
 
             // Current status values
-            _bok1_currentStatusHpValue = CreateLabel("djangoCurrentHpValue", "", 44, 19, 31, 15);
-            _bok1_currentStatusEneValue = CreateLabel("djangoCurrentHpValue", "", 44, 34, 31, 15);
+            _bok1_currentStatusHpValue = WinFormHelpers.CreateLabel("djangoCurrentHpValue", "", 44, 19, 31, 15);
+            _bok1_currentStatusEneValue = WinFormHelpers.CreateLabel("djangoCurrentHpValue", "", 44, 34, 31, 15);
 
             // Add values labels to group
             currentStatusLabels.Add(_bok1_currentStatusHpValue);

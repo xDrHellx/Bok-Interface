@@ -40,22 +40,19 @@ namespace BokInterface.Tools.TileDataViewer {
 
         #region Subwindow & loop-related methods
 
-        public TileDataViewer(string name, string title, int width, int height, string currentGame, string icon = "", Form? parentForm = null) {
+        public TileDataViewer(string name, string title, int width, int height, string currentGame, Form parentForm) {
             Name = name;
             Text = title;
-            Icon = GetIcon(icon);
+            Icon = parentForm.Icon;
             AutoScaleDimensions = new SizeF(6F, 15F);
             AutoScaleMode = AutoScaleMode.Inherit;
             FormBorderStyle = FormBorderStyle.FixedSingle;
             BackColor = SystemColors.Control;
-            Font = BokInterface.defaultFont;
+            Font = WinFormHelpers.defaultFont;
             AutoScroll = true;
+            Owner = parentForm;
             SetSubwindowSize(width, height);
             this.currentGame = currentGame;
-
-            if (parentForm != null) {
-                Owner = parentForm;
-            }
 
             // Prevent flickering
             SetStyle(
@@ -97,13 +94,6 @@ namespace BokInterface.Tools.TileDataViewer {
                     _mapDataAddress = _djangoXposAddress = _djangoYposAddress = 0;
                     break;
             }
-        }
-
-        /// <summary>Get the specified icon if it exist</summary>
-        /// <param name="fileName">File name (without .ico extension)</param>
-        /// <returns><c>System.Drawing.Icon</c>Specified Icon instance (or default if the specified icon could not be found)</returns>
-        protected Icon GetIcon(string fileName) {
-            return fileName == "" ? Icon : (Icon)Properties.Resources.ResourceManager.GetObject(fileName);
         }
 
         /// <summary>Sets the subwindow's size</summary>

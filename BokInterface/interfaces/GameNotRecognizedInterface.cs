@@ -1,3 +1,5 @@
+using BokInterface.All;
+
 /**
  * File for the "Game not recognized" interface
  */
@@ -10,7 +12,7 @@ namespace BokInterface {
         private void GameNotRecognizedWindow() {
 
             // Current game name
-            CreateLabel("currentGameName", "Game not recognized!", 5, 5, 123, 20, true);
+            WinFormHelpers.CreateLabel("currentGameName", "Game not recognized!", 5, 5, 123, 20, this);
 
             // Window
             SetMainWindow("Bok Interface" + (shorterGameName != "" ? " - " + shorterGameName : ""), 350, 100);
