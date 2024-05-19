@@ -30,10 +30,10 @@ namespace BokInterface.Tools.MemoryValuesListing {
 
         #region Subwindow-related methods
 
-        public MemoryValuesListing(string name, string title, int width, int height, string currentGame, string icon = "", Form? parentForm = null) {
+        public MemoryValuesListing(string name, string title, int width, int height, string currentGame, Form parentForm) {
             Name = name;
             Text = title;
-            Icon = GetIcon(icon);
+            Icon = parentForm.Icon;
             AutoScaleDimensions = new SizeF(6F, 15F);
             AutoScaleMode = AutoScaleMode.Inherit;
             FormBorderStyle = FormBorderStyle.FixedSingle;
@@ -41,11 +41,8 @@ namespace BokInterface.Tools.MemoryValuesListing {
             Font = WinFormHelpers.defaultFont;
             AutoScroll = true;
             ClientSize = new Size(width, height);
+            Owner = parentForm;
             _currentGame = currentGame;
-
-            if (parentForm != null) {
-                Owner = parentForm;
-            }
         }
 
         /// <summary>Get the specified icon if it exist</summary>
