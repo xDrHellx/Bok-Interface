@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Drawing;
+using System.Windows.Forms;
+
+using BokInterface.All;
 
 /**
  * File for the external window part of the Bok interface
@@ -15,23 +17,6 @@ namespace BokInterface {
 
 		/// <summary>Required designer variable</summary>
 		private IContainer components = null;
-
-		/// <summary>Color for pure / base stat points (Boktai 2, 3, LK)</summary>
-		public static string baseStatColor = "#FFE600";
-
-		/// <summary>
-		/// Color for stat points from equipments (Boktai 3) <br/>
-		/// These points does not affect as many things as pure stat points <br/><br/>
-		/// For example STR points from equipments does not affect coffin carrying speed
-		/// </summary>
-		public static string equipsStatColor = "#FFA529";
-
-		/// <summary>Color for the total amount of points for a specific stat (Boktai 2, 3, LK)</summary>
-		public static string totalStatColor = "#D3D3D3";
-
-		public static System.Drawing.Font defaultFont = new("Segoe UI", 9, System.Drawing.FontStyle.Regular, GraphicsUnit.Point);
-		public static System.Windows.Forms.Padding defaultMargin = new(3, 0, 3, 0);
-		public static System.Windows.Forms.AnchorStyles defaultAnchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left;
 
 		#endregion
 
@@ -47,7 +32,7 @@ namespace BokInterface {
 		private List<System.Windows.Forms.Button> editButtons = new();
 		
 		/// <summary>Tooltip for values that only updates after switching rooms</summary>
-		public static System.Windows.Forms.ToolTip toolTip = BokInterface.CreateToolTip();
+		public static System.Windows.Forms.ToolTip toolTip = WinFormHelpers.CreateToolTip();
 
 		#endregion
 
@@ -91,47 +76,35 @@ namespace BokInterface {
 			 */
 			this.ClearInterface();
 
-			// Sets default icon if available
-			this.Icon = this.GetIcon("nero");
+			// Set corresponding game icon (or default icon if not available)
+			this.Icon = WinFormHelpers.GetIcon(WinFormHelpers.GetGameIconName());
 
 			// Try initializing list of memory values instances
 			this._memoryValues = new(shorterGameName);
 
-			/**
-			 * If not a Boktai game, shows the "Game not recognized" window
-			 * Otherwise, shows the window for the corresponding game
-			 */
-			if(supportedGame == false) {
-				GameNotRecognizedWindow();
-			} else {
-
-				// Set corresponding game icon
-				this.Icon = this.GetIcon(this.GetGameIconName());
-
-				// Show corresponding interface
-				switch(shorterGameName) {
-					case "Boktai":
-						interfaceActivated = true;
-						ShowBoktaiInterface();
-						break;
-					case "Zoktai":
-						interfaceActivated = true;
-						ShowZoktaiInterface();
-						break;
-					case "Shinbok":
-						interfaceActivated = true;
-						ShowShinbokInterface();
-						break;
-					case "LunarKnights":
-						interfaceActivated = true;
-						ShowLunarKnightsInterface();
-						break;
-					default:
-						// Just in case, show the "Game not recognized" window if the game is not handled via the switch
-						interfaceActivated = false;
-						GameNotRecognizedWindow();
-						break;
-				}
+			// Show corresponding interface
+			switch(shorterGameName) {
+				case "Boktai":
+					interfaceActivated = true;
+					ShowBoktaiInterface();
+					break;
+				case "Zoktai":
+					interfaceActivated = true;
+					ShowZoktaiInterface();
+					break;
+				case "Shinbok":
+					interfaceActivated = true;
+					ShowShinbokInterface();
+					break;
+				case "LunarKnights":
+					interfaceActivated = true;
+					ShowLunarKnightsInterface();
+					break;
+				default:
+					// If not a Boktai game, show the "Game not recognized" window
+					interfaceActivated = false;
+					GameNotRecognizedWindow();
+					break;
 			}
 		}
 
@@ -194,16 +167,35 @@ namespace BokInterface {
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit;
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
 			this.BackColor = System.Drawing.SystemColors.Control;
-			this.Font = BokInterface.defaultFont;
+			this.Font = WinFormHelpers.defaultFont;
 			this.ClientSize = new System.Drawing.Size(width, height);
 		}
 
-		/// <summary>Get the specified icon if it exist</summary>
-		/// <param name="fileName">File name (without .ico extension)</param>
-		/// <returns><c>System.Drawing.Icon</c>Specified Icon instance (or default if the specified icon could not be found)</returns>
-		private System.Drawing.Icon GetIcon(string fileName) {
-			return fileName == "" ? this.Icon : (Icon)Properties.Resources.ResourceManager.GetObject(fileName);
-		}
+		/// <summary>Adds Tools section for the corresponding game</summary>
+        private void AddToolsSection() {
+
+            switch (BokInterface.shorterGameName) {
+                case "Boktai":
+                    extrasGroupBox = WinFormHelpers.CreateGroupBox("extraTools", "Tools", 237, 25, 87, 52, this);
+                    break;
+                case "Zoktai":
+                    extrasGroupBox = WinFormHelpers.CreateGroupBox("extraTools", "Tools", 237, 187, 87, 52, this);
+                    break;
+                case "Shinbok":
+                    extrasGroupBox = WinFormHelpers.CreateGroupBox("extraTools", "Tools", 237, 187, 87, 52, this);
+                    break;
+                case "LunarKnights":
+                    extrasGroupBox = WinFormHelpers.CreateGroupBox("extraTools", "Tools", 237, 25, 87, 52, this);
+                    break;
+                default:
+                    // If game is not handled, don't add anything & stop here
+                    return;
+            }
+
+            // Add Misc Tools button
+            Button miscToolsBtn = WinFormHelpers.CreateButton("showExtraTools", "Misc tools", 6, 21, 75, 23, extrasGroupBox);
+            miscToolsBtn.Click += new System.EventHandler(OpenMiscToolsSelector);
+        }
 
 		#endregion
 	}

@@ -1,6 +1,7 @@
 using System;
 using System.Windows.Forms;
 
+using BokInterface.All;
 using BokInterface.Tools.TileDataViewer;
 using BokInterface.Tools.MemoryValuesListing;
 
@@ -54,7 +55,7 @@ namespace BokInterface {
 		/// <param name="width">Width (in pixels)</param>
 		/// <param name="height">Height (in pixels)</param>
         private void AddToolsLabel(int posX = 5, int posY = 5, int width = 176, int height = 15) {
-            Label availableToolsLabel = CreateLabel("availableToolsLabel", "-- Tools available --", posX, posY, width, height);
+            Label availableToolsLabel = WinFormHelpers.CreateLabel("availableToolsLabel", "-- Tools available --", posX, posY, width, height);
             miscToolsSelectionWindow.Controls.Add(availableToolsLabel);
         }
 
@@ -65,7 +66,7 @@ namespace BokInterface {
 		/// <param name="height">Height (in pixels)</param>
         private void AddTileDataViewerBtn(int posX = 5, int posY = 23, int width = 176, int height = 23) {
 
-            Button tileDataBtn = CreateButton("tileDataBtn", "Tile data viewer", posX, posY, width, height);
+            Button tileDataBtn = WinFormHelpers.CreateButton("tileDataBtn", "Tile data viewer", posX, posY, width, height);
             tileDataBtn.Click += new EventHandler(delegate (object sender, EventArgs e) {
 
                 // If tool is already active, stop
@@ -75,7 +76,7 @@ namespace BokInterface {
 
                 tileDataViewerActive = true;
 
-                _tileDataViewer = new("tileDateViewer", "Tile data viewer", 500, 500, shorterGameName, GetGameIconName(), this);
+                _tileDataViewer = new("tileDateViewer", "Tile data viewer", 500, 500, shorterGameName, WinFormHelpers.GetGameIconName(), this);
                 _tileDataViewer.InitializeFrameLoop();
 
                 _tileDataViewer.FormClosing += new FormClosingEventHandler(delegate (object sender, FormClosingEventArgs e) {
@@ -103,7 +104,7 @@ namespace BokInterface {
 		/// <param name="height">Height (in pixels)</param>
         private void AddMemoryAddressesTableBtn(int posX = 5, int posY = 50, int width = 176, int height = 23) {
 
-            Button memAddrBtn = CreateButton("memAddrTableBtn", "Memory values list", posX, posY, width, height);
+            Button memAddrBtn = WinFormHelpers.CreateButton("memAddrTableBtn", "Memory values list", posX, posY, width, height);
             memAddrBtn.Click += new EventHandler(delegate (object sender, EventArgs e) {
 
                 // If tool is already active, stop
@@ -113,7 +114,7 @@ namespace BokInterface {
 
                 memValuesListingActive = true;
 
-                _memValuesListing = new("memAddrTable", "Memory values list", 650, 500, shorterGameName, GetGameIconName(), this);
+                _memValuesListing = new("memAddrTable", "Memory values list", 650, 500, shorterGameName, WinFormHelpers.GetGameIconName(), this);
                 _memValuesListing.FormClosing += new FormClosingEventHandler(delegate (object sender, FormClosingEventArgs e) {
 
                     memValuesListingActive = false;

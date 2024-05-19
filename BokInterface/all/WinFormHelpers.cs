@@ -1,16 +1,42 @@
 using System.Collections.Generic;
+using System.Data;
 using System.Drawing;
 using System.Windows.Forms;
 
-using BokInterface.All;
+namespace BokInterface.All {
 
-/**
- * File for the winforms elements generation methods of the Bok interface & checks related to them
- */
+    /// <summary>
+    /// Class for WinForm Helpers
+    /// <para><example>WinForm elements generation methods</example></para>
+    /// </summary>
+    static class WinFormHelpers {
 
-namespace BokInterface {
+        /// <summary>Tooltip for values that only updates after switching rooms</summary>
+        public static ToolTip toolTip = CreateToolTip();
 
-    partial class BokInterface {
+        /// <summary>Color for base stat points (Boktai 2, 3, LK)</summary>
+        public static string baseStatColor = "#FFE600";
+
+        /// <summary>
+        /// Color for stat points from equipments (Boktai 3) <br/>
+        /// These points does not affect as many things as pure stat points <br/><br/>
+        /// For example STR points from equipments does not affect coffin carrying speed
+        /// </summary>
+        public static string equipsStatColor = "#FFA529";
+
+        /// <summary>Color for the total amount of points for a specific stat (Boktai 2, 3, LK)</summary>
+        public static string totalStatColor = "#D3D3D3";
+
+        public static Font defaultFont = new("Segoe UI", 9, FontStyle.Regular, GraphicsUnit.Point);
+        public static Padding defaultMargin = new(3, 0, 3, 0);
+        public static AnchorStyles defaultAnchor = AnchorStyles.Top | AnchorStyles.Left;
+
+        /// <summary>Get the specified icon if it exist</summary>
+		/// <param name="fileName">File name (without .ico extension)</param>
+		/// <returns><c>System.Drawing.Icon</c>Specified Icon instance (or default if the specified icon could not be found)</returns>
+		public static Icon? GetIcon(string fileName) {
+            return fileName == "" ? null : (Icon)Properties.Resources.ResourceManager.GetObject(fileName);
+        }
 
         #region Form elements generating methods
 
@@ -21,9 +47,9 @@ namespace BokInterface {
         /// <param name="positionY">Y position</param>
         /// <param name="width">Width (in pixels)</param>
         /// <param name="height">Height (in pixels)</param>
-        /// <param name="addToWindow">Set to true to add the element directly to the main interface window</param>
+        /// <param name="control">Control instance if the element is to be attached to it directly</param>
         /// <returns><c>System.Windows.Forms.GroupBox</c>Group box instance</returns>
-        private GroupBox CreateGroupBox(string name, string text, int positionX, int positionY, int width, int height, bool addToWindow = false) {
+        public static GroupBox CreateGroupBox(string name, string text, int positionX, int positionY, int width, int height, Control? control = null) {
 
             GroupBox groupBox = new() {
                 Name = name,
@@ -36,10 +62,8 @@ namespace BokInterface {
                 Font = defaultFont
             };
 
-            // Add to main window
-            if (addToWindow == true) {
-                Controls.Add(groupBox);
-            }
+            // If a Control instance is passed, add the generated element to it
+            control?.Controls.Add(groupBox);
 
             return groupBox;
         }
@@ -51,12 +75,12 @@ namespace BokInterface {
         /// <param name="positionY">Y position</param>
         /// <param name="width">Width (in pixels)</param>
         /// <param name="height">Height (in pixels)</param>
-        /// <param name="addToWindow">Set to true to add the element directly to the main interface window</param>
+        /// <param name="control">Control instance if the element is to be attached to it directly</param>
         /// <param name="colorHex">Set the background color for the label</param>
         /// <param name="margin">Margin (by default System.Windows.Forms.Padding(0, 3, 0, 3), the default value in Visual Studio)</param>
         /// <param name="textAlignment">Text alignment, by default "MiddleCenter" (see System.Drawing.ContentAlignment for possible values)</param>
         /// <returns><c>System.Windows.Forms.Label</c>Label instance</returns>
-        private Label CreateLabel(string name, string text, int positionX, int positionY, int width, int height, bool addToWindow = false, string colorHex = "", Padding margin = new Padding(), string textAlignment = "MiddleCenter") {
+        public static Label CreateLabel(string name, string text, int positionX, int positionY, int width, int height, Control? control = null, string colorHex = "", Padding margin = new Padding(), string textAlignment = "MiddleCenter") {
 
             Label label = new() {
                 Name = name,
@@ -83,10 +107,8 @@ namespace BokInterface {
             // Text alignment
             label.TextAlign = GetTextAlignment(textAlignment);
 
-            // Add to main window
-            if (addToWindow == true) {
-                Controls.Add(label);
-            }
+            // If a Control instance is passed, add the generated element to it
+            control?.Controls.Add(label);
 
             return label;
         }
@@ -98,12 +120,12 @@ namespace BokInterface {
         /// <param name="positionY">Y position</param>
         /// <param name="width">Width (in pixels)</param>
         /// <param name="height">Height (in pixels)</param>
-        /// <param name="addToWindow">Set to true to add the element directly to the main interface window</param>
+        /// <param name="control">Control instance if the element is to be attached to it directly</param>
         /// <param name="colorHex">Set the background color for the label</param>
         /// <param name="margin">Margin (by default System.Windows.Forms.Padding(0, 3, 0, 3), the default value in Visual Studio)</param>
         /// <param name="textAlignment">Text alignment, by default "MiddleCenter" (see System.Drawing.ContentAlignment for possible values)</param>
         /// <returns><c>System.Windows.Forms.Button</c>Button instance</returns>
-        private Button CreateButton(string name, string text, int positionX, int positionY, int width, int height, bool addToWindow = false, string colorHex = "", Padding margin = new Padding(), string textAlignment = "MiddleCenter") {
+        public static Button CreateButton(string name, string text, int positionX, int positionY, int width, int height, Control? control = null, string colorHex = "", Padding margin = new Padding(), string textAlignment = "MiddleCenter") {
 
             Button btn = new() {
                 Name = name,
@@ -130,10 +152,8 @@ namespace BokInterface {
             // Text alignment
             btn.TextAlign = GetTextAlignment(textAlignment);
 
-            // Add to main window
-            if (addToWindow == true) {
-                Controls.Add(btn);
-            }
+            // If a Control instance is passed, add the generated element to it
+            control?.Controls.Add(btn);
 
             return btn;
         }
@@ -146,7 +166,7 @@ namespace BokInterface {
         /// <param name="icon">Subwindow icon (by default retrieves the one from the main interface window)</param>
         /// <param name="parentForm">Form the subwindow is attached to (this will make the subwindow always show in front of its parent, by default it shows in front of the main window)</param>
         /// <returns><c>System.Windows.Forms.Form</c>Subwindow instance</returns>
-        private Form CreateSubWindow(string name, string title, int width, int height, string icon = "", Form? parentForm = null) {
+        public static Form CreateSubWindow(string name, string title, int width, int height, string icon = "", Form? parentForm = null) {
 
             Form form = new() {
                 Name = name,
@@ -157,15 +177,9 @@ namespace BokInterface {
                 FormBorderStyle = FormBorderStyle.FixedSingle,
                 BackColor = SystemColors.Control,
                 Font = defaultFont,
-                ClientSize = new Size(width, height)
+                ClientSize = new Size(width, height),
+                Owner = parentForm
             };
-
-            // Form parent / owner
-            if (parentForm == null) {
-                form.Owner = this;
-            } else {
-                form.Owner = parentForm;
-            }
 
             return form;
         }
@@ -180,14 +194,14 @@ namespace BokInterface {
         /// <param name="minValue">Minimum settable value</param>
         /// <param name="maxValue">Maximum settable value</param>
         /// <param name="nbDecimals">Number of decimals (0 by default)</param>
-        /// <param name="addToWindow">Set to true to add the element directly to the main interface window</param>
+        /// <param name="control">Control instance if the element is to be attached to it directly</param>
         /// <param name="colorHex">Set the background color for the label</param>
         /// <param name="margin">Margin (by default System.Windows.Forms.Padding(0, 3, 0, 3), the default value in Visual Studio)</param>
         /// <param name="valueAlignment">Value alignment, by default "Left" (see System.Windows.Forms.HorizontalAlignment for possible values)</param>
         /// <returns><c>System.Windows.Forms.NumericUpDown</c>NumericUpDown instance</returns>
-        private NumericUpDown CreateNumericUpDown(string name, decimal defaultValue, int positionX, int positionY, int width, int height, decimal minValue = 0, decimal maxValue = 99, int nbDecimals = 0, bool addToWindow = false, string colorHex = "", Padding margin = new Padding(), string valueAlignment = "Left") {
+        public static NumericUpDown CreateNumericUpDown(string name, decimal defaultValue, int positionX, int positionY, int width, int height, decimal minValue = 0, decimal maxValue = 99, int nbDecimals = 0, Control? control = null, string colorHex = "", Padding margin = new Padding(), string valueAlignment = "Left") {
 
-            NumericUpDown field = new() {
+            NumericUpDown numUpDown = new() {
                 Name = name,
                 Minimum = minValue,
                 Maximum = maxValue,
@@ -204,7 +218,7 @@ namespace BokInterface {
             };
 
             if (colorHex != "") {
-                field.BackColor = ColorTranslator.FromHtml(colorHex);
+                numUpDown.BackColor = ColorTranslator.FromHtml(colorHex);
             }
 
             // If no specific margin is passed, set defaults from Visual Studio
@@ -214,17 +228,16 @@ namespace BokInterface {
             }
 
             // Value alignment
-            field.TextAlign = valueAlignment switch {
+            numUpDown.TextAlign = valueAlignment switch {
                 "Right" => HorizontalAlignment.Right,
                 "Center" => HorizontalAlignment.Center,
                 _ => HorizontalAlignment.Left,
             };
 
-            if (addToWindow == true) {
-                Controls.Add(field);
-            }
+            // If a Control instance is passed, add the generated element to it
+            control?.Controls.Add(numUpDown);
 
-            return field;
+            return numUpDown;
         }
 
         /// <summary>Simplified method for creating a CheckGroupBox</summary>
@@ -233,9 +246,9 @@ namespace BokInterface {
         /// <param name="width">Width (in pixels)</param>
         /// <param name="height">Height (in pixels)</param>
         /// <param name="isCheckedByDefault">Set to true if the CheckGroupBox has to be checked when initiated</param>
-        /// <param name="addToWindow">Set to true to add the element directly to the main interface window</param>
+        /// <param name="control">Control instance if the element is to be attached to it directly</param>
         /// <returns><c>CheckGroupBox</c>CheckGroupBox instance</returns>
-        private CheckGroupBox CreateCheckGroupBox(string name, string text, int positionX, int positionY, int width, int height, bool isCheckedByDefault = false, bool addToWindow = false) {
+        public static CheckGroupBox CreateCheckGroupBox(string name, string text, int positionX, int positionY, int width, int height, bool isCheckedByDefault = false, Control? control = null) {
 
             CheckGroupBox checkGroupBox = new() {
                 Name = name,
@@ -250,10 +263,8 @@ namespace BokInterface {
                 Font = defaultFont
             };
 
-            // Add to main window
-            if (addToWindow == true) {
-                Controls.Add(checkGroupBox);
-            }
+            // If a Control instance is passed, add the generated element to it
+            control?.Controls.Add(checkGroupBox);
 
             return checkGroupBox;
         }
@@ -263,9 +274,9 @@ namespace BokInterface {
         /// <param name="imgName">Image name</param>
         /// <param name="positionX">X position</param>
         /// <param name="positionY">Y position</param>
-        /// <param name="addToWindow">Set to true to add the element directly to the main interface window</param>
+        /// <param name="control">Control instance if the element is to be attached to it directly</param>
         /// <returns><c>System.Windows.Forms.Label</c>Label instance</returns>
-        private Label CreateImageLabel(string name, string imgName, int positionX, int positionY, bool addToWindow = false) {
+        public static Label CreateImageLabel(string name, string imgName, int positionX, int positionY, Control? control = null) {
 
             // Get image
             Image img = (Image)Properties.Resources.ResourceManager.GetObject(imgName);
@@ -285,17 +296,15 @@ namespace BokInterface {
                 Font = defaultFont
             };
 
-            // Add to main window
-            if (addToWindow == true) {
-                Controls.Add(label);
-            }
+            // If a Control instance is passed, add the generated element to it
+            control?.Controls.Add(label);
 
             return label;
         }
 
         /// <summary>Simplified method for creating a tooltip</summary>
         /// <returns><c>System.Windows.Forms.ToolTip<c/>Tooltip instance</returns>
-        private static ToolTip CreateToolTip() {
+        public static ToolTip CreateToolTip() {
 
             ToolTip toolTip = new() {
                 // Always shows tooltip even if window isn't focused
@@ -310,13 +319,49 @@ namespace BokInterface {
             return toolTip;
         }
 
+        /// <summary>Simplified method for creating a data grid view</summary>
+        /// <param name="name">Group name</param>
+        /// <param name="data">Data to show</param>
+        /// <param name="positionX">X position</param>
+        /// <param name="positionY">Y position</param>
+        /// <param name="width">Width (in pixels)</param>
+        /// <param name="height">Height (in pixels)</param>
+        /// <param name="control">Control instance if the element is to be attached to it directly</param>
+        /// <returns><c>System.Windows.Forms.GroupBox</c>Data grid view instance</returns>
+        public static DataGridView CreateDataGridView(string name, DataTable data, int positionX, int positionY, int width, int height, Control? control = null) {
+
+            DataGridView gridView = new() {
+                Name = name,
+                DataSource = data,
+                Location = new Point(positionX, positionY),
+                Size = new Size(width, height),
+                AutoSize = false,
+                TabIndex = 1,
+                Anchor = defaultAnchor,
+                Font = defaultFont,
+                AllowUserToAddRows = false,
+                AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill,
+                Dock = DockStyle.Fill,
+                EnableHeadersVisualStyles = false,
+                ReadOnly = true
+            };
+
+            // Set a specific color for the header
+            gridView.ColumnHeadersDefaultCellStyle.BackColor = Color.LightGray;
+
+            // If a Control instance is passed, add the generated element to it
+            control?.Controls.Add(gridView);
+
+            return gridView;
+        }
+
         #endregion
 
         #region Simplified adding methods
 
         /// <summary>Simplified method for adding the values warning tooltip to a list of labels</summary>
-		/// <param name="labels">List of labels</param>
-		public static void AddValuesWarningToolTip(List<Label> labels) {
+        /// <param name="labels">List of labels</param>
+        public static void AddValuesWarningToolTip(List<Label> labels) {
             for (int i = 0; i < labels.Count; i++) {
                 AddToolTip(labels[i], "Requires switching room to be fully updated");
             }
@@ -330,41 +375,14 @@ namespace BokInterface {
             label.Cursor = mouseCursor ?? Cursors.Help;
         }
 
-        /// <summary>Adds Tools section for the corresponding game</summary>
-        private void AddToolsSection() {
-
-            switch (shorterGameName) {
-                case "Boktai":
-                    extrasGroupBox = CreateGroupBox("extraTools", "Tools", 237, 25, 87, 52, true);
-                    break;
-                case "Zoktai":
-                    extrasGroupBox = CreateGroupBox("extraTools", "Tools", 237, 187, 87, 52, true);
-                    break;
-                case "Shinbok":
-                    extrasGroupBox = CreateGroupBox("extraTools", "Tools", 237, 187, 87, 52, true);
-                    break;
-                case "LunarKnights":
-                    extrasGroupBox = CreateGroupBox("extraTools", "Tools", 237, 25, 87, 52, true);
-                    break;
-                default:
-                    // If game is not handled, don't add anything & stop here
-                    return;
-            }
-
-            // Add Misc Tools button
-            Button miscToolsBtn = CreateButton("showExtraTools", "Misc tools", 6, 21, 75, 23);
-            miscToolsBtn.Click += new System.EventHandler(OpenMiscToolsSelector);
-            extrasGroupBox.Controls.Add(miscToolsBtn);
-        }
-
         #endregion
 
         #region Simplified checks methods
 
         /// <summary>Get the name of the icon corresponding to the current game</summary>
         /// <returns><c>string</c>Icon name</returns>
-        private string GetGameIconName() {
-            return shorterGameName switch {
+        public static string GetGameIconName() {
+            return BokInterface.shorterGameName switch {
                 "Boktai" => "lita",
                 "Zoktai" => "ringo",
                 "Shinbok" => "trinity",
@@ -376,7 +394,7 @@ namespace BokInterface {
         /// <summary>Get the corresponding text alignment based on a string</summary>
         /// <param name="value">Text alignment string</param>
         /// <returns><c>System.Drawing.ContentAlignment</c>Text alignment object</returns>
-        private ContentAlignment GetTextAlignment(string value) {
+        private static ContentAlignment GetTextAlignment(string value) {
             return value switch {
                 "BottomCenter" => ContentAlignment.BottomCenter,
                 "BottomLeft" => ContentAlignment.BottomLeft,
@@ -391,5 +409,6 @@ namespace BokInterface {
         }
 
         #endregion
+
     }
 }

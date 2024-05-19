@@ -2,12 +2,8 @@ using System;
 
 namespace BokInterface.All {
 
-    /// <summary>Main class for utilities</summary>
-    public class Utilities {
-
-        public Utilities() {
-
-        }
+    /// <summary>Utilities class</summary>
+    static class Utilities {
 
         #region Game code & region methods
 

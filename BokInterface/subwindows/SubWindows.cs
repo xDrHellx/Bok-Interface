@@ -1,6 +1,8 @@
 using System;
 using System.Windows.Forms;
 
+using BokInterface.All;
+
 /**
  * Main file for subwindows
  */
@@ -25,7 +27,7 @@ namespace BokInterface {
             if (statusEditorOpened == false) {
 
                 // Create subwindow & add on close event
-                statusEditWindow = CreateSubWindow("statusEditWindow", "Bok Edit - Status", 203, 144);
+                statusEditWindow = WinFormHelpers.CreateSubWindow("statusEditWindow", "Bok Edit - Status", 203, 144);
                 statusEditWindow.FormClosing += new FormClosingEventHandler(delegate (object sender, FormClosingEventArgs e) {
                     statusEditorOpened = false;
                     statusEditWindow.Controls.Clear();
@@ -65,7 +67,7 @@ namespace BokInterface {
             if (inventoryEditorOpened == false) {
 
                 // Create subwindow & add on close event
-                inventoryEditWindow = CreateSubWindow("inventoryEditWindow", "Bok Edit - Inventory", 200, 100);
+                inventoryEditWindow = WinFormHelpers.CreateSubWindow("inventoryEditWindow", "Bok Edit - Inventory", 200, 100);
                 inventoryEditWindow.FormClosing += new FormClosingEventHandler(delegate (object sender, FormClosingEventArgs e) {
                     inventoryEditorOpened = false;
                     inventoryEditWindow.Controls.Clear();
@@ -80,7 +82,7 @@ namespace BokInterface {
             if (equipsEditorOpened == false) {
 
                 // Create subwindow & add on close event
-                equipsEditWindow = CreateSubWindow("equipsEditWindow", "Bok Edit - Equips", 200, 100);
+                equipsEditWindow = WinFormHelpers.CreateSubWindow("equipsEditWindow", "Bok Edit - Equips", 200, 100);
                 equipsEditWindow.FormClosing += new FormClosingEventHandler(delegate (object sender, FormClosingEventArgs e) {
                     equipsEditorOpened = false;
                     equipsEditWindow.Controls.Clear();
@@ -95,7 +97,7 @@ namespace BokInterface {
             if (solarGunEditorOpened == false) {
 
                 // Create subwindow & add on close event
-                solarGunEditWindow = CreateSubWindow("solarGunEditWindow", "Bok Edit - Solar Gun", 200, 100);
+                solarGunEditWindow = WinFormHelpers.CreateSubWindow("solarGunEditWindow", "Bok Edit - Solar Gun", 200, 100);
                 solarGunEditWindow.FormClosing += new FormClosingEventHandler(delegate (object sender, FormClosingEventArgs e) {
                     solarGunEditorOpened = false;
                     solarGunEditWindow.Controls.Clear();
@@ -110,7 +112,7 @@ namespace BokInterface {
             if (weaponsEditorOpened == false) {
 
                 // Create subwindow & add on close event
-                weaponsEditWindow = CreateSubWindow("weaponsEditWindow", "Bok Edit - Weapons", 200, 100);
+                weaponsEditWindow = WinFormHelpers.CreateSubWindow("weaponsEditWindow", "Bok Edit - Weapons", 200, 100);
                 weaponsEditWindow.FormClosing += new FormClosingEventHandler(delegate (object sender, FormClosingEventArgs e) {
                     weaponsEditorOpened = false;
                     weaponsEditWindow.Controls.Clear();
@@ -125,7 +127,7 @@ namespace BokInterface {
             if (magicsEditorOpened == false) {
 
                 // Create subwindow & add on close event
-                magicsEditWindow = CreateSubWindow("magicsEditWindow", "Bok Edit - Magics", 200, 100);
+                magicsEditWindow = WinFormHelpers.CreateSubWindow("magicsEditWindow", "Bok Edit - Magics", 200, 100);
                 magicsEditWindow.FormClosing += new FormClosingEventHandler(delegate (object sender, FormClosingEventArgs e) {
                     magicsEditorOpened = false;
                     magicsEditWindow.Controls.Clear();
@@ -140,7 +142,7 @@ namespace BokInterface {
             if (miscToolsSelectorOpened == false) {
 
                 // Create subwindow & add on close event
-                miscToolsSelectionWindow = CreateSubWindow("miscToolsSelectWindow", "Bok Tools - Select", 186, 78);
+                miscToolsSelectionWindow = WinFormHelpers.CreateSubWindow("miscToolsSelectWindow", "Bok Tools - Select", 186, 78);
                 miscToolsSelectionWindow.FormClosing += new FormClosingEventHandler(delegate (object sender, FormClosingEventArgs e) {
                     miscToolsSelectorOpened = false;
                     miscToolsSelectionWindow.Controls.Clear();

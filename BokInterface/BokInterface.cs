@@ -17,7 +17,7 @@ namespace BokInterface {
     [ExternalTool("Bok Interface")]
     public partial class BokInterface : ToolFormBase, IExternalToolForm {
 
-        #region Variables
+        #region Properties
 
         protected override string WindowTitleStatic => "Bok Interface v0.1.5";
         public override bool BlocksInputWhenFocused => false;

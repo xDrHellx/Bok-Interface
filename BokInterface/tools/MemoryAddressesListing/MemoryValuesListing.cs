@@ -38,7 +38,7 @@ namespace BokInterface.Tools.MemoryValuesListing {
             AutoScaleMode = AutoScaleMode.Inherit;
             FormBorderStyle = FormBorderStyle.FixedSingle;
             BackColor = SystemColors.Control;
-            Font = BokInterface.defaultFont;
+            Font = WinFormHelpers.defaultFont;
             AutoScroll = true;
             ClientSize = new Size(width, height);
             _currentGame = currentGame;
@@ -84,7 +84,7 @@ namespace BokInterface.Tools.MemoryValuesListing {
             GenerateTableData(_currentGame);
 
             // Show table in subwindow & set columns styles
-            _dataGridView = CreateDataGridView("memValuesGrid", _dataTable, 5, 5, ClientSize.Width - 10, ClientSize.Height - 10, true);
+            _dataGridView = WinFormHelpers.CreateDataGridView("memValuesGrid", _dataTable, 5, 5, ClientSize.Width - 10, ClientSize.Height - 10, this);
             SetColumnsStyle();
         }
 
@@ -165,48 +165,6 @@ namespace BokInterface.Tools.MemoryValuesListing {
                     // If game is not handled, do nothing
                     break;
             }
-        }
-
-        #endregion
-
-        #region Subwindow elements creation methods
-
-        /// <summary>Simplified method for creating a data grid view</summary>
-        /// <param name="name">Group name</param>
-        /// <param name="data">Data to show</param>
-        /// <param name="positionX">X position</param>
-        /// <param name="positionY">Y position</param>
-        /// <param name="width">Width (in pixels)</param>
-        /// <param name="height">Height (in pixels)</param>
-        /// <param name="addToWindow">Set to true to add the element directly to the subwindow</param>
-        /// <returns><c>System.Windows.Forms.GroupBox</c>Data grid view instance</returns>
-        private DataGridView CreateDataGridView(string name, DataTable data, int positionX, int positionY, int width, int height, bool addToWindow = false) {
-
-            DataGridView grid = new() {
-                Name = name,
-                DataSource = data,
-                Location = new Point(positionX, positionY),
-                Size = new Size(width, height),
-                AutoSize = false,
-                TabIndex = 1,
-                Anchor = BokInterface.defaultAnchor,
-                Font = BokInterface.defaultFont,
-                AllowUserToAddRows = false,
-                AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill,
-                Dock = DockStyle.Fill,
-                EnableHeadersVisualStyles = false,
-                ReadOnly = true
-            };
-
-            // Set a specific color for the header
-            grid.ColumnHeadersDefaultCellStyle.BackColor = Color.LightGray;
-
-            // Add to subwindow
-            if (addToWindow == true) {
-                Controls.Add(grid);
-            }
-
-            return grid;
         }
 
         #endregion
