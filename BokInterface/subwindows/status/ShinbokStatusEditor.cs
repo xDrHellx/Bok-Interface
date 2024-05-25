@@ -78,9 +78,14 @@ namespace BokInterface.Status {
             _statusNumericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("django_base_str", defaultValues["django_base_str"], 36, 79, 41, 23, maxValue: 100, control: _statsGroupBox));
 
             // Tooltips & warnings
-            WinFormHelpers.CreateImageLabel("tooltip", "warning", 83, 23, _statsGroupBox);
-            WinFormHelpers.CreateImageLabel("tooltip", "warning", 83, 52, _statsGroupBox);
-            WinFormHelpers.CreateImageLabel("tooltip", "warning", 83, 81, _statsGroupBox);
+            List<Label> warningLabels = [
+                WinFormHelpers.CreateImageLabel("tooltip", "warning", 83, 23, _statsGroupBox),
+                WinFormHelpers.CreateImageLabel("tooltip", "warning", 83, 52, _statsGroupBox),
+                WinFormHelpers.CreateImageLabel("tooltip", "warning", 83, 81, _statsGroupBox)
+            ];
+
+            // Add tooltips
+            WinFormHelpers.AddValuesWarningToolTip(warningLabels);
 
             // Button for setting values & its events
             Button setValuesButton = WinFormHelpers.CreateButton("setStatusButton", "Set values", 147, 121, 75, 23, this);
