@@ -1,3 +1,4 @@
+using BokInterface.Addresses;
 using BokInterface.All;
 
 /**
@@ -9,6 +10,7 @@ namespace BokInterface {
 
         #region Properties
 
+        private readonly BoktaiAddresses _boktaiAddresses = new();
         private System.Windows.Forms.Label _bok1_currentStatusHpValue = new();
         private System.Windows.Forms.Label _bok1_currentStatusEneValue = new();
 

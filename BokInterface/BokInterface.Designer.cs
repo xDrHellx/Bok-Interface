@@ -38,7 +38,6 @@ namespace BokInterface {
 
 		#region Subwindows properties
 
-		private System.Windows.Forms.Form statusEditWindow = new();
 		private System.Windows.Forms.Form inventoryEditWindow = new();
 		private System.Windows.Forms.Form equipsEditWindow = new();
 		private System.Windows.Forms.Form solarGunEditWindow = new();
@@ -123,13 +122,6 @@ namespace BokInterface {
 			this.currentStatusLabels.Clear();
 			this.currentStatsLabels.Clear();
 			this.editButtons.Clear();
-
-			// Status edit subwindow-related
-			this.statusEditWindow.Controls.Clear();
-			this.statusEditLabels.Clear();
-			this.statusEditButtons.Clear();
-			this.statusEditWindow.Close();
-			this.statusEditorOpened = false;
 
 			// Tools selection subwindow-related
 			this.miscToolsSelectionWindow.Controls.Clear();

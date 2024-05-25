@@ -1,5 +1,6 @@
 using System.Windows.Forms;
 
+using BokInterface.Addresses;
 using BokInterface.All;
 
 /**
@@ -11,7 +12,7 @@ namespace BokInterface {
     partial class BokInterface {
 
         #region Properties
-
+        private readonly ShinbokAddresses _shinbokAddresses = new();
         private Label _bok3_currentStatusHpValue = new();
         private Label _bok3_currentStatusEneValue = new();
         private Label _bok3_currentStatusTrcValue = new();
