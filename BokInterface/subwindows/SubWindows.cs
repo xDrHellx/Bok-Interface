@@ -30,16 +30,16 @@ namespace BokInterface {
                 // Add subwindow elements corresponding to the current game
                 switch (shorterGameName) {
                     case "Boktai":
-                        _statusEditorInstance = new BoktaiStatusEditor(this, _memoryValues, _boktaiAddresses);
+                        new BoktaiStatusEditor(this, _memoryValues, _boktaiAddresses);
                         break;
                     case "Zoktai":
-                        _statusEditorInstance = new ZoktaiStatusEditor(this, _memoryValues, _zoktaiAddresses);
+                        new ZoktaiStatusEditor(this, _memoryValues, _zoktaiAddresses);
                         break;
                     case "Shinbok":
-                        _statusEditorInstance = new ShinbokStatusEditor(this, _memoryValues, _shinbokAddresses);
+                        new ShinbokStatusEditor(this, _memoryValues, _shinbokAddresses);
                         break;
                     case "LunarKnights":
-                        _statusEditorInstance = new LunarKnightsStatusEditor(this, _memoryValues, _lunarKnightsAddresses);
+                        new LunarKnightsStatusEditor(this, _memoryValues, _lunarKnightsAddresses);
                         break;
                     default:
                         // If game is not handled, do nothing
