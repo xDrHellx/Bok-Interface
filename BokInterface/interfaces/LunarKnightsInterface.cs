@@ -1,3 +1,4 @@
+using BokInterface.Addresses;
 using BokInterface.All;
 
 /**
@@ -9,6 +10,8 @@ namespace BokInterface {
     partial class BokInterface {
 
         #region Properties
+
+        private readonly LunarKnightsAddresses _lunarKnightsAddresses = new();
 
         #endregion
 

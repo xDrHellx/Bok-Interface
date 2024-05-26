@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Windows.Forms;
 
@@ -22,38 +21,24 @@ namespace BokInterface {
 
 		#region Common interface elements properties
 		
-		private System.Windows.Forms.GroupBox currentStatusGroupBox = new();
-		private System.Windows.Forms.GroupBox currentStatsGroupBox = new();
-		private System.Windows.Forms.GroupBox inventoryGroupBox = new();
-		private System.Windows.Forms.GroupBox editGroupBox = new();
-		private System.Windows.Forms.GroupBox extrasGroupBox = new();
-		private List<System.Windows.Forms.Label> currentStatusLabels = new();
-		private List<System.Windows.Forms.Label> currentStatsLabels = new();
-		private List<System.Windows.Forms.Button> editButtons = new();
-		
-		/// <summary>Tooltip for values that only updates after switching rooms</summary>
-		public static System.Windows.Forms.ToolTip toolTip = WinFormHelpers.CreateToolTip();
+		private System.Windows.Forms.GroupBox currentStatusGroupBox = new(),
+			currentStatsGroupBox = new(),
+			inventoryGroupBox = new(),
+			editGroupBox = new(),
+			extrasGroupBox = new();
 
 		#endregion
 
 		#region Subwindows properties
 
-		private System.Windows.Forms.Form statusEditWindow = new();
-		private System.Windows.Forms.Form inventoryEditWindow = new();
-		private System.Windows.Forms.Form equipsEditWindow = new();
-		private System.Windows.Forms.Form solarGunEditWindow = new();
-		private System.Windows.Forms.Form weaponsEditWindow = new();
-		private System.Windows.Forms.Form magicsEditWindow = new();
-		private System.Windows.Forms.Form miscToolsSelectionWindow = new();
-		private System.Windows.Forms.Form calculatorsSelectionWindow = new();
+		private System.Windows.Forms.Form inventoryEditWindow = new(),
+			equipsEditWindow = new(),
+			solarGunEditWindow = new(),
+			weaponsEditWindow = new(),
+			magicsEditWindow = new(),
+			miscToolsSelectionWindow = new(),
+			calculatorsSelectionWindow = new();
 		
-		#endregion
-
-		#region Common subwindows elements properties
-
-		private List<System.Windows.Forms.Label> statusEditLabels = new();
-		private List<System.Windows.Forms.Button> statusEditButtons = new();
-
 		#endregion
 
 		/// <summary>Clean up any resources being used</summary>
@@ -120,17 +105,6 @@ namespace BokInterface {
 			this.inventoryGroupBox.Controls.Clear();
 			this.editGroupBox.Controls.Clear();
 			this.extrasGroupBox.Controls.Clear();
-
-			this.currentStatusLabels.Clear();
-			this.currentStatsLabels.Clear();
-			this.editButtons.Clear();
-
-			// Status edit subwindow-related
-			this.statusEditWindow.Controls.Clear();
-			this.statusEditLabels.Clear();
-			this.statusEditButtons.Clear();
-			this.statusEditWindow.Close();
-			this.statusEditorOpened = false;
 
 			// Tools selection subwindow-related
 			this.miscToolsSelectionWindow.Controls.Clear();

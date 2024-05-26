@@ -1,104 +1,101 @@
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Windows.Forms;
 
+using BokInterface.Addresses;
 using BokInterface.All;
 
-/**
- * File for Shinbok's status edit subwindow
- */
+namespace BokInterface.Status {
+    /// <summary>Status editor for Boktai 3</summary>
+    class ShinbokStatusEditor : StatusEditor {
 
-namespace BokInterface {
-    partial class BokInterface {
+        #region Instances
 
-        private void ShinbokStatusEditSubwindow() {
+        private readonly MemoryValues _memoryValues;
+        private readonly BokInterface _bokInterface;
+        private readonly ShinbokAddresses _shinbokAddresses;
 
-            int l = 0;
-            int n = 0;
+        #endregion
+
+        public ShinbokStatusEditor(BokInterface bokInterface, MemoryValues memoryValues, ShinbokAddresses shinbokAddresses) {
+
+            _memoryValues = memoryValues;
+            _bokInterface = bokInterface;
+            _shinbokAddresses = shinbokAddresses;
+
+            Name = name;
+            Text = text;
+            Icon = _bokInterface.Icon;
+            AutoScaleDimensions = new SizeF(6F, 15F);
+            AutoScaleMode = AutoScaleMode.Inherit;
+            FormBorderStyle = FormBorderStyle.FixedSingle;
+            BackColor = SystemColors.Control;
+            Font = WinFormHelpers.defaultFont;
+            AutoScroll = true;
+            Owner = _bokInterface;
+            ClientSize = new Size(227, 149);
+
+            // Generate the subwindow & add the onClose event to it
+            FormClosing += new FormClosingEventHandler(delegate (object sender, FormClosingEventArgs e) {
+                _bokInterface.statusEditorOpened = false;
+            });
+
+            // Add elements & show the subwindow
+            AddElements();
+            Show();
+        }
+
+        protected override void AddElements() {
 
             // Get default values, depending on availability, these can be the current in-game values
-            IDictionary<string, decimal> defaultValues = GetDefaultStatusValues();
+            IDictionary<string, decimal> defaultValues = GetDefaultValues();
 
             // Sections
-            _edit_statusGroupBox = WinFormHelpers.CreateCheckGroupBox("editStatusGroup", "Status", 5, 5, 103, 110);
-            _edit_statsGroupBox = WinFormHelpers.CreateCheckGroupBox("editStatsGroup", "Stats", 114, 5, 107, 110);
+            _statusGroupBox = WinFormHelpers.CreateCheckGroupBox("editStatusGroup", "Status", 5, 5, 103, 110, control: this);
+            _statsGroupBox = WinFormHelpers.CreateCheckGroupBox("editStatsGroup", "Stats", 114, 5, 107, 110, control: this);
 
             // Status
-            _edit_statusLabels.Add(WinFormHelpers.CreateLabel("djangoEditHpLabel", "LIFE :", 7, 24, 34, 15));
-            // _edit_statusLabels.Add(WinFormHelpers.CreateLabel("djangoEditEneLabel", "ENE :", 7, 52, 34, 15));
-            // _edit_statusLabels.Add(WinFormHelpers.CreateLabel("djangoEditTrcLabel", "TRC :", 7, 81, 34, 15));
+            WinFormHelpers.CreateLabel("djangoEditHpLabel", "LIFE :", 7, 24, 34, 15, _statusGroupBox);
+            // WinFormHelpers.CreateLabel("djangoEditEneLabel", "ENE :", 7, 52, 34, 15, _statusGroupBox);
+            // WinFormHelpers.CreateLabel("djangoEditTrcLabel", "TRC :", 7, 81, 34, 15, _statusGroupBox);
 
-            _edit_statusNumericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("django_current_hp", defaultValues["django_current_hp"], 47, 21, 50, 23, maxValue: 1000));
-            // _edit_statusNumericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("django_current_ene", defaultValues["django_current_ene"], 47, 50, 50, 23, maxValue: 1000));
-            // _edit_statusNumericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("django_current_trc", defaultValues["django_current_trc"], 47, 79, 50, 23, maxValue: 1000));
-
-            // Add elements to group boxes / sections
-            for (int i = 0; i < _edit_statusLabels.Count; i++) {
-                l++;
-                _edit_statusGroupBox.Controls.Add(_edit_statusLabels[i]);
-            }
-
-            for (int i = 0; i < _edit_statusNumericUpDowns.Count; i++) {
-                n++;
-                _edit_statusGroupBox.Controls.Add(_edit_statusNumericUpDowns[i]);
-            }
+            _statusNumericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("django_current_hp", defaultValues["django_current_hp"], 47, 21, 50, 23, maxValue: 1000, control: _statusGroupBox));
+            // _statusNumericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("django_current_ene", defaultValues["django_current_ene"], 47, 50, 50, 23, maxValue: 1000, control: _statusGroupBox));
+            // _statusNumericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("django_current_trc", defaultValues["django_current_trc"], 47, 79, 50, 23, maxValue: 1000, control: _statusGroupBox));
 
             // Stats
-            _edit_statusLabels.Add(WinFormHelpers.CreateLabel("djangoEditHpLabel", "VIT", 8, 24, 27, 15));
-            _edit_statusLabels.Add(WinFormHelpers.CreateLabel("djangoEditEneLabel", "SPR", 8, 51, 27, 15));
-            _edit_statusLabels.Add(WinFormHelpers.CreateLabel("djangoEditTrcLabel", "STR", 8, 81, 27, 15));
+            WinFormHelpers.CreateLabel("djangoEditHpLabel", "VIT", 8, 24, 27, 15, control: _statsGroupBox);
+            WinFormHelpers.CreateLabel("djangoEditEneLabel", "SPR", 8, 51, 27, 15, control: _statsGroupBox);
+            WinFormHelpers.CreateLabel("djangoEditTrcLabel", "STR", 8, 81, 27, 15, control: _statsGroupBox);
 
-            _edit_statusNumericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("django_base_vit", defaultValues["django_base_vit"], 36, 21, 41, 23, maxValue: 100));
-            _edit_statusNumericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("django_base_spr", defaultValues["django_base_spr"], 36, 50, 41, 23, maxValue: 100));
-            _edit_statusNumericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("django_base_str", defaultValues["django_base_str"], 36, 79, 41, 23, maxValue: 100));
+            _statusNumericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("django_base_vit", defaultValues["django_base_vit"], 36, 21, 41, 23, maxValue: 100, control: _statsGroupBox));
+            _statusNumericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("django_base_spr", defaultValues["django_base_spr"], 36, 50, 41, 23, maxValue: 100, control: _statsGroupBox));
+            _statusNumericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("django_base_str", defaultValues["django_base_str"], 36, 79, 41, 23, maxValue: 100, control: _statsGroupBox));
 
             // Tooltips & warnings
             List<Label> warningLabels = [
-                WinFormHelpers.CreateImageLabel("tooltip", "warning", 83, 23),
-                WinFormHelpers.CreateImageLabel("tooltip", "warning", 83, 52),
-                WinFormHelpers.CreateImageLabel("tooltip", "warning", 83, 81)
+                WinFormHelpers.CreateImageLabel("tooltip", "warning", 83, 23, _statsGroupBox),
+                WinFormHelpers.CreateImageLabel("tooltip", "warning", 83, 52, _statsGroupBox),
+                WinFormHelpers.CreateImageLabel("tooltip", "warning", 83, 81, _statsGroupBox)
             ];
-
-            // Add tooltips to labels group
-            for (int i = 0; i < warningLabels.Count; i++) {
-                _edit_statusLabels.Add(warningLabels[i]);
-            }
-
-            // Add elements to group
-            for (int i = l; i < _edit_statusLabels.Count; i++) {
-                l++;
-                _edit_statsGroupBox.Controls.Add(_edit_statusLabels[i]);
-            }
-
-            for (int i = n; i < _edit_statusNumericUpDowns.Count; i++) {
-                n++;
-                _edit_statsGroupBox.Controls.Add(_edit_statusNumericUpDowns[i]);
-            }
-
-            // Add groups to subwindow
-            statusEditWindow.Controls.Add(_edit_statusGroupBox);
-            statusEditWindow.Controls.Add(_edit_statsGroupBox);
-
-            // Button for setting values & its events
-            Button setValuesButton = WinFormHelpers.CreateButton("setStatusButton", "Set values", 147, 121, 75, 23);
-            setValuesButton.Click += new EventHandler(delegate (object sender, EventArgs e) {
-                // Write the values for 10 frames
-                for (int i = 0; i < 10; i++) {
-                    SetStatusValues();
-                }
-            });
-
-            // Add button to subwindow, we do this here because the elements need to be added to the form already
-            statusEditWindow.Controls.Add(setValuesButton);
 
             // Add tooltips
             WinFormHelpers.AddValuesWarningToolTip(warningLabels);
+
+            // Button for setting values & its events
+            Button setValuesButton = WinFormHelpers.CreateButton("setStatusButton", "Set values", 147, 121, 75, 23, this);
+            setValuesButton.Click += new EventHandler(delegate (object sender, EventArgs e) {
+                // Write the values for 10 frames
+                for (int i = 0; i < 10; i++) {
+                    SetValues();
+                }
+            });
         }
 
-
-        /// <summary>Get default values for Shinbok</summary>
+        /// <summary>Get default values</summary>
         /// <returns><c>IDictionary<string, decimal></c>Default values</returns>
-        private IDictionary<string, decimal> GetShinbokDefaultValues() {
+        protected override IDictionary<string, decimal> GetDefaultValues() {
 
             IDictionary<string, decimal> defaultValues = new Dictionary<string, decimal>();
             uint djangoCurrentHp = _memoryValues.Django["current_hp"].Value;
@@ -124,7 +121,16 @@ namespace BokInterface {
 
         /// <summary>Specific method for setting status values</summary>
         /// <param name="fields">List of fields to parse through</param>
-        private void SetShinbokStatusValues(List<NumericUpDown> fields) {
+        protected override void SetValues() {
+
+            // Retrieve all input fields
+            List<NumericUpDown> fields = _statusNumericUpDowns;
+
+            // Store the previous setting for BizHawk being paused
+            _bokInterface._previousIsPauseSetting = APIs.Client.IsPaused();
+
+            // Pause BizHawk
+            APIs.Client.Pause();
 
             // Sets values based on fields
             for (int i = 0; i < fields.Count; i++) {
@@ -188,6 +194,14 @@ namespace BokInterface {
                         }
                         break;
                 }
+            }
+
+            /**
+             * If BizHawk was not paused before setting values, unpause it
+             * Otherwise keep it paused
+             */
+            if (_bokInterface._previousIsPauseSetting == true) {
+                APIs.Client.Unpause();
             }
         }
     }

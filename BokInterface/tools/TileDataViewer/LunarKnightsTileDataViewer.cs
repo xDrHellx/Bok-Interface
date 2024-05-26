@@ -1,21 +1,28 @@
 using System.Windows.Forms;
 
+using BokInterface.Addresses;
 using BokInterface.All;
 
-/**
- * File for handling Lunar Knights / Boktai DS-specific values
- */
-
 namespace BokInterface.Tools.TileDataViewer {
-    partial class TileDataViewer : Form {
+    /// <summary>TDViewer tool for Lunar Knights / Boktai DS</summary>
+    class LunarKnightsTileDataViewer : TileDataViewer {
 
-        /// <summary>Draws tile effect icons for Lunar Knights / Boktai DS</summary>
-        /// <param name="e">Painting event used for drawing</param>
-        /// <param name="tileEffect">Value for the tile's effect</param>
-        /// <param name="posX">X position of the tile</param>
-        /// <param name="posY">Y position of the tile</param>
-        /// <param name="scale">Scale (used for drawing)</param>
-        protected void DrawLunarKnightsTileEffect(PaintEventArgs e, uint tileEffect, int posX, int posY, int scale) {
+        private readonly BokInterface _bokInterface;
+        private readonly LunarKnightsAddresses _memAddresses;
+
+        public LunarKnightsTileDataViewer(BokInterface bokInterface, LunarKnightsAddresses lunarKnightsAddresses) {
+            Owner = _bokInterface = bokInterface;
+            _memAddresses = lunarKnightsAddresses;
+            Icon = _bokInterface.Icon;
+            InitializeSubwindowProperties();
+        }
+
+        protected override void SetGameAddresses() {
+            // Currently not handled, not enough addresses available
+            mapDataAddress = djangoXposAddress = djangoYposAddress = 0;
+        }
+
+        protected override void DrawTileEffect(PaintEventArgs e, uint tileEffect, int posX, int posY, int scale) {
 
             // Only handle values between a certain range (4096 = 1000 in hexadecimal)
             if (tileEffect > 0 && tileEffect < 4096) {

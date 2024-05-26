@@ -1,3 +1,4 @@
+using BokInterface.Addresses;
 using BokInterface.All;
 
 /**
@@ -9,6 +10,7 @@ namespace BokInterface {
 
         #region Properties
 
+        private readonly BoktaiAddresses _boktaiAddresses = new();
         private System.Windows.Forms.Label _bok1_currentStatusHpValue = new();
         private System.Windows.Forms.Label _bok1_currentStatusEneValue = new();
 
@@ -41,21 +43,12 @@ namespace BokInterface {
             currentStatusGroupBox = WinFormHelpers.CreateGroupBox("currentStatus", "Current status", 5, 25, 226, 70, this);
 
             // Current status labels
-            currentStatusLabels.Add(WinFormHelpers.CreateLabel("djangoCurrentHpLabel", "LIFE :", 7, 19, 34, 15));
-            currentStatusLabels.Add(WinFormHelpers.CreateLabel("djangoCurrentEneLabel", "ENE :", 7, 34, 34, 15));
+            WinFormHelpers.CreateLabel("djangoCurrentHpLabel", "LIFE :", 7, 19, 34, 15, currentStatusGroupBox);
+            WinFormHelpers.CreateLabel("djangoCurrentEneLabel", "ENE :", 7, 34, 34, 15, currentStatusGroupBox);
 
             // Current status values
-            _bok1_currentStatusHpValue = WinFormHelpers.CreateLabel("djangoCurrentHpValue", "", 44, 19, 31, 15);
-            _bok1_currentStatusEneValue = WinFormHelpers.CreateLabel("djangoCurrentHpValue", "", 44, 34, 31, 15);
-
-            // Add values labels to group
-            currentStatusLabels.Add(_bok1_currentStatusHpValue);
-            currentStatusLabels.Add(_bok1_currentStatusEneValue);
-
-            // Add elements to group
-            for (int i = 0; i < currentStatusLabels.Count; i++) {
-                currentStatusGroupBox.Controls.Add(currentStatusLabels[i]);
-            }
+            _bok1_currentStatusHpValue = WinFormHelpers.CreateLabel("djangoCurrentHpValue", "", 44, 19, 31, 15, currentStatusGroupBox);
+            _bok1_currentStatusEneValue = WinFormHelpers.CreateLabel("djangoCurrentHpValue", "", 44, 34, 31, 15, currentStatusGroupBox);
         }
     }
 }

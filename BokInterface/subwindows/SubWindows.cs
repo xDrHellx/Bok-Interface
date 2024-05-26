@@ -2,6 +2,7 @@ using System;
 using System.Windows.Forms;
 
 using BokInterface.All;
+using BokInterface.Status;
 
 /**
  * Main file for subwindows
@@ -12,14 +13,14 @@ namespace BokInterface {
 
         #region Properties indicating if subwindows are opened
 
-        protected bool statusEditorOpened = false;
-        protected bool inventoryEditorOpened = false;
-        protected bool equipsEditorOpened = false;
-        protected bool solarGunEditorOpened = false;
-        protected bool weaponsEditorOpened = false;
-        protected bool magicsEditorOpened = false;
-        protected bool miscToolsSelectorOpened = false;
-        protected bool calculatorsSelectorOpened = false;
+        public bool statusEditorOpened = false,
+            inventoryEditorOpened = false,
+            equipsEditorOpened = false,
+            solarGunEditorOpened = false,
+            weaponsEditorOpened = false,
+            magicsEditorOpened = false,
+            miscToolsSelectorOpened = false,
+            calculatorsSelectorOpened = false;
 
         #endregion
 
@@ -27,39 +28,25 @@ namespace BokInterface {
         protected void OpenStatusEditor(object sender, EventArgs e) {
             if (statusEditorOpened == false) {
 
-                // Create subwindow & add on close event
-                statusEditWindow = WinFormHelpers.CreateSubWindow("statusEditWindow", "Bok Edit - Status", 203, 144, this);
-                statusEditWindow.FormClosing += new FormClosingEventHandler(delegate (object sender, FormClosingEventArgs e) {
-                    statusEditorOpened = false;
-                    statusEditWindow.Controls.Clear();
-                });
-
-                // Clears subwindow
-                ClearStatusEditControls();
-
                 // Add subwindow elements corresponding to the current game
                 switch (shorterGameName) {
                     case "Boktai":
-                        BoktaiStatusEditSubwindow();
+                        new BoktaiStatusEditor(this, _memoryValues, _boktaiAddresses);
                         break;
                     case "Zoktai":
-                        statusEditWindow.ClientSize = new System.Drawing.Size(430, 231);
-                        ZoktaiStatusEditSubwindow();
+                        new ZoktaiStatusEditor(this, _memoryValues, _zoktaiAddresses);
                         break;
                     case "Shinbok":
-                        statusEditWindow.ClientSize = new System.Drawing.Size(227, 149);
-                        ShinbokStatusEditSubwindow();
+                        new ShinbokStatusEditor(this, _memoryValues, _shinbokAddresses);
                         break;
                     case "LunarKnights":
-                        LunarKnightsStatusEditSubwindow();
+                        new LunarKnightsStatusEditor(this, _memoryValues, _lunarKnightsAddresses);
                         break;
                     default:
-                        // If game is not handled, stop
+                        // If game is not handled, do nothing
                         return;
                 }
 
-                // statusEditWindow.ShowDialog(); // focus & stops BizHawk
-                statusEditWindow.Show(); // focus & let BizHawk continue
                 statusEditorOpened = true;
             }
         }
