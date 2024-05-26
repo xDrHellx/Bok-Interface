@@ -7,7 +7,6 @@ using BokInterface.Addresses;
 using BokInterface.All;
 
 namespace BokInterface.Status {
-
     /// <summary>Status editor for Boktai</summary>
     class BoktaiStatusEditor : StatusEditor {
 

@@ -6,10 +6,6 @@ using System.Windows.Forms;
 using BokInterface.Addresses;
 using BokInterface.All;
 
-/**
- * File for Shinbok's status edit subwindow
- */
-
 namespace BokInterface.Status {
     /// <summary>Status editor for Boktai 3</summary>
     class ShinbokStatusEditor : StatusEditor {

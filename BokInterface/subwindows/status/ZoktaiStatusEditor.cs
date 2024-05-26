@@ -7,10 +7,6 @@ using BokInterface.Addresses;
 using BokInterface.All;
 using BokInterface.ExpTables;
 
-/**
- * File for Zoktai's status edit subwindow
- */
-
 namespace BokInterface.Status {
     /// <summary>Status editor for Boktai 2</summary>
     class ZoktaiStatusEditor : StatusEditor {

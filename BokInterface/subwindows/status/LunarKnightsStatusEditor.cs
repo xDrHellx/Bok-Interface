@@ -6,13 +6,8 @@ using System.Windows.Forms;
 using BokInterface.Addresses;
 using BokInterface.All;
 
-/**
- * File for Lunar Knights / Boktai DS' status edit subwindow
- */
-
 namespace BokInterface.Status {
     /// <summary>Status editor for Lunar Knights / Boktai DS</summary>
-
     class LunarKnightsStatusEditor : StatusEditor {
 
         #region Instances
