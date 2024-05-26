@@ -13,13 +13,13 @@ namespace BokInterface {
 
         #region Properties indicating if subwindows are opened or not
 
-        public bool statusEditorOpened = false;
-        public bool inventoryEditorOpened = false;
-        public bool equipsEditorOpened = false;
-        public bool solarGunEditorOpened = false;
-        public bool weaponsEditorOpened = false;
-        public bool magicsEditorOpened = false;
-        public bool miscToolsSelectorOpened = false;
+        public bool statusEditorOpened = false,
+            inventoryEditorOpened = false,
+            equipsEditorOpened = false,
+            solarGunEditorOpened = false,
+            weaponsEditorOpened = false,
+            magicsEditorOpened = false,
+            miscToolsSelectorOpened = false;
 
         #endregion
 
