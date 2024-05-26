@@ -175,8 +175,10 @@ namespace BokInterface.All {
 
         #region Formatting methods
 
-        /// <summary>Format a memory address name for better readability</summary>
-        /// <example>"django_first_slot" => "Django first slot"</example
+        /// <summary>
+        /// <para>Format a memory address name for better readability</para>
+        /// <example>Example: "django_first_slot" => "Django first slot"</example>
+        /// </summary>
         /// <param name="name">Name to format</param>
         /// <returns><c>String</c>Formatted name</returns>
         public static string FormatMemoryAddressName(string name) {
