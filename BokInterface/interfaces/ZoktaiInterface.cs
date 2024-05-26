@@ -116,27 +116,16 @@ namespace BokInterface {
             currentStatusGroupBox = WinFormHelpers.CreateGroupBox("currentStatus", "Current status", 5, 25, 226, 55, this);
 
             // Current status labels
-            currentStatusLabels.Add(WinFormHelpers.CreateLabel("djangoCurrentHpLabel", "LIFE :", 7, 19, 34, 15));
-            currentStatusLabels.Add(WinFormHelpers.CreateLabel("djangoCurrentEneLabel", "ENE :", 7, 34, 34, 15));
-            currentStatusLabels.Add(WinFormHelpers.CreateLabel("djangoCurrentLevelLabel", "Level :", 93, 19, 40, 15));
-            currentStatusLabels.Add(WinFormHelpers.CreateLabel("djangoCurrentExpLabel", "EXP :", 93, 34, 33, 15));
+            WinFormHelpers.CreateLabel("djangoCurrentHpLabel", "LIFE :", 7, 19, 34, 15, currentStatusGroupBox);
+            WinFormHelpers.CreateLabel("djangoCurrentEneLabel", "ENE :", 7, 34, 34, 15, currentStatusGroupBox);
+            WinFormHelpers.CreateLabel("djangoCurrentLevelLabel", "Level :", 93, 19, 40, 15, currentStatusGroupBox);
+            WinFormHelpers.CreateLabel("djangoCurrentExpLabel", "EXP :", 93, 34, 33, 15, currentStatusGroupBox);
 
             // Current status values
-            _bok2_currentStatusHpValue = WinFormHelpers.CreateLabel("djangoCurrentHpValue", "", 44, 19, 31, 15);
-            _bok2_currentStatusEneValue = WinFormHelpers.CreateLabel("djangoCurrentHpValue", "", 44, 34, 31, 15);
-            _bok2_djangoLevel = WinFormHelpers.CreateLabel("djangoCurrentLevelValue", "", 132, 19, 31, 15);
-            _bok2_djangoExp = WinFormHelpers.CreateLabel("djangoCurrentExpValue", "", 132, 34, 43, 15);
-
-            // Add values labels to group
-            currentStatusLabels.Add(_bok2_currentStatusHpValue);
-            currentStatusLabels.Add(_bok2_currentStatusEneValue);
-            currentStatusLabels.Add(_bok2_djangoLevel);
-            currentStatusLabels.Add(_bok2_djangoExp);
-
-            // Add elements to group
-            for (int i = 0; i < currentStatusLabels.Count; i++) {
-                currentStatusGroupBox.Controls.Add(currentStatusLabels[i]);
-            }
+            _bok2_currentStatusHpValue = WinFormHelpers.CreateLabel("djangoCurrentHpValue", "", 44, 19, 31, 15, currentStatusGroupBox);
+            _bok2_currentStatusEneValue = WinFormHelpers.CreateLabel("djangoCurrentHpValue", "", 44, 34, 31, 15, currentStatusGroupBox);
+            _bok2_djangoLevel = WinFormHelpers.CreateLabel("djangoCurrentLevelValue", "", 132, 19, 31, 15, currentStatusGroupBox);
+            _bok2_djangoExp = WinFormHelpers.CreateLabel("djangoCurrentExpValue", "", 132, 34, 43, 15, currentStatusGroupBox);
         }
 
         private void AddZoktaiCurrentSkillSection() {
