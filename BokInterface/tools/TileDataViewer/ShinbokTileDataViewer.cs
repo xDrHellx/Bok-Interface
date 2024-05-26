@@ -1,21 +1,29 @@
 using System.Windows.Forms;
 
+using BokInterface.Addresses;
 using BokInterface.All;
 
-/**
- * File for handling Shinbok-specific values
- */
-
 namespace BokInterface.Tools.TileDataViewer {
-    partial class TileDataViewer : Form {
+    /// <summary>TDViewer tool for Boktai 3</summary>
+    class ShinbokTileDataViewer : TileDataViewer {
 
-        /// <summary>Draws tile effect icons for Shinbok</summary>
-        /// <param name="e">Painting event used for drawing</param>
-        /// <param name="tileEffect">Value for the tile's effect</param>
-        /// <param name="posX">X position of the tile</param>
-        /// <param name="posY">Y position of the tile</param>
-        /// <param name="scale">Scale (used for drawing)</param>
-        protected void DrawShinbokTileEffect(PaintEventArgs e, uint tileEffect, int posX, int posY, int scale) {
+        private readonly BokInterface _bokInterface;
+        private readonly ShinbokAddresses _memAddresses;
+
+        public ShinbokTileDataViewer(BokInterface bokInterface, ShinbokAddresses shinbokAddresses) {
+            Owner = _bokInterface = bokInterface;
+            _memAddresses = shinbokAddresses;
+            Icon = _bokInterface.Icon;
+            InitializeSubwindowProperties();
+        }
+
+        protected override void SetGameAddresses() {
+            mapDataAddress = _memAddresses.Misc["map_data"].Address;
+            djangoXposAddress = APIs.Memory.ReadU32(_memAddresses.Misc["stat"].Address) + _memAddresses.Django["x_position"].Address;
+            djangoYposAddress = APIs.Memory.ReadU32(_memAddresses.Misc["stat"].Address) + _memAddresses.Django["y_position"].Address;
+        }
+
+        protected override void DrawTileEffect(PaintEventArgs e, uint tileEffect, int posX, int posY, int scale) {
 
             // Only handle values between a certain range (4096 = 1000 in hexadecimal)
             if (tileEffect > 0 && tileEffect < 4096) {
