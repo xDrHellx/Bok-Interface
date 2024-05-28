@@ -2,7 +2,7 @@ using System.Collections.Generic;
 
 namespace BokInterface.ExpTables {
     /// <summary>Class containing the EXP tables for Django, for each game (if available)</summary>
-    static class Django {
+    static class DjangoExpTable {
 
         // public static readonly List<uint> boktai = [];
         public static readonly List<uint> zoktai = [
