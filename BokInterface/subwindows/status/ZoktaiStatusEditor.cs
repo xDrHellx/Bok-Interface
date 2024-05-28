@@ -159,7 +159,7 @@ namespace BokInterface.Status {
              */
             if (_memoryValues.U32.ContainsKey("total_exp_until_next_level") == true && _memoryValues.Django.ContainsKey("level")) {
                 int level = (int)_memoryValues.Django["level"].Value;
-                _memoryValues.U32["total_exp_until_next_level"].Value = level < 99 ? Django.zoktai[level] : 0;
+                _memoryValues.U32["total_exp_until_next_level"].Value = level < 99 ? DjangoExpTable.zoktai[level] : 0;
             }
 
             /**
