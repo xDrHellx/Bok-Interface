@@ -94,14 +94,14 @@ namespace BokInterface {
                         return;
                 }
 
-                // Initialize the loop to update / redraw automatically
+                // Initialize the loop to update / redraw automatically & add the on-close event handler
                 _tileDataViewer.InitializeFrameLoop();
                 _tileDataViewer.FormClosing += new FormClosingEventHandler(delegate (object sender, FormClosingEventArgs e) {
 
                     tileDataViewerActive = false;
 
                     // Remove the function from the list of functions to call each frame
-                    // Also just in case, replace instance with null to prevent it from doing anything else
+                    // Also just in case, set instance with null to prevent it from doing anything else
                     functionsList.RemoveAt(_tileDataViewer.index);
                     _tileDataViewer = null;
                 });
@@ -127,16 +127,31 @@ namespace BokInterface {
 
                 memValuesListingActive = true;
 
-                _memValuesListing = new("mvl", "Memory Values List", 650, 500, shorterGameName, this);
+                switch (shorterGameName) {
+                    case "Boktai":
+                        _memValuesListing = new MemoryValuesListing(this, _boktaiAddresses);
+                        break;
+                    case "Zoktai":
+                        _memValuesListing = new MemoryValuesListing(this, _zoktaiAddresses);
+                        break;
+                    case "Shinbok":
+                        _memValuesListing = new MemoryValuesListing(this, _shinbokAddresses);
+                        break;
+                    case "LunarKnights":
+                        _memValuesListing = new MemoryValuesListing(this, _lunarKnightsAddresses);
+                        break;
+                    default:
+                        // If game not handled, indicate that the tool isn't active & stop here
+                        memValuesListingActive = false;
+                        return;
+                }
+
+                // Add the on-close event handler
                 _memValuesListing.FormClosing += new FormClosingEventHandler(delegate (object sender, FormClosingEventArgs e) {
-
+                    // Indicate that the tool isn't active anymore & set instance to null just in case, to prevent it from doing anything else
                     memValuesListingActive = false;
-
-                    // Just in case, replace instance with null to prevent it from doing anything else
                     _memValuesListing = null;
                 });
-
-                _memValuesListing.Show();
             });
 
             miscToolsSelectionWindow.Controls.Add(mvlBtn);

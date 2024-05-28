@@ -10,30 +10,59 @@ namespace BokInterface.Tools.MemoryValuesListing {
     /// <summary>Shows the list of all memory addresses listed for a game with their values, based on the ones added in the Bok Interface itself</summary>
     class MemoryValuesListing : Form {
 
-        #region Main properties
+        #region Tool properties & instances
 
         public int index = 0;
         private readonly DataTable _dataTable = new();
         private DataGridView? _dataGridView;
-        private readonly string _currentGame = "";
+        private readonly BokInterface _bokInterface;
+        private readonly dynamic? _memAddresses;
 
         #endregion
 
-        #region Memory addresses properties
+        #region Subwindow properties
 
-        private readonly BoktaiAddresses _boktaiAddresses = new();
-        private readonly ZoktaiAddresses _zoktaiAddresses = new();
-        private readonly ShinbokAddresses _shinbokAddresses = new();
-        private readonly LunarKnightsAddresses _lunarKnightsAddresses = new();
+        protected string name = "memoryValuesListing",
+            title = "Memory Values List";
+        protected int width = 650,
+            height = 500;
 
         #endregion
 
-        #region Subwindow-related methods
+        #region Constructors
 
-        public MemoryValuesListing(string name, string title, int width, int height, string currentGame, Form parentForm) {
+        public MemoryValuesListing(BokInterface bokInterface, BoktaiAddresses boktaiAddresses) {
+            Owner = _bokInterface = bokInterface;
+            _memAddresses = boktaiAddresses;
+            Icon = _bokInterface.Icon;
+            InitializeSubwindowProperties();
+        }
+
+        public MemoryValuesListing(BokInterface bokInterface, ZoktaiAddresses zoktaiAddresses) {
+            Owner = _bokInterface = bokInterface;
+            _memAddresses = zoktaiAddresses;
+            Icon = _bokInterface.Icon;
+            InitializeSubwindowProperties();
+        }
+
+        public MemoryValuesListing(BokInterface bokInterface, ShinbokAddresses shinbokAddresses) {
+            Owner = _bokInterface = bokInterface;
+            _memAddresses = shinbokAddresses;
+            Icon = _bokInterface.Icon;
+            InitializeSubwindowProperties();
+        }
+
+        public MemoryValuesListing(BokInterface bokInterface, LunarKnightsAddresses lunarKnightsAddresses) {
+            Owner = _bokInterface = bokInterface;
+            _memAddresses = lunarKnightsAddresses;
+            Icon = _bokInterface.Icon;
+            InitializeSubwindowProperties();
+        }
+
+        /// <summary>Initialize subwindow properties</summary>
+        protected void InitializeSubwindowProperties() {
             Name = name;
             Text = title;
-            Icon = parentForm.Icon;
             AutoScaleDimensions = new SizeF(6F, 15F);
             AutoScaleMode = AutoScaleMode.Inherit;
             FormBorderStyle = FormBorderStyle.FixedSingle;
@@ -41,32 +70,24 @@ namespace BokInterface.Tools.MemoryValuesListing {
             Font = WinFormHelpers.defaultFont;
             AutoScroll = true;
             ClientSize = new Size(width, height);
-            Owner = parentForm;
-            _currentGame = currentGame;
+
+            // Show the subwindow
+            Show();
         }
 
-        /// <summary>Get the specified icon if it exist</summary>
-        /// <param name="fileName">File name (without .ico extension)</param>
-        /// <returns><c>System.Drawing.Icon</c>Specified Icon instance (or default if the specified icon could not be found)</returns>
-        protected Icon GetIcon(string fileName) {
-            return fileName == "" ? Icon : (Icon)Properties.Resources.ResourceManager.GetObject(fileName);
-        }
+        #endregion
+
+        #region Drawing methods
 
         protected override void OnPaint(PaintEventArgs e) {
             base.OnPaint(e);
             _dataGridView = null;
-
-            // If current game is not handled, stop
-            if (_currentGame == "") {
-                return;
-            }
-
             GenerateDataTable();
         }
 
         #endregion
 
-        #region Data Table generation methods
+        #region DataTable generation methods
 
         /// <summary>Generate the Data Table containing the memory addresses, values and infos</summary>
         private void GenerateDataTable() {
@@ -78,10 +99,14 @@ namespace BokInterface.Tools.MemoryValuesListing {
 
             // Generate table data for the current game
             GenerateColumns();
-            GenerateTableData(_currentGame);
+            bool rowsGenerated = GenerateTableData();
+            if (rowsGenerated == false) {
+                // If no rows were generated, stop
+                return;
+            }
 
             // Show table in subwindow & set columns styles
-            _dataGridView = WinFormHelpers.CreateDataGridView("memValuesGrid", _dataTable, 5, 5, ClientSize.Width - 10, ClientSize.Height - 10, this);
+            _dataGridView = WinFormHelpers.CreateDataGridView("mvlGrid", _dataTable, 5, 5, ClientSize.Width - 10, ClientSize.Height - 10, this);
             SetColumnsStyle();
         }
 
@@ -131,36 +156,40 @@ namespace BokInterface.Tools.MemoryValuesListing {
         }
 
         /// <summary>Generate the table data for the corresponding game</summary>
-        /// <param name="gameName">Current game name</param>
-        private void GenerateTableData(string gameName) {
-            switch (gameName) {
+        /// <returns><c>bool</c>True if rows were generated, false otherwise</returns>
+        private bool GenerateTableData() {
+            if (_memAddresses == null) {
+                return false;
+            }
+
+            switch (BokInterface.shorterGameName) {
                 case "Boktai":
-                    GenerateRows(_boktaiAddresses.Django);
-                    GenerateRows(_boktaiAddresses.Inventory);
-                    GenerateRows(_boktaiAddresses.Gardening);
-                    GenerateRows(_boktaiAddresses.Misc);
-                    break;
+                    GenerateRows(_memAddresses.Django);
+                    GenerateRows(_memAddresses.Inventory);
+                    GenerateRows(_memAddresses.Gardening);
+                    GenerateRows(_memAddresses.Misc);
+                    return true;
                 case "Zoktai":
-                    GenerateRows(_zoktaiAddresses.Django);
-                    GenerateRows(_zoktaiAddresses.Inventory);
-                    GenerateRows(_zoktaiAddresses.Magics);
-                    GenerateRows(_zoktaiAddresses.Misc);
-                    break;
+                    GenerateRows(_memAddresses.Django);
+                    GenerateRows(_memAddresses.Inventory);
+                    GenerateRows(_memAddresses.Magics);
+                    GenerateRows(_memAddresses.Misc);
+                    return true;
                 case "Shinbok":
-                    GenerateRows(_shinbokAddresses.Django);
-                    GenerateRows(_shinbokAddresses.Solls);
-                    GenerateRows(_shinbokAddresses.Bike);
-                    GenerateRows(_shinbokAddresses.Misc);
-                    break;
+                    GenerateRows(_memAddresses.Django);
+                    GenerateRows(_memAddresses.Solls);
+                    GenerateRows(_memAddresses.Bike);
+                    GenerateRows(_memAddresses.Misc);
+                    return true;
                 case "LunarKnights":
-                    GenerateRows(_lunarKnightsAddresses.Aaron);
-                    GenerateRows(_lunarKnightsAddresses.Lucian);
-                    GenerateRows(_lunarKnightsAddresses.Inventory);
-                    GenerateRows(_lunarKnightsAddresses.Misc);
-                    break;
+                    GenerateRows(_memAddresses.Aaron);
+                    GenerateRows(_memAddresses.Lucian);
+                    GenerateRows(_memAddresses.Inventory);
+                    GenerateRows(_memAddresses.Misc);
+                    return true;
                 default:
                     // If game is not handled, do nothing
-                    break;
+                    return false;
             }
         }
 
