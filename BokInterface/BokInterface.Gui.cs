@@ -15,11 +15,11 @@ namespace BokInterface {
 
         /// <summary>Shows the indicator for the Bok Interface</summary>
         private void ShowInterfaceIndicator() {
-            APIs.Gui.Text(3, 1, interfaceActivated == true ? "Bok ON" : "Bok Off", System.Drawing.Color.Orange, "bottomright");
+            APIs.Gui.Text(3, 1, "Bok ON", System.Drawing.Color.Orange, "bottomright");
 
             // On DS add the indicator on the top screen too
             if (isDS == true) {
-                APIs.Gui.Text(3, GetScreenHeight(true) + 1, interfaceActivated == true ? "Bok ON" : "Bok Off", System.Drawing.Color.Orange, "bottomright");
+                APIs.Gui.Text(3, GetScreenHeight(true) + 1, "Bok ON", System.Drawing.Color.Orange, "bottomright");
             }
         }
 
