@@ -192,17 +192,16 @@ namespace BokInterface {
             _bok2_editMagicsBtn = WinFormHelpers.CreateButton("editMagics", "Magics", 6, 127, 75, 23, editGroupBox);
 
             // WIP features are disabled for now
-            _bok2_editInventoryBtn.Enabled = false;
             _bok2_editEquipsBtn.Enabled = false;
             _bok2_editWeaponsBtn.Enabled = false;
             _bok2_editMagicsBtn.Enabled = false;
 
             // Add onclick events
             _bok2_editStatusBtn.Click += new System.EventHandler(OpenStatusEditor);
-            // this.bok2_editInventoryBtn.Click += new System.EventHandler(this.OpenInventoryEditor);
-            // this.bok2_editEquipsBtn.Click += new System.EventHandler(this.OpenEquipsEditor);
-            // this.bok2_editWeaponsBtn.Click += new System.EventHandler(this.OpenWeaponsEditor);
-            // this.bok2_editMagicsBtn.Click += new System.EventHandler(this.OpenMagicsEditor);
+            _bok2_editInventoryBtn.Click += new System.EventHandler(OpenInventoryEditor);
+            // _bok2_editEquipsBtn.Click += new System.EventHandler(OpenEquipsEditor);
+            // _bok2_editWeaponsBtn.Click += new System.EventHandler(OpenWeaponsEditor);
+            // _bok2_editMagicsBtn.Click += new System.EventHandler(OpenMagicsEditor);
         }
     }
 }
