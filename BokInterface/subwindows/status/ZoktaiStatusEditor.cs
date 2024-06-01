@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.Windows.Forms;
 
 using BokInterface.Addresses;
@@ -25,17 +24,10 @@ namespace BokInterface.Status {
             _bokInterface = bokInterface;
             _zoktaiAddresses = zoktaiAddresses;
 
-            Name = name;
-            Text = text;
             Icon = _bokInterface.Icon;
-            AutoScaleDimensions = new SizeF(6F, 15F);
-            AutoScaleMode = AutoScaleMode.Inherit;
-            FormBorderStyle = FormBorderStyle.FixedSingle;
-            BackColor = SystemColors.Control;
-            Font = WinFormHelpers.defaultFont;
-            AutoScroll = true;
             Owner = _bokInterface;
-            ClientSize = new Size(430, 231);
+
+            SetFormParameters(430, 231);
 
             // Generate the subwindow & add the onClose event to it
             FormClosing += new FormClosingEventHandler(delegate (object sender, FormClosingEventArgs e) {
