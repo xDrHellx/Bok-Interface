@@ -18,11 +18,9 @@ namespace BokInterface.Inventory {
         public ShinbokInventoryEditor(BokInterface bokInterface, MemoryValues memoryValues, ShinbokAddresses ShinbokAddresses) {
 
             _memoryValues = memoryValues;
-            _bokInterface = bokInterface;
             _shinbokAddresses = ShinbokAddresses;
-
+            Owner = _bokInterface = bokInterface;
             Icon = _bokInterface.Icon;
-            Owner = _bokInterface;
 
             SetFormParameters(400, 400);
 

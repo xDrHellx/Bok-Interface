@@ -18,11 +18,9 @@ namespace BokInterface.Inventory {
         public LunarKnightsInventoryEditor(BokInterface bokInterface, MemoryValues memoryValues, LunarKnightsAddresses LunarKnightsAddresses) {
 
             _memoryValues = memoryValues;
-            _bokInterface = bokInterface;
             _lunarKnightsAddresses = LunarKnightsAddresses;
-
+            Owner = _bokInterface = bokInterface;
             Icon = _bokInterface.Icon;
-            Owner = _bokInterface;
 
             SetFormParameters(400, 400);
 

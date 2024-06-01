@@ -21,11 +21,9 @@ namespace BokInterface.Status {
         public ZoktaiStatusEditor(BokInterface bokInterface, MemoryValues memoryValues, ZoktaiAddresses zoktaiAddresses) {
 
             _memoryValues = memoryValues;
-            _bokInterface = bokInterface;
             _zoktaiAddresses = zoktaiAddresses;
-
+            Owner = _bokInterface = bokInterface;
             Icon = _bokInterface.Icon;
-            Owner = _bokInterface;
 
             SetFormParameters(430, 231);
 

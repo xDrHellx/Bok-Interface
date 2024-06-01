@@ -20,11 +20,9 @@ namespace BokInterface.Status {
         public ShinbokStatusEditor(BokInterface bokInterface, MemoryValues memoryValues, ShinbokAddresses shinbokAddresses) {
 
             _memoryValues = memoryValues;
-            _bokInterface = bokInterface;
             _shinbokAddresses = shinbokAddresses;
-
+            Owner = _bokInterface = bokInterface;
             Icon = _bokInterface.Icon;
-            Owner = _bokInterface;
 
             SetFormParameters(227, 149);
 

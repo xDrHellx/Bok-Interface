@@ -18,11 +18,9 @@ namespace BokInterface.Inventory {
         public BoktaiInventoryEditor(BokInterface bokInterface, MemoryValues memoryValues, BoktaiAddresses BoktaiAddresses) {
 
             _memoryValues = memoryValues;
-            _bokInterface = bokInterface;
             _boktaiAddresses = BoktaiAddresses;
-
+            Owner = _bokInterface = bokInterface;
             Icon = _bokInterface.Icon;
-            Owner = _bokInterface;
 
             SetFormParameters(400, 400);
 

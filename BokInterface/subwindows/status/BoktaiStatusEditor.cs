@@ -20,11 +20,9 @@ namespace BokInterface.Status {
         public BoktaiStatusEditor(BokInterface bokInterface, MemoryValues memoryValues, BoktaiAddresses boktaiAddresses) {
 
             _memoryValues = memoryValues;
-            _bokInterface = bokInterface;
             _boktaiAddresses = boktaiAddresses;
-
+            Owner = _bokInterface = bokInterface;
             Icon = _bokInterface.Icon;
-            Owner = _bokInterface;
 
             SetFormParameters(203, 144);
 

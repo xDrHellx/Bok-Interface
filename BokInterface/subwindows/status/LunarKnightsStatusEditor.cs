@@ -20,11 +20,9 @@ namespace BokInterface.Status {
         public LunarKnightsStatusEditor(BokInterface bokInterface, MemoryValues memoryValues, LunarKnightsAddresses lunarKnightsAddresses) {
 
             _memoryValues = memoryValues;
-            _bokInterface = bokInterface;
             _lunarKnightsAddresses = lunarKnightsAddresses;
-
+            Owner = _bokInterface = bokInterface;
             Icon = _bokInterface.Icon;
-            Owner = _bokInterface;
 
             SetFormParameters(203, 144);
 
