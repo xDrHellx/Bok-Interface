@@ -47,7 +47,6 @@ namespace BokInterface.Status {
             Show();
         }
 
-        /// <summary>Set values to memory addresses</summary>
         protected override void SetValues() {
 
             // Retrieve all input fields
@@ -236,8 +235,6 @@ namespace BokInterface.Status {
             });
         }
 
-        /// <summary>Get default values</summary>
-        /// <returns><c>IDictionary<string, decimal></c>Default values</returns>
         protected override IDictionary<string, decimal> GetDefaultValues() {
 
             IDictionary<string, decimal> defaultValues = new Dictionary<string, decimal>();

@@ -93,8 +93,6 @@ namespace BokInterface.Status {
             });
         }
 
-        /// <summary>Get default values</summary>
-        /// <returns><c>IDictionary<string, decimal></c>Default values</returns>
         protected override IDictionary<string, decimal> GetDefaultValues() {
 
             IDictionary<string, decimal> defaultValues = new Dictionary<string, decimal>();
@@ -119,8 +117,6 @@ namespace BokInterface.Status {
             return defaultValues;
         }
 
-        /// <summary>Specific method for setting status values</summary>
-        /// <param name="fields">List of fields to parse through</param>
         protected override void SetValues() {
 
             // Retrieve all input fields
