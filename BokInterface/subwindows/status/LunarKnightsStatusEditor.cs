@@ -54,7 +54,7 @@ namespace BokInterface.Status {
         protected override void SetValues() {
 
             // Retrieve all input fields
-            List<NumericUpDown> fields = _statusNumericUpDowns;
+            List<NumericUpDown> fields = statusNumericUpDowns;
 
             // Store the previous setting for BizHawk being paused
             _bokInterface._previousIsPauseSetting = APIs.Client.IsPaused();

@@ -17,12 +17,12 @@ namespace BokInterface.Status {
 
         #region Form elements
 
-        protected CheckGroupBox _skillGroupBox = new();
-        protected CheckGroupBox _expGroupBox = new();
-        protected CheckGroupBox _statPointsGroupBox = new();
-        protected CheckGroupBox _statusGroupBox = new();
-        protected CheckGroupBox _statsGroupBox = new();
-        protected readonly List<NumericUpDown> _statusNumericUpDowns = [];
+        protected CheckGroupBox skillGroupBox = new();
+        protected CheckGroupBox expGroupBox = new();
+        protected CheckGroupBox statPointsGroupBox = new();
+        protected CheckGroupBox statusGroupBox = new();
+        protected CheckGroupBox statsGroupBox = new();
+        protected readonly List<NumericUpDown> statusNumericUpDowns = [];
 
         #endregion
 
