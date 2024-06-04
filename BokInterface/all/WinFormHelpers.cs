@@ -355,6 +355,47 @@ namespace BokInterface.All {
             return gridView;
         }
 
+        /// <summary>Simplified method for creating a dropdown list</summary>
+        /// <param name="name">Dropdown name</param>
+        /// <param name="positionX">X position</param>
+        /// <param name="positionY">Y position</param>
+        /// <param name="width">Width (in pixels)</param>
+        /// <param name="height">Height (in pixels)</param>
+        /// <param name="control">Control instance if the element is to be attached to it directly</param>
+        /// <param name="dropDownWidth">Dropdown Width (in pixels, if not specified will take use the element's width as reference)</param>
+        /// <param name="dropDownHeight">Dropdown Height (in pixels, if not specified will take use the element's height as reference)</param>
+        /// <param name="visibleOptions">Amount of options visible without needing to scroll (will take priority over dropDownHeight parameters if specified)</param>
+        /// <returns><c>System.Windows.Forms.ComboBox</c>Dropdown List instance</returns>
+        public static ComboBox CreateDowndownList(string name, int positionX, int positionY, int width, int height, Control? control = null, int dropDownWidth = 0, int dropDownHeight = 0, int visibleOptions = 0) {
+
+            ComboBox dropDownList = new() {
+                Name = name,
+                Location = new Point(positionX, positionY),
+                Size = new Size(width, height),
+                DropDownStyle = ComboBoxStyle.DropDownList,
+                TabIndex = 1,
+                Anchor = defaultAnchor,
+                Font = defaultFont,
+                // If DropDownWidth was specified, use it, otherwise use the element's width
+                DropDownWidth = dropDownWidth > 0 ? dropDownWidth : width
+            };
+
+            /**
+             * If the number of options to show without needed to scroll is specified, use it
+             * Otherwise handle the DropDownHeight the same way as the DropDownWidth
+             */
+            if (visibleOptions > 0) {
+                dropDownList.DropDownHeight = height * visibleOptions;
+            } else {
+                dropDownList.DropDownHeight = dropDownHeight > 0 ? dropDownHeight : height;
+            }
+
+            // If a Control instance is passed, add the generated element to it
+            control?.Controls.Add(dropDownList);
+
+            return dropDownList;
+        }
+
         #endregion
 
         #region Simplified adding methods
