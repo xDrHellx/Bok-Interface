@@ -16,6 +16,9 @@ namespace BokInterface.Inventory {
         #endregion
 
         #region Form elements
+
+        protected GroupBox inventoryGroupbox = new();
+
         #endregion
 
         #region Methods
