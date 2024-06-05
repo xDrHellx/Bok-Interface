@@ -24,7 +24,7 @@ namespace BokInterface.Inventory {
 
             SetFormParameters(400, 400);
 
-            // Generate the subwindow & add the onClose event to it
+            // Add the onClose event to the subwindow
             FormClosing += new FormClosingEventHandler(delegate (object sender, FormClosingEventArgs e) {
                 _bokInterface.inventoryEditorOpened = false;
             });
