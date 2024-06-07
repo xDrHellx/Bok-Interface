@@ -18,6 +18,8 @@ namespace BokInterface.Inventory {
         #region Form elements
 
         protected GroupBox inventoryGroupbox = new();
+        protected readonly List<ComboBox> dropDownLists = [];
+        protected readonly List<NumericUpDown> numericUpDowns = [];
 
         #endregion
 
