@@ -20,6 +20,7 @@ namespace BokInterface.Items {
 
         ///<summary>Init items instances</summary>
         private void InitItems() {
+            Items.Add("Empty slot", new Item("Empty Slot", 65535));
             Items.Add("Earthly Nut", new Item("Earthly Nut", 0, "earthly_nut", true));
             Items.Add("Solar Nut", new Item("Solar Nut", 1, "solar_nut", true));
             Items.Add("Speed Nut", new Item("Speed Nut", 2, "speed_nut", true));
@@ -73,6 +74,7 @@ namespace BokInterface.Items {
 
         ///<summary>Init key items instances</summary>
         private void InitKeyItems() {
+            // Items.Add("Empty slot", new Item("Empty Slot", 65535));
             // Items.Add("Dark Card", new Item("Dark Card", 49, "dark_card"));
             // Items.Add("Pet", new Item("Pet", 50, "pet"));
             // Items.Add("Spade Emblem", new Item("Spade Emblem", 51, "spade_emblem"));
