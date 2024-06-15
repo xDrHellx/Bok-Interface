@@ -4,6 +4,7 @@ using System.Windows.Forms;
 
 using BokInterface.Addresses;
 using BokInterface.All;
+using BokInterface.Items;
 
 namespace BokInterface.Inventory {
     /// <summary>Inventory editor for Boktai 2</summary>
@@ -14,6 +15,7 @@ namespace BokInterface.Inventory {
         private readonly MemoryValues _memoryValues;
         private readonly BokInterface _bokInterface;
         private readonly ZoktaiAddresses _zoktaiAddresses;
+        private readonly ZoktaiItems _zoktaiItems;
 
         #endregion
 
@@ -21,6 +23,8 @@ namespace BokInterface.Inventory {
 
             _memoryValues = memoryValues;
             _zoktaiAddresses = zoktaiAddresses;
+            _zoktaiItems = new(_memoryValues, _zoktaiAddresses);
+
             Owner = _bokInterface = bokInterface;
             Icon = _bokInterface.Icon;
 
@@ -42,72 +46,75 @@ namespace BokInterface.Inventory {
             InstanciateCheckGroupBoxes();
 
             // 1st row
-            dropDownLists.Add(WinFormHelpers.CreateDowndownList("slot1_item", 5, 19, 130, 23, slot1group));
+            dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot1_item", 5, 19, 130, 23, slot1group, visibleOptions: 5));
             WinFormHelpers.CreateLabel("slot1", "Durability", 5, 50, 58, 15, slot1group);
-            numericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("slot1_durability", 0, 85, 47, 50, 23, 0, 3839, control: slot1group));
+            numericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("inventory_slot1_durability", 0, 85, 47, 50, 23, 0, 3839, control: slot1group));
 
-            dropDownLists.Add(WinFormHelpers.CreateDowndownList("slot2_item", 5, 19, 130, 23, slot2group));
+            dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot2_item", 5, 19, 130, 23, slot2group, visibleOptions: 5));
             WinFormHelpers.CreateLabel("slot2", "Durability", 5, 50, 58, 15, slot2group);
-            numericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("slot2_durability", 0, 85, 47, 50, 23, 0, 3839, control: slot2group));
+            numericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("inventory_slot2_durability", 0, 85, 47, 50, 23, 0, 3839, control: slot2group));
 
-            dropDownLists.Add(WinFormHelpers.CreateDowndownList("slot3_item", 5, 19, 130, 23, slot3group));
+            dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot3_item", 5, 19, 130, 23, slot3group, visibleOptions: 5));
             WinFormHelpers.CreateLabel("slot3", "Durability", 5, 50, 58, 15, slot3group);
-            numericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("slot3_durability", 0, 85, 47, 50, 23, 0, 3839, control: slot3group));
+            numericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("inventory_slot3_durability", 0, 85, 47, 50, 23, 0, 3839, control: slot3group));
 
-            dropDownLists.Add(WinFormHelpers.CreateDowndownList("slot4_item", 5, 19, 130, 23, slot4group));
+            dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot4_item", 5, 19, 130, 23, slot4group, visibleOptions: 5));
             WinFormHelpers.CreateLabel("slot4", "Durability", 5, 50, 58, 15, slot4group);
-            numericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("slot4_durability", 0, 85, 47, 50, 23, 0, 3839, control: slot4group));
+            numericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("inventory_slot4_durability", 0, 85, 47, 50, 23, 0, 3839, control: slot4group));
 
             // 2nd row
-            dropDownLists.Add(WinFormHelpers.CreateDowndownList("slot5_item", 5, 19, 130, 23, slot5group));
+            dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot5_item", 5, 19, 130, 23, slot5group, visibleOptions: 5));
             WinFormHelpers.CreateLabel("slot5", "Durability", 5, 50, 58, 15, slot5group);
-            numericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("slot5_durability", 0, 85, 47, 50, 23, 0, 3839, control: slot5group));
+            numericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("inventory_slot5_durability", 0, 85, 47, 50, 23, 0, 3839, control: slot5group));
 
-            dropDownLists.Add(WinFormHelpers.CreateDowndownList("slot6_item", 5, 19, 130, 23, slot6group));
+            dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot6_item", 5, 19, 130, 23, slot6group, visibleOptions: 5));
             WinFormHelpers.CreateLabel("slot6", "Durability", 5, 50, 58, 15, slot6group);
-            numericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("slot6_durability", 0, 85, 47, 50, 23, 0, 3839, control: slot6group));
+            numericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("inventory_slot6_durability", 0, 85, 47, 50, 23, 0, 3839, control: slot6group));
 
-            dropDownLists.Add(WinFormHelpers.CreateDowndownList("slot7_item", 5, 19, 130, 23, slot7group));
+            dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot7_item", 5, 19, 130, 23, slot7group, visibleOptions: 5));
             WinFormHelpers.CreateLabel("slot7", "Durability", 5, 50, 58, 15, slot7group);
-            numericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("slot7_durability", 0, 85, 47, 50, 23, 0, 3839, control: slot7group));
+            numericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("inventory_slot7_durability", 0, 85, 47, 50, 23, 0, 3839, control: slot7group));
 
-            dropDownLists.Add(WinFormHelpers.CreateDowndownList("slot8_item", 5, 19, 130, 23, slot8group));
+            dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot8_item", 5, 19, 130, 23, slot8group, visibleOptions: 5));
             WinFormHelpers.CreateLabel("slot8", "Durability", 5, 50, 58, 15, slot8group);
-            numericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("slot8_durability", 0, 85, 47, 50, 23, 0, 3839, control: slot8group));
+            numericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("inventory_slot8_durability", 0, 85, 47, 50, 23, 0, 3839, control: slot8group));
 
             // 3rd row
-            dropDownLists.Add(WinFormHelpers.CreateDowndownList("slot9_item", 5, 19, 130, 23, slot9group));
+            dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot9_item", 5, 19, 130, 23, slot9group, visibleOptions: 5));
             WinFormHelpers.CreateLabel("slot9", "Durability", 5, 50, 58, 15, slot9group);
-            numericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("slot9_durability", 0, 85, 47, 50, 23, 0, 3839, control: slot9group));
+            numericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("inventory_slot9_durability", 0, 85, 47, 50, 23, 0, 3839, control: slot9group));
 
-            dropDownLists.Add(WinFormHelpers.CreateDowndownList("slot10_item", 5, 19, 130, 23, slot10group));
+            dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot10_item", 5, 19, 130, 23, slot10group, visibleOptions: 5));
             WinFormHelpers.CreateLabel("slot10", "Durability", 5, 50, 58, 15, slot10group);
-            numericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("slot10_durability", 0, 85, 47, 50, 23, 0, 3839, control: slot10group));
+            numericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("inventory_slot10_durability", 0, 85, 47, 50, 23, 0, 3839, control: slot10group));
 
-            dropDownLists.Add(WinFormHelpers.CreateDowndownList("slot11_item", 5, 19, 130, 23, slot11group));
+            dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot11_item", 5, 19, 130, 23, slot11group, visibleOptions: 5));
             WinFormHelpers.CreateLabel("slot11", "Durability", 5, 50, 58, 15, slot11group);
-            numericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("slot11_durability", 0, 85, 47, 50, 23, 0, 3839, control: slot11group));
+            numericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("inventory_slot11_durability", 0, 85, 47, 50, 23, 0, 3839, control: slot11group));
 
-            dropDownLists.Add(WinFormHelpers.CreateDowndownList("slot12_item", 5, 19, 130, 23, slot12group));
+            dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot12_item", 5, 19, 130, 23, slot12group, visibleOptions: 5));
             WinFormHelpers.CreateLabel("slot12", "Durability", 5, 50, 58, 15, slot12group);
-            numericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("slot12_durability", 0, 85, 47, 50, 23, 0, 3839, control: slot12group));
+            numericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("inventory_slot12_durability", 0, 85, 47, 50, 23, 0, 3839, control: slot12group));
 
             // 4th row
-            dropDownLists.Add(WinFormHelpers.CreateDowndownList("slot13_item", 5, 19, 130, 23, slot13group));
+            dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot13_item", 5, 19, 130, 23, slot13group, visibleOptions: 5));
             WinFormHelpers.CreateLabel("slot13", "Durability", 5, 50, 58, 15, slot13group);
-            numericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("slot13_durability", 0, 85, 47, 50, 23, 0, 3839, control: slot13group));
+            numericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("inventory_slot13_durability", 0, 85, 47, 50, 23, 0, 3839, control: slot13group));
 
-            dropDownLists.Add(WinFormHelpers.CreateDowndownList("slot14_item", 5, 19, 130, 23, slot14group));
+            dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot14_item", 5, 19, 130, 23, slot14group, visibleOptions: 5));
             WinFormHelpers.CreateLabel("slot14", "Durability", 5, 50, 58, 15, slot14group);
-            numericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("slot14_durability", 0, 85, 47, 50, 23, 0, 3839, control: slot14group));
+            numericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("inventory_slot14_durability", 0, 85, 47, 50, 23, 0, 3839, control: slot14group));
 
-            dropDownLists.Add(WinFormHelpers.CreateDowndownList("slot15_item", 5, 19, 130, 23, slot15group));
+            dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot15_item", 5, 19, 130, 23, slot15group, visibleOptions: 5));
             WinFormHelpers.CreateLabel("slot15", "Durability", 5, 50, 58, 15, slot15group);
-            numericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("slot15_durability", 0, 85, 47, 50, 23, 0, 3839, control: slot15group));
+            numericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("inventory_slot15_durability", 0, 85, 47, 50, 23, 0, 3839, control: slot15group));
 
-            dropDownLists.Add(WinFormHelpers.CreateDowndownList("slot16_item", 5, 19, 130, 23, slot16group));
+            dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot16_item", 5, 19, 130, 23, slot16group, visibleOptions: 5));
             WinFormHelpers.CreateLabel("slot16", "Durability", 5, 50, 58, 15, slot16group);
-            numericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("slot16_durability", 0, 85, 47, 50, 23, 0, 3839, control: slot16group));
+            numericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("inventory_slot16_durability", 0, 85, 47, 50, 23, 0, 3839, control: slot16group));
+
+            // Generate & add options to dropdowns
+            GenerateDropDownOptions();
 
             // Button for setting values & its events
             Button setValuesButton = WinFormHelpers.CreateButton("setStatusButton", "Set values", 509, 320, 75, 23, this);
@@ -143,7 +150,7 @@ namespace BokInterface.Inventory {
         protected override void SetValues() {
 
             // Retrieve all input fields
-            List<ComboBox> slots = dropDownLists;
+            List<ImageComboBox> slots = dropDownLists;
             List<NumericUpDown> durabilities = numericUpDowns;
 
             // Store the previous setting for BizHawk being paused
@@ -152,23 +159,24 @@ namespace BokInterface.Inventory {
             // Pause BizHawk
             APIs.Client.Pause();
 
-            // // Sets values for each slot
-            // for (int i = 0; i < slots.Count; i++) {
+            // Sets values for each slot
+            for (int i = 0; i < slots.Count; i++) {
 
-            //     // If the slot is disabled, skip it
-            //     if (slots[i].Enabled == false) {
-            //         continue;
-            //     }
+                // If the slot is disabled, skip it
+                if (slots[i].Enabled == false) {
+                    continue;
+                }
 
-            //     decimal value = slots[i].SelectedItem;
+                KeyValuePair<string, Item> selectedOption = (KeyValuePair<string, Item>)slots[i].SelectedItem;
+                Item selectedItem = selectedOption.Value;
 
-            //     /**
-            //      * Indicate which sublist to use for setting the value, based on the slot's name
-            //      * We only split on the first "_"
-            //      */
-            //     string[] fieldParts = slots[i].Name.Split(['_'], 2);
-            //     SetMemoryValue(fieldParts[0], fieldParts[1], value);
-            // }
+                /**
+                 * Indicate which sublist to use for setting the value, based on the slot's name
+                 * We only split on the first "_"
+                 */
+                string[] fieldParts = slots[i].Name.Split(['_'], 2);
+                SetMemoryValue(fieldParts[0], fieldParts[1], selectedItem.value);
+            }
 
             // Repeat the above process for Durabilitys
             for (int i = 0; i < durabilities.Count; i++) {
@@ -253,6 +261,15 @@ namespace BokInterface.Inventory {
                         _memoryValues.U32[memoryValueKey].Value = (uint)value;
                     }
                     break;
+                case "inventory":
+                    if (_memoryValues.Inventory.ContainsKey(memoryValueKey) == true) {
+                        _memoryValues.Inventory[memoryValueKey].Value = (uint)value;
+                    } else if (_memoryValues.U16.ContainsKey(memoryValueKey) == true) {
+                        _memoryValues.U16[memoryValueKey].Value = (uint)value;
+                    } else if (_memoryValues.U32.ContainsKey(memoryValueKey) == true) {
+                        _memoryValues.U32[memoryValueKey].Value = (uint)value;
+                    }
+                    break;
                 case "misc":
                     if (_memoryValues.Misc.ContainsKey(memoryValueKey) == true) {
                         _memoryValues.Misc[memoryValueKey].Value = (uint)value;
@@ -269,6 +286,15 @@ namespace BokInterface.Inventory {
                         _memoryValues.U32[memoryValueKey].Value = (uint)value;
                     }
                     break;
+            }
+        }
+
+        ///<summary>Generates the options for the dropdowns</summary>
+        private void GenerateDropDownOptions() {
+            foreach (ImageComboBox dropdown in dropDownLists) {
+                dropdown.DataSource = new BindingSource(_zoktaiItems.Items, null);
+                dropdown.DisplayMember = "Key";
+                dropdown.ValueMember = "Value";
             }
         }
     }
