@@ -11,6 +11,7 @@
     <ItemGroup>
         <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.3" PrivateAssets="all" />
         <PackageReference Include="System.Resources.Extensions" Version="4.7.0" />
+        <Reference Include="Microsoft.CSharp" />
         <Reference Include="System.Windows.Forms" />
         <Reference Include="BizHawk.Client.Common" HintPath="$(GBAHAWK_DIR)/dll/BizHawk.Client.Common.dll" />
         <Reference Include="BizHawk.Client.EmuHawk" HintPath="$(GBAHAWK_DIR)/GBAHawk.exe" />

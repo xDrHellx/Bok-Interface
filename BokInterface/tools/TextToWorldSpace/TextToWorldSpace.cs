@@ -18,53 +18,101 @@ namespace BokInterface.Tools.TextToWorldSpace {
 
         #endregion
 
-        #region Memory addresses properties
+        #region Addresses properties & instances
 
-        private readonly BoktaiAddresses boktaiAddresses = new();
-        private readonly ZoktaiAddresses zoktaiAddresses = new();
-        private readonly ShinbokAddresses shinbokAddresses = new();
-        private uint cameraXposAddress = 0;
-        private uint cameraYposAddress = 0;
+        private readonly dynamic? _memAddresses;
+        private uint _cameraXposAddress = 0;
+        private uint _cameraYposAddress = 0;
 
         #endregion
 
-        public TextToWorldSpace(string text, double x, double y, double z, Color? textColor = null) {
+        #region Constructors
+
+        public TextToWorldSpace(BoktaiAddresses boktaiAddresses, string text, double x, double y, double z, Color? textColor = null) {
             if (text == "") {
                 return;
             }
 
             // Set memory addresses used for getting the camera coordinates
-            SetCameraAddresses(BokInterfaceMainForm.shorterGameName);
+            _memAddresses = boktaiAddresses;
+            SetCameraAddresses();
 
             // Set text color & write to coordinates
             this.textColor = textColor == null ? Color.LimeGreen : (Color)textColor;
             WriteTextToCoordinates(text, x, y, z);
         }
 
+        public TextToWorldSpace(ZoktaiAddresses zoktaiAddresses, string text, double x, double y, double z, Color? textColor = null) {
+            if (text == "") {
+                return;
+            }
+
+            // Set memory addresses used for getting the camera coordinates
+            _memAddresses = zoktaiAddresses;
+            SetCameraAddresses();
+
+            // Set text color & write to coordinates
+            this.textColor = textColor == null ? Color.LimeGreen : (Color)textColor;
+            WriteTextToCoordinates(text, x, y, z);
+        }
+
+        public TextToWorldSpace(ShinbokAddresses shinbokAddresses, string text, double x, double y, double z, Color? textColor = null) {
+            if (text == "") {
+                return;
+            }
+
+            // Set memory addresses used for getting the camera coordinates
+            _memAddresses = shinbokAddresses;
+            SetCameraAddresses();
+
+            // Set text color & write to coordinates
+            this.textColor = textColor == null ? Color.LimeGreen : (Color)textColor;
+            WriteTextToCoordinates(text, x, y, z);
+        }
+
+        public TextToWorldSpace(LunarKnightsAddresses lunarKnightsAddresses, string text, double x, double y, double z, Color? textColor = null) {
+            if (text == "") {
+                return;
+            }
+
+            // Set memory addresses used for getting the camera coordinates
+            _memAddresses = lunarKnightsAddresses;
+            SetCameraAddresses();
+
+            // Set text color & write to coordinates
+            this.textColor = textColor == null ? Color.LimeGreen : (Color)textColor;
+            WriteTextToCoordinates(text, x, y, z);
+        }
+
+        #endregion
+
         /// <summary>Set camera memory addresses used for writing position</summary>
-        /// <param name="gameName">Current game name</param>
-        /// <returns><c>uint, uint, uint</c>Camera memory addresses (X, Y, Z)</returns>
-        private void SetCameraAddresses(string gameName) {
-            switch (gameName) {
+        /// <returns><c>bool</c>True if addresses were set, false otherwise</return>
+        private bool SetCameraAddresses() {
+            if (_memAddresses == null) {
+                return false;
+            }
+
+            switch (BokInterface.shorterGameName) {
                 case "Boktai":
-                    cameraXposAddress = boktaiAddresses.Misc["x_camera"];
-                    cameraYposAddress = boktaiAddresses.Misc["y_camera"];
-                    break;
+                    _cameraXposAddress = _memAddresses.Misc["x_camera"].Address;
+                    _cameraYposAddress = _memAddresses.Misc["y_camera"].Address;
+                    return true;
                 case "Zoktai":
-                    cameraXposAddress = zoktaiAddresses.Misc["x_camera"];
-                    cameraYposAddress = zoktaiAddresses.Misc["y_camera"];
-                    break;
+                    _cameraXposAddress = _memAddresses.Misc["x_camera"].Address;
+                    _cameraYposAddress = _memAddresses.Misc["y_camera"].Address;
+                    return true;
                 case "Shinbok":
-                    cameraXposAddress = shinbokAddresses.Misc["x_camera"];
-                    cameraYposAddress = shinbokAddresses.Misc["y_camera"];
-                    break;
+                    _cameraXposAddress = _memAddresses.Misc["x_camera"].Address;
+                    _cameraYposAddress = _memAddresses.Misc["y_camera"].Address;
+                    return true;
                 case "LunarKnights":
                     // Current not handled, not enough data available
-                    cameraXposAddress = cameraYposAddress = 0;
-                    break;
+                    _cameraXposAddress = _cameraYposAddress = 0;
+                    return false;
                 default:
-                    cameraXposAddress = cameraYposAddress = 0;
-                    break;
+                    _cameraXposAddress = _cameraYposAddress = 0;
+                    return false;
             }
         }
 
@@ -112,12 +160,12 @@ namespace BokInterface.Tools.TextToWorldSpace {
         protected (int, int) ViewToScreen(double x, double y) {
 
             // Get camera coordinates
-            double camX = APIs.Memory.ReadS16(cameraXposAddress);
-            double camY = APIs.Memory.ReadS16(cameraYposAddress);
+            double camX = APIs.Memory.ReadS16(_cameraXposAddress);
+            double camY = APIs.Memory.ReadS16(_cameraYposAddress);
 
             // Adjusts position
-            x = x - camX + (BokInterfaceMainForm.gbaScreenWidth / 2);
-            y = y - camY + (BokInterfaceMainForm.gbaScreenHeight / 2);
+            x = x - camX + (BokInterface.gbaScreenWidth / 2);
+            y = y - camY + (BokInterface.gbaScreenHeight / 2);
 
             // Transforms GBA screen point to Emulator screen point
             Point screenPoint = APIs.Client.TransformPoint(new Point((int)x, (int)y));

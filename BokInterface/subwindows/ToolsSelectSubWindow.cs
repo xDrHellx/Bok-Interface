@@ -1,19 +1,23 @@
 using System;
 using System.Windows.Forms;
 
+using BokInterface.All;
 using BokInterface.Tools.TileDataViewer;
+using BokInterface.Tools.MemoryValuesListing;
 
 /**
  * Main file for tools selection subwindows
  */
 
 namespace BokInterface {
-    partial class BokInterfaceMainForm {
+    partial class BokInterface {
 
         #region Properties
 
         protected bool tileDataViewerActive = false;
-        private TileDataViewer? TileDataViewer;
+        private TileDataViewer? _tileDataViewer;
+        protected bool memValuesListingActive = false;
+        private MemoryValuesListing? _memValuesListing;
 
         #endregion
 
@@ -22,16 +26,19 @@ namespace BokInterface {
         private void BoktaiToolsSubwindow() {
             AddToolsLabel();
             AddTileDataViewerBtn();
+            AddMemoryValuesListBtn();
         }
 
         private void ZoktaiToolsSubwindow() {
             AddToolsLabel();
             AddTileDataViewerBtn();
+            AddMemoryValuesListBtn();
         }
 
         private void ShinbokToolsSubwindow() {
             AddToolsLabel();
             AddTileDataViewerBtn();
+            AddMemoryValuesListBtn();
         }
 
         private void LunarKnightsToolsSubwindow() {
@@ -48,8 +55,7 @@ namespace BokInterface {
 		/// <param name="width">Width (in pixels)</param>
 		/// <param name="height">Height (in pixels)</param>
         private void AddToolsLabel(int posX = 5, int posY = 5, int width = 176, int height = 15) {
-            Label availableToolsLabel = CreateLabel("availableToolsLabel", "-- Tools available --", posX, posY, width, height);
-            miscToolsSelectionWindow.Controls.Add(availableToolsLabel);
+            WinFormHelpers.CreateLabel("availableToolsLabel", "-- Tools available --", posX, posY, width, height, miscToolsSelectionWindow);
         }
 
         /// <summary>Simplified method for adding the Tile Data Viewer tool button to the tools selection subwindow</summary>
@@ -59,8 +65,8 @@ namespace BokInterface {
 		/// <param name="height">Height (in pixels)</param>
         private void AddTileDataViewerBtn(int posX = 5, int posY = 23, int width = 176, int height = 23) {
 
-            Button tileDataBtn = CreateButton("tileDataBtn", "Tile data", posX, posY, width, height);
-            tileDataBtn.Click += new EventHandler(delegate (object sender, EventArgs e) {
+            Button tdvBtn = WinFormHelpers.CreateButton("tdvBtn", "Tile data viewer", posX, posY, width, height);
+            tdvBtn.Click += new EventHandler(delegate (object sender, EventArgs e) {
 
                 // If tool is already active, stop
                 if (tileDataViewerActive == true) {
@@ -69,25 +75,86 @@ namespace BokInterface {
 
                 tileDataViewerActive = true;
 
-                TileDataViewer = new("tileDateViewer", "Tile data viewer", 500, 500, shorterGameName, GetGameIconName(), this);
-                TileDataViewer.InitializeFrameLoop();
+                switch (shorterGameName) {
+                    case "Boktai":
+                        _tileDataViewer = new BoktaiTileDataViewer(this, _boktaiAddresses);
+                        break;
+                    case "Zoktai":
+                        _tileDataViewer = new ZoktaiTileDataViewer(this, _zoktaiAddresses);
+                        break;
+                    case "Shinbok":
+                        _tileDataViewer = new ShinbokTileDataViewer(this, _shinbokAddresses);
+                        break;
+                    case "LunarKnights":
+                        _tileDataViewer = new LunarKnightsTileDataViewer(this, _lunarKnightsAddresses);
+                        break;
+                    default:
+                        // If game not handled, indicate that the tool isn't active & stop here
+                        tileDataViewerActive = false;
+                        return;
+                }
 
-                TileDataViewer.FormClosing += new FormClosingEventHandler(delegate (object sender, FormClosingEventArgs e) {
+                // Initialize the loop to update / redraw automatically & add the on-close event handler
+                _tileDataViewer.InitializeFrameLoop();
+                _tileDataViewer.FormClosing += new FormClosingEventHandler(delegate (object sender, FormClosingEventArgs e) {
 
                     tileDataViewerActive = false;
 
                     // Remove the function from the list of functions to call each frame
-                    int functionIndex = TileDataViewer.index;
-                    functionsList.RemoveAt(functionIndex);
-
-                    // Just in case, replace instance with null to prevent it from doing anything else
-                    TileDataViewer = null;
+                    // Also just in case, set instance with null to prevent it from doing anything else
+                    functionsList.RemoveAt(_tileDataViewer.index);
+                    _tileDataViewer = null;
                 });
-
-                TileDataViewer.Show();
             });
 
-            miscToolsSelectionWindow.Controls.Add(tileDataBtn);
+            miscToolsSelectionWindow.Controls.Add(tdvBtn);
+        }
+
+        /// <summary>Simplified method for adding the Memory Values List tool button to the tools selection subwindow</summary>
+		/// <param name="posX">X position</param>
+		/// <param name="posY">Y position</param>
+		/// <param name="width">Width (in pixels)</param>
+		/// <param name="height">Height (in pixels)</param>
+        private void AddMemoryValuesListBtn(int posX = 5, int posY = 50, int width = 176, int height = 23) {
+
+            Button mvlBtn = WinFormHelpers.CreateButton("mvlBtn", "Memory Values List", posX, posY, width, height);
+            mvlBtn.Click += new EventHandler(delegate (object sender, EventArgs e) {
+
+                // If tool is already active, stop
+                if (memValuesListingActive == true) {
+                    return;
+                }
+
+                memValuesListingActive = true;
+
+                switch (shorterGameName) {
+                    case "Boktai":
+                        _memValuesListing = new MemoryValuesListing(this, _boktaiAddresses);
+                        break;
+                    case "Zoktai":
+                        _memValuesListing = new MemoryValuesListing(this, _zoktaiAddresses);
+                        break;
+                    case "Shinbok":
+                        _memValuesListing = new MemoryValuesListing(this, _shinbokAddresses);
+                        break;
+                    case "LunarKnights":
+                        _memValuesListing = new MemoryValuesListing(this, _lunarKnightsAddresses);
+                        break;
+                    default:
+                        // If game not handled, indicate that the tool isn't active & stop here
+                        memValuesListingActive = false;
+                        return;
+                }
+
+                // Add the on-close event handler
+                _memValuesListing.FormClosing += new FormClosingEventHandler(delegate (object sender, FormClosingEventArgs e) {
+                    // Indicate that the tool isn't active anymore & set instance to null just in case, to prevent it from doing anything else
+                    memValuesListingActive = false;
+                    _memValuesListing = null;
+                });
+            });
+
+            miscToolsSelectionWindow.Controls.Add(mvlBtn);
         }
 
         #endregion

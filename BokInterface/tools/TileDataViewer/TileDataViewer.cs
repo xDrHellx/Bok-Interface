@@ -1,61 +1,60 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
+
 using BokInterface.All;
-using BokInterface.Addresses;
 
 namespace BokInterface.Tools.TileDataViewer {
     /// <summary>
-    /// <para>Subwindow for the Tile Data Viewer</para>
+    /// <summary>Basis class for the Tile Data Viewer tool</summary>
     /// <para>Prints and show Tile Data (AKA Map)</para>
     /// <para>Made by Raphi, converted from Lua to C# by Doc</para>
     /// </summary>
-    partial class TileDataViewer : Form {
+    abstract class TileDataViewer : Form {
 
-        #region Main properties
+        #region Subwindow properties
+
+        protected string name = "tileDataViewer",
+            title = "Tile Data Viewer";
+        protected int width = 500,
+            height = 500;
+
+        #endregion
+
+        #region Tool properties
 
         public int index = 0;
-        protected string currentGame = "";
-        protected uint scale = 16;
-        protected uint alpha = 0xA0;
+        protected uint scale = 16,
+            alpha = 0xA0;
         protected int textY = 0;
-        protected static int imgNb = 1;
-        protected static int n = 0;
-        protected List<Color> colorPalette;
-        private static readonly Pen zonePen = new(Color.LimeGreen);
-        private static readonly Color blackColor = ColorTranslator.FromHtml("#0f0f0f");
+        protected static int imgNb = 1,
+            n = 0;
+        protected List<Color>? colorPalette;
+        protected static readonly Pen s_zonePen = new(Color.LimeGreen);
+        protected static readonly Color s_blackColor = ColorTranslator.FromHtml("#0f0f0f");
 
         #endregion
 
         #region Memory addresses properties
-
-        private readonly BoktaiAddresses boktaiAddresses = new();
-        private readonly ZoktaiAddresses zoktaiAddresses = new();
-        private readonly ShinbokAddresses shinbokAddresses = new();
-        private uint mapDataAddress = 0;
-        private uint djangoXposAddress = 0;
-        private uint djangoYposAddress = 0;
+        protected uint mapDataAddress = 0,
+            djangoXposAddress = 0,
+            djangoYposAddress = 0;
 
         #endregion
 
         #region Subwindow & loop-related methods
 
-        public TileDataViewer(string name, string title, int width, int height, string currentGame, string icon = "", Form? parentForm = null) {
+        /// <summary>Initialize subwindow properties</summary>
+        protected void InitializeSubwindowProperties() {
             Name = name;
             Text = title;
-            Icon = GetIcon(icon);
             AutoScaleDimensions = new SizeF(6F, 15F);
             AutoScaleMode = AutoScaleMode.Inherit;
             FormBorderStyle = FormBorderStyle.FixedSingle;
             BackColor = SystemColors.Control;
-            Font = BokInterfaceMainForm.defaultFont;
+            Font = WinFormHelpers.defaultFont;
             AutoScroll = true;
             SetSubwindowSize(width, height);
-            this.currentGame = currentGame;
-
-            if (parentForm != null) {
-                Owner = parentForm;
-            }
 
             // Prevent flickering
             SetStyle(
@@ -66,48 +65,9 @@ namespace BokInterface.Tools.TileDataViewer {
             // Generate color palette
             colorPalette = GenerateRandomColorPalette();
 
-            // Sets memory addresses to use based on the current game
-            SetGameAddresses(this.currentGame);
-        }
-
-        /// <summary>Sets memory addresses used depending n the current game</summary>
-        /// <param name="gameName"></param>
-        protected void SetGameAddresses(string gameName) {
-            switch (gameName) {
-                case "Boktai":
-                    mapDataAddress = boktaiAddresses.Misc["map_data"];
-                    djangoXposAddress = boktaiAddresses.Django["x_position"];
-                    djangoYposAddress = boktaiAddresses.Django["y_position"];
-                    break;
-                case "Zoktai":
-                    mapDataAddress = zoktaiAddresses.Misc["map_data"];
-                    djangoXposAddress = zoktaiAddresses.Django["x_position"];
-                    djangoYposAddress = zoktaiAddresses.Django["y_position"];
-                    break;
-                case "Shinbok":
-                    mapDataAddress = shinbokAddresses.Misc["map_data"];
-                    djangoXposAddress = shinbokAddresses.Django["x_position"];
-                    djangoYposAddress = shinbokAddresses.Django["y_position"];
-                    break;
-                case "LunarKnights":
-                    // Currently not handled, not enough addresses available
-                    mapDataAddress = djangoXposAddress = djangoYposAddress = 0;
-                    break;
-                default:
-                    mapDataAddress = djangoXposAddress = djangoYposAddress = 0;
-                    break;
-            }
-        }
-
-        /// <summary>Get the specified icon if it exist</summary>
-        /// <param name="fileName">File name (without .ico extension)</param>
-        /// <returns><c>System.Drawing.Icon</c>Specified Icon instance (or default if the specified icon could not be found)</returns>
-        protected Icon GetIcon(string fileName) {
-            if (fileName == "") {
-                return Icon;
-            } else {
-                return (Icon)Properties.Resources.ResourceManager.GetObject(fileName);
-            }
+            // Set memory addresses to use & show subwindow
+            SetGameAddresses();
+            Show();
         }
 
         /// <summary>Sets the subwindow's size</summary>
@@ -117,19 +77,22 @@ namespace BokInterface.Tools.TileDataViewer {
             ClientSize = new Size(width, height);
         }
 
+        /// <summary>Sets memory addresses used for the current game</summary>
+        protected abstract void SetGameAddresses();
+
         /// <summary>
         /// <para>Initialize frame loop</para>
-        /// <para>Adds the corresponding methods to BokInterfaceMainForm.functionsList to have them be executed every frame</para>
-        /// <para>Also get the index from that list for removing the methods when closing the Tile Data Viewer</para>
+        /// <para>Adds the corresponding methods to BokInterface.functionsList to have them be executed every frame</para>
+        /// <para>Also get the index from that list for removing the methods when closing the tool</para>
         /// </summary>
         public void InitializeFrameLoop() {
-            BokInterfaceMainForm.functionsList.Add(Refresh);
+            BokInterface.functionsList.Add(Refresh);
 
             /**
              * Get the index of the added function,
-             * used for removing the method from BokInterfaceMainForm.functionsList when the subwindow is closed
+             * used for removing the method from BokInterface.functionsList when the subwindow is closed
              */
-            index = BokInterfaceMainForm.functionsList.Count - 1;
+            index = BokInterface.functionsList.Count - 1;
         }
 
         #endregion
@@ -138,11 +101,6 @@ namespace BokInterface.Tools.TileDataViewer {
 
         protected override void OnPaint(PaintEventArgs e) {
             base.OnPaint(e);
-
-            // If current game is not handled, stop
-            if (currentGame == "") {
-                return;
-            }
 
             // 1. Get map data & pointers
             uint mapDataPointers = APIs.Memory.ReadU32(mapDataAddress);
@@ -168,6 +126,14 @@ namespace BokInterface.Tools.TileDataViewer {
             // 4. Draw Django on map
             uint djangoX = APIs.Memory.ReadU16(djangoXposAddress);
             uint djangoY = APIs.Memory.ReadU16(djangoYposAddress);
+
+            // If both values are at 0, it might be due to a soft reset, so we get the addresses again
+            if (djangoX == 0 && djangoY == 0) {
+                SetGameAddresses();
+                djangoX = APIs.Memory.ReadU16(djangoXposAddress);
+                djangoY = APIs.Memory.ReadU16(djangoYposAddress);
+            }
+
             DrawDjangoIcon(e, djangoX, djangoY);
 
             // Write tile address on screen
@@ -180,6 +146,10 @@ namespace BokInterface.Tools.TileDataViewer {
         /// <param name="tileWidth">Tile width</param>
         /// <param name="tileHeight">Tile height</param>
         protected void DrawTileData(PaintEventArgs e, uint mapData, uint tileWidth, uint tileHeight) {
+
+            if (colorPalette == null) {
+                return;
+            }
 
             for (int tileY = 0; tileY < tileHeight - 1; tileY++) {
                 for (int tileX = 0; tileX < tileWidth - 1; tileX++) {
@@ -211,36 +181,13 @@ namespace BokInterface.Tools.TileDataViewer {
             );
         }
 
-        /// <summary>Draws icons related to tile effects if there are any</summary>
+        /// <summary>Draws tile effect icons</summary>
         /// <param name="e">Painting event used for drawing</param>
         /// <param name="tileEffect">Value for the tile's effect</param>
         /// <param name="posX">X position of the tile</param>
         /// <param name="posY">Y position of the tile</param>
         /// <param name="scale">Scale (used for drawing)</param>
-        protected void DrawTileEffect(PaintEventArgs e, uint tileEffect, int posX, int posY, int scale) {
-
-            /**
-             * Call the corresponding method for handling the tile effect
-             * The values we're checking on can be different for each game
-             */
-            switch (currentGame) {
-                case "Boktai":
-                    DrawBoktaiTileEffect(e, tileEffect, posX, posY, scale);
-                    break;
-                case "Zoktai":
-                    DrawZoktaiTileEffect(e, tileEffect, posX, posY, scale);
-                    break;
-                case "Shinbok":
-                    DrawShinbokTileEffect(e, tileEffect, posX, posY, scale);
-                    break;
-                case "LunarKnights":
-                    DrawLunarKnightsTileEffect(e, tileEffect, posX, posY, scale);
-                    break;
-                default:
-                    // Do nothing
-                    break;
-            }
-        }
+        protected abstract void DrawTileEffect(PaintEventArgs e, uint tileEffect, int posX, int posY, int scale);
 
         /// <summary>Draws stairs icon on the tile if there are any</summary>
         /// <param name="e">Painting event used for drawing</param>
@@ -278,7 +225,7 @@ namespace BokInterface.Tools.TileDataViewer {
                 // start height (u8), end height (u8), and zone id (u16) follows, but these don't matter for drawing.
 
                 e.Graphics.DrawRectangle(
-                    zonePen,
+                    s_zonePen,
                     5 + startX * zoneScale,
                     5 + startY * zoneScale,
                     (endX - startX) * zoneScale,
@@ -316,19 +263,17 @@ namespace BokInterface.Tools.TileDataViewer {
         /// <param name="posY">Y position</param>
         /// <param name="scale">Scale (used for drawing)</param>
         protected void DrawFilledRectangle(PaintEventArgs e, Color color, int posX, int posY, int scale) {
-            using (Pen pen = new(color, 1)) {
-                Rectangle rectangle = new(
-                    posX,
-                    posY,
-                    scale,
-                    scale
-                );
+            using Pen pen = new(color, 1);
+            Rectangle rectangle = new(
+                posX,
+                posY,
+                scale,
+                scale
+            );
 
-                e.Graphics.DrawRectangle(pen, rectangle);
-                using (SolidBrush brush = new(color)) {
-                    e.Graphics.FillRectangle(brush, rectangle);
-                }
-            }
+            e.Graphics.DrawRectangle(pen, rectangle);
+            using SolidBrush brush = new(color);
+            e.Graphics.FillRectangle(brush, rectangle);
         }
 
         /// <summary>Simplified method for drawing an image on a tile</summary>
@@ -413,7 +358,7 @@ namespace BokInterface.Tools.TileDataViewer {
                 }
             }
         }
-    }
 
-    #endregion
+        #endregion
+    }
 }

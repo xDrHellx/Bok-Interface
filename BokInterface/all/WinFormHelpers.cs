@@ -1,0 +1,414 @@
+using System.Collections.Generic;
+using System.Data;
+using System.Drawing;
+using System.Windows.Forms;
+
+namespace BokInterface.All {
+
+    /// <summary>
+    /// Class for WinForm Helpers
+    /// <para><example>WinForm elements generation methods</example></para>
+    /// </summary>
+    static class WinFormHelpers {
+
+        /// <summary>Tooltip for values that only updates after switching rooms</summary>
+        public static ToolTip toolTip = CreateToolTip();
+
+        /// <summary>Color for base stat points (Boktai 2, 3, LK)</summary>
+        public static string baseStatColor = "#FFE600";
+
+        /// <summary>
+        /// Color for stat points from equipments (Boktai 3) <br/>
+        /// These points does not affect as many things as pure stat points <br/><br/>
+        /// For example STR points from equipments does not affect coffin carrying speed
+        /// </summary>
+        public static string equipsStatColor = "#FFA529";
+
+        /// <summary>Color for the total amount of points for a specific stat (Boktai 2, 3, LK)</summary>
+        public static string totalStatColor = "#D3D3D3";
+
+        public static Font defaultFont = new("Segoe UI", 9, FontStyle.Regular, GraphicsUnit.Point);
+        public static Padding defaultMargin = new(3, 0, 3, 0);
+        public static AnchorStyles defaultAnchor = AnchorStyles.Top | AnchorStyles.Left;
+
+        /// <summary>Get the specified icon if it exist</summary>
+		/// <param name="fileName">File name (without .ico extension)</param>
+		/// <returns><c>System.Drawing.Icon</c>Specified Icon instance (or default if the specified icon could not be found)</returns>
+		public static Icon? GetIcon(string fileName) {
+            return fileName == "" ? null : (Icon)Properties.Resources.ResourceManager.GetObject(fileName);
+        }
+
+        #region Form elements generating methods
+
+        /// <summary>Simplified method for creating a group box</summary>
+        /// <param name="name">Group name</param>
+        /// <param name="text">Group text</param>
+        /// <param name="positionX">X position</param>
+        /// <param name="positionY">Y position</param>
+        /// <param name="width">Width (in pixels)</param>
+        /// <param name="height">Height (in pixels)</param>
+        /// <param name="control">Control instance if the element is to be attached to it directly</param>
+        /// <returns><c>System.Windows.Forms.GroupBox</c>Group box instance</returns>
+        public static GroupBox CreateGroupBox(string name, string text, int positionX, int positionY, int width, int height, Control? control = null) {
+
+            GroupBox groupBox = new() {
+                Name = name,
+                Text = text,
+                Location = new Point(positionX, positionY),
+                Size = new Size(width, height),
+                AutoSize = false,
+                TabIndex = 1,
+                Anchor = defaultAnchor,
+                Font = defaultFont
+            };
+
+            // If a Control instance is passed, add the generated element to it
+            control?.Controls.Add(groupBox);
+
+            return groupBox;
+        }
+
+        /// <summary>Simplified method for creating a label</summary>
+        /// <param name="name">Label name</param>
+        /// <param name="text">Label text</param>
+        /// <param name="positionX">X position</param>
+        /// <param name="positionY">Y position</param>
+        /// <param name="width">Width (in pixels)</param>
+        /// <param name="height">Height (in pixels)</param>
+        /// <param name="control">Control instance if the element is to be attached to it directly</param>
+        /// <param name="colorHex">Set the background color for the label</param>
+        /// <param name="margin">Margin (by default System.Windows.Forms.Padding(0, 3, 0, 3), the default value in Visual Studio)</param>
+        /// <param name="textAlignment">Text alignment, by default "MiddleCenter" (see System.Drawing.ContentAlignment for possible values)</param>
+        /// <returns><c>System.Windows.Forms.Label</c>Label instance</returns>
+        public static Label CreateLabel(string name, string text, int positionX, int positionY, int width, int height, Control? control = null, string colorHex = "", Padding margin = new Padding(), string textAlignment = "MiddleCenter") {
+
+            Label label = new() {
+                Name = name,
+                Text = text,
+                Location = new Point(positionX, positionY),
+                Size = new Size(width, height),
+                AutoSize = false,
+                TabIndex = 2,
+                Anchor = defaultAnchor,
+                Margin = defaultMargin,
+                Font = defaultFont
+            };
+
+            if (colorHex != "") {
+                label.BackColor = ColorTranslator.FromHtml(colorHex);
+            }
+
+            // If no specific margin is passed, set defaults from Visual Studio
+            if (margin.All == 0) {
+                margin.Top = 3;
+                margin.Left = 3;
+            }
+
+            // Text alignment
+            label.TextAlign = GetTextAlignment(textAlignment);
+
+            // If a Control instance is passed, add the generated element to it
+            control?.Controls.Add(label);
+
+            return label;
+        }
+
+        /// <summary>Simplified method for creating a button</summary>
+        /// <param name="name">Label name</param>
+        /// <param name="text">Label text</param>
+        /// <param name="positionX">X position</param>
+        /// <param name="positionY">Y position</param>
+        /// <param name="width">Width (in pixels)</param>
+        /// <param name="height">Height (in pixels)</param>
+        /// <param name="control">Control instance if the element is to be attached to it directly</param>
+        /// <param name="colorHex">Set the background color for the label</param>
+        /// <param name="margin">Margin (by default System.Windows.Forms.Padding(0, 3, 0, 3), the default value in Visual Studio)</param>
+        /// <param name="textAlignment">Text alignment, by default "MiddleCenter" (see System.Drawing.ContentAlignment for possible values)</param>
+        /// <returns><c>System.Windows.Forms.Button</c>Button instance</returns>
+        public static Button CreateButton(string name, string text, int positionX, int positionY, int width, int height, Control? control = null, string colorHex = "", Padding margin = new Padding(), string textAlignment = "MiddleCenter") {
+
+            Button btn = new() {
+                Name = name,
+                Text = text,
+                Location = new Point(positionX, positionY),
+                Size = new Size(width, height),
+                AutoSize = false,
+                TabIndex = 2,
+                Anchor = defaultAnchor,
+                Margin = defaultMargin,
+                Font = defaultFont
+            };
+
+            if (colorHex != "") {
+                btn.BackColor = ColorTranslator.FromHtml(colorHex);
+            }
+
+            // If no specific margin is passed, set defaults from Visual Studio
+            if (margin.All == 0) {
+                margin.Top = 3;
+                margin.Left = 3;
+            }
+
+            // Text alignment
+            btn.TextAlign = GetTextAlignment(textAlignment);
+
+            // If a Control instance is passed, add the generated element to it
+            control?.Controls.Add(btn);
+
+            return btn;
+        }
+
+        /// <summary>Simplified method for creating a new sub window (AKA windows form)</summary>
+        /// <param name="name">Subwindow name</param>
+        /// <param name="title">Subwindow title</param>
+        /// <param name="width">Width (in pixels)</param>
+        /// <param name="height">Height (in pixels)</param>
+        /// <param name="parentForm">Form the subwindow is attached to (this will make the subwindow always show in front of its parent, by default it shows in front of the main window)</param>
+        /// <param name="icon">Subwindow icon (by default retrieves the one from the main interface window)</param>
+        /// <returns><c>System.Windows.Forms.Form</c>Subwindow instance</returns>
+        public static Form CreateSubWindow(string name, string title, int width, int height, Form? parentForm = null, string icon = "") {
+
+            Form form = new() {
+                Name = name,
+                Text = title,
+                Icon = icon == "" && parentForm != null && parentForm.Icon != null ? parentForm.Icon : GetIcon(icon),
+                AutoScaleDimensions = new SizeF(6F, 15F),
+                AutoScaleMode = AutoScaleMode.Inherit,
+                FormBorderStyle = FormBorderStyle.FixedSingle,
+                BackColor = SystemColors.Control,
+                Font = defaultFont,
+                ClientSize = new Size(width, height),
+                Owner = parentForm
+            };
+
+            return form;
+        }
+
+        /// <summary>Simplified method for creating a numeric input field</summary>
+        /// <param name="name">Field name</param>
+        /// <param name="defaultValue">Default value</param>
+        /// <param name="positionX">X position</param>
+        /// <param name="positionY">Y position</param>
+        /// <param name="width">Width (in pixels)</param>
+        /// <param name="height">Height (in pixels)</param>
+        /// <param name="minValue">Minimum settable value</param>
+        /// <param name="maxValue">Maximum settable value</param>
+        /// <param name="nbDecimals">Number of decimals (0 by default)</param>
+        /// <param name="control">Control instance if the element is to be attached to it directly</param>
+        /// <param name="colorHex">Set the background color for the label</param>
+        /// <param name="margin">Margin (by default System.Windows.Forms.Padding(0, 3, 0, 3), the default value in Visual Studio)</param>
+        /// <param name="valueAlignment">Value alignment, by default "Left" (see System.Windows.Forms.HorizontalAlignment for possible values)</param>
+        /// <returns><c>System.Windows.Forms.NumericUpDown</c>NumericUpDown instance</returns>
+        public static NumericUpDown CreateNumericUpDown(string name, decimal defaultValue, int positionX, int positionY, int width, int height, decimal minValue = 0, decimal maxValue = 99, int nbDecimals = 0, Control? control = null, string colorHex = "", Padding margin = new Padding(), string valueAlignment = "Left") {
+
+            NumericUpDown numUpDown = new() {
+                Name = name,
+                Minimum = minValue,
+                Maximum = maxValue,
+                Value = defaultValue,
+                Location = new Point(positionX, positionY),
+                Size = new Size(width, height),
+                AutoSize = false,
+                TabIndex = 2,
+                Anchor = defaultAnchor,
+                Margin = defaultMargin,
+                Font = defaultFont,
+                Increment = (decimal)(maxValue > 500 ? 10 : (nbDecimals == 2 ? 0.05 : (nbDecimals == 1 ? 0.5 : 1))),
+                DecimalPlaces = nbDecimals
+            };
+
+            if (colorHex != "") {
+                numUpDown.BackColor = ColorTranslator.FromHtml(colorHex);
+            }
+
+            // If no specific margin is passed, set defaults from Visual Studio
+            if (margin.All == 0) {
+                margin.Top = 3;
+                margin.Left = 3;
+            }
+
+            // Value alignment
+            numUpDown.TextAlign = valueAlignment switch {
+                "Right" => HorizontalAlignment.Right,
+                "Center" => HorizontalAlignment.Center,
+                _ => HorizontalAlignment.Left,
+            };
+
+            // If a Control instance is passed, add the generated element to it
+            control?.Controls.Add(numUpDown);
+
+            return numUpDown;
+        }
+
+        /// <summary>Simplified method for creating a CheckGroupBox</summary>
+        /// <param name="positionX">X position</param>
+        /// <param name="positionY">Y position</param>
+        /// <param name="width">Width (in pixels)</param>
+        /// <param name="height">Height (in pixels)</param>
+        /// <param name="isCheckedByDefault">Set to true if the CheckGroupBox has to be checked when initiated</param>
+        /// <param name="control">Control instance if the element is to be attached to it directly</param>
+        /// <returns><c>CheckGroupBox</c>CheckGroupBox instance</returns>
+        public static CheckGroupBox CreateCheckGroupBox(string name, string text, int positionX, int positionY, int width, int height, bool isCheckedByDefault = false, Control? control = null) {
+
+            CheckGroupBox checkGroupBox = new() {
+                Name = name,
+                Text = text,
+                Checked = isCheckedByDefault,
+                Location = new Point(positionX, positionY),
+                Size = new Size(width, height),
+                TabIndex = 1,
+                AutoSize = false,
+                Anchor = defaultAnchor,
+                Margin = defaultMargin,
+                Font = defaultFont
+            };
+
+            // If a Control instance is passed, add the generated element to it
+            control?.Controls.Add(checkGroupBox);
+
+            return checkGroupBox;
+        }
+
+        /// <summary>Simplified method for creating a label containing an image</summary>
+        /// <param name="name">Label name</param>
+        /// <param name="imgName">Image name</param>
+        /// <param name="positionX">X position</param>
+        /// <param name="positionY">Y position</param>
+        /// <param name="control">Control instance if the element is to be attached to it directly</param>
+        /// <returns><c>System.Windows.Forms.Label</c>Label instance</returns>
+        public static Label CreateImageLabel(string name, string imgName, int positionX, int positionY, Control? control = null) {
+
+            // Get image
+            Image img = (Image)Properties.Resources.ResourceManager.GetObject(imgName);
+
+            // Create label
+            Label label = new() {
+                Name = name,
+                Text = "",
+                Location = new Point(positionX, positionY),
+                Size = new Size(img.Width, img.Height),
+                Image = img,
+                AutoSize = false,
+                TabIndex = 2,
+                ImageAlign = ContentAlignment.MiddleCenter,
+                Anchor = defaultAnchor,
+                Margin = defaultMargin,
+                Font = defaultFont
+            };
+
+            // If a Control instance is passed, add the generated element to it
+            control?.Controls.Add(label);
+
+            return label;
+        }
+
+        /// <summary>Simplified method for creating a tooltip</summary>
+        /// <returns><c>System.Windows.Forms.ToolTip<c/>Tooltip instance</returns>
+        public static ToolTip CreateToolTip() {
+
+            ToolTip toolTip = new() {
+                // Always shows tooltip even if window isn't focused
+                ShowAlways = true,
+
+                // Set tooltip delays
+                AutoPopDelay = 5000,
+                InitialDelay = 1000,
+                ReshowDelay = 500
+            };
+
+            return toolTip;
+        }
+
+        /// <summary>Simplified method for creating a data grid view</summary>
+        /// <param name="name">Group name</param>
+        /// <param name="data">Data to show</param>
+        /// <param name="positionX">X position</param>
+        /// <param name="positionY">Y position</param>
+        /// <param name="width">Width (in pixels)</param>
+        /// <param name="height">Height (in pixels)</param>
+        /// <param name="control">Control instance if the element is to be attached to it directly</param>
+        /// <returns><c>System.Windows.Forms.GroupBox</c>Data grid view instance</returns>
+        public static DataGridView CreateDataGridView(string name, DataTable data, int positionX, int positionY, int width, int height, Control? control = null) {
+
+            DataGridView gridView = new() {
+                Name = name,
+                DataSource = data,
+                Location = new Point(positionX, positionY),
+                Size = new Size(width, height),
+                AutoSize = false,
+                TabIndex = 1,
+                Anchor = defaultAnchor,
+                Font = defaultFont,
+                AllowUserToAddRows = false,
+                AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill,
+                Dock = DockStyle.Fill,
+                EnableHeadersVisualStyles = false,
+                ReadOnly = true
+            };
+
+            // Set a specific color for the header
+            gridView.ColumnHeadersDefaultCellStyle.BackColor = Color.LightGray;
+
+            // If a Control instance is passed, add the generated element to it
+            control?.Controls.Add(gridView);
+
+            return gridView;
+        }
+
+        #endregion
+
+        #region Simplified adding methods
+
+        /// <summary>Simplified method for adding the values warning tooltip to a list of labels</summary>
+        /// <param name="labels">List of labels</param>
+        public static void AddValuesWarningToolTip(List<Label> labels) {
+            for (int i = 0; i < labels.Count; i++) {
+                AddToolTip(labels[i], "Requires switching room to be fully updated");
+            }
+        }
+
+        /// <summary>Simplified method for adding a tooltip to a label</summary>
+        /// <param name="label">Label instance</param>
+        /// <param name="text">Tooltip text</param>
+        public static void AddToolTip(Label label, string text, Cursor? mouseCursor = null) {
+            toolTip.SetToolTip(label, text);
+            label.Cursor = mouseCursor ?? Cursors.Help;
+        }
+
+        #endregion
+
+        #region Simplified checks methods
+
+        /// <summary>Get the name of the icon corresponding to the current game</summary>
+        /// <returns><c>string</c>Icon name</returns>
+        public static string GetGameIconName() {
+            return BokInterface.shorterGameName switch {
+                "Boktai" => "lita",
+                "Zoktai" => "ringo",
+                "Shinbok" => "trinity",
+                "LunarKnights" => "lucian",
+                _ => "nero",
+            };
+        }
+
+        /// <summary>Get the corresponding text alignment based on a string</summary>
+        /// <param name="value">Text alignment string</param>
+        /// <returns><c>System.Drawing.ContentAlignment</c>Text alignment object</returns>
+        private static ContentAlignment GetTextAlignment(string value) {
+            return value switch {
+                "BottomCenter" => ContentAlignment.BottomCenter,
+                "BottomLeft" => ContentAlignment.BottomLeft,
+                "BottomRight" => ContentAlignment.BottomRight,
+                "MiddleLeft" => ContentAlignment.MiddleLeft,
+                "MiddleRight" => ContentAlignment.MiddleRight,
+                "TopCenter" => ContentAlignment.TopCenter,
+                "TopLeft" => ContentAlignment.TopLeft,
+                "TopRight" => ContentAlignment.TopRight,
+                _ => ContentAlignment.MiddleCenter,
+            };
+        }
+
+        #endregion
+
+    }
+}
