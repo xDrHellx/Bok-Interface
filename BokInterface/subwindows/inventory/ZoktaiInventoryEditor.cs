@@ -116,6 +116,9 @@ namespace BokInterface.Inventory {
             // Generate & add options to dropdowns
             GenerateDropDownOptions();
 
+            // Set default values for each field
+            SetDefaultValues();
+
             // Button for setting values & its events
             Button setValuesButton = WinFormHelpers.CreateButton("setStatusButton", "Set values", 509, 320, 75, 23, this);
             setValuesButton.Click += new EventHandler(delegate (object sender, EventArgs e) {
@@ -295,6 +298,54 @@ namespace BokInterface.Inventory {
                 dropdown.DataSource = new BindingSource(_zoktaiItems.Items, null);
                 dropdown.DisplayMember = "Key";
                 dropdown.ValueMember = "Value";
+            }
+        }
+
+        ///<summary>Get an item from the items list by using its value</summary>
+        ///<param name="value"><c>decimal</c>Value</param>
+        ///<returns><c>Item</c>Item</returns>
+        private Item? GetItemByValue(decimal value) {
+            foreach (KeyValuePair<string, Item> index in _zoktaiItems.Items) {
+                Item item = index.Value;
+                if (item.value == value) {
+                    return item;
+                }
+            }
+
+            return null;
+        }
+
+        protected override void SetDefaultValues() {
+
+            // If "current stat" is a valid value, get the current inventory
+            uint currentStat = APIs.Memory.ReadU32(_zoktaiAddresses.Misc["current_stat"].Address);
+            if (currentStat > 0) {
+                foreach (ImageComboBox dropdown in dropDownLists) {
+                    /**
+                     * Get the name of the field to retrieve the value from based on the dropdown's name (for example inventory_slotX_item => slotX_item)
+                     * Then try getting the corresponding item & preselect it
+                     */
+                    string[] fieldParts = dropdown.Name.Split(['_'], 2);
+                    Item? selectedItem = GetItemByValue(_memoryValues.Inventory[fieldParts[1]].Value);
+                    if (selectedItem != null) {
+                        dropdown.SelectedIndex = dropdown.FindStringExact(selectedItem.name);
+                    }
+                }
+
+                foreach (NumericUpDown durabilityField in numericUpDowns) {
+                    // Same treatment as above
+                    string[] fieldParts = durabilityField.Name.Split(['_'], 2);
+                    durabilityField.Value = _memoryValues.Inventory[fieldParts[1]].Value;
+                }
+            } else {
+                // If current stat is unvalid (for example because we are on the title screen or in a room transition), use specific values
+                foreach (ImageComboBox dropdown in dropDownLists) {
+                    dropdown.SelectedIndex = 0;
+                }
+
+                foreach (NumericUpDown durabilityField in numericUpDowns) {
+                    durabilityField.Value = 0;
+                }
             }
         }
     }

@@ -55,18 +55,14 @@ namespace BokInterface.Inventory {
             ClientSize = new Size(width, height);
         }
 
-        ///<summary>Get the current inventory</summary>
-        /// <returns><c>IDictionary<string, decimal></c>Current inventory</returns>
-        protected virtual IDictionary<string, decimal> GetCurrentInventory() {
-            IDictionary<string, decimal> inventory = new Dictionary<string, decimal>();
-            return inventory;
-        }
-
         /// <summary>Add elements to the subwindow</summary>
         protected abstract void AddElements();
 
         /// <summary>Set values to memory addresses</summary>
         protected abstract void SetValues();
+
+        ///<summary>Sets default values for each field</summary>
+        protected virtual void SetDefaultValues() { }
 
         #endregion
     }
