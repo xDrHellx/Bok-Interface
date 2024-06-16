@@ -4,25 +4,37 @@ using System.Windows.Forms;
 
 using BokInterface.All;
 
-namespace BokInterface.Status {
-    /// <summary>Basis class for status editor subclasses</summary>
-    abstract class StatusEditor : Form {
+namespace BokInterface.Inventory {
+    /// <summary>Basis class for inventory editor subclasses</summary>
+    abstract class InventoryEditor : Form {
 
         #region Properties
 
-        protected readonly string name = "statusEditWindow";
-        protected readonly string text = "Status editor";
+        protected readonly string name = "inventoryEditWindow";
+        protected readonly string text = "Inventory editor";
 
         #endregion
 
         #region Form elements
 
-        protected CheckGroupBox skillGroupBox = new();
-        protected CheckGroupBox expGroupBox = new();
-        protected CheckGroupBox statPointsGroupBox = new();
-        protected CheckGroupBox statusGroupBox = new();
-        protected CheckGroupBox statsGroupBox = new();
-        protected readonly List<NumericUpDown> statusNumericUpDowns = [];
+        protected readonly List<ImageComboBox> dropDownLists = [];
+        protected readonly List<NumericUpDown> numericUpDowns = [];
+        protected CheckGroupBox slot1group = new(),
+            slot2group = new(),
+            slot3group = new(),
+            slot4group = new(),
+            slot5group = new(),
+            slot6group = new(),
+            slot7group = new(),
+            slot8group = new(),
+            slot9group = new(),
+            slot10group = new(),
+            slot11group = new(),
+            slot12group = new(),
+            slot13group = new(),
+            slot14group = new(),
+            slot15group = new(),
+            slot16group = new();
 
         #endregion
 
@@ -43,18 +55,14 @@ namespace BokInterface.Status {
             ClientSize = new Size(width, height);
         }
 
-        /// <summary>Get default values</summary>
-        /// <returns><c>IDictionary<string, decimal></c>Default values</returns>
-        protected virtual IDictionary<string, decimal> GetDefaultValues() {
-            IDictionary<string, decimal> defaultValues = new Dictionary<string, decimal>();
-            return defaultValues;
-        }
-
         /// <summary>Add elements to the subwindow</summary>
         protected abstract void AddElements();
 
         /// <summary>Set values to memory addresses</summary>
         protected abstract void SetValues();
+
+        ///<summary>Sets default values for each field</summary>
+        protected virtual void SetDefaultValues() { }
 
         #endregion
     }

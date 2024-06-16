@@ -77,6 +77,44 @@ namespace BokInterface.Addresses {
             // Django.Add("showned_stat_points_to_allocate", new MemoryAddress(0x02006E20)); // useless
             Django.Add("stat_points_to_allocate", new MemoryAddress(0x42, domain: "EWRAM"));
 
+            // Items inventory
+            note = "Inventory item slot";
+            Inventory.Add("item_slot_1", new MemoryAddress(0x70, note: note, domain: "EWRAM"));
+            Inventory.Add("item_slot_2", new MemoryAddress(0x72, note: note, domain: "EWRAM"));
+            Inventory.Add("item_slot_3", new MemoryAddress(0x74, note: note, domain: "EWRAM"));
+            Inventory.Add("item_slot_4", new MemoryAddress(0x76, note: note, domain: "EWRAM"));
+            Inventory.Add("item_slot_5", new MemoryAddress(0x78, note: note, domain: "EWRAM"));
+            Inventory.Add("item_slot_6", new MemoryAddress(0x7A, note: note, domain: "EWRAM"));
+            Inventory.Add("item_slot_7", new MemoryAddress(0x7C, note: note, domain: "EWRAM"));
+            Inventory.Add("item_slot_8", new MemoryAddress(0x7E, note: note, domain: "EWRAM"));
+            Inventory.Add("item_slot_9", new MemoryAddress(0x80, note: note, domain: "EWRAM"));
+            Inventory.Add("item_slot_10", new MemoryAddress(0x82, note: note, domain: "EWRAM"));
+            Inventory.Add("item_slot_11", new MemoryAddress(0x84, note: note, domain: "EWRAM"));
+            Inventory.Add("item_slot_12", new MemoryAddress(0x86, note: note, domain: "EWRAM"));
+            Inventory.Add("item_slot_13", new MemoryAddress(0x88, note: note, domain: "EWRAM"));
+            Inventory.Add("item_slot_14", new MemoryAddress(0x8A, note: note, domain: "EWRAM"));
+            Inventory.Add("item_slot_15", new MemoryAddress(0x8C, note: note, domain: "EWRAM"));
+            Inventory.Add("item_slot_16", new MemoryAddress(0x8E, note: note, domain: "EWRAM"));
+
+            // Items durability
+            note = "Inventory item durability";
+            Inventory.Add("item_slot_durability_1", new MemoryAddress(0xD0, note: note, domain: "EWRAM"));
+            Inventory.Add("item_slot_durability_2", new MemoryAddress(0xD2, note: note, domain: "EWRAM"));
+            Inventory.Add("item_slot_durability_3", new MemoryAddress(0xD4, note: note, domain: "EWRAM"));
+            Inventory.Add("item_slot_durability_4", new MemoryAddress(0xD6, note: note, domain: "EWRAM"));
+            Inventory.Add("item_slot_durability_5", new MemoryAddress(0xD8, note: note, domain: "EWRAM"));
+            Inventory.Add("item_slot_durability_6", new MemoryAddress(0xDA, note: note, domain: "EWRAM"));
+            Inventory.Add("item_slot_durability_7", new MemoryAddress(0xDC, note: note, domain: "EWRAM"));
+            Inventory.Add("item_slot_durability_8", new MemoryAddress(0xDE, note: note, domain: "EWRAM"));
+            Inventory.Add("item_slot_durability_9", new MemoryAddress(0xE0, note: note, domain: "EWRAM"));
+            Inventory.Add("item_slot_durability_10", new MemoryAddress(0xE2, note: note, domain: "EWRAM"));
+            Inventory.Add("item_slot_durability_11", new MemoryAddress(0xE4, note: note, domain: "EWRAM"));
+            Inventory.Add("item_slot_durability_12", new MemoryAddress(0xE6, note: note, domain: "EWRAM"));
+            Inventory.Add("item_slot_durability_13", new MemoryAddress(0xE8, note: note, domain: "EWRAM"));
+            Inventory.Add("item_slot_durability_14", new MemoryAddress(0xEA, note: note, domain: "EWRAM"));
+            Inventory.Add("item_slot_durability_15", new MemoryAddress(0xEC, note: note, domain: "EWRAM"));
+            Inventory.Add("item_slot_durability_16", new MemoryAddress(0xEE, note: note, domain: "EWRAM"));
+
             // Add Misc addresses
             Misc.Add("stat", new MemoryAddress(0x030046A0, note: "For persistent stats & inventory", type: "U32", domain: "IWRAM"));
             Misc.Add("world_state", new MemoryAddress(0x03004698, note: "Story progress & dungeon states", type: "U32", domain: "IWRAM"));
