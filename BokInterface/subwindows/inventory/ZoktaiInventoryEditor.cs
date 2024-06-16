@@ -131,22 +131,22 @@ namespace BokInterface.Inventory {
 
         ///<summary>Separated method for instanciating checkGroupBox instances</summary>
         protected void InstanciateCheckGroupBoxes() {
-            slot1group = WinFormHelpers.CreateCheckGroupBox("slot1group", "Slot 1", 5, 5, 150, 76, true, this);
-            slot2group = WinFormHelpers.CreateCheckGroupBox("slot2group", "Slot 2", 161, 5, 150, 76, true, this);
-            slot3group = WinFormHelpers.CreateCheckGroupBox("slot3group", "Slot 3", 317, 5, 150, 76, true, this);
-            slot4group = WinFormHelpers.CreateCheckGroupBox("slot4group", "Slot 4", 473, 5, 150, 76, true, this);
-            slot5group = WinFormHelpers.CreateCheckGroupBox("slot5group", "Slot 5", 5, 84, 150, 76, true, this);
-            slot6group = WinFormHelpers.CreateCheckGroupBox("slot6group", "Slot 6", 161, 84, 150, 76, true, this);
-            slot7group = WinFormHelpers.CreateCheckGroupBox("slot7group", "Slot 7", 317, 84, 150, 76, true, this);
-            slot8group = WinFormHelpers.CreateCheckGroupBox("slot8group", "Slot 8", 473, 84, 150, 76, true, this);
-            slot9group = WinFormHelpers.CreateCheckGroupBox("slot9group", "Slot 9", 5, 163, 150, 76, true, this);
-            slot10group = WinFormHelpers.CreateCheckGroupBox("slot10group", "Slot 10", 161, 163, 150, 76, true, this);
-            slot11group = WinFormHelpers.CreateCheckGroupBox("slot11group", "Slot 11", 317, 163, 150, 76, true, this);
-            slot12group = WinFormHelpers.CreateCheckGroupBox("slot12group", "Slot 12", 473, 163, 150, 76, true, this);
-            slot13group = WinFormHelpers.CreateCheckGroupBox("slot13group", "Slot 13", 5, 242, 150, 76, true, this);
-            slot14group = WinFormHelpers.CreateCheckGroupBox("slot14group", "Slot 14", 161, 242, 150, 76, true, this);
-            slot15group = WinFormHelpers.CreateCheckGroupBox("slot15group", "Slot 15", 317, 242, 150, 76, true, this);
-            slot16group = WinFormHelpers.CreateCheckGroupBox("slot16group", "Slot 16", 473, 242, 150, 76, true, this);
+            slot1group = WinFormHelpers.CreateCheckGroupBox("slot1group", "Slot 1", 5, 5, 150, 76, control: this);
+            slot2group = WinFormHelpers.CreateCheckGroupBox("slot2group", "Slot 2", 161, 5, 150, 76, control: this);
+            slot3group = WinFormHelpers.CreateCheckGroupBox("slot3group", "Slot 3", 317, 5, 150, 76, control: this);
+            slot4group = WinFormHelpers.CreateCheckGroupBox("slot4group", "Slot 4", 473, 5, 150, 76, control: this);
+            slot5group = WinFormHelpers.CreateCheckGroupBox("slot5group", "Slot 5", 5, 84, 150, 76, control: this);
+            slot6group = WinFormHelpers.CreateCheckGroupBox("slot6group", "Slot 6", 161, 84, 150, 76, control: this);
+            slot7group = WinFormHelpers.CreateCheckGroupBox("slot7group", "Slot 7", 317, 84, 150, 76, control: this);
+            slot8group = WinFormHelpers.CreateCheckGroupBox("slot8group", "Slot 8", 473, 84, 150, 76, control: this);
+            slot9group = WinFormHelpers.CreateCheckGroupBox("slot9group", "Slot 9", 5, 163, 150, 76, control: this);
+            slot10group = WinFormHelpers.CreateCheckGroupBox("slot10group", "Slot 10", 161, 163, 150, 76, control: this);
+            slot11group = WinFormHelpers.CreateCheckGroupBox("slot11group", "Slot 11", 317, 163, 150, 76, control: this);
+            slot12group = WinFormHelpers.CreateCheckGroupBox("slot12group", "Slot 12", 473, 163, 150, 76, control: this);
+            slot13group = WinFormHelpers.CreateCheckGroupBox("slot13group", "Slot 13", 5, 242, 150, 76, control: this);
+            slot14group = WinFormHelpers.CreateCheckGroupBox("slot14group", "Slot 14", 161, 242, 150, 76, control: this);
+            slot15group = WinFormHelpers.CreateCheckGroupBox("slot15group", "Slot 15", 317, 242, 150, 76, control: this);
+            slot16group = WinFormHelpers.CreateCheckGroupBox("slot16group", "Slot 16", 473, 242, 150, 76, control: this);
         }
 
 
