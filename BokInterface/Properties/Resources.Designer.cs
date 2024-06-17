@@ -703,32 +703,32 @@ namespace BokInterface.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        // internal static System.Drawing.Bitmap 80fd204b455900 {
-        //     get {
-        //         object obj = ResourceManager.GetObject("80fd204b455900", resourceCulture);
-        //         return ((System.Drawing.Bitmap)(obj));
-        //     }
-        // }
-
-        // /// <summary>
-        // ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        // /// </summary>
-        // internal static System.Drawing.Bitmap 80fe204b455900 {
-        //     get {
-        //         object obj = ResourceManager.GetObject("80fe204b455900", resourceCulture);
-        //         return ((System.Drawing.Bitmap)(obj));
-        //     }
-        // }
+        internal static System.Drawing.Bitmap circle_key {
+            get {
+                object obj = ResourceManager.GetObject("circle_key", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
 
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        // internal static System.Drawing.Bitmap ␣_key {
-        //     get {
-        //         object obj = ResourceManager.GetObject("␣_key", resourceCulture);
-        //         return ((System.Drawing.Bitmap)(obj));
-        //     }
-        // }
+        internal static System.Drawing.Bitmap triangle_key {
+            get {
+                object obj = ResourceManager.GetObject("triangle_key", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap square_key {
+            get {
+                object obj = ResourceManager.GetObject("square_key", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
 
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.

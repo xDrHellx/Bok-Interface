@@ -74,36 +74,36 @@ namespace BokInterface.Items {
 
         ///<summary>Init key items instances</summary>
         private void InitKeyItems() {
-            // Items.Add("Empty slot", new Item("Empty Slot", 65535));
-            // Items.Add("Dark Card", new Item("Dark Card", 49, "dark_card"));
-            // Items.Add("Pet", new Item("Pet", 50, "pet"));
-            // Items.Add("Spade Emblem", new Item("Spade Emblem", 51, "spade_emblem"));
-            // Items.Add("Heart Emblem", new Item("Heart Emblem", 52, "heart_emblem"));
-            // Items.Add("Diamond Emblem", new Item("Diamond Emblem", 53, "diamond_emblem"));
-            // Items.Add("Club Emblem", new Item("Club Emblem", 54, "club_emblem"));
-            // Items.Add("Joker Emblem", new Item("Joker Emblem", 55, "joker_emblem"));
-            // Items.Add("Oak Coffin", new Item("Oak Coffin", 56, "oak_coffin"));
-            // Items.Add("Bronze Coffin", new Item("Bronze Coffin", 57, "bronze_coffin"));
-            // Items.Add("Iron Coffin", new Item("Iron Coffin", 58, "iron_coffin"));
-            // Items.Add("Silver Coffin", new Item("Silver Coffin", 59, "silver_coffin"));
-            // Items.Add("Solar Coffin", new Item("Solar Coffin", 60, "solar_coffin"));
-            // Items.Add("Coffin Monster Elefan", new Item("Coffin Monster Elefan", 61, "coffin_monster_elefan"));
-            // Items.Add("Vampire Coffin", new Item("Vampire Coffin", 62, "vampire_coffin"));
-            // Items.Add("Iron Maiden", new Item("Iron Maiden", 63, "iron_maiden"));
-            // Items.Add("Warehouse Key", new Item("Warehouse Key", 64, "warehouse_key"));
-            // // Items.Add("80fd204b455900", new Item("80fd204b455900", 65, "80fd204b455900"));
-            // // Items.Add("80fe204b455900", new Item("80fe204b455900", 66, "80fe204b455900"));
-            // // Items.Add("␣ Key", new Item("␣ Key", 67, "␣_key"));
-            // Items.Add("Red Crystal", new Item("Red Crystal", 68, "red_crystal"));
-            // Items.Add("Blue Crystal", new Item("Blue Crystal", 69, "blue_crystal"));
-            // Items.Add("Green Crystal", new Item("Green Crystal", 70, "green_crystal"));
-            // Items.Add("Yellow Crystal", new Item("Yellow Crystal", 71, "yellow_crystal"));
-            // Items.Add("Stone Tablet Piece", new Item("Stone Tablet Piece", 72, "stone_tablet_piece"));
-            // Items.Add("Tasty Water", new Item("Tasty Water", 73, "tasty_water"));
-            // Items.Add("The Magician", new Item("The Magician", 74, "gray_card"));
-            // Items.Add("The Hierophant", new Item("The Hierophant", 75, "gray_card"));
-            // Items.Add("The Hermit", new Item("The Hermit", 76, "gray_card"));
-            // Items.Add("The World", new Item("The World", 77, "gray_card"));
+            KeyItems.Add("Empty slot", new Item("Empty Slot", 65535));
+            KeyItems.Add("Dark Card", new Item("Dark Card", 49, "dark_card"));
+            KeyItems.Add("Pet", new Item("Pet", 50, "pet"));
+            KeyItems.Add("Spade Emblem", new Item("Spade Emblem", 51, "spade_emblem"));
+            KeyItems.Add("Heart Emblem", new Item("Heart Emblem", 52, "heart_emblem"));
+            KeyItems.Add("Diamond Emblem", new Item("Diamond Emblem", 53, "diamond_emblem"));
+            KeyItems.Add("Club Emblem", new Item("Club Emblem", 54, "club_emblem"));
+            KeyItems.Add("Joker Emblem", new Item("Joker Emblem", 55, "joker_emblem"));
+            KeyItems.Add("Oak Coffin", new Item("Oak Coffin", 56, "oak_coffin"));
+            KeyItems.Add("Bronze Coffin", new Item("Bronze Coffin", 57, "bronze_coffin"));
+            KeyItems.Add("Iron Coffin", new Item("Iron Coffin", 58, "iron_coffin"));
+            KeyItems.Add("Silver Coffin", new Item("Silver Coffin", 59, "silver_coffin"));
+            KeyItems.Add("Solar Coffin", new Item("Solar Coffin", 60, "solar_coffin"));
+            KeyItems.Add("Coffin Monster Elefan", new Item("Coffin Monster Elefan", 61, "coffin_monster_elefan"));
+            KeyItems.Add("Vampire Coffin", new Item("Vampire Coffin", 62, "vampire_coffin"));
+            KeyItems.Add("Iron Maiden", new Item("Iron Maiden", 63, "iron_maiden"));
+            KeyItems.Add("Warehouse Key", new Item("Warehouse Key", 64, "warehouse_key"));
+            KeyItems.Add("Circle Key", new Item("Circle Key", 65, "circle_key"));
+            KeyItems.Add("Triangle Key", new Item("Triangle Key", 66, "triangle_key"));
+            KeyItems.Add("Square Key", new Item("Square Key", 67, "square_key"));
+            KeyItems.Add("Red Crystal", new Item("Red Crystal", 68, "red_crystal"));
+            KeyItems.Add("Blue Crystal", new Item("Blue Crystal", 69, "blue_crystal"));
+            KeyItems.Add("Green Crystal", new Item("Green Crystal", 70, "green_crystal"));
+            KeyItems.Add("Yellow Crystal", new Item("Yellow Crystal", 71, "yellow_crystal"));
+            KeyItems.Add("Stone Tablet Piece", new Item("Stone Tablet Piece", 72, "stone_tablet_piece"));
+            KeyItems.Add("Tasty Water", new Item("Tasty Water", 73, "tasty_water"));
+            KeyItems.Add("The Magician", new Item("The Magician", 74, "gray_card"));
+            KeyItems.Add("The Hierophant", new Item("The Hierophant", 75, "gray_card"));
+            KeyItems.Add("The Hermit", new Item("The Hermit", 76, "gray_card"));
+            KeyItems.Add("The World", new Item("The World", 77, "gray_card"));
         }
     }
 }
