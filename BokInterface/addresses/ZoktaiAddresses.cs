@@ -116,6 +116,7 @@ namespace BokInterface.Addresses {
             Inventory.Add("item_slot_durability_16", new MemoryAddress(0xEE, note: note, domain: "EWRAM"));
 
             // Key items inventory
+            note = "Key item slot";
             Inventory.Add("key_item_slot_1", new MemoryAddress(0x30, note: note, domain: "EWRAM"));
             Inventory.Add("key_item_slot_2", new MemoryAddress(0x32, note: note, domain: "EWRAM"));
             Inventory.Add("key_item_slot_3", new MemoryAddress(0x34, note: note, domain: "EWRAM"));
