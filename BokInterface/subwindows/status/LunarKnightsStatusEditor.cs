@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.Windows.Forms;
 
 using BokInterface.Addresses;
@@ -21,22 +20,13 @@ namespace BokInterface.Status {
         public LunarKnightsStatusEditor(BokInterface bokInterface, MemoryValues memoryValues, LunarKnightsAddresses lunarKnightsAddresses) {
 
             _memoryValues = memoryValues;
-            _bokInterface = bokInterface;
             _lunarKnightsAddresses = lunarKnightsAddresses;
-
-            Name = name;
-            Text = text;
+            Owner = _bokInterface = bokInterface;
             Icon = _bokInterface.Icon;
-            AutoScaleDimensions = new SizeF(6F, 15F);
-            AutoScaleMode = AutoScaleMode.Inherit;
-            FormBorderStyle = FormBorderStyle.FixedSingle;
-            BackColor = SystemColors.Control;
-            Font = WinFormHelpers.defaultFont;
-            AutoScroll = true;
-            Owner = _bokInterface;
-            ClientSize = new Size(203, 144);
 
-            // Generate the subwindow & add the onClose event to it
+            SetFormParameters(203, 144);
+
+            // Add the onClose event to the subwindow
             FormClosing += new FormClosingEventHandler(delegate (object sender, FormClosingEventArgs e) {
                 _bokInterface.statusEditorOpened = false;
             });
@@ -64,7 +54,7 @@ namespace BokInterface.Status {
         protected override void SetValues() {
 
             // Retrieve all input fields
-            List<NumericUpDown> fields = _statusNumericUpDowns;
+            List<NumericUpDown> fields = statusNumericUpDowns;
 
             // Store the previous setting for BizHawk being paused
             _bokInterface._previousIsPauseSetting = APIs.Client.IsPaused();

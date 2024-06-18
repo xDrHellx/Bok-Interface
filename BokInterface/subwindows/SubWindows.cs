@@ -2,6 +2,8 @@ using System;
 using System.Windows.Forms;
 
 using BokInterface.All;
+using BokInterface.Inventory;
+using BokInterface.KeyItems;
 using BokInterface.Status;
 
 /**
@@ -15,6 +17,7 @@ namespace BokInterface {
 
         public bool statusEditorOpened = false,
             inventoryEditorOpened = false,
+            keyItemsEditorOpened = false,
             equipsEditorOpened = false,
             solarGunEditorOpened = false,
             weaponsEditorOpened = false,
@@ -27,7 +30,7 @@ namespace BokInterface {
         protected void OpenStatusEditor(object sender, EventArgs e) {
             if (statusEditorOpened == false) {
 
-                // Add subwindow elements corresponding to the current game
+                // Open editor for the current game
                 switch (shorterGameName) {
                     case "Boktai":
                         new BoktaiStatusEditor(this, _memoryValues, _boktaiAddresses);
@@ -53,15 +56,52 @@ namespace BokInterface {
         protected void OpenInventoryEditor(object sender, EventArgs e) {
             if (inventoryEditorOpened == false) {
 
-                // Create subwindow & add on close event
-                inventoryEditWindow = WinFormHelpers.CreateSubWindow("inventoryEditWindow", "Bok Edit - Inventory", 200, 100, this);
-                inventoryEditWindow.FormClosing += new FormClosingEventHandler(delegate (object sender, FormClosingEventArgs e) {
-                    inventoryEditorOpened = false;
-                    inventoryEditWindow.Controls.Clear();
-                });
+                // Open editor for the current game
+                switch (shorterGameName) {
+                    case "Boktai":
+                        new BoktaiInventoryEditor(this, _memoryValues, _boktaiAddresses);
+                        break;
+                    case "Zoktai":
+                        new ZoktaiInventoryEditor(this, _memoryValues, _zoktaiAddresses);
+                        break;
+                    case "Shinbok":
+                        new ShinbokInventoryEditor(this, _memoryValues, _shinbokAddresses);
+                        break;
+                    case "LunarKnights":
+                        new LunarKnightsInventoryEditor(this, _memoryValues, _lunarKnightsAddresses);
+                        break;
+                    default:
+                        // If game is not handled, do nothing
+                        return;
+                }
 
-                inventoryEditWindow.Show();
                 inventoryEditorOpened = true;
+            }
+        }
+
+        protected void OpenKeyItemsEditor(object sender, EventArgs e) {
+            if (keyItemsEditorOpened == false) {
+
+                // Open editor for the current game
+                switch (shorterGameName) {
+                    case "Boktai":
+                        new BoktaiKeyItemsEditor(this, _memoryValues, _boktaiAddresses);
+                        break;
+                    case "Zoktai":
+                        new ZoktaiKeyItemsEditor(this, _memoryValues, _zoktaiAddresses);
+                        break;
+                    case "Shinbok":
+                        new ShinbokKeyItemsEditor(this, _memoryValues, _shinbokAddresses);
+                        break;
+                    case "LunarKnights":
+                        new LunarKnightsKeyItemsEditor(this, _memoryValues, _lunarKnightsAddresses);
+                        break;
+                    default:
+                        // If game is not handled, do nothing
+                        return;
+                }
+
+                keyItemsEditorOpened = true;
             }
         }
 

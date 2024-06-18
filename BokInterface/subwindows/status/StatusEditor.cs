@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Drawing;
 using System.Windows.Forms;
 
 using BokInterface.All;
@@ -16,16 +17,31 @@ namespace BokInterface.Status {
 
         #region Form elements
 
-        protected CheckGroupBox _skillGroupBox = new();
-        protected CheckGroupBox _expGroupBox = new();
-        protected CheckGroupBox _statPointsGroupBox = new();
-        protected CheckGroupBox _statusGroupBox = new();
-        protected CheckGroupBox _statsGroupBox = new();
-        protected readonly List<NumericUpDown> _statusNumericUpDowns = [];
+        protected CheckGroupBox skillGroupBox = new();
+        protected CheckGroupBox expGroupBox = new();
+        protected CheckGroupBox statPointsGroupBox = new();
+        protected CheckGroupBox statusGroupBox = new();
+        protected CheckGroupBox statsGroupBox = new();
+        protected readonly List<NumericUpDown> statusNumericUpDowns = [];
 
         #endregion
 
         #region Methods
+
+        ///<summary>Sets common parameters for the form / subwindow</summary>
+        ///<param name="width">Form width</param>
+        ///<param name="height">Form height</param>
+        protected void SetFormParameters(int width, int height) {
+            Name = name;
+            Text = text;
+            AutoScaleDimensions = new SizeF(6F, 15F);
+            AutoScaleMode = AutoScaleMode.Inherit;
+            FormBorderStyle = FormBorderStyle.FixedSingle;
+            BackColor = SystemColors.Control;
+            Font = WinFormHelpers.defaultFont;
+            AutoScroll = true;
+            ClientSize = new Size(width, height);
+        }
 
         /// <summary>Get default values</summary>
         /// <returns><c>IDictionary<string, decimal></c>Default values</returns>
