@@ -115,6 +115,25 @@ namespace BokInterface.Addresses {
             Inventory.Add("item_slot_durability_15", new MemoryAddress(0xEC, note: note, domain: "EWRAM"));
             Inventory.Add("item_slot_durability_16", new MemoryAddress(0xEE, note: note, domain: "EWRAM"));
 
+            // Key items inventory
+            note = "Key item slot";
+            Inventory.Add("key_item_slot_1", new MemoryAddress(0x130, note: note, domain: "EWRAM"));
+            Inventory.Add("key_item_slot_2", new MemoryAddress(0x132, note: note, domain: "EWRAM"));
+            Inventory.Add("key_item_slot_3", new MemoryAddress(0x134, note: note, domain: "EWRAM"));
+            Inventory.Add("key_item_slot_4", new MemoryAddress(0x136, note: note, domain: "EWRAM"));
+            Inventory.Add("key_item_slot_5", new MemoryAddress(0x138, note: note, domain: "EWRAM"));
+            Inventory.Add("key_item_slot_6", new MemoryAddress(0x13A, note: note, domain: "EWRAM"));
+            Inventory.Add("key_item_slot_7", new MemoryAddress(0x13C, note: note, domain: "EWRAM"));
+            Inventory.Add("key_item_slot_8", new MemoryAddress(0x13E, note: note, domain: "EWRAM"));
+            Inventory.Add("key_item_slot_9", new MemoryAddress(0x140, note: note, domain: "EWRAM"));
+            Inventory.Add("key_item_slot_10", new MemoryAddress(0x142, note: note, domain: "EWRAM"));
+            Inventory.Add("key_item_slot_11", new MemoryAddress(0x144, note: note, domain: "EWRAM"));
+            Inventory.Add("key_item_slot_12", new MemoryAddress(0x146, note: note, domain: "EWRAM"));
+            Inventory.Add("key_item_slot_13", new MemoryAddress(0x148, note: note, domain: "EWRAM"));
+            Inventory.Add("key_item_slot_14", new MemoryAddress(0x14A, note: note, domain: "EWRAM"));
+            Inventory.Add("key_item_slot_15", new MemoryAddress(0x14C, note: note, domain: "EWRAM"));
+            Inventory.Add("key_item_slot_16", new MemoryAddress(0x14E, note: note, domain: "EWRAM"));
+
             // Add Misc addresses
             Misc.Add("stat", new MemoryAddress(0x030046A0, note: "For persistent stats & inventory", type: "U32", domain: "IWRAM"));
             Misc.Add("world_state", new MemoryAddress(0x03004698, note: "Story progress & dungeon states", type: "U32", domain: "IWRAM"));

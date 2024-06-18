@@ -3,6 +3,7 @@ using System.Windows.Forms;
 
 using BokInterface.All;
 using BokInterface.Inventory;
+using BokInterface.KeyItems;
 using BokInterface.Status;
 
 /**
@@ -16,6 +17,7 @@ namespace BokInterface {
 
         public bool statusEditorOpened = false,
             inventoryEditorOpened = false,
+            keyItemsEditorOpened = false,
             equipsEditorOpened = false,
             solarGunEditorOpened = false,
             weaponsEditorOpened = false,
@@ -74,6 +76,32 @@ namespace BokInterface {
                 }
 
                 inventoryEditorOpened = true;
+            }
+        }
+
+        protected void OpenKeyItemsEditor(object sender, EventArgs e) {
+            if (keyItemsEditorOpened == false) {
+
+                // Open editor for the current game
+                switch (shorterGameName) {
+                    case "Boktai":
+                        new BoktaiKeyItemsEditor(this, _memoryValues, _boktaiAddresses);
+                        break;
+                    case "Zoktai":
+                        new ZoktaiKeyItemsEditor(this, _memoryValues, _zoktaiAddresses);
+                        break;
+                    case "Shinbok":
+                        new ShinbokKeyItemsEditor(this, _memoryValues, _shinbokAddresses);
+                        break;
+                    case "LunarKnights":
+                        new LunarKnightsKeyItemsEditor(this, _memoryValues, _lunarKnightsAddresses);
+                        break;
+                    default:
+                        // If game is not handled, do nothing
+                        return;
+                }
+
+                keyItemsEditorOpened = true;
             }
         }
 
