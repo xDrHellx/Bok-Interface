@@ -264,7 +264,7 @@ namespace BokInterface.KeyItems {
                      * Then try getting the corresponding item & preselect it
                      */
                     string[] fieldParts = dropdown.Name.Split(['_'], 2);
-                    Item? selectedItem = GetItemByValue(_memoryValues.U16[fieldParts[1]].Value);
+                    Item? selectedItem = GetItemByValue(_memoryValues.Inventory[fieldParts[1]].Value);
                     if (selectedItem != null) {
                         dropdown.SelectedIndex = dropdown.FindStringExact(selectedItem.name);
                     }

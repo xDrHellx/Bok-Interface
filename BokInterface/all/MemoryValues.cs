@@ -137,22 +137,22 @@ namespace BokInterface.All {
             Inventory.Add("slot16_durability", new DynamicMemoryValue("slot16_durability", _zoktaiAddresses.Misc["stat"].Address, _zoktaiAddresses.Inventory["item_slot_durability_16"].Address));
 
             // Key items slots
-            U16.Add("slot1_key_item", _zoktaiAddresses.Inventory["key_item_slot_1"]);
-            U16.Add("slot2_key_item", _zoktaiAddresses.Inventory["key_item_slot_2"]);
-            U16.Add("slot3_key_item", _zoktaiAddresses.Inventory["key_item_slot_3"]);
-            U16.Add("slot4_key_item", _zoktaiAddresses.Inventory["key_item_slot_4"]);
-            U16.Add("slot5_key_item", _zoktaiAddresses.Inventory["key_item_slot_5"]);
-            U16.Add("slot6_key_item", _zoktaiAddresses.Inventory["key_item_slot_6"]);
-            U16.Add("slot7_key_item", _zoktaiAddresses.Inventory["key_item_slot_7"]);
-            U16.Add("slot8_key_item", _zoktaiAddresses.Inventory["key_item_slot_8"]);
-            U16.Add("slot9_key_item", _zoktaiAddresses.Inventory["key_item_slot_9"]);
-            U16.Add("slot10_key_item", _zoktaiAddresses.Inventory["key_item_slot_10"]);
-            U16.Add("slot11_key_item", _zoktaiAddresses.Inventory["key_item_slot_11"]);
-            U16.Add("slot12_key_item", _zoktaiAddresses.Inventory["key_item_slot_12"]);
-            U16.Add("slot13_key_item", _zoktaiAddresses.Inventory["key_item_slot_13"]);
-            U16.Add("slot14_key_item", _zoktaiAddresses.Inventory["key_item_slot_14"]);
-            U16.Add("slot15_key_item", _zoktaiAddresses.Inventory["key_item_slot_15"]);
-            U16.Add("slot16_key_item", _zoktaiAddresses.Inventory["key_item_slot_16"]);
+            Inventory.Add("slot1_key_item", new DynamicMemoryValue("slot1_key_item", _zoktaiAddresses.Misc["stat"].Address, _zoktaiAddresses.Inventory["key_item_slot_1"].Address));
+            Inventory.Add("slot2_key_item", new DynamicMemoryValue("slot2_key_item", _zoktaiAddresses.Misc["stat"].Address, _zoktaiAddresses.Inventory["key_item_slot_2"].Address));
+            Inventory.Add("slot3_key_item", new DynamicMemoryValue("slot3_key_item", _zoktaiAddresses.Misc["stat"].Address, _zoktaiAddresses.Inventory["key_item_slot_3"].Address));
+            Inventory.Add("slot4_key_item", new DynamicMemoryValue("slot4_key_item", _zoktaiAddresses.Misc["stat"].Address, _zoktaiAddresses.Inventory["key_item_slot_4"].Address));
+            Inventory.Add("slot5_key_item", new DynamicMemoryValue("slot5_key_item", _zoktaiAddresses.Misc["stat"].Address, _zoktaiAddresses.Inventory["key_item_slot_5"].Address));
+            Inventory.Add("slot6_key_item", new DynamicMemoryValue("slot6_key_item", _zoktaiAddresses.Misc["stat"].Address, _zoktaiAddresses.Inventory["key_item_slot_6"].Address));
+            Inventory.Add("slot7_key_item", new DynamicMemoryValue("slot7_key_item", _zoktaiAddresses.Misc["stat"].Address, _zoktaiAddresses.Inventory["key_item_slot_7"].Address));
+            Inventory.Add("slot8_key_item", new DynamicMemoryValue("slot8_key_item", _zoktaiAddresses.Misc["stat"].Address, _zoktaiAddresses.Inventory["key_item_slot_8"].Address));
+            Inventory.Add("slot9_key_item", new DynamicMemoryValue("slot9_key_item", _zoktaiAddresses.Misc["stat"].Address, _zoktaiAddresses.Inventory["key_item_slot_9"].Address));
+            Inventory.Add("slot10_key_item", new DynamicMemoryValue("slot10_key_item", _zoktaiAddresses.Misc["stat"].Address, _zoktaiAddresses.Inventory["key_item_slot_10"].Address));
+            Inventory.Add("slot11_key_item", new DynamicMemoryValue("slot11_key_item", _zoktaiAddresses.Misc["stat"].Address, _zoktaiAddresses.Inventory["key_item_slot_11"].Address));
+            Inventory.Add("slot12_key_item", new DynamicMemoryValue("slot12_key_item", _zoktaiAddresses.Misc["stat"].Address, _zoktaiAddresses.Inventory["key_item_slot_12"].Address));
+            Inventory.Add("slot13_key_item", new DynamicMemoryValue("slot13_key_item", _zoktaiAddresses.Misc["stat"].Address, _zoktaiAddresses.Inventory["key_item_slot_13"].Address));
+            Inventory.Add("slot14_key_item", new DynamicMemoryValue("slot14_key_item", _zoktaiAddresses.Misc["stat"].Address, _zoktaiAddresses.Inventory["key_item_slot_14"].Address));
+            Inventory.Add("slot15_key_item", new DynamicMemoryValue("slot15_key_item", _zoktaiAddresses.Misc["stat"].Address, _zoktaiAddresses.Inventory["key_item_slot_15"].Address));
+            Inventory.Add("slot16_key_item", new DynamicMemoryValue("slot16_key_item", _zoktaiAddresses.Misc["stat"].Address, _zoktaiAddresses.Inventory["key_item_slot_16"].Address));
         }
 
         private void InitializeShinbokList() {
