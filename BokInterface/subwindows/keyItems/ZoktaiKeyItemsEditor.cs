@@ -28,7 +28,7 @@ namespace BokInterface.KeyItems {
             Owner = _bokInterface = bokInterface;
             Icon = _bokInterface.Icon;
 
-            SetFormParameters(629, 346);
+            SetFormParameters(691, 240);
 
             // Add the onClose event to the subwindow
             FormClosing += new FormClosingEventHandler(delegate (object sender, FormClosingEventArgs e) {
@@ -46,28 +46,28 @@ namespace BokInterface.KeyItems {
             InstanciateCheckGroupBoxes();
 
             // 1st row
-            dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot1_key_item", 5, 19, 140, 23, slot1group, visibleOptions: 5));
-            dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot2_key_item", 5, 19, 140, 23, slot2group, visibleOptions: 5));
-            dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot3_key_item", 5, 19, 140, 23, slot3group, visibleOptions: 5));
-            dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot4_key_item", 5, 19, 140, 23, slot4group, visibleOptions: 5));
+            dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot1_key_item", 5, 19, 160, 23, slot1group, visibleOptions: 5));
+            dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot2_key_item", 5, 19, 160, 23, slot2group, visibleOptions: 5));
+            dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot3_key_item", 5, 19, 160, 23, slot3group, visibleOptions: 5));
+            dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot4_key_item", 5, 19, 160, 23, slot4group, visibleOptions: 5));
 
             // 2nd row
-            dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot5_key_item", 5, 19, 140, 23, slot5group, visibleOptions: 5));
-            dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot6_key_item", 5, 19, 140, 23, slot6group, visibleOptions: 5));
-            dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot7_key_item", 5, 19, 140, 23, slot7group, visibleOptions: 5));
-            dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot8_key_item", 5, 19, 140, 23, slot8group, visibleOptions: 5));
+            dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot5_key_item", 5, 19, 160, 23, slot5group, visibleOptions: 5));
+            dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot6_key_item", 5, 19, 160, 23, slot6group, visibleOptions: 5));
+            dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot7_key_item", 5, 19, 160, 23, slot7group, visibleOptions: 5));
+            dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot8_key_item", 5, 19, 160, 23, slot8group, visibleOptions: 5));
 
             // 3rd row
-            dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot9_key_item", 5, 19, 140, 23, slot9group, visibleOptions: 5));
-            dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot10_key_item", 5, 19, 140, 23, slot10group, visibleOptions: 5));
-            dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot11_key_item", 5, 19, 140, 23, slot11group, visibleOptions: 5));
-            dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot12_key_item", 5, 19, 140, 23, slot12group, visibleOptions: 5));
+            dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot9_key_item", 5, 19, 160, 23, slot9group, visibleOptions: 5));
+            dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot10_key_item", 5, 19, 160, 23, slot10group, visibleOptions: 5));
+            dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot11_key_item", 5, 19, 160, 23, slot11group, visibleOptions: 5));
+            dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot12_key_item", 5, 19, 160, 23, slot12group, visibleOptions: 5));
 
             // 4th row
-            dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot13_key_item", 5, 19, 140, 23, slot13group, visibleOptions: 5));
-            dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot14_key_item", 5, 19, 140, 23, slot14group, visibleOptions: 5));
-            dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot15_key_item", 5, 19, 140, 23, slot15group, visibleOptions: 5));
-            dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot16_key_item", 5, 19, 140, 23, slot16group, visibleOptions: 5));
+            dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot13_key_item", 5, 19, 160, 23, slot13group, visibleOptions: 5));
+            dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot14_key_item", 5, 19, 160, 23, slot14group, visibleOptions: 5));
+            dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot15_key_item", 5, 19, 160, 23, slot15group, visibleOptions: 5));
+            dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot16_key_item", 5, 19, 160, 23, slot16group, visibleOptions: 5));
 
             // Generate & add options to dropdowns
             GenerateDropDownOptions();
@@ -76,7 +76,7 @@ namespace BokInterface.KeyItems {
             SetDefaultValues();
 
             // Button for setting values & its events
-            Button setValuesButton = WinFormHelpers.CreateButton("setStatusButton", "Set values", 549, 320, 75, 23, this);
+            Button setValuesButton = WinFormHelpers.CreateButton("setStatusButton", "Set values", 629, 213, 75, 23, this);
             setValuesButton.Click += new EventHandler(delegate (object sender, EventArgs e) {
                 // Write the values for 10 frames
                 for (int i = 0; i < 10; i++) {
@@ -87,22 +87,22 @@ namespace BokInterface.KeyItems {
 
         ///<summary>Separated method for instanciating checkGroupBox instances</summary>
         protected void InstanciateCheckGroupBoxes() {
-            slot1group = WinFormHelpers.CreateCheckGroupBox("slot1group", "Slot 1", 5, 5, 150, 76, control: this);
-            slot2group = WinFormHelpers.CreateCheckGroupBox("slot2group", "Slot 2", 161, 5, 150, 76, control: this);
-            slot3group = WinFormHelpers.CreateCheckGroupBox("slot3group", "Slot 3", 317, 5, 150, 76, control: this);
-            slot4group = WinFormHelpers.CreateCheckGroupBox("slot4group", "Slot 4", 473, 5, 150, 76, control: this);
-            slot5group = WinFormHelpers.CreateCheckGroupBox("slot5group", "Slot 5", 5, 84, 150, 76, control: this);
-            slot6group = WinFormHelpers.CreateCheckGroupBox("slot6group", "Slot 6", 161, 84, 150, 76, control: this);
-            slot7group = WinFormHelpers.CreateCheckGroupBox("slot7group", "Slot 7", 317, 84, 150, 76, control: this);
-            slot8group = WinFormHelpers.CreateCheckGroupBox("slot8group", "Slot 8", 473, 84, 150, 76, control: this);
-            slot9group = WinFormHelpers.CreateCheckGroupBox("slot9group", "Slot 9", 5, 163, 150, 76, control: this);
-            slot10group = WinFormHelpers.CreateCheckGroupBox("slot10group", "Slot 10", 161, 163, 150, 76, control: this);
-            slot11group = WinFormHelpers.CreateCheckGroupBox("slot11group", "Slot 11", 317, 163, 150, 76, control: this);
-            slot12group = WinFormHelpers.CreateCheckGroupBox("slot12group", "Slot 12", 473, 163, 150, 76, control: this);
-            slot13group = WinFormHelpers.CreateCheckGroupBox("slot13group", "Slot 13", 5, 242, 150, 76, control: this);
-            slot14group = WinFormHelpers.CreateCheckGroupBox("slot14group", "Slot 14", 161, 242, 150, 76, control: this);
-            slot15group = WinFormHelpers.CreateCheckGroupBox("slot15group", "Slot 15", 317, 242, 150, 76, control: this);
-            slot16group = WinFormHelpers.CreateCheckGroupBox("slot16group", "Slot 16", 473, 242, 150, 76, control: this);
+            slot1group = WinFormHelpers.CreateCheckGroupBox("slot1group", "Slot 1", 5, 5, 170, 49, control: this);
+            slot2group = WinFormHelpers.CreateCheckGroupBox("slot2group", "Slot 2", 181, 5, 170, 49, control: this);
+            slot3group = WinFormHelpers.CreateCheckGroupBox("slot3group", "Slot 3", 357, 5, 170, 49, control: this);
+            slot4group = WinFormHelpers.CreateCheckGroupBox("slot4group", "Slot 4", 533, 5, 170, 49, control: this);
+            slot5group = WinFormHelpers.CreateCheckGroupBox("slot5group", "Slot 5", 5, 57, 170, 49, control: this);
+            slot6group = WinFormHelpers.CreateCheckGroupBox("slot6group", "Slot 6", 181, 57, 170, 49, control: this);
+            slot7group = WinFormHelpers.CreateCheckGroupBox("slot7group", "Slot 7", 357, 57, 170, 49, control: this);
+            slot8group = WinFormHelpers.CreateCheckGroupBox("slot8group", "Slot 8", 533, 57, 170, 49, control: this);
+            slot9group = WinFormHelpers.CreateCheckGroupBox("slot9group", "Slot 9", 5, 109, 170, 49, control: this);
+            slot10group = WinFormHelpers.CreateCheckGroupBox("slot10group", "Slot 10", 181, 109, 170, 49, control: this);
+            slot11group = WinFormHelpers.CreateCheckGroupBox("slot11group", "Slot 11", 357, 109, 170, 49, control: this);
+            slot12group = WinFormHelpers.CreateCheckGroupBox("slot12group", "Slot 12", 533, 109, 170, 49, control: this);
+            slot13group = WinFormHelpers.CreateCheckGroupBox("slot13group", "Slot 13", 5, 161, 170, 49, control: this);
+            slot14group = WinFormHelpers.CreateCheckGroupBox("slot14group", "Slot 14", 181, 161, 170, 49, control: this);
+            slot15group = WinFormHelpers.CreateCheckGroupBox("slot15group", "Slot 15", 357, 161, 170, 49, control: this);
+            slot16group = WinFormHelpers.CreateCheckGroupBox("slot16group", "Slot 16", 533, 161, 170, 49, control: this);
         }
 
 
