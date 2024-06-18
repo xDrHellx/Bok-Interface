@@ -117,22 +117,22 @@ namespace BokInterface.Addresses {
 
             // Key items inventory
             note = "Key item slot";
-            Inventory.Add("key_item_slot_1", new MemoryAddress(0x30, note: note, domain: "EWRAM"));
-            Inventory.Add("key_item_slot_2", new MemoryAddress(0x32, note: note, domain: "EWRAM"));
-            Inventory.Add("key_item_slot_3", new MemoryAddress(0x34, note: note, domain: "EWRAM"));
-            Inventory.Add("key_item_slot_4", new MemoryAddress(0x36, note: note, domain: "EWRAM"));
-            Inventory.Add("key_item_slot_5", new MemoryAddress(0x38, note: note, domain: "EWRAM"));
-            Inventory.Add("key_item_slot_6", new MemoryAddress(0x3A, note: note, domain: "EWRAM"));
-            Inventory.Add("key_item_slot_7", new MemoryAddress(0x3C, note: note, domain: "EWRAM"));
-            Inventory.Add("key_item_slot_8", new MemoryAddress(0x3E, note: note, domain: "EWRAM"));
-            Inventory.Add("key_item_slot_9", new MemoryAddress(0x40, note: note, domain: "EWRAM"));
-            Inventory.Add("key_item_slot_10", new MemoryAddress(0x42, note: note, domain: "EWRAM"));
-            Inventory.Add("key_item_slot_11", new MemoryAddress(0x44, note: note, domain: "EWRAM"));
-            Inventory.Add("key_item_slot_12", new MemoryAddress(0x46, note: note, domain: "EWRAM"));
-            Inventory.Add("key_item_slot_13", new MemoryAddress(0x48, note: note, domain: "EWRAM"));
-            Inventory.Add("key_item_slot_14", new MemoryAddress(0x4A, note: note, domain: "EWRAM"));
-            Inventory.Add("key_item_slot_15", new MemoryAddress(0x4C, note: note, domain: "EWRAM"));
-            Inventory.Add("key_item_slot_16", new MemoryAddress(0x4E, note: note, domain: "EWRAM"));
+            Inventory.Add("key_item_slot_1", new MemoryAddress(0x0203C530, note: note, domain: "EWRAM"));
+            Inventory.Add("key_item_slot_2", new MemoryAddress(0x203C532, note: note, domain: "EWRAM"));
+            Inventory.Add("key_item_slot_3", new MemoryAddress(0x203C534, note: note, domain: "EWRAM"));
+            Inventory.Add("key_item_slot_4", new MemoryAddress(0x203C536, note: note, domain: "EWRAM"));
+            Inventory.Add("key_item_slot_5", new MemoryAddress(0x203C538, note: note, domain: "EWRAM"));
+            Inventory.Add("key_item_slot_6", new MemoryAddress(0x203C53A, note: note, domain: "EWRAM"));
+            Inventory.Add("key_item_slot_7", new MemoryAddress(0x203C53C, note: note, domain: "EWRAM"));
+            Inventory.Add("key_item_slot_8", new MemoryAddress(0x203C53E, note: note, domain: "EWRAM"));
+            Inventory.Add("key_item_slot_9", new MemoryAddress(0x203C540, note: note, domain: "EWRAM"));
+            Inventory.Add("key_item_slot_10", new MemoryAddress(0x203C542, note: note, domain: "EWRAM"));
+            Inventory.Add("key_item_slot_11", new MemoryAddress(0x203C544, note: note, domain: "EWRAM"));
+            Inventory.Add("key_item_slot_12", new MemoryAddress(0x203C546, note: note, domain: "EWRAM"));
+            Inventory.Add("key_item_slot_13", new MemoryAddress(0x203C548, note: note, domain: "EWRAM"));
+            Inventory.Add("key_item_slot_14", new MemoryAddress(0x203C54A, note: note, domain: "EWRAM"));
+            Inventory.Add("key_item_slot_15", new MemoryAddress(0x203C54C, note: note, domain: "EWRAM"));
+            Inventory.Add("key_item_slot_16", new MemoryAddress(0x203C54E, note: note, domain: "EWRAM"));
 
             // Add Misc addresses
             Misc.Add("stat", new MemoryAddress(0x030046A0, note: "For persistent stats & inventory", type: "U32", domain: "IWRAM"));
