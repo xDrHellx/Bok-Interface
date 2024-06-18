@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.Windows.Forms;
 
 using BokInterface.Addresses;
@@ -21,22 +20,13 @@ namespace BokInterface.Status {
         public ShinbokStatusEditor(BokInterface bokInterface, MemoryValues memoryValues, ShinbokAddresses shinbokAddresses) {
 
             _memoryValues = memoryValues;
-            _bokInterface = bokInterface;
             _shinbokAddresses = shinbokAddresses;
-
-            Name = name;
-            Text = text;
+            Owner = _bokInterface = bokInterface;
             Icon = _bokInterface.Icon;
-            AutoScaleDimensions = new SizeF(6F, 15F);
-            AutoScaleMode = AutoScaleMode.Inherit;
-            FormBorderStyle = FormBorderStyle.FixedSingle;
-            BackColor = SystemColors.Control;
-            Font = WinFormHelpers.defaultFont;
-            AutoScroll = true;
-            Owner = _bokInterface;
-            ClientSize = new Size(227, 149);
 
-            // Generate the subwindow & add the onClose event to it
+            SetFormParameters(227, 149);
+
+            // Add the onClose event to the subwindow
             FormClosing += new FormClosingEventHandler(delegate (object sender, FormClosingEventArgs e) {
                 _bokInterface.statusEditorOpened = false;
             });
@@ -52,32 +42,32 @@ namespace BokInterface.Status {
             IDictionary<string, decimal> defaultValues = GetDefaultValues();
 
             // Sections
-            _statusGroupBox = WinFormHelpers.CreateCheckGroupBox("editStatusGroup", "Status", 5, 5, 103, 110, control: this);
-            _statsGroupBox = WinFormHelpers.CreateCheckGroupBox("editStatsGroup", "Stats", 114, 5, 107, 110, control: this);
+            statusGroupBox = WinFormHelpers.CreateCheckGroupBox("editStatusGroup", "Status", 5, 5, 103, 110, control: this);
+            statsGroupBox = WinFormHelpers.CreateCheckGroupBox("editStatsGroup", "Stats", 114, 5, 107, 110, control: this);
 
             // Status
-            WinFormHelpers.CreateLabel("djangoEditHpLabel", "LIFE :", 7, 24, 34, 15, _statusGroupBox);
-            // WinFormHelpers.CreateLabel("djangoEditEneLabel", "ENE :", 7, 52, 34, 15, _statusGroupBox);
-            // WinFormHelpers.CreateLabel("djangoEditTrcLabel", "TRC :", 7, 81, 34, 15, _statusGroupBox);
+            WinFormHelpers.CreateLabel("djangoEditHpLabel", "LIFE :", 7, 24, 34, 15, statusGroupBox);
+            // WinFormHelpers.CreateLabel("djangoEditEneLabel", "ENE :", 7, 52, 34, 15, statusGroupBox);
+            // WinFormHelpers.CreateLabel("djangoEditTrcLabel", "TRC :", 7, 81, 34, 15, statusGroupBox);
 
-            _statusNumericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("django_current_hp", defaultValues["django_current_hp"], 47, 21, 50, 23, maxValue: 1000, control: _statusGroupBox));
-            // _statusNumericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("django_current_ene", defaultValues["django_current_ene"], 47, 50, 50, 23, maxValue: 1000, control: _statusGroupBox));
-            // _statusNumericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("django_current_trc", defaultValues["django_current_trc"], 47, 79, 50, 23, maxValue: 1000, control: _statusGroupBox));
+            statusNumericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("django_current_hp", defaultValues["django_current_hp"], 47, 21, 50, 23, maxValue: 1000, control: statusGroupBox));
+            // statusNumericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("django_current_ene", defaultValues["django_current_ene"], 47, 50, 50, 23, maxValue: 1000, control: statusGroupBox));
+            // statusNumericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("django_current_trc", defaultValues["django_current_trc"], 47, 79, 50, 23, maxValue: 1000, control: statusGroupBox));
 
             // Stats
-            WinFormHelpers.CreateLabel("djangoEditHpLabel", "VIT", 8, 24, 27, 15, control: _statsGroupBox);
-            WinFormHelpers.CreateLabel("djangoEditEneLabel", "SPR", 8, 51, 27, 15, control: _statsGroupBox);
-            WinFormHelpers.CreateLabel("djangoEditTrcLabel", "STR", 8, 81, 27, 15, control: _statsGroupBox);
+            WinFormHelpers.CreateLabel("djangoEditHpLabel", "VIT", 8, 24, 27, 15, control: statsGroupBox);
+            WinFormHelpers.CreateLabel("djangoEditEneLabel", "SPR", 8, 51, 27, 15, control: statsGroupBox);
+            WinFormHelpers.CreateLabel("djangoEditTrcLabel", "STR", 8, 81, 27, 15, control: statsGroupBox);
 
-            _statusNumericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("django_base_vit", defaultValues["django_base_vit"], 36, 21, 41, 23, maxValue: 100, control: _statsGroupBox));
-            _statusNumericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("django_base_spr", defaultValues["django_base_spr"], 36, 50, 41, 23, maxValue: 100, control: _statsGroupBox));
-            _statusNumericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("django_base_str", defaultValues["django_base_str"], 36, 79, 41, 23, maxValue: 100, control: _statsGroupBox));
+            statusNumericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("django_base_vit", defaultValues["django_base_vit"], 36, 21, 41, 23, maxValue: 100, control: statsGroupBox));
+            statusNumericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("django_base_spr", defaultValues["django_base_spr"], 36, 50, 41, 23, maxValue: 100, control: statsGroupBox));
+            statusNumericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("django_base_str", defaultValues["django_base_str"], 36, 79, 41, 23, maxValue: 100, control: statsGroupBox));
 
             // Tooltips & warnings
             List<Label> warningLabels = [
-                WinFormHelpers.CreateImageLabel("tooltip", "warning", 83, 23, _statsGroupBox),
-                WinFormHelpers.CreateImageLabel("tooltip", "warning", 83, 52, _statsGroupBox),
-                WinFormHelpers.CreateImageLabel("tooltip", "warning", 83, 81, _statsGroupBox)
+                WinFormHelpers.CreateImageLabel("tooltip", "warning", 83, 23, statsGroupBox),
+                WinFormHelpers.CreateImageLabel("tooltip", "warning", 83, 52, statsGroupBox),
+                WinFormHelpers.CreateImageLabel("tooltip", "warning", 83, 81, statsGroupBox)
             ];
 
             // Add tooltips
@@ -120,7 +110,7 @@ namespace BokInterface.Status {
         protected override void SetValues() {
 
             // Retrieve all input fields
-            List<NumericUpDown> fields = _statusNumericUpDowns;
+            List<NumericUpDown> fields = statusNumericUpDowns;
 
             // Store the previous setting for BizHawk being paused
             _bokInterface._previousIsPauseSetting = APIs.Client.IsPaused();

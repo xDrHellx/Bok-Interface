@@ -31,8 +31,7 @@ namespace BokInterface {
 
 		#region Subwindows properties
 
-		private System.Windows.Forms.Form inventoryEditWindow = new(),
-			equipsEditWindow = new(),
+		private System.Windows.Forms.Form equipsEditWindow = new(),
 			solarGunEditWindow = new(),
 			weaponsEditWindow = new(),
 			magicsEditWindow = new(),

@@ -80,6 +80,10 @@ namespace BokInterface.All {
                 foreach (NumericUpDown subElement in Controls.OfType<NumericUpDown>()) {
                     subElement.Enabled = false;
                 }
+
+                foreach (ComboBox subElement in Controls.OfType<ComboBox>()) {
+                    subElement.Enabled = false;
+                }
             }
         }
     }
