@@ -4,6 +4,7 @@ using BokInterface.Addresses;
 using BokInterface.All;
 
 namespace BokInterface.Items {
+    /// <summary>Class for Zoktai item instances and lists</summary>
     class ZoktaiItems {
 
         public Dictionary<string, Item> Items = [];
