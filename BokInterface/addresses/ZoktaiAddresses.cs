@@ -78,7 +78,7 @@ namespace BokInterface.Addresses {
             Django.Add("stat_points_to_allocate", new MemoryAddress(0x42, domain: "EWRAM"));
 
             // Items inventory
-            note = "Inventory item slot";
+            note = "Item inventory slot";
             Inventory.Add("item_slot_1", new MemoryAddress(0x70, note: note, domain: "EWRAM"));
             Inventory.Add("item_slot_2", new MemoryAddress(0x72, note: note, domain: "EWRAM"));
             Inventory.Add("item_slot_3", new MemoryAddress(0x74, note: note, domain: "EWRAM"));
@@ -116,7 +116,7 @@ namespace BokInterface.Addresses {
             Inventory.Add("item_slot_durability_16", new MemoryAddress(0xEE, note: note, domain: "EWRAM"));
 
             // Key items inventory
-            note = "Key item slot";
+            note = "Key item inventory slot";
             Inventory.Add("key_item_slot_1", new MemoryAddress(0x130, note: note, domain: "EWRAM"));
             Inventory.Add("key_item_slot_2", new MemoryAddress(0x132, note: note, domain: "EWRAM"));
             Inventory.Add("key_item_slot_3", new MemoryAddress(0x134, note: note, domain: "EWRAM"));
@@ -133,6 +133,25 @@ namespace BokInterface.Addresses {
             Inventory.Add("key_item_slot_14", new MemoryAddress(0x14A, note: note, domain: "EWRAM"));
             Inventory.Add("key_item_slot_15", new MemoryAddress(0x14C, note: note, domain: "EWRAM"));
             Inventory.Add("key_item_slot_16", new MemoryAddress(0x14E, note: note, domain: "EWRAM"));
+
+            // Weapons inventory
+            note = "Weapon inventory slot";
+            Inventory.Add("weapon_slot_1", new MemoryAddress(0x3D0, note: note, domain: "EWRAM"));
+            Inventory.Add("weapon_slot_2", new MemoryAddress(0x3EC, note: note, domain: "EWRAM"));
+            Inventory.Add("weapon_slot_3", new MemoryAddress(0x408, note: note, domain: "EWRAM"));
+            Inventory.Add("weapon_slot_4", new MemoryAddress(0x424, note: note, domain: "EWRAM"));
+            Inventory.Add("weapon_slot_5", new MemoryAddress(0x440, note: note, domain: "EWRAM"));
+            Inventory.Add("weapon_slot_6", new MemoryAddress(0x45C, note: note, domain: "EWRAM"));
+            Inventory.Add("weapon_slot_7", new MemoryAddress(0x478, note: note, domain: "EWRAM"));
+            Inventory.Add("weapon_slot_8", new MemoryAddress(0x494, note: note, domain: "EWRAM"));
+            Inventory.Add("weapon_slot_9", new MemoryAddress(0x4B0, note: note, domain: "EWRAM"));
+            Inventory.Add("weapon_slot_10", new MemoryAddress(0x4CC, note: note, domain: "EWRAM"));
+            Inventory.Add("weapon_slot_11", new MemoryAddress(0x4E8, note: note, domain: "EWRAM"));
+            Inventory.Add("weapon_slot_12", new MemoryAddress(0x504, note: note, domain: "EWRAM"));
+            Inventory.Add("weapon_slot_13", new MemoryAddress(0x520, note: note, domain: "EWRAM"));
+            Inventory.Add("weapon_slot_14", new MemoryAddress(0x53C, note: note, domain: "EWRAM"));
+            Inventory.Add("weapon_slot_15", new MemoryAddress(0x558, note: note, domain: "EWRAM"));
+            Inventory.Add("weapon_slot_16", new MemoryAddress(0x574, note: note, domain: "EWRAM"));
 
             // Add Misc addresses
             Misc.Add("stat", new MemoryAddress(0x030046A0, note: "For persistent stats & inventory", type: "U32", domain: "IWRAM"));
