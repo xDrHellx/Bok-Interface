@@ -38,16 +38,25 @@ namespace BokInterface.Items {
             // If this item is perishable, set the item it will turn into to the property
             if (this.perishable == true) {
                 rottsInto = this.value switch {
-                    // Redshroom
+                    // Redshroom & Blueshroom
                     9 or 10 => "Bad Mushroom",
-                    // Drop of Sun
-                    12 => "Rotten water",
+                    // Drop of Sun & Tomato Juice
+                    12 or 13 => "Rotten water",
                     // Chocolate
                     18 => coveredItem != null ? "Chocolate-covered" : "Melted Chocolate",
                     // Tasty Meat
                     15 => "Rotten Meat",
                     // Nuts
                     _ => "Rotten Nut",
+                };
+
+                /**
+                 * In some cases the item takes longer to rott
+                 * Items concerned : Tomato Juice, Redshroom, Blueshroom
+                 */
+                rottenAt = this.value switch {
+                    9 or 10 or 13 => 7680,
+                    _ => 3840,
                 };
             }
         }
