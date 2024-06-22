@@ -4,6 +4,7 @@ using BokInterface.Addresses;
 using BokInterface.All;
 
 namespace BokInterface.Items {
+    /// <summary>Class for Zoktai item instances and lists</summary>
     class ZoktaiItems {
 
         public Dictionary<string, Item> Items = [];
@@ -34,7 +35,7 @@ namespace BokInterface.Items {
             Items.Add("Blueshroom", new Item("Blueshroom", 10, "blueshroom", true));
             Items.Add("Bad Mushroom", new Item("Bad Mushroom", 11, "bad_mushroom"));
             Items.Add("Drop Of Sun", new Item("Drop Of Sun", 12, "drop_of_sun", true));
-            Items.Add("Tomato Juice", new Item("Tomato Juice", 13, "tomato_juice"));
+            Items.Add("Tomato Juice", new Item("Tomato Juice", 13, "tomato_juice", true));
             Items.Add("Rotten Water", new Item("Rotten Water", 14, "rotten_water"));
             Items.Add("Tasty Meat", new Item("Tasty Meat", 15, "tasty_meat", true));
             Items.Add("Jerky", new Item("Jerky", 16, "jerky"));
