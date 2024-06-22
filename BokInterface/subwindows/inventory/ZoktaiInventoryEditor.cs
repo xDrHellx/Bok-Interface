@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Windows.Forms;
 
 using BokInterface.Addresses;
@@ -16,6 +17,11 @@ namespace BokInterface.Inventory {
         private readonly BokInterface _bokInterface;
         private readonly ZoktaiAddresses _zoktaiAddresses;
         private readonly ZoktaiItems _zoktaiItems;
+        /// <summary>
+        /// <para>Default maximum durability value that can be set</para>
+        /// <para>This is eventually replaced based on dropdown selected items</para>
+        /// </summary>
+        private readonly int _defaultMaxDurability = 7679;
 
         #endregion
 
@@ -48,76 +54,97 @@ namespace BokInterface.Inventory {
             // 1st row
             dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot1_item", 5, 19, 140, 23, slot1group, visibleOptions: 5));
             WinFormHelpers.CreateLabel("slot1", "Durability", 5, 50, 58, 15, slot1group);
-            numericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("inventory_slot1_durability", 0, 95, 47, 50, 23, 0, 3839, control: slot1group));
+            numericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("inventory_slot1_durability", 0, 95, 47, 50, 23, 0, _defaultMaxDurability, control: slot1group));
 
             dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot2_item", 5, 19, 140, 23, slot2group, visibleOptions: 5));
             WinFormHelpers.CreateLabel("slot2", "Durability", 5, 50, 58, 15, slot2group);
-            numericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("inventory_slot2_durability", 0, 95, 47, 50, 23, 0, 3839, control: slot2group));
+            numericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("inventory_slot2_durability", 0, 95, 47, 50, 23, 0, _defaultMaxDurability, control: slot2group));
 
             dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot3_item", 5, 19, 140, 23, slot3group, visibleOptions: 5));
             WinFormHelpers.CreateLabel("slot3", "Durability", 5, 50, 58, 15, slot3group);
-            numericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("inventory_slot3_durability", 0, 95, 47, 50, 23, 0, 3839, control: slot3group));
+            numericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("inventory_slot3_durability", 0, 95, 47, 50, 23, 0, _defaultMaxDurability, control: slot3group));
 
             dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot4_item", 5, 19, 140, 23, slot4group, visibleOptions: 5));
             WinFormHelpers.CreateLabel("slot4", "Durability", 5, 50, 58, 15, slot4group);
-            numericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("inventory_slot4_durability", 0, 95, 47, 50, 23, 0, 3839, control: slot4group));
+            numericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("inventory_slot4_durability", 0, 95, 47, 50, 23, 0, _defaultMaxDurability, control: slot4group));
 
             // 2nd row
             dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot5_item", 5, 19, 140, 23, slot5group, visibleOptions: 5));
             WinFormHelpers.CreateLabel("slot5", "Durability", 5, 50, 58, 15, slot5group);
-            numericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("inventory_slot5_durability", 0, 95, 47, 50, 23, 0, 3839, control: slot5group));
+            numericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("inventory_slot5_durability", 0, 95, 47, 50, 23, 0, _defaultMaxDurability, control: slot5group));
 
             dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot6_item", 5, 19, 140, 23, slot6group, visibleOptions: 5));
             WinFormHelpers.CreateLabel("slot6", "Durability", 5, 50, 58, 15, slot6group);
-            numericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("inventory_slot6_durability", 0, 95, 47, 50, 23, 0, 3839, control: slot6group));
+            numericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("inventory_slot6_durability", 0, 95, 47, 50, 23, 0, _defaultMaxDurability, control: slot6group));
 
             dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot7_item", 5, 19, 140, 23, slot7group, visibleOptions: 5));
             WinFormHelpers.CreateLabel("slot7", "Durability", 5, 50, 58, 15, slot7group);
-            numericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("inventory_slot7_durability", 0, 95, 47, 50, 23, 0, 3839, control: slot7group));
+            numericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("inventory_slot7_durability", 0, 95, 47, 50, 23, 0, _defaultMaxDurability, control: slot7group));
 
             dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot8_item", 5, 19, 140, 23, slot8group, visibleOptions: 5));
             WinFormHelpers.CreateLabel("slot8", "Durability", 5, 50, 58, 15, slot8group);
-            numericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("inventory_slot8_durability", 0, 95, 47, 50, 23, 0, 3839, control: slot8group));
+            numericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("inventory_slot8_durability", 0, 95, 47, 50, 23, 0, _defaultMaxDurability, control: slot8group));
 
             // 3rd row
             dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot9_item", 5, 19, 140, 23, slot9group, visibleOptions: 5));
             WinFormHelpers.CreateLabel("slot9", "Durability", 5, 50, 58, 15, slot9group);
-            numericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("inventory_slot9_durability", 0, 95, 47, 50, 23, 0, 3839, control: slot9group));
+            numericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("inventory_slot9_durability", 0, 95, 47, 50, 23, 0, _defaultMaxDurability, control: slot9group));
 
             dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot10_item", 5, 19, 140, 23, slot10group, visibleOptions: 5));
             WinFormHelpers.CreateLabel("slot10", "Durability", 5, 50, 58, 15, slot10group);
-            numericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("inventory_slot10_durability", 0, 95, 47, 50, 23, 0, 3839, control: slot10group));
+            numericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("inventory_slot10_durability", 0, 95, 47, 50, 23, 0, _defaultMaxDurability, control: slot10group));
 
             dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot11_item", 5, 19, 140, 23, slot11group, visibleOptions: 5));
             WinFormHelpers.CreateLabel("slot11", "Durability", 5, 50, 58, 15, slot11group);
-            numericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("inventory_slot11_durability", 0, 95, 47, 50, 23, 0, 3839, control: slot11group));
+            numericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("inventory_slot11_durability", 0, 95, 47, 50, 23, 0, _defaultMaxDurability, control: slot11group));
 
             dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot12_item", 5, 19, 140, 23, slot12group, visibleOptions: 5));
             WinFormHelpers.CreateLabel("slot12", "Durability", 5, 50, 58, 15, slot12group);
-            numericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("inventory_slot12_durability", 0, 95, 47, 50, 23, 0, 3839, control: slot12group));
+            numericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("inventory_slot12_durability", 0, 95, 47, 50, 23, 0, _defaultMaxDurability, control: slot12group));
 
             // 4th row
             dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot13_item", 5, 19, 140, 23, slot13group, visibleOptions: 5));
             WinFormHelpers.CreateLabel("slot13", "Durability", 5, 50, 58, 15, slot13group);
-            numericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("inventory_slot13_durability", 0, 95, 47, 50, 23, 0, 3839, control: slot13group));
+            numericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("inventory_slot13_durability", 0, 95, 47, 50, 23, 0, _defaultMaxDurability, control: slot13group));
 
             dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot14_item", 5, 19, 140, 23, slot14group, visibleOptions: 5));
             WinFormHelpers.CreateLabel("slot14", "Durability", 5, 50, 58, 15, slot14group);
-            numericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("inventory_slot14_durability", 0, 95, 47, 50, 23, 0, 3839, control: slot14group));
+            numericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("inventory_slot14_durability", 0, 95, 47, 50, 23, 0, _defaultMaxDurability, control: slot14group));
 
             dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot15_item", 5, 19, 140, 23, slot15group, visibleOptions: 5));
             WinFormHelpers.CreateLabel("slot15", "Durability", 5, 50, 58, 15, slot15group);
-            numericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("inventory_slot15_durability", 0, 95, 47, 50, 23, 0, 3839, control: slot15group));
+            numericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("inventory_slot15_durability", 0, 95, 47, 50, 23, 0, _defaultMaxDurability, control: slot15group));
 
             dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot16_item", 5, 19, 140, 23, slot16group, visibleOptions: 5));
             WinFormHelpers.CreateLabel("slot16", "Durability", 5, 50, 58, 15, slot16group);
-            numericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("inventory_slot16_durability", 0, 95, 47, 50, 23, 0, 3839, control: slot16group));
+            numericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("inventory_slot16_durability", 0, 95, 47, 50, 23, 0, _defaultMaxDurability, control: slot16group));
 
             // Generate & add options to dropdowns
             GenerateDropDownOptions();
 
             // Set default values for each field
             SetDefaultValues();
+
+            /**
+             * Due to some items taking longer to rott,
+             * For each slot, when the another item is selected
+             * we update the highest durability value that can be set based on the selected item
+             */
+            foreach (ImageComboBox dropdown in dropDownLists) {
+
+                // Add on-change event
+                dropdown.SelectionChangeCommitted += new EventHandler(delegate (object sender, EventArgs e) {
+                    UpdateMaxDurabilityField(dropdown);
+                });
+
+                /**
+                 * We also call the method directly to update the durability fields
+                 * when the subwindow is generated
+                 * 
+                 * It's possible that we retrieved the current inventory so we need to do that
+                 */
+                UpdateMaxDurabilityField(dropdown);
+            }
 
             // Button for setting values & its events
             Button setValuesButton = WinFormHelpers.CreateButton("setStatusButton", "Set values", 549, 320, 75, 23, this);
@@ -313,6 +340,31 @@ namespace BokInterface.Inventory {
             }
 
             return null;
+        }
+
+        /// <summary>Updates the Maximum parameter for a durability field</summary>
+        /// <param name="dropdown">The dropdown that the durability field is related to</param>
+        private void UpdateMaxDurabilityField(ImageComboBox dropdown) {
+
+            // Separate the dropdown's name into parts & get the selected item
+            string[] fieldParts = dropdown.Name.Split(['_'], 3);
+            KeyValuePair<string, Item> selectedOption = (KeyValuePair<string, Item>)dropdown.SelectedItem;
+            Item? selectedItem = selectedOption.Value;
+            if (selectedItem != null) {
+
+                // Get the related durability field by using the dropdown's name
+                string durabilityFieldName = fieldParts[0] + "_" + fieldParts[1] + "_durability";
+                foreach (NumericUpDown field in numericUpDowns) {
+                    /**
+                     * If it's the field we're looking for,
+                     * update the max value based on the selected item & stop the loop
+                     */
+                    if (field.Name == durabilityFieldName) {
+                        field.Maximum = selectedItem.rottenAt - 1;
+                        break;
+                    }
+                }
+            }
         }
 
         protected override void SetDefaultValues() {
