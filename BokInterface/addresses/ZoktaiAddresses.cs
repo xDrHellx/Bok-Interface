@@ -39,6 +39,9 @@ namespace BokInterface.Addresses {
             Django.Add("y_position", new MemoryAddress(0x34, note: "Django Y position", domain: "EWRAM"));
             Django.Add("z_position", new MemoryAddress(0x32, note: "Django Z position", domain: "EWRAM"));
 
+            // Current form or character
+            Django.Add("current_form", new MemoryAddress(0x250, note: "Current form or character", domain: "EWRAM"));
+
             // Current stats
             note = "Used for damage calculations, will be copied to its Persistent equivalent on screen transition. Must be combined with the \"stat\" memory address' value";
             Django.Add("current_hp", new MemoryAddress(0x364, note: note, domain: "EWRAM"));
@@ -162,16 +165,6 @@ namespace BokInterface.Addresses {
             Misc.Add("y_camera", new MemoryAddress(0x030047CA, note: "Camera Y position", domain: "IWRAM"));
             Misc.Add("z_camera", new MemoryAddress(0x030047CC, note: "Camera Z position", domain: "IWRAM"));
             Misc.Add("current_stat", new MemoryAddress(0x03002BE0, note: "For current stats", type: "U32", domain: "IWRAM"));
-
-            // 0x203C650 django's current form
-            /*
-                0 - Django
-                1 - Black Django
-                2 - Bat
-                3 - Mouse
-                4 - Unused
-                5 - Sabata
-            */
 
             /*
              * US version 

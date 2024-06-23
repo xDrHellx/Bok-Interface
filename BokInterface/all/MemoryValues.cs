@@ -71,9 +71,13 @@ namespace BokInterface.All {
         }
 
         private void InitializeZoktaiList() {
+
+            // Current HP, ENE & form or character
+            Django.Add("current_form", new DynamicMemoryValue("current_form", _zoktaiAddresses.Misc["stat"].Address, _zoktaiAddresses.Django["current_form"].Address));
             Django.Add("current_hp", new DynamicMemoryValue("current_hp", _zoktaiAddresses.Misc["current_stat"].Address, _zoktaiAddresses.Django["current_hp"].Address));
             Django.Add("current_ene", new DynamicMemoryValue("current_ene", _zoktaiAddresses.Misc["current_stat"].Address, _zoktaiAddresses.Django["current_ene"].Address));
 
+            // Level, EXP & stat points to apply
             Django.Add("level", new DynamicMemoryValue("level", _zoktaiAddresses.Misc["stat"].Address, _zoktaiAddresses.Django["level"].Address));
             Django.Add("exp", new DynamicMemoryValue("exp", _zoktaiAddresses.Misc["stat"].Address, _zoktaiAddresses.Django["exp"].Address, "U32"));
             Django.Add("stat_points", new DynamicMemoryValue("stat_points", _zoktaiAddresses.Misc["stat"].Address, _zoktaiAddresses.Django["stat_points_to_allocate"].Address));
