@@ -176,7 +176,6 @@ namespace BokInterface.Inventory {
             slot16group = WinFormHelpers.CreateCheckGroupBox("slot16group", "Slot 16", 473, 242, 150, 76, control: this);
         }
 
-
         protected override void SetValues() {
 
             // Retrieve all input fields
@@ -254,7 +253,7 @@ namespace BokInterface.Inventory {
                             case "str":
                             case "agi":
                                 /**
-                                 * For stats wz also update the "persistent" stat address
+                                 * For stats we also update the "persistent" stat address
                                  * 
                                  * We do this because updating "current" stat value is not enough,
                                  * when switching room the game would set back the old values
