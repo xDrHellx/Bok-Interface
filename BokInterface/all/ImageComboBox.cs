@@ -3,6 +3,7 @@ using System.Drawing;
 using System.Windows.Forms;
 
 using BokInterface.Items;
+using BokInterface.Weapons;
 
 namespace BokInterface.All {
     ///<summary>Class for ComboBox with images next to selectable options</summary>
@@ -23,6 +24,20 @@ namespace BokInterface.All {
                 // For Boktai items
                 KeyValuePair<string, Item> option = (KeyValuePair<string, Item>)Items[e.Index];
                 Item optionItem = option.Value;
+
+                /**
+                 * Draw the item's name & icon (if it has one)
+                 * We always add the space an icon would take so that elements are aligned properly
+                 */
+                e.Graphics.DrawString(optionItem.name, e.Font, new SolidBrush(e.ForeColor), e.Bounds.Left + 16, e.Bounds.Top + 1);
+                if (optionItem.icon != null) {
+                    e.Graphics.DrawImage(optionItem.icon, e.Bounds.Left, e.Bounds.Top + 1);
+                }
+            } else if (Items[e.Index].GetType() == typeof(KeyValuePair<string, Weapon>)) {
+
+                // For Boktai weapons
+                KeyValuePair<string, Weapon> option = (KeyValuePair<string, Weapon>)Items[e.Index];
+                Weapon optionItem = option.Value;
 
                 /**
                  * Draw the item's name & icon (if it has one)

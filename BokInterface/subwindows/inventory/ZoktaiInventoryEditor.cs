@@ -207,7 +207,7 @@ namespace BokInterface.Inventory {
                 SetMemoryValue(fieldParts[0], fieldParts[1], selectedItem.value);
             }
 
-            // Repeat the above process for Durabilitys
+            // Repeat the above process for Durabilities
             for (int i = 0; i < durabilities.Count; i++) {
 
                 if (durabilities[i].Enabled == false) {
