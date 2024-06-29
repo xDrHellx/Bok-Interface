@@ -36,6 +36,9 @@ namespace BokInterface.Addresses {
             Django.Add("y_position", new MemoryAddress(0x34, note: "Django Y position", domain: "EWRAM"));
             Django.Add("z_position", new MemoryAddress(0x32, note: "Django Z position", domain: "EWRAM"));
 
+            // Current form or character
+            Django.Add("current_form", new MemoryAddress(0x250, note: "Current form or character", domain: "EWRAM"));
+
             // Current stats
             note = "Used for damage calculations, will be copied to its Persistent equivalent on screen transition. Must be combined with the \"stat\" memory address' value";
             Django.Add("current_hp", new MemoryAddress(0x364, note: note, domain: "EWRAM"));
@@ -84,7 +87,7 @@ namespace BokInterface.Addresses {
             Sabata.Add("kaamos_progress", new MemoryAddress(0x2C4, note: "Sabata - " + note, domain: "EWRAM"));
 
             // Items inventory
-            note = "Inventory item slot";
+            note = "Item inventory slot";
             Inventory.Add("item_slot_1", new MemoryAddress(0x70, note: note, domain: "EWRAM"));
             Inventory.Add("item_slot_2", new MemoryAddress(0x72, note: note, domain: "EWRAM"));
             Inventory.Add("item_slot_3", new MemoryAddress(0x74, note: note, domain: "EWRAM"));
@@ -122,7 +125,7 @@ namespace BokInterface.Addresses {
             Inventory.Add("item_slot_durability_16", new MemoryAddress(0xEE, note: note, domain: "EWRAM"));
 
             // Key items inventory
-            note = "Key item slot";
+            note = "Key item inventory slot";
             Inventory.Add("key_item_slot_1", new MemoryAddress(0x130, note: note, domain: "EWRAM"));
             Inventory.Add("key_item_slot_2", new MemoryAddress(0x132, note: note, domain: "EWRAM"));
             Inventory.Add("key_item_slot_3", new MemoryAddress(0x134, note: note, domain: "EWRAM"));
@@ -140,6 +143,25 @@ namespace BokInterface.Addresses {
             Inventory.Add("key_item_slot_15", new MemoryAddress(0x14C, note: note, domain: "EWRAM"));
             Inventory.Add("key_item_slot_16", new MemoryAddress(0x14E, note: note, domain: "EWRAM"));
 
+            // Weapons inventory
+            note = "Weapon inventory slot";
+            Inventory.Add("weapon_slot_1", new MemoryAddress(0x3D0, note: note, domain: "EWRAM"));
+            Inventory.Add("weapon_slot_2", new MemoryAddress(0x3EC, note: note, domain: "EWRAM"));
+            Inventory.Add("weapon_slot_3", new MemoryAddress(0x408, note: note, domain: "EWRAM"));
+            Inventory.Add("weapon_slot_4", new MemoryAddress(0x424, note: note, domain: "EWRAM"));
+            Inventory.Add("weapon_slot_5", new MemoryAddress(0x440, note: note, domain: "EWRAM"));
+            Inventory.Add("weapon_slot_6", new MemoryAddress(0x45C, note: note, domain: "EWRAM"));
+            Inventory.Add("weapon_slot_7", new MemoryAddress(0x478, note: note, domain: "EWRAM"));
+            Inventory.Add("weapon_slot_8", new MemoryAddress(0x494, note: note, domain: "EWRAM"));
+            Inventory.Add("weapon_slot_9", new MemoryAddress(0x4B0, note: note, domain: "EWRAM"));
+            Inventory.Add("weapon_slot_10", new MemoryAddress(0x4CC, note: note, domain: "EWRAM"));
+            Inventory.Add("weapon_slot_11", new MemoryAddress(0x4E8, note: note, domain: "EWRAM"));
+            Inventory.Add("weapon_slot_12", new MemoryAddress(0x504, note: note, domain: "EWRAM"));
+            Inventory.Add("weapon_slot_13", new MemoryAddress(0x520, note: note, domain: "EWRAM"));
+            Inventory.Add("weapon_slot_14", new MemoryAddress(0x53C, note: note, domain: "EWRAM"));
+            Inventory.Add("weapon_slot_15", new MemoryAddress(0x558, note: note, domain: "EWRAM"));
+            Inventory.Add("weapon_slot_16", new MemoryAddress(0x574, note: note, domain: "EWRAM"));
+
             // Add Misc addresses
             Misc.Add("stat", new MemoryAddress(0x030046A0, note: "For persistent stats & inventory", type: "U32", domain: "IWRAM"));
             Misc.Add("world_state", new MemoryAddress(0x03004698, note: "Story progress & dungeon states", type: "U32", domain: "IWRAM"));
@@ -149,16 +171,6 @@ namespace BokInterface.Addresses {
             Misc.Add("y_camera", new MemoryAddress(0x030047CA, note: "Camera Y position", domain: "IWRAM"));
             Misc.Add("z_camera", new MemoryAddress(0x030047CC, note: "Camera Z position", domain: "IWRAM"));
             Misc.Add("current_stat", new MemoryAddress(0x03002BE0, note: "For current stats", type: "U32", domain: "IWRAM"));
-
-            // 0x203C650 django's current form
-            /*
-                0 - Django
-                1 - Black Django
-                2 - Bat
-                3 - Mouse
-                4 - Unused
-                5 - Sabata
-            */
 
             /*
              * US version 
