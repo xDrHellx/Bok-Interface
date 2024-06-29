@@ -32,7 +32,7 @@ namespace BokInterface.Status {
             Owner = _bokInterface = bokInterface;
             Icon = _bokInterface.Icon;
 
-            SetFormParameters(351, 313);
+            SetFormParameters(335, 277);
 
             // Add the onClose event to the subwindow
             FormClosing += new FormClosingEventHandler(delegate (object sender, FormClosingEventArgs e) {
@@ -50,62 +50,62 @@ namespace BokInterface.Status {
             IDictionary<string, decimal> defaultValues = GetDefaultValues();
 
             // Sections
-            statusGroupBox = WinFormHelpers.CreateCheckGroupBox("editStatusGroup", "Status", 5, 5, 97, 74, control: this);
-            skillGroupBox = WinFormHelpers.CreateCheckGroupBox("editSkillGroup", "Skill", 110, 85, 221, 103, control: this);
-            statsGroupBox = WinFormHelpers.CreateCheckGroupBox("editStatsGroup", "Stats", 5, 85, 99, 161, control: this);
-            expGroupBox = WinFormHelpers.CreateCheckGroupBox("editExpGroup", "Leven and EXP", 108, 5, 117, 74, control: this);
-            kaamosGroupBox = WinFormHelpers.CreateCheckGroupBox("editKaamosGroup", "Kaamos", 233, 5, 83, 75, control: this);
+            statusGroupBox = WinFormHelpers.CreateCheckGroupBox("editStatusGroup", "Status", 5, 5, 97, 77, control: this);
+            skillGroupBox = WinFormHelpers.CreateCheckGroupBox("editSkillGroup", "Skill", 110, 85, 221, 106, control: this);
+            statsGroupBox = WinFormHelpers.CreateCheckGroupBox("editStatsGroup", "Stats", 5, 85, 99, 164, control: this);
+            expGroupBox = WinFormHelpers.CreateCheckGroupBox("editExpGroup", "Level and EXP", 108, 5, 115, 77, control: this);
+            kaamosGroupBox = WinFormHelpers.CreateCheckGroupBox("editKaamosGroup", "Kaamos", 229, 5, 81, 68, control: this);
 
             // Status
-            WinFormHelpers.CreateLabel("djangoEditHpLabel", "LIFE :", 2, 19, 34, 15, statusGroupBox);
-            WinFormHelpers.CreateLabel("djangoEditEneLabel", "ENE :", 2, 47, 34, 15, statusGroupBox);
+            WinFormHelpers.CreateLabel("djangoEditHpLabel", "LIFE :", 2, 22, 34, 15, statusGroupBox);
+            WinFormHelpers.CreateLabel("djangoEditEneLabel", "ENE :", 2, 50, 34, 15, statusGroupBox);
 
-            statusNumericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("django_current_hp", defaultValues["django_current_hp"], 42, 17, 50, 23, maxValue: 1000, control: statusGroupBox));
-            statusNumericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("django_current_ene", defaultValues["django_current_ene"], 42, 45, 50, 23, maxValue: 1000, control: statusGroupBox));
+            statusNumericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("django_current_hp", defaultValues["django_current_hp"], 42, 20, 50, 23, maxValue: 1000, control: statusGroupBox));
+            statusNumericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("django_current_ene", defaultValues["django_current_ene"], 42, 48, 50, 23, maxValue: 1000, control: statusGroupBox));
 
             // Skill
-            WinFormHelpers.CreateLabel("djangoEditSwordSkillLabel", "Sword", 2, 19, 54, 15, skillGroupBox, textAlignment: "MiddleLeft");
-            WinFormHelpers.CreateLabel("djangoEditSpearSkillLabel", "Spear", 123, 19, 36, 15, skillGroupBox, textAlignment: "MiddleLeft");
-            WinFormHelpers.CreateLabel("djangoEditHammerSkillLabel", "Hammer", 2, 47, 54, 15, skillGroupBox, textAlignment: "MiddleLeft");
-            WinFormHelpers.CreateLabel("djangoEditFistsSkillLabel", "Fists", 123, 47, 36, 15, skillGroupBox, textAlignment: "MiddleLeft");
-            WinFormHelpers.CreateLabel("djangoEditGunSkillLabel", "Gun", 2, 76, 54, 15, skillGroupBox, textAlignment: "MiddleLeft");
+            WinFormHelpers.CreateLabel("djangoEditSwordSkillLabel", "Sword", 2, 22, 54, 15, skillGroupBox, textAlignment: "MiddleLeft");
+            WinFormHelpers.CreateLabel("djangoEditSpearSkillLabel", "Spear", 123, 22, 36, 15, skillGroupBox, textAlignment: "MiddleLeft");
+            WinFormHelpers.CreateLabel("djangoEditHammerSkillLabel", "Hammer", 2, 50, 54, 15, skillGroupBox, textAlignment: "MiddleLeft");
+            WinFormHelpers.CreateLabel("djangoEditFistsSkillLabel", "Fists", 123, 50, 36, 15, skillGroupBox, textAlignment: "MiddleLeft");
+            WinFormHelpers.CreateLabel("djangoEditGunSkillLabel", "Gun", 2, 79, 54, 15, skillGroupBox, textAlignment: "MiddleLeft");
 
-            statusNumericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("django_sword_skill", defaultValues["django_sword_skill"], 58, 16, 51, 23, nbDecimals: 2, control: skillGroupBox));
-            statusNumericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("django_spear_skill", defaultValues["django_spear_skill"], 165, 16, 51, 23, nbDecimals: 2, control: skillGroupBox));
-            statusNumericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("django_hammer_skill", defaultValues["django_hammer_skill"], 58, 45, 51, 23, nbDecimals: 2, control: skillGroupBox));
-            statusNumericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("django_fists_skill", defaultValues["django_fists_skill"], 165, 45, 51, 23, nbDecimals: 2, control: skillGroupBox));
-            statusNumericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("django_gun_skill", defaultValues["django_gun_skill"], 58, 74, 51, 23, nbDecimals: 2, control: skillGroupBox));
+            statusNumericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("django_sword_skill", defaultValues["django_sword_skill"], 58, 19, 51, 23, nbDecimals: 2, control: skillGroupBox));
+            statusNumericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("django_spear_skill", defaultValues["django_spear_skill"], 165, 19, 51, 23, nbDecimals: 2, control: skillGroupBox));
+            statusNumericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("django_hammer_skill", defaultValues["django_hammer_skill"], 58, 48, 51, 23, nbDecimals: 2, control: skillGroupBox));
+            statusNumericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("django_fists_skill", defaultValues["django_fists_skill"], 165, 48, 51, 23, nbDecimals: 2, control: skillGroupBox));
+            statusNumericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("django_gun_skill", defaultValues["django_gun_skill"], 58, 77, 51, 23, nbDecimals: 2, control: skillGroupBox));
 
             // Stats
-            WinFormHelpers.CreateLabel("djangoEditVitLabel", "VIT", 2, 19, 27, 15, statsGroupBox);
-            WinFormHelpers.CreateLabel("djangoEditSprLabel", "SPR", 2, 47, 27, 15, statsGroupBox);
-            WinFormHelpers.CreateLabel("djangoEditStrLabel", "STR", 2, 76, 27, 15, statsGroupBox);
-            WinFormHelpers.CreateLabel("djangoEditAgiLabel", "AGI", 2, 105, 27, 15, statsGroupBox);
-            WinFormHelpers.CreateLabel("djangoEditStatPointsLabel", "Points", 2, 134, 40, 15, statsGroupBox);
+            WinFormHelpers.CreateLabel("djangoEditVitLabel", "VIT", 2, 22, 27, 15, statsGroupBox);
+            WinFormHelpers.CreateLabel("djangoEditSprLabel", "SPR", 2, 50, 27, 15, statsGroupBox);
+            WinFormHelpers.CreateLabel("djangoEditStrLabel", "STR", 2, 79, 27, 15, statsGroupBox);
+            WinFormHelpers.CreateLabel("djangoEditAgiLabel", "AGI", 2, 108, 27, 15, statsGroupBox);
+            WinFormHelpers.CreateLabel("djangoEditStatPointsLabel", "Points", 2, 137, 40, 15, statsGroupBox);
 
-            statusNumericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("django_vit", defaultValues["django_vit"], 53, 16, 41, 23, control: statsGroupBox));
-            statusNumericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("django_spr", defaultValues["django_spr"], 53, 45, 41, 23, control: statsGroupBox));
-            statusNumericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("django_str", defaultValues["django_str"], 53, 74, 41, 23, control: statsGroupBox));
-            statusNumericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("django_agi", defaultValues["django_agi"], 53, 103, 41, 23, control: statsGroupBox));
-            statusNumericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("django_stat_points", defaultValues["django_stat_points"], 48, 132, 46, 23, minValue: 0, maxValue: 255, control: statsGroupBox));
+            statusNumericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("django_vit", defaultValues["django_vit"], 53, 19, 41, 23, control: statsGroupBox));
+            statusNumericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("django_spr", defaultValues["django_spr"], 53, 48, 41, 23, control: statsGroupBox));
+            statusNumericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("django_str", defaultValues["django_str"], 53, 77, 41, 23, control: statsGroupBox));
+            statusNumericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("django_agi", defaultValues["django_agi"], 53, 106, 41, 23, control: statsGroupBox));
+            statusNumericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("django_stat_points", defaultValues["django_stat_points"], 48, 135, 46, 23, minValue: 0, maxValue: 255, control: statsGroupBox));
 
             // Level & EXP
-            WinFormHelpers.CreateLabel("djangoEditLevelLabel", "Level", 2, 19, 34, 15, expGroupBox);
-            WinFormHelpers.CreateLabel("djangoEditExpLabel", "EXP", 2, 47, 27, 15, expGroupBox);
+            WinFormHelpers.CreateLabel("djangoEditLevelLabel", "Level", 2, 22, 34, 15, expGroupBox);
+            WinFormHelpers.CreateLabel("djangoEditExpLabel", "EXP", 2, 50, 27, 15, expGroupBox);
 
-            statusNumericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("django_level", defaultValues["django_level"], 42, 16, 50, 23, control: expGroupBox));
-            statusNumericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("django_exp", defaultValues["django_exp"], 32, 45, 60, 23, minValue: 0, maxValue: 999999, control: expGroupBox));
+            statusNumericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("django_level", defaultValues["django_level"], 42, 19, 50, 23, control: expGroupBox));
+            statusNumericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("django_exp", defaultValues["django_exp"], 32, 48, 60, 23, minValue: 0, maxValue: 999999, control: expGroupBox));
 
             // Kaamos
-            statusCheckBoxes.Add(WinFormHelpers.CreateCheckBox("django_kaamos", "Django", 10, 22, 64, 19, isCheckedByDefault: defaultValues["django_kaamos"] > 0, control: kaamosGroupBox));
-            statusCheckBoxes.Add(WinFormHelpers.CreateCheckBox("sabata_kaamos", "Sabata", 10, 44, 64, 19, isCheckedByDefault: defaultValues["sabata_kaamos"] > 0, control: kaamosGroupBox));
+            statusCheckBoxes.Add(WinFormHelpers.CreateCheckBox("django_kaamos", "Django", 10, 25, 64, 19, isCheckedByDefault: defaultValues["django_kaamos"] > 0, control: kaamosGroupBox));
+            statusCheckBoxes.Add(WinFormHelpers.CreateCheckBox("sabata_kaamos", "Sabata", 10, 47, 64, 19, isCheckedByDefault: defaultValues["sabata_kaamos"] > 0, control: kaamosGroupBox));
 
             // Add tooltips & warnings
-            Label expWarning = WinFormHelpers.CreateImageLabel("tooltip", "warning", 97, 48, expGroupBox);
+            Label expWarning = WinFormHelpers.CreateImageLabel("tooltip", "warning", 97, 51, expGroupBox);
             WinFormHelpers.AddToolTip(expWarning, "Level will be automatically adjusted if EXP is high enough to reach higher levels");
 
             // Button for setting values & its events
-            Button setValuesButton = WinFormHelpers.CreateButton("setStatusButton", "Set values", 257, 248, 75, 23, this);
+            Button setValuesButton = WinFormHelpers.CreateButton("setStatusButton", "Set values", 257, 251, 75, 23, this);
             setValuesButton.Click += new EventHandler(delegate (object sender, EventArgs e) {
                 // Write the values for 10 frames
                 for (int i = 0; i < 10; i++) {
