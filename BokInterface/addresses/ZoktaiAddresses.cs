@@ -83,8 +83,8 @@ namespace BokInterface.Addresses {
             Django.Add("kaamos_progress", new MemoryAddress(0x2C0, note: note, domain: "EWRAM"));
 
             // Sabata
-            Sabata.Add("kaamos_status", new MemoryAddress(0x02CE, domain: "EWRAM"));
-            Sabata.Add("kaamos_progress", new MemoryAddress(0x2C4, note: note, domain: "EWRAM"));;
+            Sabata.Add("kaamos_status", new MemoryAddress(0x02CE, note: "Sabata", domain: "EWRAM"));
+            Sabata.Add("kaamos_progress", new MemoryAddress(0x2C4, note: "Sabata - " + note, domain: "EWRAM"));
 
             // Items inventory
             note = "Item inventory slot";

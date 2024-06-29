@@ -171,19 +171,21 @@ namespace BokInterface.Tools.MemoryValuesListing {
                     return true;
                 case "Zoktai":
                     GenerateRows(_memAddresses.Django);
+                    GenerateRows(_memAddresses.Sabata);
                     GenerateRows(_memAddresses.Inventory);
                     GenerateRows(_memAddresses.Magics);
                     GenerateRows(_memAddresses.Misc);
                     return true;
                 case "Shinbok":
                     GenerateRows(_memAddresses.Django);
+                    GenerateRows(_memAddresses.Sabata);
                     GenerateRows(_memAddresses.Solls);
                     GenerateRows(_memAddresses.Bike);
                     GenerateRows(_memAddresses.Misc);
                     return true;
                 case "LunarKnights":
-                    GenerateRows(_memAddresses.Aaron);
-                    GenerateRows(_memAddresses.Lucian);
+                    GenerateRows(_memAddresses.Django);
+                    GenerateRows(_memAddresses.Sabata);
                     GenerateRows(_memAddresses.Inventory);
                     GenerateRows(_memAddresses.Misc);
                     return true;
