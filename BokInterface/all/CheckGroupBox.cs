@@ -84,6 +84,14 @@ namespace BokInterface.All {
                 foreach (ComboBox subElement in Controls.OfType<ComboBox>()) {
                     subElement.Enabled = false;
                 }
+
+                foreach (CheckBox subElement in Controls.OfType<CheckBox>()) {
+                    if (subElement == _checkBoxInstance) {
+                        continue;
+                    }
+
+                    subElement.Enabled = false;
+                }
             }
         }
     }
