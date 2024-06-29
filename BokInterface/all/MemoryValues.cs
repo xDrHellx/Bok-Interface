@@ -14,22 +14,18 @@ namespace BokInterface.All {
 
         /// <summary>Django-related memory values</summary>
         public IDictionary<string, DynamicMemoryValue> Django = new Dictionary<string, DynamicMemoryValue>();
-
+        /// <summary>Sabata-related memory values</summary>
+        public IDictionary<string, DynamicMemoryValue> Sabata = new Dictionary<string, DynamicMemoryValue>();
         /// <summary>Solls-related memory values</summary>
         public IDictionary<string, DynamicMemoryValue> Solls = new Dictionary<string, DynamicMemoryValue>();
-
         /// <summary>Inventory-related memory values</summary>
         public IDictionary<string, DynamicMemoryValue> Inventory = new Dictionary<string, DynamicMemoryValue>();
-
         /// <summary>Bike-related memory values</summary>
         public IDictionary<string, DynamicMemoryValue> Bike = new Dictionary<string, DynamicMemoryValue>();
-
         /// <summary>Misc memory values</summary>
         public IDictionary<string, DynamicMemoryValue> Misc = new Dictionary<string, DynamicMemoryValue>();
-
         /// <summary>U16 memory values</summary>
         public IDictionary<string, MemoryAddress> U16 = new Dictionary<string, MemoryAddress>();
-
         /// <summary>U32 memory values</summary>
         public IDictionary<string, MemoryAddress> U32 = new Dictionary<string, MemoryAddress>();
 
@@ -59,8 +55,10 @@ namespace BokInterface.All {
             }
         }
 
+        /// <summary>Clears all lists</summary>
         private void ClearLists() {
             Django.Clear();
+            Sabata.Clear();
             Solls.Clear();
             Bike.Clear();
             Misc.Clear();
@@ -87,6 +85,10 @@ namespace BokInterface.All {
             Django.Add("spr", new DynamicMemoryValue("spr", _zoktaiAddresses.Misc["current_stat"].Address, _zoktaiAddresses.Django["current_spr"].Address));
             Django.Add("str", new DynamicMemoryValue("str", _zoktaiAddresses.Misc["current_stat"].Address, _zoktaiAddresses.Django["current_str"].Address));
             Django.Add("agi", new DynamicMemoryValue("agi", _zoktaiAddresses.Misc["current_stat"].Address, _zoktaiAddresses.Django["current_agi"].Address));
+
+            // Kaamos
+            Django.Add("kaamos", new DynamicMemoryValue("kaamos", _zoktaiAddresses.Misc["stat"].Address, _zoktaiAddresses.Django["kaamos_status"].Address));
+            Sabata.Add("kaamos", new DynamicMemoryValue("kaamos", _zoktaiAddresses.Misc["stat"].Address, _zoktaiAddresses.Sabata["kaamos_status"].Address));
 
             // Skill
             Django.Add("sword_skill", new DynamicMemoryValue("sword_skill", _zoktaiAddresses.Misc["stat"].Address, _zoktaiAddresses.Django["sword_skill_exp"].Address));

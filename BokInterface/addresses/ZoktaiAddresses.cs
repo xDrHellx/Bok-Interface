@@ -5,19 +5,16 @@ namespace BokInterface.Addresses {
     /// <summary>Main class for Boktai 2: Solar Boy Django / Zoktai memory addresses</summary>
     public class ZoktaiAddresses {
 
-        /// <summary>
-        /// <para>Django-related memory addresses</para>
-        /// </summary>
+        /// <summary>Django-related memory addresses</summary>
         public IDictionary<string, MemoryAddress> Django = new Dictionary<string, MemoryAddress>();
 
-        /// <summary>
-        /// <para>Inventory-related memory addresses</para>
-        /// </summary>
+        /// <summary>Sabata-related memory addresses</summary>
+        public IDictionary<string, MemoryAddress> Sabata = new Dictionary<string, MemoryAddress>();
+
+        /// <summary>Inventory-related memory addresses</summary>
         public IDictionary<string, MemoryAddress> Inventory = new Dictionary<string, MemoryAddress>();
 
-        /// <summary>
-        /// <para>Magics-related memory addresses</para>
-        /// </summary>
+        /// <summary>Magics-related memory addresses</summary>
         public IDictionary<string, MemoryAddress> Magics = new Dictionary<string, MemoryAddress>();
 
         /// <summary>
@@ -79,6 +76,15 @@ namespace BokInterface.Addresses {
             // Stat points
             // Django.Add("showned_stat_points_to_allocate", new MemoryAddress(0x02006E20)); // useless
             Django.Add("stat_points_to_allocate", new MemoryAddress(0x42, domain: "EWRAM"));
+
+            // Status effects
+            note = "Kaamos status is applied when this value is > 35999 & it rains";
+            Django.Add("kaamos_status", new MemoryAddress(0x2C8, domain: "EWRAM"));
+            Django.Add("kaamos_progress", new MemoryAddress(0x2C0, note: note, domain: "EWRAM"));
+
+            // Sabata
+            Sabata.Add("kaamos_status", new MemoryAddress(0x02CE, domain: "EWRAM"));
+            Sabata.Add("kaamos_progress", new MemoryAddress(0x2C4, note: note, domain: "EWRAM"));;
 
             // Items inventory
             note = "Item inventory slot";

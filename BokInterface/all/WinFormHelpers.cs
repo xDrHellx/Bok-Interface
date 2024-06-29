@@ -240,7 +240,42 @@ namespace BokInterface.All {
             return numUpDown;
         }
 
+        /// <summary>Simplified method for creating a CheckBox</summary>
+        /// <param name="name">Field name</param>
+        /// <param name="text">Field text</param>
+        /// <param name="positionX">X position</param>
+        /// <param name="positionY">Y position</param>
+        /// <param name="width">Width (in pixels)</param>
+        /// <param name="height">Height (in pixels)</param>
+        /// <param name="isCheckedByDefault">Set to true if the CheckBox has to be checked when initiated</param>
+        /// <param name="checkboxOnRight">Set to true if the Checkbox has to be on the right of the text</param>
+        /// <param name="control">Control instance if the element is to be attached to it directly</param>
+        /// <returns><c>CheckBox</c>CheckBox instance</returns>
+        public static CheckBox CreateCheckBox(string name, string text, int positionX, int positionY, int width, int height, bool isCheckedByDefault = false, bool checkboxOnRight = false, Control? control = null) {
+
+            CheckBox checkBox = new() {
+                Name = name,
+                Text = text,
+                Checked = isCheckedByDefault,
+                RightToLeft = checkboxOnRight == true ? RightToLeft.Yes : RightToLeft.No,
+                Location = new Point(positionX, positionY),
+                Size = new Size(width, height),
+                TabIndex = 1,
+                AutoSize = false,
+                Anchor = defaultAnchor,
+                Margin = defaultMargin,
+                Font = defaultFont
+            };
+
+            // If a Control instance is passed, add the generated element to it
+            control?.Controls.Add(checkBox);
+
+            return checkBox;
+        }
+
         /// <summary>Simplified method for creating a CheckGroupBox</summary>
+        /// <param name="name">Field name</param>
+        /// <param name="text">Field text</param>
         /// <param name="positionX">X position</param>
         /// <param name="positionY">Y position</param>
         /// <param name="width">Width (in pixels)</param>
