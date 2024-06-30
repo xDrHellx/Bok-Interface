@@ -53,8 +53,8 @@ namespace BokInterface.Status {
             statusGroupBox = WinFormHelpers.CreateCheckGroupBox("editStatusGroup", "Status", 5, 5, 97, 77, control: this);
             skillGroupBox = WinFormHelpers.CreateCheckGroupBox("editSkillGroup", "Skill", 110, 85, 221, 106, control: this);
             statsGroupBox = WinFormHelpers.CreateCheckGroupBox("editStatsGroup", "Stats", 5, 85, 99, 164, control: this);
-            expGroupBox = WinFormHelpers.CreateCheckGroupBox("editExpGroup", "Level and EXP", 108, 5, 115, 77, control: this);
-            kaamosGroupBox = WinFormHelpers.CreateCheckGroupBox("editKaamosGroup", "Kaamos", 229, 5, 81, 68, control: this);
+            expGroupBox = WinFormHelpers.CreateCheckGroupBox("editExpGroup", "Level and EXP", 108, 5, 118, 77, control: this);
+            kaamosGroupBox = WinFormHelpers.CreateCheckGroupBox("editKaamosGroup", "Kaamos", 232, 5, 81, 68, control: this);
 
             // Status
             WinFormHelpers.CreateLabel("djangoEditHpLabel", "LIFE :", 2, 22, 34, 15, statusGroupBox);
