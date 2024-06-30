@@ -112,6 +112,7 @@ namespace BokInterface.Tools.MemoryValuesListing {
 
         /// <summary>Simplified method for generating columns for the data table</summary>
         private void GenerateColumns() {
+            _dataTable.Columns.Add("Dictionnary");
             _dataTable.Columns.Add("Name");
             _dataTable.Columns.Add("Address");
             _dataTable.Columns.Add("Type");
@@ -124,24 +125,27 @@ namespace BokInterface.Tools.MemoryValuesListing {
             if (_dataGridView != null) {
 
                 // Width
-                _dataGridView.Columns[1].Width = 70; // Address
-                _dataGridView.Columns[2].Width = 40; // Type
-                _dataGridView.Columns[3].Width = 60; // Domain
+                _dataGridView.Columns[0].Width = 75; // Dictionnary
+                _dataGridView.Columns[2].Width = 70; // Address
+                _dataGridView.Columns[3].Width = 40; // Type
+                _dataGridView.Columns[4].Width = 60; // Domain
 
                 // Text alignment
-                _dataGridView.Columns[1].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
-                _dataGridView.Columns[2].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+                _dataGridView.Columns[0].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
+                _dataGridView.Columns[2].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
                 _dataGridView.Columns[3].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+                _dataGridView.Columns[4].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             }
         }
 
         /// <summary>Simplified method for generating rows for the data table from a dictionnary</summary>
-        private void GenerateRows(IDictionary<string, MemoryAddress> dictionnary) {
+        private void GenerateRows(IDictionary<string, MemoryAddress> dictionnary, string dictionnaryName = "") {
             foreach (KeyValuePair<string, MemoryAddress> row in dictionnary) {
                 try {
                     // Try getting the MemoryAddress instance & adding the row
                     MemoryAddress memAddress = row.Value;
                     _dataTable.Rows.Add(
+                        dictionnaryName,
                         Utilities.FormatMemoryAddressName(row.Key),
                         "0x" + memAddress.Address.ToString("X"),
                         memAddress.Type,
@@ -164,30 +168,29 @@ namespace BokInterface.Tools.MemoryValuesListing {
 
             switch (BokInterface.shorterGameName) {
                 case "Boktai":
-                    GenerateRows(_memAddresses.Django);
-                    GenerateRows(_memAddresses.Inventory);
-                    GenerateRows(_memAddresses.Gardening);
-                    GenerateRows(_memAddresses.Misc);
+                    GenerateRows(_memAddresses.Django, "Django");
+                    GenerateRows(_memAddresses.Inventory, "Inventory");
+                    GenerateRows(_memAddresses.Gardening, "Gargening");
+                    GenerateRows(_memAddresses.Misc, "Misc");
                     return true;
                 case "Zoktai":
-                    GenerateRows(_memAddresses.Django);
-                    GenerateRows(_memAddresses.Sabata);
-                    GenerateRows(_memAddresses.Inventory);
-                    GenerateRows(_memAddresses.Magics);
-                    GenerateRows(_memAddresses.Misc);
+                    GenerateRows(_memAddresses.Django, "Django");
+                    GenerateRows(_memAddresses.Sabata, "Sabata");
+                    GenerateRows(_memAddresses.Inventory, "Inventory");
+                    GenerateRows(_memAddresses.Magics, "Magics");
+                    GenerateRows(_memAddresses.Misc, "Misc");
                     return true;
                 case "Shinbok":
-                    GenerateRows(_memAddresses.Django);
-                    GenerateRows(_memAddresses.Sabata);
-                    GenerateRows(_memAddresses.Solls);
-                    GenerateRows(_memAddresses.Bike);
-                    GenerateRows(_memAddresses.Misc);
+                    GenerateRows(_memAddresses.Django, "Django");
+                    GenerateRows(_memAddresses.Solls, "Solls");
+                    GenerateRows(_memAddresses.Bike, "Solar bike");
+                    GenerateRows(_memAddresses.Misc, "Misc");
                     return true;
                 case "LunarKnights":
-                    GenerateRows(_memAddresses.Django);
-                    GenerateRows(_memAddresses.Sabata);
-                    GenerateRows(_memAddresses.Inventory);
-                    GenerateRows(_memAddresses.Misc);
+                    GenerateRows(_memAddresses.Django, "Django");
+                    GenerateRows(_memAddresses.Sabata, "Sabata");
+                    GenerateRows(_memAddresses.Inventory, "Inventory");
+                    GenerateRows(_memAddresses.Misc, "Misc");
                     return true;
                 default:
                     // If game is not handled, do nothing
