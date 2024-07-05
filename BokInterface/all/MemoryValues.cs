@@ -162,9 +162,9 @@ namespace BokInterface.All {
             Inventory.Add("slot1_weapon_bonus", new DynamicMemoryValue("slot1_weapon_bonus", _zoktaiAddresses.Misc["stat"].Address, _zoktaiAddresses.Inventory["weapon_slot_1_bonus"].Address));
             Inventory.Add("slot1_weapon_durability", new DynamicMemoryValue("slot1_weapon_durability", _zoktaiAddresses.Misc["stat"].Address, _zoktaiAddresses.Inventory["weapon_slot_1_durability"].Address));
 
-            Inventory.Add("slot1_weapon", new DynamicMemoryValue("slot1_weapon", _zoktaiAddresses.Misc["stat"].Address, _zoktaiAddresses.Inventory["weapon_slot_1_forgedBy_1"].Address));
-            Inventory.Add("slot1_weapon", new DynamicMemoryValue("slot1_weapon", _zoktaiAddresses.Misc["stat"].Address, _zoktaiAddresses.Inventory["weapon_slot_1_forgedBy_2"].Address));
-            Inventory.Add("slot1_weapon", new DynamicMemoryValue("slot1_weapon", _zoktaiAddresses.Misc["stat"].Address, _zoktaiAddresses.Inventory["weapon_slot_1_forgedBy_3"].Address));
+            Inventory.Add("slot1_weapon_forgedBy_1", new DynamicMemoryValue("slot1_weapon_forgedBy_1", _zoktaiAddresses.Misc["stat"].Address, _zoktaiAddresses.Inventory["weapon_slot_1_forgedBy_1"].Address));
+            Inventory.Add("slot1_weapon_forgedBy_2", new DynamicMemoryValue("slot1_weapon_forgedBy_2", _zoktaiAddresses.Misc["stat"].Address, _zoktaiAddresses.Inventory["weapon_slot_1_forgedBy_2"].Address));
+            Inventory.Add("slot1_weapon_forgedBy_3", new DynamicMemoryValue("slot1_weapon_forgedBy_3", _zoktaiAddresses.Misc["stat"].Address, _zoktaiAddresses.Inventory["weapon_slot_1_forgedBy_3"].Address));
 
             Inventory.Add("slot1_weapon_sp_ability_1", new DynamicMemoryValue("slot1_weapon_sp_ability_1", _zoktaiAddresses.Misc["stat"].Address, _zoktaiAddresses.Inventory["weapon_slot_1_sp_ability_1"].Address));
             Inventory.Add("slot1_weapon_sp_ability_2", new DynamicMemoryValue("slot1_weapon_sp_ability_2", _zoktaiAddresses.Misc["stat"].Address, _zoktaiAddresses.Inventory["weapon_slot_1_sp_ability_2"].Address));
@@ -175,9 +175,9 @@ namespace BokInterface.All {
             Inventory.Add("slot2_weapon_bonus", new DynamicMemoryValue("slot2_weapon_bonus", _zoktaiAddresses.Misc["stat"].Address, _zoktaiAddresses.Inventory["weapon_slot_2_bonus"].Address));
             Inventory.Add("slot2_weapon_durability", new DynamicMemoryValue("slot2_weapon_durability", _zoktaiAddresses.Misc["stat"].Address, _zoktaiAddresses.Inventory["weapon_slot_2_durability"].Address));
 
-            Inventory.Add("slot2_weapon", new DynamicMemoryValue("slot2_weapon", _zoktaiAddresses.Misc["stat"].Address, _zoktaiAddresses.Inventory["weapon_slot_2_forgedBy_1"].Address));
-            Inventory.Add("slot2_weapon", new DynamicMemoryValue("slot2_weapon", _zoktaiAddresses.Misc["stat"].Address, _zoktaiAddresses.Inventory["weapon_slot_2_forgedBy_2"].Address));
-            Inventory.Add("slot2_weapon", new DynamicMemoryValue("slot2_weapon", _zoktaiAddresses.Misc["stat"].Address, _zoktaiAddresses.Inventory["weapon_slot_2_forgedBy_3"].Address));
+            Inventory.Add("slot2_weapon_forgedBy_1", new DynamicMemoryValue("slot2_weapon_forgedBy_1", _zoktaiAddresses.Misc["stat"].Address, _zoktaiAddresses.Inventory["weapon_slot_2_forgedBy_1"].Address));
+            Inventory.Add("slot2_weapon_forgedBy_2", new DynamicMemoryValue("slot2_weapon_forgedBy_2", _zoktaiAddresses.Misc["stat"].Address, _zoktaiAddresses.Inventory["weapon_slot_2_forgedBy_2"].Address));
+            Inventory.Add("slot2_weapon_forgedBy_3", new DynamicMemoryValue("slot2_weapon_forgedBy_3", _zoktaiAddresses.Misc["stat"].Address, _zoktaiAddresses.Inventory["weapon_slot_2_forgedBy_3"].Address));
 
             Inventory.Add("slot2_weapon_sp_ability_1", new DynamicMemoryValue("slot2_weapon_sp_ability_1", _zoktaiAddresses.Misc["stat"].Address, _zoktaiAddresses.Inventory["weapon_slot_2_sp_ability_1"].Address));
             Inventory.Add("slot2_weapon_sp_ability_2", new DynamicMemoryValue("slot2_weapon_sp_ability_2", _zoktaiAddresses.Misc["stat"].Address, _zoktaiAddresses.Inventory["weapon_slot_2_sp_ability_2"].Address));
@@ -188,9 +188,9 @@ namespace BokInterface.All {
             Inventory.Add("slot3_weapon_bonus", new DynamicMemoryValue("slot3_weapon_bonus", _zoktaiAddresses.Misc["stat"].Address, _zoktaiAddresses.Inventory["weapon_slot_3_bonus"].Address));
             Inventory.Add("slot3_weapon_durability", new DynamicMemoryValue("slot3_weapon_durability", _zoktaiAddresses.Misc["stat"].Address, _zoktaiAddresses.Inventory["weapon_slot_3_durability"].Address));
 
-            Inventory.Add("slot3_weapon", new DynamicMemoryValue("slot3_weapon", _zoktaiAddresses.Misc["stat"].Address, _zoktaiAddresses.Inventory["weapon_slot_3_forgedBy_1"].Address));
-            Inventory.Add("slot3_weapon", new DynamicMemoryValue("slot3_weapon", _zoktaiAddresses.Misc["stat"].Address, _zoktaiAddresses.Inventory["weapon_slot_3_forgedBy_2"].Address));
-            Inventory.Add("slot3_weapon", new DynamicMemoryValue("slot3_weapon", _zoktaiAddresses.Misc["stat"].Address, _zoktaiAddresses.Inventory["weapon_slot_3_forgedBy_3"].Address));
+            Inventory.Add("slot3_weapon_forgedBy_1", new DynamicMemoryValue("slot3_weapon_forgedBy_1", _zoktaiAddresses.Misc["stat"].Address, _zoktaiAddresses.Inventory["weapon_slot_3_forgedBy_1"].Address));
+            Inventory.Add("slot3_weapon_forgedBy_2", new DynamicMemoryValue("slot3_weapon_forgedBy_2", _zoktaiAddresses.Misc["stat"].Address, _zoktaiAddresses.Inventory["weapon_slot_3_forgedBy_2"].Address));
+            Inventory.Add("slot3_weapon_forgedBy_3", new DynamicMemoryValue("slot3_weapon_forgedBy_3", _zoktaiAddresses.Misc["stat"].Address, _zoktaiAddresses.Inventory["weapon_slot_3_forgedBy_3"].Address));
 
             Inventory.Add("slot3_weapon_sp_ability_1", new DynamicMemoryValue("slot3_weapon_sp_ability_1", _zoktaiAddresses.Misc["stat"].Address, _zoktaiAddresses.Inventory["weapon_slot_3_sp_ability_1"].Address));
             Inventory.Add("slot3_weapon_sp_ability_2", new DynamicMemoryValue("slot3_weapon_sp_ability_2", _zoktaiAddresses.Misc["stat"].Address, _zoktaiAddresses.Inventory["weapon_slot_3_sp_ability_2"].Address));
@@ -201,9 +201,9 @@ namespace BokInterface.All {
             Inventory.Add("slot4_weapon_bonus", new DynamicMemoryValue("slot4_weapon_bonus", _zoktaiAddresses.Misc["stat"].Address, _zoktaiAddresses.Inventory["weapon_slot_4_bonus"].Address));
             Inventory.Add("slot4_weapon_durability", new DynamicMemoryValue("slot4_weapon_durability", _zoktaiAddresses.Misc["stat"].Address, _zoktaiAddresses.Inventory["weapon_slot_4_durability"].Address));
 
-            Inventory.Add("slot4_weapon", new DynamicMemoryValue("slot4_weapon", _zoktaiAddresses.Misc["stat"].Address, _zoktaiAddresses.Inventory["weapon_slot_4_forgedBy_1"].Address));
-            Inventory.Add("slot4_weapon", new DynamicMemoryValue("slot4_weapon", _zoktaiAddresses.Misc["stat"].Address, _zoktaiAddresses.Inventory["weapon_slot_4_forgedBy_2"].Address));
-            Inventory.Add("slot4_weapon", new DynamicMemoryValue("slot4_weapon", _zoktaiAddresses.Misc["stat"].Address, _zoktaiAddresses.Inventory["weapon_slot_4_forgedBy_3"].Address));
+            Inventory.Add("slot4_weapon_forgedBy_1", new DynamicMemoryValue("slot4_weapon_forgedBy_1", _zoktaiAddresses.Misc["stat"].Address, _zoktaiAddresses.Inventory["weapon_slot_4_forgedBy_1"].Address));
+            Inventory.Add("slot4_weapon_forgedBy_2", new DynamicMemoryValue("slot4_weapon_forgedBy_2", _zoktaiAddresses.Misc["stat"].Address, _zoktaiAddresses.Inventory["weapon_slot_4_forgedBy_2"].Address));
+            Inventory.Add("slot4_weapon_forgedBy_3", new DynamicMemoryValue("slot4_weapon_forgedBy_3", _zoktaiAddresses.Misc["stat"].Address, _zoktaiAddresses.Inventory["weapon_slot_4_forgedBy_3"].Address));
 
             Inventory.Add("slot4_weapon_sp_ability_1", new DynamicMemoryValue("slot4_weapon_sp_ability_1", _zoktaiAddresses.Misc["stat"].Address, _zoktaiAddresses.Inventory["weapon_slot_4_sp_ability_1"].Address));
             Inventory.Add("slot4_weapon_sp_ability_2", new DynamicMemoryValue("slot4_weapon_sp_ability_2", _zoktaiAddresses.Misc["stat"].Address, _zoktaiAddresses.Inventory["weapon_slot_4_sp_ability_2"].Address));
@@ -214,9 +214,9 @@ namespace BokInterface.All {
             Inventory.Add("slot5_weapon_bonus", new DynamicMemoryValue("slot5_weapon_bonus", _zoktaiAddresses.Misc["stat"].Address, _zoktaiAddresses.Inventory["weapon_slot_5_bonus"].Address));
             Inventory.Add("slot5_weapon_durability", new DynamicMemoryValue("slot5_weapon_durability", _zoktaiAddresses.Misc["stat"].Address, _zoktaiAddresses.Inventory["weapon_slot_5_durability"].Address));
 
-            Inventory.Add("slot5_weapon", new DynamicMemoryValue("slot5_weapon", _zoktaiAddresses.Misc["stat"].Address, _zoktaiAddresses.Inventory["weapon_slot_5_forgedBy_1"].Address));
-            Inventory.Add("slot5_weapon", new DynamicMemoryValue("slot5_weapon", _zoktaiAddresses.Misc["stat"].Address, _zoktaiAddresses.Inventory["weapon_slot_5_forgedBy_2"].Address));
-            Inventory.Add("slot5_weapon", new DynamicMemoryValue("slot5_weapon", _zoktaiAddresses.Misc["stat"].Address, _zoktaiAddresses.Inventory["weapon_slot_5_forgedBy_3"].Address));
+            Inventory.Add("slot5_weapon_forgedBy_1", new DynamicMemoryValue("slot5_weapon_forgedBy_1", _zoktaiAddresses.Misc["stat"].Address, _zoktaiAddresses.Inventory["weapon_slot_5_forgedBy_1"].Address));
+            Inventory.Add("slot5_weapon_forgedBy_2", new DynamicMemoryValue("slot5_weapon_forgedBy_2", _zoktaiAddresses.Misc["stat"].Address, _zoktaiAddresses.Inventory["weapon_slot_5_forgedBy_2"].Address));
+            Inventory.Add("slot5_weapon_forgedBy_3", new DynamicMemoryValue("slot5_weapon_forgedBy_3", _zoktaiAddresses.Misc["stat"].Address, _zoktaiAddresses.Inventory["weapon_slot_5_forgedBy_3"].Address));
 
             Inventory.Add("slot5_weapon_sp_ability_1", new DynamicMemoryValue("slot5_weapon_sp_ability_1", _zoktaiAddresses.Misc["stat"].Address, _zoktaiAddresses.Inventory["weapon_slot_5_sp_ability_1"].Address));
             Inventory.Add("slot5_weapon_sp_ability_2", new DynamicMemoryValue("slot5_weapon_sp_ability_2", _zoktaiAddresses.Misc["stat"].Address, _zoktaiAddresses.Inventory["weapon_slot_5_sp_ability_2"].Address));
@@ -227,9 +227,9 @@ namespace BokInterface.All {
             Inventory.Add("slot6_weapon_bonus", new DynamicMemoryValue("slot6_weapon_bonus", _zoktaiAddresses.Misc["stat"].Address, _zoktaiAddresses.Inventory["weapon_slot_6_bonus"].Address));
             Inventory.Add("slot6_weapon_durability", new DynamicMemoryValue("slot6_weapon_durability", _zoktaiAddresses.Misc["stat"].Address, _zoktaiAddresses.Inventory["weapon_slot_6_durability"].Address));
 
-            Inventory.Add("slot6_weapon", new DynamicMemoryValue("slot6_weapon", _zoktaiAddresses.Misc["stat"].Address, _zoktaiAddresses.Inventory["weapon_slot_6_forgedBy_1"].Address));
-            Inventory.Add("slot6_weapon", new DynamicMemoryValue("slot6_weapon", _zoktaiAddresses.Misc["stat"].Address, _zoktaiAddresses.Inventory["weapon_slot_6_forgedBy_2"].Address));
-            Inventory.Add("slot6_weapon", new DynamicMemoryValue("slot6_weapon", _zoktaiAddresses.Misc["stat"].Address, _zoktaiAddresses.Inventory["weapon_slot_6_forgedBy_3"].Address));
+            Inventory.Add("slot6_weapon_forgedBy_1", new DynamicMemoryValue("slot6_weapon_forgedBy_1", _zoktaiAddresses.Misc["stat"].Address, _zoktaiAddresses.Inventory["weapon_slot_6_forgedBy_1"].Address));
+            Inventory.Add("slot6_weapon_forgedBy_2", new DynamicMemoryValue("slot6_weapon_forgedBy_2", _zoktaiAddresses.Misc["stat"].Address, _zoktaiAddresses.Inventory["weapon_slot_6_forgedBy_2"].Address));
+            Inventory.Add("slot6_weapon_forgedBy_3", new DynamicMemoryValue("slot6_weapon_forgedBy_3", _zoktaiAddresses.Misc["stat"].Address, _zoktaiAddresses.Inventory["weapon_slot_6_forgedBy_3"].Address));
 
             Inventory.Add("slot6_weapon_sp_ability_1", new DynamicMemoryValue("slot6_weapon_sp_ability_1", _zoktaiAddresses.Misc["stat"].Address, _zoktaiAddresses.Inventory["weapon_slot_6_sp_ability_1"].Address));
             Inventory.Add("slot6_weapon_sp_ability_2", new DynamicMemoryValue("slot6_weapon_sp_ability_2", _zoktaiAddresses.Misc["stat"].Address, _zoktaiAddresses.Inventory["weapon_slot_6_sp_ability_2"].Address));
@@ -240,9 +240,9 @@ namespace BokInterface.All {
             Inventory.Add("slot7_weapon_bonus", new DynamicMemoryValue("slot7_weapon_bonus", _zoktaiAddresses.Misc["stat"].Address, _zoktaiAddresses.Inventory["weapon_slot_7_bonus"].Address));
             Inventory.Add("slot7_weapon_durability", new DynamicMemoryValue("slot7_weapon_durability", _zoktaiAddresses.Misc["stat"].Address, _zoktaiAddresses.Inventory["weapon_slot_7_durability"].Address));
 
-            Inventory.Add("slot7_weapon", new DynamicMemoryValue("slot7_weapon", _zoktaiAddresses.Misc["stat"].Address, _zoktaiAddresses.Inventory["weapon_slot_7_forgedBy_1"].Address));
-            Inventory.Add("slot7_weapon", new DynamicMemoryValue("slot7_weapon", _zoktaiAddresses.Misc["stat"].Address, _zoktaiAddresses.Inventory["weapon_slot_7_forgedBy_2"].Address));
-            Inventory.Add("slot7_weapon", new DynamicMemoryValue("slot7_weapon", _zoktaiAddresses.Misc["stat"].Address, _zoktaiAddresses.Inventory["weapon_slot_7_forgedBy_3"].Address));
+            Inventory.Add("slot7_weapon_forgedBy_1", new DynamicMemoryValue("slot7_weapon_forgedBy_1", _zoktaiAddresses.Misc["stat"].Address, _zoktaiAddresses.Inventory["weapon_slot_7_forgedBy_1"].Address));
+            Inventory.Add("slot7_weapon_forgedBy_2", new DynamicMemoryValue("slot7_weapon_forgedBy_2", _zoktaiAddresses.Misc["stat"].Address, _zoktaiAddresses.Inventory["weapon_slot_7_forgedBy_2"].Address));
+            Inventory.Add("slot7_weapon_forgedBy_3", new DynamicMemoryValue("slot7_weapon_forgedBy_3", _zoktaiAddresses.Misc["stat"].Address, _zoktaiAddresses.Inventory["weapon_slot_7_forgedBy_3"].Address));
 
             Inventory.Add("slot7_weapon_sp_ability_1", new DynamicMemoryValue("slot7_weapon_sp_ability_1", _zoktaiAddresses.Misc["stat"].Address, _zoktaiAddresses.Inventory["weapon_slot_7_sp_ability_1"].Address));
             Inventory.Add("slot7_weapon_sp_ability_2", new DynamicMemoryValue("slot7_weapon_sp_ability_2", _zoktaiAddresses.Misc["stat"].Address, _zoktaiAddresses.Inventory["weapon_slot_7_sp_ability_2"].Address));
@@ -253,9 +253,9 @@ namespace BokInterface.All {
             Inventory.Add("slot8_weapon_bonus", new DynamicMemoryValue("slot8_weapon_bonus", _zoktaiAddresses.Misc["stat"].Address, _zoktaiAddresses.Inventory["weapon_slot_8_bonus"].Address));
             Inventory.Add("slot8_weapon_durability", new DynamicMemoryValue("slot8_weapon_durability", _zoktaiAddresses.Misc["stat"].Address, _zoktaiAddresses.Inventory["weapon_slot_8_durability"].Address));
 
-            Inventory.Add("slot8_weapon", new DynamicMemoryValue("slot8_weapon", _zoktaiAddresses.Misc["stat"].Address, _zoktaiAddresses.Inventory["weapon_slot_8_forgedBy_1"].Address));
-            Inventory.Add("slot8_weapon", new DynamicMemoryValue("slot8_weapon", _zoktaiAddresses.Misc["stat"].Address, _zoktaiAddresses.Inventory["weapon_slot_8_forgedBy_2"].Address));
-            Inventory.Add("slot8_weapon", new DynamicMemoryValue("slot8_weapon", _zoktaiAddresses.Misc["stat"].Address, _zoktaiAddresses.Inventory["weapon_slot_8_forgedBy_3"].Address));
+            Inventory.Add("slot8_weapon_forgedBy_1", new DynamicMemoryValue("slot8_weapon_forgedBy_1", _zoktaiAddresses.Misc["stat"].Address, _zoktaiAddresses.Inventory["weapon_slot_8_forgedBy_1"].Address));
+            Inventory.Add("slot8_weapon_forgedBy_2", new DynamicMemoryValue("slot8_weapon_forgedBy_2", _zoktaiAddresses.Misc["stat"].Address, _zoktaiAddresses.Inventory["weapon_slot_8_forgedBy_2"].Address));
+            Inventory.Add("slot8_weapon_forgedBy_3", new DynamicMemoryValue("slot8_weapon_forgedBy_3", _zoktaiAddresses.Misc["stat"].Address, _zoktaiAddresses.Inventory["weapon_slot_8_forgedBy_3"].Address));
 
             Inventory.Add("slot8_weapon_sp_ability_1", new DynamicMemoryValue("slot8_weapon_sp_ability_1", _zoktaiAddresses.Misc["stat"].Address, _zoktaiAddresses.Inventory["weapon_slot_8_sp_ability_1"].Address));
             Inventory.Add("slot8_weapon_sp_ability_2", new DynamicMemoryValue("slot8_weapon_sp_ability_2", _zoktaiAddresses.Misc["stat"].Address, _zoktaiAddresses.Inventory["weapon_slot_8_sp_ability_2"].Address));
@@ -266,9 +266,9 @@ namespace BokInterface.All {
             Inventory.Add("slot9_weapon_bonus", new DynamicMemoryValue("slot9_weapon_bonus", _zoktaiAddresses.Misc["stat"].Address, _zoktaiAddresses.Inventory["weapon_slot_9_bonus"].Address));
             Inventory.Add("slot9_weapon_durability", new DynamicMemoryValue("slot9_weapon_durability", _zoktaiAddresses.Misc["stat"].Address, _zoktaiAddresses.Inventory["weapon_slot_9_durability"].Address));
 
-            Inventory.Add("slot9_weapon", new DynamicMemoryValue("slot9_weapon", _zoktaiAddresses.Misc["stat"].Address, _zoktaiAddresses.Inventory["weapon_slot_9_forgedBy_1"].Address));
-            Inventory.Add("slot9_weapon", new DynamicMemoryValue("slot9_weapon", _zoktaiAddresses.Misc["stat"].Address, _zoktaiAddresses.Inventory["weapon_slot_9_forgedBy_2"].Address));
-            Inventory.Add("slot9_weapon", new DynamicMemoryValue("slot9_weapon", _zoktaiAddresses.Misc["stat"].Address, _zoktaiAddresses.Inventory["weapon_slot_9_forgedBy_3"].Address));
+            Inventory.Add("slot9_weapon_forgedBy_1", new DynamicMemoryValue("slot9_weapon_forgedBy_1", _zoktaiAddresses.Misc["stat"].Address, _zoktaiAddresses.Inventory["weapon_slot_9_forgedBy_1"].Address));
+            Inventory.Add("slot9_weapon_forgedBy_2", new DynamicMemoryValue("slot9_weapon_forgedBy_2", _zoktaiAddresses.Misc["stat"].Address, _zoktaiAddresses.Inventory["weapon_slot_9_forgedBy_2"].Address));
+            Inventory.Add("slot9_weapon_forgedBy_3", new DynamicMemoryValue("slot9_weapon_forgedBy_3", _zoktaiAddresses.Misc["stat"].Address, _zoktaiAddresses.Inventory["weapon_slot_9_forgedBy_3"].Address));
 
             Inventory.Add("slot9_weapon_sp_ability_1", new DynamicMemoryValue("slot9_weapon_sp_ability_1", _zoktaiAddresses.Misc["stat"].Address, _zoktaiAddresses.Inventory["weapon_slot_9_sp_ability_1"].Address));
             Inventory.Add("slot9_weapon_sp_ability_2", new DynamicMemoryValue("slot9_weapon_sp_ability_2", _zoktaiAddresses.Misc["stat"].Address, _zoktaiAddresses.Inventory["weapon_slot_9_sp_ability_2"].Address));
@@ -279,9 +279,9 @@ namespace BokInterface.All {
             Inventory.Add("slot10_weapon_bonus", new DynamicMemoryValue("slot10_weapon_bonus", _zoktaiAddresses.Misc["stat"].Address, _zoktaiAddresses.Inventory["weapon_slot_10_bonus"].Address));
             Inventory.Add("slot10_weapon_durability", new DynamicMemoryValue("slot10_weapon_durability", _zoktaiAddresses.Misc["stat"].Address, _zoktaiAddresses.Inventory["weapon_slot_10_durability"].Address));
 
-            Inventory.Add("slot10_weapon", new DynamicMemoryValue("slot10_weapon", _zoktaiAddresses.Misc["stat"].Address, _zoktaiAddresses.Inventory["weapon_slot_10_forgedBy_1"].Address));
-            Inventory.Add("slot10_weapon", new DynamicMemoryValue("slot10_weapon", _zoktaiAddresses.Misc["stat"].Address, _zoktaiAddresses.Inventory["weapon_slot_10_forgedBy_2"].Address));
-            Inventory.Add("slot10_weapon", new DynamicMemoryValue("slot10_weapon", _zoktaiAddresses.Misc["stat"].Address, _zoktaiAddresses.Inventory["weapon_slot_10_forgedBy_3"].Address));
+            Inventory.Add("slot10_weapon_forgedBy_1", new DynamicMemoryValue("slot10_weapon_forgedBy_1", _zoktaiAddresses.Misc["stat"].Address, _zoktaiAddresses.Inventory["weapon_slot_10_forgedBy_1"].Address));
+            Inventory.Add("slot10_weapon_forgedBy_2", new DynamicMemoryValue("slot10_weapon_forgedBy_2", _zoktaiAddresses.Misc["stat"].Address, _zoktaiAddresses.Inventory["weapon_slot_10_forgedBy_2"].Address));
+            Inventory.Add("slot10_weapon_forgedBy_3", new DynamicMemoryValue("slot10_weapon_forgedBy_3", _zoktaiAddresses.Misc["stat"].Address, _zoktaiAddresses.Inventory["weapon_slot_10_forgedBy_3"].Address));
 
             Inventory.Add("slot10_weapon_sp_ability_1", new DynamicMemoryValue("slot10_weapon_sp_ability_1", _zoktaiAddresses.Misc["stat"].Address, _zoktaiAddresses.Inventory["weapon_slot_10_sp_ability_1"].Address));
             Inventory.Add("slot10_weapon_sp_ability_2", new DynamicMemoryValue("slot10_weapon_sp_ability_2", _zoktaiAddresses.Misc["stat"].Address, _zoktaiAddresses.Inventory["weapon_slot_10_sp_ability_2"].Address));
@@ -292,9 +292,9 @@ namespace BokInterface.All {
             Inventory.Add("slot11_weapon_bonus", new DynamicMemoryValue("slot11_weapon_bonus", _zoktaiAddresses.Misc["stat"].Address, _zoktaiAddresses.Inventory["weapon_slot_11_bonus"].Address));
             Inventory.Add("slot11_weapon_durability", new DynamicMemoryValue("slot11_weapon_durability", _zoktaiAddresses.Misc["stat"].Address, _zoktaiAddresses.Inventory["weapon_slot_11_durability"].Address));
 
-            Inventory.Add("slot11_weapon", new DynamicMemoryValue("slot11_weapon", _zoktaiAddresses.Misc["stat"].Address, _zoktaiAddresses.Inventory["weapon_slot_11_forgedBy_1"].Address));
-            Inventory.Add("slot11_weapon", new DynamicMemoryValue("slot11_weapon", _zoktaiAddresses.Misc["stat"].Address, _zoktaiAddresses.Inventory["weapon_slot_11_forgedBy_2"].Address));
-            Inventory.Add("slot11_weapon", new DynamicMemoryValue("slot11_weapon", _zoktaiAddresses.Misc["stat"].Address, _zoktaiAddresses.Inventory["weapon_slot_11_forgedBy_3"].Address));
+            Inventory.Add("slot11_weapon_forgedBy_1", new DynamicMemoryValue("slot11_weapon_forgedBy_1", _zoktaiAddresses.Misc["stat"].Address, _zoktaiAddresses.Inventory["weapon_slot_11_forgedBy_1"].Address));
+            Inventory.Add("slot11_weapon_forgedBy_2", new DynamicMemoryValue("slot11_weapon_forgedBy_2", _zoktaiAddresses.Misc["stat"].Address, _zoktaiAddresses.Inventory["weapon_slot_11_forgedBy_2"].Address));
+            Inventory.Add("slot11_weapon_forgedBy_3", new DynamicMemoryValue("slot11_weapon_forgedBy_3", _zoktaiAddresses.Misc["stat"].Address, _zoktaiAddresses.Inventory["weapon_slot_11_forgedBy_3"].Address));
 
             Inventory.Add("slot11_weapon_sp_ability_1", new DynamicMemoryValue("slot11_weapon_sp_ability_1", _zoktaiAddresses.Misc["stat"].Address, _zoktaiAddresses.Inventory["weapon_slot_11_sp_ability_1"].Address));
             Inventory.Add("slot11_weapon_sp_ability_2", new DynamicMemoryValue("slot11_weapon_sp_ability_2", _zoktaiAddresses.Misc["stat"].Address, _zoktaiAddresses.Inventory["weapon_slot_11_sp_ability_2"].Address));
@@ -305,9 +305,9 @@ namespace BokInterface.All {
             Inventory.Add("slot12_weapon_bonus", new DynamicMemoryValue("slot12_weapon_bonus", _zoktaiAddresses.Misc["stat"].Address, _zoktaiAddresses.Inventory["weapon_slot_12_bonus"].Address));
             Inventory.Add("slot12_weapon_durability", new DynamicMemoryValue("slot12_weapon_durability", _zoktaiAddresses.Misc["stat"].Address, _zoktaiAddresses.Inventory["weapon_slot_12_durability"].Address));
 
-            Inventory.Add("slot12_weapon", new DynamicMemoryValue("slot12_weapon", _zoktaiAddresses.Misc["stat"].Address, _zoktaiAddresses.Inventory["weapon_slot_12_forgedBy_1"].Address));
-            Inventory.Add("slot12_weapon", new DynamicMemoryValue("slot12_weapon", _zoktaiAddresses.Misc["stat"].Address, _zoktaiAddresses.Inventory["weapon_slot_12_forgedBy_2"].Address));
-            Inventory.Add("slot12_weapon", new DynamicMemoryValue("slot12_weapon", _zoktaiAddresses.Misc["stat"].Address, _zoktaiAddresses.Inventory["weapon_slot_12_forgedBy_3"].Address));
+            Inventory.Add("slot12_weapon_forgedBy_1", new DynamicMemoryValue("slot12_weapon_forgedBy_1", _zoktaiAddresses.Misc["stat"].Address, _zoktaiAddresses.Inventory["weapon_slot_12_forgedBy_1"].Address));
+            Inventory.Add("slot12_weapon_forgedBy_2", new DynamicMemoryValue("slot12_weapon_forgedBy_2", _zoktaiAddresses.Misc["stat"].Address, _zoktaiAddresses.Inventory["weapon_slot_12_forgedBy_2"].Address));
+            Inventory.Add("slot12_weapon_forgedBy_3", new DynamicMemoryValue("slot12_weapon_forgedBy_3", _zoktaiAddresses.Misc["stat"].Address, _zoktaiAddresses.Inventory["weapon_slot_12_forgedBy_3"].Address));
 
             Inventory.Add("slot12_weapon_sp_ability_1", new DynamicMemoryValue("slot12_weapon_sp_ability_1", _zoktaiAddresses.Misc["stat"].Address, _zoktaiAddresses.Inventory["weapon_slot_12_sp_ability_1"].Address));
             Inventory.Add("slot12_weapon_sp_ability_2", new DynamicMemoryValue("slot12_weapon_sp_ability_2", _zoktaiAddresses.Misc["stat"].Address, _zoktaiAddresses.Inventory["weapon_slot_12_sp_ability_2"].Address));
@@ -318,9 +318,9 @@ namespace BokInterface.All {
             Inventory.Add("slot13_weapon_bonus", new DynamicMemoryValue("slot13_weapon_bonus", _zoktaiAddresses.Misc["stat"].Address, _zoktaiAddresses.Inventory["weapon_slot_13_bonus"].Address));
             Inventory.Add("slot13_weapon_durability", new DynamicMemoryValue("slot13_weapon_durability", _zoktaiAddresses.Misc["stat"].Address, _zoktaiAddresses.Inventory["weapon_slot_13_durability"].Address));
 
-            Inventory.Add("slot13_weapon", new DynamicMemoryValue("slot13_weapon", _zoktaiAddresses.Misc["stat"].Address, _zoktaiAddresses.Inventory["weapon_slot_13_forgedBy_1"].Address));
-            Inventory.Add("slot13_weapon", new DynamicMemoryValue("slot13_weapon", _zoktaiAddresses.Misc["stat"].Address, _zoktaiAddresses.Inventory["weapon_slot_13_forgedBy_2"].Address));
-            Inventory.Add("slot13_weapon", new DynamicMemoryValue("slot13_weapon", _zoktaiAddresses.Misc["stat"].Address, _zoktaiAddresses.Inventory["weapon_slot_13_forgedBy_3"].Address));
+            Inventory.Add("slot13_weapon_forgedBy_1", new DynamicMemoryValue("slot13_weapon_forgedBy_1", _zoktaiAddresses.Misc["stat"].Address, _zoktaiAddresses.Inventory["weapon_slot_13_forgedBy_1"].Address));
+            Inventory.Add("slot13_weapon_forgedBy_2", new DynamicMemoryValue("slot13_weapon_forgedBy_2", _zoktaiAddresses.Misc["stat"].Address, _zoktaiAddresses.Inventory["weapon_slot_13_forgedBy_2"].Address));
+            Inventory.Add("slot13_weapon_forgedBy_3", new DynamicMemoryValue("slot13_weapon_forgedBy_3", _zoktaiAddresses.Misc["stat"].Address, _zoktaiAddresses.Inventory["weapon_slot_13_forgedBy_3"].Address));
 
             Inventory.Add("slot13_weapon_sp_ability_1", new DynamicMemoryValue("slot13_weapon_sp_ability_1", _zoktaiAddresses.Misc["stat"].Address, _zoktaiAddresses.Inventory["weapon_slot_13_sp_ability_1"].Address));
             Inventory.Add("slot13_weapon_sp_ability_2", new DynamicMemoryValue("slot13_weapon_sp_ability_2", _zoktaiAddresses.Misc["stat"].Address, _zoktaiAddresses.Inventory["weapon_slot_13_sp_ability_2"].Address));
@@ -331,9 +331,9 @@ namespace BokInterface.All {
             Inventory.Add("slot14_weapon_bonus", new DynamicMemoryValue("slot14_weapon_bonus", _zoktaiAddresses.Misc["stat"].Address, _zoktaiAddresses.Inventory["weapon_slot_14_bonus"].Address));
             Inventory.Add("slot14_weapon_durability", new DynamicMemoryValue("slot14_weapon_durability", _zoktaiAddresses.Misc["stat"].Address, _zoktaiAddresses.Inventory["weapon_slot_14_durability"].Address));
 
-            Inventory.Add("slot14_weapon", new DynamicMemoryValue("slot14_weapon", _zoktaiAddresses.Misc["stat"].Address, _zoktaiAddresses.Inventory["weapon_slot_14_forgedBy_1"].Address));
-            Inventory.Add("slot14_weapon", new DynamicMemoryValue("slot14_weapon", _zoktaiAddresses.Misc["stat"].Address, _zoktaiAddresses.Inventory["weapon_slot_14_forgedBy_2"].Address));
-            Inventory.Add("slot14_weapon", new DynamicMemoryValue("slot14_weapon", _zoktaiAddresses.Misc["stat"].Address, _zoktaiAddresses.Inventory["weapon_slot_14_forgedBy_3"].Address));
+            Inventory.Add("slot14_weapon_forgedBy_1", new DynamicMemoryValue("slot14_weapon_forgedBy_1", _zoktaiAddresses.Misc["stat"].Address, _zoktaiAddresses.Inventory["weapon_slot_14_forgedBy_1"].Address));
+            Inventory.Add("slot14_weapon_forgedBy_2", new DynamicMemoryValue("slot14_weapon_forgedBy_2", _zoktaiAddresses.Misc["stat"].Address, _zoktaiAddresses.Inventory["weapon_slot_14_forgedBy_2"].Address));
+            Inventory.Add("slot14_weapon_forgedBy_3", new DynamicMemoryValue("slot14_weapon_forgedBy_3", _zoktaiAddresses.Misc["stat"].Address, _zoktaiAddresses.Inventory["weapon_slot_14_forgedBy_3"].Address));
 
             Inventory.Add("slot14_weapon_sp_ability_1", new DynamicMemoryValue("slot14_weapon_sp_ability_1", _zoktaiAddresses.Misc["stat"].Address, _zoktaiAddresses.Inventory["weapon_slot_14_sp_ability_1"].Address));
             Inventory.Add("slot14_weapon_sp_ability_2", new DynamicMemoryValue("slot14_weapon_sp_ability_2", _zoktaiAddresses.Misc["stat"].Address, _zoktaiAddresses.Inventory["weapon_slot_14_sp_ability_2"].Address));
@@ -344,9 +344,9 @@ namespace BokInterface.All {
             Inventory.Add("slot15_weapon_bonus", new DynamicMemoryValue("slot15_weapon_bonus", _zoktaiAddresses.Misc["stat"].Address, _zoktaiAddresses.Inventory["weapon_slot_15_bonus"].Address));
             Inventory.Add("slot15_weapon_durability", new DynamicMemoryValue("slot15_weapon_durability", _zoktaiAddresses.Misc["stat"].Address, _zoktaiAddresses.Inventory["weapon_slot_15_durability"].Address));
 
-            Inventory.Add("slot15_weapon", new DynamicMemoryValue("slot15_weapon", _zoktaiAddresses.Misc["stat"].Address, _zoktaiAddresses.Inventory["weapon_slot_15_forgedBy_1"].Address));
-            Inventory.Add("slot15_weapon", new DynamicMemoryValue("slot15_weapon", _zoktaiAddresses.Misc["stat"].Address, _zoktaiAddresses.Inventory["weapon_slot_15_forgedBy_2"].Address));
-            Inventory.Add("slot15_weapon", new DynamicMemoryValue("slot15_weapon", _zoktaiAddresses.Misc["stat"].Address, _zoktaiAddresses.Inventory["weapon_slot_15_forgedBy_3"].Address));
+            Inventory.Add("slot15_weapon_forgedBy_1", new DynamicMemoryValue("slot15_weapon_forgedBy_1", _zoktaiAddresses.Misc["stat"].Address, _zoktaiAddresses.Inventory["weapon_slot_15_forgedBy_1"].Address));
+            Inventory.Add("slot15_weapon_forgedBy_2", new DynamicMemoryValue("slot15_weapon_forgedBy_2", _zoktaiAddresses.Misc["stat"].Address, _zoktaiAddresses.Inventory["weapon_slot_15_forgedBy_2"].Address));
+            Inventory.Add("slot15_weapon_forgedBy_3", new DynamicMemoryValue("slot15_weapon_forgedBy_3", _zoktaiAddresses.Misc["stat"].Address, _zoktaiAddresses.Inventory["weapon_slot_15_forgedBy_3"].Address));
 
             Inventory.Add("slot15_weapon_sp_ability_1", new DynamicMemoryValue("slot15_weapon_sp_ability_1", _zoktaiAddresses.Misc["stat"].Address, _zoktaiAddresses.Inventory["weapon_slot_15_sp_ability_1"].Address));
             Inventory.Add("slot15_weapon_sp_ability_2", new DynamicMemoryValue("slot15_weapon_sp_ability_2", _zoktaiAddresses.Misc["stat"].Address, _zoktaiAddresses.Inventory["weapon_slot_15_sp_ability_2"].Address));
@@ -357,9 +357,9 @@ namespace BokInterface.All {
             Inventory.Add("slot16_weapon_bonus", new DynamicMemoryValue("slot16_weapon_bonus", _zoktaiAddresses.Misc["stat"].Address, _zoktaiAddresses.Inventory["weapon_slot_16_bonus"].Address));
             Inventory.Add("slot16_weapon_durability", new DynamicMemoryValue("slot16_weapon_durability", _zoktaiAddresses.Misc["stat"].Address, _zoktaiAddresses.Inventory["weapon_slot_16_durability"].Address));
 
-            Inventory.Add("slot16_weapon", new DynamicMemoryValue("slot16_weapon", _zoktaiAddresses.Misc["stat"].Address, _zoktaiAddresses.Inventory["weapon_slot_16_forgedBy_1"].Address));
-            Inventory.Add("slot16_weapon", new DynamicMemoryValue("slot16_weapon", _zoktaiAddresses.Misc["stat"].Address, _zoktaiAddresses.Inventory["weapon_slot_16_forgedBy_2"].Address));
-            Inventory.Add("slot16_weapon", new DynamicMemoryValue("slot16_weapon", _zoktaiAddresses.Misc["stat"].Address, _zoktaiAddresses.Inventory["weapon_slot_16_forgedBy_3"].Address));
+            Inventory.Add("slot16_weapon_forgedBy_1", new DynamicMemoryValue("slot16_weapon_forgedBy_1", _zoktaiAddresses.Misc["stat"].Address, _zoktaiAddresses.Inventory["weapon_slot_16_forgedBy_1"].Address));
+            Inventory.Add("slot16_weapon_forgedBy_2", new DynamicMemoryValue("slot16_weapon_forgedBy_2", _zoktaiAddresses.Misc["stat"].Address, _zoktaiAddresses.Inventory["weapon_slot_16_forgedBy_2"].Address));
+            Inventory.Add("slot16_weapon_forgedBy_3", new DynamicMemoryValue("slot16_weapon_forgedBy_3", _zoktaiAddresses.Misc["stat"].Address, _zoktaiAddresses.Inventory["weapon_slot_16_forgedBy_3"].Address));
 
             Inventory.Add("slot16_weapon_sp_ability_1", new DynamicMemoryValue("slot16_weapon_sp_ability_1", _zoktaiAddresses.Misc["stat"].Address, _zoktaiAddresses.Inventory["weapon_slot_16_sp_ability_1"].Address));
             Inventory.Add("slot16_weapon_sp_ability_2", new DynamicMemoryValue("slot16_weapon_sp_ability_2", _zoktaiAddresses.Misc["stat"].Address, _zoktaiAddresses.Inventory["weapon_slot_16_sp_ability_2"].Address));

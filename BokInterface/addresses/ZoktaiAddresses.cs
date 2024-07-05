@@ -180,7 +180,7 @@ namespace BokInterface.Addresses {
             Inventory.Add("weapon_slot_1_sp_ability_3", new MemoryAddress(0x3E8, domain: "EWRAM"));
 
             // Slot 2
-            Inventory.Add("weapon_slot_2", new MemoryAddress(0x3EC, domain: "EWRAM"));
+            Inventory.Add("weapon_slot_2", new MemoryAddress(0x3EC, note: _note, domain: "EWRAM"));
             Inventory.Add("weapon_slot_2_bonus", new MemoryAddress(0x3ED, domain: "EWRAM"));
             Inventory.Add("weapon_slot_2_durability", new MemoryAddress(0x3EE, domain: "EWRAM"));
 
@@ -193,7 +193,7 @@ namespace BokInterface.Addresses {
             Inventory.Add("weapon_slot_2_sp_ability_3", new MemoryAddress(0x404, domain: "EWRAM"));
 
             // Slot 3
-            Inventory.Add("weapon_slot_3", new MemoryAddress(0x408, domain: "EWRAM"));
+            Inventory.Add("weapon_slot_3", new MemoryAddress(0x408, note: _note, domain: "EWRAM"));
             Inventory.Add("weapon_slot_3_bonus", new MemoryAddress(0x409, domain: "EWRAM"));
             Inventory.Add("weapon_slot_3_durability", new MemoryAddress(0x40A, domain: "EWRAM"));
 
@@ -206,7 +206,7 @@ namespace BokInterface.Addresses {
             Inventory.Add("weapon_slot_3_sp_ability_3", new MemoryAddress(0x420, domain: "EWRAM"));
 
             // Slot 4
-            Inventory.Add("weapon_slot_4", new MemoryAddress(0x424, domain: "EWRAM"));
+            Inventory.Add("weapon_slot_4", new MemoryAddress(0x424, note: _note, domain: "EWRAM"));
             Inventory.Add("weapon_slot_4_bonus", new MemoryAddress(0x425, domain: "EWRAM"));
             Inventory.Add("weapon_slot_4_durability", new MemoryAddress(0x426, domain: "EWRAM"));
 
@@ -219,7 +219,7 @@ namespace BokInterface.Addresses {
             Inventory.Add("weapon_slot_4_sp_ability_3", new MemoryAddress(0x43C, domain: "EWRAM"));
 
             // Slot 5
-            Inventory.Add("weapon_slot_5", new MemoryAddress(0x440, domain: "EWRAM"));
+            Inventory.Add("weapon_slot_5", new MemoryAddress(0x440, note: _note, domain: "EWRAM"));
             Inventory.Add("weapon_slot_5_bonus", new MemoryAddress(0x441, domain: "EWRAM"));
             Inventory.Add("weapon_slot_5_durability", new MemoryAddress(0x442, domain: "EWRAM"));
 
@@ -232,7 +232,7 @@ namespace BokInterface.Addresses {
             Inventory.Add("weapon_slot_5_sp_ability_3", new MemoryAddress(0x458, domain: "EWRAM"));
 
             // Slot 6
-            Inventory.Add("weapon_slot_6", new MemoryAddress(0x45C, domain: "EWRAM"));
+            Inventory.Add("weapon_slot_6", new MemoryAddress(0x45C, note: _note, domain: "EWRAM"));
             Inventory.Add("weapon_slot_6_bonus", new MemoryAddress(0x45D, domain: "EWRAM"));
             Inventory.Add("weapon_slot_6_durability", new MemoryAddress(0x45E, domain: "EWRAM"));
 
@@ -245,7 +245,7 @@ namespace BokInterface.Addresses {
             Inventory.Add("weapon_slot_6_sp_ability_3", new MemoryAddress(0x474, domain: "EWRAM"));
 
             // Slot 7
-            Inventory.Add("weapon_slot_7", new MemoryAddress(0x478, domain: "EWRAM"));
+            Inventory.Add("weapon_slot_7", new MemoryAddress(0x478, note: _note, domain: "EWRAM"));
             Inventory.Add("weapon_slot_7_bonus", new MemoryAddress(0x479, domain: "EWRAM"));
             Inventory.Add("weapon_slot_7_durability", new MemoryAddress(0x47A, domain: "EWRAM"));
 
@@ -258,7 +258,7 @@ namespace BokInterface.Addresses {
             Inventory.Add("weapon_slot_7_sp_ability_3", new MemoryAddress(0x490, domain: "EWRAM"));
 
             // Slot 8
-            Inventory.Add("weapon_slot_8", new MemoryAddress(0x494, domain: "EWRAM"));
+            Inventory.Add("weapon_slot_8", new MemoryAddress(0x494, note: _note, domain: "EWRAM"));
             Inventory.Add("weapon_slot_8_bonus", new MemoryAddress(0x495, domain: "EWRAM"));
             Inventory.Add("weapon_slot_8_durability", new MemoryAddress(0x496, domain: "EWRAM"));
 
@@ -271,7 +271,7 @@ namespace BokInterface.Addresses {
             Inventory.Add("weapon_slot_8_sp_ability_3", new MemoryAddress(0x4AC, domain: "EWRAM"));
 
             // Slot 9
-            Inventory.Add("weapon_slot_9", new MemoryAddress(0x4B0, domain: "EWRAM"));
+            Inventory.Add("weapon_slot_9", new MemoryAddress(0x4B0, note: _note, domain: "EWRAM"));
             Inventory.Add("weapon_slot_9_bonus", new MemoryAddress(0x4B1, domain: "EWRAM"));
             Inventory.Add("weapon_slot_9_durability", new MemoryAddress(0x4B2, domain: "EWRAM"));
 
@@ -284,7 +284,7 @@ namespace BokInterface.Addresses {
             Inventory.Add("weapon_slot_9_sp_ability_3", new MemoryAddress(0x4C8, domain: "EWRAM"));
 
             // Slot 10
-            Inventory.Add("weapon_slot_10", new MemoryAddress(0x4CC, domain: "EWRAM"));
+            Inventory.Add("weapon_slot_10", new MemoryAddress(0x4CC, note: _note, domain: "EWRAM"));
             Inventory.Add("weapon_slot_10_bonus", new MemoryAddress(0x4CD, domain: "EWRAM"));
             Inventory.Add("weapon_slot_10_durability", new MemoryAddress(0x4CE, domain: "EWRAM"));
 
@@ -297,7 +297,7 @@ namespace BokInterface.Addresses {
             Inventory.Add("weapon_slot_10_sp_ability_3", new MemoryAddress(0x4E4, domain: "EWRAM"));
 
             // Slot 11
-            Inventory.Add("weapon_slot_11", new MemoryAddress(0x4E8, domain: "EWRAM"));
+            Inventory.Add("weapon_slot_11", new MemoryAddress(0x4E8, note: _note, domain: "EWRAM"));
             Inventory.Add("weapon_slot_11_bonus", new MemoryAddress(0x4E9, domain: "EWRAM"));
             Inventory.Add("weapon_slot_11_durability", new MemoryAddress(0x4EA, domain: "EWRAM"));
 
@@ -310,7 +310,7 @@ namespace BokInterface.Addresses {
             Inventory.Add("weapon_slot_11_sp_ability_3", new MemoryAddress(0x500, domain: "EWRAM"));
 
             // Slot 12
-            Inventory.Add("weapon_slot_12", new MemoryAddress(0x504, domain: "EWRAM"));
+            Inventory.Add("weapon_slot_12", new MemoryAddress(0x504, note: _note, domain: "EWRAM"));
             Inventory.Add("weapon_slot_12_bonus", new MemoryAddress(0x505, domain: "EWRAM"));
             Inventory.Add("weapon_slot_12_durability", new MemoryAddress(0x506, domain: "EWRAM"));
 
@@ -323,7 +323,7 @@ namespace BokInterface.Addresses {
             Inventory.Add("weapon_slot_12_sp_ability_3", new MemoryAddress(0x51C, domain: "EWRAM"));
 
             // Slot 13
-            Inventory.Add("weapon_slot_13", new MemoryAddress(0x520, domain: "EWRAM"));
+            Inventory.Add("weapon_slot_13", new MemoryAddress(0x520, note: _note, domain: "EWRAM"));
             Inventory.Add("weapon_slot_13_bonus", new MemoryAddress(0x521, domain: "EWRAM"));
             Inventory.Add("weapon_slot_13_durability", new MemoryAddress(0x522, domain: "EWRAM"));
 
@@ -336,7 +336,7 @@ namespace BokInterface.Addresses {
             Inventory.Add("weapon_slot_13_sp_ability_3", new MemoryAddress(0x538, domain: "EWRAM"));
 
             // Slot 14
-            Inventory.Add("weapon_slot_14", new MemoryAddress(0x53C, domain: "EWRAM"));
+            Inventory.Add("weapon_slot_14", new MemoryAddress(0x53C, note: _note, domain: "EWRAM"));
             Inventory.Add("weapon_slot_14_bonus", new MemoryAddress(0x53D, domain: "EWRAM"));
             Inventory.Add("weapon_slot_14_durability", new MemoryAddress(0x53E, domain: "EWRAM"));
 
@@ -349,7 +349,7 @@ namespace BokInterface.Addresses {
             Inventory.Add("weapon_slot_14_sp_ability_3", new MemoryAddress(0x554, domain: "EWRAM"));
 
             // Slot 15
-            Inventory.Add("weapon_slot_15", new MemoryAddress(0x558, domain: "EWRAM"));
+            Inventory.Add("weapon_slot_15", new MemoryAddress(0x558, note: _note, domain: "EWRAM"));
             Inventory.Add("weapon_slot_15_bonus", new MemoryAddress(0x559, domain: "EWRAM"));
             Inventory.Add("weapon_slot_15_durability", new MemoryAddress(0x55A, domain: "EWRAM"));
 
@@ -362,7 +362,7 @@ namespace BokInterface.Addresses {
             Inventory.Add("weapon_slot_15_sp_ability_3", new MemoryAddress(0x570, domain: "EWRAM"));
 
             // Slot 16
-            Inventory.Add("weapon_slot_16", new MemoryAddress(0x574, domain: "EWRAM"));
+            Inventory.Add("weapon_slot_16", new MemoryAddress(0x574, note: _note, domain: "EWRAM"));
             Inventory.Add("weapon_slot_16_bonus", new MemoryAddress(0x575, domain: "EWRAM"));
             Inventory.Add("weapon_slot_16_durability", new MemoryAddress(0x576, domain: "EWRAM"));
 
