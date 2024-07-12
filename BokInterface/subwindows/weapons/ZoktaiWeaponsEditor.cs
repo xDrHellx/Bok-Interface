@@ -325,7 +325,6 @@ namespace BokInterface.Weapons {
                      * Then try getting the corresponding weapon & preselect it
                      */
                     string[] fieldParts = dropdown.Name.Split(['_'], 2);
-                    APIs.Gui.AddMessage(fieldParts[1].ToString() + " => " + _memoryValues.Inventory[fieldParts[1]].Value.ToString());
                     Weapon? selectedWeapon = GetWeaponByValue(_memoryValues.Inventory[fieldParts[1]].Value);
                     if (selectedWeapon != null) {
                         dropdown.SelectedIndex = dropdown.FindStringExact(selectedWeapon.name);
