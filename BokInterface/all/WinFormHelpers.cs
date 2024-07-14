@@ -273,70 +273,6 @@ namespace BokInterface.All {
             return checkBox;
         }
 
-        /// <summary>Simplified method for creating a CheckGroupBox</summary>
-        /// <param name="name">Field name</param>
-        /// <param name="text">Field text</param>
-        /// <param name="positionX">X position</param>
-        /// <param name="positionY">Y position</param>
-        /// <param name="width">Width (in pixels)</param>
-        /// <param name="height">Height (in pixels)</param>
-        /// <param name="isCheckedByDefault">Set to true if the CheckGroupBox has to be checked when initiated</param>
-        /// <param name="control">Control instance if the element is to be attached to it directly</param>
-        /// <returns><c>CheckGroupBox</c>CheckGroupBox instance</returns>
-        public static CheckGroupBox CreateCheckGroupBox(string name, string text, int positionX, int positionY, int width, int height, bool isCheckedByDefault = false, Control? control = null) {
-
-            CheckGroupBox checkGroupBox = new() {
-                Name = name,
-                Text = text,
-                Checked = isCheckedByDefault,
-                Location = new Point(positionX, positionY),
-                Size = new Size(width, height),
-                TabIndex = 1,
-                AutoSize = false,
-                Anchor = defaultAnchor,
-                Margin = defaultMargin,
-                Font = defaultFont
-            };
-
-            // If a Control instance is passed, add the generated element to it
-            control?.Controls.Add(checkGroupBox);
-
-            return checkGroupBox;
-        }
-
-        /// <summary>Simplified method for creating a label containing an image</summary>
-        /// <param name="name">Label name</param>
-        /// <param name="imgName">Image name</param>
-        /// <param name="positionX">X position</param>
-        /// <param name="positionY">Y position</param>
-        /// <param name="control">Control instance if the element is to be attached to it directly</param>
-        /// <returns><c>System.Windows.Forms.Label</c>Label instance</returns>
-        public static Label CreateImageLabel(string name, string imgName, int positionX, int positionY, Control? control = null) {
-
-            // Get image
-            Image img = (Image)Properties.Resources.ResourceManager.GetObject(imgName);
-
-            // Create label
-            Label label = new() {
-                Name = name,
-                Text = "",
-                Location = new Point(positionX, positionY),
-                Size = new Size(img.Width, img.Height),
-                Image = img,
-                AutoSize = false,
-                TabIndex = 2,
-                ImageAlign = ContentAlignment.MiddleCenter,
-                Anchor = defaultAnchor,
-                Margin = defaultMargin,
-                Font = defaultFont
-            };
-
-            // If a Control instance is passed, add the generated element to it
-            control?.Controls.Add(label);
-
-            return label;
-        }
-
         /// <summary>Simplified method for creating a tooltip</summary>
         /// <returns><c>System.Windows.Forms.ToolTip<c/>Tooltip instance</returns>
         public static ToolTip CreateToolTip() {
@@ -431,6 +367,97 @@ namespace BokInterface.All {
             return dropDownList;
         }
 
+        /// <summary>Simplified method for creating a Panel</summary>
+        /// <param name="name">Panel name</param>
+        /// <param name="positionX">X position</param>
+        /// <param name="positionY">Y position</param>
+        /// <param name="width">Width (in pixels)</param>
+        /// <param name="height">Height (in pixels)</param>
+        /// <param name="autoScroll">True if AutoScroll should be active (True by default)</param>
+        /// <param name="control">Control instance if the element is to be attached to it directly</param>
+        /// <returns><c>Panel</c>Panel instance</returns>
+        public static Panel CreatePanel(string name, int positionX, int positionY, int width, int height, Control? control = null, bool autoScroll = true) {
+
+            Panel panel = new() {
+                Name = name,
+                Location = new Point(positionX, positionY),
+                Size = new Size(width, height),
+                TabIndex = 1,
+                Anchor = defaultAnchor,
+                Font = defaultFont,
+                AutoScroll = autoScroll
+            };
+
+            control?.Controls.Add(panel);
+
+            return panel;
+        }
+
+        /// <summary>Simplified method for creating a TextBox</summary>
+        /// <param name="name">TextBox name</param>
+        /// <param name="text">TextBox text</param>
+        /// <param name="positionX">X position</param>
+        /// <param name="positionY">Y position</param>
+        /// <param name="width">Width (in pixels)</param>
+        /// <param name="height">Height (in pixels)</param>
+        /// <param name="control">Control instance if the element is to be attached to it directly</param>
+        /// <param name="multiLine">True if text added should take multiple lines (True by default)</param>
+        /// <returns><c>TextBox</c>TextBox instance</returns>
+        public static TextBox CreateTextBox(string name, string text, int positionX, int positionY, int width, int height, Control? control = null, bool multiLine = true) {
+
+            TextBox textBox = new() {
+                Name = name,
+                Location = new Point(positionX, positionY),
+                Size = new Size(width, height),
+                TabIndex = 1,
+                Anchor = defaultAnchor,
+                Font = defaultFont,
+                Text = text,
+                Multiline = multiLine
+            };
+
+            control?.Controls.Add(textBox);
+
+            return textBox;
+        }
+
+        #endregion
+
+        #region Custom elements generating methods
+
+        /// <summary>Simplified method for creating a label containing an image</summary>
+        /// <param name="name">Label name</param>
+        /// <param name="imgName">Image name</param>
+        /// <param name="positionX">X position</param>
+        /// <param name="positionY">Y position</param>
+        /// <param name="control">Control instance if the element is to be attached to it directly</param>
+        /// <returns><c>System.Windows.Forms.Label</c>Label instance</returns>
+        public static Label CreateImageLabel(string name, string imgName, int positionX, int positionY, Control? control = null) {
+
+            // Get image
+            Image img = (Image)Properties.Resources.ResourceManager.GetObject(imgName);
+
+            // Create label
+            Label label = new() {
+                Name = name,
+                Text = "",
+                Location = new Point(positionX, positionY),
+                Size = new Size(img.Width, img.Height),
+                Image = img,
+                AutoSize = false,
+                TabIndex = 2,
+                ImageAlign = ContentAlignment.MiddleCenter,
+                Anchor = defaultAnchor,
+                Margin = defaultMargin,
+                Font = defaultFont
+            };
+
+            // If a Control instance is passed, add the generated element to it
+            control?.Controls.Add(label);
+
+            return label;
+        }
+
         /// <summary>Simplified method for creating a dropdown list that can have images next to items (options)</summary>
         /// <param name="name">Dropdown name</param>
         /// <param name="positionX">X position</param>
@@ -471,6 +498,37 @@ namespace BokInterface.All {
             control?.Controls.Add(dropDownList);
 
             return dropDownList;
+        }
+
+        /// <summary>Simplified method for creating a CheckGroupBox</summary>
+        /// <param name="name">Field name</param>
+        /// <param name="text">Field text</param>
+        /// <param name="positionX">X position</param>
+        /// <param name="positionY">Y position</param>
+        /// <param name="width">Width (in pixels)</param>
+        /// <param name="height">Height (in pixels)</param>
+        /// <param name="isCheckedByDefault">Set to true if the CheckGroupBox has to be checked when initiated</param>
+        /// <param name="control">Control instance if the element is to be attached to it directly</param>
+        /// <returns><c>CheckGroupBox</c>CheckGroupBox instance</returns>
+        public static CheckGroupBox CreateCheckGroupBox(string name, string text, int positionX, int positionY, int width, int height, bool isCheckedByDefault = false, Control? control = null) {
+
+            CheckGroupBox checkGroupBox = new() {
+                Name = name,
+                Text = text,
+                Checked = isCheckedByDefault,
+                Location = new Point(positionX, positionY),
+                Size = new Size(width, height),
+                TabIndex = 1,
+                AutoSize = false,
+                Anchor = defaultAnchor,
+                Margin = defaultMargin,
+                Font = defaultFont
+            };
+
+            // If a Control instance is passed, add the generated element to it
+            control?.Controls.Add(checkGroupBox);
+
+            return checkGroupBox;
         }
 
         #endregion
@@ -527,6 +585,5 @@ namespace BokInterface.All {
         }
 
         #endregion
-
     }
 }
