@@ -92,6 +92,10 @@ namespace BokInterface.All {
 
                     subElement.Enabled = false;
                 }
+
+                foreach (CheckGroupBox subElement in Controls.OfType<CheckGroupBox>()) {
+                    subElement.Enabled = false;
+                }
             }
         }
     }
