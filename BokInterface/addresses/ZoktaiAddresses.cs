@@ -134,10 +134,10 @@ namespace BokInterface.Addresses {
                 Inventory.Add("weapon_slot_" + slotNumber + "_forgedBy_2", new MemoryAddress(0x3D8 + addressOffset, note: _note + "(part 2)", domain: "EWRAM", type: "U32"));
                 Inventory.Add("weapon_slot_" + slotNumber + "_forgedBy_3", new MemoryAddress(0x3DC + addressOffset, note: _note + "(part 3)", domain: "EWRAM", type: "U32"));
 
-                // Sp ability (4 bytes each)
-                Inventory.Add("weapon_slot_" + slotNumber + "_sp_ability_1", new MemoryAddress(0x3E0 + addressOffset, note: "1st SP ability (of the current weapon itself)", domain: "EWRAM", type: "U32"));
-                Inventory.Add("weapon_slot_" + slotNumber + "_sp_ability_2", new MemoryAddress(0x3E4 + addressOffset, note: "2nd SP ability (inherited through forging)", domain: "EWRAM", type: "U32"));
-                Inventory.Add("weapon_slot_" + slotNumber + "_sp_ability_3", new MemoryAddress(0x3E8 + addressOffset, note: "3rd SP ability (inherited through forging)", domain: "EWRAM", type: "U32"));
+                // Sp ability (4 bytes each, but we'll only read 1 to get a proper SP ability value)
+                Inventory.Add("weapon_slot_" + slotNumber + "_sp_ability_1", new MemoryAddress(0x3E0 + addressOffset, note: "1st SP ability (of the current weapon itself)", domain: "EWRAM", type: "U8"));
+                Inventory.Add("weapon_slot_" + slotNumber + "_sp_ability_2", new MemoryAddress(0x3E4 + addressOffset, note: "2nd SP ability (inherited through forging)", domain: "EWRAM", type: "U8"));
+                Inventory.Add("weapon_slot_" + slotNumber + "_sp_ability_3", new MemoryAddress(0x3E8 + addressOffset, note: "3rd SP ability (inherited through forging)", domain: "EWRAM", type: "U8"));
             }
         }
 
