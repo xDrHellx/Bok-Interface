@@ -65,9 +65,9 @@ namespace BokInterface.Weapons {
 
             // SP abilities
             CheckGroupBox slot1SpAbilitiesGroup = WinFormHelpers.CreateCheckGroupBox("slot1_sp_abilities_group", "SP abilities", 5, 129, 150, 107, control: slot1group);
-            dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot1_weapon_sp_ability_1", 5, 19, 140, 23, slot1SpAbilitiesGroup, visibleOptions: 5, dropDownWidth: 370));
-            dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot1_weapon_sp_ability_2", 5, 48, 140, 23, slot1SpAbilitiesGroup, visibleOptions: 5, dropDownWidth: 370));
-            dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot1_weapon_sp_ability_3", 5, 77, 140, 23, slot1SpAbilitiesGroup, visibleOptions: 5, dropDownWidth: 370));
+            dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot1_weapon_sp_ability_1", 5, 19, 140, 23, slot1SpAbilitiesGroup, visibleOptions: 5, dropDownWidth: 350));
+            dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot1_weapon_sp_ability_2", 5, 48, 140, 23, slot1SpAbilitiesGroup, visibleOptions: 5, dropDownWidth: 350));
+            dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot1_weapon_sp_ability_3", 5, 77, 140, 23, slot1SpAbilitiesGroup, visibleOptions: 5, dropDownWidth: 350));
 
             // Slot 2
             dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot2_weapon", 5, 19, 150, 23, slot2group, visibleOptions: 5));
@@ -78,9 +78,9 @@ namespace BokInterface.Weapons {
             numericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("inventory_slot2_weapon_durability", 0, 98, 48, 47, 23, maxValue: 200, control: slot2BonusGroup));
 
             CheckGroupBox slot2SpAbilitiesGroup = WinFormHelpers.CreateCheckGroupBox("slot2_sp_abilities_group", "SP abilities", 5, 129, 150, 107, control: slot2group);
-            dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot2_weapon_sp_ability_1", 5, 19, 140, 23, slot2SpAbilitiesGroup, visibleOptions: 5, dropDownWidth: 370));
-            dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot2_weapon_sp_ability_2", 5, 48, 140, 23, slot2SpAbilitiesGroup, visibleOptions: 5, dropDownWidth: 370));
-            dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot2_weapon_sp_ability_3", 5, 77, 140, 23, slot2SpAbilitiesGroup, visibleOptions: 5, dropDownWidth: 370));
+            dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot2_weapon_sp_ability_1", 5, 19, 140, 23, slot2SpAbilitiesGroup, visibleOptions: 5, dropDownWidth: 350));
+            dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot2_weapon_sp_ability_2", 5, 48, 140, 23, slot2SpAbilitiesGroup, visibleOptions: 5, dropDownWidth: 350));
+            dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot2_weapon_sp_ability_3", 5, 77, 140, 23, slot2SpAbilitiesGroup, visibleOptions: 5, dropDownWidth: 350));
 
             // Slot 3
             dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot3_weapon", 5, 19, 150, 23, slot3group, visibleOptions: 5));
@@ -91,9 +91,9 @@ namespace BokInterface.Weapons {
             numericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("inventory_slot3_weapon_durability", 0, 98, 48, 47, 23, maxValue: 200, control: slot3BonusGroup));
 
             CheckGroupBox slot3SpAbilitiesGroup = WinFormHelpers.CreateCheckGroupBox("slot3_sp_abilities_group", "SP abilities", 5, 129, 150, 107, control: slot3group);
-            dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot3_weapon_sp_ability_1", 5, 19, 140, 23, slot3SpAbilitiesGroup, visibleOptions: 5, dropDownWidth: 370));
-            dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot3_weapon_sp_ability_2", 5, 48, 140, 23, slot3SpAbilitiesGroup, visibleOptions: 5, dropDownWidth: 370));
-            dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot3_weapon_sp_ability_3", 5, 77, 140, 23, slot3SpAbilitiesGroup, visibleOptions: 5, dropDownWidth: 370));
+            dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot3_weapon_sp_ability_1", 5, 19, 140, 23, slot3SpAbilitiesGroup, visibleOptions: 5, dropDownWidth: 350));
+            dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot3_weapon_sp_ability_2", 5, 48, 140, 23, slot3SpAbilitiesGroup, visibleOptions: 5, dropDownWidth: 350));
+            dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot3_weapon_sp_ability_3", 5, 77, 140, 23, slot3SpAbilitiesGroup, visibleOptions: 5, dropDownWidth: 350));
 
             // Slot 4
             dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot4_weapon", 5, 19, 150, 23, slot4group, visibleOptions: 5));
@@ -104,9 +104,9 @@ namespace BokInterface.Weapons {
             numericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("inventory_slot4_weapon_durability", 0, 98, 48, 47, 23, maxValue: 200, control: slot4BonusGroup));
 
             CheckGroupBox slot4SpAbilitiesGroup = WinFormHelpers.CreateCheckGroupBox("slot4_sp_abilities_group", "SP abilities", 5, 129, 150, 107, control: slot4group);
-            dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot4_weapon_sp_ability_1", 5, 19, 140, 23, slot4SpAbilitiesGroup, visibleOptions: 5, dropDownWidth: 370));
-            dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot4_weapon_sp_ability_2", 5, 48, 140, 23, slot4SpAbilitiesGroup, visibleOptions: 5, dropDownWidth: 370));
-            dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot4_weapon_sp_ability_3", 5, 77, 140, 23, slot4SpAbilitiesGroup, visibleOptions: 5, dropDownWidth: 370));
+            dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot4_weapon_sp_ability_1", 5, 19, 140, 23, slot4SpAbilitiesGroup, visibleOptions: 5, dropDownWidth: 350));
+            dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot4_weapon_sp_ability_2", 5, 48, 140, 23, slot4SpAbilitiesGroup, visibleOptions: 5, dropDownWidth: 350));
+            dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot4_weapon_sp_ability_3", 5, 77, 140, 23, slot4SpAbilitiesGroup, visibleOptions: 5, dropDownWidth: 350));
 
             // 2nd row
             // Slot 5
@@ -118,9 +118,9 @@ namespace BokInterface.Weapons {
             numericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("inventory_slot5_weapon_durability", 0, 98, 48, 47, 23, maxValue: 200, control: slot5BonusGroup));
 
             CheckGroupBox slot5SpAbilitiesGroup = WinFormHelpers.CreateCheckGroupBox("slot5_sp_abilities_group", "SP abilities", 5, 129, 150, 107, control: slot5group);
-            dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot5_weapon_sp_ability_1", 5, 19, 140, 23, slot5SpAbilitiesGroup, visibleOptions: 5, dropDownWidth: 370));
-            dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot5_weapon_sp_ability_2", 5, 48, 140, 23, slot5SpAbilitiesGroup, visibleOptions: 5, dropDownWidth: 370));
-            dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot5_weapon_sp_ability_3", 5, 77, 140, 23, slot5SpAbilitiesGroup, visibleOptions: 5, dropDownWidth: 370));
+            dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot5_weapon_sp_ability_1", 5, 19, 140, 23, slot5SpAbilitiesGroup, visibleOptions: 5, dropDownWidth: 350));
+            dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot5_weapon_sp_ability_2", 5, 48, 140, 23, slot5SpAbilitiesGroup, visibleOptions: 5, dropDownWidth: 350));
+            dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot5_weapon_sp_ability_3", 5, 77, 140, 23, slot5SpAbilitiesGroup, visibleOptions: 5, dropDownWidth: 350));
 
             // Slot 6
             dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot6_weapon", 5, 19, 150, 23, slot6group, visibleOptions: 5));
@@ -131,9 +131,9 @@ namespace BokInterface.Weapons {
             numericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("inventory_slot6_weapon_durability", 0, 98, 48, 47, 23, maxValue: 200, control: slot6BonusGroup));
 
             CheckGroupBox slot6SpAbilitiesGroup = WinFormHelpers.CreateCheckGroupBox("slot6_sp_abilities_group", "SP abilities", 5, 129, 150, 107, control: slot6group);
-            dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot6_weapon_sp_ability_1", 5, 19, 140, 23, slot6SpAbilitiesGroup, visibleOptions: 5, dropDownWidth: 370));
-            dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot6_weapon_sp_ability_2", 5, 48, 140, 23, slot6SpAbilitiesGroup, visibleOptions: 5, dropDownWidth: 370));
-            dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot6_weapon_sp_ability_3", 5, 77, 140, 23, slot6SpAbilitiesGroup, visibleOptions: 5, dropDownWidth: 370));
+            dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot6_weapon_sp_ability_1", 5, 19, 140, 23, slot6SpAbilitiesGroup, visibleOptions: 5, dropDownWidth: 350));
+            dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot6_weapon_sp_ability_2", 5, 48, 140, 23, slot6SpAbilitiesGroup, visibleOptions: 5, dropDownWidth: 350));
+            dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot6_weapon_sp_ability_3", 5, 77, 140, 23, slot6SpAbilitiesGroup, visibleOptions: 5, dropDownWidth: 350));
 
             // Slot 7
             dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot7_weapon", 5, 19, 150, 23, slot7group, visibleOptions: 5));
@@ -144,9 +144,9 @@ namespace BokInterface.Weapons {
             numericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("inventory_slot7_weapon_durability", 0, 98, 48, 47, 23, maxValue: 200, control: slot7BonusGroup));
 
             CheckGroupBox slot7SpAbilitiesGroup = WinFormHelpers.CreateCheckGroupBox("slot7_sp_abilities_group", "SP abilities", 5, 129, 150, 107, control: slot7group);
-            dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot7_weapon_sp_ability_1", 5, 19, 140, 23, slot7SpAbilitiesGroup, visibleOptions: 5, dropDownWidth: 370));
-            dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot7_weapon_sp_ability_2", 5, 48, 140, 23, slot7SpAbilitiesGroup, visibleOptions: 5, dropDownWidth: 370));
-            dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot7_weapon_sp_ability_3", 5, 77, 140, 23, slot7SpAbilitiesGroup, visibleOptions: 5, dropDownWidth: 370));
+            dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot7_weapon_sp_ability_1", 5, 19, 140, 23, slot7SpAbilitiesGroup, visibleOptions: 5, dropDownWidth: 350));
+            dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot7_weapon_sp_ability_2", 5, 48, 140, 23, slot7SpAbilitiesGroup, visibleOptions: 5, dropDownWidth: 350));
+            dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot7_weapon_sp_ability_3", 5, 77, 140, 23, slot7SpAbilitiesGroup, visibleOptions: 5, dropDownWidth: 350));
 
             // Slot 8
             dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot8_weapon", 5, 19, 150, 23, slot8group, visibleOptions: 5));
@@ -157,9 +157,9 @@ namespace BokInterface.Weapons {
             numericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("inventory_slot8_weapon_durability", 0, 98, 48, 47, 23, maxValue: 200, control: slot8BonusGroup));
 
             CheckGroupBox slot8SpAbilitiesGroup = WinFormHelpers.CreateCheckGroupBox("slot8_sp_abilities_group", "SP abilities", 5, 129, 150, 107, control: slot8group);
-            dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot8_weapon_sp_ability_1", 5, 19, 140, 23, slot8SpAbilitiesGroup, visibleOptions: 5, dropDownWidth: 370));
-            dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot8_weapon_sp_ability_2", 5, 48, 140, 23, slot8SpAbilitiesGroup, visibleOptions: 5, dropDownWidth: 370));
-            dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot8_weapon_sp_ability_3", 5, 77, 140, 23, slot8SpAbilitiesGroup, visibleOptions: 5, dropDownWidth: 370));
+            dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot8_weapon_sp_ability_1", 5, 19, 140, 23, slot8SpAbilitiesGroup, visibleOptions: 5, dropDownWidth: 350));
+            dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot8_weapon_sp_ability_2", 5, 48, 140, 23, slot8SpAbilitiesGroup, visibleOptions: 5, dropDownWidth: 350));
+            dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot8_weapon_sp_ability_3", 5, 77, 140, 23, slot8SpAbilitiesGroup, visibleOptions: 5, dropDownWidth: 350));
 
             // 3rd row
             // Slot 9
@@ -171,9 +171,9 @@ namespace BokInterface.Weapons {
             numericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("inventory_slot9_weapon_durability", 0, 98, 48, 47, 23, maxValue: 200, control: slot9BonusGroup));
 
             CheckGroupBox slot9SpAbilitiesGroup = WinFormHelpers.CreateCheckGroupBox("slot9_sp_abilities_group", "SP abilities", 5, 129, 150, 107, control: slot9group);
-            dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot9_weapon_sp_ability_1", 5, 19, 140, 23, slot9SpAbilitiesGroup, visibleOptions: 5, dropDownWidth: 370));
-            dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot9_weapon_sp_ability_2", 5, 48, 140, 23, slot9SpAbilitiesGroup, visibleOptions: 5, dropDownWidth: 370));
-            dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot9_weapon_sp_ability_3", 5, 77, 140, 23, slot9SpAbilitiesGroup, visibleOptions: 5, dropDownWidth: 370));
+            dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot9_weapon_sp_ability_1", 5, 19, 140, 23, slot9SpAbilitiesGroup, visibleOptions: 5, dropDownWidth: 350));
+            dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot9_weapon_sp_ability_2", 5, 48, 140, 23, slot9SpAbilitiesGroup, visibleOptions: 5, dropDownWidth: 350));
+            dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot9_weapon_sp_ability_3", 5, 77, 140, 23, slot9SpAbilitiesGroup, visibleOptions: 5, dropDownWidth: 350));
 
             // Slot 10
             dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot10_weapon", 5, 19, 150, 23, slot10group, visibleOptions: 5));
@@ -184,9 +184,9 @@ namespace BokInterface.Weapons {
             numericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("inventory_slot10_weapon_durability", 0, 98, 48, 47, 23, maxValue: 200, control: slot10BonusGroup));
 
             CheckGroupBox slot10SpAbilitiesGroup = WinFormHelpers.CreateCheckGroupBox("slot10_sp_abilities_group", "SP abilities", 5, 129, 150, 107, control: slot10group);
-            dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot10_weapon_sp_ability_1", 5, 19, 140, 23, slot10SpAbilitiesGroup, visibleOptions: 5, dropDownWidth: 370));
-            dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot10_weapon_sp_ability_2", 5, 48, 140, 23, slot10SpAbilitiesGroup, visibleOptions: 5, dropDownWidth: 370));
-            dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot10_weapon_sp_ability_3", 5, 77, 140, 23, slot10SpAbilitiesGroup, visibleOptions: 5, dropDownWidth: 370));
+            dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot10_weapon_sp_ability_1", 5, 19, 140, 23, slot10SpAbilitiesGroup, visibleOptions: 5, dropDownWidth: 350));
+            dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot10_weapon_sp_ability_2", 5, 48, 140, 23, slot10SpAbilitiesGroup, visibleOptions: 5, dropDownWidth: 350));
+            dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot10_weapon_sp_ability_3", 5, 77, 140, 23, slot10SpAbilitiesGroup, visibleOptions: 5, dropDownWidth: 350));
 
             // Slot 11
             dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot11_weapon", 5, 19, 150, 23, slot11group, visibleOptions: 5));
@@ -197,9 +197,9 @@ namespace BokInterface.Weapons {
             numericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("inventory_slot11_weapon_durability", 0, 98, 48, 47, 23, maxValue: 200, control: slot11BonusGroup));
 
             CheckGroupBox slot11SpAbilitiesGroup = WinFormHelpers.CreateCheckGroupBox("slot11_sp_abilities_group", "SP abilities", 5, 129, 150, 107, control: slot11group);
-            dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot11_weapon_sp_ability_1", 5, 19, 140, 23, slot11SpAbilitiesGroup, visibleOptions: 5, dropDownWidth: 370));
-            dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot11_weapon_sp_ability_2", 5, 48, 140, 23, slot11SpAbilitiesGroup, visibleOptions: 5, dropDownWidth: 370));
-            dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot11_weapon_sp_ability_3", 5, 77, 140, 23, slot11SpAbilitiesGroup, visibleOptions: 5, dropDownWidth: 370));
+            dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot11_weapon_sp_ability_1", 5, 19, 140, 23, slot11SpAbilitiesGroup, visibleOptions: 5, dropDownWidth: 350));
+            dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot11_weapon_sp_ability_2", 5, 48, 140, 23, slot11SpAbilitiesGroup, visibleOptions: 5, dropDownWidth: 350));
+            dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot11_weapon_sp_ability_3", 5, 77, 140, 23, slot11SpAbilitiesGroup, visibleOptions: 5, dropDownWidth: 350));
 
             // Slot 12
             dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot12_weapon", 5, 19, 150, 23, slot12group, visibleOptions: 5));
@@ -210,9 +210,9 @@ namespace BokInterface.Weapons {
             numericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("inventory_slot12_weapon_durability", 0, 98, 48, 47, 23, maxValue: 200, control: slot12BonusGroup));
 
             CheckGroupBox slot12SpAbilitiesGroup = WinFormHelpers.CreateCheckGroupBox("slot12_sp_abilities_group", "SP abilities", 5, 129, 150, 107, control: slot12group);
-            dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot12_weapon_sp_ability_1", 5, 19, 140, 23, slot12SpAbilitiesGroup, visibleOptions: 5, dropDownWidth: 370));
-            dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot12_weapon_sp_ability_2", 5, 48, 140, 23, slot12SpAbilitiesGroup, visibleOptions: 5, dropDownWidth: 370));
-            dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot12_weapon_sp_ability_3", 5, 77, 140, 23, slot12SpAbilitiesGroup, visibleOptions: 5, dropDownWidth: 370));
+            dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot12_weapon_sp_ability_1", 5, 19, 140, 23, slot12SpAbilitiesGroup, visibleOptions: 5, dropDownWidth: 350));
+            dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot12_weapon_sp_ability_2", 5, 48, 140, 23, slot12SpAbilitiesGroup, visibleOptions: 5, dropDownWidth: 350));
+            dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot12_weapon_sp_ability_3", 5, 77, 140, 23, slot12SpAbilitiesGroup, visibleOptions: 5, dropDownWidth: 350));
 
             // 4th row
             // Slot 13
@@ -224,9 +224,9 @@ namespace BokInterface.Weapons {
             numericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("inventory_slot13_weapon_durability", 0, 98, 48, 47, 23, maxValue: 200, control: slot13BonusGroup));
 
             CheckGroupBox slot13SpAbilitiesGroup = WinFormHelpers.CreateCheckGroupBox("slot13_sp_abilities_group", "SP abilities", 5, 129, 150, 107, control: slot13group);
-            dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot13_weapon_sp_ability_1", 5, 19, 140, 23, slot13SpAbilitiesGroup, visibleOptions: 5, dropDownWidth: 370));
-            dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot13_weapon_sp_ability_2", 5, 48, 140, 23, slot13SpAbilitiesGroup, visibleOptions: 5, dropDownWidth: 370));
-            dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot13_weapon_sp_ability_3", 5, 77, 140, 23, slot13SpAbilitiesGroup, visibleOptions: 5, dropDownWidth: 370));
+            dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot13_weapon_sp_ability_1", 5, 19, 140, 23, slot13SpAbilitiesGroup, visibleOptions: 5, dropDownWidth: 350));
+            dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot13_weapon_sp_ability_2", 5, 48, 140, 23, slot13SpAbilitiesGroup, visibleOptions: 5, dropDownWidth: 350));
+            dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot13_weapon_sp_ability_3", 5, 77, 140, 23, slot13SpAbilitiesGroup, visibleOptions: 5, dropDownWidth: 350));
 
             // Slot 14
             dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot14_weapon", 5, 19, 150, 23, slot14group, visibleOptions: 5));
@@ -237,9 +237,9 @@ namespace BokInterface.Weapons {
             numericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("inventory_slot14_weapon_durability", 0, 98, 48, 47, 23, maxValue: 200, control: slot14BonusGroup));
 
             CheckGroupBox slot14SpAbilitiesGroup = WinFormHelpers.CreateCheckGroupBox("slot14_sp_abilities_group", "SP abilities", 5, 129, 150, 107, control: slot14group);
-            dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot14_weapon_sp_ability_1", 5, 19, 140, 23, slot14SpAbilitiesGroup, visibleOptions: 5, dropDownWidth: 370));
-            dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot14_weapon_sp_ability_2", 5, 48, 140, 23, slot14SpAbilitiesGroup, visibleOptions: 5, dropDownWidth: 370));
-            dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot14_weapon_sp_ability_3", 5, 77, 140, 23, slot14SpAbilitiesGroup, visibleOptions: 5, dropDownWidth: 370));
+            dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot14_weapon_sp_ability_1", 5, 19, 140, 23, slot14SpAbilitiesGroup, visibleOptions: 5, dropDownWidth: 350));
+            dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot14_weapon_sp_ability_2", 5, 48, 140, 23, slot14SpAbilitiesGroup, visibleOptions: 5, dropDownWidth: 350));
+            dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot14_weapon_sp_ability_3", 5, 77, 140, 23, slot14SpAbilitiesGroup, visibleOptions: 5, dropDownWidth: 350));
 
             // Slot 15
             dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot15_weapon", 5, 19, 150, 23, slot15group, visibleOptions: 5));
@@ -250,9 +250,9 @@ namespace BokInterface.Weapons {
             numericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("inventory_slot15_weapon_durability", 0, 98, 48, 47, 23, maxValue: 200, control: slot15BonusGroup));
 
             CheckGroupBox slot15SpAbilitiesGroup = WinFormHelpers.CreateCheckGroupBox("slot15_sp_abilities_group", "SP abilities", 5, 129, 150, 107, control: slot15group);
-            dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot15_weapon_sp_ability_1", 5, 19, 140, 23, slot15SpAbilitiesGroup, visibleOptions: 5, dropDownWidth: 370));
-            dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot15_weapon_sp_ability_2", 5, 48, 140, 23, slot15SpAbilitiesGroup, visibleOptions: 5, dropDownWidth: 370));
-            dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot15_weapon_sp_ability_3", 5, 77, 140, 23, slot15SpAbilitiesGroup, visibleOptions: 5, dropDownWidth: 370));
+            dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot15_weapon_sp_ability_1", 5, 19, 140, 23, slot15SpAbilitiesGroup, visibleOptions: 5, dropDownWidth: 350));
+            dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot15_weapon_sp_ability_2", 5, 48, 140, 23, slot15SpAbilitiesGroup, visibleOptions: 5, dropDownWidth: 350));
+            dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot15_weapon_sp_ability_3", 5, 77, 140, 23, slot15SpAbilitiesGroup, visibleOptions: 5, dropDownWidth: 350));
 
             // Slot 16
             dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot16_weapon", 5, 19, 150, 23, slot16group, visibleOptions: 5));
@@ -263,9 +263,9 @@ namespace BokInterface.Weapons {
             numericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("inventory_slot16_weapon_durability", 0, 98, 48, 47, 23, maxValue: 200, control: slot16BonusGroup));
 
             CheckGroupBox slot16SpAbilitiesGroup = WinFormHelpers.CreateCheckGroupBox("slot16_sp_abilities_group", "SP abilities", 5, 129, 150, 107, control: slot16group);
-            dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot16_weapon_sp_ability_1", 5, 19, 140, 23, slot16SpAbilitiesGroup, visibleOptions: 5, dropDownWidth: 370));
-            dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot16_weapon_sp_ability_2", 5, 48, 140, 23, slot16SpAbilitiesGroup, visibleOptions: 5, dropDownWidth: 370));
-            dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot16_weapon_sp_ability_3", 5, 77, 140, 23, slot16SpAbilitiesGroup, visibleOptions: 5, dropDownWidth: 370));
+            dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot16_weapon_sp_ability_1", 5, 19, 140, 23, slot16SpAbilitiesGroup, visibleOptions: 5, dropDownWidth: 350));
+            dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot16_weapon_sp_ability_2", 5, 48, 140, 23, slot16SpAbilitiesGroup, visibleOptions: 5, dropDownWidth: 350));
+            dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot16_weapon_sp_ability_3", 5, 77, 140, 23, slot16SpAbilitiesGroup, visibleOptions: 5, dropDownWidth: 350));
 
             // Generate & add options to weapon selection & SP abilities dropdowns
             GenerateDropDownOptions();

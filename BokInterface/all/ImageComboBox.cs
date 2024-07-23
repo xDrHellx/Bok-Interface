@@ -53,15 +53,7 @@ namespace BokInterface.All {
                 // For Weapon SP abilities (Bok 2 & 3)
                 KeyValuePair<string, Ability> option = (KeyValuePair<string, Ability>)Items[e.Index];
                 Ability optionItem = option.Value;
-
-                /**
-                 * Draw the item's name & icon (if it has one)
-                 * We always add the space an icon would take so that elements are aligned properly
-                 */
-                e.Graphics.DrawString(optionItem.name, e.Font, new SolidBrush(e.ForeColor), e.Bounds.Left + 16, e.Bounds.Top + 1);
-                if (optionItem.icon != null) {
-                    e.Graphics.DrawImage(optionItem.icon, e.Bounds.Left, e.Bounds.Top + 1);
-                }
+                e.Graphics.DrawString(optionItem.name, e.Font, new SolidBrush(e.ForeColor), e.Bounds.Left, e.Bounds.Top + 1);
             } else {
                 // Default item
                 ImageComboBoxItem item = new(Items[e.Index].ToString());
