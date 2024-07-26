@@ -61,7 +61,7 @@ namespace BokInterface.Weapons {
             WinFormHelpers.CreateLabel("slot1_bonus_label", "Bonus | malus", 2, 21, 81, 15, control: slot1BonusGroup);
             numericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("inventory_slot1_weapon_bonus", 0, 98, 19, 47, 23, -10, 10, control: slot1BonusGroup, enabled: false));
             WinFormHelpers.CreateLabel("slot1_durability_label", "Durability", 2, 50, 58, 15, control: slot1BonusGroup);
-            numericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("inventory_slot1_weapon_durability", 0, 98, 48, 47, 23, maxValue: 200, control: slot1BonusGroup));
+            numericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("inventory_slot1_weapon_durability", 0, 98, 48, 47, 23, maxValue: 200, control: slot1BonusGroup, enabled: false));
 
             // SP abilities
             CheckGroupBox slot1SpAbilitiesGroup = WinFormHelpers.CreateCheckGroupBox("slot1_sp_abilities_group", "SP abilities", 5, 129, 150, 107, control: slot1group);
@@ -75,7 +75,7 @@ namespace BokInterface.Weapons {
             WinFormHelpers.CreateLabel("slot2_bonus_label", "Bonus | malus", 2, 21, 81, 15, control: slot2BonusGroup);
             numericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("inventory_slot2_weapon_bonus", 0, 98, 19, 47, 23, -10, 10, control: slot2BonusGroup, enabled: false));
             WinFormHelpers.CreateLabel("slot2_durability_label", "Durability", 2, 50, 58, 15, control: slot2BonusGroup);
-            numericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("inventory_slot2_weapon_durability", 0, 98, 48, 47, 23, maxValue: 200, control: slot2BonusGroup));
+            numericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("inventory_slot2_weapon_durability", 0, 98, 48, 47, 23, maxValue: 200, control: slot2BonusGroup, enabled: false));
 
             CheckGroupBox slot2SpAbilitiesGroup = WinFormHelpers.CreateCheckGroupBox("slot2_sp_abilities_group", "SP abilities", 5, 129, 150, 107, control: slot2group);
             dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot2_weapon_sp_ability_1", 5, 19, 140, 23, slot2SpAbilitiesGroup, visibleOptions: 5, dropDownWidth: 350, enabled: false));
@@ -88,7 +88,7 @@ namespace BokInterface.Weapons {
             WinFormHelpers.CreateLabel("slot3_bonus_label", "Bonus | malus", 2, 21, 81, 15, control: slot3BonusGroup);
             numericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("inventory_slot3_weapon_bonus", 0, 98, 19, 47, 23, -10, 10, control: slot3BonusGroup, enabled: false));
             WinFormHelpers.CreateLabel("slot3_durability_label", "Durability", 2, 50, 58, 15, control: slot3BonusGroup);
-            numericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("inventory_slot3_weapon_durability", 0, 98, 48, 47, 23, maxValue: 200, control: slot3BonusGroup));
+            numericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("inventory_slot3_weapon_durability", 0, 98, 48, 47, 23, maxValue: 200, control: slot3BonusGroup, enabled: false));
 
             CheckGroupBox slot3SpAbilitiesGroup = WinFormHelpers.CreateCheckGroupBox("slot3_sp_abilities_group", "SP abilities", 5, 129, 150, 107, control: slot3group);
             dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot3_weapon_sp_ability_1", 5, 19, 140, 23, slot3SpAbilitiesGroup, visibleOptions: 5, dropDownWidth: 350, enabled: false));
@@ -101,7 +101,7 @@ namespace BokInterface.Weapons {
             WinFormHelpers.CreateLabel("slot4_bonus_label", "Bonus | malus", 2, 21, 81, 15, control: slot4BonusGroup);
             numericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("inventory_slot4_weapon_bonus", 0, 98, 19, 47, 23, -10, 10, control: slot4BonusGroup, enabled: false));
             WinFormHelpers.CreateLabel("slot4_durability_label", "Durability", 2, 50, 58, 15, control: slot4BonusGroup);
-            numericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("inventory_slot4_weapon_durability", 0, 98, 48, 47, 23, maxValue: 200, control: slot4BonusGroup));
+            numericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("inventory_slot4_weapon_durability", 0, 98, 48, 47, 23, maxValue: 200, control: slot4BonusGroup, enabled: false));
 
             CheckGroupBox slot4SpAbilitiesGroup = WinFormHelpers.CreateCheckGroupBox("slot4_sp_abilities_group", "SP abilities", 5, 129, 150, 107, control: slot4group);
             dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot4_weapon_sp_ability_1", 5, 19, 140, 23, slot4SpAbilitiesGroup, visibleOptions: 5, dropDownWidth: 350, enabled: false));
@@ -115,7 +115,7 @@ namespace BokInterface.Weapons {
             WinFormHelpers.CreateLabel("slot5_bonus_label", "Bonus | malus", 2, 21, 81, 15, control: slot5BonusGroup);
             numericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("inventory_slot5_weapon_bonus", 0, 98, 19, 47, 23, -10, 10, control: slot5BonusGroup, enabled: false));
             WinFormHelpers.CreateLabel("slot5_durability_label", "Durability", 2, 50, 58, 15, control: slot5BonusGroup);
-            numericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("inventory_slot5_weapon_durability", 0, 98, 48, 47, 23, maxValue: 200, control: slot5BonusGroup));
+            numericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("inventory_slot5_weapon_durability", 0, 98, 48, 47, 23, maxValue: 200, control: slot5BonusGroup, enabled: false));
 
             CheckGroupBox slot5SpAbilitiesGroup = WinFormHelpers.CreateCheckGroupBox("slot5_sp_abilities_group", "SP abilities", 5, 129, 150, 107, control: slot5group);
             dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot5_weapon_sp_ability_1", 5, 19, 140, 23, slot5SpAbilitiesGroup, visibleOptions: 5, dropDownWidth: 350, enabled: false));
@@ -128,7 +128,7 @@ namespace BokInterface.Weapons {
             WinFormHelpers.CreateLabel("slot6_bonus_label", "Bonus | malus", 2, 21, 81, 15, control: slot6BonusGroup);
             numericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("inventory_slot6_weapon_bonus", 0, 98, 19, 47, 23, -10, 10, control: slot6BonusGroup, enabled: false));
             WinFormHelpers.CreateLabel("slot6_durability_label", "Durability", 2, 50, 58, 15, control: slot6BonusGroup);
-            numericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("inventory_slot6_weapon_durability", 0, 98, 48, 47, 23, maxValue: 200, control: slot6BonusGroup));
+            numericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("inventory_slot6_weapon_durability", 0, 98, 48, 47, 23, maxValue: 200, control: slot6BonusGroup, enabled: false));
 
             CheckGroupBox slot6SpAbilitiesGroup = WinFormHelpers.CreateCheckGroupBox("slot6_sp_abilities_group", "SP abilities", 5, 129, 150, 107, control: slot6group);
             dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot6_weapon_sp_ability_1", 5, 19, 140, 23, slot6SpAbilitiesGroup, visibleOptions: 5, dropDownWidth: 350, enabled: false));
@@ -141,7 +141,7 @@ namespace BokInterface.Weapons {
             WinFormHelpers.CreateLabel("slot7_bonus_label", "Bonus | malus", 2, 21, 81, 15, control: slot7BonusGroup);
             numericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("inventory_slot7_weapon_bonus", 0, 98, 19, 47, 23, -10, 10, control: slot7BonusGroup, enabled: false));
             WinFormHelpers.CreateLabel("slot7_durability_label", "Durability", 2, 50, 58, 15, control: slot7BonusGroup);
-            numericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("inventory_slot7_weapon_durability", 0, 98, 48, 47, 23, maxValue: 200, control: slot7BonusGroup));
+            numericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("inventory_slot7_weapon_durability", 0, 98, 48, 47, 23, maxValue: 200, control: slot7BonusGroup, enabled: false));
 
             CheckGroupBox slot7SpAbilitiesGroup = WinFormHelpers.CreateCheckGroupBox("slot7_sp_abilities_group", "SP abilities", 5, 129, 150, 107, control: slot7group);
             dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot7_weapon_sp_ability_1", 5, 19, 140, 23, slot7SpAbilitiesGroup, visibleOptions: 5, dropDownWidth: 350, enabled: false));
@@ -154,7 +154,7 @@ namespace BokInterface.Weapons {
             WinFormHelpers.CreateLabel("slot8_bonus_label", "Bonus | malus", 2, 21, 81, 15, control: slot8BonusGroup);
             numericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("inventory_slot8_weapon_bonus", 0, 98, 19, 47, 23, -10, 10, control: slot8BonusGroup, enabled: false));
             WinFormHelpers.CreateLabel("slot8_durability_label", "Durability", 2, 50, 58, 15, control: slot8BonusGroup);
-            numericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("inventory_slot8_weapon_durability", 0, 98, 48, 47, 23, maxValue: 200, control: slot8BonusGroup));
+            numericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("inventory_slot8_weapon_durability", 0, 98, 48, 47, 23, maxValue: 200, control: slot8BonusGroup, enabled: false));
 
             CheckGroupBox slot8SpAbilitiesGroup = WinFormHelpers.CreateCheckGroupBox("slot8_sp_abilities_group", "SP abilities", 5, 129, 150, 107, control: slot8group);
             dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot8_weapon_sp_ability_1", 5, 19, 140, 23, slot8SpAbilitiesGroup, visibleOptions: 5, dropDownWidth: 350, enabled: false));
@@ -168,7 +168,7 @@ namespace BokInterface.Weapons {
             WinFormHelpers.CreateLabel("slot9_bonus_label", "Bonus | malus", 2, 21, 81, 15, control: slot9BonusGroup);
             numericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("inventory_slot9_weapon_bonus", 0, 98, 19, 47, 23, -10, 10, control: slot9BonusGroup, enabled: false));
             WinFormHelpers.CreateLabel("slot9_durability_label", "Durability", 2, 50, 58, 15, control: slot9BonusGroup);
-            numericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("inventory_slot9_weapon_durability", 0, 98, 48, 47, 23, maxValue: 200, control: slot9BonusGroup));
+            numericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("inventory_slot9_weapon_durability", 0, 98, 48, 47, 23, maxValue: 200, control: slot9BonusGroup, enabled: false));
 
             CheckGroupBox slot9SpAbilitiesGroup = WinFormHelpers.CreateCheckGroupBox("slot9_sp_abilities_group", "SP abilities", 5, 129, 150, 107, control: slot9group);
             dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot9_weapon_sp_ability_1", 5, 19, 140, 23, slot9SpAbilitiesGroup, visibleOptions: 5, dropDownWidth: 350, enabled: false));
@@ -181,7 +181,7 @@ namespace BokInterface.Weapons {
             WinFormHelpers.CreateLabel("slot10_bonus_label", "Bonus | malus", 2, 21, 81, 15, control: slot10BonusGroup);
             numericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("inventory_slot10_weapon_bonus", 0, 98, 19, 47, 23, -10, 10, control: slot10BonusGroup, enabled: false));
             WinFormHelpers.CreateLabel("slot10_durability_label", "Durability", 2, 50, 58, 15, control: slot10BonusGroup);
-            numericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("inventory_slot10_weapon_durability", 0, 98, 48, 47, 23, maxValue: 200, control: slot10BonusGroup));
+            numericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("inventory_slot10_weapon_durability", 0, 98, 48, 47, 23, maxValue: 200, control: slot10BonusGroup, enabled: false));
 
             CheckGroupBox slot10SpAbilitiesGroup = WinFormHelpers.CreateCheckGroupBox("slot10_sp_abilities_group", "SP abilities", 5, 129, 150, 107, control: slot10group);
             dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot10_weapon_sp_ability_1", 5, 19, 140, 23, slot10SpAbilitiesGroup, visibleOptions: 5, dropDownWidth: 350, enabled: false));
@@ -194,7 +194,7 @@ namespace BokInterface.Weapons {
             WinFormHelpers.CreateLabel("slot11_bonus_label", "Bonus | malus", 2, 21, 81, 15, control: slot11BonusGroup);
             numericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("inventory_slot11_weapon_bonus", 0, 98, 19, 47, 23, -10, 10, control: slot11BonusGroup, enabled: false));
             WinFormHelpers.CreateLabel("slot11_durability_label", "Durability", 2, 50, 58, 15, control: slot11BonusGroup);
-            numericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("inventory_slot11_weapon_durability", 0, 98, 48, 47, 23, maxValue: 200, control: slot11BonusGroup));
+            numericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("inventory_slot11_weapon_durability", 0, 98, 48, 47, 23, maxValue: 200, control: slot11BonusGroup, enabled: false));
 
             CheckGroupBox slot11SpAbilitiesGroup = WinFormHelpers.CreateCheckGroupBox("slot11_sp_abilities_group", "SP abilities", 5, 129, 150, 107, control: slot11group);
             dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot11_weapon_sp_ability_1", 5, 19, 140, 23, slot11SpAbilitiesGroup, visibleOptions: 5, dropDownWidth: 350, enabled: false));
@@ -207,7 +207,7 @@ namespace BokInterface.Weapons {
             WinFormHelpers.CreateLabel("slot12_bonus_label", "Bonus | malus", 2, 21, 81, 15, control: slot12BonusGroup);
             numericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("inventory_slot12_weapon_bonus", 0, 98, 19, 47, 23, -10, 10, control: slot12BonusGroup, enabled: false));
             WinFormHelpers.CreateLabel("slot12_durability_label", "Durability", 2, 50, 58, 15, control: slot12BonusGroup);
-            numericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("inventory_slot12_weapon_durability", 0, 98, 48, 47, 23, maxValue: 200, control: slot12BonusGroup));
+            numericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("inventory_slot12_weapon_durability", 0, 98, 48, 47, 23, maxValue: 200, control: slot12BonusGroup, enabled: false));
 
             CheckGroupBox slot12SpAbilitiesGroup = WinFormHelpers.CreateCheckGroupBox("slot12_sp_abilities_group", "SP abilities", 5, 129, 150, 107, control: slot12group);
             dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot12_weapon_sp_ability_1", 5, 19, 140, 23, slot12SpAbilitiesGroup, visibleOptions: 5, dropDownWidth: 350, enabled: false));
@@ -221,7 +221,7 @@ namespace BokInterface.Weapons {
             WinFormHelpers.CreateLabel("slot13_bonus_label", "Bonus | malus", 2, 21, 81, 15, control: slot13BonusGroup);
             numericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("inventory_slot13_weapon_bonus", 0, 98, 19, 47, 23, -10, 10, control: slot13BonusGroup, enabled: false));
             WinFormHelpers.CreateLabel("slot13_durability_label", "Durability", 2, 50, 58, 15, control: slot13BonusGroup);
-            numericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("inventory_slot13_weapon_durability", 0, 98, 48, 47, 23, maxValue: 200, control: slot13BonusGroup));
+            numericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("inventory_slot13_weapon_durability", 0, 98, 48, 47, 23, maxValue: 200, control: slot13BonusGroup, enabled: false));
 
             CheckGroupBox slot13SpAbilitiesGroup = WinFormHelpers.CreateCheckGroupBox("slot13_sp_abilities_group", "SP abilities", 5, 129, 150, 107, control: slot13group);
             dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot13_weapon_sp_ability_1", 5, 19, 140, 23, slot13SpAbilitiesGroup, visibleOptions: 5, dropDownWidth: 350, enabled: false));
@@ -234,7 +234,7 @@ namespace BokInterface.Weapons {
             WinFormHelpers.CreateLabel("slot14_bonus_label", "Bonus | malus", 2, 21, 81, 15, control: slot14BonusGroup);
             numericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("inventory_slot14_weapon_bonus", 0, 98, 19, 47, 23, -10, 10, control: slot14BonusGroup, enabled: false));
             WinFormHelpers.CreateLabel("slot14_durability_label", "Durability", 2, 50, 58, 15, control: slot14BonusGroup);
-            numericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("inventory_slot14_weapon_durability", 0, 98, 48, 47, 23, maxValue: 200, control: slot14BonusGroup));
+            numericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("inventory_slot14_weapon_durability", 0, 98, 48, 47, 23, maxValue: 200, control: slot14BonusGroup, enabled: false));
 
             CheckGroupBox slot14SpAbilitiesGroup = WinFormHelpers.CreateCheckGroupBox("slot14_sp_abilities_group", "SP abilities", 5, 129, 150, 107, control: slot14group);
             dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot14_weapon_sp_ability_1", 5, 19, 140, 23, slot14SpAbilitiesGroup, visibleOptions: 5, dropDownWidth: 350, enabled: false));
@@ -247,7 +247,7 @@ namespace BokInterface.Weapons {
             WinFormHelpers.CreateLabel("slot15_bonus_label", "Bonus | malus", 2, 21, 81, 15, control: slot15BonusGroup);
             numericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("inventory_slot15_weapon_bonus", 0, 98, 19, 47, 23, -10, 10, control: slot15BonusGroup, enabled: false));
             WinFormHelpers.CreateLabel("slot15_durability_label", "Durability", 2, 50, 58, 15, control: slot15BonusGroup);
-            numericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("inventory_slot15_weapon_durability", 0, 98, 48, 47, 23, maxValue: 200, control: slot15BonusGroup));
+            numericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("inventory_slot15_weapon_durability", 0, 98, 48, 47, 23, maxValue: 200, control: slot15BonusGroup, enabled: false));
 
             CheckGroupBox slot15SpAbilitiesGroup = WinFormHelpers.CreateCheckGroupBox("slot15_sp_abilities_group", "SP abilities", 5, 129, 150, 107, control: slot15group);
             dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot15_weapon_sp_ability_1", 5, 19, 140, 23, slot15SpAbilitiesGroup, visibleOptions: 5, dropDownWidth: 350, enabled: false));
@@ -260,7 +260,7 @@ namespace BokInterface.Weapons {
             WinFormHelpers.CreateLabel("slot16_bonus_label", "Bonus | malus", 2, 21, 81, 15, control: slot16BonusGroup);
             numericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("inventory_slot16_weapon_bonus", 0, 98, 19, 47, 23, -10, 10, control: slot16BonusGroup, enabled: false));
             WinFormHelpers.CreateLabel("slot16_durability_label", "Durability", 2, 50, 58, 15, control: slot16BonusGroup);
-            numericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("inventory_slot16_weapon_durability", 0, 98, 48, 47, 23, maxValue: 200, control: slot16BonusGroup));
+            numericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("inventory_slot16_weapon_durability", 0, 98, 48, 47, 23, maxValue: 200, control: slot16BonusGroup, enabled: false));
 
             CheckGroupBox slot16SpAbilitiesGroup = WinFormHelpers.CreateCheckGroupBox("slot16_sp_abilities_group", "SP abilities", 5, 129, 150, 107, control: slot16group);
             dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot16_weapon_sp_ability_1", 5, 19, 140, 23, slot16SpAbilitiesGroup, visibleOptions: 5, dropDownWidth: 350, enabled: false));
