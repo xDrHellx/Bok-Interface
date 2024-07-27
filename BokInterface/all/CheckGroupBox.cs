@@ -1,6 +1,5 @@
 using System;
 using System.Drawing;
-using System.Linq;
 using System.Windows.Forms;
 
 namespace BokInterface.All {
@@ -73,24 +72,12 @@ namespace BokInterface.All {
 
             // If unchecked, disable all elements within the CheckGroupBox
             if (_checkBoxInstance.Checked == false) {
-                foreach (Label subElement in Controls.OfType<Label>()) {
-                    subElement.Enabled = false;
-                }
-
-                foreach (NumericUpDown subElement in Controls.OfType<NumericUpDown>()) {
-                    subElement.Enabled = false;
-                }
-
-                foreach (ComboBox subElement in Controls.OfType<ComboBox>()) {
-                    subElement.Enabled = false;
-                }
-
-                foreach (CheckBox subElement in Controls.OfType<CheckBox>()) {
-                    if (subElement == _checkBoxInstance) {
+                foreach (Control control in Controls) {
+                    if (control == _checkBoxInstance) {
                         continue;
                     }
 
-                    subElement.Enabled = false;
+                    control.Enabled = false;
                 }
             }
         }

@@ -195,7 +195,6 @@ namespace BokInterface {
 
             // WIP features are disabled for now
             _bok2_editEquipsBtn.Enabled = false;
-            _bok2_editWeaponsBtn.Enabled = false;
             _bok2_editMagicsBtn.Enabled = false;
 
             // Add onclick events
@@ -203,7 +202,7 @@ namespace BokInterface {
             _bok2_editInventoryBtn.Click += new System.EventHandler(OpenInventoryEditor);
             _bok2_editKeyItemsBtn.Click += new System.EventHandler(OpenKeyItemsEditor);
             // _bok2_editEquipsBtn.Click += new System.EventHandler(OpenEquipsEditor);
-            // _bok2_editWeaponsBtn.Click += new System.EventHandler(OpenWeaponsEditor);
+            _bok2_editWeaponsBtn.Click += new System.EventHandler(OpenWeaponsEditor);
             // _bok2_editMagicsBtn.Click += new System.EventHandler(OpenMagicsEditor);
         }
     }

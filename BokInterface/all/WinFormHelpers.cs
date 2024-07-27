@@ -124,8 +124,9 @@ namespace BokInterface.All {
         /// <param name="colorHex">Set the background color for the label</param>
         /// <param name="margin">Margin (by default System.Windows.Forms.Padding(0, 3, 0, 3), the default value in Visual Studio)</param>
         /// <param name="textAlignment">Text alignment, by default "MiddleCenter" (see System.Drawing.ContentAlignment for possible values)</param>
+        /// <param name="enabled">True if it should be enabled (True by default)</param>
         /// <returns><c>System.Windows.Forms.Button</c>Button instance</returns>
-        public static Button CreateButton(string name, string text, int positionX, int positionY, int width, int height, Control? control = null, string colorHex = "", Padding margin = new Padding(), string textAlignment = "MiddleCenter") {
+        public static Button CreateButton(string name, string text, int positionX, int positionY, int width, int height, Control? control = null, string colorHex = "", Padding margin = new Padding(), string textAlignment = "MiddleCenter", bool enabled = true) {
 
             Button btn = new() {
                 Name = name,
@@ -136,7 +137,8 @@ namespace BokInterface.All {
                 TabIndex = 2,
                 Anchor = defaultAnchor,
                 Margin = defaultMargin,
-                Font = defaultFont
+                Font = defaultFont,
+                Enabled = enabled
             };
 
             if (colorHex != "") {
@@ -198,8 +200,9 @@ namespace BokInterface.All {
         /// <param name="colorHex">Set the background color for the label</param>
         /// <param name="margin">Margin (by default System.Windows.Forms.Padding(0, 3, 0, 3), the default value in Visual Studio)</param>
         /// <param name="valueAlignment">Value alignment, by default "Left" (see System.Windows.Forms.HorizontalAlignment for possible values)</param>
+        /// <param name="enabled">True if it should be enabled (True by default)</param>
         /// <returns><c>System.Windows.Forms.NumericUpDown</c>NumericUpDown instance</returns>
-        public static NumericUpDown CreateNumericUpDown(string name, decimal defaultValue, int positionX, int positionY, int width, int height, decimal minValue = 0, decimal maxValue = 99, int nbDecimals = 0, Control? control = null, string colorHex = "", Padding margin = new Padding(), string valueAlignment = "Left") {
+        public static NumericUpDown CreateNumericUpDown(string name, decimal defaultValue, int positionX, int positionY, int width, int height, decimal minValue = 0, decimal maxValue = 99, int nbDecimals = 0, Control? control = null, string colorHex = "", Padding margin = new Padding(), string valueAlignment = "Left", bool enabled = true) {
 
             NumericUpDown numUpDown = new() {
                 Name = name,
@@ -214,7 +217,8 @@ namespace BokInterface.All {
                 Margin = defaultMargin,
                 Font = defaultFont,
                 Increment = (decimal)(maxValue > 500 ? 10 : (nbDecimals == 2 ? 0.05 : (nbDecimals == 1 ? 0.5 : 1))),
-                DecimalPlaces = nbDecimals
+                DecimalPlaces = nbDecimals,
+                Enabled = enabled
             };
 
             if (colorHex != "") {
@@ -271,70 +275,6 @@ namespace BokInterface.All {
             control?.Controls.Add(checkBox);
 
             return checkBox;
-        }
-
-        /// <summary>Simplified method for creating a CheckGroupBox</summary>
-        /// <param name="name">Field name</param>
-        /// <param name="text">Field text</param>
-        /// <param name="positionX">X position</param>
-        /// <param name="positionY">Y position</param>
-        /// <param name="width">Width (in pixels)</param>
-        /// <param name="height">Height (in pixels)</param>
-        /// <param name="isCheckedByDefault">Set to true if the CheckGroupBox has to be checked when initiated</param>
-        /// <param name="control">Control instance if the element is to be attached to it directly</param>
-        /// <returns><c>CheckGroupBox</c>CheckGroupBox instance</returns>
-        public static CheckGroupBox CreateCheckGroupBox(string name, string text, int positionX, int positionY, int width, int height, bool isCheckedByDefault = false, Control? control = null) {
-
-            CheckGroupBox checkGroupBox = new() {
-                Name = name,
-                Text = text,
-                Checked = isCheckedByDefault,
-                Location = new Point(positionX, positionY),
-                Size = new Size(width, height),
-                TabIndex = 1,
-                AutoSize = false,
-                Anchor = defaultAnchor,
-                Margin = defaultMargin,
-                Font = defaultFont
-            };
-
-            // If a Control instance is passed, add the generated element to it
-            control?.Controls.Add(checkGroupBox);
-
-            return checkGroupBox;
-        }
-
-        /// <summary>Simplified method for creating a label containing an image</summary>
-        /// <param name="name">Label name</param>
-        /// <param name="imgName">Image name</param>
-        /// <param name="positionX">X position</param>
-        /// <param name="positionY">Y position</param>
-        /// <param name="control">Control instance if the element is to be attached to it directly</param>
-        /// <returns><c>System.Windows.Forms.Label</c>Label instance</returns>
-        public static Label CreateImageLabel(string name, string imgName, int positionX, int positionY, Control? control = null) {
-
-            // Get image
-            Image img = (Image)Properties.Resources.ResourceManager.GetObject(imgName);
-
-            // Create label
-            Label label = new() {
-                Name = name,
-                Text = "",
-                Location = new Point(positionX, positionY),
-                Size = new Size(img.Width, img.Height),
-                Image = img,
-                AutoSize = false,
-                TabIndex = 2,
-                ImageAlign = ContentAlignment.MiddleCenter,
-                Anchor = defaultAnchor,
-                Margin = defaultMargin,
-                Font = defaultFont
-            };
-
-            // If a Control instance is passed, add the generated element to it
-            control?.Controls.Add(label);
-
-            return label;
         }
 
         /// <summary>Simplified method for creating a tooltip</summary>
@@ -400,8 +340,9 @@ namespace BokInterface.All {
         /// <param name="dropDownWidth">Dropdown Width (in pixels, if not specified will take use the element's width as reference)</param>
         /// <param name="dropDownHeight">Dropdown Height (in pixels, if not specified will take use the element's height as reference)</param>
         /// <param name="visibleOptions">Amount of options visible without needing to scroll (will take priority over dropDownHeight parameters if specified)</param>
+        /// <param name="enabled">True if it should be enabled (True by default)</param>
         /// <returns><c>System.Windows.Forms.ComboBox</c>Dropdown List instance</returns>
-        public static ComboBox CreateDropDownList(string name, int positionX, int positionY, int width, int height, Control? control = null, int dropDownWidth = 0, int dropDownHeight = 0, int visibleOptions = 0) {
+        public static ComboBox CreateDropDownList(string name, int positionX, int positionY, int width, int height, Control? control = null, int dropDownWidth = 0, int dropDownHeight = 0, int visibleOptions = 0, bool enabled = true) {
 
             ComboBox dropDownList = new() {
                 Name = name,
@@ -412,7 +353,8 @@ namespace BokInterface.All {
                 Anchor = defaultAnchor,
                 Font = defaultFont,
                 // If DropDownWidth was specified, use it, otherwise use the element's width
-                DropDownWidth = dropDownWidth > 0 ? dropDownWidth : width
+                DropDownWidth = dropDownWidth > 0 ? dropDownWidth : width,
+                Enabled = enabled
             };
 
             /**
@@ -431,6 +373,101 @@ namespace BokInterface.All {
             return dropDownList;
         }
 
+        /// <summary>Simplified method for creating a Panel</summary>
+        /// <param name="name">Panel name</param>
+        /// <param name="positionX">X position</param>
+        /// <param name="positionY">Y position</param>
+        /// <param name="width">Width (in pixels)</param>
+        /// <param name="height">Height (in pixels)</param>
+        /// <param name="autoScroll">True if AutoScroll should be active (True by default)</param>
+        /// <param name="control">Control instance if the element is to be attached to it directly</param>
+        /// <param name="enabled">True if it should be enabled (True by default)</param>
+        /// <returns><c>Panel</c>Panel instance</returns>
+        public static Panel CreatePanel(string name, int positionX, int positionY, int width, int height, Control? control = null, bool autoScroll = true, bool enabled = true) {
+
+            Panel panel = new() {
+                Name = name,
+                Location = new Point(positionX, positionY),
+                Size = new Size(width, height),
+                TabIndex = 1,
+                Anchor = defaultAnchor,
+                Font = defaultFont,
+                AutoScroll = autoScroll,
+                Enabled = enabled
+            };
+
+            control?.Controls.Add(panel);
+
+            return panel;
+        }
+
+        /// <summary>Simplified method for creating a TextBox</summary>
+        /// <param name="name">TextBox name</param>
+        /// <param name="text">TextBox text</param>
+        /// <param name="positionX">X position</param>
+        /// <param name="positionY">Y position</param>
+        /// <param name="width">Width (in pixels)</param>
+        /// <param name="height">Height (in pixels)</param>
+        /// <param name="control">Control instance if the element is to be attached to it directly</param>
+        /// <param name="multiLine">True if text added should take multiple lines (True by default)</param>
+        /// <param name="readOnly">True if text should be readonly (True by default)</param>
+        /// <returns><c>TextBox</c>TextBox instance</returns>
+        public static TextBox CreateTextBox(string name, string text, int positionX, int positionY, int width, int height, Control? control = null, bool multiLine = true, bool readOnly = true) {
+
+            TextBox textBox = new() {
+                Name = name,
+                Location = new Point(positionX, positionY),
+                Size = new Size(width, height),
+                TabIndex = 1,
+                Anchor = defaultAnchor,
+                Font = defaultFont,
+                Text = text,
+                Multiline = multiLine,
+                ReadOnly = readOnly
+            };
+
+            control?.Controls.Add(textBox);
+
+            return textBox;
+        }
+
+        #endregion
+
+        #region Custom elements generating methods
+
+        /// <summary>Simplified method for creating a label containing an image</summary>
+        /// <param name="name">Label name</param>
+        /// <param name="imgName">Image name</param>
+        /// <param name="positionX">X position</param>
+        /// <param name="positionY">Y position</param>
+        /// <param name="control">Control instance if the element is to be attached to it directly</param>
+        /// <returns><c>System.Windows.Forms.Label</c>Label instance</returns>
+        public static Label CreateImageLabel(string name, string imgName, int positionX, int positionY, Control? control = null) {
+
+            // Get image
+            Image img = (Image)Properties.Resources.ResourceManager.GetObject(imgName);
+
+            // Create label
+            Label label = new() {
+                Name = name,
+                Text = "",
+                Location = new Point(positionX, positionY),
+                Size = new Size(img.Width, img.Height),
+                Image = img,
+                AutoSize = false,
+                TabIndex = 2,
+                ImageAlign = ContentAlignment.MiddleCenter,
+                Anchor = defaultAnchor,
+                Margin = defaultMargin,
+                Font = defaultFont
+            };
+
+            // If a Control instance is passed, add the generated element to it
+            control?.Controls.Add(label);
+
+            return label;
+        }
+
         /// <summary>Simplified method for creating a dropdown list that can have images next to items (options)</summary>
         /// <param name="name">Dropdown name</param>
         /// <param name="positionX">X position</param>
@@ -441,8 +478,9 @@ namespace BokInterface.All {
         /// <param name="dropDownWidth">Dropdown Width (in pixels, if not specified will take use the element's width as reference)</param>
         /// <param name="dropDownHeight">Dropdown Height (in pixels, if not specified will take use the element's height as reference)</param>
         /// <param name="visibleOptions">Amount of options visible without needing to scroll (will take priority over dropDownHeight parameters if specified)</param>
+        /// <param name="enabled">True if it should be enabled (True by default)</param>
         /// <returns><c>System.Windows.Forms.ComboBox</c>Dropdown List instance</returns>
-        public static ImageComboBox CreateImageDropdownList(string name, int positionX, int positionY, int width, int height, Control? control = null, int dropDownWidth = 0, int dropDownHeight = 0, int visibleOptions = 0) {
+        public static ImageComboBox CreateImageDropdownList(string name, int positionX, int positionY, int width, int height, Control? control = null, int dropDownWidth = 0, int dropDownHeight = 0, int visibleOptions = 0, bool enabled = true) {
 
             ImageComboBox dropDownList = new() {
                 Name = name,
@@ -454,7 +492,8 @@ namespace BokInterface.All {
                 Anchor = defaultAnchor,
                 Font = defaultFont,
                 // If DropDownWidth was specified, use it, otherwise use the element's width
-                DropDownWidth = dropDownWidth > 0 ? dropDownWidth : width
+                DropDownWidth = dropDownWidth > 0 ? dropDownWidth : width,
+                Enabled = enabled
             };
 
             /**
@@ -471,6 +510,37 @@ namespace BokInterface.All {
             control?.Controls.Add(dropDownList);
 
             return dropDownList;
+        }
+
+        /// <summary>Simplified method for creating a CheckGroupBox</summary>
+        /// <param name="name">Field name</param>
+        /// <param name="text">Field text</param>
+        /// <param name="positionX">X position</param>
+        /// <param name="positionY">Y position</param>
+        /// <param name="width">Width (in pixels)</param>
+        /// <param name="height">Height (in pixels)</param>
+        /// <param name="isCheckedByDefault">Set to true if the CheckGroupBox has to be checked when initiated</param>
+        /// <param name="control">Control instance if the element is to be attached to it directly</param>
+        /// <returns><c>CheckGroupBox</c>CheckGroupBox instance</returns>
+        public static CheckGroupBox CreateCheckGroupBox(string name, string text, int positionX, int positionY, int width, int height, bool isCheckedByDefault = false, Control? control = null) {
+
+            CheckGroupBox checkGroupBox = new() {
+                Name = name,
+                Text = text,
+                Checked = isCheckedByDefault,
+                Location = new Point(positionX, positionY),
+                Size = new Size(width, height),
+                TabIndex = 1,
+                AutoSize = false,
+                Anchor = defaultAnchor,
+                Margin = defaultMargin,
+                Font = defaultFont
+            };
+
+            // If a Control instance is passed, add the generated element to it
+            control?.Controls.Add(checkGroupBox);
+
+            return checkGroupBox;
         }
 
         #endregion
@@ -505,7 +575,7 @@ namespace BokInterface.All {
                 "Zoktai" => "ringo",
                 "Shinbok" => "trinity",
                 "LunarKnights" => "lucian",
-                _ => "nero",
+                _ => "nero"
             };
         }
 
@@ -522,11 +592,10 @@ namespace BokInterface.All {
                 "TopCenter" => ContentAlignment.TopCenter,
                 "TopLeft" => ContentAlignment.TopLeft,
                 "TopRight" => ContentAlignment.TopRight,
-                _ => ContentAlignment.MiddleCenter,
+                _ => ContentAlignment.MiddleCenter
             };
         }
 
         #endregion
-
     }
 }
