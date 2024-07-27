@@ -317,7 +317,7 @@ namespace BokInterface.Weapons {
         protected override void SetValues() {
 
             // Retrieve all input fields
-            List<ImageComboBox> slots = dropDownLists;
+            List<ImageComboBox> dropdowns = dropDownLists;
             List<NumericUpDown> bonusRelatedFields = numericUpDowns;
 
             // Store the previous setting for BizHawk being paused
@@ -326,11 +326,11 @@ namespace BokInterface.Weapons {
             // Pause BizHawk
             APIs.Client.Pause();
 
-            // Sets values for each slot
-            for (int i = 0; i < slots.Count; i++) {
+            // Sets values for each slot's dropdown
+            for (int i = 0; i < dropdowns.Count; i++) {
 
-                // If the slot is disabled, skip it
-                if (slots[i].Enabled == false) {
+                // If the dropdown is disabled, skip it
+                if (dropdowns[i].Enabled == false) {
                     continue;
                 }
 
@@ -338,19 +338,23 @@ namespace BokInterface.Weapons {
                  * Indicate which sublist to use for setting the value, based on the slot's name
                  * Also indicate if we're setting the value for a weapon or an SP ability
                  */
-                string[] fieldParts = slots[i].Name.Split(['_'], 4);
+                string[] fieldParts = dropdowns[i].Name.Split(['_'], 4);
                 if (fieldParts.Length >= 4 && fieldParts[3] != null && fieldParts[3].Substring(0, 10) == "sp_ability") {
                     // SP ability
                     string key = fieldParts[1] + "_" + fieldParts[2] + "_" + fieldParts[3];
-                    KeyValuePair<string, Ability> selectedOption = (KeyValuePair<string, Ability>)slots[i].SelectedItem;
+                    KeyValuePair<string, Ability> selectedOption = (KeyValuePair<string, Ability>)dropdowns[i].SelectedItem;
                     Ability selectedItem = selectedOption.Value;
                     SetMemoryValue(fieldParts[0], key, selectedItem.value);
                 } else {
                     // Weapon
                     string key = fieldParts[1] + "_" + fieldParts[2];
-                    KeyValuePair<string, Weapon> selectedOption = (KeyValuePair<string, Weapon>)slots[i].SelectedItem;
+                    KeyValuePair<string, Weapon> selectedOption = (KeyValuePair<string, Weapon>)dropdowns[i].SelectedItem;
                     Weapon selectedItem = selectedOption.Value;
                     SetMemoryValue(fieldParts[0], key, selectedItem.value);
+
+                    // In this case also set the "Forged by" name on the weapon
+                    string slotNumber = fieldParts[1].Substring(4, fieldParts[1].Length == 6 ? 2 : 1);
+                    SetWeaponForgedByName(Convert.ToInt32(slotNumber));
                 }
             }
 
@@ -597,6 +601,16 @@ namespace BokInterface.Weapons {
             }
 
             return null;
+        }
+
+        /// <summary>Sets the "Forged by" name on the weapon in the specified slot to "TayiohNetwrk"</summary>
+        /// <param name="slot">Slot number</param>
+        private void SetWeaponForgedByName(int slot) {
+            if (slot > 0 && slot < 17) {
+                _memoryValues.Inventory["slot" + slot + "_weapon_forgedBy_1"].Value = 2036949332;
+                _memoryValues.Inventory["slot" + slot + "_weapon_forgedBy_2"].Value = 1699637359;
+                _memoryValues.Inventory["slot" + slot + "_weapon_forgedBy_3"].Value = 1802663796;
+            }
         }
     }
 }
