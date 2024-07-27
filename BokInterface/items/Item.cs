@@ -20,13 +20,21 @@ namespace BokInterface.Items {
         public readonly Item? coveredItem;
         ///<summary>The name of the item this can rott or melt into, if perishable</summary>
         public readonly string rottsInto = "";
+        /// <summary>Price when buying</summary>
+        public readonly int buyPrice;
+        /// <summary>Price when selling</summary>
+        public readonly int sellPrice;
 
-        public Item(string name, uint value, string icon = "", bool perishable = false, int durability = 0, Item? coveredItem = null) {
+        public Item(string name, uint value, string icon = "", bool perishable = false, int durability = 0, Item? coveredItem = null, int buyPrice = 0) {
             this.name = name;
             this.value = value;
             this.perishable = perishable;
             this.durability = durability < rottenAt ? durability : 0;
             this.coveredItem = coveredItem;
+            this.buyPrice = buyPrice;
+
+            // Price for selling is always the buying price divided by 2 (or 0 if it cannot be sold)
+            sellPrice = buyPrice > 0 ? buyPrice / 2 : 0;
 
             // If an icon was specified try getting & setting it to the property
             if (icon != "") {
