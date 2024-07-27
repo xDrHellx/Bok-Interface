@@ -19,6 +19,7 @@ namespace BokInterface.Weapons {
 
         protected readonly List<ImageComboBox> dropDownLists = [];
         protected readonly List<NumericUpDown> numericUpDowns = [];
+        protected Panel slotsPanel = new();
         protected CheckGroupBox slot1group = new(),
             slot2group = new(),
             slot3group = new(),

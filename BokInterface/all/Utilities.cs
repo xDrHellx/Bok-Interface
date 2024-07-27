@@ -191,5 +191,65 @@ namespace BokInterface.All {
         }
 
         #endregion
+
+        #region Special cases conversion methods
+
+        /// <summary>
+        ///     <para>
+        ///         Convert a value to its bonus or malus equivalent
+        ///     </para>
+        ///     <example>
+        ///         Example :
+        ///         <code>246 => -10</code>
+        ///         <code>10 => 10</code>
+        ///     </example>
+        /// </summary>
+        /// <param name="value">Value to convert</param>
+        /// <returns><c>Int</c>Bonus / Malus equivalent</returns>
+        public static int ConvertValueToWeaponBonus(uint value) {
+            if (value <= 255 && value >= 246) {
+                // If value is equivalent to a proper malus (-01 to -10)
+                return (int)value - 256;
+            } else if (value >= 1 && value <= 10) {
+                // If equivalent to a proper bonus (+01 to +10)
+                return (int)value;
+            }
+
+            // If value is not equivalent to a proper bonus or malus
+            return 0;
+        }
+
+        /// <summary>
+        ///     <para>
+        ///         Convert a decimal to a weapon bonus or malus
+        ///     </para>
+        ///     <example>
+        ///         Example :
+        ///         <code>5 => 5</code>
+        ///         <code>-10 => 246</code>
+        ///     </example>
+        ///     <remarks>Note: Maluses starts at 256 (-01 in-game) and then further below</remarks>
+        /// </summary>
+        /// <param name="bonus">Decimal value to convert</param>
+        /// <returns><c>uint</c>In-game Bonus / Malus equivalent</returns>
+        public static uint ConvertWeaponBonusToValue(decimal bonus) {
+            if (bonus > 0) {
+                // Bonus (+01 & above)
+                return (uint)bonus;
+            } else if (bonus < 0) {
+                /**
+                 * Malus (-01 & below)
+                 * 
+                 * Negative values starts at 256 and go further down,
+                 * so we convert the negative decimal value that was passed & substract 256 by that value
+                 */
+                return 256 - (uint)Math.Abs(bonus);
+            }
+
+            // If there is no bonus or malus
+            return 0;
+        }
+
+        #endregion
     }
 }

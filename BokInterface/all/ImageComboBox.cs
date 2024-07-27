@@ -5,6 +5,7 @@ using System.Windows.Forms;
 using BokInterface.Entities;
 using BokInterface.Items;
 using BokInterface.Weapons;
+using BokInterface.Weapons.Abilities;
 
 namespace BokInterface.All {
     ///<summary>Class for ComboBox with images next to selectable options</summary>
@@ -48,6 +49,12 @@ namespace BokInterface.All {
                 if (optionItem.icon != null) {
                     e.Graphics.DrawImage(optionItem.icon, e.Bounds.Left, e.Bounds.Top + 1);
                 }
+            } else if (Items[e.Index].GetType() == typeof(KeyValuePair<string, Ability>)) {
+
+                // For Weapon SP abilities (Bok 2 & 3)
+                KeyValuePair<string, Ability> option = (KeyValuePair<string, Ability>)Items[e.Index];
+                Ability optionItem = option.Value;
+                e.Graphics.DrawString(optionItem.name, e.Font, new SolidBrush(e.ForeColor), e.Bounds.Left, e.Bounds.Top + 1);
             } else if (Items[e.Index].GetType() == typeof(KeyValuePair<string, Character>)) {
 
                 // For Boktai characters
