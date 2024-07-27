@@ -11,7 +11,7 @@ namespace BokInterface.Weapons {
         /// <summary>Weapon type (Sword, Gun, ...)</summary>
         public readonly string type;
         public readonly Image? icon = null;
-        ///<summary>Weapon durability (if it has a +X bonus>
+        ///<summary>Weapon durability (if it has a +X bonus</summary>
         public readonly int durability;
         /// <summary>Bonus if applicable (can be negative, maluses are possible through forging)</summary>
         public readonly int bonus;
