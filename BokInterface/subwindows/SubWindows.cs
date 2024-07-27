@@ -5,6 +5,7 @@ using BokInterface.All;
 using BokInterface.Inventory;
 using BokInterface.KeyItems;
 using BokInterface.Status;
+using BokInterface.Weapons;
 
 /**
  * Main file for subwindows
@@ -138,14 +139,25 @@ namespace BokInterface {
         protected void OpenWeaponsEditor(object sender, EventArgs e) {
             if (weaponsEditorOpened == false) {
 
-                // Create subwindow & add on close event
-                weaponsEditWindow = WinFormHelpers.CreateSubWindow("weaponsEditWindow", "Bok Edit - Weapons", 200, 100, this);
-                weaponsEditWindow.FormClosing += new FormClosingEventHandler(delegate (object sender, FormClosingEventArgs e) {
-                    weaponsEditorOpened = false;
-                    weaponsEditWindow.Controls.Clear();
-                });
+                // Open editor for the current game
+                switch (shorterGameName) {
+                    case "Boktai":
+                        new BoktaiWeaponsEditor(this, _memoryValues, _boktaiAddresses);
+                        break;
+                    case "Zoktai":
+                        new ZoktaiWeaponsEditor(this, _memoryValues, _zoktaiAddresses);
+                        break;
+                    case "Shinbok":
+                        new ShinbokWeaponsEditor(this, _memoryValues, _shinbokAddresses);
+                        break;
+                    case "LunarKnights":
+                        new LunarKnightsWeaponsEditor(this, _memoryValues, _lunarKnightsAddresses);
+                        break;
+                    default:
+                        // If game is not handled, do nothing
+                        return;
+                }
 
-                weaponsEditWindow.Show();
                 weaponsEditorOpened = true;
             }
         }
