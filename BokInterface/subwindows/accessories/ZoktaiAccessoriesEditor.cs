@@ -70,10 +70,10 @@ namespace BokInterface.Accessories {
             dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot16_accessory", 5, 19, 160, 23, slot16group, visibleOptions: 5));
 
             // Generate & add options to dropdowns
-            // GenerateDropDownOptions();
+            GenerateDropDownOptions();
 
             // Set default values for each field
-            // SetDefaultValues();
+            SetDefaultValues();
 
             // Button for setting values & its events
             Button setValuesButton = WinFormHelpers.CreateButton("setStatusButton", "Set values", 629, 213, 75, 23, this);
