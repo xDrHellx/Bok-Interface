@@ -42,6 +42,9 @@ namespace BokInterface.Addresses {
             Django.Add("y_position", new MemoryAddress(0x34, note: "Django Y position", domain: "EWRAM"));
             Django.Add("z_position", new MemoryAddress(0x32, note: "Django Z position", domain: "EWRAM"));
 
+            // Current form or character
+            Django.Add("current_form", new MemoryAddress(0x250, note: "Current form or character", domain: "EWRAM"));
+
             // Current stats
             _note = "Used for damage calculations, will be copied to its Persistent equivalent on screen transition. Must be combined with the \"stat\" memory address' value";
             Django.Add("current_hp", new MemoryAddress(0x364, note: _note, domain: "EWRAM"));
