@@ -55,7 +55,7 @@ namespace BokInterface.All {
                 KeyValuePair<string, Ability> option = (KeyValuePair<string, Ability>)Items[e.Index];
                 Ability optionItem = option.Value;
                 e.Graphics.DrawString(optionItem.name, e.Font, new SolidBrush(e.ForeColor), e.Bounds.Left, e.Bounds.Top + 1);
-            } else if (Items[e.Index].GetType() == typeof(KeyValuePair<string, Weapon>)) {
+            } else if (Items[e.Index].GetType() == typeof(KeyValuePair<string, Accessory>)) {
 
                 // For Boktai accessories
                 KeyValuePair<string, Accessory> option = (KeyValuePair<string, Accessory>)Items[e.Index];
