@@ -110,10 +110,11 @@ namespace BokInterface.All {
 
                 int slotNumber = i + 1;
 
-                // Items & key items
+                // Items, key items & accessories
                 Inventory.Add("slot" + slotNumber + "_item", new DynamicMemoryValue("slot" + slotNumber + "_item", _zoktaiAddresses.Misc["stat"].Address, _zoktaiAddresses.Inventory["item_slot_" + slotNumber].Address));
                 Inventory.Add("slot" + slotNumber + "_durability", new DynamicMemoryValue("slot" + slotNumber + "_durability", _zoktaiAddresses.Misc["stat"].Address, _zoktaiAddresses.Inventory["item_slot_durability_" + slotNumber].Address));
                 Inventory.Add("slot" + slotNumber + "_key_item", new DynamicMemoryValue("slot" + slotNumber + "_key_item", _zoktaiAddresses.Misc["stat"].Address, _zoktaiAddresses.Inventory["key_item_slot_" + slotNumber].Address));
+                Inventory.Add("slot" + slotNumber + "_accessory", new DynamicMemoryValue("slot" + slotNumber + "_accessory", _zoktaiAddresses.Misc["stat"].Address, _zoktaiAddresses.Inventory["accessory_slot_" + slotNumber].Address));
 
                 // Weapons
                 Inventory.Add("slot" + slotNumber + "_weapon", new DynamicMemoryValue("slot" + slotNumber + "_weapon", _zoktaiAddresses.Misc["stat"].Address, _zoktaiAddresses.Inventory["weapon_slot_" + slotNumber].Address, type: _zoktaiAddresses.Inventory["weapon_slot_" + slotNumber].Type));

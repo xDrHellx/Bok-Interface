@@ -1,6 +1,7 @@
 using System;
 using System.Windows.Forms;
 
+using BokInterface.Accessories;
 using BokInterface.All;
 using BokInterface.Inventory;
 using BokInterface.KeyItems;
@@ -109,14 +110,25 @@ namespace BokInterface {
         protected void OpenEquipsEditor(object sender, EventArgs e) {
             if (equipsEditorOpened == false) {
 
-                // Create subwindow & add on close event
-                equipsEditWindow = WinFormHelpers.CreateSubWindow("equipsEditWindow", "Bok Edit - Equips", 200, 100, this);
-                equipsEditWindow.FormClosing += new FormClosingEventHandler(delegate (object sender, FormClosingEventArgs e) {
-                    equipsEditorOpened = false;
-                    equipsEditWindow.Controls.Clear();
-                });
+                // Open editor for the current game
+                switch (shorterGameName) {
+                    case "Boktai":
+                        // new BoktaiAccessoriesEditor(this, _memoryValues, _boktaiAddresses);
+                        break;
+                    case "Zoktai":
+                        new ZoktaiAccessoriesEditor(this, _memoryValues, _zoktaiAddresses);
+                        break;
+                    case "Shinbok":
+                        // new ShinbokAccessoriesEditor(this, _memoryValues, _shinbokAddresses);
+                        break;
+                    case "LunarKnights":
+                        // new LunarKnightsAccessoriesEditor(this, _memoryValues, _lunarKnightsAddresses);
+                        break;
+                    default:
+                        // If game is not handled, do nothing
+                        return;
+                }
 
-                equipsEditWindow.Show();
                 equipsEditorOpened = true;
             }
         }
