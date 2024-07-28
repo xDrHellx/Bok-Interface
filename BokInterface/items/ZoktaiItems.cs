@@ -1,20 +1,13 @@
 using System.Collections.Generic;
 
-using BokInterface.Addresses;
-using BokInterface.All;
-
 namespace BokInterface.Items {
     /// <summary>Class for Zoktai item instances and lists</summary>
     class ZoktaiItems {
 
         public Dictionary<string, Item> Items = [];
         public Dictionary<string, Item> KeyItems = [];
-        private readonly ZoktaiAddresses _memAddresses;
-        private readonly MemoryValues _memoryValues;
 
-        public ZoktaiItems(MemoryValues memoryValues, ZoktaiAddresses zoktaiAddresses) {
-            _memoryValues = memoryValues;
-            _memAddresses = zoktaiAddresses;
+        public ZoktaiItems() {
             InitItems();
             InitKeyItems();
         }

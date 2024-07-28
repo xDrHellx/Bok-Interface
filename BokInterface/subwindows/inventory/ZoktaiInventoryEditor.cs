@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.Windows.Forms;
 
 using BokInterface.Addresses;
@@ -29,7 +28,7 @@ namespace BokInterface.Inventory {
 
             _memoryValues = memoryValues;
             _zoktaiAddresses = zoktaiAddresses;
-            _zoktaiItems = new(_memoryValues, _zoktaiAddresses);
+            _zoktaiItems = new();
 
             Owner = _bokInterface = bokInterface;
             Icon = _bokInterface.Icon;

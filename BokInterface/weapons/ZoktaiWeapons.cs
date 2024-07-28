@@ -1,9 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
 
-using BokInterface.Addresses;
-using BokInterface.All;
-
 namespace BokInterface.Weapons {
     /// <summary>Class for Zoktai weapon instances and lists</summary>
     class ZoktaiWeapons {
@@ -14,14 +11,8 @@ namespace BokInterface.Weapons {
             Guns = [],
             Misc = [],
             All = [];
-        private readonly ZoktaiAddresses _memAddresses;
-        private readonly MemoryValues _memoryValues;
 
-        public ZoktaiWeapons(MemoryValues memoryValues, ZoktaiAddresses zoktaiAddresses) {
-            _memoryValues = memoryValues;
-            _memAddresses = zoktaiAddresses;
-
-            // Init dictionnaries
+        public ZoktaiWeapons() {
             InitSwords();
             InitHammers();
             InitSpears();

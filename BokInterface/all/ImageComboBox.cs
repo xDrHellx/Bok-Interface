@@ -6,6 +6,7 @@ using BokInterface.Entities;
 using BokInterface.Items;
 using BokInterface.Weapons;
 using BokInterface.Weapons.Abilities;
+using BokInterface.Weapons.Accessories;
 
 namespace BokInterface.All {
     ///<summary>Class for ComboBox with images next to selectable options</summary>
@@ -55,6 +56,20 @@ namespace BokInterface.All {
                 KeyValuePair<string, Ability> option = (KeyValuePair<string, Ability>)Items[e.Index];
                 Ability optionItem = option.Value;
                 e.Graphics.DrawString(optionItem.name, e.Font, new SolidBrush(e.ForeColor), e.Bounds.Left, e.Bounds.Top + 1);
+            } else if (Items[e.Index].GetType() == typeof(KeyValuePair<string, Accessory>)) {
+
+                // For Boktai accessories
+                KeyValuePair<string, Accessory> option = (KeyValuePair<string, Accessory>)Items[e.Index];
+                Accessory optionItem = option.Value;
+
+                /**
+                 * Draw the item's name & icon (if it has one)
+                 * We always add the space an icon would take so that elements are aligned properly
+                 */
+                e.Graphics.DrawString(optionItem.name, e.Font, new SolidBrush(e.ForeColor), e.Bounds.Left + 16, e.Bounds.Top + 1);
+                if (optionItem.icon != null) {
+                    e.Graphics.DrawImage(optionItem.icon, e.Bounds.Left, e.Bounds.Top + 1);
+                }
             } else if (Items[e.Index].GetType() == typeof(KeyValuePair<string, Character>)) {
 
                 // For Boktai characters
@@ -75,14 +90,6 @@ namespace BokInterface.All {
                 KeyValuePair<string, Enemy> option = (KeyValuePair<string, Enemy>)Items[e.Index];
                 Enemy optionItem = option.Value;
 
-                /**
-                 * Draw the item's name & icon (if it has one)
-                 * We always add the space an icon would take so that elements are aligned properly
-                 */
-                e.Graphics.DrawString(optionItem.name, e.Font, new SolidBrush(e.ForeColor), e.Bounds.Left + 16, e.Bounds.Top + 1);
-                if (optionItem.icon != null) {
-                    e.Graphics.DrawImage(optionItem.icon, e.Bounds.Left, e.Bounds.Top + 1);
-                }
             } else {
                 // Default item
                 ImageComboBoxItem item = new(Items[e.Index].ToString());
