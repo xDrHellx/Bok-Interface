@@ -4,31 +4,31 @@ using System.Windows.Forms;
 
 using BokInterface.Addresses;
 using BokInterface.All;
-using BokInterface.Items;
+using BokInterface.Weapons.Accessories;
 
-namespace BokInterface.KeyItems {
-    /// <summary>Key items editor for Boktai 2</summary>
-    class ZoktaiKeyItemsEditor : KeyItemsEditor {
+namespace BokInterface.Accessories {
+    class ZoktaiAccessoriesEditor : AccessoriesEditor {
 
         #region Instances
 
         private readonly MemoryValues _memoryValues;
         private readonly BokInterface _bokInterface;
         private readonly ZoktaiAddresses _zoktaiAddresses;
-        private readonly ZoktaiItems _zoktaiItems;
+        private readonly ZoktaiAccessories _zoktaiAccessories;
 
         #endregion
 
-        public ZoktaiKeyItemsEditor(BokInterface bokInterface, MemoryValues memoryValues, ZoktaiAddresses zoktaiAddresses) {
+        public ZoktaiAccessoriesEditor(BokInterface bokInterface, MemoryValues memoryValues, ZoktaiAddresses zoktaiAddresses) {
 
             _memoryValues = memoryValues;
             _zoktaiAddresses = zoktaiAddresses;
-            _zoktaiItems = new();
 
             Owner = _bokInterface = bokInterface;
             Icon = _bokInterface.Icon;
+            _zoktaiAccessories = new();
 
             SetFormParameters(691, 240);
+            Text = "Protectors editor";
 
             // Add the onClose event to the subwindow
             FormClosing += new FormClosingEventHandler(delegate (object sender, FormClosingEventArgs e) {
@@ -46,28 +46,28 @@ namespace BokInterface.KeyItems {
             InstanciateCheckGroupBoxes();
 
             // 1st row
-            dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot1_key_item", 5, 19, 160, 23, slot1group, visibleOptions: 5));
-            dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot2_key_item", 5, 19, 160, 23, slot2group, visibleOptions: 5));
-            dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot3_key_item", 5, 19, 160, 23, slot3group, visibleOptions: 5));
-            dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot4_key_item", 5, 19, 160, 23, slot4group, visibleOptions: 5));
+            dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot1_accessory", 5, 19, 160, 23, slot1group, visibleOptions: 5));
+            dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot2_accessory", 5, 19, 160, 23, slot2group, visibleOptions: 5));
+            dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot3_accessory", 5, 19, 160, 23, slot3group, visibleOptions: 5));
+            dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot4_accessory", 5, 19, 160, 23, slot4group, visibleOptions: 5));
 
             // 2nd row
-            dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot5_key_item", 5, 19, 160, 23, slot5group, visibleOptions: 5));
-            dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot6_key_item", 5, 19, 160, 23, slot6group, visibleOptions: 5));
-            dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot7_key_item", 5, 19, 160, 23, slot7group, visibleOptions: 5));
-            dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot8_key_item", 5, 19, 160, 23, slot8group, visibleOptions: 5));
+            dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot5_accessory", 5, 19, 160, 23, slot5group, visibleOptions: 5));
+            dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot6_accessory", 5, 19, 160, 23, slot6group, visibleOptions: 5));
+            dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot7_accessory", 5, 19, 160, 23, slot7group, visibleOptions: 5));
+            dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot8_accessory", 5, 19, 160, 23, slot8group, visibleOptions: 5));
 
             // 3rd row
-            dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot9_key_item", 5, 19, 160, 23, slot9group, visibleOptions: 5));
-            dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot10_key_item", 5, 19, 160, 23, slot10group, visibleOptions: 5));
-            dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot11_key_item", 5, 19, 160, 23, slot11group, visibleOptions: 5));
-            dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot12_key_item", 5, 19, 160, 23, slot12group, visibleOptions: 5));
+            dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot9_accessory", 5, 19, 160, 23, slot9group, visibleOptions: 5));
+            dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot10_accessory", 5, 19, 160, 23, slot10group, visibleOptions: 5));
+            dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot11_accessory", 5, 19, 160, 23, slot11group, visibleOptions: 5));
+            dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot12_accessory", 5, 19, 160, 23, slot12group, visibleOptions: 5));
 
             // 4th row
-            dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot13_key_item", 5, 19, 160, 23, slot13group, visibleOptions: 5));
-            dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot14_key_item", 5, 19, 160, 23, slot14group, visibleOptions: 5));
-            dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot15_key_item", 5, 19, 160, 23, slot15group, visibleOptions: 5));
-            dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot16_key_item", 5, 19, 160, 23, slot16group, visibleOptions: 5));
+            dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot13_accessory", 5, 19, 160, 23, slot13group, visibleOptions: 5));
+            dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot14_accessory", 5, 19, 160, 23, slot14group, visibleOptions: 5));
+            dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot15_accessory", 5, 19, 160, 23, slot15group, visibleOptions: 5));
+            dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot16_accessory", 5, 19, 160, 23, slot16group, visibleOptions: 5));
 
             // Generate & add options to dropdowns
             GenerateDropDownOptions();
@@ -124,15 +124,15 @@ namespace BokInterface.KeyItems {
                     continue;
                 }
 
-                KeyValuePair<string, Item> selectedOption = (KeyValuePair<string, Item>)slots[i].SelectedItem;
-                Item selectedItem = selectedOption.Value;
+                KeyValuePair<string, Accessory> selectedOption = (KeyValuePair<string, Accessory>)slots[i].SelectedItem;
+                Accessory selectedAccessory = selectedOption.Value;
 
                 /**
                  * Indicate which sublist to use for setting the value, based on the slot's name
                  * We only split on the first "_"
                  */
                 string[] fieldParts = slots[i].Name.Split(['_'], 2);
-                SetMemoryValue(fieldParts[0], fieldParts[1], selectedItem.value);
+                SetMemoryValue(fieldParts[0], fieldParts[1], selectedAccessory.value);
             }
 
             /**
@@ -232,20 +232,20 @@ namespace BokInterface.KeyItems {
         ///<summary>Generates the options for the dropdowns</summary>
         private void GenerateDropDownOptions() {
             foreach (ImageComboBox dropdown in dropDownLists) {
-                dropdown.DataSource = new BindingSource(_zoktaiItems.KeyItems, null);
+                dropdown.DataSource = new BindingSource(_zoktaiAccessories.All, null);
                 dropdown.DisplayMember = "Key";
                 dropdown.ValueMember = "Value";
             }
         }
 
-        ///<summary>Get an item from the items list by using its value</summary>
+        ///<summary>Get an accessory from the accessories list by using its value</summary>
         ///<param name="value"><c>decimal</c>Value</param>
-        ///<returns><c>Item</c>Item</returns>
-        private Item? GetItemByValue(decimal value) {
-            foreach (KeyValuePair<string, Item> index in _zoktaiItems.KeyItems) {
-                Item item = index.Value;
-                if (item.value == value) {
-                    return item;
+        ///<returns><c>Accessory</c>Accessory</returns>
+        private Accessory? GetAccessoryByValue(decimal value) {
+            foreach (KeyValuePair<string, Accessory> index in _zoktaiAccessories.All) {
+                Accessory accessory = index.Value;
+                if (accessory.value == value) {
+                    return accessory;
                 }
             }
 
@@ -259,13 +259,13 @@ namespace BokInterface.KeyItems {
             if (currentStat > 0) {
                 foreach (ImageComboBox dropdown in dropDownLists) {
                     /**
-                     * Get the name of the field to retrieve the value from based on the dropdown's name (for example inventory_slotX_item => slotX_item)
+                     * Get the name of the field to retrieve the value from based on the dropdown's name (for example inventory_slotX_accessory => slotX_accessory)
                      * Then try getting the corresponding item & preselect it
                      */
                     string[] fieldParts = dropdown.Name.Split(['_'], 2);
-                    Item? selectedItem = GetItemByValue(_memoryValues.Inventory[fieldParts[1]].Value);
-                    if (selectedItem != null) {
-                        dropdown.SelectedIndex = dropdown.FindStringExact(selectedItem.name);
+                    Accessory? selectedAccessory = GetAccessoryByValue(_memoryValues.Inventory[fieldParts[1]].Value);
+                    if (selectedAccessory != null) {
+                        dropdown.SelectedIndex = dropdown.FindStringExact(selectedAccessory.name);
                     }
                 }
             } else {

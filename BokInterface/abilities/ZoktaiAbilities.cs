@@ -1,7 +1,5 @@
 using System.Collections.Generic;
 
-using BokInterface.Addresses;
-using BokInterface.All;
 using BokInterface.Weapons.Abilities;
 
 namespace BokInterface.Abilities {
@@ -10,14 +8,8 @@ namespace BokInterface.Abilities {
 
         public Dictionary<string, Ability> Weapons = [],
             Armors = [];
-        private readonly ZoktaiAddresses _memAddresses;
-        private readonly MemoryValues _memoryValues;
 
-        public ZoktaiAbilities(MemoryValues memoryValues, ZoktaiAddresses zoktaiAddresses) {
-            _memoryValues = memoryValues;
-            _memAddresses = zoktaiAddresses;
-
-            // Init dictionnaries
+        public ZoktaiAbilities() {
             InitWeaponAbilitiesList();
             InitArmorAbilitiesList();
         }

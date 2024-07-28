@@ -544,4 +544,115 @@
   <data name="astro_hammer" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\img\bok2\weapons\astro_hammer.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="cloth_armor" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok2\accessories\cloth_armor.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="leather_armor" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok2\accessories\leather_armor.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="chain_mail" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok2\accessories\chain_mail.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="silver_chain" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok2\accessories\silver_chain.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="scale_mail" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok2\accessories\scale_mail.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="samurai_armor" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok2\accessories\samurai_armor.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="blade_mail" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok2\accessories\blade_mail.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="brigandine" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok2\accessories\brigandine.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="mail_of_sol" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok2\accessories\mail_of_sol.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="mail_of_darkness" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok2\accessories\mail_of_darkness.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="mail_of_luna" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok2\accessories\mail_of_luna.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="fire_dragon_fang" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok2\accessories\fire_dragon_fang.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="water_dragon_tail" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok2\accessories\water_dragon_tail.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="wind_dragon_wing" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok2\accessories\wind_dragon_wing.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="earth_dragon_claw" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok2\accessories\earth_dragon_claw.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="dragon_scale" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok2\accessories\dragon_scale.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="fairy_robe" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok2\accessories\fairy_robe.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="earthly_robe" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok2\accessories\earthly_robe.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="raincoat" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok2\accessories\raincoat.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="garb_of_light" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok2\accessories\garb_of_light.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="garb_of_darkness" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok2\accessories\garb_of_darkness.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="magic_robe" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok2\accessories\magic_robe.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="blood_soaked_cape" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok2\accessories\blood_soaked_cape.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="skull_suit" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok2\accessories\skull_suit.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="training_gear" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok2\accessories\training_gear.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="thiefs_clothes" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok2\accessories\thiefs_clothes.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="hunters_clothes" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok2\accessories\hunters_clothes.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="poison_guard" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok2\accessories\poison_guard.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="weapon_guard" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok2\accessories\weapon_guard.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="parade_armor" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok2\accessories\parade_armor.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ninja_gi" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok2\accessories\ninja_gi.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="spike_mail" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok2\accessories\spike_mail.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="pitch_black_armor" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok2\accessories\pitch_black_armor.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="mega_power" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok2\accessories\mega_power.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="guts_power" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok2\accessories\guts_power.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="proto_power" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok2\accessories\proto_power.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="toad_power" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok2\accessories\toad_power.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
 </root>
