@@ -104,7 +104,7 @@ namespace BokInterface.Addresses {
 
             /**
              * Inventory-related memory addresses
-             * We set these using a loop to simplify (each slot is 2 bytes)
+             * We set these using a loop to simplify
              */
             for (int i = 0; i < 16; i++) {
 
@@ -117,6 +117,9 @@ namespace BokInterface.Addresses {
 
                 // Key items (2 bytes)
                 Inventory.Add("key_item_slot_" + slotNumber, new MemoryAddress(0x130 + addressOffset, note: "Key item inventory slot", domain: "EWRAM"));
+
+                // Accessories (2 bytes)
+                Inventory.Add("accessory_slot_" + slotNumber, new MemoryAddress(0x150 + addressOffset, note: "Accessory inventory slot", domain: "EWRAM"));
 
                 // Weapons & parameters
                 addressOffset = 0x1C * (uint)i;

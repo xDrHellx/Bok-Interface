@@ -189,20 +189,19 @@ namespace BokInterface {
             _bok2_editStatusBtn = WinFormHelpers.CreateButton("editStatuts", "Status", 6, 19, 75, 23, editGroupBox);
             _bok2_editInventoryBtn = WinFormHelpers.CreateButton("editItems", "Items", 6, 46, 75, 23, editGroupBox);
             _bok2_editKeyItemsBtn = WinFormHelpers.CreateButton("editKeyItems", "Key items", 6, 73, 75, 23, editGroupBox);
-            // _bok2_editEquipsBtn = WinFormHelpers.CreateButton("editEquips", "Equips", 6, 73, 75, 23, editGroupBox);
             _bok2_editWeaponsBtn = WinFormHelpers.CreateButton("editWeapons", "Weapons", 6, 100, 75, 23, editGroupBox);
-            _bok2_editMagicsBtn = WinFormHelpers.CreateButton("editMagics", "Magics", 6, 127, 75, 23, editGroupBox);
+            _bok2_editEquipsBtn = WinFormHelpers.CreateButton("editEquips", "Protectors", 6, 127, 75, 23, editGroupBox);
+            // _bok2_editMagicsBtn = WinFormHelpers.CreateButton("editMagics", "Magics", 6, 127, 75, 23, editGroupBox);
 
             // WIP features are disabled for now
-            _bok2_editEquipsBtn.Enabled = false;
             _bok2_editMagicsBtn.Enabled = false;
 
             // Add onclick events
             _bok2_editStatusBtn.Click += new System.EventHandler(OpenStatusEditor);
             _bok2_editInventoryBtn.Click += new System.EventHandler(OpenInventoryEditor);
             _bok2_editKeyItemsBtn.Click += new System.EventHandler(OpenKeyItemsEditor);
-            // _bok2_editEquipsBtn.Click += new System.EventHandler(OpenEquipsEditor);
             _bok2_editWeaponsBtn.Click += new System.EventHandler(OpenWeaponsEditor);
+            _bok2_editEquipsBtn.Click += new System.EventHandler(OpenEquipsEditor);
             // _bok2_editMagicsBtn.Click += new System.EventHandler(OpenMagicsEditor);
         }
     }

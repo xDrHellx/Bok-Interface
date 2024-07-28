@@ -25,8 +25,8 @@ namespace BokInterface.Weapons {
 
             _memoryValues = memoryValues;
             _zoktaiAddresses = zoktaiAddresses;
-            _zoktaiWeapons = new(_memoryValues, _zoktaiAddresses);
-            _zoktaiAbilities = new(_memoryValues, _zoktaiAddresses);
+            _zoktaiWeapons = new();
+            _zoktaiAbilities = new();
 
             Owner = _bokInterface = bokInterface;
             Icon = _bokInterface.Icon;
