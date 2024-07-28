@@ -8,7 +8,7 @@ namespace BokInterface.Weapons.Accessories {
         public readonly string name;
         ///<summary>Value (decimal)<summary>
         public readonly uint value;
-        /// <summary>Accessory type (Head, torso, ...)</summary>
+        /// <summary>Accessory type (Head, Body, Hand, Foot)</summary>
         public readonly string type;
         public readonly Image? icon = null;
         public readonly int row;
