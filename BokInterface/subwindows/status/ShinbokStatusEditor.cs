@@ -51,8 +51,8 @@ namespace BokInterface.Status {
             // WinFormHelpers.CreateLabel("djangoEditTrcLabel", "TRC :", 7, 81, 34, 15, statusGroupBox);
 
             statusNumericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("django_current_hp", defaultValues["django_current_hp"], 47, 21, 50, 23, maxValue: 1000, control: statusGroupBox));
-            // statusNumericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("django_current_ene", defaultValues["django_current_ene"], 47, 50, 50, 23, maxValue: 1000, control: statusGroupBox));
-            // statusNumericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("django_current_trc", defaultValues["django_current_trc"], 47, 79, 50, 23, maxValue: 1000, control: statusGroupBox));
+            statusNumericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("django_current_ene", defaultValues["django_current_ene"], 47, 50, 50, 23, maxValue: 1000, control: statusGroupBox));
+            statusNumericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("django_current_trc", defaultValues["django_current_trc"], 47, 79, 50, 23, maxValue: 1000, control: statusGroupBox));
 
             // Stats
             WinFormHelpers.CreateLabel("djangoEditHpLabel", "VIT", 8, 24, 27, 15, control: statsGroupBox);
@@ -91,14 +91,16 @@ namespace BokInterface.Status {
             // If HP value is valid, get the other in-game values
             if (djangoCurrentHp >= 0 && djangoCurrentHp <= 1000) {
                 defaultValues.Add("django_current_hp", djangoCurrentHp);
+                defaultValues.Add("django_current_ene", _memoryValues.Django["current_ene"].Value);
+                defaultValues.Add("django_current_trc", _memoryValues.Django["current_trc"].Value);
                 defaultValues.Add("django_base_vit", _memoryValues.Django["base_vit"].Value);
                 defaultValues.Add("django_base_spr", _memoryValues.Django["base_spr"].Value);
                 defaultValues.Add("django_base_str", _memoryValues.Django["base_str"].Value);
             } else {
                 // If HP is unvalid (for example if we are on the title screen or in bike races), use specific values
                 defaultValues.Add("django_current_hp", 100);
-                // defaultValues.Add("django_current_ene", 100);
-                // defaultValues.Add("django_current_trc", 1000);
+                defaultValues.Add("django_current_ene", 100);
+                defaultValues.Add("django_current_trc", 1000);
                 defaultValues.Add("django_base_vit", 10);
                 defaultValues.Add("django_base_spr", 10);
                 defaultValues.Add("django_base_str", 10);
