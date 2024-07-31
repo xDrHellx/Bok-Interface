@@ -37,17 +37,24 @@ namespace BokInterface.Addresses {
         /// </summary>
         public IDictionary<string, MemoryAddress> Misc = new Dictionary<string, MemoryAddress>();
 
+        /// <summary>Note for MemoryAddress instances (for less repetition)</summary>
+        private string _note = "";
+
         public ShinbokAddresses() {
 
-            // For less repetition
-            string note = "";
-
             // Add Django addresses
-            // Django.Add("ene", 0x03C42C);
-            // Django.Add("trc", 0x03CA08);
-            // Django.Add("stat_points_to_allocate", 0x03C442);
-            // Django.Add("level", 0x03C440);
-            // Django.Add("current_exp", 0x03C448);
+            Django.Add("x_position", new MemoryAddress(0x30, note: "Django X position", domain: "EWRAM"));
+            Django.Add("y_position", new MemoryAddress(0x34, note: "Django Y position", domain: "EWRAM"));
+            Django.Add("z_position", new MemoryAddress(0x32, note: "Django Z position", domain: "EWRAM"));
+
+            // Current stats
+            Django.Add("current_hp", new MemoryAddress(0x424, domain: "EWRAM"));
+            Django.Add("current_ene", new MemoryAddress(0x428, domain: "EWRAM"));
+            Django.Add("current_trc", new MemoryAddress(0x42C, domain: "EWRAM"));
+
+            // EXP & level
+            Django.Add("level", new MemoryAddress(0x440, domain: "EWRAM"));
+            Django.Add("current_exp", new MemoryAddress(0x448, domain: "EWRAM"));
             // Django.Add("exp_until_next_level", 0x001BC8);
 
             // Add Solls addresses
@@ -63,18 +70,12 @@ namespace BokInterface.Addresses {
             // Bike.Add("scrolling", 0x0004E0);
             // Bike.Add("progress", 0x00F6AC);
 
-            // Add Django addresses
-            Django.Add("hp", new MemoryAddress(0x424, domain: "EWRAM"));
-
-            Django.Add("x_position", new MemoryAddress(0x30, note: "Django X position", domain: "EWRAM"));
-            Django.Add("y_position", new MemoryAddress(0x34, note: "Django Y position", domain: "EWRAM"));
-            Django.Add("z_position", new MemoryAddress(0x32, note: "Django Z position", domain: "EWRAM"));
-
             // 0x18 + 2 * stat_id
-            note = "Stat points put into ";
-            Django.Add("base_vit", new MemoryAddress(0x18, note: note + "VIT", domain: "EWRAM"));
-            Django.Add("base_spr", new MemoryAddress(0x1A, note: note + "SPR", domain: "EWRAM"));
-            Django.Add("base_str", new MemoryAddress(0x1C, note: note + "STR", domain: "EWRAM"));
+            _note = "Stat points put into ";
+            Django.Add("base_vit", new MemoryAddress(0x18, note: _note + "VIT", domain: "EWRAM"));
+            Django.Add("base_spr", new MemoryAddress(0x1A, note: _note + "SPR", domain: "EWRAM"));
+            Django.Add("base_str", new MemoryAddress(0x1C, note: _note + "STR", domain: "EWRAM"));
+            Django.Add("stat_points_to_allocate", new MemoryAddress(0x442, domain: "EWRAM"));
 
             // Django.Add("equips_vit", 0x18);
             // Django.Add("equips_spr", 0x32C);
