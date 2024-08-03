@@ -1,33 +1,11 @@
 using System.Drawing;
 
 namespace BokInterface.Items {
-    ///<summary>Base class for representing an item</summary>
-    abstract class Item {
+    ///<summary>Class representing an item for Zoktai</summary>
+    class ZoktaiItem : Item {
 
-        ///<summary>Item name</summary>
-        public string name;
-        ///<summary>Value (decimal)<summary>
-        public uint value;
-        ///<summary>Indicates if the item can is perishable (becomes rotten or melts)</summary>
-        public bool perishable;
-        ///<summary>Item durability if it can melt or become rotten</summary>
-        public int durability;
-        ///<summary>Value at which the item spoils and turns into the corresponding melted or rotten item </summary>
-        public int rottenAt = 3840;
-        public Image? icon = null;
-        ///<summary>Covered item if this instance is "Chocolated-covered"</summary>
-        ///<remarks>Currently unused (research for implementation is needed)</remarks>
-        public Item? coveredItem;
-        ///<summary>The name of the item this can rott or melt into, if perishable</summary>
-        public string rottsInto = "";
-        /// <summary>Price when buying</summary>
-        public int buyPrice;
-        /// <summary>Price when selling</summary>
-        public int sellPrice;
+        public ZoktaiItem(string name, uint value, string icon = "", bool perishable = false, int durability = 0, Item? coveredItem = null, int buyPrice = 0) : base(name, value) {
 
-        public Item(string name, uint value, string icon = "", bool perishable = false, int durability = 0, Item? coveredItem = null, int buyPrice = 0) {
-            this.name = name;
-            this.value = value;
             this.perishable = perishable;
             this.durability = durability < rottenAt ? durability : 0;
             this.coveredItem = coveredItem;
@@ -58,11 +36,29 @@ namespace BokInterface.Items {
         /// <summary>Returns the item this instance should rott into</summary>
         /// <param name="value">Instance item value</param>
         /// <returns><c>String</c>Item name</returns>
-        protected abstract string GetRottsInto(uint value);
+        protected override string GetRottsInto(uint value) {
+            return value switch {
+                // Redshroom & Blueshroom
+                9 or 10 => "Bad Mushroom",
+                // Drop of Sun & Tomato Juice
+                12 or 13 => "Rotten water",
+                // Chocolate
+                18 => coveredItem != null ? "Chocolate-covered" : "Melted Chocolate",
+                // Tasty Meat
+                15 => "Rotten Meat",
+                // Nuts
+                _ => "Rotten Nut",
+            };
+        }
 
         /// <summary>Returns the value at which this instance should turn into a rotten item</summary>
         /// <param name="value">Instance item value</param>
         /// <returns><c>Int</c>Rottens at value</returns>
-        protected abstract int GetRottensAt(uint value);
+        protected override int GetRottensAt(uint value) {
+            return value switch {
+                9 or 10 or 13 => 7680,
+                _ => 3840,
+            };
+        }
     }
 }
