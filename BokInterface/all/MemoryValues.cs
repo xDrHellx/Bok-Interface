@@ -137,9 +137,9 @@ namespace BokInterface.All {
             Django.Add("current_trc", new DynamicMemoryValue("current_trc", _shinbokAddresses.Misc["room"].Address, _shinbokAddresses.Django["current_trc"].Address));
 
             // Stats
-            Django.Add("base_vit", new DynamicMemoryValue("base_vit", _shinbokAddresses.Misc["stat"].Address, _shinbokAddresses.Django["base_vit"].Address));
-            Django.Add("base_spr", new DynamicMemoryValue("base_spr", _shinbokAddresses.Misc["stat"].Address, _shinbokAddresses.Django["base_spr"].Address));
-            Django.Add("base_str", new DynamicMemoryValue("base_str", _shinbokAddresses.Misc["stat"].Address, _shinbokAddresses.Django["base_str"].Address));
+            Django.Add("base_vit", new DynamicMemoryValue("base_vit", _shinbokAddresses.Misc["stat"].Address, _shinbokAddresses.Django["current_base_vit"].Address));
+            Django.Add("base_spr", new DynamicMemoryValue("base_spr", _shinbokAddresses.Misc["stat"].Address, _shinbokAddresses.Django["current_base_spr"].Address));
+            Django.Add("base_str", new DynamicMemoryValue("base_str", _shinbokAddresses.Misc["stat"].Address, _shinbokAddresses.Django["current_base_str"].Address));
         }
 
         private void InitializeLunarKnightsList() {

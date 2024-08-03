@@ -48,33 +48,28 @@ namespace BokInterface.Addresses {
             Django.Add("z_position", new MemoryAddress(0x32, note: "Django Z position", domain: "EWRAM"));
 
             // Current stats
+            _note = "Used for damage calculations, will be copied to its Persistent equivalent on screen transition. Must be combined with the \"stat\" memory address' value";
             Django.Add("current_hp", new MemoryAddress(0x424, domain: "EWRAM"));
             Django.Add("current_ene", new MemoryAddress(0x428, domain: "EWRAM"));
             Django.Add("current_trc", new MemoryAddress(0x42C, domain: "EWRAM"));
+            Django.Add("current_base_vit", new MemoryAddress(0x18, note: _note, domain: "EWRAM"));
+            Django.Add("current_base_spr", new MemoryAddress(0x1A, note: _note, domain: "EWRAM"));
+            Django.Add("current_base_str", new MemoryAddress(0x1C, note: _note, domain: "EWRAM"));
 
-            // EXP & level
-            Django.Add("level", new MemoryAddress(0x440, domain: "EWRAM"));
-            Django.Add("current_exp", new MemoryAddress(0x448, domain: "EWRAM"));
-            // Django.Add("exp_until_next_level", 0x001BC8);
 
             // Add Solls addresses
             // Solls.Add("solls_on_self", 0x03CBB0);
             // Solls.Add("solar_bank", 0x03CB7C);
             // Solls.Add("dark_loan", 0x03C90C);
 
-            // Add Bike addresses
-            // Bike.Add("points", 0x03CBB2);
-            // Bike.Add("hp", 0x00F6F8);
-            // Bike.Add("ene", 0x00F6F4);
-            // Bike.Add("base_speed", 0x00F730);
-            // Bike.Add("scrolling", 0x0004E0);
-            // Bike.Add("progress", 0x00F6AC);
 
             // 0x18 + 2 * stat_id
-            _note = "Stat points put into ";
-            Django.Add("base_vit", new MemoryAddress(0x18, note: _note + "VIT", domain: "EWRAM"));
-            Django.Add("base_spr", new MemoryAddress(0x1A, note: _note + "SPR", domain: "EWRAM"));
-            Django.Add("base_str", new MemoryAddress(0x1C, note: _note + "STR", domain: "EWRAM"));
+
+            // Persistent stats (used on screen transitions & save data)
+            _note = "Also corresponds to values from Save Data";
+            Django.Add("persistent_base_vit", new MemoryAddress(0x808, note: _note, domain: "EWRAM"));
+            Django.Add("persistent_base_spr", new MemoryAddress(0x80A, note: _note, domain: "EWRAM"));
+            Django.Add("persistent_base_str", new MemoryAddress(0x81C, note: _note, domain: "EWRAM"));
             Django.Add("stat_points_to_allocate", new MemoryAddress(0x442, domain: "EWRAM"));
 
             // Django.Add("equips_vit", 0x18);
@@ -95,6 +90,24 @@ namespace BokInterface.Addresses {
             equips str
             00B55A
             */
+
+            // EXP & level
+            Django.Add("level", new MemoryAddress(0x440, domain: "EWRAM"));
+            Django.Add("current_exp", new MemoryAddress(0x448, domain: "EWRAM"));
+            // Django.Add("exp_until_next_level", 0x001BC8);
+
+            // Add Solls addresses
+            // Solls.Add("solls_on_self", 0x03CBB0);
+            // Solls.Add("solar_bank", 0x03CB7C);
+            // Solls.Add("dark_loan", 0x03C90C);
+
+            // Add Bike addresses
+            // Bike.Add("points", 0x03CBB2);
+            // Bike.Add("hp", 0x00F6F8);
+            // Bike.Add("ene", 0x00F6F4);
+            // Bike.Add("base_speed", 0x00F730);
+            // Bike.Add("scrolling", 0x0004E0);
+            // Bike.Add("progress", 0x00F6AC);
 
             // Add Misc addresses
             // Misc.Add("equips_stat", 0x02004094);
