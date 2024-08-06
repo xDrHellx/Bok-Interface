@@ -77,6 +77,8 @@ namespace BokInterface {
 			 */
             if (djangoCurrentHp >= 0 && djangoCurrentHp <= 1000) {
                 _bok3_currentStatusHpValue.Text = djangoCurrentHp.ToString();
+                _bok3_currentStatusEneValue.Text = _memoryValues.Django["current_ene"].Value.ToString();
+                _bok3_currentStatusTrcValue.Text = _memoryValues.Django["current_trc"].Value.ToString();
                 _bok3_djangoBaseVit.Text = _memoryValues.Django["base_vit"].Value.ToString();
                 _bok3_djangoBaseSpr.Text = _memoryValues.Django["base_spr"].Value.ToString();
                 _bok3_djangoBaseStr.Text = _memoryValues.Django["base_str"].Value.ToString();
