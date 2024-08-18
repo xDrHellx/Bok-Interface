@@ -24,7 +24,7 @@ namespace BokInterface.Status {
             Owner = _bokInterface = bokInterface;
             Icon = _bokInterface.Icon;
 
-            SetFormParameters(227, 149);
+            SetFormParameters(283, 157);
 
             // Add the onClose event to the subwindow
             FormClosing += new FormClosingEventHandler(delegate (object sender, FormClosingEventArgs e) {
@@ -42,39 +42,44 @@ namespace BokInterface.Status {
             IDictionary<string, decimal> defaultValues = GetDefaultValues();
 
             // Sections
-            statusGroupBox = WinFormHelpers.CreateCheckGroupBox("editStatusGroup", "Status", 5, 5, 103, 110, control: this);
-            statsGroupBox = WinFormHelpers.CreateCheckGroupBox("editStatsGroup", "Stats", 114, 5, 107, 110, control: this);
+            statusGroupBox = WinFormHelpers.CreateCheckGroupBox("editStatusGroup", "Status", 5, 5, 102, 106, control: this);
+            statsGroupBox = WinFormHelpers.CreateCheckGroupBox("editStatsGroup", "Stats", 113, 5, 166, 124, control: this);
 
             // Status
-            WinFormHelpers.CreateLabel("djangoEditHpLabel", "LIFE :", 7, 24, 34, 15, statusGroupBox);
-            // WinFormHelpers.CreateLabel("djangoEditEneLabel", "ENE :", 7, 52, 34, 15, statusGroupBox);
-            // WinFormHelpers.CreateLabel("djangoEditTrcLabel", "TRC :", 7, 81, 34, 15, statusGroupBox);
+            WinFormHelpers.CreateLabel("djangoEditHpLabel", "LIFE :", 7, 22, 34, 15, statusGroupBox);
+            WinFormHelpers.CreateLabel("djangoEditEneLabel", "ENE :", 7, 50, 34, 15, statusGroupBox);
+            WinFormHelpers.CreateLabel("djangoEditTrcLabel", "TRC :", 7, 79, 34, 15, statusGroupBox);
 
-            statusNumericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("django_current_hp", defaultValues["django_current_hp"], 47, 21, 50, 23, maxValue: 1000, control: statusGroupBox));
-            statusNumericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("django_current_ene", defaultValues["django_current_ene"], 47, 50, 50, 23, maxValue: 1000, control: statusGroupBox));
-            statusNumericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("django_current_trc", defaultValues["django_current_trc"], 47, 79, 50, 23, maxValue: 1000, control: statusGroupBox));
+            statusNumericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("django_current_hp", defaultValues["django_current_hp"], 47, 19, 50, 23, maxValue: 1000, control: statusGroupBox));
+            statusNumericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("django_current_ene", defaultValues["django_current_ene"], 47, 48, 50, 23, maxValue: 1000, control: statusGroupBox));
+            statusNumericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("django_current_trc", defaultValues["django_current_trc"], 47, 77, 50, 23, maxValue: 1000, control: statusGroupBox));
 
             // Stats
-            WinFormHelpers.CreateLabel("djangoEditHpLabel", "VIT", 8, 24, 27, 15, control: statsGroupBox);
-            WinFormHelpers.CreateLabel("djangoEditEneLabel", "SPR", 8, 51, 27, 15, control: statsGroupBox);
-            WinFormHelpers.CreateLabel("djangoEditTrcLabel", "STR", 8, 81, 27, 15, control: statsGroupBox);
+            WinFormHelpers.CreateLabel("djangoEditVitLabel", "VIT", 7, 39, 27, 15, control: statsGroupBox);
+            WinFormHelpers.CreateLabel("djangoEditSprLabel", "SPR", 7, 68, 27, 15, control: statsGroupBox);
+            WinFormHelpers.CreateLabel("djangoEditStrLabel", "STR", 7, 97, 27, 15, control: statsGroupBox);
 
-            statusNumericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("django_base_vit", defaultValues["django_base_vit"], 36, 21, 41, 23, maxValue: 100, control: statsGroupBox));
-            statusNumericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("django_base_spr", defaultValues["django_base_spr"], 36, 50, 41, 23, maxValue: 100, control: statsGroupBox));
-            statusNumericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("django_base_str", defaultValues["django_base_str"], 36, 79, 41, 23, maxValue: 100, control: statsGroupBox));
+            WinFormHelpers.CreateLabel("djangoStatsBaseLabel", "Base", 35, 19, 42, 15, control: statsGroupBox, WinFormHelpers.baseStatColor);
+            WinFormHelpers.CreateLabel("djangoStatsCardsLabel", "Cards", 77, 19, 42, 15, control: statsGroupBox, WinFormHelpers.cardsStatColor);
+            WinFormHelpers.CreateLabel("djangoStatsEquipsLabel", "Equips", 119, 19, 42, 15, control: statsGroupBox, WinFormHelpers.equipsStatColor);
 
-            // Tooltips & warnings
-            List<Label> warningLabels = [
-                WinFormHelpers.CreateImageLabel("tooltip", "warning", 83, 23, statsGroupBox),
-                WinFormHelpers.CreateImageLabel("tooltip", "warning", 83, 52, statsGroupBox),
-                WinFormHelpers.CreateImageLabel("tooltip", "warning", 83, 81, statsGroupBox)
-            ];
+            // Base
+            statusNumericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("django_base_vit", defaultValues["django_base_vit"], 39, 37, 38, 23, maxValue: 100, control: statsGroupBox));
+            statusNumericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("django_base_spr", defaultValues["django_base_spr"], 39, 66, 38, 23, maxValue: 100, control: statsGroupBox));
+            statusNumericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("django_base_str", defaultValues["django_base_str"], 39, 95, 38, 23, maxValue: 100, control: statsGroupBox));
 
-            // Add tooltips
-            WinFormHelpers.AddValuesWarningToolTip(warningLabels);
+            // Cards
+            statusNumericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("django_cards_vit", defaultValues["django_cards_vit"], 81, 37, 38, 23, maxValue: 100, control: statsGroupBox));
+            statusNumericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("django_cards_spr", defaultValues["django_cards_spr"], 81, 66, 38, 23, maxValue: 100, control: statsGroupBox));
+            statusNumericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("django_cards_str", defaultValues["django_cards_str"], 81, 95, 38, 23, maxValue: 100, control: statsGroupBox));
+
+            // Equips / accessories
+            statusNumericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("django_equips_vit", defaultValues["django_equips_vit"], 123, 37, 38, 23, maxValue: 100, control: statsGroupBox));
+            statusNumericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("django_equips_spr", defaultValues["django_equips_spr"], 123, 66, 38, 23, maxValue: 100, control: statsGroupBox));
+            statusNumericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("django_equips_str", defaultValues["django_equips_str"], 123, 95, 38, 23, maxValue: 100, control: statsGroupBox));
 
             // Button for setting values & its events
-            Button setValuesButton = WinFormHelpers.CreateButton("setStatusButton", "Set values", 147, 121, 75, 23, this);
+            Button setValuesButton = WinFormHelpers.CreateButton("setStatusButton", "Set values", 205, 131, 75, 23, this);
             setValuesButton.Click += new EventHandler(delegate (object sender, EventArgs e) {
                 // Write the values for 10 frames
                 for (int i = 0; i < 10; i++) {
@@ -96,6 +101,12 @@ namespace BokInterface.Status {
                 defaultValues.Add("django_base_vit", _memoryValues.Django["base_vit"].Value);
                 defaultValues.Add("django_base_spr", _memoryValues.Django["base_spr"].Value);
                 defaultValues.Add("django_base_str", _memoryValues.Django["base_str"].Value);
+                defaultValues.Add("django_cards_vit", _memoryValues.Django["cards_vit"].Value);
+                defaultValues.Add("django_cards_spr", _memoryValues.Django["cards_spr"].Value);
+                defaultValues.Add("django_cards_str", _memoryValues.Django["cards_str"].Value);
+                defaultValues.Add("django_equips_vit", _memoryValues.Django["equips_vit"].Value);
+                defaultValues.Add("django_equips_spr", _memoryValues.Django["equips_spr"].Value);
+                defaultValues.Add("django_equips_str", _memoryValues.Django["equips_str"].Value);
             } else {
                 // If HP is unvalid (for example if we are on the title screen or in bike races), use specific values
                 defaultValues.Add("django_current_hp", 100);
@@ -104,6 +115,12 @@ namespace BokInterface.Status {
                 defaultValues.Add("django_base_vit", 10);
                 defaultValues.Add("django_base_spr", 10);
                 defaultValues.Add("django_base_str", 10);
+                defaultValues.Add("django_cards_vit", 0);
+                defaultValues.Add("django_cards_spr", 0);
+                defaultValues.Add("django_cards_str", 0);
+                defaultValues.Add("django_equips_vit", 0);
+                defaultValues.Add("django_equips_spr", 0);
+                defaultValues.Add("django_equips_str", 0);
             }
 
             return defaultValues;
