@@ -52,18 +52,32 @@ namespace BokInterface.Addresses {
             Django.Add("current_hp", new MemoryAddress(0x424, domain: "EWRAM"));
             Django.Add("current_ene", new MemoryAddress(0x428, domain: "EWRAM"));
             Django.Add("current_trc", new MemoryAddress(0x42C, domain: "EWRAM"));
-            Django.Add("current_base_vit", new MemoryAddress(0x18, note: _note, domain: "EWRAM"));
-            Django.Add("current_base_spr", new MemoryAddress(0x1A, note: _note, domain: "EWRAM"));
-            Django.Add("current_base_str", new MemoryAddress(0x1C, note: _note, domain: "EWRAM"));
 
+            // VIT
+            Django.Add("current_base_vit", new MemoryAddress(0x18, note: _note, domain: "EWRAM"));
+            Django.Add("current_cards_vit", new MemoryAddress(0x20, note: "Stat points from cards", domain: "EWRAM"));
+            Django.Add("current_equips_vit", new MemoryAddress(0x332, note: "Stat points from accessories", domain: "EWRAM"));
+            Django.Add("current_sum_base_cards_vit", new MemoryAddress(0x41C, note: "Sum of base stat & points from cards", domain: "EWRAM"));
+            // Django.Add("current_total_vit", new MemoryAddress(0xFCB636, note: "Total stat points (Base + Cards + Accessories)", domain: "EWRAM"));
+
+            // SPR
+            Django.Add("current_base_spr", new MemoryAddress(0x1A, note: _note, domain: "EWRAM"));
+            Django.Add("current_cards_spr", new MemoryAddress(0x22, note: "Stat points from cards", domain: "EWRAM"));
+            Django.Add("current_equips_spr", new MemoryAddress(0x334, note: "Stat points from accessories", domain: "EWRAM"));
+            Django.Add("current_sum_base_cards_spr", new MemoryAddress(0x41E, note: "Sum of base stat & points from cards", domain: "EWRAM"));
+            // Django.Add("current_total_spr", new MemoryAddress(0xFCB638, note: "Total stat points (Base + Cards + Accessories)", domain: "EWRAM"));
+
+            // STR
+            Django.Add("current_base_str", new MemoryAddress(0x1C, note: _note, domain: "EWRAM"));
+            Django.Add("current_cards_str", new MemoryAddress(0x24, note: "Stat points from cards", domain: "EWRAM"));
+            Django.Add("current_equips_str", new MemoryAddress(0x336, note: "Stat points from accessories", domain: "EWRAM"));
+            Django.Add("current_sum_base_cards_str", new MemoryAddress(0x420, note: "Sum of base stat & points from cards", domain: "EWRAM"));
+            // Django.Add("current_total_str", new MemoryAddress(0xFCB640, note: "Total stat points (Base + Cards + Accessories)", domain: "EWRAM"));
 
             // Add Solls addresses
             // Solls.Add("solls_on_self", 0x03CBB0);
             // Solls.Add("solar_bank", 0x03CB7C);
             // Solls.Add("dark_loan", 0x03C90C);
-
-
-            // 0x18 + 2 * stat_id
 
             // Persistent stats (used on screen transitions & save data)
             _note = "Also corresponds to values from Save Data";
@@ -71,25 +85,6 @@ namespace BokInterface.Addresses {
             Django.Add("persistent_base_spr", new MemoryAddress(0x80A, note: _note, domain: "EWRAM"));
             Django.Add("persistent_base_str", new MemoryAddress(0x81C, note: _note, domain: "EWRAM"));
             Django.Add("stat_points_to_allocate", new MemoryAddress(0x442, domain: "EWRAM"));
-
-            // Django.Add("equips_vit", 0x18);
-            // Django.Add("equips_spr", 0x32C);
-            // Django.Add("equips_str", 0x1C);
-
-            /*
-            equips vit
-            00B55
-            
-            equips spr
-
-            0200b918 => 0813EDFA => 0813F062
-
-            00B558
-            00C8B8
-
-            equips str
-            00B55A
-            */
 
             // EXP & level
             Django.Add("level", new MemoryAddress(0x440, domain: "EWRAM"));
@@ -111,8 +106,7 @@ namespace BokInterface.Addresses {
 
             // Add Misc addresses
             // Misc.Add("equips_stat", 0x02004094);
-            // 02004094
-            Misc.Add("room", new MemoryAddress(0x02000580, note: "Current room", type: "U32", domain: "EWRAM"));
+            Misc.Add("actor", new MemoryAddress(0x02000580, note: "Pointer to Django's actor data", type: "U32", domain: "EWRAM"));
             Misc.Add("stat", new MemoryAddress(0x02000710, note: "Stats & inventory", type: "U32", domain: "EWRAM"));
             Misc.Add("world_state", new MemoryAddress(0x0203DB08, note: "Story progress & dungeon states", type: "U32", domain: "EWRAM"));
             Misc.Add("scratch", new MemoryAddress(0x0203E308, type: "U32", domain: "EWRAM"));
