@@ -47,13 +47,13 @@ namespace BokInterface.Items {
             Items.Add("Sunny Clog", new ShinbokItem("Sunny Clog", 29, "sunny_clog"));
             Items.Add("Loser Stick", new ShinbokItem("Loser Stick", 30, "loser_stick"));
             Items.Add("Winner Stick", new ShinbokItem("Winner Stick", 31, "winner_stick"));
-            Items.Add("The High Priestess", new ShinbokItem("The High Priestess", 32, "the_high_priestess"));
-            Items.Add("The Empress", new ShinbokItem("The Empress", 33, "the_empress"));
-            Items.Add("Strength", new ShinbokItem("Strength", 34, "strength"));
-            Items.Add("Wheel of Fortune", new ShinbokItem("Wheel of Fortune", 35, "wheel_of_fortune"));
-            Items.Add("The Moon", new ShinbokItem("The Moon", 36, "the_moon"));
-            Items.Add("The Sun", new ShinbokItem("The Sun", 37, "the_sun"));
-            Items.Add("Judgement", new ShinbokItem("Judgement", 38, "judgement"));
+            Items.Add("The High Priestess", new ShinbokItem("The High Priestess", 32, "red_card"));
+            Items.Add("The Empress", new ShinbokItem("The Empress", 33, "red_card"));
+            Items.Add("Strength", new ShinbokItem("Strength", 34, "red_card"));
+            Items.Add("Wheel of Fortune", new ShinbokItem("Wheel of Fortune", 35, "red_card"));
+            Items.Add("The Moon", new ShinbokItem("The Moon", 36, "green_card"));
+            Items.Add("The Sun", new ShinbokItem("The Sun", 37, "green_card"));
+            Items.Add("Judgement", new ShinbokItem("Judgement", 38, "green_card"));
         }
 
         ///<summary>Init key items instances</summary>
