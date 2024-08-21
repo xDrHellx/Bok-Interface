@@ -17,7 +17,7 @@ namespace BokInterface.Items {
             // If an icon was specified try getting & setting it to the property
             if (icon != "") {
                 try {
-                    this.icon = (Image)Properties.Resources.ResourceManager.GetObject(icon);
+                    this.icon = (Image)ResourceLoader.LoadResource("ShinbokResources", icon);
                 } catch { }
             }
 
