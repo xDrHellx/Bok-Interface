@@ -74,6 +74,12 @@ namespace BokInterface.Addresses {
             Django.Add("z_position", new MemoryAddress(0x32, note: "Django Z position", domain: "EWRAM"));
 
             // 0x18 + 2 * stat_id
+            _note = "Stat points put into ";
+            Django.Add("base_vit", new MemoryAddress(0x18, note: _note + "VIT", domain: "EWRAM"));
+            Django.Add("base_spr", new MemoryAddress(0x1A, note: _note + "SPR", domain: "EWRAM"));
+            Django.Add("base_str", new MemoryAddress(0x1C, note: _note + "STR", domain: "EWRAM"));
+
+            InitInventoryAddresses();
 
             // Django.Add("equips_vit", 0x18);
             // Django.Add("equips_spr", 0x32C);
@@ -121,6 +127,9 @@ namespace BokInterface.Addresses {
                 // TODO : add durability
                 uint addressOffset = 0x2 * (uint)i;
                 Inventory.Add("item_slot_" + slotNumber, new MemoryAddress(0xA0 + addressOffset, note: "Item slot", domain: "EWRAM"));
+
+                // Key items (2 bytes)
+                Inventory.Add("key_item_slot_" + slotNumber, new MemoryAddress(0x838 + addressOffset, note: "Key item inventory slot", domain: "EWRAM"));
             }
         }
     }

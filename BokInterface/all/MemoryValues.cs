@@ -147,9 +147,10 @@ namespace BokInterface.All {
 
                 int slotNumber = i + 1;
 
-                // Items
-                // TODO : add durability & key items
+                // Items, key items
+                // TODO : add durability
                 Inventory.Add("slot" + slotNumber + "_item", new DynamicMemoryValue("slot" + slotNumber + "_item", _shinbokAddresses.Misc["stat"].Address, _shinbokAddresses.Inventory["item_slot_" + slotNumber].Address));
+                Inventory.Add("slot" + slotNumber + "_key_item", new DynamicMemoryValue("slot" + slotNumber + "_key_item", _shinbokAddresses.Misc["stat"].Address, _shinbokAddresses.Inventory["key_item_slot_" + slotNumber].Address));
             }
         }
 
