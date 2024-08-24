@@ -123,10 +123,10 @@ namespace BokInterface.Addresses {
 
                 int slotNumber = 1 + i;
 
-                // Items (2 bytes)
-                // TODO : add durability
+                // Items & durability (2 bytes)
                 uint addressOffset = 0x2 * (uint)i;
                 Inventory.Add("item_slot_" + slotNumber, new MemoryAddress(0xA0 + addressOffset, note: "Item slot", domain: "EWRAM"));
+                Inventory.Add("item_slot_durability_" + slotNumber, new MemoryAddress(0x100 + addressOffset, note: "Item durability (for spoiling)", domain: "EWRAM"));
 
                 // Key items (2 bytes)
                 Inventory.Add("key_item_slot_" + slotNumber, new MemoryAddress(0x838 + addressOffset, note: "Key item inventory slot", domain: "EWRAM"));
