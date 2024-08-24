@@ -12,8 +12,11 @@ namespace BokInterface.Items {
         public bool perishable;
         ///<summary>Item durability if it can melt or become rotten</summary>
         public int durability;
+        /// <summary>Item durability offset</summary>
+        /// <remarks>This is used in special cases like "Chocolate-Covered" items that adds an offset on top of the covered item's own durability</remarks>
+        public int durabilityOffset = 0;
         ///<summary>Value at which the item spoils and turns into the corresponding melted or rotten item </summary>
-        public int rottenAt = 3840;
+        public int rottenAt = 0;
         public Image? icon = null;
         ///<summary>Covered item if this instance is "Chocolated-covered"</summary>
         ///<remarks>Currently unused (research for implementation is needed)</remarks>

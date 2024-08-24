@@ -7,7 +7,6 @@ namespace BokInterface.Items {
         public ShinbokItem(string name, uint value, string icon = "", bool perishable = false, int durability = 0, Item? coveredItem = null, int buyPrice = 0) : base(name, value) {
 
             this.perishable = perishable;
-            this.durability = durability < rottenAt ? durability : 0;
             this.coveredItem = coveredItem;
             this.buyPrice = buyPrice;
 
@@ -21,16 +20,16 @@ namespace BokInterface.Items {
                 } catch { }
             }
 
-            // If this item is perishable, set the item it will turn into to the property
+            /**
+             * If this item is perishable, set the item it will turn into to the property
+             * Also adjust the time it takes for it to rott
+             */
             if (this.perishable == true) {
-                rottsInto = GetRottsInto(this.value);
-
-                /**
-                 * In some cases the item takes longer to rott
-                 * Items concerned : Tomato Juice, Redshroom, Blueshroom
-                 */
-                rottenAt = GetRottensAt(this.value);
+                rottsInto = GetRottsInto(value);
+                rottenAt = GetRottensAt(value);
             }
+
+            this.durability = durability < rottenAt ? durability : 0;
         }
 
         /// <summary>Returns the item this instance should rott into</summary>
@@ -40,10 +39,12 @@ namespace BokInterface.Items {
             return value switch {
                 // Redshroom & Blueshroom
                 23 or 24 => "Bad Mushroom",
-                // Drop of Sun
-                17 => "Rotten water",
+                // GariGari Soda & GariGari Cola
+                10 or 11 => "Loser Stick",
                 // Chocolate
-                6 => coveredItem != null ? "Chocolate-covered" : "Melted Chocolate",
+                6 => coveredItem != null ? "Chocolate-Covered" : "Melted Chocolate",
+                // Chocolate-Covered
+                9 => "Deluxe Chocolate",
                 // Tasty Meat
                 4 => "Rotten Meat",
                 // Nuts
@@ -56,8 +57,8 @@ namespace BokInterface.Items {
         /// <returns><c>Int</c>Rottens at value</returns>
         protected override int GetRottensAt(uint value) {
             return value switch {
-                23 or 24 => 7680,
-                _ => 3840,
+                4 or 6 or 10 or 11 => 3840,
+                _ => 7680
             };
         }
     }
