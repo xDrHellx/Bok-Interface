@@ -22,11 +22,21 @@ namespace BokInterface.Items {
 
             /**
              * If this item is perishable, set the item it will turn into to the property
-             * Also adjust the time it takes for it to rott
+             * Also adjust the value at which it'll be rotten
              */
             if (this.perishable == true) {
                 rottsInto = GetRottsInto(value);
                 rottenAt = GetRottensAt(value);
+            } else if (this.value == 9) {
+                /**
+                 * Special case for "Chocolate-Covered" :
+                 * If a covered item was passed, retrieve its rottenAt value & set it for the "Chocolate-Covered" instance
+                 * If none was passed, just call the GetRottensAt function to set the default value
+                 * 
+                 * We do this because the game stores the value of the covered item's own durability
+                 * It's possible to set this item without it covering anything, however by normal means, it only exists if chocolate did cover another item
+                 */
+                rottenAt = coveredItem != null ? coveredItem.rottenAt : GetRottensAt(value);
             }
 
             this.durability = durability < rottenAt ? durability : 0;
@@ -43,12 +53,14 @@ namespace BokInterface.Items {
                 10 or 11 => "Loser Stick",
                 // Chocolate
                 6 => coveredItem != null ? "Chocolate-Covered" : "Melted Chocolate",
-                // Chocolate-Covered
-                9 => "Deluxe Chocolate",
+                // Melted Chocolate (only turns into Deluxe Chocolate if covering another Melted Chocolate)
+                8 => coveredItem != null && coveredItem.value == 9 ? "Deluxe Chocolate" : "",
                 // Tasty Meat
                 4 => "Rotten Meat",
                 // Nuts
-                _ => "Rotten Nut",
+                1 or 13 or 19 or 22 or 25 => "Rotten Nut",
+                // Non-perishable item
+                _ => ""
             };
         }
 
@@ -58,7 +70,8 @@ namespace BokInterface.Items {
         protected override int GetRottensAt(uint value) {
             return value switch {
                 4 or 6 or 10 or 11 => 3840,
-                _ => 7680
+                1 or 8 or 13 or 19 or 22 or 25 or 23 or 24 => 7680,
+                _ => 0
             };
         }
     }
