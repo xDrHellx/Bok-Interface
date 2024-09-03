@@ -17,7 +17,7 @@ namespace BokInterface.Items {
             // If an icon was specified try getting & setting it to the property
             if (icon != "") {
                 try {
-                    this.icon = (Image)Properties.Resources.ResourceManager.GetObject(icon);
+                    this.icon = (Image)ResourceLoader.LoadResource("ZoktaiResources", icon);
                 } catch { }
             }
 
@@ -43,7 +43,7 @@ namespace BokInterface.Items {
                 // Drop of Sun & Tomato Juice
                 12 or 13 => "Rotten water",
                 // Chocolate
-                18 => coveredItem != null ? "Chocolate-covered" : "Melted Chocolate",
+                18 => coveredItem != null ? "Chocolate-Covered" : "Melted Chocolate",
                 // Tasty Meat
                 15 => "Rotten Meat",
                 // Nuts

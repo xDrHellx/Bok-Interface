@@ -1,0 +1,607 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="earthly_nut" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok2\items\earthly_nut.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="solar_nut" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok2\items\solar_nut.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="speed_nut" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok2\items\speed_nut.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="tiptoe_nut" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok2\items\tiptoe_nut.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="banana" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok2\items\banana.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="chocolate_banana" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok2\items\chocolate_banana.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="bearnut" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok2\items\bearnut.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="see_all_nut" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok2\items\see_all_nut.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="rotten_nut" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok2\items\rotten_nut.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="redshroom" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok2\items\redshroom.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="blueshroom" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok2\items\blueshroom.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="bad_mushroom" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok2\items\bad_mushroom.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="drop_of_sun" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok2\items\drop_of_sun.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="tomato_juice" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok2\items\tomato_juice.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="rotten_water" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok2\items\rotten_water.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="tasty_meat" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok2\items\tasty_meat.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="jerky" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok2\items\jerky.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="rotten_meat" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok2\items\rotten_meat.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="chocolate" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok2\items\chocolate.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="melted_chocolate" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok2\items\melted_chocolate.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="chocolate_covered" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok2\items\chocolate_covered.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="deluxe_chocolate" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok2\items\deluxe_chocolate.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="healer" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok2\items\healer.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="magical_potion" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok2\items\magical_potion.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="antidote" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok2\items\antidote.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="elixir" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok2\items\elixir.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="sunblock" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok2\items\sunblock.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="mr_rainnot" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok2\items\mr_rainnot.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="tonniar_rm" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok2\items\tonniar_rm.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="sunny_clog" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok2\items\sunny_clog.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="warp_leaf" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok2\items\warp_leaf.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="dark_card" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok2\items\dark_card.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="pet" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok2\items\pet.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="spade_emblem" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok2\items\spade_emblem.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="heart_emblem" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok2\items\heart_emblem.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="diamond_emblem" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok2\items\diamond_emblem.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="club_emblem" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok2\items\club_emblem.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="joker_emblem" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok2\items\joker_emblem.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="oak_coffin" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok2\items\oak_coffin.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="bronze_coffin" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok2\items\bronze_coffin.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="iron_coffin" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok2\items\iron_coffin.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="silver_coffin" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok2\items\silver_coffin.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="solar_coffin" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok2\items\solar_coffin.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="coffin_monster_elefan" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok2\items\coffin_monster_elefan.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="vampire_coffin" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok2\items\vampire_coffin.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="iron_maiden" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok2\items\iron_maiden.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="warehouse_key" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok2\items\warehouse_key.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="circle_key" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok2\items\circle_key.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="triangle_key" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok2\items\triangle_key.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="square_key" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok2\items\square_key.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="red_crystal" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok2\items\red_crystal.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="blue_crystal" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok2\items\blue_crystal.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="green_crystal" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok2\items\green_crystal.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="yellow_crystal" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok2\items\yellow_crystal.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="stone_tablet_piece" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok2\items\stone_tablet_piece.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="tasty_water" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok2\items\tasty_water.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="red_card" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok2\items\red_card.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="blue_card" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok2\items\blue_card.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="green_card" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok2\items\green_card.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="gray_card" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok2\items\gray_card.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+    <data name="gradius" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok2\weapons\gradius.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="short_sword" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok2\weapons\short_sword.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="broadsword" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok2\weapons\broadsword.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="long_sword" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok2\weapons\long_sword.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="dull_blade" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok2\weapons\dull_blade.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="zweihander" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok2\weapons\zweihander.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="flamberge" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok2\weapons\flamberge.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="claymore" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok2\weapons\claymore.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="magic_sword" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok2\weapons\magic_sword.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="katana" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok2\weapons\katana.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="bastard_sword" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok2\weapons\bastard_sword.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="great_sword" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok2\weapons\great_sword.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="bushido_sword" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok2\weapons\bushido_sword.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="blood_sword" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok2\weapons\blood_sword.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="muramasa" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok2\weapons\muramasa.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="vorpal_sword" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok2\weapons\vorpal_sword.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="solar_sword" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok2\weapons\solar_sword.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="sword_of_darkness" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok2\weapons\sword_of_darkness.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Gram" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok2\weapons\Gram.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="short_spear" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok2\weapons\short_spear.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="glaive" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok2\weapons\glaive.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="long_spear" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok2\weapons\long_spear.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="lance" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok2\weapons\lance.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="quarter_staff" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok2\weapons\quarter_staff.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="corsesca" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok2\weapons\corsesca.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="fire_paw" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok2\weapons\fire_paw.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="bardiche" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok2\weapons\bardiche.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ice_glaive" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok2\weapons\ice_glaive.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="rune_glaive" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok2\weapons\rune_glaive.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="partisan" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok2\weapons\partisan.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="thunder_spear" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok2\weapons\thunder_spear.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="blood_spear" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok2\weapons\blood_spear.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="grand_lance" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok2\weapons\grand_lance.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="rune_spear" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok2\weapons\rune_spear.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="halberd" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok2\weapons\halberd.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="white_queen" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok2\weapons\white_queen.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="black_queen" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok2\weapons\black_queen.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="gungnir" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok2\weapons\gungnir.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="club" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok2\weapons\club.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="hammer" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok2\weapons\hammer.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="mace" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok2\weapons\mace.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="flail" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok2\weapons\flail.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="pounder" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok2\weapons\pounder.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="axe" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok2\weapons\axe.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="maul" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok2\weapons\maul.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="silver_mace" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok2\weapons\silver_mace.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="silver_flail" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok2\weapons\silver_flail.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="heavy_mace" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok2\weapons\heavy_mace.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="battle_axe" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok2\weapons\battle_axe.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="war_hammer" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok2\weapons\war_hammer.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="bloody_mace" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok2\weapons\bloody_mace.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="morning_star" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok2\weapons\morning_star.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="heavy_axe" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok2\weapons\heavy_axe.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="earthshaker" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok2\weapons\earthshaker.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="daybreak" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok2\weapons\daybreak.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="twilight" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok2\weapons\twilight.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="mjollnir" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok2\weapons\mjollnir.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="broken_solar_gun" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok2\weapons\broken_solar_gun.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="gun_del_sol" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok2\weapons\gun_del_sol.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="gun_del_hell" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok2\weapons\gun_del_hell.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="megabuster" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok2\weapons\megabuster.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="star_piece" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok2\weapons\star_piece.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="astro_sword" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok2\weapons\astro_sword.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="astro_spear" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok2\weapons\astro_spear.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="astro_hammer" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok2\weapons\astro_hammer.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="cloth_armor" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok2\accessories\cloth_armor.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="leather_armor" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok2\accessories\leather_armor.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="chain_mail" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok2\accessories\chain_mail.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="silver_chain" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok2\accessories\silver_chain.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="scale_mail" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok2\accessories\scale_mail.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="samurai_armor" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok2\accessories\samurai_armor.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="blade_mail" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok2\accessories\blade_mail.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="brigandine" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok2\accessories\brigandine.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="mail_of_sol" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok2\accessories\mail_of_sol.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="mail_of_darkness" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok2\accessories\mail_of_darkness.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="mail_of_luna" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok2\accessories\mail_of_luna.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="fire_dragon_fang" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok2\accessories\fire_dragon_fang.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="water_dragon_tail" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok2\accessories\water_dragon_tail.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="wind_dragon_wing" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok2\accessories\wind_dragon_wing.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="earth_dragon_claw" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok2\accessories\earth_dragon_claw.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="dragon_scale" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok2\accessories\dragon_scale.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="fairy_robe" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok2\accessories\fairy_robe.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="earthly_robe" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok2\accessories\earthly_robe.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="raincoat" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok2\accessories\raincoat.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="garb_of_light" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok2\accessories\garb_of_light.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="garb_of_darkness" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok2\accessories\garb_of_darkness.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="magic_robe" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok2\accessories\magic_robe.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="blood_soaked_cape" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok2\accessories\blood_soaked_cape.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="skull_suit" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok2\accessories\skull_suit.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="training_gear" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok2\accessories\training_gear.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="thiefs_clothes" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok2\accessories\thiefs_clothes.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="hunters_clothes" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok2\accessories\hunters_clothes.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="poison_guard" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok2\accessories\poison_guard.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="weapon_guard" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok2\accessories\weapon_guard.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="parade_armor" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok2\accessories\parade_armor.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ninja_gi" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok2\accessories\ninja_gi.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="spike_mail" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok2\accessories\spike_mail.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="pitch_black_armor" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok2\accessories\pitch_black_armor.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="mega_power" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok2\accessories\mega_power.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="guts_power" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok2\accessories\guts_power.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="proto_power" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok2\accessories\proto_power.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="toad_power" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok2\accessories\toad_power.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>  
+</root>

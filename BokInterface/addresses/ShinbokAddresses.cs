@@ -18,6 +18,9 @@ namespace BokInterface.Addresses {
         /// <summary>Solls-related memory addresses</summary>
         public IDictionary<string, MemoryAddress> Solls = new Dictionary<string, MemoryAddress>();
 
+        /// <summary>Inventory-related memory addresses</summary>
+        public IDictionary<string, MemoryAddress> Inventory = new Dictionary<string, MemoryAddress>();
+
         /// <summary>
         /// <para>Bike-related memory addresses</para>
         /// <para>
@@ -37,10 +40,10 @@ namespace BokInterface.Addresses {
         /// </summary>
         public IDictionary<string, MemoryAddress> Misc = new Dictionary<string, MemoryAddress>();
 
-        public ShinbokAddresses() {
+        /// <summary>Note for MemoryAddress instances (for less repetition)</summary>
+        private string _note = "";
 
-            // For less repetition
-            string note = "";
+        public ShinbokAddresses() {
 
             // Add Django addresses
             // Django.Add("ene", 0x03C42C);
@@ -71,10 +74,12 @@ namespace BokInterface.Addresses {
             Django.Add("z_position", new MemoryAddress(0x32, note: "Django Z position", domain: "EWRAM"));
 
             // 0x18 + 2 * stat_id
-            note = "Stat points put into ";
-            Django.Add("base_vit", new MemoryAddress(0x18, note: note + "VIT", domain: "EWRAM"));
-            Django.Add("base_spr", new MemoryAddress(0x1A, note: note + "SPR", domain: "EWRAM"));
-            Django.Add("base_str", new MemoryAddress(0x1C, note: note + "STR", domain: "EWRAM"));
+            _note = "Stat points put into ";
+            Django.Add("base_vit", new MemoryAddress(0x18, note: _note + "VIT", domain: "EWRAM"));
+            Django.Add("base_spr", new MemoryAddress(0x1A, note: _note + "SPR", domain: "EWRAM"));
+            Django.Add("base_str", new MemoryAddress(0x1C, note: _note + "STR", domain: "EWRAM"));
+
+            InitInventoryAddresses();
 
             // Django.Add("equips_vit", 0x18);
             // Django.Add("equips_spr", 0x32C);
@@ -106,6 +111,26 @@ namespace BokInterface.Addresses {
             Misc.Add("x_camera", new MemoryAddress(0x03005418, note: "Camera X position", domain: "IWRAM"));
             Misc.Add("y_camera", new MemoryAddress(0x0300541A, note: "Camera Y position", domain: "IWRAM"));
             Misc.Add("z_camera", new MemoryAddress(0x0300541C, note: "Camera Z position", domain: "IWRAM"));
+        }
+
+        protected void InitInventoryAddresses() {
+
+            /**
+             * Inventory-related memory addresses
+             * We set these using a loop to simplify
+             */
+            for (int i = 0; i < 16; i++) {
+
+                int slotNumber = 1 + i;
+
+                // Items & durability (2 bytes)
+                uint addressOffset = 0x2 * (uint)i;
+                Inventory.Add("item_slot_" + slotNumber, new MemoryAddress(0xA0 + addressOffset, note: "Item slot", domain: "EWRAM"));
+                Inventory.Add("item_slot_durability_" + slotNumber, new MemoryAddress(0x100 + addressOffset, note: "Item durability (for spoiling)", domain: "EWRAM"));
+
+                // Key items (2 bytes)
+                Inventory.Add("key_item_slot_" + slotNumber, new MemoryAddress(0x838 + addressOffset, note: "Key item inventory slot", domain: "EWRAM"));
+            }
         }
     }
 }
