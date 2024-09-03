@@ -67,5 +67,11 @@ namespace BokInterface.Items {
         /// <param name="value">Instance item value</param>
         /// <returns><c>Int</c>Rottens at value</returns>
         protected abstract int GetRottensAt(uint value);
+
+        /// <summary>Returns the durability of the covered item (for "Chocolate-Covered" instances)</summary>
+        /// <returns><c>Int</c>Covered item durability</returns>
+        public int GetCoveredItemDurability() {
+            return durability - durabilityOffset;
+        }
     }
 }
