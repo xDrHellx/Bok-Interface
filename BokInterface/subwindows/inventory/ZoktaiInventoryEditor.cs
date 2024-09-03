@@ -33,7 +33,7 @@ namespace BokInterface.Inventory {
             Owner = _bokInterface = bokInterface;
             Icon = _bokInterface.Icon;
 
-            SetFormParameters(629, 346);
+            SetFormParameters(628, 346);
 
             // Add the onClose event to the subwindow
             FormClosing += new FormClosingEventHandler(delegate (object sender, FormClosingEventArgs e) {
