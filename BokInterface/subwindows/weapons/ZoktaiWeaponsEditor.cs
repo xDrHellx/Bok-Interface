@@ -307,9 +307,9 @@ namespace BokInterface.Weapons {
         protected void AddInformativeText() {
             TextBox textBox = WinFormHelpers.CreateTextBox("weaponInfoText",
                 "Regarding SP abilities and bonus or malus for a weapon :"
-                + "\r\n- A weapon cannot have both SP abilities and bonus or malus"
+                + "\r\n- A weapon can have SP abilities and a bonus or malus"
                 + "\r\n- Weapons with a bonus or malus have a durability value"
-                + "\r\n- When the value reaches a certain threshold, the bonus or malus is removed",
+                + "\r\n- When the value reaches a certain threshold, the bonus decreases by 1",
                 5, 5, 424, 68, this, readOnly: true
             );
         }

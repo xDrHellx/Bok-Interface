@@ -1,29 +1,32 @@
 using System.Drawing;
 
 namespace BokInterface.Items {
-    ///<summary>Class representing an item</summary>
-    class Item {
+    ///<summary>Base class for representing an item</summary>
+    abstract class Item {
 
         ///<summary>Item name</summary>
-        public readonly string name;
+        public string name;
         ///<summary>Value (decimal)<summary>
-        public readonly uint value;
+        public uint value;
         ///<summary>Indicates if the item can is perishable (becomes rotten or melts)</summary>
-        public readonly bool perishable;
+        public bool perishable;
         ///<summary>Item durability if it can melt or become rotten</summary>
-        public readonly int durability;
+        public int durability;
+        /// <summary>Item durability offset</summary>
+        /// <remarks>This is used in special cases like "Chocolate-Covered" items that adds an offset on top of the covered item's own durability</remarks>
+        public int durabilityOffset = 0;
         ///<summary>Value at which the item spoils and turns into the corresponding melted or rotten item </summary>
-        public readonly int rottenAt = 3840;
-        public readonly Image? icon = null;
+        public int rottenAt = 0;
+        public Image? icon = null;
         ///<summary>Covered item if this instance is "Chocolated-covered"</summary>
         ///<remarks>Currently unused (research for implementation is needed)</remarks>
-        public readonly Item? coveredItem;
+        public Item? coveredItem;
         ///<summary>The name of the item this can rott or melt into, if perishable</summary>
-        public readonly string rottsInto = "";
+        public string rottsInto = "";
         /// <summary>Price when buying</summary>
-        public readonly int buyPrice;
+        public int buyPrice;
         /// <summary>Price when selling</summary>
-        public readonly int sellPrice;
+        public int sellPrice;
 
         public Item(string name, uint value, string icon = "", bool perishable = false, int durability = 0, Item? coveredItem = null, int buyPrice = 0) {
             this.name = name;
@@ -45,28 +48,30 @@ namespace BokInterface.Items {
 
             // If this item is perishable, set the item it will turn into to the property
             if (this.perishable == true) {
-                rottsInto = this.value switch {
-                    // Redshroom & Blueshroom
-                    9 or 10 => "Bad Mushroom",
-                    // Drop of Sun & Tomato Juice
-                    12 or 13 => "Rotten water",
-                    // Chocolate
-                    18 => coveredItem != null ? "Chocolate-covered" : "Melted Chocolate",
-                    // Tasty Meat
-                    15 => "Rotten Meat",
-                    // Nuts
-                    _ => "Rotten Nut",
-                };
+                rottsInto = GetRottsInto(this.value);
 
                 /**
                  * In some cases the item takes longer to rott
                  * Items concerned : Tomato Juice, Redshroom, Blueshroom
                  */
-                rottenAt = this.value switch {
-                    9 or 10 or 13 => 7680,
-                    _ => 3840,
-                };
+                rottenAt = GetRottensAt(this.value);
             }
+        }
+
+        /// <summary>Returns the item this instance should rott into</summary>
+        /// <param name="value">Instance item value</param>
+        /// <returns><c>String</c>Item name</returns>
+        protected abstract string GetRottsInto(uint value);
+
+        /// <summary>Returns the value at which this instance should turn into a rotten item</summary>
+        /// <param name="value">Instance item value</param>
+        /// <returns><c>Int</c>Rottens at value</returns>
+        protected abstract int GetRottensAt(uint value);
+
+        /// <summary>Returns the durability of the covered item (for "Chocolate-Covered" instances)</summary>
+        /// <returns><c>Int</c>Covered item durability</returns>
+        public int GetCoveredItemDurability() {
+            return durability - durabilityOffset;
         }
     }
 }

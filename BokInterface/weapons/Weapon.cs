@@ -1,37 +1,37 @@
 using System.Drawing;
 
 namespace BokInterface.Weapons {
-    ///<summary>Class representing a Weapon</summary>
-    class Weapon {
+    ///<summary>Base class for representing a weapon</summary>
+    abstract class Weapon {
 
         ///<summary>Weapon name</summary>
-        public readonly string name;
+        public string name;
         ///<summary>Value (decimal)<summary>
-        public readonly uint value;
+        public uint value;
         /// <summary>Weapon type (Sword, Gun, ...)</summary>
-        public readonly string type;
-        public readonly Image? icon = null;
+        public string type;
+        public Image? icon = null;
         ///<summary>Weapon durability (if it has a +X bonus</summary>
-        public readonly int durability;
+        public int durability;
         /// <summary>Bonus if applicable (can be negative, maluses are possible through forging)</summary>
-        public readonly int bonus;
+        public int bonus;
         /// <summary>SP effect the weapon can obtain (SP ability in-game)</summary>
-        public readonly string spEffect;
+        public string spEffect;
         /// <summary>Base weapon damage (Power in-game)</summary>
-        public readonly int baseDamage;
+        public int baseDamage;
         /// <summary>Level required to equip</summary>
-        public readonly int level;
-        public readonly int row;
+        public int level;
+        public int row;
         /// <summary>Indicates if R-Rank weapon</summary>
-        public readonly bool rRank;
+        public bool rRank;
         /// <summary>Indicates if event weapon (ex: Astro Sword)</summary>
-        public readonly bool eventWeapon;
+        public bool eventWeapon;
         /// <summary>Indicates if the weapon adjusts to Django's level (Level and Power set to "??" in-game)</summary>
-        public readonly bool adjustToLevel;
+        public bool adjustToLevel;
         /// <summary>Price when buying</summary>
-        public readonly int buyPrice;
+        public int buyPrice;
         /// <summary>Price when selling</summary>
-        public readonly int sellPrice;
+        public int sellPrice;
 
         public Weapon(string name, uint value, string type, string icon = "", int durability = 0, int bonus = 0, string spEffect = "", int baseDamage = 1, int level = 1, int row = 1, bool rRank = false, int buyPrice = 0, bool eventWeapon = false, bool adjustToLevel = false) {
             this.name = name;
