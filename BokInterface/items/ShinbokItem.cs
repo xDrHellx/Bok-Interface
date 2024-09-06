@@ -51,8 +51,8 @@ namespace BokInterface.Items {
                 23 or 24 => "Bad Mushroom",
                 // GariGari Soda & GariGari Cola
                 10 or 11 => "Loser Stick",
-                // Chocolate
-                6 => coveredItem != null ? "Chocolate-Covered" : "Melted Chocolate",
+                // Chocolate (if a Banana gets covered, it becomes a "Chocolate Banana", other items becomes "Chocolate-Covered")
+                6 => coveredItem != null ? (coveredItem.value == 20 ? "Chocolate Banana" : "Chocolate-Covered") : "Melted Chocolate",
                 // Melted Chocolate (only turns into Deluxe Chocolate if covering another Melted Chocolate)
                 8 => coveredItem != null && coveredItem.value == 9 ? "Deluxe Chocolate" : "",
                 // Tasty Meat
@@ -70,7 +70,7 @@ namespace BokInterface.Items {
         protected override int GetRottensAt(uint value) {
             return value switch {
                 4 or 6 or 10 or 11 => 3840,
-                1 or 8 or 13 or 19 or 22 or 25 or 23 or 24 => 7680,
+                1 or 13 or 19 or 22 or 25 or 23 or 24 => 7680,
                 _ => 0
             };
         }
