@@ -154,6 +154,20 @@ namespace BokInterface.All {
             Django.Add("base_str", new DynamicMemoryValue("base_str", _shinbokAddresses.Misc["stat"].Address, _shinbokAddresses.Django["current_base_str"].Address));
             Django.Add("cards_str", new DynamicMemoryValue("cards_str", _shinbokAddresses.Misc["stat"].Address, _shinbokAddresses.Django["current_cards_str"].Address));
             Django.Add("equips_str", new DynamicMemoryValue("equips_str", _shinbokAddresses.Misc["actor"].Address, _shinbokAddresses.Django["current_equips_str"].Address));
+
+            /**
+             * Inventory-related
+             * We set these using a loop to simplify
+             */
+            for (int i = 0; i < 16; i++) {
+
+                int slotNumber = i + 1;
+
+                // Items, key items
+                Inventory.Add("slot" + slotNumber + "_item", new DynamicMemoryValue("slot" + slotNumber + "_item", _shinbokAddresses.Misc["stat"].Address, _shinbokAddresses.Inventory["item_slot_" + slotNumber].Address));
+                Inventory.Add("slot" + slotNumber + "_key_item", new DynamicMemoryValue("slot" + slotNumber + "_key_item", _shinbokAddresses.Misc["stat"].Address, _shinbokAddresses.Inventory["key_item_slot_" + slotNumber].Address));
+                Inventory.Add("slot" + slotNumber + "_durability", new DynamicMemoryValue("slot" + slotNumber + "_durability", _shinbokAddresses.Misc["stat"].Address, _shinbokAddresses.Inventory["item_slot_durability_" + slotNumber].Address));
+            }
         }
 
         private void InitializeLunarKnightsList() {

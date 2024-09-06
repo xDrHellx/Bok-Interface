@@ -30,6 +30,7 @@ namespace BokInterface {
             _bok3_djangoTotalStr = new();
         private Button _bok3_editStatusBtn = new(),
             _bok3_editInventoryBtn = new(),
+            _bok3_editKeyItemsBtn = new(),
             _bok3_editEquipsBtn = new(),
             _bok3_editWeaponsBtn = new(),
             _bok3_editSolarGunBtn = new();
@@ -153,21 +154,22 @@ namespace BokInterface {
 
             _bok3_editStatusBtn = WinFormHelpers.CreateButton("editStatuts", "Status", 6, 19, 75, 23, editGroupBox);
             _bok3_editInventoryBtn = WinFormHelpers.CreateButton("editItems", "Items", 6, 46, 75, 23, editGroupBox);
-            _bok3_editEquipsBtn = WinFormHelpers.CreateButton("editEquips", "Equips", 6, 73, 75, 23, editGroupBox);
+            _bok3_editKeyItemsBtn = WinFormHelpers.CreateButton("editKeyItems", "Key items", 6, 73, 75, 23, editGroupBox);
             _bok3_editWeaponsBtn = WinFormHelpers.CreateButton("editWeapons", "Weapons", 6, 100, 75, 23, editGroupBox);
-            _bok3_editSolarGunBtn = WinFormHelpers.CreateButton("editSolarGun", "Solar gun", 6, 127, 75, 23, editGroupBox);
+            _bok3_editEquipsBtn = WinFormHelpers.CreateButton("editEquips", "Protectors", 6, 127, 75, 23, editGroupBox);
+            // _bok3_editSolarGunBtn = WinFormHelpers.CreateButton("editSolarGun", "Solar gun", 6, 127, 75, 23, editGroupBox);
 
             // WIP features are disabled for now
-            _bok3_editInventoryBtn.Enabled = false;
-            _bok3_editEquipsBtn.Enabled = false;
             _bok3_editWeaponsBtn.Enabled = false;
-            _bok3_editSolarGunBtn.Enabled = false;
+            _bok3_editEquipsBtn.Enabled = false;
+            // _bok3_editSolarGunBtn.Enabled = false;
 
             // Add onclick events
             _bok3_editStatusBtn.Click += new System.EventHandler(OpenStatusEditor);
-            // this.bok3_editInventoryBtn.Click += new System.EventHandler(this.OpenInventoryEditor);
-            // this.bok3_editEquipsBtn.Click += new System.EventHandler(this.OpenEquipsEditor);
+            _bok3_editInventoryBtn.Click += new System.EventHandler(OpenInventoryEditor);
+            _bok3_editKeyItemsBtn.Click += new System.EventHandler(OpenKeyItemsEditor);
             // this.bok3_editWeaponsBtn.Click += new System.EventHandler(this.OpenWeaponsEditor);
+            // this.bok3_editEquipsBtn.Click += new System.EventHandler(this.OpenEquipsEditor);
             // this.bok3_editSolarGunBtn.Click += new System.EventHandler(this.OpenSolarGunEditor);
         }
     }

@@ -18,6 +18,9 @@ namespace BokInterface.Addresses {
         /// <summary>Solls-related memory addresses</summary>
         public IDictionary<string, MemoryAddress> Solls = new Dictionary<string, MemoryAddress>();
 
+        /// <summary>Inventory-related memory addresses</summary>
+        public IDictionary<string, MemoryAddress> Inventory = new Dictionary<string, MemoryAddress>();
+
         /// <summary>
         /// <para>Bike-related memory addresses</para>
         /// <para>
@@ -104,6 +107,8 @@ namespace BokInterface.Addresses {
             // Bike.Add("scrolling", 0x0004E0);
             // Bike.Add("progress", 0x00F6AC);
 
+            InitInventoryAddresses();
+
             // Add Misc addresses
             // Misc.Add("equips_stat", 0x02004094);
             Misc.Add("actor", new MemoryAddress(0x02000580, note: "Pointer to Django's actor data", type: "U32", domain: "EWRAM"));
@@ -114,6 +119,26 @@ namespace BokInterface.Addresses {
             Misc.Add("x_camera", new MemoryAddress(0x03005418, note: "Camera X position", domain: "IWRAM"));
             Misc.Add("y_camera", new MemoryAddress(0x0300541A, note: "Camera Y position", domain: "IWRAM"));
             Misc.Add("z_camera", new MemoryAddress(0x0300541C, note: "Camera Z position", domain: "IWRAM"));
+        }
+
+        protected void InitInventoryAddresses() {
+
+            /**
+             * Inventory-related memory addresses
+             * We set these using a loop to simplify
+             */
+            for (int i = 0; i < 16; i++) {
+
+                int slotNumber = 1 + i;
+
+                // Items & durability (2 bytes)
+                uint addressOffset = 0x2 * (uint)i;
+                Inventory.Add("item_slot_" + slotNumber, new MemoryAddress(0xA0 + addressOffset, note: "Item slot", domain: "EWRAM"));
+                Inventory.Add("item_slot_durability_" + slotNumber, new MemoryAddress(0x100 + addressOffset, note: "Item durability (for spoiling)", domain: "EWRAM"));
+
+                // Key items (2 bytes)
+                Inventory.Add("key_item_slot_" + slotNumber, new MemoryAddress(0x838 + addressOffset, note: "Key item inventory slot", domain: "EWRAM"));
+            }
         }
     }
 }
