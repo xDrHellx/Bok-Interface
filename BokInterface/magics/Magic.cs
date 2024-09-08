@@ -7,7 +7,6 @@ namespace BokInterface.Magics {
         public string name;
         /// <summary>Magic type (Luna, Sol, Dark, ...)</summary>
         public string type;
-        public string iconName;
         public Image? icon = null;
         /// <summary>Description (usually corresponds to the in-game text</summary>
         public string description;
@@ -18,7 +17,6 @@ namespace BokInterface.Magics {
             this.description = description;
 
             // If an icon was specified try getting & setting it to the property
-            iconName = icon;
             if (icon != "") {
                 try {
                     this.icon = (Image)Properties.Resources.ResourceManager.GetObject(icon);

@@ -5,7 +5,6 @@ namespace BokInterface.Magics {
     class ZoktaiMagic : Magic {
 
         public ZoktaiMagic(string name, string type, string icon = "", string description = "") : base(name, type) {
-
             this.description = description;
 
             // If an icon was specified try getting & setting it to the property
