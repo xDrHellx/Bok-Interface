@@ -1,27 +1,27 @@
 using System.Drawing;
 
 namespace BokInterface.Weapons.Accessories {
-    ///<summary>Class representing an accessory (a piece of armor, also called protector in Zoktai)</summary>
-    class Accessory {
+    ///<summary>Base class for representing an accessory</summary>
+    abstract class Accessory {
 
         ///<summary>Weapon name</summary>
-        public readonly string name;
+        public string name;
         ///<summary>Value (decimal)<summary>
-        public readonly uint value;
+        public uint value;
         /// <summary>Accessory type (Head, Body, Hand, Foot)</summary>
-        public readonly string type;
-        public readonly Image? icon = null;
-        public readonly int row;
+        public string type;
+        public Image? icon = null;
+        public int row;
         /// <summary>Indicates if obtained via CrossOver points</summary>
-        public readonly bool crossOver;
+        public bool crossOver;
         /// <summary>Price when buying</summary>
-        public readonly int buyPrice;
+        public int buyPrice;
         /// <summary>Price when selling</summary>
-        public readonly int sellPrice;
+        public int sellPrice;
         ///<summary>Accessory defense (refered as Durability in-game, and only used in Zoktai)</summary>
-        public readonly int defense;
+        public int defense;
         /// <summary>Accessory weight (only used in Zoktai)</summary>
-        public readonly int weight;
+        public int weight;
 
         public Accessory(string name, uint value, string type, string icon = "", int row = 1, int buyPrice = 0, bool crossOver = false, int defense = 0, int weight = 0) {
             this.name = name;

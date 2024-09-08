@@ -41,6 +41,9 @@ namespace BokInterface.Addresses {
             Misc.Add("x_camera", new MemoryAddress(0x030046E8, note: "Camera X position", domain: "IWRAM"));
             Misc.Add("y_camera", new MemoryAddress(0x030046EA, note: "Camera Y position", domain: "IWRAM"));
             Misc.Add("z_camera", new MemoryAddress(0x030046EC, note: "Camera Z position", domain: "IWRAM"));
+            Misc.Add("ingame_time", new MemoryAddress(0x0203D910, domain: "System Bus"));
+            Misc.Add("detected", new MemoryAddress(0x0203D918, note: "Number of times seen (current dungeon)", domain: "System Bus"));
+            Misc.Add("action_difficulty", new MemoryAddress(0x0203E8BC, note: "Action difficulty setting", domain: "System Bus")); // 0 : Easy? | 1 : Normal (Recommended) | 2 = hard
         }
     }
 }

@@ -32,7 +32,7 @@ namespace BokInterface.Accessories {
 
             // Add the onClose event to the subwindow
             FormClosing += new FormClosingEventHandler(delegate (object sender, FormClosingEventArgs e) {
-                _bokInterface.keyItemsEditorOpened = false;
+                _bokInterface.equipsEditorOpened = false;
             });
 
             // Add elements & show the subwindow
