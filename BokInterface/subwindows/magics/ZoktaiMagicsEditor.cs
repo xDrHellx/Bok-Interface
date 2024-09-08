@@ -105,7 +105,7 @@ namespace BokInterface.Magics {
                     checkBoxes.Add(WinFormHelpers.CreateCheckBox("magic_" + labelName, "", 112, 18 * yPositionOffset, 16, 16, control: groupBox));
                 }
 
-                // If n > 1 && n is an odd number, it means we're moving to another row
+                // If n > 1 && n is an even number, it means we're moving to another row next
                 if (n % 2 == 0 && n > 1) {
                     yPositionOffset++;
                 }
