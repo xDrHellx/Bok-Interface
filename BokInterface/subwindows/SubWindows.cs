@@ -5,6 +5,7 @@ using BokInterface.Accessories;
 using BokInterface.All;
 using BokInterface.Inventory;
 using BokInterface.KeyItems;
+using BokInterface.Magics;
 using BokInterface.Status;
 using BokInterface.Weapons;
 
@@ -176,15 +177,25 @@ namespace BokInterface {
 
         protected void OpenMagicsEditor(object sender, EventArgs e) {
             if (magicsEditorOpened == false) {
+                switch (shorterGameName) {
+                    case "Boktai":
+                        // No magics in Bok 1
+                        return;
+                    case "Zoktai":
+                        new ZoktaiMagicsEditor(this, _memoryValues, _zoktaiAddresses);
+                        break;
+                    case "Shinbok":
+                        // new ShinbokMagicsEditor(this, _memoryValues, _shinbokAddresses);
+                        // break;
+                        return;
+                    case "LunarKnights":
+                        // No magics in LK / DS
+                        return;
+                    default:
+                        // If game is not handled, do nothing
+                        return;
+                }
 
-                // Create subwindow & add on close event
-                magicsEditWindow = WinFormHelpers.CreateSubWindow("magicsEditWindow", "Bok Edit - Magics", 200, 100, this);
-                magicsEditWindow.FormClosing += new FormClosingEventHandler(delegate (object sender, FormClosingEventArgs e) {
-                    magicsEditorOpened = false;
-                    magicsEditWindow.Controls.Clear();
-                });
-
-                magicsEditWindow.Show();
                 magicsEditorOpened = true;
             }
         }
