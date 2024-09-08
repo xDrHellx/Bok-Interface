@@ -450,7 +450,6 @@ namespace BokInterface.All {
             // Create label
             Label label = new() {
                 Name = name,
-                Text = "",
                 Location = new Point(positionX, positionY),
                 Size = new Size(img.Width, img.Height),
                 Image = img,
@@ -461,6 +460,36 @@ namespace BokInterface.All {
                 Margin = defaultMargin,
                 Font = defaultFont
             };
+
+            // If a Control instance is passed, add the generated element to it
+            control?.Controls.Add(label);
+
+            return label;
+        }
+
+        /// <summary>Simplified method for creating a label containing an image</summary>
+        /// <param name="name">Label name</param>
+        /// <param name="img">Image</param>
+        /// <param name="positionX">X position</param>
+        /// <param name="positionY">Y position</param>
+        /// <param name="control">Control instance if the element is to be attached to it directly</param>
+        /// <returns><c>System.Windows.Forms.Label</c>Label instance</returns>
+        public static Label CreateImageLabel(string name, Image? img, int positionX, int positionY, Control? control = null) {
+            Label label = new() {
+                Name = name,
+                Location = new Point(positionX, positionY),
+                AutoSize = false,
+                TabIndex = 2,
+                ImageAlign = ContentAlignment.MiddleCenter,
+                Anchor = defaultAnchor,
+                Margin = defaultMargin,
+                Font = defaultFont
+            };
+
+            if (img != null) {
+                label.Size = new Size(img.Width, img.Height);
+                label.Image = img;
+            }
 
             // If a Control instance is passed, add the generated element to it
             control?.Controls.Add(label);
