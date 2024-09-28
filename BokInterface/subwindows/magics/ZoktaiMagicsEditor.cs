@@ -35,7 +35,7 @@ namespace BokInterface.Magics {
             Icon = _bokInterface.Icon;
             _zoktaiMagics = new();
 
-            SetFormParameters(271, 295);
+            SetFormParameters(281, 249);
 
             // Add the onClose event to the subwindow
             FormClosing += new FormClosingEventHandler(delegate (object sender, FormClosingEventArgs e) {
@@ -50,10 +50,13 @@ namespace BokInterface.Magics {
         protected override void AddElements() {
 
             // Sections
-            lunaGroupBox = WinFormHelpers.CreateGroupBox("lunaGroupBox", "Luna", 5, 5, 261, 95, control: this);
-            solGroupBox = WinFormHelpers.CreateGroupBox("solGroupBox", "Sol", 5, 102, 261, 57, control: this);
-            darkGroupBox = WinFormHelpers.CreateGroupBox("darkGroupBox", "Dark", 5, 161, 261, 57, control: this);
-            sabataGroupBox = WinFormHelpers.CreateGroupBox("sabataGroupBox", "Sabata", 5, 229, 261, 38, control: this);
+            lunaGroupBox = WinFormHelpers.CreateGroupBox("lunaGroupBox", "Luna", 5, 5, 271, 95, control: this);
+            solGroupBox = WinFormHelpers.CreateGroupBox("solGroupBox", "Sol", 5, 102, 271, 58, control: this);
+            darkGroupBox = WinFormHelpers.CreateGroupBox("darkGroupBox", "Dark", 5, 162, 271, 58, control: this);
+            sabataGroupBox = WinFormHelpers.CreateGroupBox("sabataGroupBox", "Sabata", 5, 222, 271, 38, control: this);
+
+            // Hide the Sabata section, see why below
+            sabataGroupBox.Hide();
 
             // Loop over all magics & add elements
             int yPositionOffset = 1, n = 1;
@@ -75,6 +78,11 @@ namespace BokInterface.Magics {
                         groupBox = darkGroupBox;
                         break;
                     case "Sabata":
+                        /**
+                         * Note :
+                         * Sabata's magics cannot be updated through this
+                         * the game might be forcing them when playing as Sabata
+                         */
                         groupBox = sabataGroupBox;
                         break;
                     default:
@@ -95,14 +103,14 @@ namespace BokInterface.Magics {
                 // Label with image & checkbox
                 if (n % 2 == 0) {
                     // Even (right side)
-                    WinFormHelpers.CreateImageLabel(labelName + "_img", magic.icon, 136, 18 * yPositionOffset, groupBox);
-                    WinFormHelpers.CreateLabel(labelName, magic.name, 152, 18 * yPositionOffset, 85, 15, groupBox, textAlignment: "MiddleLeft");
-                    checkBoxes.Add(WinFormHelpers.CreateCheckBox("magic_" + labelName, "", 243, 18 * yPositionOffset, 16, 16, control: groupBox));
+                    WinFormHelpers.CreateImageLabel(labelName + "_img", magic.icon, 146, 18 * yPositionOffset, groupBox);
+                    WinFormHelpers.CreateLabel(labelName, magic.name, 162, 18 * yPositionOffset, 85, 15, groupBox, textAlignment: "MiddleLeft");
+                    checkBoxes.Add(WinFormHelpers.CreateCheckBox("magic_" + labelName, "", 253, 18 * yPositionOffset, 16, 16, control: groupBox));
                 } else {
                     // Odd (left side)
                     WinFormHelpers.CreateImageLabel(labelName + "_img", magic.icon, 5, 18 * yPositionOffset, groupBox);
-                    WinFormHelpers.CreateLabel(labelName, magic.name, 21, 18 * yPositionOffset, 85, 15, groupBox, textAlignment: "MiddleLeft");
-                    checkBoxes.Add(WinFormHelpers.CreateCheckBox("magic_" + labelName, "", 112, 18 * yPositionOffset, 16, 16, control: groupBox));
+                    WinFormHelpers.CreateLabel(labelName, magic.name, 21, 18 * yPositionOffset, 95, 15, groupBox, textAlignment: "MiddleLeft");
+                    checkBoxes.Add(WinFormHelpers.CreateCheckBox("magic_" + labelName, "", 122, 18 * yPositionOffset, 16, 16, control: groupBox));
                 }
 
                 // If n > 1 && n is an even number, it means we're moving to another row next
@@ -117,7 +125,7 @@ namespace BokInterface.Magics {
             SetDefaultValues();
 
             // Button for setting values & its events
-            Button setValuesButton = WinFormHelpers.CreateButton("setMagicsButton", "Set values", 192, 269, 75, 23, this);
+            Button setValuesButton = WinFormHelpers.CreateButton("setMagicsButton", "Set values", 202, 223, 75, 23, this);
             setValuesButton.Click += new EventHandler(delegate (object sender, EventArgs e) {
                 // Write the values for 10 frames
                 for (int i = 0; i < 10; i++) {
@@ -129,11 +137,37 @@ namespace BokInterface.Magics {
         protected override void SetValues() {
 
             // Get checkboxes
-            // List<CheckBox> checkBoxes = this.checkBoxes;
+            List<CheckBox> checkBoxes = this.checkBoxes;
 
             /**
-             * TODO Explode the magics memory address to set values for each magic (since it's a 32 bytes bitmask & each magic is 4 bytes)
+             * Retrieve the current magics value from the memory address
+             * We'll use it as a base for updating the bitmask it contains
              */
+            int bitPosition = 0;
+            int magic = (int)_memoryValues.Inventory["magics"].Value;
+            uint newMagicValue = (uint)magic;
+            foreach (CheckBox checkbox in checkBoxes) {
+                if (checkbox.Enabled == false) {
+                    continue;
+                }
+
+                /**
+                 * Set the value for the bitmask corresponding to the magic
+                 * (checked : 1 | unchecked : 0)
+                 */
+                if (checkbox.Checked == true) {
+                    newMagicValue = (uint)Utilities.SetBitToOne((int)newMagicValue, bitPosition);
+                    APIs.Gui.AddMessage(checkbox.Name + " : " + newMagicValue.ToString() + " : " + bitPosition);
+                } else {
+                    newMagicValue = (uint)Utilities.SetBitToZero((int)newMagicValue, bitPosition);
+                    APIs.Gui.AddMessage(checkbox.Name + " : " + newMagicValue.ToString() + " : " + bitPosition);
+                }
+
+                bitPosition++;
+            }
+
+            // Set the updated value to the memory address
+            _memoryValues.Inventory["magics"].Value = newMagicValue;
         }
 
         protected override void SetDefaultValues() {
@@ -141,10 +175,23 @@ namespace BokInterface.Magics {
             // If "current stat" is a valid value, get the current inventory
             uint currentStat = APIs.Memory.ReadU32(_zoktaiAddresses.Misc["current_stat"].Address);
             if (currentStat > 0) {
-                // foreach (CheckBox checkBox in checkBoxes) { }
+                int bitPosition = 0;
+                int magic = (int)_memoryValues.Inventory["magics"].Value;
+                foreach (CheckBox checkBox in checkBoxes) {
+                    if (checkBox.Enabled == false) {
+                        continue;
+                    }
+
+                    checkBox.Checked = Utilities.IsBitOne(magic, bitPosition);
+                    bitPosition++;
+                }
             } else {
                 // If current stat is unvalid (for example because we are on the title screen or in a room transition), uncheck all checkboxes
                 foreach (CheckBox checkBox in checkBoxes) {
+                    if (checkBox.Enabled == false) {
+                        continue;
+                    }
+
                     checkBox.Checked = false;
                 }
             }
