@@ -57,9 +57,9 @@ namespace BokInterface.Magics {
         private void InitFullList() {
             All = All
                 .Concat(Luna)
+                .Concat(Sabata)
                 .Concat(Sol)
                 .Concat(Dark)
-                .Concat(Sabata)
                 .ToDictionary(e => e.Key, e => e.Value);
         }
     }
