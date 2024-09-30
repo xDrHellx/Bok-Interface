@@ -166,7 +166,7 @@ namespace BokInterface {
                     extrasGroupBox = WinFormHelpers.CreateGroupBox("extraTools", "Tools", 237, 25, 87, 52, this);
                     break;
                 case "Zoktai":
-                    extrasGroupBox = WinFormHelpers.CreateGroupBox("extraTools", "Tools", 237, 187, 87, 52, this);
+                    extrasGroupBox = WinFormHelpers.CreateGroupBox("extraTools", "Tools", 237, 214, 87, 52, this);
                     break;
                 case "Shinbok":
                     extrasGroupBox = WinFormHelpers.CreateGroupBox("extraTools", "Tools", 237, 187, 87, 52, this);
