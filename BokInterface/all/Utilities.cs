@@ -155,6 +155,34 @@ namespace BokInterface.All {
 
         #endregion
 
+        #region Bitmask methods
+
+        /// <summary>Tests if a bit is 1</summary>
+        /// <param name="bitmask">Bitmask</param>
+        /// <param name="bitIndex">Bit index</param>
+        /// <returns><c>Bool</c>True if has magic, otherwise False</returns>
+        public static bool IsBitOne(int bitmask, int bitIndex) {
+            return (bitmask & (1 << bitIndex)) != 0;
+        }
+
+        /// <summary>Set a bit to 1</summary>
+        /// <param name="bitmask">Bitmask</param>
+        /// <param name="bitIndex">Bit index</param>
+        /// <returns><c>Int</c>Value to set to relevant memory address</returns>
+        public static int SetBitToOne(int bitmask, int bitIndex) {
+            return bitmask | (1 << bitIndex);
+        }
+
+        /// <summary>Set a bit to 0</summary>
+        /// <param name="bitmask">Bitmask</param>
+        /// <param name="bitIndex">Bit index</param>
+        /// <returns><c>Int</c>Value to set to relevant memory address</returns>
+        public static int SetBitToZero(int bitmask, int bitIndex) {
+            return bitmask & ~(1 << bitIndex);
+        }
+
+        #endregion
+
         #region EXP & level conversions methods
 
         /// <summary>Convert EXP to Level</summary>
