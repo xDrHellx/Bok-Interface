@@ -129,6 +129,9 @@ namespace BokInterface.All {
                 Inventory.Add("slot" + slotNumber + "_weapon_sp_ability_2", new DynamicMemoryValue("slot" + slotNumber + "_weapon_sp_ability_2", _zoktaiAddresses.Misc["stat"].Address, _zoktaiAddresses.Inventory["weapon_slot_" + slotNumber + "_sp_ability_2"].Address, type: _zoktaiAddresses.Inventory["weapon_slot_" + slotNumber + "_sp_ability_2"].Type));
                 Inventory.Add("slot" + slotNumber + "_weapon_sp_ability_3", new DynamicMemoryValue("slot" + slotNumber + "_weapon_sp_ability_3", _zoktaiAddresses.Misc["stat"].Address, _zoktaiAddresses.Inventory["weapon_slot_" + slotNumber + "_sp_ability_3"].Address, type: _zoktaiAddresses.Inventory["weapon_slot_" + slotNumber + "_sp_ability_3"].Type));
             }
+
+            // Magics
+            Inventory.Add("magics", new DynamicMemoryValue("magics", _zoktaiAddresses.Misc["stat"].Address, _zoktaiAddresses.Inventory["magics"].Address, type: _zoktaiAddresses.Inventory["magics"].Type));
         }
 
         private void InitializeShinbokList() {
