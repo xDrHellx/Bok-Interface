@@ -603,5 +603,59 @@
   </data>
   <data name="toad_power" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\img\bok2\accessories\toad_power.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>  
+  </data>
+  <data name="enchant_sol" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok2\magics\enchant_sol.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="enchant_dark" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok2\magics\enchant_dark.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="enchant_flame" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok2\magics\enchant_flame.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="enchant_frost" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok2\magics\enchant_frost.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="enchant_cloud" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok2\magics\enchant_cloud.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="enchant_earth" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok2\magics\enchant_earth.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="transform" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok2\magics\transform.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="rising_sun" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok2\magics\rising_sun.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="freeze" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok2\magics\freeze.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="dash" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok2\magics\dash.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="healing" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok2\magics\healing.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="dynamite" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok2\magics\dynamite.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="sleeping" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok2\magics\sleeping.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="change_bat" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok2\magics\change_bat.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="change_mouse" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok2\magics\change_mouse.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="change_wolf" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok2\magics\change_wolf.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="zero_shift" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok2\magics\zero_shift.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="dark_sun" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok2\magics\dark_sun.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
 </root>
