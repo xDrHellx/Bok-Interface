@@ -41,7 +41,7 @@ namespace BokInterface.Weapons {
             Swords.Add("Vorpal Sword", new ZoktaiWeapon("Vorpal Sword", 16, "Sword", "vorpal_sword", row: 4));
             Swords.Add("Solar Sword", new ZoktaiWeapon("Solar Sword", 17, "Sword", "solar_sword", row: 4));
             Swords.Add("Sword of Darkness", new ZoktaiWeapon("Sword of Darkness", 18, "Sword", "sword_of_darkness", row: 4));
-            Swords.Add("Gram", new ZoktaiWeapon("Gram", 19, "Sword", "Gram", row: 4, rRank: true));
+            Swords.Add("Gram", new ZoktaiWeapon("Gram", 19, "Sword", "gram", row: 4, rRank: true));
         }
 
         ///<summary>Init weapon instances for Spears</summary>
