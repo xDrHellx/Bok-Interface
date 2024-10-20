@@ -677,9 +677,9 @@ namespace BokInterface.Properties {
         }
 
         /// <summary>Looks up a localized resource of type System.Drawing.Bitmap.</summary>
-        internal static System.Drawing.Bitmap Gram {
+        internal static System.Drawing.Bitmap gram {
             get {
-                object obj = ResourceManager.GetObject("Gram", resourceCulture);
+                object obj = ResourceManager.GetObject("gram", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

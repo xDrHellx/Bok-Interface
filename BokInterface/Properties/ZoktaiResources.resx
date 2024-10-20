@@ -352,7 +352,7 @@
   <data name="sword_of_darkness" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\img\bok2\weapons\sword_of_darkness.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Gram" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="gram" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\img\bok2\weapons\gram.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="short_spear" type="System.Resources.ResXFileRef, System.Windows.Forms">
