@@ -58,7 +58,7 @@ namespace BokInterface.Items {
                 // Tasty Meat
                 4 => "Rotten Meat",
                 // Nuts
-                1 or 13 or 19 or 22 or 25 => "Rotten Nut",
+                1 or 13 or 18 or 19 or 20 or 22 or 25 => "Rotten Nut",
                 // Non-perishable item
                 _ => ""
             };
@@ -70,7 +70,7 @@ namespace BokInterface.Items {
         protected override int GetRottensAt(uint value) {
             return value switch {
                 4 or 6 or 10 or 11 => 3840,
-                1 or 13 or 19 or 22 or 25 or 23 or 24 => 7680,
+                1 or 13 or 18 or 19 or 20 or 22 or 23 or 24 or 25 => 7680,
                 _ => 0
             };
         }
