@@ -17,10 +17,15 @@ namespace BokInterface.All {
         /// <summary>Color for base stat points (Boktai 2, 3, LK)</summary>
         public static string baseStatColor = "#FFE600";
 
+        /// <summary>Color for base stat points obtained from cards (Boktai 3)</summary>
+        public static string cardsStatColor = "#f7df02";
+
         /// <summary>
-        /// Color for stat points from equipments (Boktai 3) <br/>
-        /// These points does not affect as many things as pure stat points <br/><br/>
-        /// For example STR points from equipments does not affect coffin carrying speed
+        /// <para>
+        /// Color for stat points from accessories (Boktai 3) <br/>
+        /// These points does not affect as many things as base stat points
+        /// </para>
+        /// <example>For example STR points from accessories does not affect coffin carrying speed</example>
         /// </summary>
         public static string equipsStatColor = "#FFA529";
 
