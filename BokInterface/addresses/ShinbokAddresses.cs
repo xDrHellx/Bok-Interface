@@ -56,38 +56,48 @@ namespace BokInterface.Addresses {
             Django.Add("current_ene", new MemoryAddress(0x428, domain: "EWRAM"));
             Django.Add("current_trc", new MemoryAddress(0x42C, domain: "EWRAM"));
 
+            // TODO : Base points are only applied after switching rooms : fix current_base_
+            // TODO : Cards points are only applied after switching rooms : fix current_cards_
+            // TODO : Equips points don't stay after switching rooms : add persistent_equips_
+
             // VIT
-            Django.Add("current_base_vit", new MemoryAddress(0x18, note: _note, domain: "EWRAM"));
-            Django.Add("current_cards_vit", new MemoryAddress(0x20, note: "Stat points from cards", domain: "EWRAM"));
-            Django.Add("current_equips_vit", new MemoryAddress(0x332, note: "Stat points from accessories", domain: "EWRAM"));
-            Django.Add("current_sum_base_cards_vit", new MemoryAddress(0x41C, note: "Sum of base stat & points from cards", domain: "EWRAM"));
+            Django.Add("current_base_vit", new MemoryAddress(0x18, note: _note, domain: "EWRAM")); // need to find proper address
+            Django.Add("current_cards_vit", new MemoryAddress(0x20, note: "Stat points from cards, " + _note.ToLower(), domain: "EWRAM")); // need to find proper address
+            Django.Add("current_equips_vit", new MemoryAddress(0x332, note: "Stat points from accessories, " + _note.ToLower(), domain: "EWRAM"));
+            Django.Add("current_sum_base_cards_vit", new MemoryAddress(0x41C, note: "Sum of base stat & points from cards, " + _note.ToLower(), domain: "EWRAM"));
             // Django.Add("current_total_vit", new MemoryAddress(0xFCB636, note: "Total stat points (Base + Cards + Accessories)", domain: "EWRAM"));
 
             // SPR
-            Django.Add("current_base_spr", new MemoryAddress(0x1A, note: _note, domain: "EWRAM"));
-            Django.Add("current_cards_spr", new MemoryAddress(0x22, note: "Stat points from cards", domain: "EWRAM"));
-            Django.Add("current_equips_spr", new MemoryAddress(0x334, note: "Stat points from accessories", domain: "EWRAM"));
-            Django.Add("current_sum_base_cards_spr", new MemoryAddress(0x41E, note: "Sum of base stat & points from cards", domain: "EWRAM"));
+            Django.Add("current_base_spr", new MemoryAddress(0x1A, note: _note, domain: "EWRAM")); // need to find proper address
+            Django.Add("current_cards_spr", new MemoryAddress(0x22, note: "Stat points from cards, " + _note.ToLower(), domain: "EWRAM")); // need to find proper address
+            Django.Add("current_equips_spr", new MemoryAddress(0x334, note: "Stat points from accessories, " + _note.ToLower(), domain: "EWRAM"));
+            Django.Add("current_sum_base_cards_spr", new MemoryAddress(0x41E, note: "Sum of base stat & points from cards, " + _note.ToLower(), domain: "EWRAM"));
             // Django.Add("current_total_spr", new MemoryAddress(0xFCB638, note: "Total stat points (Base + Cards + Accessories)", domain: "EWRAM"));
 
             // STR
-            Django.Add("current_base_str", new MemoryAddress(0x1C, note: _note, domain: "EWRAM"));
-            Django.Add("current_cards_str", new MemoryAddress(0x24, note: "Stat points from cards", domain: "EWRAM"));
-            Django.Add("current_equips_str", new MemoryAddress(0x336, note: "Stat points from accessories", domain: "EWRAM"));
-            Django.Add("current_sum_base_cards_str", new MemoryAddress(0x420, note: "Sum of base stat & points from cards", domain: "EWRAM"));
+            Django.Add("current_base_str", new MemoryAddress(0x1C, note: _note, domain: "EWRAM")); // need to find proper address
+            Django.Add("current_cards_str", new MemoryAddress(0x24, note: "Stat points from cards, " + _note.ToLower(), domain: "EWRAM")); // need to find proper address
+            Django.Add("current_equips_str", new MemoryAddress(0x336, note: "Stat points from accessories, " + _note.ToLower(), domain: "EWRAM"));
+            Django.Add("current_sum_base_cards_str", new MemoryAddress(0x420, note: "Sum of base stat & points from cards, " + _note.ToLower(), domain: "EWRAM"));
             // Django.Add("current_total_str", new MemoryAddress(0xFCB640, note: "Total stat points (Base + Cards + Accessories)", domain: "EWRAM"));
+
+            // Persistent stats (used on screen transitions & save data)
+            _note = "Also corresponds to values from Save Data";
+            Django.Add("persistent_base_vit", new MemoryAddress(0x18, note: _note, domain: "EWRAM"));
+            Django.Add("persistent_cards_vit", new MemoryAddress(0x20, note: "Stat points from cards, " + _note.ToLower(), domain: "EWRAM"));
+
+            Django.Add("persistent_base_spr", new MemoryAddress(0x1A, note: _note, domain: "EWRAM"));
+            Django.Add("persistent_cards_spr", new MemoryAddress(0x22, note: "Stat points from cards, " + _note.ToLower(), domain: "EWRAM"));
+
+            Django.Add("persistent_base_str", new MemoryAddress(0x1C, note: _note, domain: "EWRAM"));
+            Django.Add("persistent_cards_str", new MemoryAddress(0x24, note: "Stat points from cards, " + _note.ToLower(), domain: "EWRAM"));
+
+            Django.Add("stat_points_to_allocate", new MemoryAddress(0x442, domain: "EWRAM"));
 
             // Add Solls addresses
             // Solls.Add("solls_on_self", 0x03CBB0);
             // Solls.Add("solar_bank", 0x03CB7C);
             // Solls.Add("dark_loan", 0x03C90C);
-
-            // Persistent stats (used on screen transitions & save data)
-            _note = "Also corresponds to values from Save Data";
-            Django.Add("persistent_base_vit", new MemoryAddress(0x808, note: _note, domain: "EWRAM"));
-            Django.Add("persistent_base_spr", new MemoryAddress(0x80A, note: _note, domain: "EWRAM"));
-            Django.Add("persistent_base_str", new MemoryAddress(0x81C, note: _note, domain: "EWRAM"));
-            Django.Add("stat_points_to_allocate", new MemoryAddress(0x442, domain: "EWRAM"));
 
             // EXP & level
             Django.Add("level", new MemoryAddress(0x440, domain: "EWRAM"));
