@@ -4,7 +4,7 @@ using System.Linq;
 using BokInterface.Weapons.Accessories;
 
 namespace BokInterface.Accessories {
-    /// <summary>Class for Shinboks accessories instances and lists</summary>
+    /// <summary>Class for Shinbok accessories instances and lists</summary>
     class ShinbokAccessories {
 
         public Dictionary<string, Accessory> Head = [],
