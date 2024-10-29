@@ -34,7 +34,7 @@ namespace BokInterface.Accessories {
             Head.Add("Golden Mask", new ShinbokAccessory("Golden Mask", 7, type, "golden_mask"));
             Head.Add("Faded Hat", new ShinbokAccessory("Faded Hat", 8, type, "faded_hat"));
             Head.Add("Wolf Fang", new ShinbokAccessory("Wolf Fang", 9, type, "wolf_fang"));
-            Head.Add("Colonel Helm", new ShinbokAccessory("Colonel Helm", 10, type, "colonel_helm"));
+            Head.Add("Colonel Helm", new ShinbokAccessory("Colonel Helm", 10, type, "colonel_helm", crossOver: true));
         }
 
         ///<summary>Init accessory instances for Head accessories</summary>
@@ -55,7 +55,7 @@ namespace BokInterface.Accessories {
             Torso.Add("Black Armor", new ShinbokAccessory("Black Armor", 23, type, "black_armor"));
             Torso.Add("Worn-out Coat", new ShinbokAccessory("Worn-out Coat", 24, type, "worn_out_coat"));
             Torso.Add("Bat Wing", new ShinbokAccessory("Bat Wing", 25, type, "bat_wing"));
-            Torso.Add("Forte Mantle", new ShinbokAccessory("Forte Mantle", 26, type, "forte_mantle"));
+            Torso.Add("Forte Mantle", new ShinbokAccessory("Forte Mantle", 26, type, "forte_mantle", crossOver: true));
         }
 
         ///<summary>Init accessory instances for Head accessories</summary>
@@ -71,7 +71,7 @@ namespace BokInterface.Accessories {
             Arm.Add("Black Gauntlet", new ShinbokAccessory("Black Gauntlet", 34, type, "black_gauntlet"));
             Arm.Add("Sweaty Gloves", new ShinbokAccessory("Sweaty Gloves", 35, type, "sweaty_gloves"));
             Arm.Add("Undead Fingernail", new ShinbokAccessory("Undead Fingernail", 36, type, "undead_fingernail"));
-            Arm.Add("Tomahawk Armor", new ShinbokAccessory("Tomahawk Armor", 37, type, "tomahawk_armor"));
+            Arm.Add("Tomahawk Armor", new ShinbokAccessory("Tomahawk Armor", 37, type, "tomahawk_armor", crossOver: true));
         }
 
         ///<summary>Init accessory instances for Head accessories</summary>
@@ -86,7 +86,7 @@ namespace BokInterface.Accessories {
             Foot.Add("Adventurer's Boots", new ShinbokAccessory("Adventurer's Boots", 44, type, "adventurer_s_boots"));
             Foot.Add("Worn-Out Boots", new ShinbokAccessory("Worn-Out Boots", 45, type, "worn_out_boots"));
             Foot.Add("Rat Tail", new ShinbokAccessory("Rat Tail", 46, type, "rat_tail"));
-            Foot.Add("Blues Leg", new ShinbokAccessory("Blues Leg", 47, type, "blues_leg"));
+            Foot.Add("Blues Leg", new ShinbokAccessory("Blues Leg", 47, type, "blues_leg", crossOver: true));
         }
 
         ///<summary>Init the full list containing all accessories (mostly used for editors)</summary>
