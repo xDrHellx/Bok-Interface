@@ -55,7 +55,7 @@ namespace BokInterface {
             // this.inventoryGroupBox = WinFormHelpers.WinFormHelpers.CreateGroupBox("inventory", "Inventory", 5, 101, 250, 55, this);
 
             // Main window
-            SetMainWindow("Bok Interface" + (shorterGameName != "" ? " - " + shorterGameName : ""), 345, 500);
+            SetMainWindow("Bok Interface" + (shorterGameName != "" ? " - " + shorterGameName : ""), 339, 500);
 
             ResumeLayout(false);
         }
@@ -132,27 +132,26 @@ namespace BokInterface {
         private void AddShinbokEditSection() {
 
             // Section
-            editGroupBox = WinFormHelpers.CreateGroupBox("editButtons", "Edit", 237, 25, 87, 157, this);
+            editGroupBox = WinFormHelpers.CreateGroupBox("editButtons", "Edit", 237, 25, 97, 157, this);
 
-            _bok3_editStatusBtn = WinFormHelpers.CreateButton("editStatuts", "Status", 6, 19, 75, 23, editGroupBox);
-            _bok3_editInventoryBtn = WinFormHelpers.CreateButton("editItems", "Items", 6, 46, 75, 23, editGroupBox);
-            _bok3_editKeyItemsBtn = WinFormHelpers.CreateButton("editKeyItems", "Key items", 6, 73, 75, 23, editGroupBox);
-            _bok3_editWeaponsBtn = WinFormHelpers.CreateButton("editWeapons", "Weapons", 6, 100, 75, 23, editGroupBox);
-            _bok3_editEquipsBtn = WinFormHelpers.CreateButton("editEquips", "Protectors", 6, 127, 75, 23, editGroupBox);
-            // _bok3_editSolarGunBtn = WinFormHelpers.CreateButton("editSolarGun", "Solar gun", 6, 127, 75, 23, editGroupBox);
+            _bok3_editStatusBtn = WinFormHelpers.CreateButton("editStatuts", "Status", 6, 19, 85, 23, editGroupBox);
+            _bok3_editInventoryBtn = WinFormHelpers.CreateButton("editItems", "Items", 6, 46, 85, 23, editGroupBox);
+            _bok3_editKeyItemsBtn = WinFormHelpers.CreateButton("editKeyItems", "Key items", 6, 73, 85, 23, editGroupBox);
+            _bok3_editWeaponsBtn = WinFormHelpers.CreateButton("editWeapons", "Weapons", 6, 100, 85, 23, editGroupBox);
+            _bok3_editEquipsBtn = WinFormHelpers.CreateButton("editEquips", "Accessories", 6, 127, 85, 23, editGroupBox);
+            // _bok3_editSolarGunBtn = WinFormHelpers.CreateButton("editSolarGun", "Solar gun", 6, 127, 85, 23, editGroupBox);
 
             // WIP features are disabled for now
             _bok3_editWeaponsBtn.Enabled = false;
-            _bok3_editEquipsBtn.Enabled = false;
             // _bok3_editSolarGunBtn.Enabled = false;
 
             // Add onclick events
             _bok3_editStatusBtn.Click += new System.EventHandler(OpenStatusEditor);
             _bok3_editInventoryBtn.Click += new System.EventHandler(OpenInventoryEditor);
             _bok3_editKeyItemsBtn.Click += new System.EventHandler(OpenKeyItemsEditor);
-            // this.bok3_editWeaponsBtn.Click += new System.EventHandler(this.OpenWeaponsEditor);
-            // this.bok3_editEquipsBtn.Click += new System.EventHandler(this.OpenEquipsEditor);
-            // this.bok3_editSolarGunBtn.Click += new System.EventHandler(this.OpenSolarGunEditor);
+            // _bok3_editWeaponsBtn.Click += new System.EventHandler(OpenWeaponsEditor);
+            _bok3_editEquipsBtn.Click += new System.EventHandler(OpenEquipsEditor);
+            // _bok3_editSolarGunBtn.Click += new System.EventHandler(OpenSolarGunEditor);
         }
     }
 }

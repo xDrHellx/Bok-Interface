@@ -5,7 +5,7 @@ using System.Windows.Forms;
 using BokInterface.Items;
 using BokInterface.Weapons;
 using BokInterface.Weapons.Abilities;
-using BokInterface.Weapons.Accessories;
+using BokInterface.Accessories;
 
 namespace BokInterface.All {
     ///<summary>Class for ComboBox with images next to selectable options</summary>
