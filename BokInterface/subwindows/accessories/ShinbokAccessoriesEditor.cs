@@ -6,28 +6,27 @@ using BokInterface.Addresses;
 using BokInterface.All;
 
 namespace BokInterface.Accessories {
-    class ZoktaiAccessoriesEditor : AccessoriesEditor {
+    class ShinbokAccessoriesEditor : AccessoriesEditor {
 
         #region Instances
 
         private readonly MemoryValues _memoryValues;
         private readonly BokInterface _bokInterface;
-        private readonly ZoktaiAddresses _zoktaiAddresses;
-        private readonly ZoktaiAccessories _zoktaiAccessories;
+        private readonly ShinbokAddresses _shinbokAddresses;
+        private readonly ShinbokAccessories _shinbokAccessories;
 
         #endregion
 
-        public ZoktaiAccessoriesEditor(BokInterface bokInterface, MemoryValues memoryValues, ZoktaiAddresses zoktaiAddresses) {
+        public ShinbokAccessoriesEditor(BokInterface bokInterface, MemoryValues memoryValues, ShinbokAddresses shinbokAddresses) {
 
             _memoryValues = memoryValues;
-            _zoktaiAddresses = zoktaiAddresses;
+            _shinbokAddresses = shinbokAddresses;
 
             Owner = _bokInterface = bokInterface;
             Icon = _bokInterface.Icon;
-            _zoktaiAccessories = new();
+            _shinbokAccessories = new();
 
             SetFormParameters(691, 240);
-            Text = "Protectors editor";
 
             // Add the onClose event to the subwindow
             FormClosing += new FormClosingEventHandler(delegate (object sender, FormClosingEventArgs e) {
@@ -155,36 +154,7 @@ namespace BokInterface.Accessories {
             switch (subList) {
                 case "django":
                     if (_memoryValues.Django.ContainsKey(memoryValueKey) == true) {
-
-                        // Depending on the key, we treat the value setting differently
-                        switch (memoryValueKey) {
-                            case "vit":                     // Stats
-                            case "spr":
-                            case "str":
-                            case "agi":
-                                /**
-                                 * For stats we also update the "persistent" stat address
-                                 * 
-                                 * We do this because updating "current" stat value is not enough,
-                                 * when switching room the game would set back the old values
-                                 */
-                                _memoryValues.Django[memoryValueKey].Value = (uint)value;
-                                if (_memoryValues.Misc.ContainsKey(memoryValueKey) == true) {
-                                    _memoryValues.Misc[memoryValueKey].Value = (uint)value;
-                                }
-                                break;
-                            case "sword_skill":             // Skill
-                            case "spear_skill":
-                            case "hammer_skill":
-                            case "fists_skill":
-                            case "gun_skill":
-                                _memoryValues.Django[memoryValueKey].Value = Utilities.LevelToExp(value);
-                                break;
-                            default:                        // Default treatment
-                                _memoryValues.Django[memoryValueKey].Value = (uint)value;
-                                break;
-                        }
-
+                        _memoryValues.Django[memoryValueKey].Value = (uint)value;
                     } else if (_memoryValues.U16.ContainsKey(memoryValueKey) == true) {
                         _memoryValues.U16[memoryValueKey].Value = (uint)value;
                     } else if (_memoryValues.U32.ContainsKey(memoryValueKey) == true) {
@@ -231,7 +201,7 @@ namespace BokInterface.Accessories {
         ///<summary>Generates the options for the dropdowns</summary>
         private void GenerateDropDownOptions() {
             foreach (ImageComboBox dropdown in dropDownLists) {
-                dropdown.DataSource = new BindingSource(_zoktaiAccessories.All, null);
+                dropdown.DataSource = new BindingSource(_shinbokAccessories.All, null);
                 dropdown.DisplayMember = "Key";
                 dropdown.ValueMember = "Value";
             }
@@ -241,7 +211,7 @@ namespace BokInterface.Accessories {
         ///<param name="value"><c>decimal</c>Value</param>
         ///<returns><c>Accessory</c>Accessory</returns>
         private Accessory? GetAccessoryByValue(decimal value) {
-            foreach (KeyValuePair<string, Accessory> index in _zoktaiAccessories.All) {
+            foreach (KeyValuePair<string, Accessory> index in _shinbokAccessories.All) {
                 Accessory accessory = index.Value;
                 if (accessory.value == value) {
                     return accessory;
@@ -253,9 +223,12 @@ namespace BokInterface.Accessories {
 
         protected override void SetDefaultValues() {
 
-            // If "current stat" is a valid value, get the current inventory
-            uint currentStat = APIs.Memory.ReadU32(_zoktaiAddresses.Misc["current_stat"].Address);
-            if (currentStat > 0) {
+            /**
+			 * If Django's current HP is a valid, try retrieving the current accessory inventory
+			 * (Django's current HP goes below 0 or above 1000 when switching rooms, during bike races or on world map)
+			 */
+            uint djangoCurrentHp = _memoryValues.Django["current_hp"].Value;
+            if (djangoCurrentHp >= 0 && djangoCurrentHp <= 1000) {
                 foreach (ImageComboBox dropdown in dropDownLists) {
                     /**
                      * Get the name of the field to retrieve the value from based on the dropdown's name (for example inventory_slotX_accessory => slotX_accessory)
@@ -268,7 +241,7 @@ namespace BokInterface.Accessories {
                     }
                 }
             } else {
-                // If current stat is unvalid (for example because we are on the title screen or in a room transition), use specific values
+                // Otherwise set default values in the editor subwindow
                 foreach (ImageComboBox dropdown in dropDownLists) {
                     dropdown.SelectedIndex = 0;
                 }

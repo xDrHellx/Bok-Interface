@@ -148,6 +148,9 @@ namespace BokInterface.Addresses {
 
                 // Key items (2 bytes)
                 Inventory.Add("key_item_slot_" + slotNumber, new MemoryAddress(0x838 + addressOffset, note: "Key item inventory slot", domain: "EWRAM"));
+
+                // Accessory slots (2 bytes)
+                Inventory.Add("accessory_slot_" + slotNumber, new MemoryAddress(0x160 + addressOffset, note: "Accessory inventory slot", domain: "EWRAM"));
             }
         }
     }
