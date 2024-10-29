@@ -1,6 +1,6 @@
 using System.Drawing;
 
-namespace BokInterface.Weapons.Accessories {
+namespace BokInterface.Accessories {
     ///<summary>Class for representing an accessory in Shinbok</summary>
     class ShinbokAccessory : Accessory {
 

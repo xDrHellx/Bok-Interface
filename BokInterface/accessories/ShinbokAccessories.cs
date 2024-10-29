@@ -1,8 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
 
-using BokInterface.Weapons.Accessories;
-
 namespace BokInterface.Accessories {
     /// <summary>Class for Shinbok accessories instances and lists</summary>
     class ShinbokAccessories {

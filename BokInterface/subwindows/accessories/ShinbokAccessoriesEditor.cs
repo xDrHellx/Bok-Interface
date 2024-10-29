@@ -4,7 +4,6 @@ using System.Windows.Forms;
 
 using BokInterface.Addresses;
 using BokInterface.All;
-using BokInterface.Weapons.Accessories;
 
 namespace BokInterface.Accessories {
     class ShinbokAccessoriesEditor : AccessoriesEditor {

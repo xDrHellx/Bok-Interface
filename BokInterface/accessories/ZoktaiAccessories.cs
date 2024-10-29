@@ -1,7 +1,5 @@
 using System.Collections.Generic;
 
-using BokInterface.Weapons.Accessories;
-
 namespace BokInterface.Accessories {
     /// <summary>Class for Zoktai accessories (protectors) instances and lists</summary>
     class ZoktaiAccessories {

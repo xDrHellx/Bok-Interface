@@ -1,6 +1,6 @@
 using System.Drawing;
 
-namespace BokInterface.Weapons.Accessories {
+namespace BokInterface.Accessories {
     ///<summary>Class for representing an accessory in Zoktai (also called protector)</summary>
     class ZoktaiAccessory : Accessory {
 
