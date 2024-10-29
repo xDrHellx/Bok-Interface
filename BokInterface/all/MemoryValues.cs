@@ -150,10 +150,11 @@ namespace BokInterface.All {
 
                 int slotNumber = i + 1;
 
-                // Items, key items
+                // Items, durability, key items & accessory slots
                 Inventory.Add("slot" + slotNumber + "_item", new DynamicMemoryValue("slot" + slotNumber + "_item", _shinbokAddresses.Misc["stat"].Address, _shinbokAddresses.Inventory["item_slot_" + slotNumber].Address));
-                Inventory.Add("slot" + slotNumber + "_key_item", new DynamicMemoryValue("slot" + slotNumber + "_key_item", _shinbokAddresses.Misc["stat"].Address, _shinbokAddresses.Inventory["key_item_slot_" + slotNumber].Address));
                 Inventory.Add("slot" + slotNumber + "_durability", new DynamicMemoryValue("slot" + slotNumber + "_durability", _shinbokAddresses.Misc["stat"].Address, _shinbokAddresses.Inventory["item_slot_durability_" + slotNumber].Address));
+                Inventory.Add("slot" + slotNumber + "_key_item", new DynamicMemoryValue("slot" + slotNumber + "_key_item", _shinbokAddresses.Misc["stat"].Address, _shinbokAddresses.Inventory["key_item_slot_" + slotNumber].Address));
+                Inventory.Add("slot" + slotNumber + "_accessory", new DynamicMemoryValue("slot" + slotNumber + "_accessory", _shinbokAddresses.Misc["stat"].Address, _shinbokAddresses.Inventory["accessory_slot_" + slotNumber].Address));
             }
         }
 
