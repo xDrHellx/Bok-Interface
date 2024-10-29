@@ -157,10 +157,8 @@ namespace BokInterface.Magics {
                  */
                 if (checkbox.Checked == true) {
                     newMagicValue = (uint)Utilities.SetBitToOne((int)newMagicValue, bitPosition);
-                    APIs.Gui.AddMessage(checkbox.Name + " : " + newMagicValue.ToString() + " : " + bitPosition);
                 } else {
                     newMagicValue = (uint)Utilities.SetBitToZero((int)newMagicValue, bitPosition);
-                    APIs.Gui.AddMessage(checkbox.Name + " : " + newMagicValue.ToString() + " : " + bitPosition);
                 }
 
                 bitPosition++;
