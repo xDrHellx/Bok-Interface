@@ -256,4 +256,148 @@
   <data name="necessity_goddess_statue" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\img\bok3\items\necessity_goddess_statue.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="circlet" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok3\accessories\circlet.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="cool_bandana" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok3\accessories\cool_bandana.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="burning_headband" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok3\accessories\burning_headband.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="earth_amulet" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok3\accessories\earth_amulet.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="proof_of_shinobi" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok3\accessories\proof_of_shinobi.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="alfar_tiara" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok3\accessories\alfar_tiara.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="x_ray_glasses" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok3\accessories\x_ray_glasses.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="golden_mask" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok3\accessories\golden_mask.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="faded_hat" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok3\accessories\faded_hat.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="wolf_fang" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok3\accessories\wolf_fang.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="colonel_helm" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok3\accessories\colonel_helm.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="leather_armor" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok3\accessories\leather_armor.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="chain_mail" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok3\accessories\chain_mail.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="plate_mail" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok3\accessories\plate_mail.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="fire_dragon_armor" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok3\accessories\fire_dragon_armor.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ice_dragon_armor" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok3\accessories\ice_dragon_armor.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="wind_dragon_armor" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok3\accessories\wind_dragon_armor.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="earth_dragon_armor" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok3\accessories\earth_dragon_armor.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="raincoat" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok3\accessories\raincoat.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="rune_armor" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok3\accessories\rune_armor.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="spike_mail" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok3\accessories\spike_mail.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="novice_mail" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok3\accessories\novice_mail.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="white_armor" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok3\accessories\white_armor.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="black_armor" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok3\accessories\black_armor.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="worn_out_coat" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok3\accessories\worn_out_coat.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="bat_wing" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok3\accessories\bat_wing.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="forte_mantle" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok3\accessories\forte_mantle.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="power_wrist" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok3\accessories\power_wrist.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="bracelet" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok3\accessories\bracelet.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="crest_of_clubs" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok3\accessories\crest_of_clubs.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="crest_of_diamonds" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok3\accessories\crest_of_diamonds.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="buckler" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok3\accessories\buckler.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="rune_gauntlet" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok3\accessories\rune_gauntlet.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="white_gauntlet" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok3\accessories\white_gauntlet.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="black_gauntlet" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok3\accessories\black_gauntlet.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="sweaty_gloves" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok3\accessories\sweaty_gloves.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="undead_fingernail" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok3\accessories\undead_fingernail.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="tomahawk_armor" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok3\accessories\tomahawk_armor.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="iron_clogs" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok3\accessories\iron_clogs.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="funny_shoes" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok3\accessories\funny_shoes.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="power_ankle" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok3\accessories\power_ankle.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="traveler_s_shoes" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok3\accessories\traveler_s_shoes.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="sabaton" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok3\accessories\sabaton.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="winged_boots" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok3\accessories\winged_boots.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="adventurer_s_boots" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok3\accessories\adventurer_s_boots.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="worn_out_boots" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok3\accessories\worn_out_boots.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="rat_tail" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok3\accessories\rat_tail.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="blues_leg" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok3\accessories\blues_leg.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
 </root>

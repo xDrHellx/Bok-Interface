@@ -1,10 +1,10 @@
 using System.Drawing;
 
 namespace BokInterface.Accessories {
-    ///<summary>Class for representing an accessory in Zoktai (also called protector)</summary>
-    class ZoktaiAccessory : Accessory {
+    ///<summary>Class for representing an accessory in Shinbok</summary>
+    class ShinbokAccessory : Accessory {
 
-        public ZoktaiAccessory(string name, uint value, string type, string icon = "", int row = 1, int buyPrice = 0, bool crossOver = false, int defense = 0, int weight = 0) : base(name, value, type) {
+        public ShinbokAccessory(string name, uint value, string type, string icon = "", int row = 1, int buyPrice = 0, bool crossOver = false, int defense = 0, int weight = 0) : base(name, value, type) {
             this.name = name;
             this.value = value;
             this.type = type;
@@ -20,7 +20,7 @@ namespace BokInterface.Accessories {
             // If an icon was specified try getting & setting it to the property
             if (icon != "") {
                 try {
-                    this.icon = (Image)ResourceLoader.LoadResource("ZoktaiResources", icon);
+                    this.icon = (Image)ResourceLoader.LoadResource("ShinbokResources", icon);
                 } catch { }
             }
         }
