@@ -121,7 +121,7 @@ namespace BokInterface {
                         new ZoktaiAccessoriesEditor(this, _memoryValues, _zoktaiAddresses);
                         break;
                     case "Shinbok":
-                        // new ShinbokAccessoriesEditor(this, _memoryValues, _shinbokAddresses);
+                        new ShinbokAccessoriesEditor(this, _memoryValues, _shinbokAddresses);
                         break;
                     case "LunarKnights":
                         // new LunarKnightsAccessoriesEditor(this, _memoryValues, _lunarKnightsAddresses);

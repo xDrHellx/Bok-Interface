@@ -1,6 +1,6 @@
 using System.Drawing;
 
-namespace BokInterface.Weapons.Accessories {
+namespace BokInterface.Accessories {
     ///<summary>Base class for representing an accessory</summary>
     abstract class Accessory {
 

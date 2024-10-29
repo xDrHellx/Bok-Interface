@@ -98,7 +98,7 @@ namespace BokInterface.Magics {
                 previousType = magic.type;
 
                 // Prepare the label name by converting the magic's name to snake_case
-                string labelName = string.Join("_", magic.name.Split(new[] { " " }, StringSplitOptions.RemoveEmptyEntries)).ToLower();
+                string labelName = string.Join("_", magic.name.Split([" "], StringSplitOptions.RemoveEmptyEntries)).ToLower();
 
                 // Label with image & checkbox
                 if (n % 2 == 0) {
@@ -157,10 +157,8 @@ namespace BokInterface.Magics {
                  */
                 if (checkbox.Checked == true) {
                     newMagicValue = (uint)Utilities.SetBitToOne((int)newMagicValue, bitPosition);
-                    APIs.Gui.AddMessage(checkbox.Name + " : " + newMagicValue.ToString() + " : " + bitPosition);
                 } else {
                     newMagicValue = (uint)Utilities.SetBitToZero((int)newMagicValue, bitPosition);
-                    APIs.Gui.AddMessage(checkbox.Name + " : " + newMagicValue.ToString() + " : " + bitPosition);
                 }
 
                 bitPosition++;
