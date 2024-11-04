@@ -139,7 +139,7 @@ namespace BokInterface.Addresses {
                 Inventory.Add("weapon_slot_" + slotNumber, new MemoryAddress(0x1C0 + addressOffset, note: "Weapon inventory slot", domain: "EWRAM"));
                 Inventory.Add("weapon_slot_" + slotNumber + "_durability", new MemoryAddress(0x1C2 + addressOffset, note: "Weapon durability", domain: "EWRAM"));
 
-                // SP effects    03C5C0	w	u	0	EWRAM	weapon ID
+                // SP effects
                 Inventory.Add("weapon_slot_" + slotNumber + "_sp_ability_1", new MemoryAddress(0x1C4 + addressOffset, note: "1st SP ability", domain: "EWRAM"));
                 Inventory.Add("weapon_slot_" + slotNumber + "_sp_ability_2", new MemoryAddress(0x1C8 + addressOffset, note: "2nd SP ability", domain: "EWRAM"));
 
