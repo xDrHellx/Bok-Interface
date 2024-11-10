@@ -1,7 +1,5 @@
 using System.Collections.Generic;
 
-using BokInterface.Weapons.Abilities;
-
 namespace BokInterface.Abilities {
     /// <summary>Class for Zoktai abilities (effect) instances and lists</summary>
     class ZoktaiAbilities {
