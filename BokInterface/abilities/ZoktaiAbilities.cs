@@ -4,17 +4,15 @@ namespace BokInterface.Abilities {
     /// <summary>Class for Zoktai abilities (effect) instances and lists</summary>
     class ZoktaiAbilities {
 
-        public Dictionary<string, Ability> Weapons = [],
-            Armors = [];
+        public Dictionary<string, Ability> Weapons = [];
 
         public ZoktaiAbilities() {
             InitWeaponAbilitiesList();
-            InitArmorAbilitiesList();
         }
 
         ///<summary>Init ability instances for weapon effects</summary>
         private void InitWeaponAbilitiesList() {
-            Weapons.Add("No ability", new Ability("No ability", 0, ""));
+            Weapons.Add("No ability", new Ability("No ability", 0));
             Weapons.Add("Damage increases based on solar gauge", new Ability("Damage increases based on solar gauge", 1, "Increases attack power based on sunlight"));
             Weapons.Add("+10 damage at night", new Ability("+10 damage at night", 2, "Increases attack power at night"));
             Weapons.Add("Lower HP = higher damage", new Ability("Lower HP = higher damage", 3, "Increases attack power as Life diminishes"));
@@ -46,12 +44,6 @@ namespace BokInterface.Abilities {
             Weapons.Add("Kill enemy to lose 1 HP (Django) or gain 1 HP (Black Django)", new Ability("Kill enemy to lose 1 HP (Django) or gain 1 HP (Black Django)", 29, "Defeat an enemy and..."));
             Weapons.Add("-20% enchants cost", new Ability("-20% enchants cost", 30, "Decreases magic cost for Enchantment Attacks"));
             Weapons.Add("Reduce durability lost when attacking by 50%", new Ability("Reduce durability lost when attacking by 50%", 31, "Reduces damage to Weapons"));
-        }
-
-        ///<summary>Init ability instances for armor effects</summary>
-        private void InitArmorAbilitiesList() {
-            // Armors.Add("No ability", new Ability("No ability", 0, ""));
-            Armors.Add("name", new Ability("name", 1));
         }
     }
 }
