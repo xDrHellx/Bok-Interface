@@ -431,6 +431,36 @@ namespace BokInterface.All {
             return textBox;
         }
 
+        /// <summary>Simplified method for creating a RadioButton</summary>
+        /// <param name="name">RadioButton name</param>
+        /// <param name="text">RadioButton text</param>
+        /// <param name="positionX">X position</param>
+        /// <param name="positionY">Y position</param>
+        /// <param name="width">Width (in pixels)</param>
+        /// <param name="height">Height (in pixels)</param>
+        /// <param name="control">Control instance if the element is to be attached to it directly</param>
+        /// <param name="checkboxOnRight">Set to true if the Checkbox has to be on the right of the text</param>
+        /// <returns><c>RadioButton</c>RadioButton instance</returns>
+        public static RadioButton CreateRadioButton(string name, string text, int positionX, int positionY, int width, int height, Control? control = null, bool isCheckedByDefault = false) {
+
+            RadioButton radioBtn = new() {
+                Name = name,
+                Text = text,
+                Checked = isCheckedByDefault,
+                Location = new Point(positionX, positionY),
+                Size = new Size(width, height),
+                TabIndex = 1,
+                AutoSize = false,
+                Anchor = defaultAnchor,
+                Margin = defaultMargin,
+                Font = defaultFont
+            };
+
+            control?.Controls.Add(radioBtn);
+
+            return radioBtn;
+        }
+
         #endregion
 
         #region Custom elements generating methods
