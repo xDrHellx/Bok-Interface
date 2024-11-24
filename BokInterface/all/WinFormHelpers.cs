@@ -439,14 +439,16 @@ namespace BokInterface.All {
         /// <param name="width">Width (in pixels)</param>
         /// <param name="height">Height (in pixels)</param>
         /// <param name="control">Control instance if the element is to be attached to it directly</param>
-        /// <param name="checkboxOnRight">Set to true if the Checkbox has to be on the right of the text</param>
+        /// <param name="tag">Tag (used to store a value if necessary)</param>
+        /// <param name="isCheckedByDefault">Set to true if the CheckBox has to be checked when initiated</param>
         /// <returns><c>RadioButton</c>RadioButton instance</returns>
-        public static RadioButton CreateRadioButton(string name, string text, int positionX, int positionY, int width, int height, Control? control = null, bool isCheckedByDefault = false) {
+        public static RadioButton CreateRadioButton(string name, string text, int positionX, int positionY, int width, int height, Control? control = null, object? tag = null, bool isCheckedByDefault = false) {
 
             RadioButton radioBtn = new() {
                 Name = name,
                 Text = text,
                 Checked = isCheckedByDefault,
+                Tag = tag,
                 Location = new Point(positionX, positionY),
                 Size = new Size(width, height),
                 TabIndex = 1,
