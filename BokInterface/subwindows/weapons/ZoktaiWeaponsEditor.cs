@@ -304,7 +304,7 @@ namespace BokInterface.Weapons {
 
         /// <summary>Add informative text regarding weapons</summary>
         protected void AddInformativeText() {
-            TextBox textBox = WinFormHelpers.CreateTextBox("weaponInfoText",
+            WinFormHelpers.CreateTextBox("weaponInfoText",
                 "Regarding SP abilities and bonus or malus for a weapon :"
                 + "\r\n- A weapon can have SP abilities and a bonus or malus"
                 + "\r\n- Weapons with a bonus or malus have a durability value"
@@ -573,7 +573,7 @@ namespace BokInterface.Weapons {
 
             /**
              * For some reason there are duplicated within the game,
-             * so in these cases we set it to what "original" instead of keeping the duplicate's value
+             * so in these cases we set it to the "original" instead of keeping the duplicate's value
              * 
              * This is also to prevent having to show duplicate SP abilities in dropdown lists
              */
