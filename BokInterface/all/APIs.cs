@@ -62,12 +62,9 @@ namespace BokInterface.All {
         }
 
         public static bool LoadRom(string path) {
-
-            // Copy what the OpenRom API does because `IEmuClientApi.OpenRom` does not return the success bool
-            // https://github.com/TASVideos/BizHawk/blob/b8f5050d6c426ba81ec1b1e1265b9b6cb9a40d3a/src/BizHawk.Client.Common/Api/Classes/EmuClientApi.cs#L141
             return MainFormForTools.LoadRom(
                 path,
-                new LoadRomArgs { OpenAdvanced = OpenAdvancedSerializer.ParseWithLegacy(path) }
+                new LoadRomArgs(new OpenAdvanced_OpenRom(path))
             );
         }
     }
