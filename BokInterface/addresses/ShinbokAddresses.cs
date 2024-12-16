@@ -144,8 +144,8 @@ namespace BokInterface.Addresses {
                 Inventory.Add("weapon_slot_" + slotNumber + "_sp_ability_2", new MemoryAddress(0x1C8 + addressOffset, note: "2nd SP ability", domain: "EWRAM"));
 
                 // Refine & weapon attack pattern
-                Inventory.Add("weapon_slot_" + slotNumber + "_refine", new MemoryAddress(0x1CC + addressOffset, note: "Refine", domain: "EWRAM")); // 1 = II, 2 = III, others = normal weapon
-                Inventory.Add("weapon_slot_" + slotNumber + "_pattern", new MemoryAddress(0x1CD + addressOffset, note: "Attack pattern ID", domain: "EWRAM"));
+                Inventory.Add("weapon_slot_" + slotNumber + "_refine", new MemoryAddress(0x1CC + addressOffset, note: "Refine", domain: "EWRAM", type: "U8")); // 1 = II, 2 = III, others = normal weapon
+                Inventory.Add("weapon_slot_" + slotNumber + "_pattern", new MemoryAddress(0x1CD + addressOffset, note: "Attack pattern ID", domain: "EWRAM", type: "U8"));
             }
         }
     }
