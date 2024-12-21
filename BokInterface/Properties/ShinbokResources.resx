@@ -400,4 +400,151 @@
   <data name="blues_leg" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\img\bok3\accessories\blues_leg.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="gradius" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok3\weapons\gradius.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="estoc" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok3\weapons\estoc.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="kopis" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok3\weapons\kopis.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="short_sword" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok3\weapons\short_sword.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="zweihander" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok3\weapons\zweihander.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="rapier" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok3\weapons\rapier.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="bronze_edge" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok3\weapons\bronze_edge.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="kagerou" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok3\weapons\kagerou.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="broadsword" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok3\weapons\broadsword.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="iron_sword" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok3\weapons\iron_sword.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="epee" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok3\weapons\epee.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="katzbalger" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok3\weapons\katzbalger.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="wild_rose" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok3\weapons\wild_rose.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="falcata" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok3\weapons\falcata.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="shiranui" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok3\weapons\shiranui.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="iron_blade" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok3\weapons\iron_blade.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="flamberge" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok3\weapons\flamberge.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="falchion" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok3\weapons\falchion.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="claymore" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok3\weapons\claymore.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="saber" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok3\weapons\saber.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="silver_edge" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok3\weapons\silver_edge.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="shinzan" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok3\weapons\shinzan.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="schiavona" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok3\weapons\schiavona.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="steel_sword" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok3\weapons\steel_sword.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="pallasch" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok3\weapons\pallasch.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="bastard_sword" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok3\weapons\bastard_sword.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="bloody_rose" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok3\weapons\bloody_rose.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="kora" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok3\weapons\kora.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="sakurabana" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok3\weapons\sakurabana.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="nameless_sword" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok3\weapons\nameless_sword.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="greatsword" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok3\weapons\greatsword.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ice_edge" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok3\weapons\ice_edge.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="air_blade" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok3\weapons\air_blade.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="king_of_swords" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok3\weapons\king_of_swords.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="prime_rose" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok3\weapons\prime_rose.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="damascus_edge" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok3\weapons\damascus_edge.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="shuusui" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok3\weapons\shuusui.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="gram" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok3\weapons\gram.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="platinum_blade" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok3\weapons\platinum_blade.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="adamant_sword" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok3\weapons\adamant_sword.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="blue_rose" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok3\weapons\blue_rose.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="thunder_edge" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok3\weapons\thunder_edge.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="murasame" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok3\weapons\murasame.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="fire_blade" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok3\weapons\fire_blade.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="sword_of_earth" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok3\weapons\sword_of_earth.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="sol_blade" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok3\weapons\sol_blade.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="immortal_sword" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok3\weapons\immortal_sword.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="la_vie_en_rose" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok3\weapons\la_vie_en_rose.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="rockbuster" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok3\weapons\rockbuster.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
 </root>
