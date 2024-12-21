@@ -142,14 +142,13 @@ namespace BokInterface {
             // _bok3_editSolarGunBtn = WinFormHelpers.CreateButton("editSolarGun", "Solar gun", 6, 127, 85, 23, editGroupBox);
 
             // WIP features are disabled for now
-            _bok3_editWeaponsBtn.Enabled = false;
             // _bok3_editSolarGunBtn.Enabled = false;
 
             // Add onclick events
             _bok3_editStatusBtn.Click += new System.EventHandler(OpenStatusEditor);
             _bok3_editInventoryBtn.Click += new System.EventHandler(OpenInventoryEditor);
             _bok3_editKeyItemsBtn.Click += new System.EventHandler(OpenKeyItemsEditor);
-            // _bok3_editWeaponsBtn.Click += new System.EventHandler(OpenWeaponsEditor);
+            _bok3_editWeaponsBtn.Click += new System.EventHandler(OpenWeaponsEditor);
             _bok3_editEquipsBtn.Click += new System.EventHandler(OpenEquipsEditor);
             // _bok3_editSolarGunBtn.Click += new System.EventHandler(OpenSolarGunEditor);
         }
