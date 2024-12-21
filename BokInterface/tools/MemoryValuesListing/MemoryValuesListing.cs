@@ -183,6 +183,7 @@ namespace BokInterface.Tools.MemoryValuesListing {
                 case "Shinbok":
                     GenerateRows(_memAddresses.Django, "Django");
                     GenerateRows(_memAddresses.Solls, "Solls");
+                    GenerateRows(_memAddresses.Inventory, "Inventory");
                     GenerateRows(_memAddresses.Bike, "Solar bike");
                     GenerateRows(_memAddresses.Misc, "Misc");
                     return true;
