@@ -5,7 +5,7 @@ using System.Windows.Forms;
 using BokInterface.Entities;
 using BokInterface.Items;
 using BokInterface.Weapons;
-using BokInterface.Weapons.Abilities;
+using BokInterface.Abilities;
 using BokInterface.Accessories;
 
 namespace BokInterface.All {

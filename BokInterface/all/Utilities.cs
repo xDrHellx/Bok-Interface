@@ -5,7 +5,7 @@ namespace BokInterface.All {
     /// <summary>Utilities class</summary>
     static class Utilities {
 
-        #region Game code & region methods
+        #region Game code & region
 
         /// <summary>Retrieve the code for the current GBA game running on BizHawk</summary>
         /// <returns><c>uint</c>Game code</returns>
@@ -27,7 +27,7 @@ namespace BokInterface.All {
 
         #endregion
 
-        #region Simplified memory addresses-related methods
+        #region Memory addresses
 
         /// <summary>Shortcut method for retrieving the value of a memory address</summary>
         /// <param name="address">Address to read</param>
@@ -155,7 +155,7 @@ namespace BokInterface.All {
 
         #endregion
 
-        #region Bitmask methods
+        #region Bitmask
 
         /// <summary>Tests if a bit is 1</summary>
         /// <param name="bitmask">Bitmask</param>
@@ -183,7 +183,7 @@ namespace BokInterface.All {
 
         #endregion
 
-        #region EXP & level conversions methods
+        #region EXP & level
 
         /// <summary>Convert EXP to Level</summary>
         /// <param name="exp">EXP amount</param>
@@ -201,7 +201,7 @@ namespace BokInterface.All {
 
         #endregion
 
-        #region Formatting methods
+        #region Formatting
 
         /// <summary>
         /// <para>Format a memory address name for better readability</para>
@@ -220,7 +220,7 @@ namespace BokInterface.All {
 
         #endregion
 
-        #region Special cases conversion methods
+        #region Special cases
 
         /// <summary>
         ///     <para>
