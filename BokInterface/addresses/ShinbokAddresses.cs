@@ -135,7 +135,7 @@ namespace BokInterface.Addresses {
                 Inventory.Add("accessory_slot_" + slotNumber, new MemoryAddress(0x160 + addressOffset, note: "Accessory inventory slot", domain: "EWRAM"));
 
                 // Weapon inventory slots & durability
-                addressOffset = 0xA * (uint)i;
+                addressOffset = 0x10 * (uint)i;
                 Inventory.Add("weapon_slot_" + slotNumber, new MemoryAddress(0x1C0 + addressOffset, note: "Weapon inventory slot", domain: "EWRAM"));
                 Inventory.Add("weapon_slot_" + slotNumber + "_durability", new MemoryAddress(0x1C2 + addressOffset, note: "Weapon durability", domain: "EWRAM"));
 
