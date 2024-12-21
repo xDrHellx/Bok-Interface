@@ -55,7 +55,7 @@ namespace BokInterface {
             // this.inventoryGroupBox = WinFormHelpers.WinFormHelpers.CreateGroupBox("inventory", "Inventory", 5, 101, 250, 55, this);
 
             // Main window
-            SetMainWindow("Bok Interface" + (shorterGameName != "" ? " - " + shorterGameName : ""), 339, 500);
+            SetMainWindow("Bok Interface" + (shorterGameName != "" ? " - " + shorterGameName : ""), 339, 243);
 
             ResumeLayout(false);
         }

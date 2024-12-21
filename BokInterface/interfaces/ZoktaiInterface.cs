@@ -67,7 +67,7 @@ namespace BokInterface {
             AddToolsSection();
 
             // Main window
-            SetMainWindow("Bok Interface" + (shorterGameName != "" ? " - " + shorterGameName : ""), 345, 500);
+            SetMainWindow("Bok Interface" + (shorterGameName != "" ? " - " + shorterGameName : ""), 329, 270);
 
             ResumeLayout(false);
         }
