@@ -155,6 +155,16 @@ namespace BokInterface.All {
                 Inventory.Add("slot" + slotNumber + "_durability", new DynamicMemoryValue("slot" + slotNumber + "_durability", _shinbokAddresses.Misc["stat"].Address, _shinbokAddresses.Inventory["item_slot_durability_" + slotNumber].Address));
                 Inventory.Add("slot" + slotNumber + "_key_item", new DynamicMemoryValue("slot" + slotNumber + "_key_item", _shinbokAddresses.Misc["stat"].Address, _shinbokAddresses.Inventory["key_item_slot_" + slotNumber].Address));
                 Inventory.Add("slot" + slotNumber + "_accessory", new DynamicMemoryValue("slot" + slotNumber + "_accessory", _shinbokAddresses.Misc["stat"].Address, _shinbokAddresses.Inventory["accessory_slot_" + slotNumber].Address));
+
+                // Weapon slots & properties
+                Inventory.Add("slot" + slotNumber + "_weapon", new DynamicMemoryValue("slot" + slotNumber + "_weapon", _shinbokAddresses.Misc["stat"].Address, _shinbokAddresses.Inventory["weapon_slot_" + slotNumber].Address, type: _shinbokAddresses.Inventory["weapon_slot_" + slotNumber].Type));
+                Inventory.Add("slot" + slotNumber + "_weapon_durability", new DynamicMemoryValue("slot" + slotNumber + "_weapon_durability", _shinbokAddresses.Misc["stat"].Address, _shinbokAddresses.Inventory["weapon_slot_" + slotNumber + "_durability"].Address, type: _shinbokAddresses.Inventory["weapon_slot_" + slotNumber + "_durability"].Type));
+
+                Inventory.Add("slot" + slotNumber + "_weapon_sp_ability_1", new DynamicMemoryValue("slot" + slotNumber + "_weapon_sp_ability_1", _shinbokAddresses.Misc["stat"].Address, _shinbokAddresses.Inventory["weapon_slot_" + slotNumber + "_sp_ability_1"].Address, type: _shinbokAddresses.Inventory["weapon_slot_" + slotNumber + "_sp_ability_1"].Type));
+                Inventory.Add("slot" + slotNumber + "_weapon_sp_ability_2", new DynamicMemoryValue("slot" + slotNumber + "_weapon_sp_ability_2", _shinbokAddresses.Misc["stat"].Address, _shinbokAddresses.Inventory["weapon_slot_" + slotNumber + "_sp_ability_2"].Address, type: _shinbokAddresses.Inventory["weapon_slot_" + slotNumber + "_sp_ability_2"].Type));
+
+                Inventory.Add("slot" + slotNumber + "_weapon_refine", new DynamicMemoryValue("slot" + slotNumber + "_weapon_refine", _shinbokAddresses.Misc["stat"].Address, _shinbokAddresses.Inventory["weapon_slot_" + slotNumber + "_refine"].Address, type: _shinbokAddresses.Inventory["weapon_slot_" + slotNumber + "_refine"].Type));
+                Inventory.Add("slot" + slotNumber + "_weapon_pattern", new DynamicMemoryValue("slot" + slotNumber + "_weapon_pattern", _shinbokAddresses.Misc["stat"].Address, _shinbokAddresses.Inventory["weapon_slot_" + slotNumber + "_pattern"].Address, type: _shinbokAddresses.Inventory["weapon_slot_" + slotNumber + "_pattern"].Type));
             }
         }
 
