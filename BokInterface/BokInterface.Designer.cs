@@ -160,7 +160,7 @@ namespace BokInterface {
 
 		/// <summary>Adds Tools section for the corresponding game</summary>
         private void AddToolsSection() {
-
+			int btnWidthOffset = 0;
             switch (BokInterface.shorterGameName) {
                 case "Boktai":
                     extrasGroupBox = WinFormHelpers.CreateGroupBox("extraTools", "Tools", 237, 25, 87, 52, this);
@@ -169,7 +169,8 @@ namespace BokInterface {
                     extrasGroupBox = WinFormHelpers.CreateGroupBox("extraTools", "Tools", 237, 214, 87, 52, this);
                     break;
                 case "Shinbok":
-                    extrasGroupBox = WinFormHelpers.CreateGroupBox("extraTools", "Tools", 237, 187, 87, 52, this);
+                    extrasGroupBox = WinFormHelpers.CreateGroupBox("extraTools", "Tools", 237, 187, 97, 52, this);
+					btnWidthOffset += 10;
                     break;
                 case "LunarKnights":
                     extrasGroupBox = WinFormHelpers.CreateGroupBox("extraTools", "Tools", 237, 25, 87, 52, this);
@@ -180,7 +181,7 @@ namespace BokInterface {
             }
 
             // Add Misc Tools button
-            Button miscToolsBtn = WinFormHelpers.CreateButton("showExtraTools", "Misc tools", 6, 21, 75, 23, extrasGroupBox);
+			Button miscToolsBtn = WinFormHelpers.CreateButton("showExtraTools", "Misc tools", 6, 21, 75 + btnWidthOffset, 23, extrasGroupBox); // 17
             miscToolsBtn.Click += new System.EventHandler(OpenMiscToolsSelector);
 
 			// Add Calculators button

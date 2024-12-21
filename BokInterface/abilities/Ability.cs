@@ -1,4 +1,4 @@
-namespace BokInterface.Weapons.Abilities {
+namespace BokInterface.Abilities {
     ///<summary>Class representing a weapon or armor ability (effect)</summary>
     class Ability(string name, decimal value, string description = "") {
 
