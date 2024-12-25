@@ -56,6 +56,12 @@ namespace BokInterface.Addresses {
             Django.Add("current_ene", new MemoryAddress(0x428, domain: "EWRAM"));
             Django.Add("current_trc", new MemoryAddress(0x42C, domain: "EWRAM"));
 
+            Django.Add("level", new MemoryAddress(0x40, type: "U32", domain: "EWRAM"));
+            Django.Add("exp", new MemoryAddress(0x48, domain: "EWRAM"));
+            // Django.Add("exp_until_next_level", 0x001BC8);
+
+            Django.Add("stat_points", new MemoryAddress(0x42, domain: "EWRAM"));
+
             // TODO : Base points are only applied after switching rooms : fix current_base_
             // TODO : Cards points are only applied after switching rooms : fix current_cards_
             // TODO : Equips points don't stay after switching rooms : add persistent_equips_
@@ -83,39 +89,40 @@ namespace BokInterface.Addresses {
 
             // Persistent stats (used on screen transitions & save data)
             _note = "Also corresponds to values from Save Data";
+            Django.Add("persistent_hp", new MemoryAddress(0x28, domain: "EWRAM"));
+            Django.Add("persistent_ene", new MemoryAddress(0x2C, domain: "EWRAM"));
+            Django.Add("persistent_trc", new MemoryAddress(0x608, domain: "EWRAM"));
+
             Django.Add("persistent_base_vit", new MemoryAddress(0x18, note: _note, domain: "EWRAM"));
             Django.Add("persistent_cards_vit", new MemoryAddress(0x20, note: "Stat points from cards, " + _note.ToLower(), domain: "EWRAM"));
+            // Django.Add("persistent_equips_vit", new MemoryAddress(0xXX, note: "Stat points from accessories, " + _note.ToLower(), domain: "EWRAM"));  // Might not exist ?
 
             Django.Add("persistent_base_spr", new MemoryAddress(0x1A, note: _note, domain: "EWRAM"));
             Django.Add("persistent_cards_spr", new MemoryAddress(0x22, note: "Stat points from cards, " + _note.ToLower(), domain: "EWRAM"));
+            // Django.Add("persistent_equips_spr", new MemoryAddress(0xXX, note: "Stat points from accessories, " + _note.ToLower(), domain: "EWRAM"));  // Might not exist ?
 
             Django.Add("persistent_base_str", new MemoryAddress(0x1C, note: _note, domain: "EWRAM"));
             Django.Add("persistent_cards_str", new MemoryAddress(0x24, note: "Stat points from cards, " + _note.ToLower(), domain: "EWRAM"));
-
-            Django.Add("stat_points_to_allocate", new MemoryAddress(0x442, domain: "EWRAM"));
-
-            // Add Solls addresses
-            // Solls.Add("solls_on_self", 0x03CBB0);
-            // Solls.Add("solar_bank", 0x03CB7C);
-            // Solls.Add("dark_loan", 0x03C90C);
-
-            // EXP & level
-            Django.Add("level", new MemoryAddress(0x440, domain: "EWRAM"));
-            Django.Add("current_exp", new MemoryAddress(0x448, domain: "EWRAM"));
-            // Django.Add("exp_until_next_level", 0x001BC8);
+            // Django.Add("persistent_equips_str", new MemoryAddress(0xXX, note: "Stat points from accessories, " + _note.ToLower(), domain: "EWRAM"));  // Might not exist ?
 
             // Add Solls addresses
             // Solls.Add("solls_on_self", 0x03CBB0);
-            // Solls.Add("solar_bank", 0x03CB7C);
+            Solls.Add("solar_station", new MemoryAddress(0x77C, note: "Solar station balance", type: "U32", domain: "EWRAM"));
+            Solls.Add("solar_bank", new MemoryAddress(0x7B0, note: "Solar bank balance", domain: "EWRAM"));
             // Solls.Add("dark_loan", 0x03C90C);
 
             // Add Bike addresses
-            // Bike.Add("points", 0x03CBB2);
-            // Bike.Add("hp", 0x00F6F8);
-            // Bike.Add("ene", 0x00F6F4);
-            // Bike.Add("base_speed", 0x00F730);
-            // Bike.Add("scrolling", 0x0004E0);
-            // Bike.Add("progress", 0x00F6AC);
+            _note = "Equipped bike part";
+            // Bike.Add("name", new MemoryAddress(0x780, note: "Bike name", domain: "EWRAM"));
+            Bike.Add("points", new MemoryAddress(0x7B2, note: "Points from races", domain: "EWRAM"));
+            Bike.Add("battle_matches", new MemoryAddress(0x7B4, note: "Number of Bike Battles matches", domain: "EWRAM"));
+            Bike.Add("battle_wins", new MemoryAddress(0x7B6, note: "Number of Bike Battles won", domain: "EWRAM"));
+            Bike.Add("front", new MemoryAddress(0x7B8, note: _note, domain: "EWRAM"));
+            Bike.Add("tires", new MemoryAddress(0x7BC, note: _note, domain: "EWRAM"));
+            Bike.Add("body", new MemoryAddress(0x7C0, note: _note, domain: "EWRAM"));
+            Bike.Add("special", new MemoryAddress(0x7C4, note: _note, domain: "EWRAM"));
+            Bike.Add("color", new MemoryAddress(0x07F8, note: _note, domain: "EWRAM"));
+            Bike.Add("options", new MemoryAddress(0x81C, note: _note, domain: "EWRAM"));
 
             InitInventoryAddresses();
 
@@ -129,6 +136,8 @@ namespace BokInterface.Addresses {
             Misc.Add("x_camera", new MemoryAddress(0x03005418, note: "Camera X position", domain: "IWRAM"));
             Misc.Add("y_camera", new MemoryAddress(0x0300541A, note: "Camera Y position", domain: "IWRAM"));
             Misc.Add("z_camera", new MemoryAddress(0x0300541C, note: "Camera Z position", domain: "IWRAM"));
+
+            Misc.Add("boss_hp", new MemoryAddress(0x0200EEC0, domain: "EWRAM"));
         }
 
         protected void InitInventoryAddresses() {
