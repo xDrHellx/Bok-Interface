@@ -73,7 +73,7 @@ namespace BokInterface.All {
             Django.Add("current_ene", new DynamicMemoryValue("current_ene", _zoktaiAddresses.Misc["current_stat"].Address, _zoktaiAddresses.Django["current_ene"].Address));
 
             Django.Add("level", new DynamicMemoryValue("level", _zoktaiAddresses.Misc["stat"].Address, _zoktaiAddresses.Django["level"].Address));
-            Django.Add("exp", new DynamicMemoryValue("exp", _zoktaiAddresses.Misc["stat"].Address, _zoktaiAddresses.Django["exp"].Address, "U32"));
+            Django.Add("exp", new DynamicMemoryValue("exp", _zoktaiAddresses.Misc["stat"].Address, _zoktaiAddresses.Django["exp"].Address, _zoktaiAddresses.Django["exp"].Type));
             Django.Add("stat_points", new DynamicMemoryValue("stat_points", _zoktaiAddresses.Misc["stat"].Address, _zoktaiAddresses.Django["stat_points_to_allocate"].Address));
 
             // Stats applied in the current room
@@ -135,12 +135,52 @@ namespace BokInterface.All {
         }
 
         private void InitializeShinbokList() {
-            Django.Add("current_hp", new DynamicMemoryValue("current_hp", _shinbokAddresses.Misc["room"].Address, _shinbokAddresses.Django["hp"].Address));
+            Django.Add("current_hp", new DynamicMemoryValue("current_hp", _shinbokAddresses.Misc["actor"].Address, _shinbokAddresses.Django["current_hp"].Address));
+            Django.Add("current_ene", new DynamicMemoryValue("current_ene", _shinbokAddresses.Misc["actor"].Address, _shinbokAddresses.Django["current_ene"].Address));
+            Django.Add("current_trc", new DynamicMemoryValue("current_trc", _shinbokAddresses.Misc["actor"].Address, _shinbokAddresses.Django["current_trc"].Address));
+
+            Django.Add("level", new DynamicMemoryValue("level", _shinbokAddresses.Misc["stat"].Address, _shinbokAddresses.Django["level"].Address));
+            Django.Add("exp", new DynamicMemoryValue("exp", _shinbokAddresses.Misc["stat"].Address, _shinbokAddresses.Django["exp"].Address, _shinbokAddresses.Django["exp"].Type));
+            Django.Add("stat_points", new DynamicMemoryValue("stat_points", _shinbokAddresses.Misc["stat"].Address, _shinbokAddresses.Django["stat_points"].Address));
 
             // Stats
-            Django.Add("base_vit", new DynamicMemoryValue("base_vit", _shinbokAddresses.Misc["stat"].Address, _shinbokAddresses.Django["base_vit"].Address));
-            Django.Add("base_spr", new DynamicMemoryValue("base_spr", _shinbokAddresses.Misc["stat"].Address, _shinbokAddresses.Django["base_spr"].Address));
-            Django.Add("base_str", new DynamicMemoryValue("base_str", _shinbokAddresses.Misc["stat"].Address, _shinbokAddresses.Django["base_str"].Address));
+            Django.Add("sum_base_cards_vit", new DynamicMemoryValue("sum_base_cards_vit", _shinbokAddresses.Misc["actor"].Address, _shinbokAddresses.Django["current_sum_base_cards_vit"].Address));
+            Django.Add("equips_vit", new DynamicMemoryValue("equips_vit", _shinbokAddresses.Misc["actor"].Address, _shinbokAddresses.Django["current_equips_vit"].Address));
+
+            Django.Add("sum_base_cards_spr", new DynamicMemoryValue("sum_base_cards_spr", _shinbokAddresses.Misc["actor"].Address, _shinbokAddresses.Django["current_sum_base_cards_spr"].Address));
+            Django.Add("equips_spr", new DynamicMemoryValue("equips_spr", _shinbokAddresses.Misc["actor"].Address, _shinbokAddresses.Django["current_equips_spr"].Address));
+
+            Django.Add("sum_base_cards_str", new DynamicMemoryValue("sum_base_cards_str", _shinbokAddresses.Misc["actor"].Address, _shinbokAddresses.Django["current_sum_base_cards_str"].Address));
+            Django.Add("equips_str", new DynamicMemoryValue("equips_str", _shinbokAddresses.Misc["actor"].Address, _shinbokAddresses.Django["current_equips_str"].Address));
+
+            // Will be applied when switching room
+            Misc.Add("persistent_hp", new DynamicMemoryValue("persistent_hp", _shinbokAddresses.Misc["stat"].Address, _shinbokAddresses.Django["persistent_hp"].Address, _shinbokAddresses.Django["persistent_hp"].Type));
+            Misc.Add("persistent_ene", new DynamicMemoryValue("persistent_ene", _shinbokAddresses.Misc["stat"].Address, _shinbokAddresses.Django["persistent_ene"].Address, _shinbokAddresses.Django["persistent_ene"].Type));
+            Misc.Add("persistent_trc", new DynamicMemoryValue("persistent_trc", _shinbokAddresses.Misc["stat"].Address, _shinbokAddresses.Django["persistent_trc"].Address, _shinbokAddresses.Django["persistent_trc"].Type));
+
+            Misc.Add("base_vit", new DynamicMemoryValue("base_vit", _shinbokAddresses.Misc["stat"].Address, _shinbokAddresses.Django["persistent_base_vit"].Address, _shinbokAddresses.Django["persistent_base_vit"].Type));
+            Misc.Add("base_spr", new DynamicMemoryValue("base_spr", _shinbokAddresses.Misc["stat"].Address, _shinbokAddresses.Django["persistent_base_spr"].Address, _shinbokAddresses.Django["persistent_base_spr"].Type));
+            Misc.Add("base_str", new DynamicMemoryValue("base_str", _shinbokAddresses.Misc["stat"].Address, _shinbokAddresses.Django["persistent_base_str"].Address, _shinbokAddresses.Django["persistent_base_str"].Type));
+
+            Misc.Add("cards_vit", new DynamicMemoryValue("cards_vit", _shinbokAddresses.Misc["stat"].Address, _shinbokAddresses.Django["persistent_cards_vit"].Address, _shinbokAddresses.Django["persistent_cards_vit"].Type));
+            Misc.Add("cards_spr", new DynamicMemoryValue("cards_spr", _shinbokAddresses.Misc["stat"].Address, _shinbokAddresses.Django["persistent_cards_spr"].Address, _shinbokAddresses.Django["persistent_cards_spr"].Type));
+            Misc.Add("cards_str", new DynamicMemoryValue("cards_str", _shinbokAddresses.Misc["stat"].Address, _shinbokAddresses.Django["persistent_cards_str"].Address, _shinbokAddresses.Django["persistent_cards_str"].Type));
+
+            // Solls
+            Solls.Add("solar_station", new DynamicMemoryValue("solar_station", _shinbokAddresses.Misc["stat"].Address, _shinbokAddresses.Solls["solar_station"].Address, _shinbokAddresses.Solls["solar_station"].Type));
+            Solls.Add("solar_bank", new DynamicMemoryValue("solar_bank", _shinbokAddresses.Misc["stat"].Address, _shinbokAddresses.Solls["solar_bank"].Address, _shinbokAddresses.Solls["solar_bank"].Type));
+
+            // Solar Bike
+            // Bike.Add("name", new DynamicMemoryValue("name", _shinbokAddresses.Misc["stat"].Address, _shinbokAddresses.Bike["name"].Address));
+            Bike.Add("points", new DynamicMemoryValue("points", _shinbokAddresses.Misc["stat"].Address, _shinbokAddresses.Bike["points"].Address));
+            Bike.Add("battle_matches", new DynamicMemoryValue("battle_matches", _shinbokAddresses.Misc["stat"].Address, _shinbokAddresses.Bike["battle_matches"].Address));
+            Bike.Add("battle_wins", new DynamicMemoryValue("battle_wins", _shinbokAddresses.Misc["stat"].Address, _shinbokAddresses.Bike["battle_wins"].Address));
+            Bike.Add("front", new DynamicMemoryValue("front", _shinbokAddresses.Misc["stat"].Address, _shinbokAddresses.Bike["front"].Address));
+            Bike.Add("tires", new DynamicMemoryValue("tires", _shinbokAddresses.Misc["stat"].Address, _shinbokAddresses.Bike["tires"].Address));
+            Bike.Add("body", new DynamicMemoryValue("body", _shinbokAddresses.Misc["stat"].Address, _shinbokAddresses.Bike["body"].Address));
+            Bike.Add("special", new DynamicMemoryValue("special", _shinbokAddresses.Misc["stat"].Address, _shinbokAddresses.Bike["special"].Address));
+            Bike.Add("color", new DynamicMemoryValue("color", _shinbokAddresses.Misc["stat"].Address, _shinbokAddresses.Bike["color"].Address));
+            Bike.Add("options", new DynamicMemoryValue("options", _shinbokAddresses.Misc["stat"].Address, _shinbokAddresses.Bike["options"].Address));
 
             /**
              * Inventory-related
