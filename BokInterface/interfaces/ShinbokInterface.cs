@@ -83,18 +83,18 @@ namespace BokInterface {
                 _bok3_currentStatusHpValue.Text = djangoCurrentHp.ToString();
                 _bok3_currentStatusEneValue.Text = _memoryValues.Django["current_ene"].Value.ToString();
                 _bok3_currentStatusTrcValue.Text = _memoryValues.Django["current_trc"].Value.ToString();
-                _bok3_djangoBaseVit.Text = _memoryValues.Django["base_vit"].Value.ToString();
-                _bok3_djangoBaseSpr.Text = _memoryValues.Django["base_spr"].Value.ToString();
-                _bok3_djangoBaseStr.Text = _memoryValues.Django["base_str"].Value.ToString();
-                _bok3_djangoCardsVit.Text = _memoryValues.Django["cards_vit"].Value.ToString();
-                _bok3_djangoCardsSpr.Text = _memoryValues.Django["cards_spr"].Value.ToString();
-                _bok3_djangoCardsStr.Text = _memoryValues.Django["cards_str"].Value.ToString();
+                _bok3_djangoBaseVit.Text = _memoryValues.Misc["base_vit"].Value.ToString();
+                _bok3_djangoBaseSpr.Text = _memoryValues.Misc["base_spr"].Value.ToString();
+                _bok3_djangoBaseStr.Text = _memoryValues.Misc["base_str"].Value.ToString();
+                _bok3_djangoCardsVit.Text = _memoryValues.Misc["cards_vit"].Value.ToString();
+                _bok3_djangoCardsSpr.Text = _memoryValues.Misc["cards_spr"].Value.ToString();
+                _bok3_djangoCardsStr.Text = _memoryValues.Misc["cards_str"].Value.ToString();
                 _bok3_djangoEquipsVit.Text = _memoryValues.Django["equips_vit"].Value.ToString();
                 _bok3_djangoEquipsSpr.Text = _memoryValues.Django["equips_spr"].Value.ToString();
                 _bok3_djangoEquipsStr.Text = _memoryValues.Django["equips_str"].Value.ToString();
-                _bok3_djangoTotalVit.Text = (_memoryValues.Django["base_vit"].Value + _memoryValues.Django["cards_vit"].Value + _memoryValues.Django["equips_vit"].Value).ToString();
-                _bok3_djangoTotalSpr.Text = (_memoryValues.Django["base_spr"].Value + _memoryValues.Django["cards_spr"].Value + _memoryValues.Django["equips_spr"].Value).ToString();
-                _bok3_djangoTotalStr.Text = (_memoryValues.Django["base_str"].Value + _memoryValues.Django["cards_str"].Value + _memoryValues.Django["equips_str"].Value).ToString();
+                _bok3_djangoTotalVit.Text = (_memoryValues.Misc["base_vit"].Value + _memoryValues.Misc["cards_vit"].Value + _memoryValues.Django["equips_vit"].Value).ToString();
+                _bok3_djangoTotalSpr.Text = (_memoryValues.Misc["base_spr"].Value + _memoryValues.Misc["cards_spr"].Value + _memoryValues.Django["equips_spr"].Value).ToString();
+                _bok3_djangoTotalStr.Text = (_memoryValues.Misc["base_str"].Value + _memoryValues.Misc["cards_str"].Value + _memoryValues.Django["equips_str"].Value).ToString();
             }
         }
 
