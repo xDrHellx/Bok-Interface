@@ -144,22 +144,13 @@ namespace BokInterface.All {
             Django.Add("stat_points", new DynamicMemoryValue("stat_points", _shinbokAddresses.Misc["stat"].Address, _shinbokAddresses.Django["stat_points"].Address));
 
             // Stats
-            // Django.Add("total_vit", new DynamicMemoryValue("total_vit", _shinbokAddresses.Misc["stat"].Address, _shinbokAddresses.Django["current_total_vit"].Address));
             Django.Add("sum_base_cards_vit", new DynamicMemoryValue("sum_base_cards_vit", _shinbokAddresses.Misc["actor"].Address, _shinbokAddresses.Django["current_sum_base_cards_vit"].Address));
-            Django.Add("base_vit", new DynamicMemoryValue("base_vit", _shinbokAddresses.Misc["stat"].Address, _shinbokAddresses.Django["current_base_vit"].Address));
-            Django.Add("cards_vit", new DynamicMemoryValue("cards_vit", _shinbokAddresses.Misc["stat"].Address, _shinbokAddresses.Django["current_cards_vit"].Address));
             Django.Add("equips_vit", new DynamicMemoryValue("equips_vit", _shinbokAddresses.Misc["actor"].Address, _shinbokAddresses.Django["current_equips_vit"].Address));
 
-            // Django.Add("total_spr", new DynamicMemoryValue("total_spr", _shinbokAddresses.Misc["stat"].Address, _shinbokAddresses.Django["current_total_spr"].Address));
             Django.Add("sum_base_cards_spr", new DynamicMemoryValue("sum_base_cards_spr", _shinbokAddresses.Misc["actor"].Address, _shinbokAddresses.Django["current_sum_base_cards_spr"].Address));
-            Django.Add("base_spr", new DynamicMemoryValue("base_spr", _shinbokAddresses.Misc["stat"].Address, _shinbokAddresses.Django["current_base_spr"].Address));
-            Django.Add("cards_spr", new DynamicMemoryValue("cards_spr", _shinbokAddresses.Misc["stat"].Address, _shinbokAddresses.Django["current_cards_spr"].Address));
             Django.Add("equips_spr", new DynamicMemoryValue("equips_spr", _shinbokAddresses.Misc["actor"].Address, _shinbokAddresses.Django["current_equips_spr"].Address));
 
-            // Django.Add("total_str", new DynamicMemoryValue("total_str", _shinbokAddresses.Misc["stat"].Address, _shinbokAddresses.Django["current_total_str"].Address));
             Django.Add("sum_base_cards_str", new DynamicMemoryValue("sum_base_cards_str", _shinbokAddresses.Misc["actor"].Address, _shinbokAddresses.Django["current_sum_base_cards_str"].Address));
-            Django.Add("base_str", new DynamicMemoryValue("base_str", _shinbokAddresses.Misc["stat"].Address, _shinbokAddresses.Django["current_base_str"].Address));
-            Django.Add("cards_str", new DynamicMemoryValue("cards_str", _shinbokAddresses.Misc["stat"].Address, _shinbokAddresses.Django["current_cards_str"].Address));
             Django.Add("equips_str", new DynamicMemoryValue("equips_str", _shinbokAddresses.Misc["actor"].Address, _shinbokAddresses.Django["current_equips_str"].Address));
 
             // Will be applied when switching room
