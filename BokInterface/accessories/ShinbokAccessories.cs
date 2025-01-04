@@ -89,7 +89,7 @@ namespace BokInterface.Accessories {
 
         ///<summary>Init the full list containing all accessories (mostly used for editors)</summary>
         private void InitFullList() {
-            All.Add("Empty slot", new ShinbokAccessory("Empty slot", 0, ""));
+            All.Add("Empty slot", new ShinbokAccessory("Empty slot", 65535, ""));
             All = All
                 .Concat(Head)
                 .Concat(Torso)
