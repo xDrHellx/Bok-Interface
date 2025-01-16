@@ -499,8 +499,8 @@ namespace BokInterface.All {
         /// <param name="name">TabPage name</param>
         /// <param name="text">TabPage text</param>
         /// <param name="bgColorHex">Background color (hex code) (if none, defaults to white for visibility)</param>
-        /// <returns></returns>
-        public static TabPage CreateTabPage(string name, string text, string bgColorHex = "") {
+        /// <param name="tabControl">TabControl instance if the element is to be attached to it directly</param>
+        public static TabPage CreateTabPage(string name, string text, string bgColorHex = "", TabControl? tabControl = null) {
 
             TabPage tabPage = new() {
                 Name = name,
@@ -512,6 +512,8 @@ namespace BokInterface.All {
                 Font = defaultFont,
                 BackColor = bgColorHex != "" ? ColorTranslator.FromHtml(bgColorHex) : Color.White
             };
+
+            tabControl?.Controls.Add(tabPage);
 
             return tabPage;
         }
