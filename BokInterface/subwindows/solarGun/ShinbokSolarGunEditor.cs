@@ -215,36 +215,9 @@ namespace BokInterface.solarGun {
         private void SetMemoryValue(string subList, string valueKey, decimal value) {
             string memoryValueKey = valueKey;
             switch (subList) {
-                case "django":
-                    if (_memoryValues.Django.ContainsKey(memoryValueKey) == true) {
-                        _memoryValues.Django[memoryValueKey].Value = (uint)value;
-                    } else if (_memoryValues.U16.ContainsKey(memoryValueKey) == true) {
-                        _memoryValues.U16[memoryValueKey].Value = (uint)value;
-                    } else if (_memoryValues.U32.ContainsKey(memoryValueKey) == true) {
-                        _memoryValues.U32[memoryValueKey].Value = (uint)value;
-                    }
-                    break;
-                case "solls":
-                    if (_memoryValues.Solls.ContainsKey(memoryValueKey) == true) {
-                        _memoryValues.Solls[memoryValueKey].Value = (uint)value;
-                    } else if (_memoryValues.U16.ContainsKey(memoryValueKey) == true) {
-                        _memoryValues.U16[memoryValueKey].Value = (uint)value;
-                    } else if (_memoryValues.U32.ContainsKey(memoryValueKey) == true) {
-                        _memoryValues.U32[memoryValueKey].Value = (uint)value;
-                    }
-                    break;
                 case "inventory":
                     if (_memoryValues.Inventory.ContainsKey(memoryValueKey) == true) {
                         _memoryValues.Inventory[memoryValueKey].Value = (uint)value;
-                    } else if (_memoryValues.U16.ContainsKey(memoryValueKey) == true) {
-                        _memoryValues.U16[memoryValueKey].Value = (uint)value;
-                    } else if (_memoryValues.U32.ContainsKey(memoryValueKey) == true) {
-                        _memoryValues.U32[memoryValueKey].Value = (uint)value;
-                    }
-                    break;
-                case "misc":
-                    if (_memoryValues.Misc.ContainsKey(memoryValueKey) == true) {
-                        _memoryValues.Misc[memoryValueKey].Value = (uint)value;
                     } else if (_memoryValues.U16.ContainsKey(memoryValueKey) == true) {
                         _memoryValues.U16[memoryValueKey].Value = (uint)value;
                     } else if (_memoryValues.U32.ContainsKey(memoryValueKey) == true) {
