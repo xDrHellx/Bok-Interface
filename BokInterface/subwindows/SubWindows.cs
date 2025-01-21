@@ -6,6 +6,7 @@ using BokInterface.All;
 using BokInterface.Inventory;
 using BokInterface.KeyItems;
 using BokInterface.Magics;
+using BokInterface.solarGun;
 using BokInterface.Status;
 using BokInterface.Weapons;
 
@@ -136,15 +137,22 @@ namespace BokInterface {
 
         protected void OpenSolarGunEditor(object sender, EventArgs e) {
             if (solarGunEditorOpened == false) {
-
-                // Create subwindow & add on close event
-                solarGunEditWindow = WinFormHelpers.CreateSubWindow("solarGunEditWindow", "Bok Edit - Solar Gun", 200, 100, this);
-                solarGunEditWindow.FormClosing += new FormClosingEventHandler(delegate (object sender, FormClosingEventArgs e) {
-                    solarGunEditorOpened = false;
-                    solarGunEditWindow.Controls.Clear();
-                });
-
-                solarGunEditWindow.Show();
+                // Open editor for the current game
+                switch (shorterGameName) {
+                    case "Boktai":
+                        // None yet
+                        break;
+                    case "Zoktai":
+                        // None, solar gun is handled via Weapons Inventory
+                        break;
+                    case "Shinbok":
+                        new ShinbokSolarGunEditor(this, _memoryValues, _shinbokAddresses);
+                        break;
+                    case "LunarKnights":
+                    default:
+                        // If game is not handled, do nothing
+                        return;
+                }
                 solarGunEditorOpened = true;
             }
         }
