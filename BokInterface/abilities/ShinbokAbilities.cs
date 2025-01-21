@@ -12,7 +12,6 @@ namespace BokInterface.Abilities {
 
         ///<summary>Init ability instances for weapon effects</summary>
         private void InitWeaponAbilitiesList() {
-            // TODO : Check these more, the gamefaqs guide for these don't match with other sources
             Weapons.Add("No ability", new Ability("No ability", 0));
             Weapons.Add("Damage +5 per level", new Ability("Damage +5 per level", 1, "Attack Power is relative to your level")); // Exclusive to "La Vie En Rose"
             Weapons.Add("+25% damage", new Ability("+25% damage", 2, "25% Attack Power boost"));
