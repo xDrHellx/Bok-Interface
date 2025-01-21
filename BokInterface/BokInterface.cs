@@ -14,7 +14,11 @@ using BokInterface.All;
 namespace BokInterface {
 
     /// <summary>Main class for the Bok Interface</summary>
-    [ExternalTool("Bok Interface")]
+    [ExternalTool(
+        "Bok Interface",
+        Description = "External tool to aid with routing and the research of Boktai games"
+    )]
+    [ExternalToolEmbeddedIcon("BokInterface.img.django_head_16.png")]
     public partial class BokInterface : ToolFormBase, IExternalToolForm {
 
         #region Properties
