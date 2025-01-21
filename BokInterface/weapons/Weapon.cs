@@ -10,6 +10,7 @@ namespace BokInterface.Weapons {
         public uint value;
         /// <summary>Weapon type (Sword, Gun, ...)</summary>
         public string type;
+        /// <summary>Weapon icon</summary>
         public Image? icon = null;
         ///<summary>Weapon durability (if it has a +X bonus</summary>
         public int durability;

@@ -53,7 +53,7 @@ namespace BokInterface.All {
         /// <param name="width">Width (in pixels)</param>
         /// <param name="height">Height (in pixels)</param>
         /// <param name="control">Control instance if the element is to be attached to it directly</param>
-        /// <returns><c>GroupBox</c>Group box instance</returns>
+        /// <returns><c>GroupBox</c>Instance</returns>
         public static GroupBox CreateGroupBox(string name, string text, int positionX, int positionY, int width, int height, Control? control = null) {
 
             GroupBox groupBox = new() {
@@ -84,7 +84,7 @@ namespace BokInterface.All {
         /// <param name="colorHex">Set the background color for the label</param>
         /// <param name="margin">Margin (by default Padding(0, 3, 0, 3), the default value in Visual Studio)</param>
         /// <param name="textAlignment">Text alignment, by default "MiddleCenter" (see System.Drawing.ContentAlignment for possible values)</param>
-        /// <returns><c>Label</c>Label instance</returns>
+        /// <returns><c>Label</c>Instance</returns>
         public static Label CreateLabel(string name, string text, int positionX, int positionY, int width, int height, Control? control = null, string colorHex = "", Padding margin = new Padding(), string textAlignment = "MiddleCenter") {
 
             Label label = new() {
@@ -130,7 +130,7 @@ namespace BokInterface.All {
         /// <param name="margin">Margin (by default Padding(0, 3, 0, 3), the default value in Visual Studio)</param>
         /// <param name="textAlignment">Text alignment, by default "MiddleCenter" (see System.Drawing.ContentAlignment for possible values)</param>
         /// <param name="enabled">True if it should be enabled (True by default)</param>
-        /// <returns><c>Button</c>Button instance</returns>
+        /// <returns><c>Button</c>Instance</returns>
         public static Button CreateButton(string name, string text, int positionX, int positionY, int width, int height, Control? control = null, string colorHex = "", Padding margin = new Padding(), string textAlignment = "MiddleCenter", bool enabled = true) {
 
             Button btn = new() {
@@ -172,7 +172,7 @@ namespace BokInterface.All {
         /// <param name="height">Height (in pixels)</param>
         /// <param name="parentForm">Form the subwindow is attached to (this will make the subwindow always show in front of its parent, by default it shows in front of the main window)</param>
         /// <param name="icon">Subwindow icon (by default retrieves the one from the main interface window)</param>
-        /// <returns><c>Form</c>Subwindow instance</returns>
+        /// <returns><c>Form</c>Instance</returns>
         public static Form CreateSubWindow(string name, string title, int width, int height, Form? parentForm = null, string icon = "") {
 
             Form form = new() {
@@ -206,7 +206,7 @@ namespace BokInterface.All {
         /// <param name="margin">Margin (by default Padding(0, 3, 0, 3), the default value in Visual Studio)</param>
         /// <param name="valueAlignment">Value alignment, by default "Left" (see HorizontalAlignment for possible values)</param>
         /// <param name="enabled">True if it should be enabled (True by default)</param>
-        /// <returns><c>NumericUpDown</c>NumericUpDown instance</returns>
+        /// <returns><c>NumericUpDown</c>Instance</returns>
         public static NumericUpDown CreateNumericUpDown(string name, decimal defaultValue, int positionX, int positionY, int width, int height, decimal minValue = 0, decimal maxValue = 99, int nbDecimals = 0, Control? control = null, string colorHex = "", Padding margin = new Padding(), string valueAlignment = "Left", bool enabled = true) {
 
             NumericUpDown numUpDown = new() {
@@ -259,7 +259,7 @@ namespace BokInterface.All {
         /// <param name="isCheckedByDefault">Set to true if the CheckBox has to be checked when initiated</param>
         /// <param name="checkboxOnRight">Set to true if the Checkbox has to be on the right of the text</param>
         /// <param name="control">Control instance if the element is to be attached to it directly</param>
-        /// <returns><c>CheckBox</c>CheckBox instance</returns>
+        /// <returns><c>CheckBox</c>Instance</returns>
         public static CheckBox CreateCheckBox(string name, string text, int positionX, int positionY, int width, int height, bool isCheckedByDefault = false, bool checkboxOnRight = false, Control? control = null) {
 
             CheckBox checkBox = new() {
@@ -283,7 +283,7 @@ namespace BokInterface.All {
         }
 
         /// <summary>Simplified method for creating a tooltip</summary>
-        /// <returns><c>ToolTip<c/>Tooltip instance</returns>
+        /// <returns><c>ToolTip<c/>Instance</returns>
         public static ToolTip CreateToolTip() {
 
             ToolTip toolTip = new() {
@@ -307,7 +307,7 @@ namespace BokInterface.All {
         /// <param name="width">Width (in pixels)</param>
         /// <param name="height">Height (in pixels)</param>
         /// <param name="control">Control instance if the element is to be attached to it directly</param>
-        /// <returns><c>GroupBox</c>Data grid view instance</returns>
+        /// <returns><c>DataGridView</c>Instance</returns>
         public static DataGridView CreateDataGridView(string name, DataTable data, int positionX, int positionY, int width, int height, Control? control = null) {
 
             DataGridView gridView = new() {
@@ -346,7 +346,7 @@ namespace BokInterface.All {
         /// <param name="dropDownHeight">Dropdown Height (in pixels, if not specified will take use the element's height as reference)</param>
         /// <param name="visibleOptions">Amount of options visible without needing to scroll (will take priority over dropDownHeight parameters if specified)</param>
         /// <param name="enabled">True if it should be enabled (True by default)</param>
-        /// <returns><c>ComboBox</c>Dropdown List instance</returns>
+        /// <returns><c>ComboBox</c>Instance</returns>
         public static ComboBox CreateDropDownList(string name, int positionX, int positionY, int width, int height, Control? control = null, int dropDownWidth = 0, int dropDownHeight = 0, int visibleOptions = 0, bool enabled = true) {
 
             ComboBox dropDownList = new() {
@@ -387,7 +387,7 @@ namespace BokInterface.All {
         /// <param name="autoScroll">True if AutoScroll should be active (True by default)</param>
         /// <param name="control">Control instance if the element is to be attached to it directly</param>
         /// <param name="enabled">True if it should be enabled (True by default)</param>
-        /// <returns><c>Panel</c>Panel instance</returns>
+        /// <returns><c>Panel</c>Instance</returns>
         public static Panel CreatePanel(string name, int positionX, int positionY, int width, int height, Control? control = null, bool autoScroll = true, bool enabled = true) {
 
             Panel panel = new() {
@@ -416,7 +416,7 @@ namespace BokInterface.All {
         /// <param name="control">Control instance if the element is to be attached to it directly</param>
         /// <param name="multiLine">True if text added should take multiple lines (True by default)</param>
         /// <param name="readOnly">True if text should be readonly (True by default)</param>
-        /// <returns><c>TextBox</c>TextBox instance</returns>
+        /// <returns><c>TextBox</c>Instance</returns>
         public static TextBox CreateTextBox(string name, string text, int positionX, int positionY, int width, int height, Control? control = null, bool multiLine = true, bool readOnly = true) {
 
             TextBox textBox = new() {
@@ -446,7 +446,7 @@ namespace BokInterface.All {
         /// <param name="control">Control instance if the element is to be attached to it directly</param>
         /// <param name="tag">Tag (used to store a value if necessary)</param>
         /// <param name="isCheckedByDefault">Set to true if the CheckBox has to be checked when initiated</param>
-        /// <returns><c>RadioButton</c>RadioButton instance</returns>
+        /// <returns><c>RadioButton</c>Instance</returns>
         public static RadioButton CreateRadioButton(string name, string text, int positionX, int positionY, int width, int height, Control? control = null, object? tag = null, bool isCheckedByDefault = false) {
 
             RadioButton radioBtn = new() {
@@ -468,6 +468,56 @@ namespace BokInterface.All {
             return radioBtn;
         }
 
+        /// <summary>Simplified method for creating a TabControl</summary>
+        /// <param name="name">TabControl name</param>
+        /// <param name="positionX">X position</param>
+        /// <param name="positionY">Y position</param>
+        /// <param name="width">Width (in pixels)</param>
+        /// <param name="height">Height (in pixels)</param>
+        /// <param name="control">Control instance if the element is to be attached to it directly</param>
+        /// <returns><c>TabControl</c>Instance</returns>
+        public static TabControl CreateTabControl(string name, int positionX, int positionY, int width, int height, Control? control = null) {
+
+            TabControl tabCtrl = new() {
+                Name = name,
+                Location = new Point(positionX, positionY),
+                Size = new Size(width, height),
+                TabIndex = 1,
+                AutoSize = false,
+                Anchor = defaultAnchor,
+                Margin = defaultMargin,
+                Font = defaultFont,
+                // SelectedIndex = 1
+            };
+
+            control?.Controls.Add(tabCtrl);
+
+            return tabCtrl;
+        }
+
+        /// <summary>Simplified method for creating a TabPage</summary>
+        /// <param name="name">TabPage name</param>
+        /// <param name="text">TabPage text</param>
+        /// <param name="bgColorHex">Background color (hex code) (if none, defaults to white for visibility)</param>
+        /// <param name="tabControl">TabControl instance if the element is to be attached to it directly</param>
+        public static TabPage CreateTabPage(string name, string text, string bgColorHex = "", TabControl? tabControl = null) {
+
+            TabPage tabPage = new() {
+                Name = name,
+                Text = text,
+                TabIndex = 2,
+                AutoSize = false,
+                Anchor = defaultAnchor,
+                Margin = defaultMargin,
+                Font = defaultFont,
+                BackColor = bgColorHex != "" ? ColorTranslator.FromHtml(bgColorHex) : Color.White
+            };
+
+            tabControl?.Controls.Add(tabPage);
+
+            return tabPage;
+        }
+
         #endregion
 
         #region Custom elements
@@ -478,7 +528,7 @@ namespace BokInterface.All {
         /// <param name="positionX">X position</param>
         /// <param name="positionY">Y position</param>
         /// <param name="control">Control instance if the element is to be attached to it directly</param>
-        /// <returns><c>Label</c>Label instance</returns>
+        /// <returns><c>Label</c>Instance</returns>
         public static Label CreateImageLabel(string name, string imgName, int positionX, int positionY, Control? control = null) {
 
             // Get image
@@ -510,7 +560,7 @@ namespace BokInterface.All {
         /// <param name="positionX">X position</param>
         /// <param name="positionY">Y position</param>
         /// <param name="control">Control instance if the element is to be attached to it directly</param>
-        /// <returns><c>Label</c>Label instance</returns>
+        /// <returns><c>Label</c>Instance</returns>
         public static Label CreateImageLabel(string name, Image? img, int positionX, int positionY, Control? control = null) {
             Label label = new() {
                 Name = name,
@@ -545,7 +595,7 @@ namespace BokInterface.All {
         /// <param name="dropDownHeight">Dropdown Height (in pixels, if not specified will take use the element's height as reference)</param>
         /// <param name="visibleOptions">Amount of options visible without needing to scroll (will take priority over dropDownHeight parameters if specified)</param>
         /// <param name="enabled">True if it should be enabled (True by default)</param>
-        /// <returns><c>ComboBox</c>Dropdown List instance</returns>
+        /// <returns><c>ComboBox</c>Instance</returns>
         public static ImageComboBox CreateImageDropdownList(string name, int positionX, int positionY, int width, int height, Control? control = null, int dropDownWidth = 0, int dropDownHeight = 0, int visibleOptions = 0, bool enabled = true) {
 
             ImageComboBox dropDownList = new() {
@@ -587,7 +637,7 @@ namespace BokInterface.All {
         /// <param name="height">Height (in pixels)</param>
         /// <param name="isCheckedByDefault">Set to true if the CheckGroupBox has to be checked when initiated</param>
         /// <param name="control">Control instance if the element is to be attached to it directly</param>
-        /// <returns><c>CheckGroupBox</c>CheckGroupBox instance</returns>
+        /// <returns><c>CheckGroupBox</c>Instance</returns>
         public static CheckGroupBox CreateCheckGroupBox(string name, string text, int positionX, int positionY, int width, int height, bool isCheckedByDefault = false, Control? control = null) {
 
             CheckGroupBox checkGroupBox = new() {

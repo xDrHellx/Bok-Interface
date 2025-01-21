@@ -1196,5 +1196,173 @@ namespace BokInterface.Properties {
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
+
+        /// <summary>Looks up a localized resource of type System.Drawing.Bitmap.</summary>
+        internal static System.Drawing.Bitmap fighter {
+            get {
+                object obj = ResourceManager.GetObject("fighter", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+
+        /// <summary>Looks up a localized resource of type System.Drawing.Bitmap.</summary>
+        internal static System.Drawing.Bitmap calamity {
+            get {
+                object obj = ResourceManager.GetObject("calamity", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+
+        /// <summary>Looks up a localized resource of type System.Drawing.Bitmap.</summary>
+        internal static System.Drawing.Bitmap wizard {
+            get {
+                object obj = ResourceManager.GetObject("wizard", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+
+        /// <summary>Looks up a localized resource of type System.Drawing.Bitmap.</summary>
+        internal static System.Drawing.Bitmap bubbles {
+            get {
+                object obj = ResourceManager.GetObject("bubbles", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+
+        /// <summary>Looks up a localized resource of type System.Drawing.Bitmap.</summary>
+        internal static System.Drawing.Bitmap hoop {
+            get {
+                object obj = ResourceManager.GetObject("hoop", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+
+        /// <summary>Looks up a localized resource of type System.Drawing.Bitmap.</summary>
+        internal static System.Drawing.Bitmap juggler {
+            get {
+                object obj = ResourceManager.GetObject("juggler", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+
+        /// <summary>Looks up a localized resource of type System.Drawing.Bitmap.</summary>
+        internal static System.Drawing.Bitmap stalker {
+            get {
+                object obj = ResourceManager.GetObject("stalker", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+
+        /// <summary>Looks up a localized resource of type System.Drawing.Bitmap.</summary>
+        internal static System.Drawing.Bitmap dragoon {
+            get {
+                object obj = ResourceManager.GetObject("dragoon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+
+        /// <summary>Looks up a localized resource of type System.Drawing.Bitmap.</summary>
+        internal static System.Drawing.Bitmap samurai {
+            get {
+                object obj = ResourceManager.GetObject("samurai", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+
+        /// <summary>Looks up a localized resource of type System.Drawing.Bitmap.</summary>
+        internal static System.Drawing.Bitmap bomber {
+            get {
+                object obj = ResourceManager.GetObject("bomber", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+
+        /// <summary>Looks up a localized resource of type System.Drawing.Bitmap.</summary>
+        internal static System.Drawing.Bitmap tempest {
+            get {
+                object obj = ResourceManager.GetObject("tempest", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+
+        /// <summary>Looks up a localized resource of type System.Drawing.Bitmap.</summary>
+        internal static System.Drawing.Bitmap beatmania {
+            get {
+                object obj = ResourceManager.GetObject("beatmania", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+
+        /// <summary>Looks up a localized resource of type System.Drawing.Bitmap.</summary>
+        internal static System.Drawing.Bitmap sol_lens {
+            get {
+                object obj = ResourceManager.GetObject("sol_lens", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>Looks up a localized resource of type System.Drawing.Bitmap.</summary>
+        internal static System.Drawing.Bitmap luna_lens {
+            get {
+                object obj = ResourceManager.GetObject("luna_lens", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>Looks up a localized resource of type System.Drawing.Bitmap.</summary>
+        internal static System.Drawing.Bitmap flame_lens {
+            get {
+                object obj = ResourceManager.GetObject("flame_lens", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>Looks up a localized resource of type System.Drawing.Bitmap.</summary>
+        internal static System.Drawing.Bitmap frost_lens {
+            get {
+                object obj = ResourceManager.GetObject("frost_lens", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>Looks up a localized resource of type System.Drawing.Bitmap.</summary>
+        internal static System.Drawing.Bitmap cloud_lens {
+            get {
+                object obj = ResourceManager.GetObject("cloud_lens", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>Looks up a localized resource of type System.Drawing.Bitmap.</summary>
+        internal static System.Drawing.Bitmap earth_lens {
+            get {
+                object obj = ResourceManager.GetObject("earth_lens", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>Looks up a localized resource of type System.Drawing.Bitmap.</summary>
+        internal static System.Drawing.Bitmap star_lens {
+            get {
+                object obj = ResourceManager.GetObject("star_lens", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>Looks up a localized resource of type System.Drawing.Bitmap.</summary>
+        internal static System.Drawing.Bitmap astro_lens {
+            get {
+                object obj = ResourceManager.GetObject("astro_lens", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>Looks up a localized resource of type System.Drawing.Bitmap.</summary>
+        internal static System.Drawing.Bitmap dark_lens {
+            get {
+                object obj = ResourceManager.GetObject("dark_lens", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
     }
 }
