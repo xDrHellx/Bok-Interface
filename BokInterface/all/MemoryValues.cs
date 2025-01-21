@@ -187,7 +187,7 @@ namespace BokInterface.All {
             Bike.Add("options", new DynamicMemoryValue("options", _shinbokAddresses.Misc["stat"].Address, _shinbokAddresses.Bike["options"].Address));
 
             /**
-             * Inventory-related
+             * Items, key items, accessories & weapons inventories
              * We set these using a loop to simplify
              */
             for (int i = 0; i < 16; i++) {
@@ -209,6 +209,17 @@ namespace BokInterface.All {
 
                 Inventory.Add("slot" + slotNumber + "_weapon_refine", new DynamicMemoryValue("slot" + slotNumber + "_weapon_refine", _shinbokAddresses.Misc["stat"].Address, _shinbokAddresses.Inventory["weapon_slot_" + slotNumber + "_refine"].Address, type: _shinbokAddresses.Inventory["weapon_slot_" + slotNumber + "_refine"].Type));
                 Inventory.Add("slot" + slotNumber + "_weapon_pattern", new DynamicMemoryValue("slot" + slotNumber + "_weapon_pattern", _shinbokAddresses.Misc["stat"].Address, _shinbokAddresses.Inventory["weapon_slot_" + slotNumber + "_pattern"].Address, type: _shinbokAddresses.Inventory["weapon_slot_" + slotNumber + "_pattern"].Type));
+            }
+
+            // Gun lenses & frames inventories
+            for (int i = 0; i < 8; i++) {
+                int slotNumber = i + 1;
+                Inventory.Add("slot" + slotNumber + "_gun_lens", new DynamicMemoryValue("slot" + slotNumber + "_gun_lens", _shinbokAddresses.Misc["stat"].Address, _shinbokAddresses.Inventory["gun_lens_slot_" + slotNumber].Address));
+            }
+
+            for (int i = 0; i < 12; i++) {
+                int slotNumber = i + 1;
+                Inventory.Add("slot" + slotNumber + "_gun_frame", new DynamicMemoryValue("slot" + slotNumber + "_gun_frame", _shinbokAddresses.Misc["stat"].Address, _shinbokAddresses.Inventory["gun_frame_slot_" + slotNumber].Address));
             }
         }
 

@@ -41,11 +41,6 @@ namespace BokInterface.All {
                 // For Boktai weapons
                 KeyValuePair<string, Weapon> option = (KeyValuePair<string, Weapon>)Items[e.Index];
                 Weapon optionItem = option.Value;
-
-                /**
-                 * Draw the item's name & icon (if it has one)
-                 * We always add the space an icon would take so that elements are aligned properly
-                 */
                 e.Graphics.DrawString(optionItem.name, e.Font, new SolidBrush(e.ForeColor), e.Bounds.Left + 16, e.Bounds.Top + 1);
                 if (optionItem.icon != null) {
                     e.Graphics.DrawImage(optionItem.icon, e.Bounds.Left, e.Bounds.Top + 1);
@@ -61,11 +56,24 @@ namespace BokInterface.All {
                 // For Boktai accessories
                 KeyValuePair<string, Accessory> option = (KeyValuePair<string, Accessory>)Items[e.Index];
                 Accessory optionItem = option.Value;
+                e.Graphics.DrawString(optionItem.name, e.Font, new SolidBrush(e.ForeColor), e.Bounds.Left + 16, e.Bounds.Top + 1);
+                if (optionItem.icon != null) {
+                    e.Graphics.DrawImage(optionItem.icon, e.Bounds.Left, e.Bounds.Top + 1);
+                }
+            } else if (Items[e.Index].GetType() == typeof(KeyValuePair<string, ShinbokLens>)) {
 
-                /**
-                 * Draw the item's name & icon (if it has one)
-                 * We always add the space an icon would take so that elements are aligned properly
-                 */
+                // For Shinbok gun lenses
+                KeyValuePair<string, ShinbokLens> option = (KeyValuePair<string, ShinbokLens>)Items[e.Index];
+                ShinbokLens optionItem = option.Value;
+                e.Graphics.DrawString(optionItem.name, e.Font, new SolidBrush(e.ForeColor), e.Bounds.Left + 16, e.Bounds.Top + 1);
+                if (optionItem.icon != null) {
+                    e.Graphics.DrawImage(optionItem.icon, e.Bounds.Left, e.Bounds.Top + 1);
+                }
+            } else if (Items[e.Index].GetType() == typeof(KeyValuePair<string, ShinbokFrame>)) {
+
+                // For Shinbok gun frames
+                KeyValuePair<string, ShinbokFrame> option = (KeyValuePair<string, ShinbokFrame>)Items[e.Index];
+                ShinbokFrame optionItem = option.Value;
                 e.Graphics.DrawString(optionItem.name, e.Font, new SolidBrush(e.ForeColor), e.Bounds.Left + 16, e.Bounds.Top + 1);
                 if (optionItem.icon != null) {
                     e.Graphics.DrawImage(optionItem.icon, e.Bounds.Left, e.Bounds.Top + 1);
