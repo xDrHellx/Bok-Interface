@@ -35,7 +35,7 @@ namespace BokInterface.Weapons {
             Owner = _bokInterface = bokInterface;
             Icon = _bokInterface.Icon;
 
-            SetFormParameters(699, 296);
+            SetFormParameters(699, 312);
 
             // Add the onClose event to the subwindow
             FormClosing += new FormClosingEventHandler(delegate (object sender, FormClosingEventArgs e) {
@@ -50,7 +50,7 @@ namespace BokInterface.Weapons {
         protected override void AddElements() {
 
             // Add Panel along with each slot's main CheckGroupBox
-            slotsPanel = WinFormHelpers.CreatePanel("slots_panel", 5, 79, 690, 214, this);
+            slotsPanel = WinFormHelpers.CreatePanel("slots_panel", 5, 94, 690, 214, this);
             InstanciateCheckGroupBoxes();
 
             // Add informative text
@@ -335,7 +335,7 @@ namespace BokInterface.Weapons {
             SetDefaultValues();
 
             // Button for setting values & its events
-            Button setValuesButton = WinFormHelpers.CreateButton("setStatusButton", "Set values", 620, 50, 75, 23, this);
+            Button setValuesButton = WinFormHelpers.CreateButton("setStatusButton", "Set values", 620, 65, 75, 23, this);
             setValuesButton.Click += new EventHandler(delegate (object sender, EventArgs e) {
                 // Write the values for 10 frames
                 for (int i = 0; i < 10; i++) {
@@ -370,8 +370,9 @@ namespace BokInterface.Weapons {
                 "Regarding weapons :"
                 + "\r\n- A weapon becomes broken (reduced base attack) once its durability value reaches 0 (except La Vie En Rose)"
                 + "\r\n- SP effects that lowers resistance to an element will stack everytime the weapon is equipped (game bug)"
-                + "\r\n- These effects goes back to normal when switching rooms",
-                5, 5, 610, 67, this, readOnly: true
+                + "\r\n- These effects goes back to normal when switching rooms"
+                + "\r\n- If you want a weapon to have its proper attack pattern, set the refine for it",
+                5, 5, 611, 82, this, readOnly: true
             );
         }
 
