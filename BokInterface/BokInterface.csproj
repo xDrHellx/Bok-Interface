@@ -19,6 +19,9 @@
         <Reference Include="BizHawk.Emulation.Common" HintPath="$(GBAHAWK_DIR)/dll/BizHawk.Emulation.Common.dll" />
         <Reference Include="BizHawk.WinForms.Controls" HintPath="$(GBAHAWK_DIR)/dll/BizHawk.WinForms.Controls.dll" />
     </ItemGroup>
+    <ItemGroup>
+        <EmbeddedResource Include="img\django_head_16.png" />
+    </ItemGroup>
     <Target Name="PostBuild" AfterTargets="PostBuildEvent">
         <Copy SourceFiles="$(OutputPath)$(MSBuildProjectName).dll" DestinationFolder="$(ProjectDir)../GBAHawk/ExternalTools" />
     </Target>

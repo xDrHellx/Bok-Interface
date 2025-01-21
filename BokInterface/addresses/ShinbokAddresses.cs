@@ -109,6 +109,7 @@ namespace BokInterface.Addresses {
             Bike.Add("options", new MemoryAddress(0x81C, note: _note, domain: "EWRAM"));
 
             InitInventoryAddresses();
+            InitGunAddresses();
 
             // Add Misc addresses
             // Misc.Add("equips_stat", 0x02004094);
@@ -124,12 +125,9 @@ namespace BokInterface.Addresses {
             Misc.Add("boss_hp", new MemoryAddress(0x0200EEC0, domain: "EWRAM"));
         }
 
+        /// <summary>Init Inventory-related memory addresses</summary>
         protected void InitInventoryAddresses() {
-
-            /**
-             * Inventory-related memory addresses
-             * We set these using a loop to simplify
-             */
+            // We set these using a loop to simplify
             for (int i = 0; i < 16; i++) {
 
                 int slotNumber = 1 + i;
@@ -157,6 +155,23 @@ namespace BokInterface.Addresses {
                 // Refine & weapon attack pattern
                 Inventory.Add("weapon_slot_" + slotNumber + "_refine", new MemoryAddress(0x1CC + addressOffset, note: "Refine", domain: "EWRAM", type: "U8")); // 1 = II, 2 = III, others = normal weapon
                 Inventory.Add("weapon_slot_" + slotNumber + "_pattern", new MemoryAddress(0x1CD + addressOffset, note: "Attack pattern ID", domain: "EWRAM", type: "U8"));
+            }
+        }
+
+        /// <summary>Init Gun-related memory addresses</summary>
+        protected void InitGunAddresses() {
+            // Lenses
+            for (int i = 0; i < 8; i++) {
+                int slotNumber = 1 + i;
+                uint addressOffset = 0x2 * (uint)i;
+                Inventory.Add("gun_lens_slot_" + slotNumber, new MemoryAddress(0x828 + addressOffset, note: "Gun lens inventory slot", domain: "EWRAM"));
+            }
+
+            // Frames
+            for (int i = 0; i < 12; i++) {
+                int slotNumber = 1 + i;
+                uint addressOffset = 0x2 * (uint)i;
+                Inventory.Add("gun_frame_slot_" + slotNumber, new MemoryAddress(0x4C0 + addressOffset, note: "Gun frame inventory slot", domain: "EWRAM"));
             }
         }
     }
