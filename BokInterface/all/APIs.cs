@@ -62,10 +62,7 @@ namespace BokInterface.All {
         }
 
         public static bool LoadRom(string path) {
-            return MainFormForTools.LoadRom(
-                path,
-                new LoadRomArgs(new OpenAdvanced_OpenRom(path))
-            );
+            return Client.OpenRom(path);
         }
     }
 }
