@@ -14,6 +14,9 @@ namespace BokInterface.Addresses {
         /// <summary>Garding-related memory addresses</summary>
         public IDictionary<string, MemoryAddress> Gardening = new Dictionary<string, MemoryAddress>();
 
+        /// <summary>Map & dungeon-related memory addresses</summary>
+        public IDictionary<string, MemoryAddress> Map = new Dictionary<string, MemoryAddress>();
+
         /// <summary>Misc memory addresses</summary>
         public IDictionary<string, MemoryAddress> Misc = new Dictionary<string, MemoryAddress>();
 
@@ -51,6 +54,17 @@ namespace BokInterface.Addresses {
             Inventory.Add("batteries", new MemoryAddress(0x0203DCD0, note: "bitmask", type: "U32", domain: "EWRAM"));
             Inventory.Add("lenses_exp", new MemoryAddress(0x0203DCD8, domain: "EWRAM"));
 
+            // Add Map & dungeon-related addresses
+            Map.Add("current_map_id", new MemoryAddress(0x0203D900, domain: "EWRAM"));
+            Map.Add("dungeon_igt", new MemoryAddress(0x0203D910, type: "U32", domain: "EWRAM"));
+            Map.Add("dungeon_charged_energy", new MemoryAddress(0x0203D914, type: "U32", domain: "EWRAM"));
+            Map.Add("dungeon_amount_detected", new MemoryAddress(0x0203D918, note: "Number of times seen (current dungeon)", domain: "EWRAM"));
+            Map.Add("dungeons_completion_flags", new MemoryAddress(0x0203D928, type: "U32", domain: "EWRAM"));
+            Map.Add("dungeons_related_flags", new MemoryAddress(0x0203DAF0, domain: "EWRAM"));
+            Map.Add("current_area_id", new MemoryAddress(0x0203DADC, type: "U32", domain: "EWRAM"));
+            Map.Add("dungeon_base_score", new MemoryAddress(0x0203F0CC, domain: "EWRAM"));
+            Map.Add("map_data", new MemoryAddress(0x03004610, type: "U32", domain: "IWRAM"));
+
             // Add Misc addresses
             Misc.Add("boss_hp", new MemoryAddress(0x02001B5E, note: "Read-only", domain: "EWRAM"));
             Misc.Add("trap_hp", new MemoryAddress(0x02001B6A, note: "Read-only", domain: "EWRAM"));
@@ -76,15 +90,6 @@ namespace BokInterface.Addresses {
             Misc.Add("playthrough_count", new MemoryAddress(0x0203D8B6, note: "0 = New Game, 1 = NG+, 2 = NG++, ...", domain: "EWRAM"));
             Misc.Add("frames_since_new_file", new MemoryAddress(0x0203D8FC, note: "IGT frames since creating save file", type: "U32", domain: "EWRAM"));
 
-            Misc.Add("current_map_id", new MemoryAddress(0x0203D900, domain: "EWRAM"));
-            Misc.Add("dungeon_igt", new MemoryAddress(0x0203D910, type: "U32", domain: "EWRAM"));
-            Misc.Add("dungeon_charged_energy", new MemoryAddress(0x0203D914, type: "U32", domain: "EWRAM"));
-            Misc.Add("dungeon_amount_detected", new MemoryAddress(0x0203D918, note: "Number of times seen (current dungeon)", domain: "EWRAM"));
-            Misc.Add("dungeons_completion_flags", new MemoryAddress(0x0203D928, type: "U32", domain: "EWRAM"));
-            Misc.Add("dungeons_related_flags", new MemoryAddress(0x0203DAF0, domain: "EWRAM"));
-            Misc.Add("current_area_id", new MemoryAddress(0x0203DADC, type: "U32", domain: "EWRAM"));
-            Misc.Add("dungeon_base_score", new MemoryAddress(0x0203F0CC, domain: "EWRAM"));
-
             Misc.Add("purification_immortal_hp", new MemoryAddress(0x0203DAF4, type: "U32", domain: "EWRAM"));
             // Misc.Add("story_progress", new MemoryAddress(0x0203E80E, domain: "EWRAM"));
 
@@ -95,7 +100,6 @@ namespace BokInterface.Addresses {
             Misc.Add("bootstrap_rng_seed", new MemoryAddress(0x03004478, domain: "IWRAM"));
 
             Misc.Add("actor", new MemoryAddress(0x03001C90, note: "Pointer to Django's actor data", type: "U32", domain: "IWRAM"));
-            Misc.Add("map_data", new MemoryAddress(0x03004610, type: "U32", domain: "IWRAM"));
             Misc.Add("x_camera", new MemoryAddress(0x030046E8, note: "Camera X position", domain: "IWRAM"));
             Misc.Add("y_camera", new MemoryAddress(0x030046EA, note: "Camera Y position", domain: "IWRAM"));
             Misc.Add("z_camera", new MemoryAddress(0x030046EC, note: "Camera Z position", domain: "IWRAM"));
