@@ -27,11 +27,11 @@ namespace BokInterface {
         public override bool BlocksInputWhenFocused => false;
         protected Icon? icon;
         public uint currentGameId;
-        public static string currentGameName = "";
-        public static string shorterGameName = "";
-        protected bool supportedGame = false;
-        protected bool interfaceActivated = false;
-        protected bool isDS = false;
+        public static string currentGameName = "",
+            shorterGameName = "";
+        protected bool supportedGame = false,
+            interfaceActivated = false,
+            isDS = false;
         protected int retryCount = 0;
         private bool _previousDisplayMessagesSetting = true;
         public bool _previousIsPauseSetting = false;
@@ -81,8 +81,7 @@ namespace BokInterface {
         protected void InitializeInterface() {
 
             // Reset variables used for initializing
-            supportedGame = false;
-            interfaceActivated = false;
+            supportedGame = interfaceActivated = false;
 
             /**
              * We use a try - catch to prevent the tool from returning an error when no ROM is loaded
@@ -226,8 +225,7 @@ namespace BokInterface {
                     isDS = true;
                     break;
                 default:
-                    currentGameName = "";
-                    shorterGameName = "";
+                    currentGameName = shorterGameName = "";
                     supportedGame = false;
                     break;
             }
