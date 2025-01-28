@@ -153,65 +153,9 @@ namespace BokInterface.Accessories {
         private void SetMemoryValue(string subList, string valueKey, decimal value) {
             string memoryValueKey = valueKey;
             switch (subList) {
-                case "django":
-                    if (_memoryValues.Django.ContainsKey(memoryValueKey) == true) {
-
-                        // Depending on the key, we treat the value setting differently
-                        switch (memoryValueKey) {
-                            case "vit":                     // Stats
-                            case "spr":
-                            case "str":
-                            case "agi":
-                                /**
-                                 * For stats we also update the "persistent" stat address
-                                 * 
-                                 * We do this because updating "current" stat value is not enough,
-                                 * when switching room the game would set back the old values
-                                 */
-                                _memoryValues.Django[memoryValueKey].Value = (uint)value;
-                                if (_memoryValues.Misc.ContainsKey(memoryValueKey) == true) {
-                                    _memoryValues.Misc[memoryValueKey].Value = (uint)value;
-                                }
-                                break;
-                            case "sword_skill":             // Skill
-                            case "spear_skill":
-                            case "hammer_skill":
-                            case "fists_skill":
-                            case "gun_skill":
-                                _memoryValues.Django[memoryValueKey].Value = Utilities.LevelToExp(value);
-                                break;
-                            default:                        // Default treatment
-                                _memoryValues.Django[memoryValueKey].Value = (uint)value;
-                                break;
-                        }
-
-                    } else if (_memoryValues.U16.ContainsKey(memoryValueKey) == true) {
-                        _memoryValues.U16[memoryValueKey].Value = (uint)value;
-                    } else if (_memoryValues.U32.ContainsKey(memoryValueKey) == true) {
-                        _memoryValues.U32[memoryValueKey].Value = (uint)value;
-                    }
-                    break;
-                case "solls":
-                    if (_memoryValues.Solls.ContainsKey(memoryValueKey) == true) {
-                        _memoryValues.Solls[memoryValueKey].Value = (uint)value;
-                    } else if (_memoryValues.U16.ContainsKey(memoryValueKey) == true) {
-                        _memoryValues.U16[memoryValueKey].Value = (uint)value;
-                    } else if (_memoryValues.U32.ContainsKey(memoryValueKey) == true) {
-                        _memoryValues.U32[memoryValueKey].Value = (uint)value;
-                    }
-                    break;
                 case "inventory":
                     if (_memoryValues.Inventory.ContainsKey(memoryValueKey) == true) {
                         _memoryValues.Inventory[memoryValueKey].Value = (uint)value;
-                    } else if (_memoryValues.U16.ContainsKey(memoryValueKey) == true) {
-                        _memoryValues.U16[memoryValueKey].Value = (uint)value;
-                    } else if (_memoryValues.U32.ContainsKey(memoryValueKey) == true) {
-                        _memoryValues.U32[memoryValueKey].Value = (uint)value;
-                    }
-                    break;
-                case "misc":
-                    if (_memoryValues.Misc.ContainsKey(memoryValueKey) == true) {
-                        _memoryValues.Misc[memoryValueKey].Value = (uint)value;
                     } else if (_memoryValues.U16.ContainsKey(memoryValueKey) == true) {
                         _memoryValues.U16[memoryValueKey].Value = (uint)value;
                     } else if (_memoryValues.U32.ContainsKey(memoryValueKey) == true) {

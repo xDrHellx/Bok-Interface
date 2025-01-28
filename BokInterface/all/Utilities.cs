@@ -77,7 +77,7 @@ namespace BokInterface.All {
                 default:
                     APIs.Memory.WriteU16(address, value, domain);
                     break;
-            };
+            }
         }
 
         /// <summary>Shortcut method for setting the value of a memory address</summary>
@@ -100,7 +100,7 @@ namespace BokInterface.All {
                 default:
                     APIs.Memory.WriteS16(address, value, domain);
                     break;
-            };
+            }
         }
 
         /// <summary>Shortcut method for retrieving the value of a dynamic memory address</summary>
@@ -136,7 +136,7 @@ namespace BokInterface.All {
                 default:
                     APIs.Memory.WriteU16(APIs.Memory.ReadU32(firstAddress) + secondAddress, value);
                     break;
-            };
+            }
         }
 
         /// <summary>Convert an hexadecimal value to an integer</summary>

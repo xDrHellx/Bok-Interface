@@ -38,16 +38,16 @@ namespace BokInterface {
                 // Open editor for the current game
                 switch (shorterGameName) {
                     case "Boktai":
-                        new BoktaiStatusEditor(this, _memoryValues, _boktaiAddresses);
+                        subwindows.Add(new BoktaiStatusEditor(this, _memoryValues, _boktaiAddresses));
                         break;
                     case "Zoktai":
-                        new ZoktaiStatusEditor(this, _memoryValues, _zoktaiAddresses);
+                        subwindows.Add(new ZoktaiStatusEditor(this, _memoryValues, _zoktaiAddresses));
                         break;
                     case "Shinbok":
-                        new ShinbokStatusEditor(this, _memoryValues, _shinbokAddresses);
+                        subwindows.Add(new ShinbokStatusEditor(this, _memoryValues, _shinbokAddresses));
                         break;
                     case "LunarKnights":
-                        new LunarKnightsStatusEditor(this, _memoryValues, _lunarKnightsAddresses);
+                        subwindows.Add(new LunarKnightsStatusEditor(this, _memoryValues, _lunarKnightsAddresses));
                         break;
                     default:
                         // If game is not handled, do nothing
@@ -64,16 +64,16 @@ namespace BokInterface {
                 // Open editor for the current game
                 switch (shorterGameName) {
                     case "Boktai":
-                        new BoktaiInventoryEditor(this, _memoryValues, _boktaiAddresses);
+                        subwindows.Add(new BoktaiInventoryEditor(this, _memoryValues, _boktaiAddresses));
                         break;
                     case "Zoktai":
-                        new ZoktaiInventoryEditor(this, _memoryValues, _zoktaiAddresses);
+                        subwindows.Add(new ZoktaiInventoryEditor(this, _memoryValues, _zoktaiAddresses));
                         break;
                     case "Shinbok":
-                        new ShinbokInventoryEditor(this, _memoryValues, _shinbokAddresses);
+                        subwindows.Add(new ShinbokInventoryEditor(this, _memoryValues, _shinbokAddresses));
                         break;
                     case "LunarKnights":
-                        new LunarKnightsInventoryEditor(this, _memoryValues, _lunarKnightsAddresses);
+                        subwindows.Add(new LunarKnightsInventoryEditor(this, _memoryValues, _lunarKnightsAddresses));
                         break;
                     default:
                         // If game is not handled, do nothing
@@ -90,16 +90,16 @@ namespace BokInterface {
                 // Open editor for the current game
                 switch (shorterGameName) {
                     case "Boktai":
-                        new BoktaiKeyItemsEditor(this, _memoryValues, _boktaiAddresses);
+                        subwindows.Add(new BoktaiKeyItemsEditor(this, _memoryValues, _boktaiAddresses));
                         break;
                     case "Zoktai":
-                        new ZoktaiKeyItemsEditor(this, _memoryValues, _zoktaiAddresses);
+                        subwindows.Add(new ZoktaiKeyItemsEditor(this, _memoryValues, _zoktaiAddresses));
                         break;
                     case "Shinbok":
-                        new ShinbokKeyItemsEditor(this, _memoryValues, _shinbokAddresses);
+                        subwindows.Add(new ShinbokKeyItemsEditor(this, _memoryValues, _shinbokAddresses));
                         break;
                     case "LunarKnights":
-                        new LunarKnightsKeyItemsEditor(this, _memoryValues, _lunarKnightsAddresses);
+                        subwindows.Add(new LunarKnightsKeyItemsEditor(this, _memoryValues, _lunarKnightsAddresses));
                         break;
                     default:
                         // If game is not handled, do nothing
@@ -116,16 +116,16 @@ namespace BokInterface {
                 // Open editor for the current game
                 switch (shorterGameName) {
                     case "Boktai":
-                        // new BoktaiAccessoriesEditor(this, _memoryValues, _boktaiAddresses);
+                        // subwindows.Add(new BoktaiAccessoriesEditor(this, _memoryValues, _boktaiAddresses));
                         break;
                     case "Zoktai":
-                        new ZoktaiAccessoriesEditor(this, _memoryValues, _zoktaiAddresses);
+                        subwindows.Add(new ZoktaiAccessoriesEditor(this, _memoryValues, _zoktaiAddresses));
                         break;
                     case "Shinbok":
-                        new ShinbokAccessoriesEditor(this, _memoryValues, _shinbokAddresses);
+                        subwindows.Add(new ShinbokAccessoriesEditor(this, _memoryValues, _shinbokAddresses));
                         break;
                     case "LunarKnights":
-                        // new LunarKnightsAccessoriesEditor(this, _memoryValues, _lunarKnightsAddresses);
+                        // subwindows.Add(new LunarKnightsAccessoriesEditor(this, _memoryValues, _lunarKnightsAddresses));
                         break;
                     default:
                         // If game is not handled, do nothing
@@ -147,7 +147,7 @@ namespace BokInterface {
                         // None, solar gun is handled via Weapons Inventory
                         break;
                     case "Shinbok":
-                        new ShinbokSolarGunEditor(this, _memoryValues, _shinbokAddresses);
+                        subwindows.Add(new ShinbokSolarGunEditor(this, _memoryValues, _shinbokAddresses));
                         break;
                     case "LunarKnights":
                     default:
@@ -164,16 +164,16 @@ namespace BokInterface {
                 // Open editor for the current game
                 switch (shorterGameName) {
                     case "Boktai":
-                        new BoktaiWeaponsEditor(this, _memoryValues, _boktaiAddresses);
+                        subwindows.Add(new BoktaiWeaponsEditor(this, _memoryValues, _boktaiAddresses));
                         break;
                     case "Zoktai":
-                        new ZoktaiWeaponsEditor(this, _memoryValues, _zoktaiAddresses);
+                        subwindows.Add(new ZoktaiWeaponsEditor(this, _memoryValues, _zoktaiAddresses));
                         break;
                     case "Shinbok":
-                        new ShinbokWeaponsEditor(this, _memoryValues, _shinbokAddresses);
+                        subwindows.Add(new ShinbokWeaponsEditor(this, _memoryValues, _shinbokAddresses));
                         break;
                     case "LunarKnights":
-                        new LunarKnightsWeaponsEditor(this, _memoryValues, _lunarKnightsAddresses);
+                        subwindows.Add(new LunarKnightsWeaponsEditor(this, _memoryValues, _lunarKnightsAddresses));
                         break;
                     default:
                         // If game is not handled, do nothing
@@ -191,10 +191,10 @@ namespace BokInterface {
                         // No magics in Bok 1
                         return;
                     case "Zoktai":
-                        new ZoktaiMagicsEditor(this, _memoryValues, _zoktaiAddresses);
+                        subwindows.Add(new ZoktaiMagicsEditor(this, _memoryValues, _zoktaiAddresses));
                         break;
                     case "Shinbok":
-                        // new ShinbokMagicsEditor(this, _memoryValues, _shinbokAddresses);
+                        // subwindows.Add(new ShinbokMagicsEditor(this, _memoryValues, _shinbokAddresses));
                         // break;
                         return;
                     case "LunarKnights":

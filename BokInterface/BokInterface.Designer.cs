@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
 using System.Windows.Forms;
 
 using BokInterface.All;
@@ -31,12 +33,9 @@ namespace BokInterface {
 
 		#region Subwindows properties
 
-		private System.Windows.Forms.Form equipsEditWindow = new(),
-			solarGunEditWindow = new(),
-			weaponsEditWindow = new(),
-			magicsEditWindow = new(),
-			miscToolsSelectionWindow = new(),
-			calculatorsSelectionWindow = new();
+		private System.Windows.Forms.Form miscToolsSelectionWindow = new(),
+			calculatorsSelectionWindow = new();;
+		private List<System.Windows.Forms.Form> subwindows = new();
 		
 		#endregion
 
@@ -68,7 +67,7 @@ namespace BokInterface {
 			this._memoryValues = new(shorterGameName);
 
 			// Show corresponding interface
-			switch(shorterGameName) {
+			switch (shorterGameName) {
 				case "Boktai":
 					interfaceActivated = true;
 					ShowBoktaiInterface();
@@ -96,16 +95,23 @@ namespace BokInterface {
 		/// <summary>Clears the interface window and all other sections within it</summary>
 		private void ClearInterface() {
 
-			// Main window-related
-			this.Controls.Clear();
+			// Close all subwindows
+			foreach (Form subwindow in subwindows) {
+				if (subwindow != null && subwindow.IsDisposed == false) {
+					subwindow.Close();
+				}
+			}
 
+			// Main window elements
+			this.Controls.Clear();
+			this.subwindows.Clear();
 			this.currentStatusGroupBox.Controls.Clear();
 			this.currentStatsGroupBox.Controls.Clear();
 			this.inventoryGroupBox.Controls.Clear();
 			this.editGroupBox.Controls.Clear();
 			this.extrasGroupBox.Controls.Clear();
 
-			// Tools selection subwindow-related
+			// Tools selection subwindow elements
 			this.miscToolsSelectionWindow.Controls.Clear();
 			this.miscToolsSelectionWindow.Close();
 			this.miscToolsSelectorOpened = false;
@@ -116,9 +122,9 @@ namespace BokInterface {
 			this.calculatorsSelectorOpened = false;
 
 			// Calculators-related
-			ClearCalculators();
+			this.ClearCalculators();
 
-			// Extra tools-related
+			// Extra tools
 			this.ClearExtraTools();
 		}
 
@@ -130,14 +136,15 @@ namespace BokInterface {
 		/// <summary>Clears subwindows related to extra tools</summary>
 		private void ClearExtraTools() {
 
-			// Tile Data Viewer-related
-			if(this._tileDataViewer != null) {
+			// Tile Data Viewer
+			if (this._tileDataViewer != null) {
 				this._tileDataViewer.Controls.Clear();
 				this._tileDataViewer.Close();
 				this.tileDataViewerActive = false;
 			}
 
-			if(this._memValuesListing != null) {
+			// Memory Values Listing
+			if (this._memValuesListing != null) {
 				this._memValuesListing.Controls.Clear();
 				this._memValuesListing.Close();
 				this.memValuesListingActive = false;
