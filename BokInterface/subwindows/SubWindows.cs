@@ -6,6 +6,7 @@ using BokInterface.All;
 using BokInterface.Inventory;
 using BokInterface.KeyItems;
 using BokInterface.Magics;
+using BokInterface.solarBike;
 using BokInterface.solarGun;
 using BokInterface.Status;
 using BokInterface.Weapons;
@@ -24,6 +25,7 @@ namespace BokInterface {
             keyItemsEditorOpened = false,
             equipsEditorOpened = false,
             solarGunEditorOpened = false,
+            solarBikeEditorOpened = false,
             weaponsEditorOpened = false,
             magicsEditorOpened = false,
             miscToolsSelectorOpened = false;
@@ -59,8 +61,6 @@ namespace BokInterface {
 
         protected void OpenInventoryEditor(object sender, EventArgs e) {
             if (inventoryEditorOpened == false) {
-
-                // Open editor for the current game
                 switch (shorterGameName) {
                     case "Boktai":
                         subwindows.Add(new BoktaiInventoryEditor(this, _memoryValues, _boktaiAddresses));
@@ -85,8 +85,6 @@ namespace BokInterface {
 
         protected void OpenKeyItemsEditor(object sender, EventArgs e) {
             if (keyItemsEditorOpened == false) {
-
-                // Open editor for the current game
                 switch (shorterGameName) {
                     case "Boktai":
                         subwindows.Add(new BoktaiKeyItemsEditor(this, _memoryValues, _boktaiAddresses));
@@ -111,8 +109,6 @@ namespace BokInterface {
 
         protected void OpenEquipsEditor(object sender, EventArgs e) {
             if (equipsEditorOpened == false) {
-
-                // Open editor for the current game
                 switch (shorterGameName) {
                     case "Boktai":
                         // subwindows.Add(new BoktaiAccessoriesEditor(this, _memoryValues, _boktaiAddresses));
@@ -137,7 +133,6 @@ namespace BokInterface {
 
         protected void OpenSolarGunEditor(object sender, EventArgs e) {
             if (solarGunEditorOpened == false) {
-                // Open editor for the current game
                 switch (shorterGameName) {
                     case "Boktai":
                         // None yet
@@ -157,10 +152,16 @@ namespace BokInterface {
             }
         }
 
+        protected void OpenBikeEditor(object sender, EventArgs e) {
+            // Solar Bike only exist in Boktai 3
+            if (solarBikeEditorOpened == false && shorterGameName == "Shinbok") {
+                subwindows.Add(new ShinbokSolarBikeEditor(this, _memoryValues, _shinbokAddresses));
+                solarBikeEditorOpened = true;
+            }
+        }
+
         protected void OpenWeaponsEditor(object sender, EventArgs e) {
             if (weaponsEditorOpened == false) {
-
-                // Open editor for the current game
                 switch (shorterGameName) {
                     case "Boktai":
                         subwindows.Add(new BoktaiWeaponsEditor(this, _memoryValues, _boktaiAddresses));
@@ -186,9 +187,6 @@ namespace BokInterface {
         protected void OpenMagicsEditor(object sender, EventArgs e) {
             if (magicsEditorOpened == false) {
                 switch (shorterGameName) {
-                    case "Boktai":
-                        // No magics in Bok 1
-                        return;
                     case "Zoktai":
                         subwindows.Add(new ZoktaiMagicsEditor(this, _memoryValues, _zoktaiAddresses));
                         break;
@@ -196,11 +194,9 @@ namespace BokInterface {
                         // subwindows.Add(new ShinbokMagicsEditor(this, _memoryValues, _shinbokAddresses));
                         // break;
                         return;
-                    case "LunarKnights":
-                        // No magics in LK / DS
-                        return;
                     default:
                         // If game is not handled, do nothing
+                        // There's also no magics in Bok 1 or LK / DS
                         return;
                 }
 

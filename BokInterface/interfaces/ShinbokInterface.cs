@@ -33,7 +33,8 @@ namespace BokInterface {
             _bok3_editKeyItemsBtn = new(),
             _bok3_editEquipsBtn = new(),
             _bok3_editWeaponsBtn = new(),
-            _bok3_editSolarGunBtn = new();
+            _bok3_editSolarGunBtn = new(),
+            _bok3_editSolarBikeBtn = new();
 
         #endregion
 
@@ -58,7 +59,7 @@ namespace BokInterface {
             // this.inventoryGroupBox = WinFormHelpers.WinFormHelpers.CreateGroupBox("inventory", "Inventory", 5, 101, 250, 55, this);
 
             // Main window
-            SetMainWindow("Bok Interface" + (shorterGameName != "" ? " - " + shorterGameName : ""), 339, 270);
+            SetMainWindow("Bok Interface" + (shorterGameName != "" ? " - " + shorterGameName : ""), 339, 294);
 
             ResumeLayout(false);
         }
@@ -150,7 +151,7 @@ namespace BokInterface {
         private void AddShinbokEditSection() {
 
             // Section
-            editGroupBox = WinFormHelpers.CreateGroupBox("editButtons", "Edit", 237, 25, 97, 184, this);
+            editGroupBox = WinFormHelpers.CreateGroupBox("editButtons", "Edit", 237, 25, 97, 211, this);
 
             // Buttons
             _bok3_editStatusBtn = WinFormHelpers.CreateButton("editStatuts", "Status", 6, 19, 85, 23, editGroupBox);
@@ -159,6 +160,7 @@ namespace BokInterface {
             _bok3_editWeaponsBtn = WinFormHelpers.CreateButton("editWeapons", "Weapons", 6, 100, 85, 23, editGroupBox);
             _bok3_editEquipsBtn = WinFormHelpers.CreateButton("editEquips", "Accessories", 6, 127, 85, 23, editGroupBox);
             _bok3_editSolarGunBtn = WinFormHelpers.CreateButton("editSolarGun", "Solar gun", 6, 154, 85, 23, editGroupBox);
+            _bok3_editSolarBikeBtn = WinFormHelpers.CreateButton("editSolarBike", "Solar Bike", 6, 181, 85, 23, editGroupBox);
 
             // Onclick events
             _bok3_editStatusBtn.Click += new System.EventHandler(OpenStatusEditor);
@@ -167,6 +169,7 @@ namespace BokInterface {
             _bok3_editWeaponsBtn.Click += new System.EventHandler(OpenWeaponsEditor);
             _bok3_editEquipsBtn.Click += new System.EventHandler(OpenEquipsEditor);
             _bok3_editSolarGunBtn.Click += new System.EventHandler(OpenSolarGunEditor);
+            _bok3_editSolarBikeBtn.Click += new System.EventHandler(OpenBikeEditor);
         }
     }
 }
