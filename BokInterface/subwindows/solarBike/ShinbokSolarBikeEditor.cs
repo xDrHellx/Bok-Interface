@@ -24,6 +24,11 @@ namespace BokInterface.solarBike {
         private readonly BokInterface _bokInterface;
         private readonly ShinbokAddresses _shinbokAddresses;
         private readonly ShinbokBikeParts _shinbokBikeParts;
+
+        #endregion
+
+        #region Form elements
+
         private GroupBox _mainGroup = new(),
             _optionsGroup = new();
         private readonly List<ComboBox> _dropDownList = [];
