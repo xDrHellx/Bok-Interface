@@ -244,13 +244,12 @@ namespace BokInterface.Status {
         ///<param name="valueKey"><c>strng</c>Key withint the dictionnary</param>
         ///<param name="value"><c>decimal</c>Value to set</param>
         private void SetMemoryValue(string subList, string valueKey, decimal value) {
-            string memoryValueKey = valueKey;
             switch (subList) {
                 case "django":
-                    if (_memoryValues.Django.ContainsKey(memoryValueKey) == true) {
+                    if (_memoryValues.Django.ContainsKey(valueKey) == true) {
 
                         // Depending on the key, we treat the value setting differently
-                        switch (memoryValueKey) {
+                        switch (valueKey) {
                             case "vit":                     // Stats
                             case "spr":
                             case "str":
@@ -261,9 +260,9 @@ namespace BokInterface.Status {
                                  * We do this because updating "current" stat value is not enough,
                                  * when switching room the game would set back the old values
                                  */
-                                _memoryValues.Django[memoryValueKey].Value = (uint)value;
-                                if (_memoryValues.Misc.ContainsKey(memoryValueKey) == true) {
-                                    _memoryValues.Misc[memoryValueKey].Value = (uint)value;
+                                _memoryValues.Django[valueKey].Value = (uint)value;
+                                if (_memoryValues.Misc.ContainsKey(valueKey) == true) {
+                                    _memoryValues.Misc[valueKey].Value = (uint)value;
                                 }
                                 break;
                             case "sword_skill":             // Skill
@@ -271,60 +270,42 @@ namespace BokInterface.Status {
                             case "hammer_skill":
                             case "fists_skill":
                             case "gun_skill":
-                                _memoryValues.Django[memoryValueKey].Value = Utilities.LevelToExp(value);
+                                _memoryValues.Django[valueKey].Value = Utilities.LevelToExp(value);
                                 break;
                             default:                        // Default treatment
-                                _memoryValues.Django[memoryValueKey].Value = (uint)value;
+                                _memoryValues.Django[valueKey].Value = (uint)value;
                                 break;
                         }
 
-                    } else if (_memoryValues.U16.ContainsKey(memoryValueKey) == true) {
-                        _memoryValues.U16[memoryValueKey].Value = (uint)value;
-                    } else if (_memoryValues.U32.ContainsKey(memoryValueKey) == true) {
-                        _memoryValues.U32[memoryValueKey].Value = (uint)value;
+                    } else if (_memoryValues.U16.ContainsKey(valueKey) == true) {
+                        _memoryValues.U16[valueKey].Value = (uint)value;
+                    } else if (_memoryValues.U32.ContainsKey(valueKey) == true) {
+                        _memoryValues.U32[valueKey].Value = (uint)value;
                     }
                     break;
                 case "sabata":
-                    if (_memoryValues.Sabata.ContainsKey(memoryValueKey) == true) {
-                        _memoryValues.Sabata[memoryValueKey].Value = (uint)value;
-                    } else if (_memoryValues.U16.ContainsKey(memoryValueKey) == true) {
-                        _memoryValues.U16[memoryValueKey].Value = (uint)value;
-                    } else if (_memoryValues.U32.ContainsKey(memoryValueKey) == true) {
-                        _memoryValues.U32[memoryValueKey].Value = (uint)value;
-                    }
-                    break;
-                case "solls":
-                    if (_memoryValues.Solls.ContainsKey(memoryValueKey) == true) {
-                        _memoryValues.Solls[memoryValueKey].Value = (uint)value;
-                    } else if (_memoryValues.U16.ContainsKey(memoryValueKey) == true) {
-                        _memoryValues.U16[memoryValueKey].Value = (uint)value;
-                    } else if (_memoryValues.U32.ContainsKey(memoryValueKey) == true) {
-                        _memoryValues.U32[memoryValueKey].Value = (uint)value;
-                    }
-                    break;
-                case "inventory":
-                    if (_memoryValues.Inventory.ContainsKey(memoryValueKey) == true) {
-                        _memoryValues.Inventory[memoryValueKey].Value = (uint)value;
-                    } else if (_memoryValues.U16.ContainsKey(memoryValueKey) == true) {
-                        _memoryValues.U16[memoryValueKey].Value = (uint)value;
-                    } else if (_memoryValues.U32.ContainsKey(memoryValueKey) == true) {
-                        _memoryValues.U32[memoryValueKey].Value = (uint)value;
+                    if (_memoryValues.Sabata.ContainsKey(valueKey) == true) {
+                        _memoryValues.Sabata[valueKey].Value = (uint)value;
+                    } else if (_memoryValues.U16.ContainsKey(valueKey) == true) {
+                        _memoryValues.U16[valueKey].Value = (uint)value;
+                    } else if (_memoryValues.U32.ContainsKey(valueKey) == true) {
+                        _memoryValues.U32[valueKey].Value = (uint)value;
                     }
                     break;
                 case "misc":
-                    if (_memoryValues.Misc.ContainsKey(memoryValueKey) == true) {
-                        _memoryValues.Misc[memoryValueKey].Value = (uint)value;
-                    } else if (_memoryValues.U16.ContainsKey(memoryValueKey) == true) {
-                        _memoryValues.U16[memoryValueKey].Value = (uint)value;
-                    } else if (_memoryValues.U32.ContainsKey(memoryValueKey) == true) {
-                        _memoryValues.U32[memoryValueKey].Value = (uint)value;
+                    if (_memoryValues.Misc.ContainsKey(valueKey) == true) {
+                        _memoryValues.Misc[valueKey].Value = (uint)value;
+                    } else if (_memoryValues.U16.ContainsKey(valueKey) == true) {
+                        _memoryValues.U16[valueKey].Value = (uint)value;
+                    } else if (_memoryValues.U32.ContainsKey(valueKey) == true) {
+                        _memoryValues.U32[valueKey].Value = (uint)value;
                     }
                     break;
                 default:
-                    if (_memoryValues.U16.ContainsKey(memoryValueKey) == true) {
-                        _memoryValues.U16[memoryValueKey].Value = (uint)value;
-                    } else if (_memoryValues.U32.ContainsKey(memoryValueKey) == true) {
-                        _memoryValues.U32[memoryValueKey].Value = (uint)value;
+                    if (_memoryValues.U16.ContainsKey(valueKey) == true) {
+                        _memoryValues.U16[valueKey].Value = (uint)value;
+                    } else if (_memoryValues.U32.ContainsKey(valueKey) == true) {
+                        _memoryValues.U32[valueKey].Value = (uint)value;
                     }
                     break;
             }

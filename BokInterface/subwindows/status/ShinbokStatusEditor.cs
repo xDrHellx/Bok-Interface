@@ -123,30 +123,27 @@ namespace BokInterface.Status {
 
         protected override void SetValues() {
 
-            // Retrieve all input fields
-            List<NumericUpDown> fields = statusNumericUpDowns;
-
             // Store the previous setting for BizHawk being paused
             _bokInterface._previousIsPauseSetting = APIs.Client.IsPaused();
 
             // Pause BizHawk
             APIs.Client.Pause();
 
-            // Sets values based on fields
-            for (int i = 0; i < fields.Count; i++) {
+            // Sets values based on fields (numericUpDowns)
+            for (int i = 0; i < statusNumericUpDowns.Count; i++) {
 
                 // If the field is disabled, skip it
-                if (fields[i].Enabled == false) {
+                if (statusNumericUpDowns[i].Enabled == false) {
                     continue;
                 }
 
-                decimal value = fields[i].Value;
+                decimal value = statusNumericUpDowns[i].Value;
 
                 /**
                  * Indicate which sublist to use for setting the value, based on the input field's name
                  * We only split on the first "_"
                  */
-                string[] fieldParts = fields[i].Name.Split(['_'], 3);
+                string[] fieldParts = statusNumericUpDowns[i].Name.Split(['_'], 3);
                 string subList = fieldParts[0];
                 string memoryValueKey = fieldParts[1] + "_" + fieldParts[2];
                 switch (subList) {
