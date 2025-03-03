@@ -175,15 +175,15 @@ namespace BokInterface.All {
 
             // Solar Bike
             // Bike.Add("name", new DynamicMemoryValue("name", memoryAddresses.Misc["stat"].Address, memoryAddresses.Bike["name"].Address));
-            Bike.Add("points", new DynamicMemoryValue("points", memoryAddresses.Misc["stat"].Address, memoryAddresses.Bike["points"].Address));
-            Bike.Add("battle_matches", new DynamicMemoryValue("battle_matches", memoryAddresses.Misc["stat"].Address, memoryAddresses.Bike["battle_matches"].Address));
-            Bike.Add("battle_wins", new DynamicMemoryValue("battle_wins", memoryAddresses.Misc["stat"].Address, memoryAddresses.Bike["battle_wins"].Address));
-            Bike.Add("front", new DynamicMemoryValue("front", memoryAddresses.Misc["stat"].Address, memoryAddresses.Bike["front"].Address));
-            Bike.Add("tires", new DynamicMemoryValue("tires", memoryAddresses.Misc["stat"].Address, memoryAddresses.Bike["tires"].Address));
-            Bike.Add("body", new DynamicMemoryValue("body", memoryAddresses.Misc["stat"].Address, memoryAddresses.Bike["body"].Address));
-            Bike.Add("special", new DynamicMemoryValue("special", memoryAddresses.Misc["stat"].Address, memoryAddresses.Bike["special"].Address));
-            Bike.Add("color", new DynamicMemoryValue("color", memoryAddresses.Misc["stat"].Address, memoryAddresses.Bike["color"].Address));
-            Bike.Add("options", new DynamicMemoryValue("options", memoryAddresses.Misc["stat"].Address, memoryAddresses.Bike["options"].Address));
+            Bike.Add("points", new DynamicMemoryValue("points", memoryAddresses.Misc["stat"].Address, memoryAddresses.Bike["points"].Address, memoryAddresses.Bike["points"].Type));
+            Bike.Add("battle_matches", new DynamicMemoryValue("battle_matches", memoryAddresses.Misc["stat"].Address, memoryAddresses.Bike["battle_matches"].Address, memoryAddresses.Bike["battle_matches"].Type));
+            Bike.Add("battle_wins", new DynamicMemoryValue("battle_wins", memoryAddresses.Misc["stat"].Address, memoryAddresses.Bike["battle_wins"].Address, memoryAddresses.Bike["battle_wins"].Type));
+            Bike.Add("front", new DynamicMemoryValue("front", memoryAddresses.Misc["stat"].Address, memoryAddresses.Bike["front"].Address, memoryAddresses.Bike["front"].Type));
+            Bike.Add("tires", new DynamicMemoryValue("tires", memoryAddresses.Misc["stat"].Address, memoryAddresses.Bike["tires"].Address, memoryAddresses.Bike["tires"].Type));
+            Bike.Add("body", new DynamicMemoryValue("body", memoryAddresses.Misc["stat"].Address, memoryAddresses.Bike["body"].Address, memoryAddresses.Bike["body"].Type));
+            Bike.Add("special", new DynamicMemoryValue("special", memoryAddresses.Misc["stat"].Address, memoryAddresses.Bike["special"].Address, memoryAddresses.Bike["special"].Type));
+            Bike.Add("color", new DynamicMemoryValue("color", memoryAddresses.Misc["stat"].Address, memoryAddresses.Bike["color"].Address, memoryAddresses.Bike["color"].Type));
+            Bike.Add("options", new DynamicMemoryValue("options", memoryAddresses.Misc["stat"].Address, memoryAddresses.Bike["options"].Address, memoryAddresses.Bike["options"].Type));
 
             /**
              * Items, key items, accessories & weapons inventories
