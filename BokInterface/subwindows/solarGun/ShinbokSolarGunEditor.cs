@@ -154,10 +154,6 @@ namespace BokInterface.solarGun {
 
         protected override void SetValues() {
 
-            // Retrieve all input fields
-            List<ImageComboBox> lensesSlots = lensesDropDownLists;
-            List<ImageComboBox> framesSlots = framesDropDownLists;
-
             // Store the previous setting for BizHawk being paused
             _bokInterface._previousIsPauseSetting = APIs.Client.IsPaused();
 
@@ -165,34 +161,34 @@ namespace BokInterface.solarGun {
             APIs.Client.Pause();
 
             // Sets values for each lens slot
-            for (int i = 0; i < lensesSlots.Count; i++) {
+            for (int i = 0; i < lensesDropDownLists.Count; i++) {
 
                 // If the slot is disabled, skip it
-                if (lensesSlots[i].Enabled == false) {
+                if (lensesDropDownLists[i].Enabled == false) {
                     continue;
                 }
 
-                KeyValuePair<string, ShinbokLens> selectedOption = (KeyValuePair<string, ShinbokLens>)lensesSlots[i].SelectedItem;
+                KeyValuePair<string, ShinbokLens> selectedOption = (KeyValuePair<string, ShinbokLens>)lensesDropDownLists[i].SelectedItem;
                 ShinbokLens selectedItem = selectedOption.Value;
 
                 /**
                  * Indicate which sublist to use for setting the value, based on the slot's name
                  * We only split on the first "_"
                  */
-                string[] fieldParts = lensesSlots[i].Name.Split(['_'], 2);
+                string[] fieldParts = lensesDropDownLists[i].Name.Split(['_'], 2);
                 SetMemoryValue(fieldParts[0], fieldParts[1], selectedItem.value);
             }
 
             // Do the same thing as above for each frame slot
-            for (int i = 0; i < framesSlots.Count; i++) {
-                if (framesSlots[i].Enabled == false) {
+            for (int i = 0; i < framesDropDownLists.Count; i++) {
+                if (framesDropDownLists[i].Enabled == false) {
                     continue;
                 }
 
-                KeyValuePair<string, ShinbokFrame> selectedOption = (KeyValuePair<string, ShinbokFrame>)framesSlots[i].SelectedItem;
+                KeyValuePair<string, ShinbokFrame> selectedOption = (KeyValuePair<string, ShinbokFrame>)framesDropDownLists[i].SelectedItem;
                 ShinbokFrame selectedItem = selectedOption.Value;
 
-                string[] fieldParts = framesSlots[i].Name.Split(['_'], 2);
+                string[] fieldParts = framesDropDownLists[i].Name.Split(['_'], 2);
                 SetMemoryValue(fieldParts[0], fieldParts[1], selectedItem.value);
             }
 
@@ -213,22 +209,21 @@ namespace BokInterface.solarGun {
         ///<param name="valueKey"><c>strng</c>Key withint the dictionnary</param>
         ///<param name="value"><c>decimal</c>Value to set</param>
         private void SetMemoryValue(string subList, string valueKey, decimal value) {
-            string memoryValueKey = valueKey;
             switch (subList) {
                 case "inventory":
-                    if (_memoryValues.Inventory.ContainsKey(memoryValueKey) == true) {
-                        _memoryValues.Inventory[memoryValueKey].Value = (uint)value;
-                    } else if (_memoryValues.U16.ContainsKey(memoryValueKey) == true) {
-                        _memoryValues.U16[memoryValueKey].Value = (uint)value;
-                    } else if (_memoryValues.U32.ContainsKey(memoryValueKey) == true) {
-                        _memoryValues.U32[memoryValueKey].Value = (uint)value;
+                    if (_memoryValues.Inventory.ContainsKey(valueKey) == true) {
+                        _memoryValues.Inventory[valueKey].Value = (uint)value;
+                    } else if (_memoryValues.U16.ContainsKey(valueKey) == true) {
+                        _memoryValues.U16[valueKey].Value = (uint)value;
+                    } else if (_memoryValues.U32.ContainsKey(valueKey) == true) {
+                        _memoryValues.U32[valueKey].Value = (uint)value;
                     }
                     break;
                 default:
-                    if (_memoryValues.U16.ContainsKey(memoryValueKey) == true) {
-                        _memoryValues.U16[memoryValueKey].Value = (uint)value;
-                    } else if (_memoryValues.U32.ContainsKey(memoryValueKey) == true) {
-                        _memoryValues.U32[memoryValueKey].Value = (uint)value;
+                    if (_memoryValues.U16.ContainsKey(valueKey) == true) {
+                        _memoryValues.U16[valueKey].Value = (uint)value;
+                    } else if (_memoryValues.U32.ContainsKey(valueKey) == true) {
+                        _memoryValues.U32[valueKey].Value = (uint)value;
                     }
                     break;
             }

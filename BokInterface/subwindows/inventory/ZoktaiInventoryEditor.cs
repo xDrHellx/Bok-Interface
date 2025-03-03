@@ -196,43 +196,39 @@ namespace BokInterface.Inventory {
 
         protected override void SetValues() {
 
-            // Retrieve all input fields
-            List<ImageComboBox> slots = dropDownLists;
-            List<NumericUpDown> durabilities = numericUpDowns;
-
             // Store the previous setting for BizHawk being paused
             _bokInterface._previousIsPauseSetting = APIs.Client.IsPaused();
 
             // Pause BizHawk
             APIs.Client.Pause();
 
-            // Sets values for each slot
-            for (int i = 0; i < slots.Count; i++) {
+            // Sets values for each dropdown (slot)
+            for (int i = 0; i < dropDownLists.Count; i++) {
 
                 // If the slot is disabled, skip it
-                if (slots[i].Enabled == false) {
+                if (dropDownLists[i].Enabled == false) {
                     continue;
                 }
 
-                KeyValuePair<string, Item> selectedOption = (KeyValuePair<string, Item>)slots[i].SelectedItem;
+                KeyValuePair<string, Item> selectedOption = (KeyValuePair<string, Item>)dropDownLists[i].SelectedItem;
                 Item selectedItem = selectedOption.Value;
 
                 /**
                  * Indicate which sublist to use for setting the value, based on the slot's name
                  * We only split on the first "_"
                  */
-                string[] fieldParts = slots[i].Name.Split(['_'], 2);
+                string[] fieldParts = dropDownLists[i].Name.Split(['_'], 2);
                 SetMemoryValue(fieldParts[0], fieldParts[1], selectedItem.value);
             }
 
-            // Repeat the above process for Durabilities
-            for (int i = 0; i < durabilities.Count; i++) {
+            // Repeat the above process for Durabilities (numericUpDowns)
+            for (int i = 0; i < numericUpDowns.Count; i++) {
 
-                if (durabilities[i].Enabled == false) {
+                if (numericUpDowns[i].Enabled == false) {
                     continue;
                 }
 
-                string[] fieldParts = durabilities[i].Name.Split(['_'], 3);
+                string[] fieldParts = numericUpDowns[i].Name.Split(['_'], 3);
 
                 // Check if the chocolate-covered checkbox is enabled & checked
                 bool isChocolateCovered = false;
@@ -248,7 +244,7 @@ namespace BokInterface.Inventory {
                  * If the checkbox is checked, adds the offset for chocolate-covered items to the value
                  * Then set the value to the memory address
                  */
-                decimal value = durabilities[i].Value + (isChocolateCovered == true ? _chocolateCoveredDurabilityOffset : 0);
+                decimal value = numericUpDowns[i].Value + (isChocolateCovered == true ? _chocolateCoveredDurabilityOffset : 0);
                 SetMemoryValue(fieldParts[0], fieldParts[1] + "_" + fieldParts[2], value);
             }
 
@@ -269,22 +265,21 @@ namespace BokInterface.Inventory {
         ///<param name="valueKey"><c>strng</c>Key withint the dictionnary</param>
         ///<param name="value"><c>decimal</c>Value to set</param>
         private void SetMemoryValue(string subList, string valueKey, decimal value) {
-            string memoryValueKey = valueKey;
             switch (subList) {
                 case "inventory":
-                    if (_memoryValues.Inventory.ContainsKey(memoryValueKey) == true) {
-                        _memoryValues.Inventory[memoryValueKey].Value = (uint)value;
-                    } else if (_memoryValues.U16.ContainsKey(memoryValueKey) == true) {
-                        _memoryValues.U16[memoryValueKey].Value = (uint)value;
-                    } else if (_memoryValues.U32.ContainsKey(memoryValueKey) == true) {
-                        _memoryValues.U32[memoryValueKey].Value = (uint)value;
+                    if (_memoryValues.Inventory.ContainsKey(valueKey) == true) {
+                        _memoryValues.Inventory[valueKey].Value = (uint)value;
+                    } else if (_memoryValues.U16.ContainsKey(valueKey) == true) {
+                        _memoryValues.U16[valueKey].Value = (uint)value;
+                    } else if (_memoryValues.U32.ContainsKey(valueKey) == true) {
+                        _memoryValues.U32[valueKey].Value = (uint)value;
                     }
                     break;
                 default:
-                    if (_memoryValues.U16.ContainsKey(memoryValueKey) == true) {
-                        _memoryValues.U16[memoryValueKey].Value = (uint)value;
-                    } else if (_memoryValues.U32.ContainsKey(memoryValueKey) == true) {
-                        _memoryValues.U32[memoryValueKey].Value = (uint)value;
+                    if (_memoryValues.U16.ContainsKey(valueKey) == true) {
+                        _memoryValues.U16[valueKey].Value = (uint)value;
+                    } else if (_memoryValues.U32.ContainsKey(valueKey) == true) {
+                        _memoryValues.U32[valueKey].Value = (uint)value;
                     }
                     break;
             }
