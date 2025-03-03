@@ -38,7 +38,7 @@ namespace BokInterface.Bike {
             Tires.Add("Trail", new ShinbokBikePart("Trail", 2, "tires"));
             Tires.Add("Chain", new ShinbokBikePart("Chain", 3, "tires"));
             Tires.Add("Multi-purpose", new ShinbokBikePart("Multi-purpose", 4, "tires"));
-            Tires.Add("Booster	", new ShinbokBikePart("Booster	", 5, "tires"));
+            Tires.Add("Booster", new ShinbokBikePart("Booster", 5, "tires"));
         }
 
         protected void InitBodyParts() {
