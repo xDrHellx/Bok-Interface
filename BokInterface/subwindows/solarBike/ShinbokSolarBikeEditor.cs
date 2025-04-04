@@ -114,10 +114,10 @@ namespace BokInterface.solarBike {
             _bikeColor = WinFormHelpers.CreateDropDownList("bike_color", 57, 136, 140, 23, _mainGroup, visibleOptions: 6);
 
             // Options
-            _option1 = WinFormHelpers.CreateDropDownList("bike_options", 57, 19, 140, 23, _optionsGroup, visibleOptions: 6);
-            _option2 = WinFormHelpers.CreateDropDownList("bike_options", 57, 48, 140, 23, _optionsGroup, visibleOptions: 6);
-            _option3 = WinFormHelpers.CreateDropDownList("bike_options", 57, 77, 140, 23, _optionsGroup, visibleOptions: 6);
-            _option4 = WinFormHelpers.CreateDropDownList("bike_options", 57, 107, 140, 23, _optionsGroup, visibleOptions: 6);
+            _option1 = WinFormHelpers.CreateDropDownList("bike_option_1", 57, 19, 140, 23, _optionsGroup, visibleOptions: 6);
+            _option2 = WinFormHelpers.CreateDropDownList("bike_option_2", 57, 48, 140, 23, _optionsGroup, visibleOptions: 6);
+            _option3 = WinFormHelpers.CreateDropDownList("bike_option_3", 57, 77, 140, 23, _optionsGroup, visibleOptions: 6);
+            _option4 = WinFormHelpers.CreateDropDownList("bike_option_4", 57, 107, 140, 23, _optionsGroup, visibleOptions: 6);
 
             // Add to the dropdown list to loop over it later
             _dropDownList.Add(_frontPart);
@@ -231,7 +231,7 @@ namespace BokInterface.solarBike {
         ///<returns><c>ShinbokBikePart</c>Bike part</returns>
         private ShinbokBikePart? GetBikePartByValue(decimal value, string dictionnaryName) {
 
-            Dictionary<string, ShinbokBikePart> dictionnary = [];
+            Dictionary<string, ShinbokBikePart> dictionnary;
             switch (dictionnaryName) {
                 case "front":
                     dictionnary = _shinbokBikeParts.Front;
