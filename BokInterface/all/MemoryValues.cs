@@ -183,7 +183,10 @@ namespace BokInterface.All {
             Bike.Add("body", new DynamicMemoryValue("body", memoryAddresses.Misc["stat"].Address, memoryAddresses.Bike["body"].Address, memoryAddresses.Bike["body"].Type));
             Bike.Add("special", new DynamicMemoryValue("special", memoryAddresses.Misc["stat"].Address, memoryAddresses.Bike["special"].Address, memoryAddresses.Bike["special"].Type));
             Bike.Add("color", new DynamicMemoryValue("color", memoryAddresses.Misc["stat"].Address, memoryAddresses.Bike["color"].Address, memoryAddresses.Bike["color"].Type));
-            Bike.Add("options", new DynamicMemoryValue("options", memoryAddresses.Misc["stat"].Address, memoryAddresses.Bike["options"].Address, memoryAddresses.Bike["options"].Type));
+            Bike.Add("option_1", new DynamicMemoryValue("option_1", memoryAddresses.Misc["stat"].Address, memoryAddresses.Bike["option_1"].Address, memoryAddresses.Bike["option_1"].Type));
+            Bike.Add("option_2", new DynamicMemoryValue("option_2", memoryAddresses.Misc["stat"].Address, memoryAddresses.Bike["option_2"].Address, memoryAddresses.Bike["option_2"].Type));
+            Bike.Add("option_3", new DynamicMemoryValue("option_3", memoryAddresses.Misc["stat"].Address, memoryAddresses.Bike["option_3"].Address, memoryAddresses.Bike["option_3"].Type));
+            Bike.Add("option_4", new DynamicMemoryValue("option_4", memoryAddresses.Misc["stat"].Address, memoryAddresses.Bike["option_4"].Address, memoryAddresses.Bike["option_4"].Type));
 
             /**
              * Items, key items, accessories & weapons inventories
