@@ -53,7 +53,7 @@ namespace BokInterface.solarBike {
             Owner = _bokInterface = bokInterface;
             Icon = _bokInterface.Icon;
 
-            SetFormParameters(422, 175);
+            SetFormParameters(373, 175);
 
             // Add the onClose event to the subwindow
             FormClosing += new FormClosingEventHandler(delegate (object sender, FormClosingEventArgs e) {
@@ -84,23 +84,33 @@ namespace BokInterface.solarBike {
 
             // Init groups & add them to the editor subwindow
             _mainGroup = WinFormHelpers.CreateCheckGroupBox("main_group", "Main parts", 5, 5, 203, 166, control: this);
-            _optionsGroup = WinFormHelpers.CreateCheckGroupBox("options_group", "Options", 214, 5, 203, 137, control: this);
+            _optionsGroup = WinFormHelpers.CreateCheckGroupBox("options_group", "Options", 214, 5, 154, 137, control: this);
 
-            // Init dropdowns, then generate & add options to them
+            // Init dropdowns, generate & add options to them, then add the labels
             InitDropDowns();
             GenerateDropDownOptions();
+            InitLabels();
 
             // Set default values for each field
             SetDefaultValues();
 
             // Button for setting values & its events
-            Button setValuesButton = WinFormHelpers.CreateButton("setBikePartsButton", "Set values", 343, 148, 75, 23, this);
+            Button setValuesButton = WinFormHelpers.CreateButton("setBikePartsButton", "Set values", 294, 148, 75, 23, this);
             setValuesButton.Click += new EventHandler(delegate (object sender, EventArgs e) {
                 // Write the values for 10 frames
                 for (int i = 0; i < 10; i++) {
                     SetValues();
                 }
             });
+        }
+
+        /// <summary>Add the labels</summary>
+        protected void InitLabels() {
+            WinFormHelpers.CreateLabel("bike_front_label", "Front", 4, 23, 44, 15, _mainGroup, textAlignment: "MiddleLeft");
+            WinFormHelpers.CreateLabel("bike_tires_label", "Tires", 4, 52, 44, 15, _mainGroup, textAlignment: "MiddleLeft");
+            WinFormHelpers.CreateLabel("bike_body_label", "Body", 4, 81, 44, 15, _mainGroup, textAlignment: "MiddleLeft");
+            WinFormHelpers.CreateLabel("bike_special_label", "Special", 4, 111, 44, 15, _mainGroup, textAlignment: "MiddleLeft");
+            WinFormHelpers.CreateLabel("bike_color_label", "Color", 4, 138, 44, 15, _mainGroup, textAlignment: "MiddleLeft");
         }
 
         /// <summary>Initialize the dropdowns</summary>
@@ -114,10 +124,10 @@ namespace BokInterface.solarBike {
             _bikeColor = WinFormHelpers.CreateDropDownList("bike_color", 57, 136, 140, 23, _mainGroup, visibleOptions: 6);
 
             // Options
-            _option1 = WinFormHelpers.CreateDropDownList("bike_option_1", 57, 19, 140, 23, _optionsGroup, visibleOptions: 6);
-            _option2 = WinFormHelpers.CreateDropDownList("bike_option_2", 57, 48, 140, 23, _optionsGroup, visibleOptions: 6);
-            _option3 = WinFormHelpers.CreateDropDownList("bike_option_3", 57, 77, 140, 23, _optionsGroup, visibleOptions: 6);
-            _option4 = WinFormHelpers.CreateDropDownList("bike_option_4", 57, 107, 140, 23, _optionsGroup, visibleOptions: 6);
+            _option1 = WinFormHelpers.CreateDropDownList("bike_option_1", 8, 19, 140, 23, _optionsGroup, visibleOptions: 6);
+            _option2 = WinFormHelpers.CreateDropDownList("bike_option_2", 8, 48, 140, 23, _optionsGroup, visibleOptions: 6);
+            _option3 = WinFormHelpers.CreateDropDownList("bike_option_3", 8, 77, 140, 23, _optionsGroup, visibleOptions: 6);
+            _option4 = WinFormHelpers.CreateDropDownList("bike_option_4", 8, 107, 140, 23, _optionsGroup, visibleOptions: 6);
 
             // Add to the dropdown list to loop over it later
             _dropDownList.Add(_frontPart);
