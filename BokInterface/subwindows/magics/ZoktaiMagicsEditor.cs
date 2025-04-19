@@ -135,10 +135,6 @@ namespace BokInterface.Magics {
         }
 
         protected override void SetValues() {
-
-            // Get checkboxes
-            List<CheckBox> checkBoxes = this.checkBoxes;
-
             /**
              * Retrieve the current magics value from the memory address
              * We'll use it as a base for updating the bitmask it contains

@@ -315,10 +315,6 @@ namespace BokInterface.Weapons {
 
         protected override void SetValues() {
 
-            // Retrieve all input fields
-            List<ImageComboBox> dropdowns = dropDownLists;
-            List<NumericUpDown> bonusRelatedFields = numericUpDowns;
-
             // Store the previous setting for BizHawk being paused
             _bokInterface._previousIsPauseSetting = APIs.Client.IsPaused();
 
@@ -326,10 +322,10 @@ namespace BokInterface.Weapons {
             APIs.Client.Pause();
 
             // Sets values for each slot's dropdown
-            for (int i = 0; i < dropdowns.Count; i++) {
+            for (int i = 0; i < dropDownLists.Count; i++) {
 
                 // If the dropdown is disabled, skip it
-                if (dropdowns[i].Enabled == false) {
+                if (dropDownLists[i].Enabled == false) {
                     continue;
                 }
 
@@ -337,17 +333,17 @@ namespace BokInterface.Weapons {
                  * Indicate which sublist to use for setting the value, based on the slot's name
                  * Also indicate if we're setting the value for a weapon or an SP ability
                  */
-                string[] fieldParts = dropdowns[i].Name.Split(['_'], 4);
+                string[] fieldParts = dropDownLists[i].Name.Split(['_'], 4);
                 if (fieldParts.Length >= 4 && fieldParts[3] != null && fieldParts[3].Substring(0, 10) == "sp_ability") {
                     // SP ability
                     string key = fieldParts[1] + "_" + fieldParts[2] + "_" + fieldParts[3];
-                    KeyValuePair<string, Ability> selectedOption = (KeyValuePair<string, Ability>)dropdowns[i].SelectedItem;
+                    KeyValuePair<string, Ability> selectedOption = (KeyValuePair<string, Ability>)dropDownLists[i].SelectedItem;
                     Ability selectedItem = selectedOption.Value;
                     SetMemoryValue(fieldParts[0], key, selectedItem.value);
                 } else {
                     // Weapon
                     string key = fieldParts[1] + "_" + fieldParts[2];
-                    KeyValuePair<string, Weapon> selectedOption = (KeyValuePair<string, Weapon>)dropdowns[i].SelectedItem;
+                    KeyValuePair<string, Weapon> selectedOption = (KeyValuePair<string, Weapon>)dropDownLists[i].SelectedItem;
                     Weapon selectedItem = selectedOption.Value;
                     SetMemoryValue(fieldParts[0], key, selectedItem.value);
 
@@ -357,16 +353,16 @@ namespace BokInterface.Weapons {
                 }
             }
 
-            // Repeat the above process for bonuses / maluses & durabilities
-            for (int i = 0; i < bonusRelatedFields.Count; i++) {
+            // Repeat the above process for bonuses / maluses & durabilities (numericUpDowns)
+            for (int i = 0; i < numericUpDowns.Count; i++) {
 
-                if (bonusRelatedFields[i].Enabled == false) {
+                if (numericUpDowns[i].Enabled == false) {
                     continue;
                 }
 
                 // Get the field's value & indicate which sublist to use for setting the value to the memory
-                decimal value = bonusRelatedFields[i].Value;
-                string[] fieldParts = bonusRelatedFields[i].Name.Split(['_'], 2);
+                decimal value = numericUpDowns[i].Value;
+                string[] fieldParts = numericUpDowns[i].Name.Split(['_'], 2);
                 SetMemoryValue(fieldParts[0], fieldParts[1], value);
             }
 
@@ -387,7 +383,6 @@ namespace BokInterface.Weapons {
         ///<param name="valueKey"><c>strng</c>Key withint the dictionnary</param>
         ///<param name="value"><c>decimal</c>Value to set</param>
         private void SetMemoryValue(string subList, string valueKey, decimal value) {
-            string memoryValueKey = valueKey;
             switch (subList) {
                 case "inventory":
 
@@ -395,22 +390,22 @@ namespace BokInterface.Weapons {
                      * Split the key to check if it corresponds to a weapon bonus or malus
                      * If it does, the value needs to be converted
                      */
-                    string[] keyParts = memoryValueKey.Split(['_'], 2);
+                    string[] keyParts = valueKey.Split(['_'], 2);
                     uint convertedValue = keyParts[1] == "weapon_bonus" ? Utilities.ConvertWeaponBonusToValue(value) : (uint)value;
 
-                    if (_memoryValues.Inventory.ContainsKey(memoryValueKey) == true) {
-                        _memoryValues.Inventory[memoryValueKey].Value = convertedValue;
-                    } else if (_memoryValues.U16.ContainsKey(memoryValueKey) == true) {
-                        _memoryValues.U16[memoryValueKey].Value = convertedValue;
-                    } else if (_memoryValues.U32.ContainsKey(memoryValueKey) == true) {
-                        _memoryValues.U32[memoryValueKey].Value = convertedValue;
+                    if (_memoryValues.Inventory.ContainsKey(valueKey) == true) {
+                        _memoryValues.Inventory[valueKey].Value = convertedValue;
+                    } else if (_memoryValues.U16.ContainsKey(valueKey) == true) {
+                        _memoryValues.U16[valueKey].Value = convertedValue;
+                    } else if (_memoryValues.U32.ContainsKey(valueKey) == true) {
+                        _memoryValues.U32[valueKey].Value = convertedValue;
                     }
                     break;
                 default:
-                    if (_memoryValues.U16.ContainsKey(memoryValueKey) == true) {
-                        _memoryValues.U16[memoryValueKey].Value = (uint)value;
-                    } else if (_memoryValues.U32.ContainsKey(memoryValueKey) == true) {
-                        _memoryValues.U32[memoryValueKey].Value = (uint)value;
+                    if (_memoryValues.U16.ContainsKey(valueKey) == true) {
+                        _memoryValues.U16[valueKey].Value = (uint)value;
+                    } else if (_memoryValues.U32.ContainsKey(valueKey) == true) {
+                        _memoryValues.U32[valueKey].Value = (uint)value;
                     }
                     break;
             }
@@ -516,7 +511,7 @@ namespace BokInterface.Weapons {
         private Ability? GetAbilityByValue(decimal value) {
 
             /**
-             * For some reason there are duplicated within the game,
+             * For some reason there are duplicates within the game,
              * so in these cases we set it to the "original" instead of keeping the duplicate's value
              * 
              * This is also to prevent having to show duplicate SP abilities in dropdown lists
