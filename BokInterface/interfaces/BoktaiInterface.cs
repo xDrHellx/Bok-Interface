@@ -4,6 +4,7 @@ using BokInterface.All;
 /**
  * File for the Boktai TSiiYH interface itself
  */
+
 namespace BokInterface {
 
     partial class BokInterface {

@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Collections.Generic;
 using BokInterface.All;
+using BokInterface.Calculators;
 
 /**
  * File for the main / initialization part of the Bok interface
@@ -41,6 +42,9 @@ namespace BokInterface {
         /// These are used for simplyfing getting and setting values from memory addresses, especially the ones that are "dynamic"
         /// </summary>
         private MemoryValues _memoryValues = new("");
+
+        /// <summary>Movement calculator instance</summary>
+        private readonly MovementCalculator _movementCalculator = new();
 
         /// <summary>List of functions to call each frame</summary>
         public static List<Action> functionsList = [];
