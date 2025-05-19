@@ -95,22 +95,14 @@ namespace BokInterface.Tools.TextToWorldSpace {
 
             switch (BokInterface.shorterGameName) {
                 case "Boktai":
-                    _cameraXposAddress = _memAddresses.Misc["x_camera"].Address;
-                    _cameraYposAddress = _memAddresses.Misc["y_camera"].Address;
-                    return true;
                 case "Zoktai":
-                    _cameraXposAddress = _memAddresses.Misc["x_camera"].Address;
-                    _cameraYposAddress = _memAddresses.Misc["y_camera"].Address;
-                    return true;
                 case "Shinbok":
                     _cameraXposAddress = _memAddresses.Misc["x_camera"].Address;
                     _cameraYposAddress = _memAddresses.Misc["y_camera"].Address;
                     return true;
                 case "LunarKnights":
-                    // Current not handled, not enough data available
-                    _cameraXposAddress = _cameraYposAddress = 0;
-                    return false;
                 default:
+                    // Current not handled, not enough data available
                     _cameraXposAddress = _cameraYposAddress = 0;
                     return false;
             }
