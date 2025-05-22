@@ -61,9 +61,7 @@ namespace BokInterface.All {
             Misc.Clear();
         }
 
-        private void InitializeBoktaiList() {
-
-        }
+        private void InitializeBoktaiList() { }
 
         private void InitializeZoktaiList() {
 
@@ -111,7 +109,6 @@ namespace BokInterface.All {
              * We set these using a loop to simplify
              */
             for (int i = 0; i < 16; i++) {
-
                 int slotNumber = i + 1;
 
                 // Items, key items & accessories
@@ -198,7 +195,6 @@ namespace BokInterface.All {
              * We set these using a loop to simplify
              */
             for (int i = 0; i < 16; i++) {
-
                 int slotNumber = i + 1;
 
                 // Items, durability, key items & accessory slots
@@ -230,8 +226,6 @@ namespace BokInterface.All {
             }
         }
 
-        private void InitializeLunarKnightsList() {
-
-        }
+        private void InitializeLunarKnightsList() { }
     }
 }
