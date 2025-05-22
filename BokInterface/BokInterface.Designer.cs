@@ -86,7 +86,7 @@ namespace BokInterface {
 				default:
 					// If not a Boktai game, show the "Game not recognized" window & stop here
 					interfaceActivated = false;
-					GameNotRecognizedWindow();
+					ShowGameNotRecognizedWindow();
 					break;
 			}
 		}
