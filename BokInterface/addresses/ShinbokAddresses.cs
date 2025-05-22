@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 
 namespace BokInterface.Addresses {
-
     /// <summary>Main class for Boktai 3 / Shinbok memory addresses</summary>
     public class ShinbokAddresses {
 

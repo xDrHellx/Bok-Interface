@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 
 namespace BokInterface.Addresses {
-
     /// <summary>Main class for Boktai DS / Lunar Knights memory addresses</summary>
     public class LunarKnightsAddresses {
 
