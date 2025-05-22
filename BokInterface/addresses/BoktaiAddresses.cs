@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 
 namespace BokInterface.Addresses {
-
     /// <summary>Main class for Boktai: The Sun is in Your Hand memory addresses</summary>
     public class BoktaiAddresses {
 
