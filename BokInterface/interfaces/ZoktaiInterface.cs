@@ -1,3 +1,4 @@
+using System;
 using System.Windows.Forms;
 
 using BokInterface.Addresses;
@@ -64,6 +65,7 @@ namespace BokInterface {
             AddZoktaiEditSection();
 
             // Extras / misc tools section
+            AddMiscDataSection();
             AddToolsSection();
 
             // Main window
@@ -108,6 +110,19 @@ namespace BokInterface {
                 WinFormHelpers.AddToolTip(_bok2_djangoHammerSkill, _memoryValues.Django["hammer_skill"].Value + " EXP");
                 WinFormHelpers.AddToolTip(_bok2_djangoFistsSkill, _memoryValues.Django["fists_skill"].Value + " EXP");
                 WinFormHelpers.AddToolTip(_bok2_djangoGunSkill, _memoryValues.Django["gun_skill"].Value + " EXP");
+
+                // Update the current & average speed
+                int positionX = (int)_memoryValues.Django["x_position"].Value;
+                int positionY = (int)_memoryValues.Django["y_position"].Value;
+                int positionZ = (int)_memoryValues.Django["z_position"].Value;
+
+                // Get the movement speed in 3D & the average speed
+                double speed3D = _movementCalculator.Get3dMovementSpeed(positionX, positionY, positionZ);
+                double averageSpeed = Math.Round(_movementCalculator.GetAverageSpeed(speed3D, 60), 3);
+
+                // Update the fields
+                _currentSpeedLabel.Text = "Current movement speed : " + Math.Round(speed3D, 3);
+                _averageSpeedLabel.Text = "Average over 60 frames : " + averageSpeed.ToString();
             }
         }
 

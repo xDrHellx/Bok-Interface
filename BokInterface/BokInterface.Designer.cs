@@ -27,7 +27,10 @@ namespace BokInterface {
 			currentStatsGroupBox = new(),
 			inventoryGroupBox = new(),
 			editGroupBox = new(),
-			extrasGroupBox = new();
+			extrasGroupBox = new(),
+			miscDataGroupBox = new();
+		private System.Windows.Forms.Label _averageSpeedLabel = new(),
+			_currentSpeedLabel = new();
 
 		#endregion
 
@@ -64,6 +67,9 @@ namespace BokInterface {
 
 			// Try initializing list of memory values instances
 			this._memoryValues = new(shorterGameName);
+
+			// Re-initialize the MovementCalculator to reset its properties values
+			_movementCalculator = new();
 
 			// Show corresponding interface
 			switch (shorterGameName) {
@@ -178,6 +184,35 @@ namespace BokInterface {
 			// Add Misc Tools button
 			Button miscToolsBtn = WinFormHelpers.CreateButton("showExtraTools", "Misc tools", 6, 21, 75 + btnWidthOffset, 23, extrasGroupBox); // 17
 			miscToolsBtn.Click += new System.EventHandler(OpenMiscToolsSelector);
+		}
+		
+		/// <summary>Adds the Misc. data section for the corresponding game</summary>
+		private void AddMiscDataSection() {
+
+			int positionY = 90;
+			switch (BokInterface.shorterGameName) {
+				case "Boktai":
+					positionY = 90;
+					break;
+				case "Zoktai":
+					positionY = 198;
+					break;
+				case "Shinbok":
+					positionY = 194;
+					break;
+				case "LunarKnights":
+					positionY = 105;
+					break;
+				default:
+					// If game is not handled, don't add anything & stop here
+					return;
+			}
+
+			miscDataGroupBox = WinFormHelpers.CreateGroupBox("miscData", "Misc. data", 5, positionY, 226, 55, this);
+
+			// Average speed
+			_currentSpeedLabel = WinFormHelpers.CreateLabel("currentMovementSpeed", "Current movement speed : ", 7, 19, 200, 15, miscDataGroupBox, textAlignment: "MiddleLeft");
+			_averageSpeedLabel = WinFormHelpers.CreateLabel("averageMovementSpeed", "Average over 60 frames : ", 7, 34, 200, 15, miscDataGroupBox, textAlignment: "MiddleLeft");
 		}
 
 		#endregion

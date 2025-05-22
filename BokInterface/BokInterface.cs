@@ -44,7 +44,7 @@ namespace BokInterface {
         private MemoryValues _memoryValues = new("");
 
         /// <summary>Movement calculator instance</summary>
-        private readonly MovementCalculator _movementCalculator = new();
+        private MovementCalculator _movementCalculator = new();
 
         /// <summary>List of functions to call each frame</summary>
         public static List<Action> functionsList = [];

@@ -1,3 +1,4 @@
+using System;
 using System.Windows.Forms;
 
 using BokInterface.Addresses;
@@ -53,6 +54,7 @@ namespace BokInterface {
             AddShinbokEditSection();
 
             // Extras / misc tools section
+            AddMiscDataSection();
             AddToolsSection();
 
             // Inventory section
@@ -96,6 +98,19 @@ namespace BokInterface {
                 _bok3_djangoTotalVit.Text = (_memoryValues.Misc["base_vit"].Value + _memoryValues.Misc["cards_vit"].Value + _memoryValues.Django["equips_vit"].Value).ToString();
                 _bok3_djangoTotalSpr.Text = (_memoryValues.Misc["base_spr"].Value + _memoryValues.Misc["cards_spr"].Value + _memoryValues.Django["equips_spr"].Value).ToString();
                 _bok3_djangoTotalStr.Text = (_memoryValues.Misc["base_str"].Value + _memoryValues.Misc["cards_str"].Value + _memoryValues.Django["equips_str"].Value).ToString();
+
+                // Update the current & average speed
+                int positionX = (int)_memoryValues.Django["x_position"].Value;
+                int positionY = (int)_memoryValues.Django["y_position"].Value;
+                int positionZ = (int)_memoryValues.Django["z_position"].Value;
+
+                // Get the movement speed in 3D & the average speed
+                double speed3D = _movementCalculator.Get3dMovementSpeed(positionX, positionY, positionZ);
+                double averageSpeed = Math.Round(_movementCalculator.GetAverageSpeed(speed3D, 60), 3);
+
+                // Update the fields
+                _currentSpeedLabel.Text = "Current movement speed : " + Math.Round(speed3D, 3);
+                _averageSpeedLabel.Text = "Average over 60 frames : " + averageSpeed.ToString();
             }
         }
 

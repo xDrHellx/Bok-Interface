@@ -24,6 +24,7 @@ namespace BokInterface {
             AddLunarKnightsCurrentStatusSection();
 
             // Extras / misc tools section
+            AddMiscDataSection();
             AddToolsSection();
 
             // Main window

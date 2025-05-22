@@ -1,3 +1,5 @@
+using System;
+
 using BokInterface.Addresses;
 using BokInterface.All;
 
@@ -26,6 +28,7 @@ namespace BokInterface {
             AddBoktaiCurrentStatusSection();
 
             // Extras / misc tools section
+            AddMiscDataSection();
             AddToolsSection();
 
             // Main window
@@ -36,12 +39,24 @@ namespace BokInterface {
 
         private void UpdateBoktaiInterface() {
 
+            // Update the current & average speed
+            int positionX = (int)_boktaiAddresses.Django["x_position"].Value;
+            int positionY = (int)_boktaiAddresses.Django["y_position"].Value;
+            int positionZ = (int)_boktaiAddresses.Django["z_position"].Value;
+
+            // Get the movement speed in 3D & the average speed
+            double speed3D = _movementCalculator.Get3dMovementSpeed(positionX, positionY, positionZ);
+            double averageSpeed = Math.Round(_movementCalculator.GetAverageSpeed(speed3D, 60), 3);
+
+            // Update the fields
+            _currentSpeedLabel.Text = "Current movement speed : " + Math.Round(speed3D, 3);
+            _averageSpeedLabel.Text = "Average over 60 frames : " + averageSpeed.ToString();
         }
 
         private void AddBoktaiCurrentStatusSection() {
 
             // Section
-            currentStatusGroupBox = WinFormHelpers.CreateGroupBox("currentStatus", "Current status", 5, 25, 226, 70, this);
+            currentStatusGroupBox = WinFormHelpers.CreateGroupBox("currentStatus", "Current status", 5, 25, 226, 55, this);
 
             // Current status labels
             WinFormHelpers.CreateLabel("djangoCurrentHpLabel", "LIFE :", 7, 19, 34, 15, currentStatusGroupBox);
@@ -49,7 +64,7 @@ namespace BokInterface {
 
             // Current status values
             _bok1_currentStatusHpValue = WinFormHelpers.CreateLabel("djangoCurrentHpValue", "", 44, 19, 31, 15, currentStatusGroupBox);
-            _bok1_currentStatusEneValue = WinFormHelpers.CreateLabel("djangoCurrentHpValue", "", 44, 34, 31, 15, currentStatusGroupBox);
+            _bok1_currentStatusEneValue = WinFormHelpers.CreateLabel("djangoCurrentEneValue", "", 44, 34, 31, 15, currentStatusGroupBox);
         }
     }
 }
