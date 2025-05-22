@@ -52,19 +52,11 @@ namespace BokInterface {
             // Current game name
             WinFormHelpers.CreateLabel("currentGameName", currentGameName + version, 5, 5, gameNameLabelWidth, 20, this);
 
-            // Current status section
+            // Sections
             AddZoktaiCurrentStatusSection();
-
-            // Stats section
             AddZoktaiCurrentStatsSection();
-
-            // Skill sections
             AddZoktaiCurrentSkillSection();
-
-            // Values setting / editing section
             AddZoktaiEditSection();
-
-            // Extras / misc tools section
             AddMiscDataSection();
             AddToolsSection();
 
@@ -209,12 +201,12 @@ namespace BokInterface {
             _bok2_editMagicsBtn = WinFormHelpers.CreateButton("editMagics", "Magics", 6, 154, 75, 23, editGroupBox);
 
             // Add onclick events
-            _bok2_editStatusBtn.Click += new System.EventHandler(OpenStatusEditor);
-            _bok2_editInventoryBtn.Click += new System.EventHandler(OpenInventoryEditor);
-            _bok2_editKeyItemsBtn.Click += new System.EventHandler(OpenKeyItemsEditor);
-            _bok2_editWeaponsBtn.Click += new System.EventHandler(OpenWeaponsEditor);
-            _bok2_editEquipsBtn.Click += new System.EventHandler(OpenEquipsEditor);
-            _bok2_editMagicsBtn.Click += new System.EventHandler(OpenMagicsEditor);
+            _bok2_editStatusBtn.Click += new EventHandler(OpenStatusEditor);
+            _bok2_editInventoryBtn.Click += new EventHandler(OpenInventoryEditor);
+            _bok2_editKeyItemsBtn.Click += new EventHandler(OpenKeyItemsEditor);
+            _bok2_editWeaponsBtn.Click += new EventHandler(OpenWeaponsEditor);
+            _bok2_editEquipsBtn.Click += new EventHandler(OpenEquipsEditor);
+            _bok2_editMagicsBtn.Click += new EventHandler(OpenMagicsEditor);
         }
     }
 }

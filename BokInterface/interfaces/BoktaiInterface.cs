@@ -24,10 +24,8 @@ namespace BokInterface {
             // Current game name
             WinFormHelpers.CreateLabel("currentGameName", currentGameName, 5, 5, 171, 20, this);
 
-            // Current status section
+            // Sections
             AddBoktaiCurrentStatusSection();
-
-            // Extras / misc tools section
             AddMiscDataSection();
             AddToolsSection();
 

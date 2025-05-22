@@ -44,21 +44,12 @@ namespace BokInterface {
             // Current game name
             WinFormHelpers.CreateLabel("currentGameName", currentGameName, 5, 5, 176, 20, this);
 
-            // Current status section
+            // Sections
             AddShinbokCurrentStatusSection();
-
-            // Stats section
             AddShinbokCurrentStatsSection();
-
-            // Values setting / editing section
             AddShinbokEditSection();
-
-            // Extras / misc tools section
             AddMiscDataSection();
             AddToolsSection();
-
-            // Inventory section
-            // this.inventoryGroupBox = WinFormHelpers.WinFormHelpers.CreateGroupBox("inventory", "Inventory", 5, 101, 250, 55, this);
 
             // Main window
             SetMainWindow("Bok Interface" + (shorterGameName != "" ? " - " + shorterGameName : ""), 339, 270);
@@ -177,12 +168,12 @@ namespace BokInterface {
             _bok3_editSolarGunBtn = WinFormHelpers.CreateButton("editSolarGun", "Solar gun", 6, 154, 85, 23, editGroupBox);
 
             // Onclick events
-            _bok3_editStatusBtn.Click += new System.EventHandler(OpenStatusEditor);
-            _bok3_editInventoryBtn.Click += new System.EventHandler(OpenInventoryEditor);
-            _bok3_editKeyItemsBtn.Click += new System.EventHandler(OpenKeyItemsEditor);
-            _bok3_editWeaponsBtn.Click += new System.EventHandler(OpenWeaponsEditor);
-            _bok3_editEquipsBtn.Click += new System.EventHandler(OpenEquipsEditor);
-            _bok3_editSolarGunBtn.Click += new System.EventHandler(OpenSolarGunEditor);
+            _bok3_editStatusBtn.Click += new EventHandler(OpenStatusEditor);
+            _bok3_editInventoryBtn.Click += new EventHandler(OpenInventoryEditor);
+            _bok3_editKeyItemsBtn.Click += new EventHandler(OpenKeyItemsEditor);
+            _bok3_editWeaponsBtn.Click += new EventHandler(OpenWeaponsEditor);
+            _bok3_editEquipsBtn.Click += new EventHandler(OpenEquipsEditor);
+            _bok3_editSolarGunBtn.Click += new EventHandler(OpenSolarGunEditor);
         }
     }
 }

@@ -60,13 +60,13 @@ namespace BokInterface {
 			 * Clear the interface
 			 * The Bok Interface supports all 4 games, so we need to do that
 			 */
-			this.ClearInterface();
+			ClearInterface();
 
 			// Set corresponding game icon (or default icon if not available)
-			this.Icon = WinFormHelpers.GetIcon(WinFormHelpers.GetGameIconName());
+			Icon = WinFormHelpers.GetIcon(WinFormHelpers.GetGameIconName());
 
-			// Try initializing list of memory values instances
-			this._memoryValues = new(shorterGameName);
+			// Try initializing the memory values instances dictionnaries
+			_memoryValues = new(shorterGameName);
 
 			// Re-initialize the MovementCalculator to reset its properties values
 			_movementCalculator = new();
@@ -108,38 +108,38 @@ namespace BokInterface {
 			}
 
 			// Main window elements
-			this.Controls.Clear();
-			this.subwindows.Clear();
-			this.currentStatusGroupBox.Controls.Clear();
-			this.currentStatsGroupBox.Controls.Clear();
-			this.inventoryGroupBox.Controls.Clear();
-			this.editGroupBox.Controls.Clear();
-			this.extrasGroupBox.Controls.Clear();
+			Controls.Clear();
+			subwindows.Clear();
+			currentStatusGroupBox.Controls.Clear();
+			currentStatsGroupBox.Controls.Clear();
+			inventoryGroupBox.Controls.Clear();
+			editGroupBox.Controls.Clear();
+			extrasGroupBox.Controls.Clear();
 
 			// Tools selection subwindow elements
-			this.miscToolsSelectionWindow.Controls.Clear();
-			this.miscToolsSelectionWindow.Close();
-			this.miscToolsSelectorOpened = false;
+			miscToolsSelectionWindow.Controls.Clear();
+			miscToolsSelectionWindow.Close();
+			miscToolsSelectorOpened = false;
 
 			// Extra tools
-			this.ClearExtraTools();
+			ClearExtraTools();
 		}
 
 		/// <summary>Clears subwindows related to extra tools</summary>
 		private void ClearExtraTools() {
 
 			// Tile Data Viewer
-			if (this._tileDataViewer != null) {
-				this._tileDataViewer.Controls.Clear();
-				this._tileDataViewer.Close();
-				this.tileDataViewerActive = false;
+			if (_tileDataViewer != null) {
+				_tileDataViewer.Controls.Clear();
+				_tileDataViewer.Close();
+				tileDataViewerActive = false;
 			}
 
 			// Memory Values Listing
-			if (this._memValuesListing != null) {
-				this._memValuesListing.Controls.Clear();
-				this._memValuesListing.Close();
-				this.memValuesListingActive = false;
+			if (_memValuesListing != null) {
+				_memValuesListing.Controls.Clear();
+				_memValuesListing.Close();
+				memValuesListingActive = false;
 			}
 		}
 
@@ -148,17 +148,15 @@ namespace BokInterface {
 		/// <param name="width">Width</param>
 		/// <param name="height">Height</param>
 		private void SetMainWindow(string name, Int32 width, Int32 height) {
-			this.Name = name;
-			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 15F);
-			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit;
-			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-			this.BackColor = System.Drawing.SystemColors.Control;
-			this.Font = WinFormHelpers.defaultFont;
-			this.ClientSize = new System.Drawing.Size(width, height);
+			Name = name;
+			AutoScaleDimensions = new System.Drawing.SizeF(6F, 15F);
+			AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit;
+			FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+			BackColor = System.Drawing.SystemColors.Control;
+			Font = WinFormHelpers.defaultFont;
+			ClientSize = new System.Drawing.Size(width, height);
 		}
 
-		/// <summary>Adds Tools section for the corresponding game</summary>
-        private void AddToolsSection() {
 		/// <summary>Adds the Tools section for the corresponding game</summary>
 		private void AddToolsSection() {
 			int btnWidthOffset = 0;
