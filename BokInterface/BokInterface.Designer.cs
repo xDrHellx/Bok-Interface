@@ -22,12 +22,15 @@ namespace BokInterface {
 		#endregion
 
 		#region Common interface elements properties
-		
+
 		private System.Windows.Forms.GroupBox currentStatusGroupBox = new(),
 			currentStatsGroupBox = new(),
 			inventoryGroupBox = new(),
 			editGroupBox = new(),
-			extrasGroupBox = new();
+			extrasGroupBox = new(),
+			miscDataGroupBox = new();
+		private System.Windows.Forms.Label _averageSpeedLabel = new(),
+			_currentSpeedLabel = new();
 
 		#endregion
 
@@ -35,7 +38,7 @@ namespace BokInterface {
 
 		private System.Windows.Forms.Form miscToolsSelectionWindow = new();
 		private List<System.Windows.Forms.Form> subwindows = new();
-		
+
 		#endregion
 
 		/// <summary>Clean up any resources being used</summary>
@@ -49,21 +52,24 @@ namespace BokInterface {
 		}
 
 		#region Windows Form Designer generated code
-		
+
 		/// <summary>Required method for Designer support - do not modify the contents of this method with the code editor</summary>
 		private void InitializeComponent() {
 
 			/**
-			 * Clear the external tool window
+			 * Clear the interface
 			 * The Bok Interface supports all 4 games, so we need to do that
 			 */
-			this.ClearInterface();
+			ClearInterface();
 
 			// Set corresponding game icon (or default icon if not available)
-			this.Icon = WinFormHelpers.GetIcon(WinFormHelpers.GetGameIconName());
+			Icon = WinFormHelpers.GetIcon(WinFormHelpers.GetGameIconName());
 
-			// Try initializing list of memory values instances
-			this._memoryValues = new(shorterGameName);
+			// Try initializing the memory values instances dictionnaries
+			_memoryValues = new(shorterGameName);
+
+			// Re-initialize the MovementCalculator to reset its properties values
+			_movementCalculator = new();
 
 			// Show corresponding interface
 			switch (shorterGameName) {
@@ -84,9 +90,9 @@ namespace BokInterface {
 					ShowLunarKnightsInterface();
 					break;
 				default:
-					// If not a Boktai game, show the "Game not recognized" window
+					// If not a Boktai game, show the "Game not recognized" window & stop here
 					interfaceActivated = false;
-					GameNotRecognizedWindow();
+					ShowGameNotRecognizedWindow();
 					break;
 			}
 		}
@@ -102,38 +108,38 @@ namespace BokInterface {
 			}
 
 			// Main window elements
-			this.Controls.Clear();
-			this.subwindows.Clear();
-			this.currentStatusGroupBox.Controls.Clear();
-			this.currentStatsGroupBox.Controls.Clear();
-			this.inventoryGroupBox.Controls.Clear();
-			this.editGroupBox.Controls.Clear();
-			this.extrasGroupBox.Controls.Clear();
+			Controls.Clear();
+			subwindows.Clear();
+			currentStatusGroupBox.Controls.Clear();
+			currentStatsGroupBox.Controls.Clear();
+			inventoryGroupBox.Controls.Clear();
+			editGroupBox.Controls.Clear();
+			extrasGroupBox.Controls.Clear();
 
 			// Tools selection subwindow elements
-			this.miscToolsSelectionWindow.Controls.Clear();
-			this.miscToolsSelectionWindow.Close();
-			this.miscToolsSelectorOpened = false;
+			miscToolsSelectionWindow.Controls.Clear();
+			miscToolsSelectionWindow.Close();
+			miscToolsSelectorOpened = false;
 
 			// Extra tools
-			this.ClearExtraTools();
+			ClearExtraTools();
 		}
 
 		/// <summary>Clears subwindows related to extra tools</summary>
 		private void ClearExtraTools() {
 
 			// Tile Data Viewer
-			if (this._tileDataViewer != null) {
-				this._tileDataViewer.Controls.Clear();
-				this._tileDataViewer.Close();
-				this.tileDataViewerActive = false;
+			if (_tileDataViewer != null) {
+				_tileDataViewer.Controls.Clear();
+				_tileDataViewer.Close();
+				tileDataViewerActive = false;
 			}
 
 			// Memory Values Listing
-			if (this._memValuesListing != null) {
-				this._memValuesListing.Controls.Clear();
-				this._memValuesListing.Close();
-				this.memValuesListingActive = false;
+			if (_memValuesListing != null) {
+				_memValuesListing.Controls.Clear();
+				_memValuesListing.Close();
+				memValuesListingActive = false;
 			}
 		}
 
@@ -142,41 +148,70 @@ namespace BokInterface {
 		/// <param name="width">Width</param>
 		/// <param name="height">Height</param>
 		private void SetMainWindow(string name, Int32 width, Int32 height) {
-			this.Name = name;
-			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 15F);
-			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit;
-			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-			this.BackColor = System.Drawing.SystemColors.Control;
-			this.Font = WinFormHelpers.defaultFont;
-			this.ClientSize = new System.Drawing.Size(width, height);
+			Name = name;
+			AutoScaleDimensions = new System.Drawing.SizeF(6F, 15F);
+			AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit;
+			FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+			BackColor = System.Drawing.SystemColors.Control;
+			Font = WinFormHelpers.defaultFont;
+			ClientSize = new System.Drawing.Size(width, height);
 		}
 
-		/// <summary>Adds Tools section for the corresponding game</summary>
-        private void AddToolsSection() {
+		/// <summary>Adds the Tools section for the corresponding game</summary>
+		private void AddToolsSection() {
 			int btnWidthOffset = 0;
-            switch (BokInterface.shorterGameName) {
-                case "Boktai":
-                    extrasGroupBox = WinFormHelpers.CreateGroupBox("extraTools", "Tools", 237, 25, 87, 52, this);
-                    break;
-                case "Zoktai":
-                    extrasGroupBox = WinFormHelpers.CreateGroupBox("extraTools", "Tools", 237, 214, 87, 52, this);
-                    break;
-                case "Shinbok":
-                    extrasGroupBox = WinFormHelpers.CreateGroupBox("extraTools", "Tools", 237, 214, 97, 52, this);
+			switch (BokInterface.shorterGameName) {
+				case "Boktai":
+					extrasGroupBox = WinFormHelpers.CreateGroupBox("extraTools", "Tools", 237, 25, 87, 52, this);
+					break;
+				case "Zoktai":
+					extrasGroupBox = WinFormHelpers.CreateGroupBox("extraTools", "Tools", 237, 214, 87, 52, this);
+					break;
+				case "Shinbok":
+					extrasGroupBox = WinFormHelpers.CreateGroupBox("extraTools", "Tools", 237, 214, 97, 52, this);
 					btnWidthOffset += 10;
-                    break;
-                case "LunarKnights":
-                    extrasGroupBox = WinFormHelpers.CreateGroupBox("extraTools", "Tools", 237, 25, 87, 52, this);
-                    break;
-                default:
-                    // If game is not handled, don't add anything & stop here
-                    return;
-            }
+					break;
+				case "LunarKnights":
+					extrasGroupBox = WinFormHelpers.CreateGroupBox("extraTools", "Tools", 237, 25, 87, 52, this);
+					break;
+				default:
+					// If game is not handled, don't add anything & stop here
+					return;
+			}
 
-            // Add Misc Tools button
+			// Add Misc Tools button
 			Button miscToolsBtn = WinFormHelpers.CreateButton("showExtraTools", "Misc tools", 6, 21, 75 + btnWidthOffset, 23, extrasGroupBox); // 17
-            miscToolsBtn.Click += new System.EventHandler(OpenMiscToolsSelector);
-        }
+			miscToolsBtn.Click += new System.EventHandler(OpenMiscToolsSelector);
+		}
+		
+		/// <summary>Adds the Misc. data section for the corresponding game</summary>
+		private void AddMiscDataSection() {
+
+			int positionY = 90;
+			switch (BokInterface.shorterGameName) {
+				case "Boktai":
+					positionY = 90;
+					break;
+				case "Zoktai":
+					positionY = 198;
+					break;
+				case "Shinbok":
+					positionY = 194;
+					break;
+				case "LunarKnights":
+					positionY = 105;
+					break;
+				default:
+					// If game is not handled, don't add anything & stop here
+					return;
+			}
+
+			miscDataGroupBox = WinFormHelpers.CreateGroupBox("miscData", "Misc. data", 5, positionY, 226, 55, this);
+
+			// Average speed
+			_currentSpeedLabel = WinFormHelpers.CreateLabel("currentMovementSpeed", "Current movement speed : ", 7, 19, 200, 15, miscDataGroupBox, textAlignment: "MiddleLeft");
+			_averageSpeedLabel = WinFormHelpers.CreateLabel("averageMovementSpeed", "Average over 60 frames : ", 7, 34, 200, 15, miscDataGroupBox, textAlignment: "MiddleLeft");
+		}
 
 		#endregion
 	}

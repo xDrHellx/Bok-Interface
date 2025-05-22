@@ -69,6 +69,10 @@ namespace BokInterface.All {
 
             ZoktaiAddresses memoryAddresses = new();
 
+            Django.Add("x_position", new DynamicMemoryValue("x_position", memoryAddresses.Misc["stat"].Address, memoryAddresses.Django["x_position"].Address));
+            Django.Add("y_position", new DynamicMemoryValue("y_position", memoryAddresses.Misc["stat"].Address, memoryAddresses.Django["y_position"].Address));
+            Django.Add("z_position", new DynamicMemoryValue("z_position", memoryAddresses.Misc["stat"].Address, memoryAddresses.Django["z_position"].Address));
+
             // Current HP, ENE & form or character
             Django.Add("current_form", new DynamicMemoryValue("current_form", _zoktaiAddresses.Misc["stat"].Address, _zoktaiAddresses.Django["current_form"].Address));
             Django.Add("current_hp", new DynamicMemoryValue("current_hp", memoryAddresses.Misc["current_stat"].Address, memoryAddresses.Django["current_hp"].Address));
@@ -139,6 +143,10 @@ namespace BokInterface.All {
         private void InitializeShinbokList() {
 
             ShinbokAddresses memoryAddresses = new();
+
+            Django.Add("x_position", new DynamicMemoryValue("x_position", memoryAddresses.Misc["actor"].Address, memoryAddresses.Django["x_position"].Address));
+            Django.Add("y_position", new DynamicMemoryValue("y_position", memoryAddresses.Misc["actor"].Address, memoryAddresses.Django["y_position"].Address));
+            Django.Add("z_position", new DynamicMemoryValue("z_position", memoryAddresses.Misc["actor"].Address, memoryAddresses.Django["z_position"].Address));
 
             Django.Add("current_hp", new DynamicMemoryValue("current_hp", memoryAddresses.Misc["actor"].Address, memoryAddresses.Django["current_hp"].Address));
             Django.Add("current_ene", new DynamicMemoryValue("current_ene", memoryAddresses.Misc["actor"].Address, memoryAddresses.Django["current_ene"].Address));
