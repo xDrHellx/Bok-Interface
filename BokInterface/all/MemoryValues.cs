@@ -80,7 +80,6 @@ namespace BokInterface.All {
         }
 
         private void InitializeZoktaiList() {
-
             ZoktaiAddresses memoryAddresses = new();
 
             Django.Add("x_position", new DynamicMemoryValue("x_position", memoryAddresses.Misc["stat"].Address, memoryAddresses.Django["x_position"].Address));
@@ -152,7 +151,6 @@ namespace BokInterface.All {
         }
 
         private void InitializeShinbokList() {
-
             ShinbokAddresses memoryAddresses = new();
 
             Django.Add("x_position", new DynamicMemoryValue("x_position", memoryAddresses.Misc["actor"].Address, memoryAddresses.Django["x_position"].Address));
