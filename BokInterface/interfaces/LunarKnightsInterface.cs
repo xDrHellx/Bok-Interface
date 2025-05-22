@@ -32,9 +32,7 @@ namespace BokInterface {
             ResumeLayout(false);
         }
 
-        private void UpdateLunarKnightsInterface() {
-
-        }
+        private void UpdateLunarKnightsInterface() { }
 
         private void AddLunarKnightsCurrentStatusSection() {
 

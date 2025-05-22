@@ -38,8 +38,8 @@ namespace BokInterface {
         public bool _previousIsPauseSetting = false;
 
         /// <summary>
-        /// List of MemoryValues instances <br/>
-        /// These are used for simplyfing getting and setting values from memory addresses, especially the ones that are "dynamic"
+        /// List of MemoryValues instances.<br/>
+        /// These are used for simplyfing getting and setting values from memory addresses that are "dynamic."
         /// </summary>
         private MemoryValues _memoryValues = new("");
 
@@ -59,14 +59,11 @@ namespace BokInterface {
         #region Main methods
 
         public BokInterface() {
-
-            // Try initializing the interface
             InitializeInterface();
         }
 
         /// <summary>Executed once after the constructor, and again every time a rom is loaded or reloaded</summary>
         public override void Restart() {
-
             // Update the APIs, as some of them might not be available if a game is not loaded
             APIs.Update(MainForm);
 
@@ -77,7 +74,7 @@ namespace BokInterface {
             // Clear subwindows related to extra tools to prevent errors caused by switching between games
             ClearExtraTools();
 
-            // Try initializing the interface
+            // Try initializing the interface again
             InitializeInterface();
         }
 
@@ -119,7 +116,6 @@ namespace BokInterface {
 
         /// <summary>Executed after every frame (except while turboing, use FastUpdateAfter for that)</summary>
         protected override void UpdateAfter() {
-
             try {
                 if (supportedGame == true) {
                     ShowInterfaceIndicator();

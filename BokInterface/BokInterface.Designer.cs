@@ -22,7 +22,7 @@ namespace BokInterface {
 		#endregion
 
 		#region Common interface elements properties
-		
+
 		private System.Windows.Forms.GroupBox currentStatusGroupBox = new(),
 			currentStatsGroupBox = new(),
 			inventoryGroupBox = new(),
@@ -35,7 +35,7 @@ namespace BokInterface {
 
 		private System.Windows.Forms.Form miscToolsSelectionWindow = new();
 		private List<System.Windows.Forms.Form> subwindows = new();
-		
+
 		#endregion
 
 		/// <summary>Clean up any resources being used</summary>
@@ -49,12 +49,12 @@ namespace BokInterface {
 		}
 
 		#region Windows Form Designer generated code
-		
+
 		/// <summary>Required method for Designer support - do not modify the contents of this method with the code editor</summary>
 		private void InitializeComponent() {
 
 			/**
-			 * Clear the external tool window
+			 * Clear the interface
 			 * The Bok Interface supports all 4 games, so we need to do that
 			 */
 			this.ClearInterface();
@@ -84,7 +84,7 @@ namespace BokInterface {
 					ShowLunarKnightsInterface();
 					break;
 				default:
-					// If not a Boktai game, show the "Game not recognized" window
+					// If not a Boktai game, show the "Game not recognized" window & stop here
 					interfaceActivated = false;
 					GameNotRecognizedWindow();
 					break;
@@ -153,30 +153,32 @@ namespace BokInterface {
 
 		/// <summary>Adds Tools section for the corresponding game</summary>
         private void AddToolsSection() {
+		/// <summary>Adds the Tools section for the corresponding game</summary>
+		private void AddToolsSection() {
 			int btnWidthOffset = 0;
-            switch (BokInterface.shorterGameName) {
-                case "Boktai":
-                    extrasGroupBox = WinFormHelpers.CreateGroupBox("extraTools", "Tools", 237, 25, 87, 52, this);
-                    break;
-                case "Zoktai":
-                    extrasGroupBox = WinFormHelpers.CreateGroupBox("extraTools", "Tools", 237, 214, 87, 52, this);
-                    break;
-                case "Shinbok":
-                    extrasGroupBox = WinFormHelpers.CreateGroupBox("extraTools", "Tools", 237, 214, 97, 52, this);
+			switch (BokInterface.shorterGameName) {
+				case "Boktai":
+					extrasGroupBox = WinFormHelpers.CreateGroupBox("extraTools", "Tools", 237, 25, 87, 52, this);
+					break;
+				case "Zoktai":
+					extrasGroupBox = WinFormHelpers.CreateGroupBox("extraTools", "Tools", 237, 214, 87, 52, this);
+					break;
+				case "Shinbok":
+					extrasGroupBox = WinFormHelpers.CreateGroupBox("extraTools", "Tools", 237, 214, 97, 52, this);
 					btnWidthOffset += 10;
-                    break;
-                case "LunarKnights":
-                    extrasGroupBox = WinFormHelpers.CreateGroupBox("extraTools", "Tools", 237, 25, 87, 52, this);
-                    break;
-                default:
-                    // If game is not handled, don't add anything & stop here
-                    return;
-            }
+					break;
+				case "LunarKnights":
+					extrasGroupBox = WinFormHelpers.CreateGroupBox("extraTools", "Tools", 237, 25, 87, 52, this);
+					break;
+				default:
+					// If game is not handled, don't add anything & stop here
+					return;
+			}
 
-            // Add Misc Tools button
+			// Add Misc Tools button
 			Button miscToolsBtn = WinFormHelpers.CreateButton("showExtraTools", "Misc tools", 6, 21, 75 + btnWidthOffset, 23, extrasGroupBox); // 17
-            miscToolsBtn.Click += new System.EventHandler(OpenMiscToolsSelector);
-        }
+			miscToolsBtn.Click += new System.EventHandler(OpenMiscToolsSelector);
+		}
 
 		#endregion
 	}
