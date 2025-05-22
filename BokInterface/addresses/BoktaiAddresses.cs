@@ -19,6 +19,9 @@ namespace BokInterface.Addresses {
         /// <summary>Misc memory addresses</summary>
         public IDictionary<string, MemoryAddress> Misc = new Dictionary<string, MemoryAddress>();
 
+        /// <summary>Coffin-related memory addresses</summary>
+        public IDictionary<string, MemoryAddress> Coffin = new Dictionary<string, MemoryAddress>();
+
         public BoktaiAddresses() {
 
             // Add Django addresses
@@ -68,6 +71,16 @@ namespace BokInterface.Addresses {
             Map.Add("piledriver_top_right", new MemoryAddress(0x02008956, domain: "EWRAM"));
             Map.Add("piledriver_bottom_left", new MemoryAddress(0x02008BE6, domain: "EWRAM"));
             Map.Add("piledriver_bottom_right", new MemoryAddress(0x020086C6, domain: "EWRAM"));
+
+            // Add Coffin addresses
+            Coffin.Add("actor", new MemoryAddress(0x03001C20, type: "U32", domain: "IWRAM"));
+            Coffin.Add("damage", new MemoryAddress(0x248, note: "Stun/Damage dealt to the coffin (coffin becomes stunned when the value reaches 1200 and then stays stunned for that duration, resets to 0 when coffin goes into shaking phase)", domain: "IWRAM"));
+            Coffin.Add("windup_timer", new MemoryAddress(0x272, note: "Frames until the coffin goes into the windup phase (increases only while Django holds the chain)", domain: "IWRAM"));
+            Coffin.Add("shake_timer", new MemoryAddress(0x278, note: "Time before the coffin is able to damage Django and becomes immovable (ranges from 0-127 and resets to 0 when the coffin goes into the shake phase)", domain: "IWRAM"));
+            Coffin.Add("shake_duration", new MemoryAddress(0x288, note: "Duration of the shake (seems to be randomly chosen when entering rooms and after shaking)", domain: "IWRAM"));
+            Coffin.Add("own_movement_timer", new MemoryAddress(0x29C, note: "Frames until the coffin starts moving on its own", domain: "IWRAM"));
+            Coffin.Add("x_position", new MemoryAddress(0x44, domain: "IWRAM"));
+            Coffin.Add("y_position", new MemoryAddress(0x48, domain: "IWRAM"));
 
             // Add Misc addresses
             Misc.Add("boss_hp", new MemoryAddress(0x02001B5E, note: "Read-only", domain: "EWRAM"));
