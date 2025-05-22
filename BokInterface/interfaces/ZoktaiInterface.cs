@@ -1,3 +1,4 @@
+using System;
 using System.Windows.Forms;
 
 using BokInterface.Addresses;
@@ -51,19 +52,12 @@ namespace BokInterface {
             // Current game name
             WinFormHelpers.CreateLabel("currentGameName", currentGameName + version, 5, 5, gameNameLabelWidth, 20, this);
 
-            // Current status section
+            // Sections
             AddZoktaiCurrentStatusSection();
-
-            // Stats section
             AddZoktaiCurrentStatsSection();
-
-            // Skill sections
             AddZoktaiCurrentSkillSection();
-
-            // Values setting / editing section
             AddZoktaiEditSection();
-
-            // Extras / misc tools section
+            AddMiscDataSection();
             AddToolsSection();
 
             // Main window
@@ -108,6 +102,19 @@ namespace BokInterface {
                 WinFormHelpers.AddToolTip(_bok2_djangoHammerSkill, _memoryValues.Django["hammer_skill"].Value + " EXP");
                 WinFormHelpers.AddToolTip(_bok2_djangoFistsSkill, _memoryValues.Django["fists_skill"].Value + " EXP");
                 WinFormHelpers.AddToolTip(_bok2_djangoGunSkill, _memoryValues.Django["gun_skill"].Value + " EXP");
+
+                // Update the current & average speed
+                int positionX = (int)_memoryValues.Django["x_position"].Value;
+                int positionY = (int)_memoryValues.Django["y_position"].Value;
+                int positionZ = (int)_memoryValues.Django["z_position"].Value;
+
+                // Get the movement speed in 3D & the average speed
+                double speed3D = _movementCalculator.Get3dMovementSpeed(positionX, positionY, positionZ);
+                double averageSpeed = Math.Round(_movementCalculator.GetAverageSpeed(speed3D, 60), 3);
+
+                // Update the fields
+                _currentSpeedLabel.Text = "Current movement speed : " + Math.Round(speed3D, 3);
+                _averageSpeedLabel.Text = "Average over 60 frames : " + averageSpeed.ToString();
             }
         }
 
@@ -194,12 +201,12 @@ namespace BokInterface {
             _bok2_editMagicsBtn = WinFormHelpers.CreateButton("editMagics", "Magics", 6, 154, 75, 23, editGroupBox);
 
             // Add onclick events
-            _bok2_editStatusBtn.Click += new System.EventHandler(OpenStatusEditor);
-            _bok2_editInventoryBtn.Click += new System.EventHandler(OpenInventoryEditor);
-            _bok2_editKeyItemsBtn.Click += new System.EventHandler(OpenKeyItemsEditor);
-            _bok2_editWeaponsBtn.Click += new System.EventHandler(OpenWeaponsEditor);
-            _bok2_editEquipsBtn.Click += new System.EventHandler(OpenEquipsEditor);
-            _bok2_editMagicsBtn.Click += new System.EventHandler(OpenMagicsEditor);
+            _bok2_editStatusBtn.Click += new EventHandler(OpenStatusEditor);
+            _bok2_editInventoryBtn.Click += new EventHandler(OpenInventoryEditor);
+            _bok2_editKeyItemsBtn.Click += new EventHandler(OpenKeyItemsEditor);
+            _bok2_editWeaponsBtn.Click += new EventHandler(OpenWeaponsEditor);
+            _bok2_editEquipsBtn.Click += new EventHandler(OpenEquipsEditor);
+            _bok2_editMagicsBtn.Click += new EventHandler(OpenMagicsEditor);
         }
     }
 }
