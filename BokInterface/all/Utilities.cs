@@ -22,7 +22,7 @@ namespace BokInterface.All {
         /// <summary>Get the value for the game's version</summary>
         /// <returns><c>uint</c>Indicator (for example 0 for v1.0, 1 for v1.1, ...)</returns>
         public static uint GetGameVersion() {
-            return APIs.Memory.ReadU8(0x080000bc, "Main RAM");
+            return APIs.Memory.ReadU8(0x080000BC, "Main RAM");
         }
 
         #endregion
@@ -31,7 +31,7 @@ namespace BokInterface.All {
 
         /// <summary>Shortcut method for retrieving the value of a memory address</summary>
         /// <param name="address">Address to read</param>
-        /// <param name="type">Type of method to use for reading the address (by default "U16" because it is the most common one)</param>
+        /// <param name="type">Type of method to use for reading the address (by default "U16" because it is the most common one in this case)</param>
         /// <param name="domain">Domain the address belongs to (by default none is specified because it is not always necessary)</param>
         /// <returns><c>uint</c>Value</returns>
         public static uint ReadMemoryAddress(uint address, string type = "U16", string? domain = null) {
@@ -45,7 +45,7 @@ namespace BokInterface.All {
 
         /// <summary>Shortcut method for retrieving the value of a memory address</summary>
         /// <param name="address">Address to read</param>
-        /// <param name="type">Type of method to use for reading the address (by default "S16" because it is the most common one)</param>
+        /// <param name="type">Type of method to use for reading the address (by default "S16" because it is the most common one in this case)</param>
         /// <param name="domain">Domain the address belongs to (by default none is specified because it is not always necessary)</param>
         /// <returns><c>int</c>Value</returns>
         public static int ReadMemoryAddress(int address, string type = "S16", string? domain = null) {
@@ -60,7 +60,7 @@ namespace BokInterface.All {
         /// <summary>Shortcut method for setting the value of a memory address</summary>
         /// <param name="address">Address to write to</param>
         /// <param name="value">Value to set</param>
-        /// <param name="type">Type of method to use for writing to the address (by default "U16" because it is the most common one)</param>
+        /// <param name="type">Type of method to use for writing to the address (by default "U16" because it is the most common one in this case)</param>
         /// <param name="domain">Domain the address belongs to (by default none is specified because it is not always necessary)</param>
         /// <returns><c>uint</c>Value</returns>
         public static void WriteMemoryAddress(uint address, uint value, string type = "U16", string? domain = null) {
@@ -83,7 +83,7 @@ namespace BokInterface.All {
         /// <summary>Shortcut method for setting the value of a memory address</summary>
         /// <param name="address">Address to write to</param>
         /// <param name="value">Value to set</param>
-        /// <param name="type">Type of method to use for writing to the address (by default "S16" because it is the most common one)</param>
+        /// <param name="type">Type of method to use for writing to the address (by default "S16" because it is the most common one in this case)</param>
         /// <param name="domain">Domain the address belongs to (by default none is specified because it is not always necessary)</param>
         /// <returns><c>uint</c>Value</returns>
         public static void WriteMemoryAddress(uint address, int value, string type = "S16", string? domain = null) {
@@ -215,7 +215,7 @@ namespace BokInterface.All {
             }
 
             string formattedName = name.Replace("_", " ");
-            return string.Concat(formattedName[0].ToString().ToUpper(), formattedName.Substring(1));
+            return string.Concat(formattedName[0].ToString().ToUpper(), formattedName[1..]);
         }
 
         #endregion
