@@ -41,13 +41,13 @@ namespace BokInterface.Addresses {
             Django.Add("astro_battery_unlock_password", new MemoryAddress(0x7DC, type: "U32", domain: "IWRAM"));
             Django.Add("dark_loans", new MemoryAddress(0x0203D878, type: "U32", domain: "EWRAM"));
             Django.Add("solar_station", new MemoryAddress(0x0203DCE8, domain: "EWRAM"));
+            Django.Add("max_hp", new MemoryAddress(0x0203D840, domain: "EWRAM"));
+            Django.Add("current_hp", new MemoryAddress(0x0203D8FA, domain: "EWRAM"));
         }
 
         private void InitInventoryAddresses() {
             Inventory.Add("grenade_amounts", new MemoryAddress(0x0203D80A, domain: "EWRAM"));
             Inventory.Add("battery_charges", new MemoryAddress(0x0203D818, domain: "EWRAM"));
-            Inventory.Add("max_hp", new MemoryAddress(0x0203D840, domain: "EWRAM"));
-            Inventory.Add("current_hp", new MemoryAddress(0x0203D8FA, domain: "EWRAM"));
             Inventory.Add("equipped_lens", new MemoryAddress(0x0203D88C, domain: "EWRAM"));
             Inventory.Add("equipped_frame", new MemoryAddress(0x0203D88E, domain: "EWRAM"));
             Inventory.Add("equipped_grenades", new MemoryAddress(0x0203D890, domain: "EWRAM"));
