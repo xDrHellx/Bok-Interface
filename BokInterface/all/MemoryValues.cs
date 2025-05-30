@@ -19,6 +19,8 @@ namespace BokInterface.All {
         public IDictionary<string, DynamicMemoryValue> Inventory = new Dictionary<string, DynamicMemoryValue>();
         /// <summary>Bike-related memory values</summary>
         public IDictionary<string, DynamicMemoryValue> Bike = new Dictionary<string, DynamicMemoryValue>();
+        /// <summary>Coffin-related memory values</summary>
+        public IDictionary<string, DynamicMemoryValue> Coffin = new Dictionary<string, DynamicMemoryValue>();
         /// <summary>Misc memory values</summary>
         public IDictionary<string, DynamicMemoryValue> Misc = new Dictionary<string, DynamicMemoryValue>();
         /// <summary>U16 memory values</summary>
@@ -58,15 +60,26 @@ namespace BokInterface.All {
             Sabata.Clear();
             Solls.Clear();
             Bike.Clear();
+            Coffin.Clear();
             Misc.Clear();
+            U16.Clear();
+            U32.Clear();
         }
 
         private void InitializeBoktaiList() {
+            BoktaiAddresses memoryAddresses = new();
 
+            // Coffin
+            Coffin.Add("damage", new DynamicMemoryValue("damage", memoryAddresses.Coffin["actor"].Address, memoryAddresses.Coffin["damage"].Address));
+            Coffin.Add("windup_timer", new DynamicMemoryValue("windup_timer", memoryAddresses.Coffin["actor"].Address, memoryAddresses.Coffin["windup_timer"].Address));
+            Coffin.Add("shake_timer", new DynamicMemoryValue("shake_timer", memoryAddresses.Coffin["actor"].Address, memoryAddresses.Coffin["shake_timer"].Address));
+            Coffin.Add("shake_duration", new DynamicMemoryValue("shake_duration", memoryAddresses.Coffin["actor"].Address, memoryAddresses.Coffin["shake_duration"].Address));
+            Coffin.Add("own_movement_timer", new DynamicMemoryValue("own_movement_timer", memoryAddresses.Coffin["actor"].Address, memoryAddresses.Coffin["own_movement_timer"].Address));
+            Coffin.Add("x_position", new DynamicMemoryValue("x_position", memoryAddresses.Coffin["actor"].Address, memoryAddresses.Coffin["x_position"].Address));
+            Coffin.Add("y_position", new DynamicMemoryValue("y_position", memoryAddresses.Coffin["actor"].Address, memoryAddresses.Coffin["y_position"].Address));
         }
 
         private void InitializeZoktaiList() {
-
             ZoktaiAddresses memoryAddresses = new();
 
             Django.Add("x_position", new DynamicMemoryValue("x_position", memoryAddresses.Misc["stat"].Address, memoryAddresses.Django["x_position"].Address));
@@ -111,7 +124,6 @@ namespace BokInterface.All {
              * We set these using a loop to simplify
              */
             for (int i = 0; i < 16; i++) {
-
                 int slotNumber = i + 1;
 
                 // Items, key items & accessories
@@ -139,7 +151,6 @@ namespace BokInterface.All {
         }
 
         private void InitializeShinbokList() {
-
             ShinbokAddresses memoryAddresses = new();
 
             Django.Add("x_position", new DynamicMemoryValue("x_position", memoryAddresses.Misc["actor"].Address, memoryAddresses.Django["x_position"].Address));
@@ -201,7 +212,6 @@ namespace BokInterface.All {
              * We set these using a loop to simplify
              */
             for (int i = 0; i < 16; i++) {
-
                 int slotNumber = i + 1;
 
                 // Items, durability, key items & accessory slots
@@ -233,8 +243,6 @@ namespace BokInterface.All {
             }
         }
 
-        private void InitializeLunarKnightsList() {
-
-        }
+        private void InitializeLunarKnightsList() { }
     }
 }
