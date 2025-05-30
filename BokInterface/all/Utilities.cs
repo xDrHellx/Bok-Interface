@@ -1,4 +1,5 @@
 using System;
+using System.Drawing;
 
 namespace BokInterface.All {
 
@@ -197,6 +198,21 @@ namespace BokInterface.All {
         /// <returns><c>uint</c>EXP</returns>
         public static uint LevelToExp(decimal level) {
             return level > 0 ? (uint)(level * 100) : 0;
+        }
+
+        #endregion
+
+        #region Distance
+
+        /// <summary>Get the distance between two points</summary>
+        /// <param name="from">Point to start from</param>
+        /// <param name="to">Point to go to</param>
+        /// <returns><c>double</c>Distance</returns>
+        public static double GetDistance(Point from, Point to) {
+            return Math.Round(Math.Sqrt(
+                Math.Pow(from.X - to.X, 2) +
+                Math.Pow(from.Y - to.Y, 2)
+            ), 2);
         }
 
         #endregion
