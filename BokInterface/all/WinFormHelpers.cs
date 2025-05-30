@@ -118,6 +118,32 @@ namespace BokInterface.All {
             return label;
         }
 
+        /// <summary>Simplified method for creating a separator via a label</summary>
+        /// <param name="name">Label name</param>
+        /// <param name="positionX">X position</param>
+        /// <param name="positionY">Y position</param>
+        /// <param name="length">Length (in pixels)</param>
+        /// <param name="control">Control instance if the element is to be attached to it directly</param>
+        /// <param name="vertical">True if the separator should be vertical (False by default)</param>
+        /// <returns><c>Label</c>Instance</returns>
+        public static Label CreateSeparator(string name, int positionX, int positionY, int length, Control? control = null, bool vertical = false) {
+
+            Label separator = new() {
+                Name = name,
+                Location = new Point(positionX, positionY),
+                Size = vertical == false ? new Size(length, 1) : new Size(1, length),
+                AutoSize = false,
+                TabIndex = 2,
+                Anchor = defaultAnchor,
+                Margin = defaultMargin,
+                Font = defaultFont,
+                BorderStyle = BorderStyle.Fixed3D
+            };
+
+            control?.Controls.Add(separator);
+            return separator;
+        }
+
         /// <summary>Simplified method for creating a button</summary>
         /// <param name="name">Label name</param>
         /// <param name="text">Label text</param>

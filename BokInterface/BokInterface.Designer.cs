@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 
@@ -29,8 +30,15 @@ namespace BokInterface {
 			editGroupBox = new(),
 			extrasGroupBox = new(),
 			miscDataGroupBox = new();
+		// Misc data labels
 		private System.Windows.Forms.Label _averageSpeedLabel = new(),
-			_currentSpeedLabel = new();
+			_currentSpeedLabel = new(),
+			_coffinDamageLabel = new(),
+			_coffinWindupTimerLabel = new(),
+			_coffinShakeTimerLabel = new(),
+			_coffinShakeDurationLabel = new(),
+			_coffinEscapeTimerLabel = new(),
+			_coffinDistanceLabel = new();
 
 		#endregion
 
@@ -201,14 +209,18 @@ namespace BokInterface {
             Button calculatorsBtn = WinFormHelpers.CreateButton("showCalculators", "Calculators", 6, 48, 75, 23, extrasGroupBox);
             calculatorsBtn.Click += new System.EventHandler(OpenCalculatorsSelector);
 		}
-		
+
 		/// <summary>Adds the Misc. data section for the corresponding game</summary>
 		private void AddMiscDataSection() {
 
 			int positionY = 90;
+			int groupHeight = 55;
+			bool enableCoffinSection = false;
 			switch (BokInterface.shorterGameName) {
 				case "Boktai":
 					positionY = 90;
+					groupHeight = 164;
+					enableCoffinSection = true;
 					break;
 				case "Zoktai":
 					positionY = 198;
@@ -224,11 +236,26 @@ namespace BokInterface {
 					return;
 			}
 
-			miscDataGroupBox = WinFormHelpers.CreateGroupBox("miscData", "Misc. data", 5, positionY, 226, 55, this);
+			miscDataGroupBox = WinFormHelpers.CreateGroupBox("miscData", "Misc. data", 5, positionY, 226, groupHeight, this);
 
 			// Average speed
 			_currentSpeedLabel = WinFormHelpers.CreateLabel("currentMovementSpeed", "Current movement speed : ", 7, 19, 200, 15, miscDataGroupBox, textAlignment: "MiddleLeft");
 			_averageSpeedLabel = WinFormHelpers.CreateLabel("averageMovementSpeed", "Average over 60 frames : ", 7, 34, 200, 15, miscDataGroupBox, textAlignment: "MiddleLeft");
+
+			// Add the coffin section if enabled
+			if (enableCoffinSection == true) {
+
+				WinFormHelpers.CreateSeparator("miscDataSeparator", 5, 51, 216, miscDataGroupBox);
+				WinFormHelpers.CreateLabel("coffinSection", "Coffin data", 5, 53, 80, 15, miscDataGroupBox, textAlignment: "MiddleLeft").Font = new("Segoe UI", 9, FontStyle.Underline, GraphicsUnit.Point);
+
+				// Coffin data
+				_coffinDamageLabel = WinFormHelpers.CreateLabel("coffinDamage", "Damage : ", 5, 68, 200, 15, miscDataGroupBox, textAlignment: "MiddleLeft");
+				_coffinWindupTimerLabel = WinFormHelpers.CreateLabel("coffinWindupTimer", "Windup begins in : ", 5, 83, 200, 15, miscDataGroupBox, textAlignment: "MiddleLeft");
+				_coffinShakeTimerLabel = WinFormHelpers.CreateLabel("coffnShakeTimer", "Windup : ", 5, 98, 200, 15, miscDataGroupBox, textAlignment: "MiddleLeft");
+				_coffinShakeDurationLabel = WinFormHelpers.CreateLabel("coffinShakeDuration", "Duration : ", 5, 113, 200, 15, miscDataGroupBox, textAlignment: "MiddleLeft");
+				_coffinEscapeTimerLabel = WinFormHelpers.CreateLabel("coffinEscapeTimer", "Begins escaping in : ", 5, 128, 200, 15, miscDataGroupBox, textAlignment: "MiddleLeft");
+				_coffinDistanceLabel = WinFormHelpers.CreateLabel("coffinDistance", "Distance : ", 5, 143, 200, 15, miscDataGroupBox, textAlignment: "MiddleLeft");
+			}
 		}
 
 		#endregion
