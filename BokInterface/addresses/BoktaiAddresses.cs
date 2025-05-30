@@ -19,9 +19,18 @@ namespace BokInterface.Addresses {
         /// <summary>Misc memory addresses</summary>
         public IDictionary<string, MemoryAddress> Misc = new Dictionary<string, MemoryAddress>();
 
-        public BoktaiAddresses() {
+        /// <summary>Coffin-related memory addresses</summary>
+        public IDictionary<string, MemoryAddress> Coffin = new Dictionary<string, MemoryAddress>();
 
-            // Add Django addresses
+        public BoktaiAddresses() {
+            InitDjangoAddresses();
+            InitInventoryAddresses();
+            InitMapAddresses();
+            InitCoffinAddresses();
+            InitMiscAddresses();
+        }
+
+        private void InitDjangoAddresses() {
             Django.Add("x_position", new MemoryAddress(0x0203D8F0, note: "Django X position", domain: "EWRAM"));
             Django.Add("y_position", new MemoryAddress(0x0203D8F4, note: "Django Y position", domain: "EWRAM"));
             Django.Add("z_position", new MemoryAddress(0x0203D8F2, note: "Django Z position", domain: "EWRAM"));
@@ -32,12 +41,13 @@ namespace BokInterface.Addresses {
             Django.Add("astro_battery_unlock_password", new MemoryAddress(0x7DC, type: "U32", domain: "IWRAM"));
             Django.Add("dark_loans", new MemoryAddress(0x0203D878, type: "U32", domain: "EWRAM"));
             Django.Add("solar_station", new MemoryAddress(0x0203DCE8, domain: "EWRAM"));
+            Django.Add("max_hp", new MemoryAddress(0x0203D840, domain: "EWRAM"));
+            Django.Add("current_hp", new MemoryAddress(0x0203D8FA, domain: "EWRAM"));
+        }
 
-            // Add Inventory addresses
+        private void InitInventoryAddresses() {
             Inventory.Add("grenade_amounts", new MemoryAddress(0x0203D80A, domain: "EWRAM"));
             Inventory.Add("battery_charges", new MemoryAddress(0x0203D818, domain: "EWRAM"));
-            Inventory.Add("max_hp", new MemoryAddress(0x0203D840, domain: "EWRAM"));
-            Inventory.Add("current_hp", new MemoryAddress(0x0203D8FA, domain: "EWRAM"));
             Inventory.Add("equipped_lens", new MemoryAddress(0x0203D88C, domain: "EWRAM"));
             Inventory.Add("equipped_frame", new MemoryAddress(0x0203D88E, domain: "EWRAM"));
             Inventory.Add("equipped_grenades", new MemoryAddress(0x0203D890, domain: "EWRAM"));
@@ -52,8 +62,9 @@ namespace BokInterface.Addresses {
             Inventory.Add("frames", new MemoryAddress(0x0203DCC8, note: "bitmask", type: "U32", domain: "EWRAM"));
             Inventory.Add("batteries", new MemoryAddress(0x0203DCD0, note: "bitmask", type: "U32", domain: "EWRAM"));
             Inventory.Add("lenses_exp", new MemoryAddress(0x0203DCD8, domain: "EWRAM"));
+        }
 
-            // Add Map & dungeon-related addresses
+        private void InitMapAddresses() {
             Map.Add("current_map_id", new MemoryAddress(0x0203D900, domain: "EWRAM"));
             Map.Add("dungeon_igt", new MemoryAddress(0x0203D910, type: "U32", domain: "EWRAM"));
             Map.Add("dungeon_charged_energy", new MemoryAddress(0x0203D914, type: "U32", domain: "EWRAM"));
@@ -68,8 +79,20 @@ namespace BokInterface.Addresses {
             Map.Add("piledriver_top_right", new MemoryAddress(0x02008956, domain: "EWRAM"));
             Map.Add("piledriver_bottom_left", new MemoryAddress(0x02008BE6, domain: "EWRAM"));
             Map.Add("piledriver_bottom_right", new MemoryAddress(0x020086C6, domain: "EWRAM"));
+        }
 
-            // Add Misc addresses
+        private void InitCoffinAddresses() {
+            Coffin.Add("actor", new MemoryAddress(0x03001C20, type: "U32", domain: "IWRAM"));
+            Coffin.Add("damage", new MemoryAddress(0x248, note: "Stun/Damage dealt to the coffin (coffin becomes stunned when the value reaches 1200 and then stays stunned for that duration, resets to 0 when coffin goes into shaking phase)", domain: "IWRAM"));
+            Coffin.Add("windup_timer", new MemoryAddress(0x272, note: "Frames until the coffin goes into the windup phase (increases only while Django holds the chain)", domain: "IWRAM"));
+            Coffin.Add("shake_timer", new MemoryAddress(0x278, note: "Time before the coffin is able to damage Django and becomes immovable (ranges from 0-127 and resets to 0 when the coffin goes into the shake phase)", domain: "IWRAM"));
+            Coffin.Add("shake_duration", new MemoryAddress(0x288, note: "Duration of the shake (seems to be randomly chosen when entering rooms and after shaking)", domain: "IWRAM"));
+            Coffin.Add("own_movement_timer", new MemoryAddress(0x29C, note: "Frames until the coffin starts moving on its own", domain: "IWRAM"));
+            Coffin.Add("x_position", new MemoryAddress(0x44, domain: "IWRAM"));
+            Coffin.Add("y_position", new MemoryAddress(0x48, domain: "IWRAM"));
+        }
+
+        private void InitMiscAddresses() {
             Misc.Add("boss_hp", new MemoryAddress(0x02001B5E, note: "Read-only", domain: "EWRAM"));
             Misc.Add("trap_hp", new MemoryAddress(0x02001B6A, note: "Read-only", domain: "EWRAM"));
 

@@ -28,8 +28,6 @@ namespace BokInterface.Addresses {
         /// </summary>
         public IDictionary<string, MemoryAddress> Misc = new Dictionary<string, MemoryAddress>();
 
-        public LunarKnightsAddresses() {
-
-        }
+        public LunarKnightsAddresses() { }
     }
 }
