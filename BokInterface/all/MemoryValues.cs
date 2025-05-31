@@ -86,6 +86,8 @@ namespace BokInterface.All {
             Django.Add("y_position", new DynamicMemoryValue("y_position", memoryAddresses.Misc["stat"].Address, memoryAddresses.Django["y_position"].Address));
             Django.Add("z_position", new DynamicMemoryValue("z_position", memoryAddresses.Misc["stat"].Address, memoryAddresses.Django["z_position"].Address));
 
+            // Current HP, ENE & form or character
+            Django.Add("current_form", new DynamicMemoryValue("current_form", _zoktaiAddresses.Misc["stat"].Address, _zoktaiAddresses.Django["current_form"].Address));
             Django.Add("current_hp", new DynamicMemoryValue("current_hp", memoryAddresses.Misc["current_stat"].Address, memoryAddresses.Django["current_hp"].Address));
             Django.Add("current_ene", new DynamicMemoryValue("current_ene", memoryAddresses.Misc["current_stat"].Address, memoryAddresses.Django["current_ene"].Address));
 
