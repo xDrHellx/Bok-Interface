@@ -4,6 +4,7 @@ using System.Windows.Forms;
 
 using BokInterface.Addresses;
 using BokInterface.All;
+using BokInterface.ExpTables;
 
 /**
  * Note :
@@ -31,7 +32,7 @@ namespace BokInterface.Status {
             Owner = _bokInterface = bokInterface;
             Icon = _bokInterface.Icon;
 
-            SetFormParameters(241, 157);
+            SetFormParameters(242, 201);
 
             // Add the onClose event to the subwindow
             FormClosing += new FormClosingEventHandler(delegate (object sender, FormClosingEventArgs e) {
@@ -50,7 +51,8 @@ namespace BokInterface.Status {
 
             // Sections
             statusGroupBox = WinFormHelpers.CreateCheckGroupBox("editStatusGroup", "Status", 5, 5, 102, 106, control: this);
-            statsGroupBox = WinFormHelpers.CreateCheckGroupBox("editStatsGroup", "Stats", 113, 5, 124, 124, control: this);
+            statsGroupBox = WinFormHelpers.CreateCheckGroupBox("editStatsGroup", "Stats", 113, 5, 124, 153, control: this);
+            expGroupBox = WinFormHelpers.CreateCheckGroupBox("editExpGroup", "Level & EXP", 5, 120, 102, 77, control: this);
 
             // Status
             WinFormHelpers.CreateLabel("djangoEditHpLabel", "LIFE :", 7, 22, 34, 15, statusGroupBox);
@@ -65,7 +67,7 @@ namespace BokInterface.Status {
             WinFormHelpers.CreateLabel("djangoEditVitLabel", "VIT", 7, 39, 27, 15, control: statsGroupBox);
             WinFormHelpers.CreateLabel("djangoEditSprLabel", "SPR", 7, 68, 27, 15, control: statsGroupBox);
             WinFormHelpers.CreateLabel("djangoEditStrLabel", "STR", 7, 97, 27, 15, control: statsGroupBox);
-
+            WinFormHelpers.CreateLabel("djangoEditStatPointsLabel", "Points", 7, 126, 40, 15, control: statsGroupBox);
             WinFormHelpers.CreateLabel("djangoStatsBaseLabel", "Base", 35, 19, 42, 15, control: statsGroupBox, WinFormHelpers.baseStatColor);
             WinFormHelpers.CreateLabel("djangoStatsCardsLabel", "Cards", 77, 19, 42, 15, control: statsGroupBox, WinFormHelpers.cardsStatColor);
 
@@ -79,8 +81,18 @@ namespace BokInterface.Status {
             statusNumericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("misc_cards_spr", defaultValues["django_cards_spr"], 81, 66, 38, 23, maxValue: 100, control: statsGroupBox));
             statusNumericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("misc_cards_str", defaultValues["django_cards_str"], 81, 95, 38, 23, maxValue: 100, control: statsGroupBox));
 
+            // Points to allocate
+            statusNumericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("django_stat_points", defaultValues["django_stat_points"], 73, 124, 46, 23, maxValue: 196, control: statsGroupBox));
+
+            // Level & EXP
+            WinFormHelpers.CreateLabel("djangoEditLevelLabel", "Level", 2, 22, 34, 15, expGroupBox);
+            WinFormHelpers.CreateLabel("djangoEditExpLabel", "EXP", 2, 50, 27, 15, expGroupBox);
+
+            statusNumericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("django_level", defaultValues["django_level"], 47, 19, 50, 23, control: expGroupBox));
+            statusNumericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("django_exp", defaultValues["django_exp"], 37, 48, 60, 23, minValue: 0, maxValue: 999999, control: expGroupBox));
+
             // Button for setting values & its events
-            Button setValuesButton = WinFormHelpers.CreateButton("setStatusButton", "Set values", 163, 131, 75, 23, this);
+            Button setValuesButton = WinFormHelpers.CreateButton("setStatusButton", "Set values", 163, 174, 75, 23, this);
             setValuesButton.Click += new EventHandler(delegate (object sender, EventArgs e) {
                 // Write the values for 10 frames
                 for (int i = 0; i < 10; i++) {
@@ -99,23 +111,29 @@ namespace BokInterface.Status {
                 defaultValues.Add("django_current_hp", djangoCurrentHp);
                 defaultValues.Add("django_current_ene", _memoryValues.Django["current_ene"].Value);
                 defaultValues.Add("django_current_trc", _memoryValues.Django["current_trc"].Value);
+                defaultValues.Add("django_exp", _memoryValues.Django["exp"].Value);
+                defaultValues.Add("django_level", _memoryValues.Django["level"].Value);
                 defaultValues.Add("django_base_vit", _memoryValues.Misc["base_vit"].Value);
                 defaultValues.Add("django_base_spr", _memoryValues.Misc["base_spr"].Value);
                 defaultValues.Add("django_base_str", _memoryValues.Misc["base_str"].Value);
                 defaultValues.Add("django_cards_vit", _memoryValues.Misc["cards_vit"].Value);
                 defaultValues.Add("django_cards_spr", _memoryValues.Misc["cards_spr"].Value);
                 defaultValues.Add("django_cards_str", _memoryValues.Misc["cards_str"].Value);
+                defaultValues.Add("django_stat_points", _memoryValues.Django["stat_points"].Value);
             } else {
                 // If HP is unvalid (for example if we are on the title screen or in bike races), use specific values
                 defaultValues.Add("django_current_hp", 100);
                 defaultValues.Add("django_current_ene", 100);
                 defaultValues.Add("django_current_trc", 1000);
+                defaultValues.Add("django_exp", 0);
+                defaultValues.Add("django_level", 1);
                 defaultValues.Add("django_base_vit", 10);
                 defaultValues.Add("django_base_spr", 10);
                 defaultValues.Add("django_base_str", 10);
                 defaultValues.Add("django_cards_vit", 0);
                 defaultValues.Add("django_cards_spr", 0);
                 defaultValues.Add("django_cards_str", 0);
+                defaultValues.Add("django_stat_points", 0);
             }
 
             return defaultValues;
@@ -129,6 +147,16 @@ namespace BokInterface.Status {
             // Pause BizHawk
             APIs.Client.Pause();
 
+            /**
+             * If the total EXP until next level & current level are available,
+             * we'll use these to prevent the game from adjusting the level while setting new values
+             * 
+             * We'll set the total EXP until next level to the maximum possible to prevent that from happening
+             */
+            if (_memoryValues.U32.ContainsKey("total_exp_until_next_level") == true) {
+                _memoryValues.U32["total_exp_until_next_level"].Value = 99999999;
+            }
+
             // Sets values based on fields (numericUpDowns)
             for (int i = 0; i < statusNumericUpDowns.Count; i++) {
 
@@ -141,57 +169,19 @@ namespace BokInterface.Status {
 
                 /**
                  * Indicate which sublist to use for setting the value, based on the input field's name
-                 * We only split on the first "_"
+                 * The first "_" indicates the sublist while the rest indicates the key within that sublist
                  */
-                string[] fieldParts = statusNumericUpDowns[i].Name.Split(['_'], 3);
-                string subList = fieldParts[0];
-                string memoryValueKey = fieldParts[1] + "_" + fieldParts[2];
-                switch (subList) {
-                    case "django":
-                        if (_memoryValues.Django.ContainsKey(memoryValueKey) == true) {
-                            _memoryValues.Django[memoryValueKey].Value = (uint)value;
-                        } else if (_memoryValues.U16.ContainsKey(memoryValueKey) == true) {
-                            _memoryValues.U16[memoryValueKey].Value = (uint)value;
-                        } else if (_memoryValues.U32.ContainsKey(memoryValueKey) == true) {
-                            _memoryValues.U32[memoryValueKey].Value = (uint)value;
-                        }
-                        break;
-                    case "misc":
-                        if (_memoryValues.Misc.ContainsKey(memoryValueKey) == true) {
-                            switch (memoryValueKey) {
-                                case "base_vit":                // Base points from level ups
-                                case "base_spr":
-                                case "base_str":
-                                case "cards_vit":               // Points from cards
-                                case "cards_spr":
-                                case "cards_str":
-                                    /**
-                                     * Due to how the game works we have to set the sum of base + card stats
-                                     * 
-                                     * This allows stats to be updated in the current room
-                                     * and stay when switching room
-                                     */
-                                    _memoryValues.Misc[memoryValueKey].Value = (uint)value;
-                                    UpdateSumBaseCardStat(fieldParts[2], _memoryValues.Misc["base_" + fieldParts[2]].Value, _memoryValues.Misc["cards_" + fieldParts[2]].Value);
-                                    break;
-                                default:                        // Default treatment
-                                    _memoryValues.Misc[memoryValueKey].Value = (uint)value;
-                                    break;
-                            }
-                        } else if (_memoryValues.U16.ContainsKey(memoryValueKey) == true) {
-                            _memoryValues.U16[memoryValueKey].Value = (uint)value;
-                        } else if (_memoryValues.U32.ContainsKey(memoryValueKey) == true) {
-                            _memoryValues.U32[memoryValueKey].Value = (uint)value;
-                        }
-                        break;
-                    default:
-                        if (_memoryValues.U16.ContainsKey(memoryValueKey) == true) {
-                            _memoryValues.U16[memoryValueKey].Value = (uint)value;
-                        } else if (_memoryValues.U32.ContainsKey(memoryValueKey) == true) {
-                            _memoryValues.U32[memoryValueKey].Value = (uint)value;
-                        }
-                        break;
-                }
+                string[] fieldParts = statusNumericUpDowns[i].Name.Split(['_'], 2);
+                SetMemoryValue(fieldParts[0], fieldParts[1], value);
+            }
+
+            /**
+             * If the total EXP until next level & current level were available before setting values,
+             * we set it to what it should be to reach the next level (except for lvl 99 which is always 0)
+             */
+            if (_memoryValues.U32.ContainsKey("total_exp_until_next_level") == true && _memoryValues.Django.ContainsKey("level")) {
+                int level = (int)_memoryValues.Django["level"].Value;
+                _memoryValues.U32["total_exp_until_next_level"].Value = level < 99 ? DjangoExpTable.shinbok[level] : 0;
             }
 
             /**
@@ -200,6 +190,67 @@ namespace BokInterface.Status {
              */
             if (_bokInterface._previousIsPauseSetting == true) {
                 APIs.Client.Unpause();
+            }
+        }
+
+        ///<summary>
+        ///<para>Method for setting memory values</para>
+        ///<para>This is separated because we use the switch inside on different types</para>
+        ///</summary>
+        ///<param name="subList"><c>Sublit / dictionnary the key belongs to</c></param>
+        ///<param name="valueKey"><c>strng</c>Key withint the dictionnary</param>
+        ///<param name="value"><c>decimal</c>Value to set</param>
+        private void SetMemoryValue(string subList, string valueKey, decimal value) {
+            switch (subList) {
+                case "django":
+                    uint test = (uint)value;
+                    APIs.Gui.AddMessage(value.ToString() + " => " + test.ToString());
+                    if (_memoryValues.Django.ContainsKey(valueKey) == true) {
+                        _memoryValues.Django[valueKey].Value = (uint)value;
+                    } else if (_memoryValues.U16.ContainsKey(valueKey) == true) {
+                        _memoryValues.U16[valueKey].Value = (uint)value;
+                    } else if (_memoryValues.U32.ContainsKey(valueKey) == true) {
+                        _memoryValues.U32[valueKey].Value = (uint)value;
+                    }
+                    break;
+                case "misc":
+                    if (_memoryValues.Misc.ContainsKey(valueKey) == true) {
+                        switch (valueKey) {
+                            case "base_vit":                // Base points from level ups
+                            case "base_spr":
+                            case "base_str":
+                            case "cards_vit":               // Points from cards
+                            case "cards_spr":
+                            case "cards_str":
+                                /**
+                                 * Due to how the game works we have to set the sum of base + card stats
+                                 * This allows stats to be updated in the current roomand stay when switching room
+                                 * 
+                                 * We'll start by getting the key needed for the stat
+                                 */
+                                string[] valueKeyParts = valueKey.Split(['_'], 2);
+                                string statKey = valueKeyParts[1];
+
+                                _memoryValues.Misc[valueKey].Value = (uint)value;
+                                UpdateSumBaseCardStat(statKey, _memoryValues.Misc["base_" + statKey].Value, _memoryValues.Misc["cards_" + statKey].Value);
+                                break;
+                            default:                        // Default treatment
+                                _memoryValues.Misc[valueKey].Value = (uint)value;
+                                break;
+                        }
+                    } else if (_memoryValues.U16.ContainsKey(valueKey) == true) {
+                        _memoryValues.U16[valueKey].Value = (uint)value;
+                    } else if (_memoryValues.U32.ContainsKey(valueKey) == true) {
+                        _memoryValues.U32[valueKey].Value = (uint)value;
+                    }
+                    break;
+                default:
+                    if (_memoryValues.U16.ContainsKey(valueKey) == true) {
+                        _memoryValues.U16[valueKey].Value = (uint)value;
+                    } else if (_memoryValues.U32.ContainsKey(valueKey) == true) {
+                        _memoryValues.U32[valueKey].Value = (uint)value;
+                    }
+                    break;
             }
         }
 

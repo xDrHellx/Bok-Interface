@@ -238,6 +238,9 @@ namespace BokInterface.All {
                 int slotNumber = i + 1;
                 Inventory.Add("slot" + slotNumber + "_gun_frame", new DynamicMemoryValue("slot" + slotNumber + "_gun_frame", memoryAddresses.Misc["stat"].Address, memoryAddresses.Inventory["gun_frame_slot_" + slotNumber].Address));
             }
+
+            // U32
+            U32.Add("total_exp_until_next_level", memoryAddresses.Django["total_exp_until_next_level"]);
         }
 
         private void InitializeLunarKnightsList() { }
