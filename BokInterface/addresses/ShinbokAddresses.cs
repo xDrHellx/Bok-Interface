@@ -54,7 +54,7 @@ namespace BokInterface.Addresses {
             Django.Add("current_hp", new MemoryAddress(0x424, domain: "EWRAM"));
             Django.Add("current_ene", new MemoryAddress(0x428, domain: "EWRAM"));
             Django.Add("current_trc", new MemoryAddress(0x42C, domain: "EWRAM"));
-            Django.Add("level", new MemoryAddress(0x40, type: "U32", domain: "EWRAM"));
+            Django.Add("level", new MemoryAddress(0x40, domain: "EWRAM"));
             Django.Add("exp", new MemoryAddress(0x48, type: "U32", domain: "EWRAM"));
             Django.Add("total_exp_until_next_level", new MemoryAddress(0x1BC8, type: "U32", domain: "EWRAM"));
             Django.Add("stat_points", new MemoryAddress(0x42, domain: "EWRAM"));
