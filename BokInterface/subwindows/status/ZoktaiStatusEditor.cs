@@ -57,8 +57,8 @@ namespace BokInterface.Status {
             kaamosGroupBox = WinFormHelpers.CreateCheckGroupBox("editKaamosGroup", "Kaamos", 232, 5, 81, 68, control: this);
 
             // Status
-            WinFormHelpers.CreateLabel("djangoEditHpLabel", "LIFE :", 2, 22, 34, 15, statusGroupBox);
-            WinFormHelpers.CreateLabel("djangoEditEneLabel", "ENE :", 2, 50, 34, 15, statusGroupBox);
+            WinFormHelpers.CreateLabel("djangoEditHpLabel", "LIFE", 2, 22, 34, 15, statusGroupBox);
+            WinFormHelpers.CreateLabel("djangoEditEneLabel", "ENE", 2, 50, 34, 15, statusGroupBox);
 
             statusNumericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("django_current_hp", defaultValues["django_current_hp"], 42, 20, 50, 23, maxValue: 1000, control: statusGroupBox));
             statusNumericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("django_current_ene", defaultValues["django_current_ene"], 42, 48, 50, 23, maxValue: 1000, control: statusGroupBox));
