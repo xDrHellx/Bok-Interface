@@ -32,7 +32,7 @@ namespace BokInterface.Status {
             Owner = _bokInterface = bokInterface;
             Icon = _bokInterface.Icon;
 
-            SetFormParameters(335, 277);
+            SetFormParameters(447, 279);
 
             // Add the onClose event to the subwindow
             FormClosing += new FormClosingEventHandler(delegate (object sender, FormClosingEventArgs e) {
@@ -51,10 +51,11 @@ namespace BokInterface.Status {
 
             // Sections
             statusGroupBox = WinFormHelpers.CreateCheckGroupBox("editStatusGroup", "Status", 5, 5, 97, 77, control: this);
-            skillGroupBox = WinFormHelpers.CreateCheckGroupBox("editSkillGroup", "Skill", 110, 85, 221, 106, control: this);
+            skillGroupBox = WinFormHelpers.CreateCheckGroupBox("editSkillGroup", "Skill", 110, 85, 203, 106, control: this);
             statsGroupBox = WinFormHelpers.CreateCheckGroupBox("editStatsGroup", "Stats", 5, 85, 99, 164, control: this);
             expGroupBox = WinFormHelpers.CreateCheckGroupBox("editExpGroup", "Level and EXP", 108, 5, 118, 77, control: this);
             kaamosGroupBox = WinFormHelpers.CreateCheckGroupBox("editKaamosGroup", "Kaamos", 232, 5, 81, 68, control: this);
+            sollsGroupBox = WinFormHelpers.CreateCheckGroupBox("editSollsGroup", "Solls", 322, 5, 137, 103, control: this);
 
             // Status
             WinFormHelpers.CreateLabel("djangoEditHpLabel", "LIFE", 2, 22, 34, 15, statusGroupBox);
@@ -65,16 +66,16 @@ namespace BokInterface.Status {
 
             // Skill
             WinFormHelpers.CreateLabel("djangoEditSwordSkillLabel", "Sword", 2, 22, 54, 15, skillGroupBox, textAlignment: "MiddleLeft");
-            WinFormHelpers.CreateLabel("djangoEditSpearSkillLabel", "Spear", 123, 22, 36, 15, skillGroupBox, textAlignment: "MiddleLeft");
+            WinFormHelpers.CreateLabel("djangoEditSpearSkillLabel", "Spear", 110, 22, 36, 15, skillGroupBox, textAlignment: "MiddleLeft");
             WinFormHelpers.CreateLabel("djangoEditHammerSkillLabel", "Hammer", 2, 50, 54, 15, skillGroupBox, textAlignment: "MiddleLeft");
-            WinFormHelpers.CreateLabel("djangoEditFistsSkillLabel", "Fists", 123, 50, 36, 15, skillGroupBox, textAlignment: "MiddleLeft");
+            WinFormHelpers.CreateLabel("djangoEditFistsSkillLabel", "Fists", 110, 50, 36, 15, skillGroupBox, textAlignment: "MiddleLeft");
             WinFormHelpers.CreateLabel("djangoEditGunSkillLabel", "Gun", 2, 79, 54, 15, skillGroupBox, textAlignment: "MiddleLeft");
 
-            statusNumericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("django_sword_skill", defaultValues["django_sword_skill"], 58, 19, 51, 23, nbDecimals: 2, control: skillGroupBox));
-            statusNumericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("django_spear_skill", defaultValues["django_spear_skill"], 165, 19, 51, 23, nbDecimals: 2, control: skillGroupBox));
-            statusNumericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("django_hammer_skill", defaultValues["django_hammer_skill"], 58, 48, 51, 23, nbDecimals: 2, control: skillGroupBox));
-            statusNumericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("django_fists_skill", defaultValues["django_fists_skill"], 165, 48, 51, 23, nbDecimals: 2, control: skillGroupBox));
-            statusNumericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("django_gun_skill", defaultValues["django_gun_skill"], 58, 77, 51, 23, nbDecimals: 2, control: skillGroupBox));
+            statusNumericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("django_sword_skill", defaultValues["django_sword_skill"], 56, 19, 51, 23, nbDecimals: 2, control: skillGroupBox));
+            statusNumericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("django_spear_skill", defaultValues["django_spear_skill"], 147, 19, 51, 23, nbDecimals: 2, control: skillGroupBox));
+            statusNumericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("django_hammer_skill", defaultValues["django_hammer_skill"], 56, 48, 51, 23, nbDecimals: 2, control: skillGroupBox));
+            statusNumericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("django_fists_skill", defaultValues["django_fists_skill"], 147, 48, 51, 23, nbDecimals: 2, control: skillGroupBox));
+            statusNumericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("django_gun_skill", defaultValues["django_gun_skill"], 56, 77, 51, 23, nbDecimals: 2, control: skillGroupBox));
 
             // Stats
             WinFormHelpers.CreateLabel("djangoEditVitLabel", "VIT", 2, 22, 27, 15, statsGroupBox);
@@ -104,8 +105,16 @@ namespace BokInterface.Status {
             Label expWarning = WinFormHelpers.CreateImageLabel("tooltip", "warning", 97, 51, expGroupBox);
             WinFormHelpers.AddToolTip(expWarning, "Level will be automatically adjusted if EXP is high enough to reach higher levels");
 
+            // Solls
+            WinFormHelpers.CreateLabel("solarStationLbl", "Solar station", 7, 19, 72, 15, sollsGroupBox, textAlignment: "MiddleLeft");
+            WinFormHelpers.CreateLabel("solarBankLbl", "Solar bank", 7, 47, 72, 15, sollsGroupBox, textAlignment: "MiddleLeft");
+            WinFormHelpers.CreateLabel("darkLoansLbl", "Dark loans", 7, 76, 72, 15, sollsGroupBox, textAlignment: "MiddleLeft");
+            statusNumericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("solls_solar_station", defaultValues["solls_solar_station"], 82, 16, 50, 23, maxValue: 9999, control: sollsGroupBox));
+            statusNumericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("solls_solar_bank", defaultValues["solls_solar_bank"], 82, 45, 50, 23, maxValue: 9999, control: sollsGroupBox));
+            statusNumericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("solls_dark_loans", defaultValues["solls_dark_loans"], 82, 74, 50, 23, maxValue: 9999, control: sollsGroupBox));
+
             // Button for setting values & its events
-            Button setValuesButton = WinFormHelpers.CreateButton("setStatusButton", "Set values", 257, 251, 75, 23, this);
+            Button setValuesButton = WinFormHelpers.CreateButton("setStatusButton", "Set values", 385, 252, 75, 23, this);
             setValuesButton.Click += new EventHandler(delegate (object sender, EventArgs e) {
                 // Write the values for 10 frames
                 for (int i = 0; i < 10; i++) {
@@ -141,6 +150,10 @@ namespace BokInterface.Status {
 
                 defaultValues.Add("django_kaamos", _memoryValues.Django["kaamos"].Value);
                 defaultValues.Add("sabata_kaamos", _memoryValues.Sabata["kaamos"].Value);
+
+                defaultValues.Add("solls_solar_station", _memoryValues.Solls["solar_station"].Value);
+                defaultValues.Add("solls_solar_bank", _memoryValues.Solls["solar_bank"].Value);
+                defaultValues.Add("solls_dark_loans", _memoryValues.Solls["dark_loans"].Value);
             } else {
                 // If current stat is unvalid (for example because we are on the title screen or in a room transition), use specific values
                 defaultValues.Add("django_current_hp", 100);
@@ -164,6 +177,10 @@ namespace BokInterface.Status {
 
                 defaultValues.Add("django_kaamos", 0);
                 defaultValues.Add("sabata_kaamos", 0);
+
+                defaultValues.Add("solls_solar_station", 0);
+                defaultValues.Add("solls_solar_bank", 0);
+                defaultValues.Add("solls_dark_loans", 0);
             }
 
             return defaultValues;
@@ -295,6 +312,15 @@ namespace BokInterface.Status {
                 case "misc":
                     if (_memoryValues.Misc.ContainsKey(valueKey) == true) {
                         _memoryValues.Misc[valueKey].Value = (uint)value;
+                    } else if (_memoryValues.U16.ContainsKey(valueKey) == true) {
+                        _memoryValues.U16[valueKey].Value = (uint)value;
+                    } else if (_memoryValues.U32.ContainsKey(valueKey) == true) {
+                        _memoryValues.U32[valueKey].Value = (uint)value;
+                    }
+                    break;
+                case "solls":
+                    if (_memoryValues.Solls.ContainsKey(valueKey) == true) {
+                        _memoryValues.Solls[valueKey].Value = (uint)value;
                     } else if (_memoryValues.U16.ContainsKey(valueKey) == true) {
                         _memoryValues.U16[valueKey].Value = (uint)value;
                     } else if (_memoryValues.U32.ContainsKey(valueKey) == true) {

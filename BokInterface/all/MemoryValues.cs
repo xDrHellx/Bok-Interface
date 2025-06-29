@@ -148,6 +148,11 @@ namespace BokInterface.All {
 
             // Magics
             Inventory.Add("magics", new DynamicMemoryValue("magics", memoryAddresses.Misc["stat"].Address, memoryAddresses.Inventory["magics"].Address, type: memoryAddresses.Inventory["magics"].Type));
+
+            // Solls
+            Solls.Add("solar_station", new DynamicMemoryValue("solar_station", memoryAddresses.Misc["stat"].Address, memoryAddresses.Solls["solar_station"].Address, memoryAddresses.Solls["solar_station"].Type));
+            Solls.Add("solar_bank", new DynamicMemoryValue("solar_bank", memoryAddresses.Misc["stat"].Address, memoryAddresses.Solls["solar_bank"].Address, memoryAddresses.Solls["solar_bank"].Type));
+            Solls.Add("dark_loans", new DynamicMemoryValue("dark_loans", memoryAddresses.Misc["stat"].Address, memoryAddresses.Solls["dark_loans"].Address, memoryAddresses.Solls["dark_loans"].Type));
         }
 
         private void InitializeShinbokList() {
