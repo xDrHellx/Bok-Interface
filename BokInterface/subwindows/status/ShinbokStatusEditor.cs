@@ -32,7 +32,7 @@ namespace BokInterface.Status {
             Owner = _bokInterface = bokInterface;
             Icon = _bokInterface.Icon;
 
-            SetFormParameters(242, 201);
+            SetFormParameters(385, 195);
 
             // Add the onClose event to the subwindow
             FormClosing += new FormClosingEventHandler(delegate (object sender, FormClosingEventArgs e) {
@@ -52,12 +52,13 @@ namespace BokInterface.Status {
             // Sections
             statusGroupBox = WinFormHelpers.CreateCheckGroupBox("editStatusGroup", "Status", 5, 5, 102, 106, control: this);
             statsGroupBox = WinFormHelpers.CreateCheckGroupBox("editStatsGroup", "Stats", 113, 5, 124, 153, control: this);
-            expGroupBox = WinFormHelpers.CreateCheckGroupBox("editExpGroup", "Level && EXP", 5, 120, 102, 77, control: this);
+            expGroupBox = WinFormHelpers.CreateCheckGroupBox("editExpGroup", "Level && EXP", 5, 114, 102, 77, control: this);
+            sollsGroupBox = WinFormHelpers.CreateCheckGroupBox("editSollsGroup", "Solls", 243, 5, 137, 103, control: this);
 
             // Status
-            WinFormHelpers.CreateLabel("djangoEditHpLabel", "LIFE :", 7, 22, 34, 15, statusGroupBox);
-            WinFormHelpers.CreateLabel("djangoEditEneLabel", "ENE :", 7, 50, 34, 15, statusGroupBox);
-            WinFormHelpers.CreateLabel("djangoEditTrcLabel", "TRC :", 7, 79, 34, 15, statusGroupBox);
+            WinFormHelpers.CreateLabel("djangoEditHpLabel", "LIFE", 7, 22, 34, 15, statusGroupBox);
+            WinFormHelpers.CreateLabel("djangoEditEneLabel", "ENE", 7, 50, 34, 15, statusGroupBox);
+            WinFormHelpers.CreateLabel("djangoEditTrcLabel", "TRC", 7, 79, 34, 15, statusGroupBox);
 
             statusNumericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("django_current_hp", defaultValues["django_current_hp"], 47, 19, 50, 23, maxValue: 1000, control: statusGroupBox));
             statusNumericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("django_current_ene", defaultValues["django_current_ene"], 47, 48, 50, 23, maxValue: 1000, control: statusGroupBox));
@@ -87,12 +88,19 @@ namespace BokInterface.Status {
             // Level & EXP
             WinFormHelpers.CreateLabel("djangoEditLevelLabel", "Level", 2, 22, 34, 15, expGroupBox);
             WinFormHelpers.CreateLabel("djangoEditExpLabel", "EXP", 2, 50, 27, 15, expGroupBox);
-
             statusNumericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("django_level", defaultValues["django_level"], 47, 19, 50, 23, control: expGroupBox));
             statusNumericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("django_exp", defaultValues["django_exp"], 37, 48, 60, 23, minValue: 0, maxValue: 999999, control: expGroupBox));
 
+            // Solls
+            WinFormHelpers.CreateLabel("solarStationLbl", "Solar station", 7, 19, 72, 15, sollsGroupBox, textAlignment: "MiddleLeft");
+            WinFormHelpers.CreateLabel("solarBankLbl", "Solar bank", 7, 47, 72, 15, sollsGroupBox, textAlignment: "MiddleLeft");
+            WinFormHelpers.CreateLabel("darkLoansLbl", "Dark loans", 7, 76, 72, 15, sollsGroupBox, textAlignment: "MiddleLeft");
+            statusNumericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("solls_solar_station", defaultValues["solls_solar_station"], 82, 16, 50, 23, maxValue: 9999, control: sollsGroupBox));
+            statusNumericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("solls_solar_bank", defaultValues["solls_solar_bank"], 82, 45, 50, 23, maxValue: 9999, control: sollsGroupBox));
+            statusNumericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("solls_dark_loans", defaultValues["solls_dark_loans"], 82, 74, 50, 23, maxValue: 9999, control: sollsGroupBox));
+
             // Button for setting values & its events
-            Button setValuesButton = WinFormHelpers.CreateButton("setStatusButton", "Set values", 163, 174, 75, 23, this);
+            Button setValuesButton = WinFormHelpers.CreateButton("setStatusButton", "Set values", 306, 168, 75, 23, this);
             setValuesButton.Click += new EventHandler(delegate (object sender, EventArgs e) {
                 // Write the values for 10 frames
                 for (int i = 0; i < 10; i++) {
@@ -120,6 +128,9 @@ namespace BokInterface.Status {
                 defaultValues.Add("django_cards_spr", _memoryValues.Misc["cards_spr"].Value);
                 defaultValues.Add("django_cards_str", _memoryValues.Misc["cards_str"].Value);
                 defaultValues.Add("django_stat_points", _memoryValues.Django["stat_points"].Value);
+                defaultValues.Add("solls_solar_station", _memoryValues.Solls["solar_station"].Value);
+                defaultValues.Add("solls_solar_bank", _memoryValues.Solls["solar_bank"].Value);
+                defaultValues.Add("solls_dark_loans", _memoryValues.Solls["dark_loans"].Value);
             } else {
                 // If HP is unvalid (for example if we are on the title screen or in bike races), use specific values
                 defaultValues.Add("django_current_hp", 100);
@@ -134,6 +145,9 @@ namespace BokInterface.Status {
                 defaultValues.Add("django_cards_spr", 0);
                 defaultValues.Add("django_cards_str", 0);
                 defaultValues.Add("django_stat_points", 0);
+                defaultValues.Add("solls_solar_station", 0);
+                defaultValues.Add("solls_solar_bank", 0);
+                defaultValues.Add("solls_dark_loans", 0);
             }
 
             return defaultValues;
@@ -203,8 +217,6 @@ namespace BokInterface.Status {
         private void SetMemoryValue(string subList, string valueKey, decimal value) {
             switch (subList) {
                 case "django":
-                    uint test = (uint)value;
-                    APIs.Gui.AddMessage(value.ToString() + " => " + test.ToString());
                     if (_memoryValues.Django.ContainsKey(valueKey) == true) {
                         _memoryValues.Django[valueKey].Value = (uint)value;
                     } else if (_memoryValues.U16.ContainsKey(valueKey) == true) {
@@ -238,6 +250,15 @@ namespace BokInterface.Status {
                                 _memoryValues.Misc[valueKey].Value = (uint)value;
                                 break;
                         }
+                    } else if (_memoryValues.U16.ContainsKey(valueKey) == true) {
+                        _memoryValues.U16[valueKey].Value = (uint)value;
+                    } else if (_memoryValues.U32.ContainsKey(valueKey) == true) {
+                        _memoryValues.U32[valueKey].Value = (uint)value;
+                    }
+                    break;
+                case "solls":
+                    if (_memoryValues.Solls.ContainsKey(valueKey) == true) {
+                        _memoryValues.Solls[valueKey].Value = (uint)value;
                     } else if (_memoryValues.U16.ContainsKey(valueKey) == true) {
                         _memoryValues.U16[valueKey].Value = (uint)value;
                     } else if (_memoryValues.U32.ContainsKey(valueKey) == true) {

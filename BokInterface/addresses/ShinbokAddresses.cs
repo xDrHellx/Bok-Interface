@@ -40,7 +40,7 @@ namespace BokInterface.Addresses {
         public IDictionary<string, MemoryAddress> Misc = new Dictionary<string, MemoryAddress>();
 
         /// <summary>Note for MemoryAddress instances (for less repetition)</summary>
-        private string _note = "";
+        private readonly string _note = "";
 
         public ShinbokAddresses() {
 
@@ -87,10 +87,9 @@ namespace BokInterface.Addresses {
             Django.Add("persistent_cards_str", new MemoryAddress(0x24, note: "Stat points from cards, " + _note.ToLower(), domain: "EWRAM"));
 
             // Add Solls addresses
-            // Solls.Add("solls_on_self", 0x03CBB0);
-            Solls.Add("solar_station", new MemoryAddress(0x77C, note: "Solar station balance", type: "U32", domain: "EWRAM"));
+            Solls.Add("solar_station", new MemoryAddress(0x77C, note: "Solar station balance", domain: "EWRAM"));
             Solls.Add("solar_bank", new MemoryAddress(0x7B0, note: "Solar bank balance", domain: "EWRAM"));
-            // Solls.Add("dark_loan", 0x03C90C);
+            Solls.Add("dark_loans", new MemoryAddress(0x50C, note: "Dark loans", domain: "EWRAM"));
 
             // Add Bike addresses
             _note = "Equipped bike part";
@@ -118,7 +117,6 @@ namespace BokInterface.Addresses {
             Misc.Add("x_camera", new MemoryAddress(0x03005418, note: "Camera X position", domain: "IWRAM"));
             Misc.Add("y_camera", new MemoryAddress(0x0300541A, note: "Camera Y position", domain: "IWRAM"));
             Misc.Add("z_camera", new MemoryAddress(0x0300541C, note: "Camera Z position", domain: "IWRAM"));
-
             Misc.Add("boss_hp", new MemoryAddress(0x0200EEC0, domain: "EWRAM"));
         }
 
