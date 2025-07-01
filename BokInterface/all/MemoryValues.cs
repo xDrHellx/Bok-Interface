@@ -148,6 +148,11 @@ namespace BokInterface.All {
 
             // Magics
             Inventory.Add("magics", new DynamicMemoryValue("magics", memoryAddresses.Misc["stat"].Address, memoryAddresses.Inventory["magics"].Address, type: memoryAddresses.Inventory["magics"].Type));
+
+            // Solls
+            Solls.Add("solar_station", new DynamicMemoryValue("solar_station", memoryAddresses.Misc["stat"].Address, memoryAddresses.Solls["solar_station"].Address, memoryAddresses.Solls["solar_station"].Type));
+            Solls.Add("solar_bank", new DynamicMemoryValue("solar_bank", memoryAddresses.Misc["stat"].Address, memoryAddresses.Solls["solar_bank"].Address, memoryAddresses.Solls["solar_bank"].Type));
+            Solls.Add("dark_loans", new DynamicMemoryValue("dark_loans", memoryAddresses.Misc["stat"].Address, memoryAddresses.Solls["dark_loans"].Address, memoryAddresses.Solls["dark_loans"].Type));
         }
 
         private void InitializeShinbokList() {
@@ -191,6 +196,7 @@ namespace BokInterface.All {
             // Solls
             Solls.Add("solar_station", new DynamicMemoryValue("solar_station", memoryAddresses.Misc["stat"].Address, memoryAddresses.Solls["solar_station"].Address, memoryAddresses.Solls["solar_station"].Type));
             Solls.Add("solar_bank", new DynamicMemoryValue("solar_bank", memoryAddresses.Misc["stat"].Address, memoryAddresses.Solls["solar_bank"].Address, memoryAddresses.Solls["solar_bank"].Type));
+            Solls.Add("dark_loans", new DynamicMemoryValue("dark_loans", memoryAddresses.Misc["stat"].Address, memoryAddresses.Solls["dark_loans"].Address, memoryAddresses.Solls["dark_loans"].Type));
 
             // Solar Bike
             // Bike.Add("name", new DynamicMemoryValue("name", memoryAddresses.Misc["stat"].Address, memoryAddresses.Bike["name"].Address));
@@ -241,6 +247,9 @@ namespace BokInterface.All {
                 int slotNumber = i + 1;
                 Inventory.Add("slot" + slotNumber + "_gun_frame", new DynamicMemoryValue("slot" + slotNumber + "_gun_frame", memoryAddresses.Misc["stat"].Address, memoryAddresses.Inventory["gun_frame_slot_" + slotNumber].Address));
             }
+
+            // U32
+            U32.Add("total_exp_until_next_level", memoryAddresses.Django["total_exp_until_next_level"]);
         }
 
         private void InitializeLunarKnightsList() { }
