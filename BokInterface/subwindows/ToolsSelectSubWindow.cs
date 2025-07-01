@@ -4,6 +4,7 @@ using System.Windows.Forms;
 using BokInterface.All;
 using BokInterface.Tools.TileDataViewer;
 using BokInterface.Tools.MemoryValuesListing;
+using BokInterface.Tools.SolarBankInterestsSimulator;
 
 /**
  * Main file for tools selection subwindows
@@ -14,14 +15,16 @@ namespace BokInterface {
 
         #region Properties
 
-        protected bool tileDataViewerActive = false;
+        protected bool tileDataViewerActive = false,
+            memValuesListingActive = false,
+            solarBankInterestsSimActive = false;
         private TileDataViewer? _tileDataViewer;
-        protected bool memValuesListingActive = false;
         private MemoryValuesListing? _memValuesListing;
+        private SolarBankInterestsSimulator? _solarBankInterestsSim;
 
         #endregion
 
-        #region Subwindows methods for each game
+        #region Subwindows methods
 
         private void BoktaiToolsSubwindow() {
             AddToolsLabel();
@@ -33,12 +36,14 @@ namespace BokInterface {
             AddToolsLabel();
             AddTileDataViewerBtn();
             AddMemoryValuesListBtn();
+            AddSolarBankInterestsSimBtn();
         }
 
         private void ShinbokToolsSubwindow() {
             AddToolsLabel();
             AddTileDataViewerBtn();
             AddMemoryValuesListBtn();
+            AddSolarBankInterestsSimBtn();
         }
 
         private void LunarKnightsToolsSubwindow() {
@@ -47,7 +52,7 @@ namespace BokInterface {
 
         #endregion
 
-        #region Subwindow elements generating methods
+        #region Elements generation
 
         /// <summary>Simplified method for adding the label in the tools selection subwindow</summary>
 		/// <param name="posX">X position</param>
@@ -74,7 +79,6 @@ namespace BokInterface {
                 }
 
                 tileDataViewerActive = true;
-
                 switch (shorterGameName) {
                     case "Boktai":
                         _tileDataViewer = new BoktaiTileDataViewer(this, _boktaiAddresses);
@@ -126,7 +130,6 @@ namespace BokInterface {
                 }
 
                 memValuesListingActive = true;
-
                 switch (shorterGameName) {
                     case "Boktai":
                         _memValuesListing = new MemoryValuesListing(this, _boktaiAddresses);
@@ -155,6 +158,44 @@ namespace BokInterface {
             });
 
             miscToolsSelectionWindow.Controls.Add(mvlBtn);
+        }
+
+        /// <summary>Simplified method for adding the Solar bank interests simulator button to the tools selection subwindow</summary>
+		/// <param name="posX">X position</param>
+		/// <param name="posY">Y position</param>
+		/// <param name="width">Width (in pixels)</param>
+		/// <param name="height">Height (in pixels)</param>
+        private void AddSolarBankInterestsSimBtn(int posX = 5, int posY = 78, int width = 176, int height = 23) {
+
+            Button solarBankSimBtn = WinFormHelpers.CreateButton("solarBankInterestsSimBtn", "Solar bank interests simulator", posX, posY, width, height);
+            solarBankSimBtn.Click += new EventHandler(delegate (object sender, EventArgs e) {
+
+                // If tool is already active, stop
+                if (solarBankInterestsSimActive == true) {
+                    return;
+                }
+
+                solarBankInterestsSimActive = true;
+                switch (shorterGameName) {
+                    case "Zoktai":
+                    case "Shinbok":
+                        _solarBankInterestsSim = new SolarBankInterestsSimulator(this);
+                        break;
+                    default:
+                        // If game not handled, indicate that the tool isn't active & stop here
+                        solarBankInterestsSimActive = false;
+                        return;
+                }
+
+                // Add the on-close event handler
+                _solarBankInterestsSim.FormClosing += new FormClosingEventHandler(delegate (object sender, FormClosingEventArgs e) {
+                    // Indicate that the tool isn't active anymore & set instance to null just in case, to prevent it from doing anything else
+                    solarBankInterestsSimActive = false;
+                    _solarBankInterestsSim = null;
+                });
+            });
+
+            miscToolsSelectionWindow.Controls.Add(solarBankSimBtn);
         }
 
         #endregion
