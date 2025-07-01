@@ -16,6 +16,9 @@ namespace BokInterface.Addresses {
         /// <summary>Magics-related memory addresses</summary>
         public IDictionary<string, MemoryAddress> Magics = new Dictionary<string, MemoryAddress>();
 
+        /// <summary>Solls-related memory addresses</summary>
+        public IDictionary<string, MemoryAddress> Solls = new Dictionary<string, MemoryAddress>();
+
         /// <summary>
         /// <para>Misc memory addresses</para>
         /// <para>
@@ -31,12 +34,13 @@ namespace BokInterface.Addresses {
         public ZoktaiAddresses() {
             InitPlayableCharactersAddresses();
             InitInventoryAddresses();
+            InitSollsAddresses();
             InitMiscAddresses();
         }
 
-        protected void InitPlayableCharactersAddresses() {
+        private void InitPlayableCharactersAddresses() {
 
-            // Add Django addresses
+            // Position coordinates
             Django.Add("x_position", new MemoryAddress(0x30, note: "Django X position", domain: "EWRAM"));
             Django.Add("y_position", new MemoryAddress(0x34, note: "Django Y position", domain: "EWRAM"));
             Django.Add("z_position", new MemoryAddress(0x32, note: "Django Z position", domain: "EWRAM"));
@@ -79,7 +83,6 @@ namespace BokInterface.Addresses {
             Django.Add("gun_skill_exp", new MemoryAddress(0x4E, note: _note, domain: "EWRAM"));
 
             // Stat points
-            // Django.Add("showned_stat_points_to_allocate", new MemoryAddress(0x02006E20)); // useless
             Django.Add("stat_points_to_allocate", new MemoryAddress(0x42, domain: "EWRAM"));
 
             // Status effects
@@ -102,12 +105,9 @@ namespace BokInterface.Addresses {
             */
         }
 
-        protected void InitInventoryAddresses() {
+        private void InitInventoryAddresses() {
 
-            /**
-             * Inventory-related memory addresses
-             * We set these using a loop to simplify
-             */
+            // Set these using a loop to simplify
             for (int i = 0; i < 16; i++) {
 
                 int slotNumber = 1 + i;
@@ -149,8 +149,7 @@ namespace BokInterface.Addresses {
             Inventory.Add("magics", new MemoryAddress(0x54, note: "Magics", domain: "EWRAM", type: "U32"));
         }
 
-        protected void InitMiscAddresses() {
-
+        private void InitMiscAddresses() {
             Misc.Add("stat", new MemoryAddress(0x030046A0, note: "For persistent stats & inventory", type: "U32", domain: "IWRAM"));
             Misc.Add("world_state", new MemoryAddress(0x03004698, note: "Story progress & dungeon states", type: "U32", domain: "IWRAM"));
             Misc.Add("scratch", new MemoryAddress(0x03004690, type: "U32", domain: "IWRAM"));
@@ -165,6 +164,12 @@ namespace BokInterface.Addresses {
              */
 
             // Misc.Add("exp_table", new MemoryAddress(0x08ce3238));
+        }
+
+        private void InitSollsAddresses() {
+            Solls.Add("solar_station", new MemoryAddress(0x3BC, note: "Solar station balance", type: "U32", domain: "EWRAM"));
+            Solls.Add("solar_bank", new MemoryAddress(0x910, note: "Solar bank balance", type: "U32", domain: "EWRAM"));
+            Solls.Add("dark_loans", new MemoryAddress(0x1C4, note: "Dark loans", domain: "EWRAM"));
         }
     }
 }

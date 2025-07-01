@@ -43,8 +43,16 @@ namespace BokInterface.Addresses {
         private string _note = "";
 
         public ShinbokAddresses() {
+            InitDjangoAddresses();
+            InitBikeAddresses();
+            InitInventoryAddresses();
+            InitGunAddresses();
+            InitMiscAddresses();
+        }
 
-            // Add Django addresses
+        private void InitDjangoAddresses() {
+
+            // Position coordinates
             Django.Add("x_position", new MemoryAddress(0x30, note: "Django X position", domain: "EWRAM"));
             Django.Add("y_position", new MemoryAddress(0x34, note: "Django Y position", domain: "EWRAM"));
             Django.Add("z_position", new MemoryAddress(0x32, note: "Django Z position", domain: "EWRAM"));
@@ -54,11 +62,9 @@ namespace BokInterface.Addresses {
             Django.Add("current_hp", new MemoryAddress(0x424, domain: "EWRAM"));
             Django.Add("current_ene", new MemoryAddress(0x428, domain: "EWRAM"));
             Django.Add("current_trc", new MemoryAddress(0x42C, domain: "EWRAM"));
-
-            Django.Add("level", new MemoryAddress(0x40, type: "U32", domain: "EWRAM"));
-            Django.Add("exp", new MemoryAddress(0x48, domain: "EWRAM"));
-            // Django.Add("exp_until_next_level", 0x001BC8);
-
+            Django.Add("level", new MemoryAddress(0x40, domain: "EWRAM"));
+            Django.Add("exp", new MemoryAddress(0x48, type: "U32", domain: "EWRAM"));
+            Django.Add("total_exp_until_next_level", new MemoryAddress(0x1BC8, type: "U32", domain: "EWRAM"));
             Django.Add("stat_points", new MemoryAddress(0x42, domain: "EWRAM"));
 
             // VIT
@@ -89,12 +95,12 @@ namespace BokInterface.Addresses {
             Django.Add("persistent_cards_str", new MemoryAddress(0x24, note: "Stat points from cards, " + _note.ToLower(), domain: "EWRAM"));
 
             // Add Solls addresses
-            // Solls.Add("solls_on_self", 0x03CBB0);
-            Solls.Add("solar_station", new MemoryAddress(0x77C, note: "Solar station balance", type: "U32", domain: "EWRAM"));
+            Solls.Add("solar_station", new MemoryAddress(0x77C, note: "Solar station balance", domain: "EWRAM"));
             Solls.Add("solar_bank", new MemoryAddress(0x7B0, note: "Solar bank balance", domain: "EWRAM"));
-            // Solls.Add("dark_loan", 0x03C90C);
+            Solls.Add("dark_loans", new MemoryAddress(0x50C, note: "Dark loans", domain: "EWRAM"));
+        }
 
-            // Add Bike addresses
+        private void InitBikeAddresses() {
             _note = "Equipped bike part";
             // Bike.Add("name", new MemoryAddress(0x780, note: "Bike name", domain: "EWRAM"));
             Bike.Add("points", new MemoryAddress(0x7B2, note: "Points from races", domain: "EWRAM"));
@@ -106,27 +112,12 @@ namespace BokInterface.Addresses {
             Bike.Add("special", new MemoryAddress(0x7C4, note: _note, domain: "EWRAM"));
             Bike.Add("color", new MemoryAddress(0x07F8, note: _note, domain: "EWRAM"));
             Bike.Add("options", new MemoryAddress(0x81C, note: _note, domain: "EWRAM"));
-
-            InitInventoryAddresses();
-            InitGunAddresses();
-
-            // Add Misc addresses
-            // Misc.Add("equips_stat", 0x02004094);
-            Misc.Add("actor", new MemoryAddress(0x02000580, note: "Pointer to Django's actor data", type: "U32", domain: "EWRAM"));
-            Misc.Add("stat", new MemoryAddress(0x02000710, note: "Stats & inventory", type: "U32", domain: "EWRAM"));
-            Misc.Add("world_state", new MemoryAddress(0x0203DB08, note: "Story progress & dungeon states", type: "U32", domain: "EWRAM"));
-            Misc.Add("scratch", new MemoryAddress(0x0203E308, type: "U32", domain: "EWRAM"));
-            Misc.Add("map_data", new MemoryAddress(0x030052F4, type: "U32", domain: "IWRAM"));
-            Misc.Add("x_camera", new MemoryAddress(0x03005418, note: "Camera X position", domain: "IWRAM"));
-            Misc.Add("y_camera", new MemoryAddress(0x0300541A, note: "Camera Y position", domain: "IWRAM"));
-            Misc.Add("z_camera", new MemoryAddress(0x0300541C, note: "Camera Z position", domain: "IWRAM"));
-
-            Misc.Add("boss_hp", new MemoryAddress(0x0200EEC0, domain: "EWRAM"));
         }
 
         /// <summary>Init Inventory-related memory addresses</summary>
-        protected void InitInventoryAddresses() {
-            // We set these using a loop to simplify
+        private void InitInventoryAddresses() {
+
+            // Set these using a loop to simplify
             for (int i = 0; i < 16; i++) {
 
                 int slotNumber = 1 + i;
@@ -158,7 +149,7 @@ namespace BokInterface.Addresses {
         }
 
         /// <summary>Init Gun-related memory addresses</summary>
-        protected void InitGunAddresses() {
+        private void InitGunAddresses() {
             // Lenses
             for (int i = 0; i < 8; i++) {
                 int slotNumber = 1 + i;
@@ -172,6 +163,19 @@ namespace BokInterface.Addresses {
                 uint addressOffset = 0x2 * (uint)i;
                 Inventory.Add("gun_frame_slot_" + slotNumber, new MemoryAddress(0x4C0 + addressOffset, note: "Gun frame inventory slot", domain: "EWRAM"));
             }
+        }
+
+        private void InitMiscAddresses() {
+            // Misc.Add("equips_stat", 0x02004094);
+            Misc.Add("actor", new MemoryAddress(0x02000580, note: "Pointer to Django's actor data", type: "U32", domain: "EWRAM"));
+            Misc.Add("stat", new MemoryAddress(0x02000710, note: "Stats & inventory", type: "U32", domain: "EWRAM"));
+            Misc.Add("world_state", new MemoryAddress(0x0203DB08, note: "Story progress & dungeon states", type: "U32", domain: "EWRAM"));
+            Misc.Add("scratch", new MemoryAddress(0x0203E308, type: "U32", domain: "EWRAM"));
+            Misc.Add("map_data", new MemoryAddress(0x030052F4, type: "U32", domain: "IWRAM"));
+            Misc.Add("x_camera", new MemoryAddress(0x03005418, note: "Camera X position", domain: "IWRAM"));
+            Misc.Add("y_camera", new MemoryAddress(0x0300541A, note: "Camera Y position", domain: "IWRAM"));
+            Misc.Add("z_camera", new MemoryAddress(0x0300541C, note: "Camera Z position", domain: "IWRAM"));
+            Misc.Add("boss_hp", new MemoryAddress(0x0200EEC0, domain: "EWRAM"));
         }
     }
 }

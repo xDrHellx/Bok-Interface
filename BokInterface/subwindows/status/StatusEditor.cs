@@ -21,7 +21,8 @@ namespace BokInterface.Status {
             expGroupBox = new(),
             statPointsGroupBox = new(),
             statusGroupBox = new(),
-            statsGroupBox = new();
+            statsGroupBox = new(),
+            sollsGroupBox = new();
         protected readonly List<NumericUpDown> statusNumericUpDowns = [];
 
         #endregion
