@@ -26,6 +26,7 @@ namespace BokInterface.Tools.SolarBankInterestsSimulator {
 
         public SolarBankInterestsSimulator(BokInterface bokInterface) {
             Owner = bokInterface;
+            Icon = bokInterface.Icon;
             Name = name;
             Text = title;
             AutoScaleDimensions = new SizeF(6F, 15F);
