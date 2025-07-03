@@ -195,6 +195,7 @@ namespace BokInterface {
             switch (currentGameId) {
                 case 1346974549:    // EU
                 case 1162425173:    // US
+                case 1246311233:    // E3 demo / beta
                 case 1246311253:    // JP
                     currentGameName = "Boktai: The Sun is in Your Hand";
                     shorterGameName = "Boktai";

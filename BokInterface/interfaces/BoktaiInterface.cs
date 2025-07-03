@@ -22,8 +22,16 @@ namespace BokInterface {
 
         private void ShowBoktaiInterface() {
 
+            // If E3 demo / beta, update the game name label
+            string version = "";
+            int gameNameLabelWidth = 171;
+            if (currentGameId == 1246311233) {
+                version = " (E3 demo / beta)";
+                gameNameLabelWidth = 301;
+            }
+
             // Current game name
-            WinFormHelpers.CreateLabel("currentGameName", currentGameName, 5, 5, 171, 20, this);
+            WinFormHelpers.CreateLabel("currentGameName", currentGameName + version, 5, 5, gameNameLabelWidth, 20, this, textAlignment: "MiddleLeft");
 
             // Sections
             AddBoktaiCurrentStatusSection();
