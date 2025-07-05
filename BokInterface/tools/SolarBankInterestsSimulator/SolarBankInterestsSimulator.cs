@@ -57,8 +57,8 @@ namespace BokInterface.Tools.SolarBankInterestsSimulator {
                 0, 0, ClientSize.Width, 98, this
             );
 
-            _interestsRateNumDown = WinFormHelpers.CreateNumericUpDown("interestsRate", (decimal)1.70, 86, 103, 50, 23, maxValue: 21, nbDecimals: 2, control: this);
-            _baseSollsNumDown = WinFormHelpers.CreateNumericUpDown("baseSolls", 1000, 86, 130, 50, 23, maxValue: 9999, control: this);
+            _interestsRateNumDown = WinFormHelpers.CreateNumericUpDown("interestsRate", (decimal)1.70, 86, 103, 50, 23, 1, 21, 2, this);
+            _baseSollsNumDown = WinFormHelpers.CreateNumericUpDown("baseSolls", 1000, 86, 130, 50, 23, 1, 9999, control: this);
 
             _calculateInterestsBtn = WinFormHelpers.CreateButton("calculateInterestsBtn", "Calculate solar bank interests", 145, 103, 350, 50, this);
             _calculateInterestsBtn.Click += new EventHandler(delegate (object sender, EventArgs e) {
