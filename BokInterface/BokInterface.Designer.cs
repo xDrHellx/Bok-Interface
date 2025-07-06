@@ -149,6 +149,13 @@ namespace BokInterface {
 				_memValuesListing.Close();
 				memValuesListingActive = false;
 			}
+
+			// Solar bank interests simulator
+			if (_solarBankInterestsSim != null) {
+				_solarBankInterestsSim.Controls.Clear();
+				_solarBankInterestsSim.Close();
+				solarBankInterestsSimActive = false;
+			}
 		}
 
 		/// <summary>Simplified method for setting the main window of the interface</summary>

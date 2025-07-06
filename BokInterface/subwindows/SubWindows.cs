@@ -220,9 +220,11 @@ namespace BokInterface {
                         BoktaiToolsSubwindow();
                         break;
                     case "Zoktai":
+                        miscToolsSelectionWindow.Height = 145;
                         ZoktaiToolsSubwindow();
                         break;
                     case "Shinbok":
+                        miscToolsSelectionWindow.Height = 145;
                         ShinbokToolsSubwindow();
                         break;
                     case "LunarKnights":
