@@ -333,8 +333,9 @@ namespace BokInterface.All {
         /// <param name="width">Width (in pixels)</param>
         /// <param name="height">Height (in pixels)</param>
         /// <param name="control">Control instance if the element is to be attached to it directly</param>
+        /// <param name="dockStyle">DockStyle (by default None)</param>
         /// <returns><c>DataGridView</c>Instance</returns>
-        public static DataGridView CreateDataGridView(string name, DataTable data, int positionX, int positionY, int width, int height, Control? control = null) {
+        public static DataGridView CreateDataGridView(string name, DataTable data, int positionX, int positionY, int width, int height, Control? control = null, DockStyle dockStyle = DockStyle.None) {
 
             DataGridView gridView = new() {
                 Name = name,
@@ -347,7 +348,7 @@ namespace BokInterface.All {
                 Font = defaultFont,
                 AllowUserToAddRows = false,
                 AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill,
-                Dock = DockStyle.Fill,
+                Dock = dockStyle,
                 EnableHeadersVisualStyles = false,
                 ReadOnly = true
             };

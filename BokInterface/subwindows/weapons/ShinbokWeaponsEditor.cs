@@ -370,7 +370,7 @@ namespace BokInterface.Weapons {
                 + "\r\n- SP effects that lowers resistance to an element will stack everytime the weapon is equipped (game bug)"
                 + "\r\n- These effects goes back to normal when switching rooms"
                 + "\r\n- If you want a weapon to have its proper attack pattern, set the refine for it",
-                5, 5, 611, 82, this, readOnly: true
+                5, 5, 611, 82, this
             );
         }
 

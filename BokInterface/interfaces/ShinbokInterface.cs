@@ -44,7 +44,7 @@ namespace BokInterface {
         private void ShowShinbokInterface() {
 
             // Current game name
-            WinFormHelpers.CreateLabel("currentGameName", currentGameName, 5, 5, 176, 20, this);
+            WinFormHelpers.CreateLabel("currentGameName", currentGameName, 5, 5, 176, 20, this, textAlignment: "MiddleLeft");
 
             // Sections
             AddShinbokCurrentStatusSection();
