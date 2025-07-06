@@ -64,12 +64,11 @@ namespace BokInterface {
 
         /// <summary>Executed once after the constructor, and again every time a rom is loaded or reloaded</summary>
         public override void Restart() {
+
             // Update the APIs, as some of them might not be available if a game is not loaded
             APIs.Update(MainForm);
 
-            // Reset the retry count & isDS indicator
-            retryCount = 0;
-            isDS = false;
+            ResetInitializationVariables();
 
             // Clear subwindows related to extra tools to prevent errors caused by switching between games
             ClearExtraTools();
@@ -78,11 +77,8 @@ namespace BokInterface {
             InitializeInterface();
         }
 
-        /// <summary>Method used for initializing the interface</summary>
+        /// <summary>Initialize the interface</summary>
         protected void InitializeInterface() {
-
-            // Reset variables used for initializing
-            supportedGame = interfaceActivated = false;
 
             /**
              * We use a try - catch to prevent the tool from returning an error when no ROM is loaded
@@ -230,6 +226,13 @@ namespace BokInterface {
                     supportedGame = false;
                     break;
             }
+        }
+
+        /// <summary>Resets the variables used for initializing the interface</summary>
+        protected void ResetInitializationVariables() {
+            retryCount = 0;
+            isDS = supportedGame = interfaceActivated = false;
+            currentGameName = shorterGameName = "";
         }
 
         #endregion
