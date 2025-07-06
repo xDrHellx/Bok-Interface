@@ -14,11 +14,14 @@ namespace BokInterface.All {
         /// <summary>Tooltip for values that only updates after switching rooms</summary>
         public static ToolTip toolTip = CreateToolTip();
 
+        /// <summary>Color for the game label</summary>
+        public static readonly string _gameNameBackground = "#EFE6BD";
+
         /// <summary>Color for base stat points (Boktai 2, 3, LK)</summary>
-        public static string baseStatColor = "#FFE600";
+        public static readonly string baseStatColor = "#FFE600";
 
         /// <summary>Color for base stat points obtained from cards (Boktai 3)</summary>
-        public static string cardsStatColor = "#F7DF02";
+        public static readonly string cardsStatColor = "#F7DF02";
 
         /// <summary>
         /// <para>

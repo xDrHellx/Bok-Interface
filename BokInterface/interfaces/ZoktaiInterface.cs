@@ -43,14 +43,12 @@ namespace BokInterface {
 
             // If JP version, update the game name label to add the version
             string version = "";
-            int gameNameLabelWidth = 145;
             if (currentGameId == 1244803925) {
                 version = Utilities.GetGameVersion() == 1 ? " (v1.1)" : " (v1.0)";
-                gameNameLabelWidth = 180;
             }
 
             // Current game name
-            WinFormHelpers.CreateLabel("currentGameName", currentGameName + version, 5, 5, gameNameLabelWidth, 20, this, textAlignment: "MiddleLeft");
+            WinFormHelpers.CreateLabel("currentGameName", currentGameName + version, 0, 0, Width, 20, this, WinFormHelpers._gameNameBackground, textAlignment: "MiddleLeft");
 
             // Sections
             AddZoktaiCurrentStatusSection();
@@ -61,8 +59,7 @@ namespace BokInterface {
             AddToolsSection();
 
             // Main window
-            SetMainWindow("Bok Interface" + (shorterGameName != "" ? " - " + shorterGameName : ""), 329, 270);
-
+            SetMainWindow("Bok Interface", 329, 270);
             ResumeLayout(false);
         }
 

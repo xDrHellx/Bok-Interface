@@ -24,14 +24,12 @@ namespace BokInterface {
 
             // If E3 demo / beta, update the game name label
             string version = "";
-            int gameNameLabelWidth = 171;
             if (currentGameId == 1246311233) {
                 version = " (E3 demo / beta)";
-                gameNameLabelWidth = 301;
             }
 
             // Current game name
-            WinFormHelpers.CreateLabel("currentGameName", currentGameName + version, 5, 5, gameNameLabelWidth, 20, this, textAlignment: "MiddleLeft");
+            WinFormHelpers.CreateLabel("currentGameName", currentGameName + version, 0, 0, Width, 20, this, WinFormHelpers._gameNameBackground, textAlignment: "MiddleLeft");
 
             // Sections
             AddBoktaiCurrentStatusSection();
@@ -39,8 +37,7 @@ namespace BokInterface {
             AddToolsSection();
 
             // Main window
-            SetMainWindow("Bok Interface" + (shorterGameName != "" ? " - " + shorterGameName : ""), 345, 500);
-
+            SetMainWindow("Bok Interface", 345, 500);
             ResumeLayout(false);
         }
 
