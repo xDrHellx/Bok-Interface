@@ -60,7 +60,7 @@ namespace BokInterface {
 		/// <param name="width">Width (in pixels)</param>
 		/// <param name="height">Height (in pixels)</param>
         private void AddToolsLabel(int posX = 5, int posY = 5, int width = 176, int height = 15) {
-            WinFormHelpers.CreateLabel("availableToolsLabel", "-- Tools available --", posX, posY, width, height, miscToolsSelectionWindow);
+            WinFormHelpers.CreateLabel("availableToolsLabel", "-- Tools available --", posX, posY, width, height, _miscToolsSelectionWindow);
         }
 
         /// <summary>Simplified method for adding the Tile Data Viewer tool button to the tools selection subwindow</summary>
@@ -111,7 +111,7 @@ namespace BokInterface {
                 });
             });
 
-            miscToolsSelectionWindow.Controls.Add(tdvBtn);
+            _miscToolsSelectionWindow.Controls.Add(tdvBtn);
         }
 
         /// <summary>Simplified method for adding the Memory Values List tool button to the tools selection subwindow</summary>
@@ -157,7 +157,7 @@ namespace BokInterface {
                 });
             });
 
-            miscToolsSelectionWindow.Controls.Add(mvlBtn);
+            _miscToolsSelectionWindow.Controls.Add(mvlBtn);
         }
 
         /// <summary>Simplified method for adding the Solar bank interests simulator button to the tools selection subwindow</summary>
@@ -195,7 +195,7 @@ namespace BokInterface {
                 });
             });
 
-            miscToolsSelectionWindow.Controls.Add(solarBankSimBtn);
+            _miscToolsSelectionWindow.Controls.Add(solarBankSimBtn);
         }
 
         #endregion

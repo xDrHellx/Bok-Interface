@@ -121,19 +121,19 @@ namespace BokInterface {
         private void AddZoktaiCurrentStatusSection() {
 
             // Section
-            currentStatusGroupBox = WinFormHelpers.CreateGroupBox("currentStatus", "Current status", 5, 25, 226, 55, this);
+            _currentStatusGroupBox = WinFormHelpers.CreateGroupBox("currentStatus", "Current status", 5, 25, 226, 55, this);
 
             // Current status labels
-            WinFormHelpers.CreateLabel("djangoCurrentHpLabel", "LIFE :", 7, 19, 34, 15, currentStatusGroupBox);
-            WinFormHelpers.CreateLabel("djangoCurrentEneLabel", "ENE :", 7, 34, 34, 15, currentStatusGroupBox);
-            WinFormHelpers.CreateLabel("djangoCurrentLevelLabel", "Level :", 93, 19, 40, 15, currentStatusGroupBox);
-            WinFormHelpers.CreateLabel("djangoCurrentExpLabel", "EXP :", 93, 34, 33, 15, currentStatusGroupBox);
+            WinFormHelpers.CreateLabel("djangoCurrentHpLabel", "LIFE :", 7, 19, 34, 15, _currentStatusGroupBox);
+            WinFormHelpers.CreateLabel("djangoCurrentEneLabel", "ENE :", 7, 34, 34, 15, _currentStatusGroupBox);
+            WinFormHelpers.CreateLabel("djangoCurrentLevelLabel", "Level :", 93, 19, 40, 15, _currentStatusGroupBox);
+            WinFormHelpers.CreateLabel("djangoCurrentExpLabel", "EXP :", 93, 34, 33, 15, _currentStatusGroupBox);
 
             // Current status values
-            _bok2_currentStatusHpValue = WinFormHelpers.CreateLabel("djangoCurrentHpValue", "", 44, 19, 31, 15, currentStatusGroupBox);
-            _bok2_currentStatusEneValue = WinFormHelpers.CreateLabel("djangoCurrentHpValue", "", 44, 34, 31, 15, currentStatusGroupBox);
-            _bok2_djangoLevel = WinFormHelpers.CreateLabel("djangoCurrentLevelValue", "", 132, 19, 31, 15, currentStatusGroupBox);
-            _bok2_djangoExp = WinFormHelpers.CreateLabel("djangoCurrentExpValue", "", 132, 34, 43, 15, currentStatusGroupBox);
+            _bok2_currentStatusHpValue = WinFormHelpers.CreateLabel("djangoCurrentHpValue", "", 44, 19, 31, 15, _currentStatusGroupBox);
+            _bok2_currentStatusEneValue = WinFormHelpers.CreateLabel("djangoCurrentHpValue", "", 44, 34, 31, 15, _currentStatusGroupBox);
+            _bok2_djangoLevel = WinFormHelpers.CreateLabel("djangoCurrentLevelValue", "", 132, 19, 31, 15, _currentStatusGroupBox);
+            _bok2_djangoExp = WinFormHelpers.CreateLabel("djangoCurrentExpValue", "", 132, 34, 43, 15, _currentStatusGroupBox);
         }
 
         private void AddZoktaiCurrentSkillSection() {
@@ -165,40 +165,40 @@ namespace BokInterface {
         private void AddZoktaiCurrentStatsSection() {
 
             // Section
-            currentStatsGroupBox = WinFormHelpers.CreateGroupBox("currentStats", "Stats", 5, 86, 75, 106, this);
+            _currentStatsGroupBox = WinFormHelpers.CreateGroupBox("currentStats", "Stats", 5, 86, 75, 106, this);
 
             // VIT
-            WinFormHelpers.CreateLabel("vitRowLabel", "VIT", 6, 19, 27, 15, currentStatsGroupBox, textAlignment: "MiddleLeft");
-            _bok2_djangoVit = WinFormHelpers.CreateLabel("djangoVit", "", 35, 19, 31, 15, currentStatsGroupBox, WinFormHelpers.baseStatColor, textAlignment: "MiddleRight");
+            WinFormHelpers.CreateLabel("vitRowLabel", "VIT", 6, 19, 27, 15, _currentStatsGroupBox, textAlignment: "MiddleLeft");
+            _bok2_djangoVit = WinFormHelpers.CreateLabel("djangoVit", "", 35, 19, 31, 15, _currentStatsGroupBox, WinFormHelpers.baseStatColor, textAlignment: "MiddleRight");
 
             // SPR
-            WinFormHelpers.CreateLabel("sprRowLabel", "SPR", 6, 34, 27, 15, currentStatsGroupBox, textAlignment: "MiddleLeft");
-            _bok2_djangoSpr = WinFormHelpers.CreateLabel("djangoSpr", "", 35, 34, 31, 15, currentStatsGroupBox, WinFormHelpers.baseStatColor, textAlignment: "MiddleRight");
+            WinFormHelpers.CreateLabel("sprRowLabel", "SPR", 6, 34, 27, 15, _currentStatsGroupBox, textAlignment: "MiddleLeft");
+            _bok2_djangoSpr = WinFormHelpers.CreateLabel("djangoSpr", "", 35, 34, 31, 15, _currentStatsGroupBox, WinFormHelpers.baseStatColor, textAlignment: "MiddleRight");
 
             // STR
-            WinFormHelpers.CreateLabel("strRowLabel", "STR", 6, 49, 27, 15, currentStatsGroupBox, textAlignment: "MiddleLeft");
-            _bok2_djangoStr = WinFormHelpers.CreateLabel("djangoStr", "", 35, 49, 31, 15, currentStatsGroupBox, WinFormHelpers.baseStatColor, textAlignment: "MiddleRight");
+            WinFormHelpers.CreateLabel("strRowLabel", "STR", 6, 49, 27, 15, _currentStatsGroupBox, textAlignment: "MiddleLeft");
+            _bok2_djangoStr = WinFormHelpers.CreateLabel("djangoStr", "", 35, 49, 31, 15, _currentStatsGroupBox, WinFormHelpers.baseStatColor, textAlignment: "MiddleRight");
 
             // AGI
-            WinFormHelpers.CreateLabel("agiRowLabel", "AGI", 6, 64, 27, 15, currentStatsGroupBox, textAlignment: "MiddleLeft");
-            _bok2_djangoAgi = WinFormHelpers.CreateLabel("djangoAgi", "", 35, 64, 31, 15, currentStatsGroupBox, WinFormHelpers.baseStatColor, textAlignment: "MiddleRight");
+            WinFormHelpers.CreateLabel("agiRowLabel", "AGI", 6, 64, 27, 15, _currentStatsGroupBox, textAlignment: "MiddleLeft");
+            _bok2_djangoAgi = WinFormHelpers.CreateLabel("djangoAgi", "", 35, 64, 31, 15, _currentStatsGroupBox, WinFormHelpers.baseStatColor, textAlignment: "MiddleRight");
 
             // Stat points to allocate
-            WinFormHelpers.CreateLabel("statPointsLabel", "Add", 6, 84, 29, 15, currentStatsGroupBox, textAlignment: "MiddleLeft");
-            _bok2_djangoStatPoints = WinFormHelpers.CreateLabel("djangoStatPoints", "", 35, 84, 31, 15, currentStatsGroupBox, WinFormHelpers.totalStatColor, textAlignment: "MiddleRight");
+            WinFormHelpers.CreateLabel("statPointsLabel", "Add", 6, 84, 29, 15, _currentStatsGroupBox, textAlignment: "MiddleLeft");
+            _bok2_djangoStatPoints = WinFormHelpers.CreateLabel("djangoStatPoints", "", 35, 84, 31, 15, _currentStatsGroupBox, WinFormHelpers.totalStatColor, textAlignment: "MiddleRight");
         }
 
         private void AddZoktaiEditSection() {
 
             // Section
-            editGroupBox = WinFormHelpers.CreateGroupBox("editButtons", "Edit", 237, 25, 87, 184, this);
+            _editGroupBox = WinFormHelpers.CreateGroupBox("editButtons", "Edit", 237, 25, 87, 184, this);
 
-            _bok2_editStatusBtn = WinFormHelpers.CreateButton("editStatuts", "Status", 6, 19, 75, 23, editGroupBox);
-            _bok2_editInventoryBtn = WinFormHelpers.CreateButton("editItems", "Items", 6, 46, 75, 23, editGroupBox);
-            _bok2_editKeyItemsBtn = WinFormHelpers.CreateButton("editKeyItems", "Key items", 6, 73, 75, 23, editGroupBox);
-            _bok2_editWeaponsBtn = WinFormHelpers.CreateButton("editWeapons", "Weapons", 6, 100, 75, 23, editGroupBox);
-            _bok2_editEquipsBtn = WinFormHelpers.CreateButton("editEquips", "Protectors", 6, 127, 75, 23, editGroupBox);
-            _bok2_editMagicsBtn = WinFormHelpers.CreateButton("editMagics", "Magics", 6, 154, 75, 23, editGroupBox);
+            _bok2_editStatusBtn = WinFormHelpers.CreateButton("editStatuts", "Status", 6, 19, 75, 23, _editGroupBox);
+            _bok2_editInventoryBtn = WinFormHelpers.CreateButton("editItems", "Items", 6, 46, 75, 23, _editGroupBox);
+            _bok2_editKeyItemsBtn = WinFormHelpers.CreateButton("editKeyItems", "Key items", 6, 73, 75, 23, _editGroupBox);
+            _bok2_editWeaponsBtn = WinFormHelpers.CreateButton("editWeapons", "Weapons", 6, 100, 75, 23, _editGroupBox);
+            _bok2_editEquipsBtn = WinFormHelpers.CreateButton("editEquips", "Protectors", 6, 127, 75, 23, _editGroupBox);
+            _bok2_editMagicsBtn = WinFormHelpers.CreateButton("editMagics", "Magics", 6, 154, 75, 23, _editGroupBox);
 
             // Add onclick events
             _bok2_editStatusBtn.Click += new EventHandler(OpenStatusEditor);

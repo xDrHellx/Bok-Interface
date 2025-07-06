@@ -22,7 +22,7 @@ namespace BokInterface {
     [ExternalToolEmbeddedIcon("BokInterface.img.django_head_16.png")]
     public partial class BokInterface : ToolFormBase, IExternalToolForm {
 
-        #region Properties
+        #region Tool properties
 
         protected override string WindowTitleStatic => "Bok Interface v0.1.9a";
         public override bool BlocksInputWhenFocused => false;
@@ -30,11 +30,11 @@ namespace BokInterface {
         public uint currentGameId;
         public static string currentGameName = "",
             shorterGameName = "";
-        protected bool supportedGame = false,
-            interfaceActivated = false,
-            isDS = false;
-        protected int retryCount = 0;
-        private bool _previousDisplayMessagesSetting = true;
+        private bool _supportedGame = false,
+            _interfaceActivated = false,
+            _isDS = false,
+            _previousDisplayMessagesSetting = true;
+        private int _retryCount = 0;
         public bool _previousIsPauseSetting = false;
 
         /// <summary>
@@ -56,7 +56,7 @@ namespace BokInterface {
 
         #endregion
 
-        #region Main methods
+        #region Init
 
         public BokInterface() {
             InitializeInterface();
@@ -68,8 +68,8 @@ namespace BokInterface {
             APIs.Update(MainForm);
 
             // Reset the retry count & isDS indicator
-            retryCount = 0;
-            isDS = false;
+            _retryCount = 0;
+            _isDS = false;
 
             // Clear subwindows related to extra tools to prevent errors caused by switching between games
             ClearExtraTools();
@@ -82,7 +82,7 @@ namespace BokInterface {
         protected void InitializeInterface() {
 
             // Reset variables used for initializing
-            supportedGame = interfaceActivated = false;
+            _supportedGame = _interfaceActivated = false;
 
             /**
              * We use a try - catch to prevent the tool from returning an error when no ROM is loaded
@@ -95,7 +95,7 @@ namespace BokInterface {
 
                 // Get & set the infos about the game currently running on BizHawk
                 DetectCurrentGame();
-                if (interfaceActivated == true) {
+                if (_interfaceActivated == true) {
                     ShowInterfaceIndicator();
                 } else {
                     /**
@@ -104,8 +104,8 @@ namespace BokInterface {
                      *
                      * 10 frames should be enough for this
                      */
-                    if (retryCount < 10) {
-                        retryCount++;
+                    if (_retryCount < 10) {
+                        _retryCount++;
                         DetectCurrentGame();
                     }
                 }
@@ -117,11 +117,11 @@ namespace BokInterface {
         /// <summary>Executed after every frame (except while turboing, use FastUpdateAfter for that)</summary>
         protected override void UpdateAfter() {
             try {
-                if (supportedGame == true) {
+                if (_supportedGame == true) {
                     ShowInterfaceIndicator();
 
                     // If the interface is not activated, reinitialize it
-                    if (interfaceActivated == false) {
+                    if (_interfaceActivated == false) {
                         InitializeComponent();
                     }
 
@@ -169,13 +169,17 @@ namespace BokInterface {
                      *
                      * 10 frames should be enough for this
                      */
-                    if (retryCount < 10) {
-                        retryCount++;
+                    if (_retryCount < 10) {
+                        _retryCount++;
                         DetectCurrentGame();
                     }
                 }
             } catch { }
         }
+
+        #endregion
+
+        #region Game detection
 
         /// <summary>
         /// Detects the current game <br/>
@@ -199,22 +203,22 @@ namespace BokInterface {
                 case 1246311253:    // JP
                     currentGameName = "Boktai: The Sun is in Your Hand";
                     shorterGameName = "Boktai";
-                    supportedGame = true;
-                    isDS = false;
+                    _supportedGame = true;
+                    _isDS = false;
                     break;
                 case 1345467221:    // EU
                 case 1160917845:    // US
                 case 1244803925:    // JP 1.0 & 1.1
                     currentGameName = "Boktai 2: Solar Boy Django";
                     shorterGameName = "Zoktai";
-                    supportedGame = true;
-                    isDS = false;
+                    _supportedGame = true;
+                    _isDS = false;
                     break;
                 case 1244869461:
                     currentGameName = "Boktai 3: Sabata's Counterattack";
                     shorterGameName = "Shinbok";
-                    supportedGame = true;
-                    isDS = false;
+                    _supportedGame = true;
+                    _isDS = false;
                     break;
                 case 1481329729:    // EU 1.1
                 case 1347112001:    // EU 1.0
@@ -222,12 +226,12 @@ namespace BokInterface {
                 case 1246448705:    // JP
                     currentGameName = "Boktai DS - Lunar Knights";
                     shorterGameName = "LunarKnights";
-                    supportedGame = true;
-                    isDS = true;
+                    _supportedGame = true;
+                    _isDS = true;
                     break;
                 default:
                     currentGameName = shorterGameName = "";
-                    supportedGame = false;
+                    _supportedGame = false;
                     break;
             }
         }

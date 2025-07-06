@@ -18,18 +18,18 @@ namespace BokInterface {
 		#region Main interface properties
 
 		/// <summary>Required designer variable</summary>
-		private IContainer components = null;
+		private IContainer _components = null;
 
 		#endregion
 
 		#region Common interface elements properties
 
-		private System.Windows.Forms.GroupBox currentStatusGroupBox = new(),
-			currentStatsGroupBox = new(),
-			inventoryGroupBox = new(),
-			editGroupBox = new(),
-			extrasGroupBox = new(),
-			miscDataGroupBox = new();
+		private System.Windows.Forms.GroupBox _currentStatusGroupBox = new(),
+			_currentStatsGroupBox = new(),
+			_inventoryGroupBox = new(),
+			_editGroupBox = new(),
+			_extrasGroupBox = new(),
+			_miscDataGroupBox = new();
 		// Misc data labels
 		private System.Windows.Forms.Label _averageSpeedLabel = new(),
 			_currentSpeedLabel = new(),
@@ -44,22 +44,22 @@ namespace BokInterface {
 
 		#region Subwindows properties
 
-		private System.Windows.Forms.Form miscToolsSelectionWindow = new();
-		private List<System.Windows.Forms.Form> subwindows = new();
+		private System.Windows.Forms.Form _miscToolsSelectionWindow = new();
+		private List<System.Windows.Forms.Form> _subwindows = new();
 
 		#endregion
 
 		/// <summary>Clean up any resources being used</summary>
 		/// <param name="disposing">True if managed resources should be disposed; otherwise, false</param>
 		protected override void Dispose(bool disposing) {
-			if (disposing && (components != null)) {
-				components.Dispose();
+			if (disposing && (_components != null)) {
+				_components.Dispose();
 			}
 
 			base.Dispose(disposing);
 		}
 
-		#region Windows Form Designer generated code
+		#region WinForm Designer
 
 		/// <summary>Required method for Designer support - do not modify the contents of this method with the code editor</summary>
 		private void InitializeComponent() {
@@ -82,24 +82,24 @@ namespace BokInterface {
 			// Show corresponding interface
 			switch (shorterGameName) {
 				case "Boktai":
-					interfaceActivated = true;
+					_interfaceActivated = true;
 					ShowBoktaiInterface();
 					break;
 				case "Zoktai":
-					interfaceActivated = true;
+					_interfaceActivated = true;
 					ShowZoktaiInterface();
 					break;
 				case "Shinbok":
-					interfaceActivated = true;
+					_interfaceActivated = true;
 					ShowShinbokInterface();
 					break;
 				case "LunarKnights":
-					interfaceActivated = true;
+					_interfaceActivated = true;
 					ShowLunarKnightsInterface();
 					break;
 				default:
 					// If not a Boktai game, show the "Game not recognized" window & stop here
-					interfaceActivated = false;
+					_interfaceActivated = false;
 					ShowGameNotRecognizedWindow();
 					break;
 			}
@@ -109,7 +109,7 @@ namespace BokInterface {
 		private void ClearInterface() {
 
 			// Close all subwindows
-			foreach (Form subwindow in subwindows) {
+			foreach (Form subwindow in _subwindows) {
 				if (subwindow != null && subwindow.IsDisposed == false) {
 					subwindow.Close();
 				}
@@ -117,16 +117,16 @@ namespace BokInterface {
 
 			// Main window elements
 			Controls.Clear();
-			subwindows.Clear();
-			currentStatusGroupBox.Controls.Clear();
-			currentStatsGroupBox.Controls.Clear();
-			inventoryGroupBox.Controls.Clear();
-			editGroupBox.Controls.Clear();
-			extrasGroupBox.Controls.Clear();
+			_subwindows.Clear();
+			_currentStatusGroupBox.Controls.Clear();
+			_currentStatsGroupBox.Controls.Clear();
+			_inventoryGroupBox.Controls.Clear();
+			_editGroupBox.Controls.Clear();
+			_extrasGroupBox.Controls.Clear();
 
 			// Tools selection subwindow elements
-			miscToolsSelectionWindow.Controls.Clear();
-			miscToolsSelectionWindow.Close();
+			_miscToolsSelectionWindow.Controls.Clear();
+			_miscToolsSelectionWindow.Close();
 			miscToolsSelectorOpened = false;
 
 			// Extra tools
@@ -177,17 +177,17 @@ namespace BokInterface {
 			int btnWidthOffset = 0;
 			switch (BokInterface.shorterGameName) {
 				case "Boktai":
-					extrasGroupBox = WinFormHelpers.CreateGroupBox("extraTools", "Tools", 237, 25, 87, 52, this);
+					_extrasGroupBox = WinFormHelpers.CreateGroupBox("extraTools", "Tools", 237, 25, 87, 52, this);
 					break;
 				case "Zoktai":
-					extrasGroupBox = WinFormHelpers.CreateGroupBox("extraTools", "Tools", 237, 214, 87, 52, this);
+					_extrasGroupBox = WinFormHelpers.CreateGroupBox("extraTools", "Tools", 237, 214, 87, 52, this);
 					break;
 				case "Shinbok":
-					extrasGroupBox = WinFormHelpers.CreateGroupBox("extraTools", "Tools", 237, 214, 97, 52, this);
+					_extrasGroupBox = WinFormHelpers.CreateGroupBox("extraTools", "Tools", 237, 214, 97, 52, this);
 					btnWidthOffset += 10;
 					break;
 				case "LunarKnights":
-					extrasGroupBox = WinFormHelpers.CreateGroupBox("extraTools", "Tools", 237, 25, 87, 52, this);
+					_extrasGroupBox = WinFormHelpers.CreateGroupBox("extraTools", "Tools", 237, 25, 87, 52, this);
 					break;
 				default:
 					// If game is not handled, don't add anything & stop here
@@ -195,7 +195,7 @@ namespace BokInterface {
 			}
 
 			// Add Misc Tools button
-			Button miscToolsBtn = WinFormHelpers.CreateButton("showExtraTools", "Misc tools", 6, 21, 75 + btnWidthOffset, 23, extrasGroupBox); // 17
+			Button miscToolsBtn = WinFormHelpers.CreateButton("showExtraTools", "Misc tools", 6, 21, 75 + btnWidthOffset, 23, _extrasGroupBox); // 17
 			miscToolsBtn.Click += new System.EventHandler(OpenMiscToolsSelector);
 		}
 
@@ -225,25 +225,25 @@ namespace BokInterface {
 					return;
 			}
 
-			miscDataGroupBox = WinFormHelpers.CreateGroupBox("miscData", "Misc. data", 5, positionY, 226, groupHeight, this);
+			_miscDataGroupBox = WinFormHelpers.CreateGroupBox("miscData", "Misc. data", 5, positionY, 226, groupHeight, this);
 
 			// Average speed
-			_currentSpeedLabel = WinFormHelpers.CreateLabel("currentMovementSpeed", "Current movement speed : ", 7, 19, 200, 15, miscDataGroupBox, textAlignment: "MiddleLeft");
-			_averageSpeedLabel = WinFormHelpers.CreateLabel("averageMovementSpeed", "Average over 60 frames : ", 7, 34, 200, 15, miscDataGroupBox, textAlignment: "MiddleLeft");
+			_currentSpeedLabel = WinFormHelpers.CreateLabel("currentMovementSpeed", "Current movement speed : ", 7, 19, 200, 15, _miscDataGroupBox, textAlignment: "MiddleLeft");
+			_averageSpeedLabel = WinFormHelpers.CreateLabel("averageMovementSpeed", "Average over 60 frames : ", 7, 34, 200, 15, _miscDataGroupBox, textAlignment: "MiddleLeft");
 
 			// Add the coffin section if enabled
 			if (enableCoffinSection == true) {
 
-				WinFormHelpers.CreateSeparator("miscDataSeparator", 5, 51, 216, miscDataGroupBox);
-				WinFormHelpers.CreateLabel("coffinSection", "Coffin data", 5, 53, 80, 15, miscDataGroupBox, textAlignment: "MiddleLeft").Font = new("Segoe UI", 9, FontStyle.Underline, GraphicsUnit.Point);
+				WinFormHelpers.CreateSeparator("miscDataSeparator", 5, 51, 216, _miscDataGroupBox);
+				WinFormHelpers.CreateLabel("coffinSection", "Coffin data", 5, 53, 80, 15, _miscDataGroupBox, textAlignment: "MiddleLeft").Font = new("Segoe UI", 9, FontStyle.Underline, GraphicsUnit.Point);
 
 				// Coffin data
-				_coffinDamageLabel = WinFormHelpers.CreateLabel("coffinDamage", "Damage : ", 5, 68, 200, 15, miscDataGroupBox, textAlignment: "MiddleLeft");
-				_coffinWindupTimerLabel = WinFormHelpers.CreateLabel("coffinWindupTimer", "Windup begins in : ", 5, 83, 200, 15, miscDataGroupBox, textAlignment: "MiddleLeft");
-				_coffinShakeTimerLabel = WinFormHelpers.CreateLabel("coffnShakeTimer", "Windup : ", 5, 98, 200, 15, miscDataGroupBox, textAlignment: "MiddleLeft");
-				_coffinShakeDurationLabel = WinFormHelpers.CreateLabel("coffinShakeDuration", "Duration : ", 5, 113, 200, 15, miscDataGroupBox, textAlignment: "MiddleLeft");
-				_coffinEscapeTimerLabel = WinFormHelpers.CreateLabel("coffinEscapeTimer", "Begins escaping in : ", 5, 128, 200, 15, miscDataGroupBox, textAlignment: "MiddleLeft");
-				_coffinDistanceLabel = WinFormHelpers.CreateLabel("coffinDistance", "Distance : ", 5, 143, 200, 15, miscDataGroupBox, textAlignment: "MiddleLeft");
+				_coffinDamageLabel = WinFormHelpers.CreateLabel("coffinDamage", "Damage : ", 5, 68, 200, 15, _miscDataGroupBox, textAlignment: "MiddleLeft");
+				_coffinWindupTimerLabel = WinFormHelpers.CreateLabel("coffinWindupTimer", "Windup begins in : ", 5, 83, 200, 15, _miscDataGroupBox, textAlignment: "MiddleLeft");
+				_coffinShakeTimerLabel = WinFormHelpers.CreateLabel("coffnShakeTimer", "Windup : ", 5, 98, 200, 15, _miscDataGroupBox, textAlignment: "MiddleLeft");
+				_coffinShakeDurationLabel = WinFormHelpers.CreateLabel("coffinShakeDuration", "Duration : ", 5, 113, 200, 15, _miscDataGroupBox, textAlignment: "MiddleLeft");
+				_coffinEscapeTimerLabel = WinFormHelpers.CreateLabel("coffinEscapeTimer", "Begins escaping in : ", 5, 128, 200, 15, _miscDataGroupBox, textAlignment: "MiddleLeft");
+				_coffinDistanceLabel = WinFormHelpers.CreateLabel("coffinDistance", "Distance : ", 5, 143, 200, 15, _miscDataGroupBox, textAlignment: "MiddleLeft");
 			}
 		}
 

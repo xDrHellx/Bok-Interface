@@ -18,7 +18,7 @@ namespace BokInterface.All {
         public static string baseStatColor = "#FFE600";
 
         /// <summary>Color for base stat points obtained from cards (Boktai 3)</summary>
-        public static string cardsStatColor = "#f7df02";
+        public static string cardsStatColor = "#F7DF02";
 
         /// <summary>
         /// <para>
