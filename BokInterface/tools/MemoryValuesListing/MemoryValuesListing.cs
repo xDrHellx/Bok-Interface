@@ -106,7 +106,7 @@ namespace BokInterface.Tools.MemoryValuesListing {
             }
 
             // Show table in subwindow & set columns styles
-            _dataGridView = WinFormHelpers.CreateDataGridView("mvlGrid", _dataTable, 5, 5, ClientSize.Width - 10, ClientSize.Height - 10, this);
+            _dataGridView = WinFormHelpers.CreateDataGridView("mvlGrid", _dataTable, 5, 5, ClientSize.Width - 10, ClientSize.Height - 10, this, DockStyle.Fill);
             SetColumnsStyle();
         }
 

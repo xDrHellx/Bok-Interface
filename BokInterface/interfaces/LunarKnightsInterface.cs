@@ -18,7 +18,7 @@ namespace BokInterface {
         private void ShowLunarKnightsInterface() {
 
             // Current game name
-            WinFormHelpers.CreateLabel("currentGameName", currentGameName, 5, 5, 141, 20, this);
+            WinFormHelpers.CreateLabel("currentGameName", currentGameName, 5, 5, 141, 20, this, textAlignment: "MiddleLeft");
 
             // Sections
             AddLunarKnightsCurrentStatusSection();
