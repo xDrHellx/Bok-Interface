@@ -16,14 +16,10 @@ namespace BokInterface.All {
         // private static IGameInfoApi? gameInfoApi; // deprecated
         private static ISaveStateApi? s_saveStateApi;
         private static IMemoryApi? s_memoryApi;
-
         private static IGuiApi? s_guiApi;
-
         public static IMainFormForTools MainFormForTools => Require(s_mainFormForTools);
         public static MainForm MainForm => (MainForm)MainFormForTools;
-
         public static ApiContainer ApiContainer => Require(s_apiContainer);
-
         // These seem to always be available even when no ROM is loaded
         public static IEmuClientApi Client => Require(s_clientApi);
         public static IEmulationApi Emulation => Require(s_emulationApi);
@@ -31,7 +27,6 @@ namespace BokInterface.All {
         public static ISaveStateApi SaveState => Require(s_saveStateApi);
         public static IMemoryApi Memory => Require(s_memoryApi);
         public static IGuiApi Gui => Require(s_guiApi);
-
         public static Config Config => ((EmulationApi)Emulation).ForbiddenConfigReference;
 
         internal static void Update(ApiContainer container) {
