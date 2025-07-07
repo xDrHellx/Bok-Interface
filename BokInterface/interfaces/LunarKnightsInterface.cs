@@ -15,6 +15,8 @@ namespace BokInterface {
 
         #endregion
 
+        #region Show interface
+
         private void ShowLunarKnightsInterface() {
 
             // Current game name
@@ -30,12 +32,22 @@ namespace BokInterface {
             ResumeLayout(false);
         }
 
+        #endregion
+
+        #region Update
+
         private void UpdateLunarKnightsInterface() { }
+
+        #endregion
+
+        #region Elements
 
         private void AddLunarKnightsCurrentStatusSection() {
 
             // Section
             _currentStatusGroupBox = WinFormHelpers.CreateGroupBox("currentStatus", "Current status", 5, 25, 226, 70, this);
         }
+
+        #endregion
     }
 }

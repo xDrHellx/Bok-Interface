@@ -10,18 +10,13 @@ namespace BokInterface.Tools.MemoryValuesListing {
     /// <summary>Shows the list of all memory addresses listed for a game with their values, based on the ones added in the Bok Interface itself</summary>
     class MemoryValuesListing : Form {
 
-        #region Tool properties & instances
+        #region Properties
 
         public int index = 0;
         private readonly DataTable _dataTable = new();
         private DataGridView? _dataGridView;
         private readonly BokInterface _bokInterface;
         private readonly dynamic? _memAddresses;
-
-        #endregion
-
-        #region Subwindow properties
-
         protected string name = "memoryValuesListing",
             title = "Memory Values List";
         protected int width = 650,
@@ -77,7 +72,7 @@ namespace BokInterface.Tools.MemoryValuesListing {
 
         #endregion
 
-        #region Drawing methods
+        #region Drawing
 
         protected override void OnPaint(PaintEventArgs e) {
             base.OnPaint(e);
@@ -87,7 +82,7 @@ namespace BokInterface.Tools.MemoryValuesListing {
 
         #endregion
 
-        #region DataTable generation methods
+        #region DataTable generation
 
         /// <summary>Generate the Data Table containing the memory addresses, values and infos</summary>
         private void GenerateDataTable() {

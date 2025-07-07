@@ -9,13 +9,15 @@ namespace BokInterface.Status {
     /// <summary>Status editor for Lunar Knights / Boktai DS</summary>
     class LunarKnightsStatusEditor : StatusEditor {
 
-        #region Instances
+        #region Properties
 
         private readonly MemoryValues _memoryValues;
         private readonly BokInterface _bokInterface;
         private readonly LunarKnightsAddresses _lunarKnightsAddresses;
 
         #endregion
+
+        #region Constructor
 
         public LunarKnightsStatusEditor(BokInterface bokInterface, MemoryValues memoryValues, LunarKnightsAddresses lunarKnightsAddresses) {
 
@@ -36,6 +38,10 @@ namespace BokInterface.Status {
             Show();
         }
 
+        #endregion
+
+        #region Elements
+
         protected override void AddElements() {
 
             // Get default values, depending on availability, these can be the current in-game values
@@ -50,6 +56,10 @@ namespace BokInterface.Status {
             //     }
             // });
         }
+
+        #endregion
+
+        #region Values setting
 
         protected override void SetValues() {
 
@@ -103,5 +113,7 @@ namespace BokInterface.Status {
             IDictionary<string, decimal> defaultValues = new Dictionary<string, decimal>();
             return defaultValues;
         }
+
+        #endregion
     }
 }

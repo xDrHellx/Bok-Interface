@@ -10,7 +10,7 @@ namespace BokInterface.Weapons {
     /// <summary>Weapons editor for Boktai 2</summary>
     class ZoktaiWeaponsEditor : WeaponsEditor {
 
-        #region Instances
+        #region Properties
 
         private readonly MemoryValues _memoryValues;
         private readonly BokInterface _bokInterface;
@@ -19,6 +19,8 @@ namespace BokInterface.Weapons {
         private readonly ZoktaiAbilities _zoktaiAbilities;
 
         #endregion
+
+        #region Constructor
 
         public ZoktaiWeaponsEditor(BokInterface bokInterface, MemoryValues memoryValues, ZoktaiAddresses zoktaiAddresses) {
 
@@ -41,6 +43,10 @@ namespace BokInterface.Weapons {
             AddElements();
             Show();
         }
+
+        #endregion
+
+        #region Elements
 
         protected override void AddElements() {
 
@@ -313,6 +319,30 @@ namespace BokInterface.Weapons {
             );
         }
 
+        ///<summary>Generates the options for the weapon selection & SP abilities dropdowns</summary>
+        private void GenerateDropDownOptions() {
+            foreach (ImageComboBox dropdown in dropDownLists) {
+
+                // Indicate what the dropdown field is for
+                string[] fieldParts = dropdown.Name.Split(['_'], 4);
+                if (fieldParts.Length >= 4 && fieldParts[3] != null && fieldParts[3].Substring(0, 10) == "sp_ability") {
+                    // If dropdown is for an SP ability
+                    dropdown.DataSource = new BindingSource(_zoktaiAbilities.Weapons, null);
+                    dropdown.DisplayMember = "Key";
+                    dropdown.ValueMember = "Value";
+                } else {
+                    // If dropdown is for the weapon itself
+                    dropdown.DataSource = new BindingSource(_zoktaiWeapons.All, null);
+                    dropdown.DisplayMember = "Key";
+                    dropdown.ValueMember = "Value";
+                }
+            }
+        }
+
+        #endregion
+
+        #region Values setting
+
         protected override void SetValues() {
 
             // Store the previous setting for BizHawk being paused
@@ -408,26 +438,6 @@ namespace BokInterface.Weapons {
                         _memoryValues.U32[valueKey].Value = (uint)value;
                     }
                     break;
-            }
-        }
-
-        ///<summary>Generates the options for the weapon selection & SP abilities dropdowns</summary>
-        private void GenerateDropDownOptions() {
-            foreach (ImageComboBox dropdown in dropDownLists) {
-
-                // Indicate what the dropdown field is for
-                string[] fieldParts = dropdown.Name.Split(['_'], 4);
-                if (fieldParts.Length >= 4 && fieldParts[3] != null && fieldParts[3].Substring(0, 10) == "sp_ability") {
-                    // If dropdown is for an SP ability
-                    dropdown.DataSource = new BindingSource(_zoktaiAbilities.Weapons, null);
-                    dropdown.DisplayMember = "Key";
-                    dropdown.ValueMember = "Value";
-                } else {
-                    // If dropdown is for the weapon itself
-                    dropdown.DataSource = new BindingSource(_zoktaiWeapons.All, null);
-                    dropdown.DisplayMember = "Key";
-                    dropdown.ValueMember = "Value";
-                }
             }
         }
 
@@ -550,5 +560,7 @@ namespace BokInterface.Weapons {
                 _memoryValues.Inventory["slot" + slot + "_weapon_forgedBy_3"].Value = 1802663796;
             }
         }
+
+        #endregion
     }
 }

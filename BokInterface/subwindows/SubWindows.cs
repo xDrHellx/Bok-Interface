@@ -17,7 +17,7 @@ using BokInterface.Weapons;
 namespace BokInterface {
     partial class BokInterface {
 
-        #region Properties indicating if subwindows are opened or not
+        #region Subwindows states
 
         public bool statusEditorOpened = false,
             inventoryEditorOpened = false,
@@ -30,7 +30,7 @@ namespace BokInterface {
 
         #endregion
 
-        #region Subwindows generation methods
+        #region Openers
         protected void OpenStatusEditor(object sender, EventArgs e) {
             if (statusEditorOpened == false) {
 

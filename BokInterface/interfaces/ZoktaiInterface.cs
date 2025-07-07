@@ -39,6 +39,8 @@ namespace BokInterface {
 
         #endregion
 
+        #region Show interface
+
         private void ShowZoktaiInterface() {
 
             // If JP version, update the game name label to add the version
@@ -62,6 +64,10 @@ namespace BokInterface {
             SetMainWindow("Bok Interface", 329, 270);
             ResumeLayout(false);
         }
+
+        #endregion
+
+        #region Update
 
         private void UpdateZoktaiInterface() {
 
@@ -114,6 +120,10 @@ namespace BokInterface {
                 _averageSpeedLabel.Text = "Average over 60 frames : " + averageSpeed.ToString();
             }
         }
+
+        #endregion
+
+        #region Elements
 
         private void AddZoktaiCurrentStatusSection() {
 
@@ -205,5 +215,7 @@ namespace BokInterface {
             _bok2_editEquipsBtn.Click += new EventHandler(OpenEquipsEditor);
             _bok2_editMagicsBtn.Click += new EventHandler(OpenMagicsEditor);
         }
+
+        #endregion
     }
 }

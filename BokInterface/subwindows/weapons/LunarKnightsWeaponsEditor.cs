@@ -7,13 +7,15 @@ namespace BokInterface.Weapons {
     /// <summary>Weapons editor for Lunar Knights / Boktai DS</summary>
     class LunarKnightsWeaponsEditor : WeaponsEditor {
 
-        #region Instances
+        #region Properties
 
         private readonly MemoryValues _memoryValues;
         private readonly BokInterface _bokInterface;
         private readonly LunarKnightsAddresses _lunarKnightsAddresses;
 
         #endregion
+
+        #region Constructor
 
         public LunarKnightsWeaponsEditor(BokInterface bokInterface, MemoryValues memoryValues, LunarKnightsAddresses LunarKnightsAddresses) {
 
@@ -34,8 +36,18 @@ namespace BokInterface.Weapons {
             Show();
         }
 
+        #endregion
+
+        #region Elements
+
         protected override void AddElements() { }
 
+        #endregion
+
+        #region Values setting
+
         protected override void SetValues() { }
+
+        #endregion
     }
 }

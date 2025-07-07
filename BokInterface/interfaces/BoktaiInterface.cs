@@ -20,6 +20,8 @@ namespace BokInterface {
 
         #endregion
 
+        #region Show interface
+
         private void ShowBoktaiInterface() {
 
             // If E3 demo / beta, update the game name label
@@ -40,6 +42,10 @@ namespace BokInterface {
             SetMainWindow("Bok Interface", 345, 500);
             ResumeLayout(false);
         }
+
+        #endregion
+
+        #region Update
 
         private void UpdateBoktaiInterface() {
             /**
@@ -85,6 +91,10 @@ namespace BokInterface {
             }
         }
 
+        #endregion
+
+        #region Elements
+
         private void AddBoktaiCurrentStatusSection() {
 
             // Section
@@ -98,5 +108,7 @@ namespace BokInterface {
             _bok1_currentStatusHpValue = WinFormHelpers.CreateLabel("djangoCurrentHpValue", "", 44, 19, 31, 15, _currentStatusGroupBox);
             _bok1_currentStatusEneValue = WinFormHelpers.CreateLabel("djangoCurrentEneValue", "", 44, 34, 31, 15, _currentStatusGroupBox);
         }
+
+        #endregion
     }
 }

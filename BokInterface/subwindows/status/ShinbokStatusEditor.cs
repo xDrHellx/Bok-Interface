@@ -17,13 +17,15 @@ namespace BokInterface.Status {
     /// <summary>Status editor for Boktai 3</summary>
     class ShinbokStatusEditor : StatusEditor {
 
-        #region Instances
+        #region Properties
 
         private readonly MemoryValues _memoryValues;
         private readonly BokInterface _bokInterface;
         private readonly ShinbokAddresses _shinbokAddresses;
 
         #endregion
+
+        #region Constructor
 
         public ShinbokStatusEditor(BokInterface bokInterface, MemoryValues memoryValues, ShinbokAddresses shinbokAddresses) {
 
@@ -43,6 +45,10 @@ namespace BokInterface.Status {
             AddElements();
             Show();
         }
+
+        #endregion
+
+        #region Elements
 
         protected override void AddElements() {
 
@@ -112,6 +118,10 @@ namespace BokInterface.Status {
                 }
             });
         }
+
+        #endregion
+
+        #region Values setting
 
         protected override IDictionary<string, decimal> GetDefaultValues() {
 
@@ -287,5 +297,7 @@ namespace BokInterface.Status {
                 _memoryValues.Django[key].Value = basePoints + cardPoints;
             }
         }
+
+        #endregion
     }
 }

@@ -7,7 +7,7 @@ namespace BokInterface.All {
     /// <summary>Class containing instances of memory values for the current game</summary>
     class MemoryValues {
 
-        #region Properties
+        #region Properties / lists
 
         /// <summary>Django-related memory values</summary>
         public IDictionary<string, DynamicMemoryValue> Django = new Dictionary<string, DynamicMemoryValue>();
@@ -29,6 +29,8 @@ namespace BokInterface.All {
         public IDictionary<string, MemoryAddress> U32 = new Dictionary<string, MemoryAddress>();
 
         #endregion
+
+        #region Constructor
 
         /// <summary>Constructor</summary>
         /// <param name="shorterGameName">Shortened game name (used for setting the lists containing the memory values instances)</param>
@@ -54,6 +56,8 @@ namespace BokInterface.All {
             }
         }
 
+        #endregion
+
         /// <summary>Clears all lists</summary>
         private void ClearLists() {
             Django.Clear();
@@ -65,6 +69,8 @@ namespace BokInterface.All {
             U16.Clear();
             U32.Clear();
         }
+
+        #region Bok 1 lists init
 
         private void InitializeBoktaiList() {
             BoktaiAddresses memoryAddresses = new();
@@ -78,6 +84,10 @@ namespace BokInterface.All {
             Coffin.Add("x_position", new DynamicMemoryValue("x_position", memoryAddresses.Coffin["actor"].Address, memoryAddresses.Coffin["x_position"].Address));
             Coffin.Add("y_position", new DynamicMemoryValue("y_position", memoryAddresses.Coffin["actor"].Address, memoryAddresses.Coffin["y_position"].Address));
         }
+
+        #endregion
+
+        #region Bok 2 lists init
 
         private void InitializeZoktaiList() {
             ZoktaiAddresses memoryAddresses = new();
@@ -154,6 +164,10 @@ namespace BokInterface.All {
             Solls.Add("solar_bank", new DynamicMemoryValue("solar_bank", memoryAddresses.Misc["stat"].Address, memoryAddresses.Solls["solar_bank"].Address, memoryAddresses.Solls["solar_bank"].Type));
             Solls.Add("dark_loans", new DynamicMemoryValue("dark_loans", memoryAddresses.Misc["stat"].Address, memoryAddresses.Solls["dark_loans"].Address, memoryAddresses.Solls["dark_loans"].Type));
         }
+
+        #endregion
+
+        #region Bok 3 lists init
 
         private void InitializeShinbokList() {
             ShinbokAddresses memoryAddresses = new();
@@ -249,6 +263,12 @@ namespace BokInterface.All {
             U32.Add("total_exp_until_next_level", memoryAddresses.Django["total_exp_until_next_level"]);
         }
 
+        #endregion
+
+        #region Bok DS / LK lists init
+
         private void InitializeLunarKnightsList() { }
+
+        #endregion
     }
 }

@@ -10,7 +10,7 @@ namespace BokInterface.KeyItems {
     /// <summary>Key items editor for Boktai 3</summary>
     class ShinbokKeyItemsEditor : KeyItemsEditor {
 
-        #region Instances
+        #region Properties
 
         private readonly MemoryValues _memoryValues;
         private readonly BokInterface _bokInterface;
@@ -18,6 +18,8 @@ namespace BokInterface.KeyItems {
         private readonly ShinbokItems _shinbokItems;
 
         #endregion
+
+        #region Constructor
 
         public ShinbokKeyItemsEditor(BokInterface bokInterface, MemoryValues memoryValues, ShinbokAddresses shinbokAddresses) {
 
@@ -39,6 +41,10 @@ namespace BokInterface.KeyItems {
             AddElements();
             Show();
         }
+
+        #endregion
+
+        #region Elements
 
         protected override void AddElements() {
 
@@ -105,6 +111,19 @@ namespace BokInterface.KeyItems {
             slot16group = WinFormHelpers.CreateCheckGroupBox("slot16group", "Slot 16", 533, 161, 170, 49, control: this);
         }
 
+        ///<summary>Generates the options for the dropdowns</summary>
+        private void GenerateDropDownOptions() {
+            foreach (ImageComboBox dropdown in dropDownLists) {
+                dropdown.DataSource = new BindingSource(_shinbokItems.KeyItems, null);
+                dropdown.DisplayMember = "Key";
+                dropdown.ValueMember = "Value";
+            }
+        }
+
+        #endregion
+
+        #region Values setting
+
         protected override void SetValues() {
 
             // Store the previous setting for BizHawk being paused
@@ -169,29 +188,6 @@ namespace BokInterface.KeyItems {
             }
         }
 
-        ///<summary>Generates the options for the dropdowns</summary>
-        private void GenerateDropDownOptions() {
-            foreach (ImageComboBox dropdown in dropDownLists) {
-                dropdown.DataSource = new BindingSource(_shinbokItems.KeyItems, null);
-                dropdown.DisplayMember = "Key";
-                dropdown.ValueMember = "Value";
-            }
-        }
-
-        ///<summary>Get an item from the items list by using its value</summary>
-        ///<param name="value"><c>decimal</c>Value</param>
-        ///<returns><c>Item</c>Item</returns>
-        private Item? GetItemByValue(decimal value) {
-            foreach (KeyValuePair<string, Item> index in _shinbokItems.KeyItems) {
-                Item item = index.Value;
-                if (item.value == value) {
-                    return item;
-                }
-            }
-
-            return null;
-        }
-
         protected override void SetDefaultValues() {
 
             /**
@@ -218,5 +214,21 @@ namespace BokInterface.KeyItems {
                 }
             }
         }
+
+        ///<summary>Get an item from the items list by using its value</summary>
+        ///<param name="value"><c>decimal</c>Value</param>
+        ///<returns><c>Item</c>Item</returns>
+        private Item? GetItemByValue(decimal value) {
+            foreach (KeyValuePair<string, Item> index in _shinbokItems.KeyItems) {
+                Item item = index.Value;
+                if (item.value == value) {
+                    return item;
+                }
+            }
+
+            return null;
+        }
+
+        #endregion
     }
 }

@@ -10,20 +10,17 @@ namespace BokInterface.Status {
     /// <summary>Status editor for Boktai 2</summary>
     class ZoktaiStatusEditor : StatusEditor {
 
-        #region Instances
+        #region Properties
 
         private readonly MemoryValues _memoryValues;
         private readonly BokInterface _bokInterface;
         private readonly ZoktaiAddresses _zoktaiAddresses;
-
-        #endregion
-
-        #region Form elements
-
         protected readonly List<CheckBox> statusCheckBoxes = [];
         protected CheckGroupBox kaamosGroupBox = new();
 
         #endregion
+
+        #region Constructor
 
         public ZoktaiStatusEditor(BokInterface bokInterface, MemoryValues memoryValues, ZoktaiAddresses zoktaiAddresses) {
 
@@ -43,6 +40,10 @@ namespace BokInterface.Status {
             AddElements();
             Show();
         }
+
+        #endregion
+
+        #region Elements
 
         protected override void AddElements() {
 
@@ -122,6 +123,10 @@ namespace BokInterface.Status {
                 }
             });
         }
+
+        #endregion
+
+        #region Values setting
 
         protected override IDictionary<string, decimal> GetDefaultValues() {
 
@@ -336,5 +341,7 @@ namespace BokInterface.Status {
                     break;
             }
         }
+
+        #endregion
     }
 }

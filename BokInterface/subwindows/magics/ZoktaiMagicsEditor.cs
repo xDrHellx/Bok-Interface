@@ -9,23 +9,20 @@ namespace BokInterface.Magics {
     /// <summary>Magics editor for Boktai 2</summary>
     class ZoktaiMagicsEditor : MagicsEditor {
 
-        #region Instances
+        #region Properties
 
         private readonly MemoryValues _memoryValues;
         private readonly BokInterface _bokInterface;
         private readonly ZoktaiAddresses _zoktaiAddresses;
         private readonly ZoktaiMagics _zoktaiMagics;
-
-        #endregion
-
-        #region Form elements
-
         protected GroupBox lunaGroupBox = new(),
             solGroupBox = new(),
             darkGroupBox = new(),
             sabataGroupBox = new();
 
         #endregion
+
+        #region Constructor
 
         public ZoktaiMagicsEditor(BokInterface bokInterface, MemoryValues memoryValues, ZoktaiAddresses zoktaiAddresses) {
 
@@ -46,6 +43,10 @@ namespace BokInterface.Magics {
             AddElements();
             Show();
         }
+
+        #endregion
+
+        #region Elements
 
         protected override void AddElements() {
 
@@ -134,6 +135,10 @@ namespace BokInterface.Magics {
             });
         }
 
+        #endregion
+
+        #region Values setting
+
         protected override void SetValues() {
             /**
              * Retrieve the current magics value from the memory address
@@ -190,5 +195,7 @@ namespace BokInterface.Magics {
                 }
             }
         }
+
+        #endregion
     }
 }

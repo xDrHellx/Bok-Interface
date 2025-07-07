@@ -7,13 +7,15 @@ namespace BokInterface.Inventory {
     /// <summary>Inventory editor for Boktai</summary>
     class BoktaiInventoryEditor : InventoryEditor {
 
-        #region Instances
+        #region Properties
 
         private readonly MemoryValues _memoryValues;
         private readonly BokInterface _bokInterface;
         private readonly BoktaiAddresses _boktaiAddresses;
 
         #endregion
+
+        #region Constructor
 
         public BoktaiInventoryEditor(BokInterface bokInterface, MemoryValues memoryValues, BoktaiAddresses BoktaiAddresses) {
 
@@ -34,8 +36,18 @@ namespace BokInterface.Inventory {
             Show();
         }
 
+        #endregion
+
+        #region Elements
+
         protected override void AddElements() { }
 
+        #endregion
+
+        #region Values setting
+
         protected override void SetValues() { }
+
+        #endregion
     }
 }

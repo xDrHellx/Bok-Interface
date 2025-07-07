@@ -10,19 +10,14 @@ namespace BokInterface.Tools.TextToWorldSpace {
     /// </summary>
     class TextToWorldSpace {
 
-        #region Main properties
+        #region Properties
 
-        protected double planeScale = (double)0x30 / 0x100;
-        protected double heightScale = (double)0x18 / 0x100;
+        protected double planeScale = (double)0x30 / 0x100,
+            heightScale = (double)0x18 / 0x100;
         protected Color textColor = new();
-
-        #endregion
-
-        #region Addresses properties & instances
-
         private readonly dynamic? _memAddresses;
-        private uint _cameraXposAddress = 0;
-        private uint _cameraYposAddress = 0;
+        private uint _cameraXposAddress = 0,
+            _cameraYposAddress = 0;
 
         #endregion
 
@@ -85,6 +80,8 @@ namespace BokInterface.Tools.TextToWorldSpace {
         }
 
         #endregion
+
+        #region Methods
 
         /// <summary>Set camera memory addresses used for writing position</summary>
         /// <returns><c>bool</c>True if addresses were set, false otherwise</return>
@@ -173,5 +170,7 @@ namespace BokInterface.Tools.TextToWorldSpace {
             (double, double, double) viewCoordinates = WorldToView(x, y, z);
             return ViewToScreen(viewCoordinates.Item1, viewCoordinates.Item2);
         }
+
+        #endregion
     }
 }

@@ -12,21 +12,19 @@ namespace BokInterface.Tools.TileDataViewer {
     /// </summary>
     abstract class TileDataViewer : Form {
 
-        #region Subwindow properties
+        #region Properties
 
         protected string name = "tileDataViewer",
             title = "Tile Data Viewer";
         protected int width = 500,
             height = 500;
-
-        #endregion
-
-        #region Tool properties
-
-        public int index = 0;
+        public int index = 0,
+            textY = 0;
         protected uint scale = 16,
-            alpha = 0xA0;
-        protected int textY = 0;
+            alpha = 0xA0,
+            mapDataAddress = 0,
+            djangoXposAddress = 0,
+            djangoYposAddress = 0;
         protected static int imgNb = 1,
             n = 0;
         protected List<Color>? colorPalette;
@@ -35,14 +33,7 @@ namespace BokInterface.Tools.TileDataViewer {
 
         #endregion
 
-        #region Memory addresses properties
-        protected uint mapDataAddress = 0,
-            djangoXposAddress = 0,
-            djangoYposAddress = 0;
-
-        #endregion
-
-        #region Subwindow & loop-related methods
+        #region Subwindow & loop
 
         /// <summary>Initialize subwindow properties</summary>
         protected void InitializeSubwindowProperties() {
@@ -97,7 +88,7 @@ namespace BokInterface.Tools.TileDataViewer {
 
         #endregion
 
-        #region Drawing methods
+        #region Drawing
 
         protected override void OnPaint(PaintEventArgs e) {
             base.OnPaint(e);
@@ -254,7 +245,7 @@ namespace BokInterface.Tools.TileDataViewer {
 
         #endregion
 
-        #region Utilities & misc methods
+        #region Utilities & misc
 
         /// <summary>Simplified method for drawing a filled rectangle</summary>
         /// <param name="e">Painting event used for drawing</param>

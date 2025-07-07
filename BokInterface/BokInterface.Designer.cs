@@ -15,14 +15,14 @@ namespace BokInterface {
 
 	partial class BokInterface {
 
-		#region Main interface properties
+		#region Main properties
 
 		/// <summary>Required designer variable</summary>
 		private IContainer _components = null;
 
 		#endregion
 
-		#region Common interface elements properties
+		#region Common elements
 
 		private System.Windows.Forms.GroupBox _currentStatusGroupBox = new(),
 			_currentStatsGroupBox = new(),
@@ -42,7 +42,7 @@ namespace BokInterface {
 
 		#endregion
 
-		#region Subwindows properties
+		#region Subwindows
 
 		private System.Windows.Forms.Form _miscToolsSelectionWindow = new();
 		private List<System.Windows.Forms.Form> _subwindows = new();
@@ -105,6 +105,10 @@ namespace BokInterface {
 			}
 		}
 
+		#endregion
+
+		#region Clearing methods
+
 		/// <summary>Clears the interface window and all other sections within it</summary>
 		private void ClearInterface() {
 
@@ -157,6 +161,10 @@ namespace BokInterface {
 				solarBankInterestsSimActive = false;
 			}
 		}
+
+		#endregion
+
+		#region Elements & window
 
 		/// <summary>Simplified method for setting the main window of the interface</summary>
 		/// <param name="name">Window name</param>

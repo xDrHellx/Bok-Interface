@@ -41,6 +41,8 @@ namespace BokInterface {
 
         #endregion
 
+        #region Show interface
+
         private void ShowShinbokInterface() {
 
             // Current game name
@@ -57,6 +59,10 @@ namespace BokInterface {
             SetMainWindow("Bok Interface", 339, 270);
             ResumeLayout(false);
         }
+
+        #endregion
+
+        #region Update
 
         private void UpdateShinbokInterface() {
 
@@ -107,6 +113,10 @@ namespace BokInterface {
                 _averageSpeedLabel.Text = "Average over 60 frames : " + averageSpeed.ToString();
             }
         }
+
+        #endregion
+
+        #region Elements
 
         private void AddShinbokCurrentStatusSection() {
 
@@ -182,5 +192,7 @@ namespace BokInterface {
             _bok3_editEquipsBtn.Click += new EventHandler(OpenEquipsEditor);
             _bok3_editSolarGunBtn.Click += new EventHandler(OpenSolarGunEditor);
         }
+
+        #endregion
     }
 }

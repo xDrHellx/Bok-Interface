@@ -8,11 +8,16 @@ namespace BokInterface.Calculators {
     /// </summary>
     class MovementCalculator {
 
+        #region Properties
+
         protected int _previousPosX,
             _previousPosY,
             _previousPosZ;
-
         protected readonly List<double> _speedBuffer = [];
+
+        #endregion
+
+        #region Methods
 
         /// <summary>Get the average speed</summary>
         /// <param name="value">Current speed</param>
@@ -92,5 +97,7 @@ namespace BokInterface.Calculators {
 
             return speed2D;
         }
+
+        #endregion
     }
 }

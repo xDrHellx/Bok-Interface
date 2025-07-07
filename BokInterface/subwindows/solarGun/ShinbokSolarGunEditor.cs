@@ -10,7 +10,7 @@ namespace BokInterface.solarGun {
     /// <summary>Solar gun editor for Boktai 3</summary>
     class ShinbokSolarGunEditor : SolarGunEditor {
 
-        #region Instances
+        #region Properties
 
         protected readonly List<RadioButton> radioButtons = [];
 
@@ -18,11 +18,6 @@ namespace BokInterface.solarGun {
         private readonly BokInterface _bokInterface;
         private readonly ShinbokAddresses _shinbokAddresses;
         private readonly ShinbokGuns _shinbokGuns;
-
-        #endregion
-
-        #region Form elements
-
         protected readonly List<ImageComboBox> lensesDropDownLists = [],
             framesDropDownLists = [];
         protected TabControl inventoryTabControl = new();
@@ -30,6 +25,8 @@ namespace BokInterface.solarGun {
             framesTab = new();
 
         #endregion
+
+        #region Constructor
 
         public ShinbokSolarGunEditor(BokInterface bokInterface, MemoryValues memoryValues, ShinbokAddresses ShinbokAddresses) {
 
@@ -51,6 +48,10 @@ namespace BokInterface.solarGun {
             AddElements();
             Show();
         }
+
+        #endregion
+
+        #region Elements
 
         protected override void AddElements() {
 
@@ -152,6 +153,28 @@ namespace BokInterface.solarGun {
             framesDropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot12_gun_frame", 5, 19, 120, 23, slot12Group, visibleOptions: 5));
         }
 
+        ///<summary>Generates the options for the dropdowns</summary>
+        private void GenerateDropDownOptions() {
+
+            // Lenses
+            foreach (ImageComboBox dropdown in lensesDropDownLists) {
+                dropdown.DataSource = new BindingSource(_shinbokGuns.Lenses, null);
+                dropdown.DisplayMember = "Key";
+                dropdown.ValueMember = "Value";
+            }
+
+            // Frames
+            foreach (ImageComboBox dropdown in framesDropDownLists) {
+                dropdown.DataSource = new BindingSource(_shinbokGuns.Frames, null);
+                dropdown.DisplayMember = "Key";
+                dropdown.ValueMember = "Value";
+            }
+        }
+
+        #endregion
+
+        #region Values setting
+
         protected override void SetValues() {
 
             // Store the previous setting for BizHawk being paused
@@ -229,52 +252,6 @@ namespace BokInterface.solarGun {
             }
         }
 
-        ///<summary>Generates the options for the dropdowns</summary>
-        private void GenerateDropDownOptions() {
-
-            // Lenses
-            foreach (ImageComboBox dropdown in lensesDropDownLists) {
-                dropdown.DataSource = new BindingSource(_shinbokGuns.Lenses, null);
-                dropdown.DisplayMember = "Key";
-                dropdown.ValueMember = "Value";
-            }
-
-            // Frames
-            foreach (ImageComboBox dropdown in framesDropDownLists) {
-                dropdown.DataSource = new BindingSource(_shinbokGuns.Frames, null);
-                dropdown.DisplayMember = "Key";
-                dropdown.ValueMember = "Value";
-            }
-        }
-
-        ///<summary>Get a lens from the lenses list by using its value</summary>
-        ///<param name="value"><c>decimal</c>Value</param>
-        ///<returns><c>ShinbokLens</c>Lens</returns>
-        private ShinbokLens? GetLensByValue(decimal value) {
-            foreach (KeyValuePair<string, ShinbokLens> index in _shinbokGuns.Lenses) {
-                ShinbokLens lens = index.Value;
-                if (lens.value == value) {
-                    return lens;
-                }
-            }
-
-            return null;
-        }
-
-        ///<summary>Get a frame from the frames list by using its value</summary>
-        ///<param name="value"><c>decimal</c>Value</param>
-        ///<returns><c>ShinbokFrame</c>Frame</returns>
-        private ShinbokFrame? GetFrameByValue(decimal value) {
-            foreach (KeyValuePair<string, ShinbokFrame> index in _shinbokGuns.Frames) {
-                ShinbokFrame frame = index.Value;
-                if (frame.value == value) {
-                    return frame;
-                }
-            }
-
-            return null;
-        }
-
         protected override void SetDefaultValues() {
 
             /**
@@ -316,5 +293,35 @@ namespace BokInterface.solarGun {
                 }
             }
         }
+
+        ///<summary>Get a lens from the lenses list by using its value</summary>
+        ///<param name="value"><c>decimal</c>Value</param>
+        ///<returns><c>ShinbokLens</c>Lens</returns>
+        private ShinbokLens? GetLensByValue(decimal value) {
+            foreach (KeyValuePair<string, ShinbokLens> index in _shinbokGuns.Lenses) {
+                ShinbokLens lens = index.Value;
+                if (lens.value == value) {
+                    return lens;
+                }
+            }
+
+            return null;
+        }
+
+        ///<summary>Get a frame from the frames list by using its value</summary>
+        ///<param name="value"><c>decimal</c>Value</param>
+        ///<returns><c>ShinbokFrame</c>Frame</returns>
+        private ShinbokFrame? GetFrameByValue(decimal value) {
+            foreach (KeyValuePair<string, ShinbokFrame> index in _shinbokGuns.Frames) {
+                ShinbokFrame frame = index.Value;
+                if (frame.value == value) {
+                    return frame;
+                }
+            }
+
+            return null;
+        }
+
+        #endregion
     }
 }
