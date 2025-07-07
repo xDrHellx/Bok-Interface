@@ -236,7 +236,7 @@ namespace BokInterface.All {
 
         #endregion
 
-        #region Special cases
+        #region Weapon bonuses
 
         /// <summary>
         ///     <para>
