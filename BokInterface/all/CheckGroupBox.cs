@@ -8,8 +8,6 @@ namespace BokInterface.All {
 
         /// <summary>CheckBox instance</summary>
         private readonly CheckBox _checkBoxInstance;
-        /// <summary>Event handler for checking or unchecking</summary>
-        public event EventHandler? CheckedChanged;
 
         /// <summary>Add the CheckBox to the control</summary>
         public CheckGroupBox() {
