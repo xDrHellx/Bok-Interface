@@ -68,6 +68,7 @@ namespace BokInterface {
             // Update the APIs, as some of them might not be available if a game is not loaded
             APIs.Update(MainForm);
 
+            // Reset the variables for initializing the corresponding game's interface
             ResetInitializationVariables();
 
             // Clear subwindows related to extra tools to prevent errors caused by switching between games
