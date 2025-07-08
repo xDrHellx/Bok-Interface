@@ -227,8 +227,7 @@ namespace BokInterface {
                     _isDS = true;
                     break;
                 default:
-                    currentGameName = shorterGameName = "";
-                    _supportedGame = false;
+                    ResetInitializationVariables();
                     break;
             }
         }
