@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
 using System.Windows.Forms;
@@ -16,9 +17,24 @@ namespace BokInterface.Tools.SolarBankInterestsSimulator {
 
         private readonly DataTable _dataTable = new();
         private DataGridView? _dataGridView;
-        private NumericUpDown _interestsRateNumDown = new(),
-            _baseSollsNumDown = new();
+        private NumericUpDown _baseSollsNumDown = new();
         private Button _calculateInterestsBtn = new();
+        private ComboBox _interestsRateDropDown = new();
+        private readonly Dictionary<int, double> _interestsRates = new() {
+            {1, 1.562500},
+            {3, 3.125000},
+            {4, 4.687500},
+            {6, 6.250000},
+            {7, 7.812500},
+            {9, 9.375000},
+            {10, 10.937500},
+            {12, 12.500000},
+            {14, 14.062500},
+            {15, 15.625000},
+            {17, 17.187500},
+            {18, 18.750000},
+            {20, 20.312500}
+        };
 
         #endregion
 
@@ -57,7 +73,10 @@ namespace BokInterface.Tools.SolarBankInterestsSimulator {
                 0, 0, ClientSize.Width, 98, this
             );
 
-            _interestsRateNumDown = WinFormHelpers.CreateNumericUpDown("interestsRate", (decimal)1.70, 86, 103, 50, 23, 1, 21, 2, this);
+            _interestsRateDropDown = WinFormHelpers.CreateDropDownList("interestsRate", 86, 103, 50, 23, this, visibleOptions: 10);
+            _interestsRateDropDown.DataSource = new BindingSource(_interestsRates, null);
+            _interestsRateDropDown.DisplayMember = "Key";
+            _interestsRateDropDown.ValueMember = "Value";
             _baseSollsNumDown = WinFormHelpers.CreateNumericUpDown("baseSolls", 1000, 86, 130, 50, 23, 1, 9999, control: this);
 
             _calculateInterestsBtn = WinFormHelpers.CreateButton("calculateInterestsBtn", "Calculate solar bank interests", 145, 103, 350, 50, this);
@@ -104,8 +123,9 @@ namespace BokInterface.Tools.SolarBankInterestsSimulator {
         private void GenerateTableData() {
 
             // Get values from fields
+            KeyValuePair<int, double> selectedRate = (KeyValuePair<int, double>)_interestsRateDropDown.SelectedItem;
+            double interestsRate = selectedRate.Value;
             double currentSolls = (double)_baseSollsNumDown.Value;
-            double interestsRate = (double)_interestsRateNumDown.Value;
 
             // Generate data
             DataRow row = _dataTable.NewRow();
