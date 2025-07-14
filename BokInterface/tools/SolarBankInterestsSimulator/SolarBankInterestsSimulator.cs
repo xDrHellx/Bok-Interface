@@ -67,9 +67,9 @@ namespace BokInterface.Tools.SolarBankInterestsSimulator {
                 "Regarding interest and rate:"
                 + "\r\n- Interest accumulates when the day rolls over at midnight in-game."
                 + "\r\n- Up to 10 days when the date at game start is greater than the date on the save file."
+                + "\r\n- The game also gives 1 Soll for free each time."
                 + "\r\n- Rate is constant over multiple days of accumulation."
-                + "\r\n- Truncated when displayed at the bank (i.e. it may display 15%, but may actually be 15.7%)."
-                + "\r\n- Can be any value between 1% and ~21% (will only display as 20%).",
+                + "\r\n- Truncated when displayed at the bank (i.e. it may display 15%, but may actually be 15.7%).",
                 0, 0, ClientSize.Width, 98, this
             );
 
@@ -134,9 +134,12 @@ namespace BokInterface.Tools.SolarBankInterestsSimulator {
                 // Generate column
                 _dataTable.Columns.Add((i + 1).ToString());
 
-                // Calculate & add solls to column
+                /**
+                 * Calculate & add solls to column
+                 * Note: the game gives 1 extra soll each day (up to 10 days)
+                 */
                 double interests = currentSolls * interestsRate / 100;
-                currentSolls = Math.Floor(currentSolls + interests);
+                currentSolls = Math.Floor(currentSolls + interests) + 1;
                 row[i] = currentSolls > 9999 ? 9999 : currentSolls;
             }
 
