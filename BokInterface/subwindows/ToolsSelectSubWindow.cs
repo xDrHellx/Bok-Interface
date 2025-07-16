@@ -101,11 +101,11 @@ namespace BokInterface {
                 // Initialize the loop to update / redraw automatically & add the on-close event handler
                 _tileDataViewer.InitializeFrameLoop();
                 _tileDataViewer.FormClosing += new FormClosingEventHandler(delegate (object sender, FormClosingEventArgs e) {
-
+                    /**
+                     * Remove the function from the list of functions to call each frame
+                     * Also set instance with null to prevent it from doing anything else
+                     */
                     tileDataViewerActive = false;
-
-                    // Remove the function from the list of functions to call each frame
-                    // Also just in case, set instance with null to prevent it from doing anything else
                     functionsList.RemoveAt(_tileDataViewer.index);
                     _tileDataViewer = null;
                 });
@@ -151,7 +151,7 @@ namespace BokInterface {
 
                 // Add the on-close event handler
                 _memValuesListing.FormClosing += new FormClosingEventHandler(delegate (object sender, FormClosingEventArgs e) {
-                    // Indicate that the tool isn't active anymore & set instance to null just in case, to prevent it from doing anything else
+                    // Indicate that the tool isn't active anymore & set instance to null to prevent it from doing anything else
                     memValuesListingActive = false;
                     _memValuesListing = null;
                 });
