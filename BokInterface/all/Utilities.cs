@@ -161,8 +161,16 @@ namespace BokInterface.All {
         /// <summary>Tests if a bit is 1</summary>
         /// <param name="bitmask">Bitmask</param>
         /// <param name="bitIndex">Bit index</param>
-        /// <returns><c>Bool</c>True if has magic, otherwise False</returns>
+        /// <returns><c>Bool</c>True if 1, otherwise False</returns>
         public static bool IsBitOne(int bitmask, int bitIndex) {
+            return (bitmask & (1 << bitIndex)) != 0;
+        }
+
+        /// <summary>Tests if a bit is 1</summary>
+        /// <param name="bitmask">Bitmask</param>
+        /// <param name="bitIndex">Bit index</param>
+        /// <returns><c>Bool</c>True if 1, otherwise False</returns>
+        public static bool IsBitOne(uint bitmask, int bitIndex) {
             return (bitmask & (1 << bitIndex)) != 0;
         }
 
