@@ -32,12 +32,6 @@ namespace BokInterface {
             _bok3_djangoCardsStr = new(),
             _bok3_djangoEquipsStr = new(),
             _bok3_djangoTotalStr = new();
-        private Button _bok3_editStatusBtn = new(),
-            _bok3_editInventoryBtn = new(),
-            _bok3_editKeyItemsBtn = new(),
-            _bok3_editEquipsBtn = new(),
-            _bok3_editWeaponsBtn = new(),
-            _bok3_editSolarGunBtn = new();
 
         #endregion
 
@@ -45,18 +39,18 @@ namespace BokInterface {
 
         private void ShowShinbokInterface() {
 
+            GenerateMenu();
+
             // Current game name
             WinFormHelpers.CreateLabel("currentGameName", currentGameName, 0, 0, Width, 20, this, WinFormHelpers._gameNameBackground, textAlignment: "MiddleLeft");
 
             // Sections
             AddShinbokCurrentStatusSection();
             AddShinbokCurrentStatsSection();
-            AddShinbokEditSection();
             AddMiscDataSection();
-            AddToolsSection();
 
             // Main window
-            SetMainWindow("Bok Interface", 339, 270);
+            SetMainWindow("Bok Interface", 236, 253);
             ResumeLayout(false);
         }
 
@@ -169,28 +163,6 @@ namespace BokInterface {
             _bok3_djangoCardsStr = WinFormHelpers.CreateLabel("djangoCardsStr", "", 66, 64, 37, 15, _currentStatsGroupBox, WinFormHelpers.cardsStatColor, textAlignment: "MiddleRight");
             _bok3_djangoEquipsStr = WinFormHelpers.CreateLabel("djangoEquipsStr", "", 103, 64, 42, 15, _currentStatsGroupBox, WinFormHelpers.equipsStatColor, textAlignment: "MiddleRight");
             _bok3_djangoTotalStr = WinFormHelpers.CreateLabel("djangoTotalStr", "", 145, 64, 32, 15, _currentStatsGroupBox, WinFormHelpers.totalStatColor, textAlignment: "MiddleRight");
-        }
-
-        private void AddShinbokEditSection() {
-
-            // Section
-            _editGroupBox = WinFormHelpers.CreateGroupBox("editButtons", "Edit", 237, 25, 97, 184, this);
-
-            // Buttons
-            _bok3_editStatusBtn = WinFormHelpers.CreateButton("editStatuts", "Status", 6, 19, 85, 23, _editGroupBox);
-            _bok3_editInventoryBtn = WinFormHelpers.CreateButton("editItems", "Items", 6, 46, 85, 23, _editGroupBox);
-            _bok3_editKeyItemsBtn = WinFormHelpers.CreateButton("editKeyItems", "Key items", 6, 73, 85, 23, _editGroupBox);
-            _bok3_editWeaponsBtn = WinFormHelpers.CreateButton("editWeapons", "Weapons", 6, 100, 85, 23, _editGroupBox);
-            _bok3_editEquipsBtn = WinFormHelpers.CreateButton("editEquips", "Accessories", 6, 127, 85, 23, _editGroupBox);
-            _bok3_editSolarGunBtn = WinFormHelpers.CreateButton("editSolarGun", "Solar gun", 6, 154, 85, 23, _editGroupBox);
-
-            // Onclick events
-            _bok3_editStatusBtn.Click += new EventHandler(OpenStatusEditor);
-            _bok3_editInventoryBtn.Click += new EventHandler(OpenInventoryEditor);
-            _bok3_editKeyItemsBtn.Click += new EventHandler(OpenKeyItemsEditor);
-            _bok3_editWeaponsBtn.Click += new EventHandler(OpenWeaponsEditor);
-            _bok3_editEquipsBtn.Click += new EventHandler(OpenEquipsEditor);
-            _bok3_editSolarGunBtn.Click += new EventHandler(OpenSolarGunEditor);
         }
 
         #endregion

@@ -35,7 +35,6 @@ namespace BokInterface.Tools.TileDataViewer {
 
         #endregion
 
-        #region Subwindow & loop
         #region Settings & frame loop
 
         /// <summary>Initialize subwindow properties</summary>

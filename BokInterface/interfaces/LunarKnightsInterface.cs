@@ -19,16 +19,16 @@ namespace BokInterface {
 
         private void ShowLunarKnightsInterface() {
 
+            // GenerateMenu();
+
             // Current game name
             WinFormHelpers.CreateLabel("currentGameName", currentGameName, 0, 0, Width, 20, this, WinFormHelpers._gameNameBackground, textAlignment: "MiddleLeft");
 
             // Sections
-            AddLunarKnightsCurrentStatusSection();
-            AddMiscDataSection();
-            AddToolsSection();
+            // AddMiscDataSection();
 
             // Main window
-            SetMainWindow("Bok Interface", 345, 500);
+            SetMainWindow("Bok Interface", 350, 40);
             ResumeLayout(false);
         }
 
@@ -41,12 +41,6 @@ namespace BokInterface {
         #endregion
 
         #region Elements
-
-        private void AddLunarKnightsCurrentStatusSection() {
-
-            // Section
-            _currentStatusGroupBox = WinFormHelpers.CreateGroupBox("currentStatus", "Current status", 5, 25, 226, 70, this);
-        }
 
         #endregion
     }

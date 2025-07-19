@@ -1,8 +1,6 @@
 using System;
-using System.Windows.Forms;
 
 using BokInterface.Accessories;
-using BokInterface.All;
 using BokInterface.Inventory;
 using BokInterface.KeyItems;
 using BokInterface.Magics;
@@ -205,42 +203,6 @@ namespace BokInterface {
                 }
 
                 magicsEditorOpened = true;
-            }
-        }
-
-        protected void OpenMiscToolsSelector(object sender, EventArgs e) {
-            if (miscToolsSelectorOpened == false) {
-
-                // Create subwindow & add on close event
-                _miscToolsSelectionWindow = WinFormHelpers.CreateSubWindow("miscToolsSelectWindow", "Bok Tools - Select", 186, 78, this);
-                _miscToolsSelectionWindow.FormClosing += new FormClosingEventHandler(delegate (object sender, FormClosingEventArgs e) {
-                    miscToolsSelectorOpened = false;
-                    _miscToolsSelectionWindow.Controls.Clear();
-                });
-
-                // Add subwindow elements corresponding to the current game
-                switch (shorterGameName) {
-                    case "Boktai":
-                        BoktaiToolsSubwindow();
-                        break;
-                    case "Zoktai":
-                        _miscToolsSelectionWindow.Height = 145;
-                        ZoktaiToolsSubwindow();
-                        break;
-                    case "Shinbok":
-                        _miscToolsSelectionWindow.Height = 145;
-                        ShinbokToolsSubwindow();
-                        break;
-                    case "LunarKnights":
-                        LunarKnightsToolsSubwindow();
-                        break;
-                    default:
-                        // If game is not handled, stop
-                        return;
-                }
-
-                _miscToolsSelectionWindow.Show();
-                miscToolsSelectorOpened = true;
             }
         }
 

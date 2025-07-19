@@ -29,12 +29,6 @@ namespace BokInterface {
             _bok2_djangoHammerSkill = new(),
             _bok2_djangoFistsSkill = new(),
             _bok2_djangoGunSkill = new();
-        private Button _bok2_editStatusBtn = new(),
-            _bok2_editInventoryBtn = new(),
-            _bok2_editKeyItemsBtn = new(),
-            _bok2_editEquipsBtn = new(),
-            _bok2_editWeaponsBtn = new(),
-            _bok2_editMagicsBtn = new();
         private GroupBox _bok2_currentSkillGroupBox = new();
 
         #endregion
@@ -42,6 +36,8 @@ namespace BokInterface {
         #region Show interface
 
         private void ShowZoktaiInterface() {
+
+            GenerateMenu();
 
             // If JP version, update the game name label to add the version
             string version = "";
@@ -56,12 +52,10 @@ namespace BokInterface {
             AddZoktaiCurrentStatusSection();
             AddZoktaiCurrentStatsSection();
             AddZoktaiCurrentSkillSection();
-            AddZoktaiEditSection();
             AddMiscDataSection();
-            AddToolsSection();
 
             // Main window
-            SetMainWindow("Bok Interface", 329, 270);
+            SetMainWindow("Bok Interface", 236, 257);
             ResumeLayout(false);
         }
 
@@ -193,27 +187,6 @@ namespace BokInterface {
             // Stat points to allocate
             WinFormHelpers.CreateLabel("statPointsLabel", "Add", 6, 84, 29, 15, _currentStatsGroupBox, textAlignment: "MiddleLeft");
             _bok2_djangoStatPoints = WinFormHelpers.CreateLabel("djangoStatPoints", "", 35, 84, 31, 15, _currentStatsGroupBox, WinFormHelpers.totalStatColor, textAlignment: "MiddleRight");
-        }
-
-        private void AddZoktaiEditSection() {
-
-            // Section
-            _editGroupBox = WinFormHelpers.CreateGroupBox("editButtons", "Edit", 237, 25, 87, 184, this);
-
-            _bok2_editStatusBtn = WinFormHelpers.CreateButton("editStatuts", "Status", 6, 19, 75, 23, _editGroupBox);
-            _bok2_editInventoryBtn = WinFormHelpers.CreateButton("editItems", "Items", 6, 46, 75, 23, _editGroupBox);
-            _bok2_editKeyItemsBtn = WinFormHelpers.CreateButton("editKeyItems", "Key items", 6, 73, 75, 23, _editGroupBox);
-            _bok2_editWeaponsBtn = WinFormHelpers.CreateButton("editWeapons", "Weapons", 6, 100, 75, 23, _editGroupBox);
-            _bok2_editEquipsBtn = WinFormHelpers.CreateButton("editEquips", "Protectors", 6, 127, 75, 23, _editGroupBox);
-            _bok2_editMagicsBtn = WinFormHelpers.CreateButton("editMagics", "Magics", 6, 154, 75, 23, _editGroupBox);
-
-            // Add onclick events
-            _bok2_editStatusBtn.Click += new EventHandler(OpenStatusEditor);
-            _bok2_editInventoryBtn.Click += new EventHandler(OpenInventoryEditor);
-            _bok2_editKeyItemsBtn.Click += new EventHandler(OpenKeyItemsEditor);
-            _bok2_editWeaponsBtn.Click += new EventHandler(OpenWeaponsEditor);
-            _bok2_editEquipsBtn.Click += new EventHandler(OpenEquipsEditor);
-            _bok2_editMagicsBtn.Click += new EventHandler(OpenMagicsEditor);
         }
 
         #endregion

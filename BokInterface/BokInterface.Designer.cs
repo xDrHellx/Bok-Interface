@@ -180,33 +180,6 @@ namespace BokInterface {
 			ClientSize = new System.Drawing.Size(width, height);
 		}
 
-		/// <summary>Adds the Tools section for the corresponding game</summary>
-		private void AddToolsSection() {
-			int btnWidthOffset = 0;
-			switch (BokInterface.shorterGameName) {
-				case "Boktai":
-					_extrasGroupBox = WinFormHelpers.CreateGroupBox("extraTools", "Tools", 237, 25, 87, 52, this);
-					break;
-				case "Zoktai":
-					_extrasGroupBox = WinFormHelpers.CreateGroupBox("extraTools", "Tools", 237, 214, 87, 52, this);
-					break;
-				case "Shinbok":
-					_extrasGroupBox = WinFormHelpers.CreateGroupBox("extraTools", "Tools", 237, 214, 97, 52, this);
-					btnWidthOffset += 10;
-					break;
-				case "LunarKnights":
-					_extrasGroupBox = WinFormHelpers.CreateGroupBox("extraTools", "Tools", 237, 25, 87, 52, this);
-					break;
-				default:
-					// If game is not handled, don't add anything & stop here
-					return;
-			}
-
-			// Add Misc Tools button
-			Button miscToolsBtn = WinFormHelpers.CreateButton("showExtraTools", "Misc tools", 6, 21, 75 + btnWidthOffset, 23, _extrasGroupBox); // 17
-			miscToolsBtn.Click += new System.EventHandler(OpenMiscToolsSelector);
-		}
-
 		/// <summary>Adds the Misc. data section for the corresponding game</summary>
 		private void AddMiscDataSection() {
 
@@ -255,6 +228,74 @@ namespace BokInterface {
 			}
 		}
 
+		#endregion
+
+		#region Menu
+
+		/// <summary>Generate the menu for the main window</summary>
+		private void GenerateMenu() {
+			MenuStrip menuBar = WinFormHelpers.CreateMenuStrip("menuBar", "", control: this);
+
+			if (shorterGameName == "LunarKnights") {
+				return;
+			}
+
+			// Edit section
+			if (shorterGameName == "Zoktai" || shorterGameName == "Shinbok") {
+
+				ToolStripMenuItem editMenu = WinFormHelpers.CreateToolStripMenuItem("editMenu", "Edit", menuStrip: menuBar);
+
+				ToolStripMenuItem editStatusMenu = WinFormHelpers.CreateToolStripMenuItem("editStatusMenu", "&Status", menuItem: editMenu);
+				editStatusMenu.Click += new EventHandler(OpenStatusEditor);
+				editMenu.DropDownItems.Add(editStatusMenu);
+
+				ToolStripMenuItem editItemsMenu = WinFormHelpers.CreateToolStripMenuItem("edititemsMenu", "&Items", menuItem: editMenu);
+				editItemsMenu.Click += new EventHandler(OpenInventoryEditor);
+				editMenu.DropDownItems.Add(editItemsMenu);
+
+				ToolStripMenuItem editKeyItemsMenu = WinFormHelpers.CreateToolStripMenuItem("editKeyitemsMenu", "&Key items", menuItem: editMenu);
+				editKeyItemsMenu.Click += new EventHandler(OpenKeyItemsEditor);
+				editMenu.DropDownItems.Add(editKeyItemsMenu);
+
+				ToolStripMenuItem editWeaponsMenu = WinFormHelpers.CreateToolStripMenuItem("editWeaponsMenu", "&Weapons", menuItem: editMenu);
+				editWeaponsMenu.Click += new EventHandler(OpenWeaponsEditor);
+				editMenu.DropDownItems.Add(editWeaponsMenu);
+
+				if (shorterGameName == "Shinbok") {
+					ToolStripMenuItem editGunMenu = WinFormHelpers.CreateToolStripMenuItem("editGunMenu", "&Solar gun", menuItem: editMenu);
+					editGunMenu.Click += new EventHandler(OpenSolarGunEditor);
+					editMenu.DropDownItems.Add(editGunMenu);
+				}
+
+				ToolStripMenuItem editAccessoriesMenu = WinFormHelpers.CreateToolStripMenuItem("editAccessoriesMenu", shorterGameName == "Zoktai" ? "&Protectors" : "&Accessories", menuItem: editMenu);
+				editAccessoriesMenu.Click += new EventHandler(OpenEquipsEditor);
+				editMenu.DropDownItems.Add(editAccessoriesMenu);
+
+				if (shorterGameName == "Zoktai") {
+					ToolStripMenuItem editMagicsMenu = WinFormHelpers.CreateToolStripMenuItem("editMagicsMenu", "&Magics", menuItem: editMenu);
+					editMagicsMenu.Click += new EventHandler(OpenMagicsEditor);
+					editMenu.DropDownItems.Add(editMagicsMenu);
+				}
+			}
+
+			// Misc tools section
+			ToolStripMenuItem toolsMenu = WinFormHelpers.CreateToolStripMenuItem("toolsMenu", "Tools", menuStrip: menuBar);
+
+			ToolStripMenuItem tileDataViewerMenu = WinFormHelpers.CreateToolStripMenuItem("tileDataViewerMenu", "&Tile data viewer", menuItem: toolsMenu);
+			tileDataViewerMenu.Click += new EventHandler(OpenTileDataViewer);
+			toolsMenu.DropDownItems.Add(tileDataViewerMenu);
+
+			ToolStripMenuItem memoryValuesListMenu = WinFormHelpers.CreateToolStripMenuItem("memoryValuesListMenu", "&Memory values list", menuItem: toolsMenu);
+			memoryValuesListMenu.Click += new EventHandler(OpenMemoryValuesList);
+			toolsMenu.DropDownItems.Add(memoryValuesListMenu);
+
+			if (shorterGameName != "Boktai") {
+				ToolStripMenuItem solarBankInterestsSimMenu = WinFormHelpers.CreateToolStripMenuItem("solarBankInterestsSimMenu", "&Solar bank interests simulator", menuItem: toolsMenu);
+				solarBankInterestsSimMenu.Click += new EventHandler(OpenSolarBankInterestsSim);
+				toolsMenu.DropDownItems.Add(solarBankInterestsSimMenu);
+			}
+		}
+		
 		#endregion
 	}
 }

@@ -1,5 +1,6 @@
 using System;
 using System.Drawing;
+using System.Windows.Forms;
 
 using BokInterface.Addresses;
 using BokInterface.All;
@@ -15,14 +16,16 @@ namespace BokInterface {
         #region Properties
 
         private readonly BoktaiAddresses _boktaiAddresses = new();
-        private System.Windows.Forms.Label _bok1_currentStatusHpValue = new();
-        private System.Windows.Forms.Label _bok1_currentStatusEneValue = new();
+        private Label _bok1_currentStatusHpValue = new();
+        private Label _bok1_currentStatusEneValue = new();
 
         #endregion
 
         #region Show interface
 
         private void ShowBoktaiInterface() {
+
+            GenerateMenu();
 
             // If E3 demo / beta, update the game name label
             string version = "";
@@ -36,10 +39,9 @@ namespace BokInterface {
             // Sections
             AddBoktaiCurrentStatusSection();
             AddMiscDataSection();
-            AddToolsSection();
 
             // Main window
-            SetMainWindow("Bok Interface", 345, 500);
+            SetMainWindow("Bok Interface", 236, 258);
             ResumeLayout(false);
         }
 
