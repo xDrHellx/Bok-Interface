@@ -63,7 +63,7 @@ namespace BokInterface.Tools.TileDataViewer {
                     case "21":                  /// Torch (Duneyrr boss room in Cathedral)
                         break;
                     case "A":                   /// Exit / entry (inconsistent)
-                        DrawTileImage(e, "exit", 5 + posX * scale, 5 + posY * scale);
+                        DrawTileImage(e, "exit", posX * scale, posY * scale);
                         break;
                     case "B":                   /// ??? (2-heights wall in Aqueduct)
                         break;
@@ -82,7 +82,7 @@ namespace BokInterface.Tools.TileDataViewer {
                     case "482":                 /// Lava in Undead Zone
                         break;
                     case "80":                  /// Noise tile (makes sound)
-                        DrawTileImage(e, "sound", 5 + posX * scale, 5 + posY * scale);
+                        DrawTileImage(e, "sound", posX * scale, posY * scale);
                         break;
                     case "400":                 /// Walkable area (Remains)
                         break;
@@ -93,7 +93,7 @@ namespace BokInterface.Tools.TileDataViewer {
                         // If tile effect is currently not handled, print its values on-screen & show its position on the tilemap to study it
                         if (_debugMode == true) {
                             APIs.Gui.AddMessage("hex : " + hex.ToString() + " ( uint : " + tileEffect + ")");
-                            DrawTileImage(e, "qmark", 5 + posX * scale, 5 + posY * scale);
+                            DrawTileImage(e, "qmark", posX * scale, posY * scale);
                         }
                         break;
                 }
