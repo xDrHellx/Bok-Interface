@@ -484,6 +484,7 @@ namespace BokInterface.All {
         /// <param name="text">TabPage text</param>
         /// <param name="bgColorHex">Background color (hex code) (if none, defaults to white for visibility)</param>
         /// <param name="tabControl">TabControl instance if the element is to be attached to it directly</param>
+        /// <returns><c>TabPage</c>Instance</returns>
         public static TabPage CreateTabPage(string name, string text, string bgColorHex = "", TabControl? tabControl = null) {
             TabPage tabPage = new() {
                 Name = name,
@@ -498,6 +499,52 @@ namespace BokInterface.All {
 
             tabControl?.Controls.Add(tabPage);
             return tabPage;
+        }
+
+        /// <summary>Simplified method for creating a MenuStrip</summary>
+        /// <param name="name">Name</param>
+        /// <param name="text">Text</param>
+        /// <param name="bgColorHex">Background color (hex code) (if none, defaults to white for visibility)</param>
+        /// <param name="control">Control instance if the element is to be attached to it directly</param>
+        /// <returns><c>MenuStrip</c>Instance</returns>
+        public static MenuStrip CreateMenuStrip(string name, string text, string bgColorHex = "", Control? control = null) {
+            MenuStrip menu = new() {
+                Name = name,
+                Text = text,
+                TabIndex = 1,
+                AutoSize = false,
+                Anchor = defaultAnchor,
+                Margin = defaultMargin,
+                Font = defaultFont,
+                BackColor = bgColorHex != "" ? ColorTranslator.FromHtml(bgColorHex) : Color.White
+            };
+
+            control?.Controls.Add(menu);
+            return menu;
+        }
+
+        /// <summary>Simplified method for creating a ToolStripMenuItem</summary>
+        /// <param name="name">Name</param>
+        /// <param name="text">Text</param>
+        /// <param name="bgColorHex">Background color (hex code) (if none, defaults to white for visibility)</param>
+        /// <param name="toolTipText">Text on hover / tooltip</param>
+        /// <param name="menuStrip">MenuStrip instance if the element is to be attached to it directly</param>
+        /// <param name="ToolStripMenuItem">ToolStripMenuItem instance if the element is to be attached to it directly</param>
+        /// <returns><c>ToolStripMenuItem</c>Instance</returns>
+        public static ToolStripMenuItem CreateToolStripMenuItem(string name, string text, string bgColorHex = "", string toolTipText = "", MenuStrip? menuStrip = null, ToolStripMenuItem? menuItem = null) {
+            ToolStripMenuItem item = new() {
+                Name = name,
+                Text = text,
+                AutoSize = true,
+                Anchor = defaultAnchor,
+                Font = defaultFont,
+                BackColor = bgColorHex != "" ? ColorTranslator.FromHtml(bgColorHex) : Color.White,
+                ToolTipText = toolTipText
+            };
+
+            menuStrip?.Items.Add(item);
+            menuItem?.DropDownItems.Add(item);
+            return item;
         }
 
         #endregion
