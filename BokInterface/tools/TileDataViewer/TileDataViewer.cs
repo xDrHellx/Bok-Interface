@@ -176,7 +176,9 @@ namespace BokInterface.Tools.TileDataViewer {
             }
 
             // Adjust subwindow size based on the number of tiles to show
-            SetSubwindowSize((int)(tileWidth * scale) - 16, (int)(tileHeight * scale) - 16);
+            int width = (int)(tileWidth * scale) - 16;
+            int height = (int)(tileHeight * scale) - 16;
+            SetSubwindowSize(width > 192 ? width : 192, height > 144 ? height : 144);
         }
 
         /// <summary>Draw stairs icon based on value</summary>
