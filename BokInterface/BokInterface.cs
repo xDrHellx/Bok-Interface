@@ -1,12 +1,17 @@
 using BizHawk.Client.Common;
 using BizHawk.Client.EmuHawk;
+
 using System;
 using System.Windows.Forms;
 using System.Drawing;
 using System.Linq;
 using System.Collections.Generic;
+
 using BokInterface.All;
 using BokInterface.Calculators;
+using BokInterface.Tools.TileDataViewer;
+using BokInterface.Tools.MemoryValuesListing;
+using BokInterface.Tools.SolarBankInterestsSimulator;
 
 /**
  * File for the main / initialization part of the Bok interface
@@ -36,16 +41,6 @@ namespace BokInterface {
             _previousDisplayMessagesSetting = true;
         private int _retryCount = 0;
         public bool _previousIsPauseSetting = false;
-
-        /// <summary>
-        /// List of MemoryValues instances.<br/>
-        /// These are used for simplyfing getting and setting values from memory addresses that are "dynamic."
-        /// </summary>
-        private MemoryValues _memoryValues = new("");
-
-        /// <summary>Movement calculator instance</summary>
-        private MovementCalculator _movementCalculator = new();
-
         /// <summary>List of functions to call each frame</summary>
         public static List<Action> functionsList = [];
 
@@ -53,6 +48,60 @@ namespace BokInterface {
             get => APIs.ApiContainer;
             set => APIs.Update(value);
         }
+
+        #endregion
+
+        #region Instances
+
+        /// <summary>
+        /// List of MemoryValues instances.<br/>
+        /// These are used for simplyfing getting and setting values from memory addresses that are "dynamic."
+        /// </summary>
+        private MemoryValues _memoryValues = new("");
+        /// <summary>Movement calculator instance</summary>
+        private MovementCalculator _movementCalculator = new();
+        private TileDataViewer? _tileDataViewer;
+        private MemoryValuesListing? _memValuesListing;
+        private SolarBankInterestsSimulator? _solarBankInterestsSim;
+
+        #endregion
+
+        #region Subwindows
+
+        private readonly Form _miscToolsSelectionWindow = new();
+        private readonly List<Form> _subwindows = [];
+        public bool statusEditorOpened = false,
+            inventoryEditorOpened = false,
+            keyItemsEditorOpened = false,
+            equipsEditorOpened = false,
+            solarGunEditorOpened = false,
+            weaponsEditorOpened = false,
+            magicsEditorOpened = false,
+            miscToolsSelectorOpened = false,
+            tileDataViewerActive = false,
+            memValuesListingActive = false,
+            solarBankInterestsSimActive = false;
+
+        #endregion
+
+        #region Common elements
+
+        private GroupBox _currentStatusGroupBox = new(),
+            _currentStatsGroupBox = new(),
+            _miscDataGroupBox = new();
+        private readonly GroupBox _inventoryGroupBox = new(),
+            _editGroupBox = new(),
+            _extrasGroupBox = new();
+
+        // Misc data labels
+        private Label _averageSpeedLabel = new(),
+            _currentSpeedLabel = new(),
+            _coffinDamageLabel = new(),
+            _coffinWindupTimerLabel = new(),
+            _coffinShakeTimerLabel = new(),
+            _coffinShakeDurationLabel = new(),
+            _coffinEscapeTimerLabel = new(),
+            _coffinDistanceLabel = new();
 
         #endregion
 

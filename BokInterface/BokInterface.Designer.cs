@@ -5,7 +5,17 @@ using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 
+using BokInterface.Accessories;
 using BokInterface.All;
+using BokInterface.Inventory;
+using BokInterface.KeyItems;
+using BokInterface.Magics;
+using BokInterface.solarGun;
+using BokInterface.Status;
+using BokInterface.Tools.MemoryValuesListing;
+using BokInterface.Tools.SolarBankInterestsSimulator;
+using BokInterface.Tools.TileDataViewer;
+using BokInterface.Weapons;
 
 /**
  * File for the external window part of the Bok interface
@@ -15,37 +25,10 @@ namespace BokInterface {
 
 	partial class BokInterface {
 
-		#region Main properties
+		#region Designer variable
 
 		/// <summary>Required designer variable</summary>
 		private IContainer _components = null;
-
-		#endregion
-
-		#region Common elements
-
-		private System.Windows.Forms.GroupBox _currentStatusGroupBox = new(),
-			_currentStatsGroupBox = new(),
-			_inventoryGroupBox = new(),
-			_editGroupBox = new(),
-			_extrasGroupBox = new(),
-			_miscDataGroupBox = new();
-		// Misc data labels
-		private System.Windows.Forms.Label _averageSpeedLabel = new(),
-			_currentSpeedLabel = new(),
-			_coffinDamageLabel = new(),
-			_coffinWindupTimerLabel = new(),
-			_coffinShakeTimerLabel = new(),
-			_coffinShakeDurationLabel = new(),
-			_coffinEscapeTimerLabel = new(),
-			_coffinDistanceLabel = new();
-
-		#endregion
-
-		#region Subwindows
-
-		private System.Windows.Forms.Form _miscToolsSelectionWindow = new();
-		private List<System.Windows.Forms.Form> _subwindows = new();
 
 		#endregion
 
@@ -295,6 +278,288 @@ namespace BokInterface {
 				toolsMenu.DropDownItems.Add(solarBankInterestsSimMenu);
 			}
 		}
+
+		#endregion
+
+		#region Openers - Editors
+		protected void OpenStatusEditor(object sender, EventArgs e) {
+			if (statusEditorOpened == false) {
+
+				// Open editor for the current game
+				switch (shorterGameName) {
+					case "Boktai":
+						_subwindows.Add(new BoktaiStatusEditor(this, _memoryValues, _boktaiAddresses));
+						break;
+					case "Zoktai":
+						_subwindows.Add(new ZoktaiStatusEditor(this, _memoryValues, _zoktaiAddresses));
+						break;
+					case "Shinbok":
+						_subwindows.Add(new ShinbokStatusEditor(this, _memoryValues, _shinbokAddresses));
+						break;
+					case "LunarKnights":
+						_subwindows.Add(new LunarKnightsStatusEditor(this, _memoryValues, _lunarKnightsAddresses));
+						break;
+					default:
+						// If game is not handled, do nothing
+						return;
+				}
+
+				statusEditorOpened = true;
+			}
+		}
+
+		protected void OpenInventoryEditor(object sender, EventArgs e) {
+			if (inventoryEditorOpened == false) {
+
+				// Open editor for the current game
+				switch (shorterGameName) {
+					case "Boktai":
+						_subwindows.Add(new BoktaiInventoryEditor(this, _memoryValues, _boktaiAddresses));
+						break;
+					case "Zoktai":
+						_subwindows.Add(new ZoktaiInventoryEditor(this, _memoryValues, _zoktaiAddresses));
+						break;
+					case "Shinbok":
+						_subwindows.Add(new ShinbokInventoryEditor(this, _memoryValues, _shinbokAddresses));
+						break;
+					case "LunarKnights":
+						_subwindows.Add(new LunarKnightsInventoryEditor(this, _memoryValues, _lunarKnightsAddresses));
+						break;
+					default:
+						// If game is not handled, do nothing
+						return;
+				}
+
+				inventoryEditorOpened = true;
+			}
+		}
+
+		protected void OpenKeyItemsEditor(object sender, EventArgs e) {
+			if (keyItemsEditorOpened == false) {
+
+				// Open editor for the current game
+				switch (shorterGameName) {
+					case "Boktai":
+						_subwindows.Add(new BoktaiKeyItemsEditor(this, _memoryValues, _boktaiAddresses));
+						break;
+					case "Zoktai":
+						_subwindows.Add(new ZoktaiKeyItemsEditor(this, _memoryValues, _zoktaiAddresses));
+						break;
+					case "Shinbok":
+						_subwindows.Add(new ShinbokKeyItemsEditor(this, _memoryValues, _shinbokAddresses));
+						break;
+					case "LunarKnights":
+						_subwindows.Add(new LunarKnightsKeyItemsEditor(this, _memoryValues, _lunarKnightsAddresses));
+						break;
+					default:
+						// If game is not handled, do nothing
+						return;
+				}
+
+				keyItemsEditorOpened = true;
+			}
+		}
+
+		protected void OpenEquipsEditor(object sender, EventArgs e) {
+			if (equipsEditorOpened == false) {
+
+				// Open editor for the current game
+				switch (shorterGameName) {
+					case "Boktai":
+						// _subwindows.Add(new BoktaiAccessoriesEditor(this, _memoryValues, _boktaiAddresses));
+						break;
+					case "Zoktai":
+						_subwindows.Add(new ZoktaiAccessoriesEditor(this, _memoryValues, _zoktaiAddresses));
+						break;
+					case "Shinbok":
+						_subwindows.Add(new ShinbokAccessoriesEditor(this, _memoryValues, _shinbokAddresses));
+						break;
+					case "LunarKnights":
+						// _subwindows.Add(new LunarKnightsAccessoriesEditor(this, _memoryValues, _lunarKnightsAddresses));
+						break;
+					default:
+						// If game is not handled, do nothing
+						return;
+				}
+
+				equipsEditorOpened = true;
+			}
+		}
+
+		protected void OpenSolarGunEditor(object sender, EventArgs e) {
+			if (solarGunEditorOpened == false) {
+				// Open editor for the current game
+				switch (shorterGameName) {
+					case "Boktai":
+						// None yet
+						break;
+					case "Zoktai":
+						// None, solar gun is handled via Weapons Inventory
+						break;
+					case "Shinbok":
+						_subwindows.Add(new ShinbokSolarGunEditor(this, _memoryValues, _shinbokAddresses));
+						break;
+					case "LunarKnights":
+					default:
+						// If game is not handled, do nothing
+						return;
+				}
+				solarGunEditorOpened = true;
+			}
+		}
+
+		protected void OpenWeaponsEditor(object sender, EventArgs e) {
+			if (weaponsEditorOpened == false) {
+
+				// Open editor for the current game
+				switch (shorterGameName) {
+					case "Boktai":
+						_subwindows.Add(new BoktaiWeaponsEditor(this, _memoryValues, _boktaiAddresses));
+						break;
+					case "Zoktai":
+						_subwindows.Add(new ZoktaiWeaponsEditor(this, _memoryValues, _zoktaiAddresses));
+						break;
+					case "Shinbok":
+						_subwindows.Add(new ShinbokWeaponsEditor(this, _memoryValues, _shinbokAddresses));
+						break;
+					case "LunarKnights":
+						_subwindows.Add(new LunarKnightsWeaponsEditor(this, _memoryValues, _lunarKnightsAddresses));
+						break;
+					default:
+						// If game is not handled, do nothing
+						return;
+				}
+
+				weaponsEditorOpened = true;
+			}
+		}
+
+		protected void OpenMagicsEditor(object sender, EventArgs e) {
+			if (magicsEditorOpened == false) {
+				switch (shorterGameName) {
+					case "Boktai":
+						// No magics in Bok 1
+						return;
+					case "Zoktai":
+						_subwindows.Add(new ZoktaiMagicsEditor(this, _memoryValues, _zoktaiAddresses));
+						break;
+					case "Shinbok":
+						// _subwindows.Add(new ShinbokMagicsEditor(this, _memoryValues, _shinbokAddresses));
+						// break;
+						return;
+					case "LunarKnights":
+						// No magics in LK / DS
+						return;
+					default:
+						// If game is not handled, do nothing
+						return;
+				}
+
+				magicsEditorOpened = true;
+			}
+		}
+
+		#endregion
+
+		#region Openers - Tools
+
+		private void OpenTileDataViewer(object sender, EventArgs e) {
+
+            // If tool is already active, stop
+            if (tileDataViewerActive == true) {
+                return;
+            }
+
+            tileDataViewerActive = true;
+            switch (shorterGameName) {
+                case "Boktai":
+                    _tileDataViewer = new BoktaiTileDataViewer(this, _boktaiAddresses);
+                    break;
+                case "Zoktai":
+                    _tileDataViewer = new ZoktaiTileDataViewer(this, _zoktaiAddresses);
+                    break;
+                case "Shinbok":
+                    _tileDataViewer = new ShinbokTileDataViewer(this, _shinbokAddresses);
+                    break;
+                case "LunarKnights":
+                    _tileDataViewer = new LunarKnightsTileDataViewer(this, _lunarKnightsAddresses);
+                    break;
+                default:
+                    // If game not handled, indicate that the tool isn't active & stop here
+                    tileDataViewerActive = false;
+                    return;
+            }
+
+            // Initialize the loop to update / redraw automatically & add the on-close event handler
+            _tileDataViewer.InitializeFrameLoop();
+            _tileDataViewer.FormClosing += new FormClosingEventHandler(delegate (object sender, FormClosingEventArgs e) {
+                /**
+                 * Remove the function from the list of functions to call each frame
+                 * Also set instance with null to prevent it from doing anything else
+                 */
+                tileDataViewerActive = false;
+                functionsList.RemoveAt(_tileDataViewer.index);
+                _tileDataViewer = null;
+            });
+        }
+
+        private void OpenMemoryValuesList(object sender, EventArgs e) {
+            if (memValuesListingActive == true) {
+                return;
+            }
+
+            memValuesListingActive = true;
+            switch (shorterGameName) {
+                case "Boktai":
+                    _memValuesListing = new MemoryValuesListing(this, _boktaiAddresses);
+                    break;
+                case "Zoktai":
+                    _memValuesListing = new MemoryValuesListing(this, _zoktaiAddresses);
+                    break;
+                case "Shinbok":
+                    _memValuesListing = new MemoryValuesListing(this, _shinbokAddresses);
+                    break;
+                case "LunarKnights":
+                    _memValuesListing = new MemoryValuesListing(this, _lunarKnightsAddresses);
+                    break;
+                default:
+                    // If game not handled, indicate that the tool isn't active & stop here
+                    memValuesListingActive = false;
+                    return;
+            }
+
+            // Add the on-close event handler
+            _memValuesListing.FormClosing += new FormClosingEventHandler(delegate (object sender, FormClosingEventArgs e) {
+                // Indicate that the tool isn't active anymore & set instance to null to prevent it from doing anything else
+                memValuesListingActive = false;
+                _memValuesListing = null;
+            });
+        }
+
+        private void OpenSolarBankInterestsSim(object sender, EventArgs e) {
+            if (solarBankInterestsSimActive == true) {
+                return;
+            }
+
+            solarBankInterestsSimActive = true;
+            switch (shorterGameName) {
+                case "Zoktai":
+                case "Shinbok":
+                    _solarBankInterestsSim = new SolarBankInterestsSimulator(this);
+                    break;
+                default:
+                    // If game not handled, indicate that the tool isn't active & stop here
+                    solarBankInterestsSimActive = false;
+                    return;
+            }
+
+            // Add the on-close event handler
+            _solarBankInterestsSim.FormClosing += new FormClosingEventHandler(delegate (object sender, FormClosingEventArgs e) {
+                // Indicate that the tool isn't active anymore & set instance to null just in case, to prevent it from doing anything else
+                solarBankInterestsSimActive = false;
+                _solarBankInterestsSim = null;
+            });
+        }
 		
 		#endregion
 	}
