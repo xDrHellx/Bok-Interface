@@ -125,11 +125,11 @@ namespace BokInterface {
             WinFormHelpers.CreateLabel("djangoCurrentExpLabel", "EXP :", 93, 34, 33, 15, _currentStatusGroupBox);
 
             // Current status values
-            _bok3_currentStatusHpValue = WinFormHelpers.CreateLabel("djangoCurrentHpValue", "", 44, 19, 31, 15, _currentStatusGroupBox);
-            _bok3_currentStatusEneValue = WinFormHelpers.CreateLabel("djangoCurrentEneValue", "", 44, 34, 31, 15, _currentStatusGroupBox);
-            _bok3_currentStatusTrcValue = WinFormHelpers.CreateLabel("djangoCurrentTrcValue", "", 44, 49, 31, 15, _currentStatusGroupBox);
-            _bok3_djangoLevel = WinFormHelpers.CreateLabel("djangoCurrentLevelValue", "", 132, 19, 31, 15, _currentStatusGroupBox);
-            _bok3_djangoExp = WinFormHelpers.CreateLabel("djangoCurrentExpValue", "", 132, 34, 43, 15, _currentStatusGroupBox);
+            _bok3_currentStatusHpValue = WinFormHelpers.CreateLabel("djangoCurrentHpValue", "", 44, 19, 31, 15, _currentStatusGroupBox, textAlignment: "MiddleRight");
+            _bok3_currentStatusEneValue = WinFormHelpers.CreateLabel("djangoCurrentEneValue", "", 44, 34, 31, 15, _currentStatusGroupBox, textAlignment: "MiddleRight");
+            _bok3_currentStatusTrcValue = WinFormHelpers.CreateLabel("djangoCurrentTrcValue", "", 44, 49, 31, 15, _currentStatusGroupBox, textAlignment: "MiddleRight");
+            _bok3_djangoLevel = WinFormHelpers.CreateLabel("djangoCurrentLevelValue", "", 144, 19, 31, 15, _currentStatusGroupBox, textAlignment: "MiddleRight");
+            _bok3_djangoExp = WinFormHelpers.CreateLabel("djangoCurrentExpValue", "", 132, 34, 43, 15, _currentStatusGroupBox, textAlignment: "MiddleRight");
         }
 
         private void AddShinbokCurrentStatsSection() {
