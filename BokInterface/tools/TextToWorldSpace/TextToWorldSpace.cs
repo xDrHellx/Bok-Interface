@@ -1,7 +1,7 @@
 using System.Drawing;
 
 using BokInterface.Addresses;
-using BokInterface.All;
+using BokInterface.Utils;
 
 namespace BokInterface.Tools.TextToWorldSpace {
     /// <summary>

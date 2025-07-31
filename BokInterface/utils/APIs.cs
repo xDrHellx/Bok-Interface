@@ -3,12 +3,23 @@
 using BizHawk.Client.Common;
 using BizHawk.Client.EmuHawk;
 
-namespace BokInterface.All {
-
+namespace BokInterface.Utils {
     /// <summary>Main class for BizHawk APIs</summary>
     public static class APIs {
 
-        // Hack-ish way to make these APIs available outside of the main tool form
+        #region Always available
+
+        public static IEmuClientApi Client => Require(s_clientApi);
+        public static IEmulationApi Emulation => Require(s_emulationApi);
+        public static ISaveStateApi SaveState => Require(s_saveStateApi);
+        public static IMemoryApi Memory => Require(s_memoryApi);
+        public static IGuiApi Gui => Require(s_guiApi);
+        public static Config Config => ((EmulationApi)Emulation).ForbiddenConfigReference;
+
+        #endregion
+
+        #region Only if game loaded
+
         private static IMainFormForTools? s_mainFormForTools;
         private static ApiContainer? s_apiContainer;
         private static IEmuClientApi? s_clientApi;
@@ -19,14 +30,10 @@ namespace BokInterface.All {
         public static IMainFormForTools MainFormForTools => Require(s_mainFormForTools);
         public static MainForm MainForm => (MainForm)MainFormForTools;
         public static ApiContainer ApiContainer => Require(s_apiContainer);
-        // These seem to always be available even when no ROM is loaded
-        public static IEmuClientApi Client => Require(s_clientApi);
-        public static IEmulationApi Emulation => Require(s_emulationApi);
-        public static ISaveStateApi SaveState => Require(s_saveStateApi);
-        public static IMemoryApi Memory => Require(s_memoryApi);
-        public static IGuiApi Gui => Require(s_guiApi);
-        public static Config Config => ((EmulationApi)Emulation).ForbiddenConfigReference;
 
+        #endregion
+
+        #region Methods
         internal static void Update(ApiContainer container) {
 
             s_apiContainer = container;
@@ -56,5 +63,7 @@ namespace BokInterface.All {
         public static bool LoadRom(string path) {
             return Client.OpenRom(path);
         }
+
+        #endregion
     }
 }

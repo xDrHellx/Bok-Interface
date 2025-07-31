@@ -1,7 +1,6 @@
 using System.Windows.Forms;
 
 using BokInterface.Addresses;
-using BokInterface.All;
 
 namespace BokInterface.Inventory {
     /// <summary>Inventory editor for Boktai</summary>

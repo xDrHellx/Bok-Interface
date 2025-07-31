@@ -1,7 +1,6 @@
 using System.Windows.Forms;
 
 using BokInterface.Addresses;
-using BokInterface.All;
 
 namespace BokInterface.Weapons {
     /// <summary>Weapons editor for Lunar Knights / Boktai DS</summary>

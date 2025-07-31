@@ -2,7 +2,7 @@ using System;
 using System.Drawing;
 using System.Windows.Forms;
 
-namespace BokInterface.All {
+namespace BokInterface.Utils {
     /// <summary>Class for CheckGroupBox (GroupBox with a Checkbox)</summary>
     public class CheckGroupBox : GroupBox {
 

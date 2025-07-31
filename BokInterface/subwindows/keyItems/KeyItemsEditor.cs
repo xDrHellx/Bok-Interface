@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 
-using BokInterface.All;
+using BokInterface.Utils;
 
 namespace BokInterface.KeyItems {
     /// <summary>Basis class for key items editor subclasses</summary>

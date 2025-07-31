@@ -1,12 +1,11 @@
 using System;
 using System.Drawing;
 
-namespace BokInterface.All {
-
+namespace BokInterface.Utils {
     /// <summary>Utilities class</summary>
     static class Utilities {
 
-        #region Game code & region
+        #region Game code & version
 
         /// <summary>Retrieve the code for the current GBA game running on BizHawk</summary>
         /// <returns><c>uint</c>Game code</returns>

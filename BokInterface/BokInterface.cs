@@ -7,11 +7,12 @@ using System.Drawing;
 using System.Linq;
 using System.Collections.Generic;
 
-using BokInterface.All;
+using BokInterface.Utils;
 using BokInterface.Calculators;
 using BokInterface.Tools.TileDataViewer;
 using BokInterface.Tools.MemoryValuesListing;
 using BokInterface.Tools.SolarBankInterestsSimulator;
+using BokInterface.Addresses;
 
 /**
  * File for the main / initialization part of the Bok interface

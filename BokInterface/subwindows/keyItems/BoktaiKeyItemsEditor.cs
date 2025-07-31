@@ -1,7 +1,6 @@
 using System.Windows.Forms;
 
 using BokInterface.Addresses;
-using BokInterface.All;
 
 namespace BokInterface.KeyItems {
     ///<summary>Key items editor for Boktai</summary>

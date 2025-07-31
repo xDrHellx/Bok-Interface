@@ -1,4 +1,4 @@
-using BokInterface.All;
+using BokInterface.Utils;
 
 namespace BokInterface.Addresses {
     /// <summary>Class for representing a memory address and its informations</summary>

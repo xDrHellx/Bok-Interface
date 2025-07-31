@@ -2,14 +2,13 @@ using System;
 using System.Windows.Forms;
 
 using BokInterface.Addresses;
-using BokInterface.All;
+using BokInterface.Utils;
 
 /**
  * File for the Zoktai (Boktai 2) interface itself
  */
 
 namespace BokInterface {
-
     partial class BokInterface {
 
         #region Properties

@@ -3,7 +3,7 @@ using System.Data;
 using System.Drawing;
 using System.Windows.Forms;
 
-namespace BokInterface.All {
+namespace BokInterface.Utils {
     /// <summary>
     /// Class for WinForm Helpers <br/>
     /// <example><i>IE WinForm elements related methods</i></example>

@@ -4,7 +4,7 @@ using System.Windows.Forms;
 
 using BokInterface.Abilities;
 using BokInterface.Addresses;
-using BokInterface.All;
+using BokInterface.Utils;
 
 namespace BokInterface.Weapons {
     /// <summary>Weapons editor for Boktai 2</summary>

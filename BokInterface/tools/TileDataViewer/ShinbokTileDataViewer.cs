@@ -1,7 +1,7 @@
 using System.Windows.Forms;
 
 using BokInterface.Addresses;
-using BokInterface.All;
+using BokInterface.Utils;
 
 namespace BokInterface.Tools.TileDataViewer {
     /// <summary>TDViewer tool for Boktai 3</summary>

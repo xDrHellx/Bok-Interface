@@ -5,8 +5,8 @@ using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 
-using BokInterface.Accessories;
-using BokInterface.All;
+using BokInterface;
+using BokInterface.Utils;
 using BokInterface.Inventory;
 using BokInterface.KeyItems;
 using BokInterface.Magics;
@@ -16,6 +16,7 @@ using BokInterface.Tools.MemoryValuesListing;
 using BokInterface.Tools.SolarBankInterestsSimulator;
 using BokInterface.Tools.TileDataViewer;
 using BokInterface.Weapons;
+using BokInterface.Accessories;
 
 /**
  * File for the external window part of the Bok interface

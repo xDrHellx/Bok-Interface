@@ -1,9 +1,8 @@
-using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
 
 using BokInterface.Addresses;
-using BokInterface.All;
+using BokInterface.Utils;
 
 namespace BokInterface.Status {
     /// <summary>Status editor for Lunar Knights / Boktai DS</summary>

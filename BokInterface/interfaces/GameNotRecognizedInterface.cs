@@ -1,11 +1,10 @@
-using BokInterface.All;
+using BokInterface.Utils;
 
 /**
  * File for the "Game not recognized" interface
  */
 
 namespace BokInterface {
-
     partial class BokInterface {
 
         /// <summary>Shows the "Game not recognized" window</summary>

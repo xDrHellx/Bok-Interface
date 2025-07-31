@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 
-using BokInterface.All;
+using BokInterface.Utils;
 
 namespace BokInterface.Magics {
     /// <summary>Basis class for magics editor subclasses</summary>

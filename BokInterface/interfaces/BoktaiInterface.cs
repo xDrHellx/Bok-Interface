@@ -3,14 +3,13 @@ using System.Drawing;
 using System.Windows.Forms;
 
 using BokInterface.Addresses;
-using BokInterface.All;
+using BokInterface.Utils;
 
 /**
  * File for the Boktai TSiiYH interface itself
  */
 
 namespace BokInterface {
-
     partial class BokInterface {
 
         #region Properties

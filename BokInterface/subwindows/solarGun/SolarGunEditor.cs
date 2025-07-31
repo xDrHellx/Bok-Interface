@@ -1,7 +1,7 @@
 using System.Drawing;
 using System.Windows.Forms;
 
-using BokInterface.All;
+using BokInterface.Utils;
 
 namespace BokInterface.solarGun {
     /// <summary>Basis class for solar gun editor subclasses</summary>
