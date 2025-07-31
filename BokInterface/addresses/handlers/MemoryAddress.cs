@@ -10,8 +10,8 @@ namespace BokInterface.Addresses {
         public uint Address = address;
         public readonly string Type = type;
         /// <summary>
-        /// <para>If the address is 8 characters or more, it already specifies the domain.</para>
-        /// <para>In that case the domain will not be passed to the value reading and writing methods to prevent issues.</para>
+        ///     If the address is 8 characters or more, it already specifies the domain.<br/>
+        ///     <i>In that case the domain will not be passed to the value reading and writing methods to prevent issues.</i>
         /// </summary>
         public readonly string? Domain = domain;
         public readonly string Note = note;

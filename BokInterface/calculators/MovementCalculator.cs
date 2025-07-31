@@ -3,8 +3,8 @@ using System.Collections.Generic;
 
 namespace BokInterface.Calculators {
     /// <summary>
-    /// Calculator for movement-related operations<br/>
-    /// Applicable to all Boktai games
+    ///     Calculator for movement-related operations.<br/>
+    ///     Applicable to all Boktai games.
     /// </summary>
     class MovementCalculator {
 

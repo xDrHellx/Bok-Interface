@@ -7,8 +7,8 @@ namespace BokInterface.Addresses {
         /// <summary>
         /// <para>Django-related memory addresses</para>
         /// <para>
-        ///     About level and EXP : <br/>
-        ///     - If the EXP is too high, level will keep increasing automatically <br/>
+        ///     About level and EXP :<br/>
+        ///     - If the EXP is too high, level will keep increasing automatically<br/>
         ///     - EXP Until next level adjusts itself automatically
         /// </para>
         /// </summary>
@@ -23,8 +23,8 @@ namespace BokInterface.Addresses {
         /// <summary>
         /// <para>Bike-related memory addresses</para>
         /// <para>
-        ///     About the bars and scrolling : <br/>
-        ///     - If HP and ENE are modified during races, the bars will update automatically <br/>
+        ///     About the bars and scrolling :<br/>
+        ///     - If HP and ENE are modified during races, the bars will update automatically<br/>
         ///     - Freezing the scrolling value will NOT stop Django from moving
         /// </para>
         /// </summary>
@@ -66,17 +66,11 @@ namespace BokInterface.Addresses {
             Django.Add("exp", new MemoryAddress(0x48, type: "U32", domain: "EWRAM"));
             Django.Add("total_exp_until_next_level", new MemoryAddress(0x1BC8, type: "U32", domain: "EWRAM"));
             Django.Add("stat_points", new MemoryAddress(0x42, domain: "EWRAM"));
-
-            // VIT
             Django.Add("current_equips_vit", new MemoryAddress(0x332, note: "Stat points from accessories, " + _note.ToLower(), domain: "EWRAM"));
-            Django.Add("current_sum_base_cards_vit", new MemoryAddress(0x41C, note: "Sum of base stat & points from cards, " + _note.ToLower(), domain: "EWRAM"));
-
-            // SPR
             Django.Add("current_equips_spr", new MemoryAddress(0x334, note: "Stat points from accessories, " + _note.ToLower(), domain: "EWRAM"));
-            Django.Add("current_sum_base_cards_spr", new MemoryAddress(0x41E, note: "Sum of base stat & points from cards, " + _note.ToLower(), domain: "EWRAM"));
-
-            // STR
             Django.Add("current_equips_str", new MemoryAddress(0x336, note: "Stat points from accessories, " + _note.ToLower(), domain: "EWRAM"));
+            Django.Add("current_sum_base_cards_vit", new MemoryAddress(0x41C, note: "Sum of base stat & points from cards, " + _note.ToLower(), domain: "EWRAM"));
+            Django.Add("current_sum_base_cards_spr", new MemoryAddress(0x41E, note: "Sum of base stat & points from cards, " + _note.ToLower(), domain: "EWRAM"));
             Django.Add("current_sum_base_cards_str", new MemoryAddress(0x420, note: "Sum of base stat & points from cards, " + _note.ToLower(), domain: "EWRAM"));
 
             // Persistent stats (used on screen transitions & save data)
@@ -84,14 +78,11 @@ namespace BokInterface.Addresses {
             Django.Add("persistent_hp", new MemoryAddress(0x28, domain: "EWRAM"));
             Django.Add("persistent_ene", new MemoryAddress(0x2C, domain: "EWRAM"));
             Django.Add("persistent_trc", new MemoryAddress(0x608, domain: "EWRAM"));
-
             Django.Add("persistent_base_vit", new MemoryAddress(0x18, note: _note, domain: "EWRAM"));
-            Django.Add("persistent_cards_vit", new MemoryAddress(0x20, note: "Stat points from cards, " + _note.ToLower(), domain: "EWRAM"));
-
             Django.Add("persistent_base_spr", new MemoryAddress(0x1A, note: _note, domain: "EWRAM"));
-            Django.Add("persistent_cards_spr", new MemoryAddress(0x22, note: "Stat points from cards, " + _note.ToLower(), domain: "EWRAM"));
-
             Django.Add("persistent_base_str", new MemoryAddress(0x1C, note: _note, domain: "EWRAM"));
+            Django.Add("persistent_cards_vit", new MemoryAddress(0x20, note: "Stat points from cards, " + _note.ToLower(), domain: "EWRAM"));
+            Django.Add("persistent_cards_spr", new MemoryAddress(0x22, note: "Stat points from cards, " + _note.ToLower(), domain: "EWRAM"));
             Django.Add("persistent_cards_str", new MemoryAddress(0x24, note: "Stat points from cards, " + _note.ToLower(), domain: "EWRAM"));
 
             // Add Solls addresses
@@ -116,21 +107,14 @@ namespace BokInterface.Addresses {
 
         /// <summary>Init Inventory-related memory addresses</summary>
         private void InitInventoryAddresses() {
-
-            // Set these using a loop to simplify
             for (int i = 0; i < 16; i++) {
-
                 int slotNumber = 1 + i;
 
-                // Items & durability (2 bytes)
+                // Items, durability, key items & accessories (2 bytes each)
                 uint addressOffset = 0x2 * (uint)i;
                 Inventory.Add("item_slot_" + slotNumber, new MemoryAddress(0xA0 + addressOffset, note: "Item slot", domain: "EWRAM"));
                 Inventory.Add("item_slot_durability_" + slotNumber, new MemoryAddress(0x100 + addressOffset, note: "Item durability (for spoiling)", domain: "EWRAM"));
-
-                // Key items (2 bytes)
                 Inventory.Add("key_item_slot_" + slotNumber, new MemoryAddress(0x838 + addressOffset, note: "Key item inventory slot", domain: "EWRAM"));
-
-                // Accessory slots (2 bytes)
                 Inventory.Add("accessory_slot_" + slotNumber, new MemoryAddress(0x160 + addressOffset, note: "Accessory inventory slot", domain: "EWRAM"));
 
                 // Weapon inventory slots & durability
@@ -150,18 +134,17 @@ namespace BokInterface.Addresses {
 
         /// <summary>Init Gun-related memory addresses</summary>
         private void InitGunAddresses() {
-            // Lenses
-            for (int i = 0; i < 8; i++) {
-                int slotNumber = 1 + i;
-                uint addressOffset = 0x2 * (uint)i;
-                Inventory.Add("gun_lens_slot_" + slotNumber, new MemoryAddress(0x828 + addressOffset, note: "Gun lens inventory slot", domain: "EWRAM"));
-            }
-
-            // Frames
             for (int i = 0; i < 12; i++) {
                 int slotNumber = 1 + i;
                 uint addressOffset = 0x2 * (uint)i;
+
+                // 12 Frame slots
                 Inventory.Add("gun_frame_slot_" + slotNumber, new MemoryAddress(0x4C0 + addressOffset, note: "Gun frame inventory slot", domain: "EWRAM"));
+
+                // 8 Lens slots
+                if (i < 8) {
+                    Inventory.Add("gun_lens_slot_" + slotNumber, new MemoryAddress(0x828 + addressOffset, note: "Gun lens inventory slot", domain: "EWRAM"));
+                }
             }
         }
 

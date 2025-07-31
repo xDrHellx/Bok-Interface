@@ -3,7 +3,6 @@ using System.Drawing;
 namespace BokInterface.Accessories {
     ///<summary>Base class for representing an accessory</summary>
     abstract class Accessory {
-
         ///<summary>Weapon name</summary>
         public string name;
         ///<summary>Value (decimal)<summary>
@@ -31,7 +30,6 @@ namespace BokInterface.Accessories {
             this.crossOver = crossOver;
             this.defense = defense;
             this.weight = weight;
-
             this.buyPrice = buyPrice;
 
             // Price for selling is always the buying price divided by 2 (or 0 if it cannot be sold)
