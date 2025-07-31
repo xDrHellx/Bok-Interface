@@ -4,7 +4,7 @@ using System.Windows.Forms;
 
 using BokInterface.Addresses;
 using BokInterface.Utils;
-using BokInterface.ExpTables;
+using BokInterface.Tables;
 
 /**
  * Note :
@@ -209,7 +209,7 @@ namespace BokInterface.Status {
              */
             if (_memoryValues.U32.ContainsKey("total_exp_until_next_level") == true && _memoryValues.Django.ContainsKey("level")) {
                 int level = (int)_memoryValues.Django["level"].Value;
-                _memoryValues.U32["total_exp_until_next_level"].Value = level < 99 ? DjangoExpTable.shinbok[level] : 0;
+                _memoryValues.U32["total_exp_until_next_level"].Value = level < 99 ? BokTables.djangoExp[level] : 0;
             }
 
             /**
