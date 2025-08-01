@@ -3,12 +3,14 @@ using System.Drawing;
 namespace BokInterface.Accessories {
     ///<summary>Base class for representing an accessory</summary>
     abstract class Accessory {
+
         ///<summary>Weapon name</summary>
         public string name;
         ///<summary>Value (decimal)<summary>
         public uint value;
         /// <summary>Accessory type (Head, Body, Hand, Foot)</summary>
         public string type;
+        /// <summary>Accessory Icon</summary>
         public Image? icon = null;
         public int row;
         /// <summary>Indicates if obtained via CrossOver points</summary>
@@ -17,19 +19,13 @@ namespace BokInterface.Accessories {
         public int buyPrice;
         /// <summary>Price when selling</summary>
         public int sellPrice;
-        ///<summary>Accessory defense (refered as Durability in-game, and only used in Zoktai)</summary>
-        public int defense;
-        /// <summary>Accessory weight (only used in Zoktai)</summary>
-        public int weight;
 
-        public Accessory(string name, uint value, string type, string icon = "", int row = 1, int buyPrice = 0, bool crossOver = false, int defense = 0, int weight = 0) {
+        public Accessory(string name, uint value, string type, string icon = "", int row = 1, int buyPrice = 0, bool crossOver = false) {
             this.name = name;
             this.value = value;
             this.type = type;
             this.row = row;
             this.crossOver = crossOver;
-            this.defense = defense;
-            this.weight = weight;
             this.buyPrice = buyPrice;
 
             // Price for selling is always the buying price divided by 2 (or 0 if it cannot be sold)

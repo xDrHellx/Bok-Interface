@@ -4,13 +4,7 @@ namespace BokInterface.Items {
     ///<summary>Class representing an item for Zoktai</summary>
     class ZoktaiItem : Item {
 
-        public ZoktaiItem(string name, uint value, string icon = "", bool perishable = false, int durability = 0, Item? coveredItem = null, int buyPrice = 0) : base(name, value) {
-            this.perishable = perishable;
-            this.coveredItem = coveredItem;
-            this.buyPrice = buyPrice;
-
-            // Price for selling is always the buying price divided by 2 (or 0 if it cannot be sold)
-            sellPrice = buyPrice > 0 ? buyPrice / 2 : 0;
+        public ZoktaiItem(string name, uint value, string icon = "", bool perishable = false, int durability = 0, Item? coveredItem = null, int buyPrice = 0) : base(name, value, icon, perishable, durability, coveredItem, buyPrice) {
 
             // If an icon was specified try getting & setting it to the property
             if (icon != "") {

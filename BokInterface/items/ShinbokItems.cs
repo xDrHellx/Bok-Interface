@@ -60,7 +60,6 @@ namespace BokInterface.Items {
         private void InitKeyItems() {
             KeyItems.Add("Empty slot", new ShinbokItem("Empty Slot", 65535));
             KeyItems.Add("Dark Card", new ShinbokItem("Dark Card", 39, "dark_card"));
-            // KeyItems.Add("Master Otenko", new ShinbokItem("Master Otenko", 40)); // Unused
             KeyItems.Add("Sword License", new ShinbokItem("Sword License", 41, "sword_license"));
             KeyItems.Add("PET", new ShinbokItem("PET", 42, "pet"));
             KeyItems.Add("Vector Coffin", new ShinbokItem("Vector Coffin", 43, "vector_coffin"));
@@ -69,12 +68,15 @@ namespace BokInterface.Items {
             KeyItems.Add("Square Key", new ShinbokItem("Square Key", 46, "square_key"));
             KeyItems.Add("Cross Key", new ShinbokItem("Cross Key", 47, "cross_key"));
             KeyItems.Add("Pile Parts", new ShinbokItem("Pile Parts", 48, "pile_parts"));
-            // KeyItems.Add("Dungeon Item 2", new ShinbokItem("Dungeon Item 2", 49)); // Unused
             KeyItems.Add("Fate Goddess Statue", new ShinbokItem("Fate Goddess Statue", 50, "fate_goddess_statue"));
             KeyItems.Add("Existence Goddess Statue", new ShinbokItem("Existence Goddess Statue", 51, "existence_goddess_statue"));
             KeyItems.Add("Necessity Goddess Statue", new ShinbokItem("Necessity Goddess Statue", 52, "necessity_goddess_statue"));
-            // KeyItems.Add("Mission Item 4", new ShinbokItem("Mission Item 4", 53)); // Unused
-            // KeyItems.Add("Mission Item 5", new ShinbokItem("Mission Item 5", 54)); // Unused
+
+            // Unused
+            // KeyItems.Add("Master Otenko", new ShinbokItem("Master Otenko", 40));
+            // KeyItems.Add("Dungeon Item 2", new ShinbokItem("Dungeon Item 2", 49));
+            // KeyItems.Add("Mission Item 4", new ShinbokItem("Mission Item 4", 53));
+            // KeyItems.Add("Mission Item 5", new ShinbokItem("Mission Item 5", 54));
         }
     }
 }
