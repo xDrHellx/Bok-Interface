@@ -47,7 +47,6 @@ namespace BokInterface.Weapons {
             this.rRank = rRank;
             this.eventWeapon = eventWeapon;
             this.adjustToLevel = adjustToLevel;
-
             this.buyPrice = buyPrice;
 
             // Price for selling is always the buying price divided by 2 (or 0 if it cannot be sold)

@@ -5,7 +5,6 @@ namespace BokInterface.Items {
     class ShinbokItem : Item {
 
         public ShinbokItem(string name, uint value, string icon = "", bool perishable = false, int durability = 0, Item? coveredItem = null, int buyPrice = 0) : base(name, value) {
-
             this.perishable = perishable;
             this.coveredItem = coveredItem;
             this.buyPrice = buyPrice;

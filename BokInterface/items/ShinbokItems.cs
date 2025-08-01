@@ -4,8 +4,8 @@ namespace BokInterface.Items {
     /// <summary>Class for Shinbok item instances and lists</summary>
     class ShinbokItems {
 
-        public Dictionary<string, Item> Items = [];
-        public Dictionary<string, Item> KeyItems = [];
+        public Dictionary<string, Item> Items = [],
+            KeyItems = [];
 
         public ShinbokItems() {
             InitItems();
