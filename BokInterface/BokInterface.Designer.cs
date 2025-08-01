@@ -162,6 +162,7 @@ namespace BokInterface {
 			BackColor = System.Drawing.SystemColors.Control;
 			Font = WinFormHelpers.defaultFont;
 			ClientSize = new System.Drawing.Size(width, height);
+			MaximizeBox = MinimizeBox = false;
 		}
 
 		/// <summary>Adds the Misc. data section for the corresponding game</summary>

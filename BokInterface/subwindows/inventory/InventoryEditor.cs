@@ -53,6 +53,7 @@ namespace BokInterface.Inventory {
             Font = WinFormHelpers.defaultFont;
             AutoScroll = true;
             ClientSize = new Size(width, height);
+            MaximizeBox = false;
         }
 
         /// <summary>Add elements to the subwindow</summary>

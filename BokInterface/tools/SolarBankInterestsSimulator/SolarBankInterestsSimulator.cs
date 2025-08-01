@@ -52,6 +52,7 @@ namespace BokInterface.Tools.SolarBankInterestsSimulator {
             Font = WinFormHelpers.defaultFont;
             AutoScroll = true;
             ClientSize = new Size(500, 208);
+            MaximizeBox = false;
 
             // Add elements & show the subwindow
             AddControls();

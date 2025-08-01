@@ -181,8 +181,10 @@ namespace BokInterface.Utils {
         /// <param name="height">Height (in pixels)</param>
         /// <param name="parentForm">Form the subwindow is attached to (this will make the subwindow always show in front of its parent, by default it shows in front of the main window)</param>
         /// <param name="icon">Subwindow icon (by default retrieves the one from the main interface window)</param>
+        /// <param name="maximizeBtn">Enable maximize button (True by default)</param>
+        /// <param name="minimizeBtn">Enable minimize button (True by default)</param>
         /// <returns><c>Form</c>Instance</returns>
-        public static Form CreateSubWindow(string name, string title, int width, int height, Form? parentForm = null, string icon = "") {
+        public static Form CreateSubWindow(string name, string title, int width, int height, Form? parentForm = null, string icon = "", bool maximizeBtn = true, bool minimizeBtn = true) {
             return new() {
                 Name = name,
                 Text = title,
@@ -193,7 +195,9 @@ namespace BokInterface.Utils {
                 BackColor = SystemColors.Control,
                 Font = defaultFont,
                 ClientSize = new Size(width, height),
-                Owner = parentForm
+                Owner = parentForm,
+                MaximizeBox = maximizeBtn,
+                MinimizeBox = minimizeBtn
             };
         }
 

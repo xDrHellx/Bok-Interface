@@ -42,6 +42,7 @@ namespace BokInterface.Status {
             Font = WinFormHelpers.defaultFont;
             AutoScroll = true;
             ClientSize = new Size(width, height);
+            MaximizeBox = false;
         }
 
         /// <summary>Get default values</summary>
