@@ -5,12 +5,12 @@ namespace BokInterface.Addresses {
     public class ShinbokAddresses {
 
         /// <summary>
-        /// <para>Django-related memory addresses</para>
-        /// <para>
-        ///     About level and EXP :<br/>
-        ///     - If the EXP is too high, level will keep increasing automatically<br/>
-        ///     - EXP Until next level adjusts itself automatically
-        /// </para>
+        ///     <para>Django-related memory addresses</para>
+        ///     <para>
+        ///         About level and EXP :<br/>
+        ///         - If the EXP is too high, level will keep increasing automatically<br/>
+        ///         - EXP Until next level adjusts itself automatically
+        ///     </para>
         /// </summary>
         public IDictionary<string, MemoryAddress> Django = new Dictionary<string, MemoryAddress>();
 
@@ -21,21 +21,21 @@ namespace BokInterface.Addresses {
         public IDictionary<string, MemoryAddress> Inventory = new Dictionary<string, MemoryAddress>();
 
         /// <summary>
-        /// <para>Bike-related memory addresses</para>
-        /// <para>
-        ///     About the bars and scrolling :<br/>
-        ///     - If HP and ENE are modified during races, the bars will update automatically<br/>
-        ///     - Freezing the scrolling value will NOT stop Django from moving
-        /// </para>
+        ///     <para>Bike-related memory addresses</para>
+        ///     <para>
+        ///         About the bars and scrolling :<br/>
+        ///         - If HP and ENE are modified during races, the bars will update automatically<br/>
+        ///         - Freezing the scrolling value will NOT stop Django from moving
+        ///     </para>
         /// </summary>
         public IDictionary<string, MemoryAddress> Bike = new Dictionary<string, MemoryAddress>();
 
         /// <summary>
-        /// <para>Misc memory addresses</para>
-        /// <para>
-        ///     These are used in combination with other memory addresses to get / set values that are "dynamic" <br/>
-        ///     For example the memory address for Django's current HP is different based on which "room sections" he is in
-        /// </para>
+        ///     <para>Misc memory addresses</para>
+        ///     <para>
+        ///         These are used in combination with other memory addresses to get / set values that are "dynamic."<br/>
+        ///         <i>For example the memory address for Django's current HP is different based on which "room sections" he is in.</i>
+        ///     </para>
         /// </summary>
         public IDictionary<string, MemoryAddress> Misc = new Dictionary<string, MemoryAddress>();
 

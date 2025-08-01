@@ -5,8 +5,8 @@ using System.Windows.Forms;
 
 namespace BokInterface.Utils {
     /// <summary>
-    /// Class for WinForm Helpers <br/>
-    /// <example><i>IE WinForm elements related methods</i></example>
+    ///     Class for WinForm Helpers.<br/>
+    ///     <i>IE WinForm elements related methods.</i>
     /// </summary>
     static class WinFormHelpers {
 

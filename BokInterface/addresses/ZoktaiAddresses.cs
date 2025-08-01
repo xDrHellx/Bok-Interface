@@ -20,11 +20,11 @@ namespace BokInterface.Addresses {
         public IDictionary<string, MemoryAddress> Solls = new Dictionary<string, MemoryAddress>();
 
         /// <summary>
-        /// <para>Misc memory addresses</para>
-        /// <para>
-        ///     These are used in combination with other memory addresses to get / set values that are "dynamic"<br/>
-        ///     For example the memory address for Django's current HP is different based on which "room sections" he is in
-        /// </para>
+        ///     <para>Misc memory addresses</para>
+        ///     <para>
+        ///         These are used in combination with other memory addresses to get / set values that are "dynamic."<br/>
+        ///         <i>For example the memory address for Django's current HP is different based on which "room sections" he is in.</i>
+        ///     </para>
         /// </summary>
         public IDictionary<string, MemoryAddress> Misc = new Dictionary<string, MemoryAddress>();
 

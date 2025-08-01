@@ -55,8 +55,8 @@ namespace BokInterface {
         #region Instances
 
         /// <summary>
-        /// List of MemoryValues instances.<br/>
-        /// These are used for simplyfing getting and setting values from memory addresses that are "dynamic."
+        ///     List of MemoryValues instances.<br/>
+        ///     These are used for simplyfing getting and setting values from memory addresses that are "dynamic."
         /// </summary>
         private MemoryValues _memoryValues = new("");
         /// <summary>Movement calculator instance</summary>
