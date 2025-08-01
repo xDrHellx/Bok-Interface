@@ -16,7 +16,7 @@ namespace BokInterface.Utils {
         public static ToolTip toolTip = CreateToolTip();
 
         /// <summary>Color for the game label</summary>
-        public static readonly string _gameNameBackground = "#EFE6BD";
+        public static readonly string gameNameBackground = "#EFE6BD";
 
         /// <summary>Color for stat points obtained through leveling up (Boktai 2, 3, LK)</summary>
         public static readonly string baseStatColor = "#FFE600";

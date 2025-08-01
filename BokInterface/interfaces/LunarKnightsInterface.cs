@@ -18,13 +18,9 @@ namespace BokInterface {
 
         private void ShowLunarKnightsInterface() {
 
-            // GenerateMenu();
-
             // Current game name
-            WinFormHelpers.CreateLabel("currentGameName", currentGameName, 0, 0, Width, 20, this, WinFormHelpers._gameNameBackground, textAlignment: "MiddleLeft");
-
-            // Sections
-            // AddMiscDataSection();
+            WinFormHelpers.CreateLabel("currentGameName", currentGameName, 0, 0, Width, 20, this, WinFormHelpers.gameNameBackground, textAlignment: "MiddleLeft");
+            WinFormHelpers.CreateLabel("extraText", "No data available for this game yet.", 0, 20, Width, 20, this, WinFormHelpers.gameNameBackground, textAlignment: "MiddleLeft");
 
             // Main window
             SetMainWindow("Bok Interface", 350, 40);

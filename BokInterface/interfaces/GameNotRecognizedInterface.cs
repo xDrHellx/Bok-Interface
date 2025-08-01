@@ -11,8 +11,8 @@ namespace BokInterface {
         private void ShowGameNotRecognizedWindow() {
 
             // Text
-            WinFormHelpers.CreateLabel("currentGameName", "Game not recognized!", 0, 0, Width, 20, this, WinFormHelpers._gameNameBackground, textAlignment: "MiddleLeft");
-            WinFormHelpers.CreateLabel("extraText", "This tool only supports Boktai games.", 0, 20, Width, 20, this, WinFormHelpers._gameNameBackground, textAlignment: "MiddleLeft");
+            WinFormHelpers.CreateLabel("currentGameName", "Game not recognized!", 0, 0, Width, 20, this, WinFormHelpers.gameNameBackground, textAlignment: "MiddleLeft");
+            WinFormHelpers.CreateLabel("extraText", "This tool only supports Boktai games.", 0, 20, Width, 20, this, WinFormHelpers.gameNameBackground, textAlignment: "MiddleLeft");
 
             // Window
             SetMainWindow("Bok Interface", 350, 40);

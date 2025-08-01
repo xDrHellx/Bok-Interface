@@ -33,7 +33,7 @@ namespace BokInterface {
             }
 
             // Current game name
-            WinFormHelpers.CreateLabel("currentGameName", currentGameName + version, 0, 0, Width, 20, this, WinFormHelpers._gameNameBackground, textAlignment: "MiddleLeft");
+            WinFormHelpers.CreateLabel("currentGameName", currentGameName + version, 0, 0, Width, 20, this, WinFormHelpers.gameNameBackground, textAlignment: "MiddleLeft");
 
             // Sections
             AddBoktaiCurrentStatusSection();
