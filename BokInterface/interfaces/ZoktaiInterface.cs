@@ -45,7 +45,7 @@ namespace BokInterface {
             }
 
             // Current game name
-            WinFormHelpers.CreateLabel("currentGameName", currentGameName + version, 0, 0, Width, 20, this, WinFormHelpers.gameNameBackground, textAlignment: "MiddleLeft");
+            WinFormHelpers.CreateLabel("currentGameName", currentGameName + version, 0, _menuBar.Height, Width, 20, this, WinFormHelpers.gameNameBackground, textAlignment: "MiddleLeft");
 
             // Sections
             AddZoktaiCurrentStatusSection();
@@ -54,7 +54,7 @@ namespace BokInterface {
             AddMiscDataSection();
 
             // Main window
-            SetMainWindow("Bok Interface", 236, 257);
+            SetMainWindow("Bok Interface", 236, 277);
             ResumeLayout(false);
         }
 
@@ -121,7 +121,7 @@ namespace BokInterface {
         private void AddZoktaiCurrentStatusSection() {
 
             // Section
-            _currentStatusGroupBox = WinFormHelpers.CreateGroupBox("currentStatus", "Current status", 5, 25, 226, 55, this);
+            _currentStatusGroupBox = WinFormHelpers.CreateGroupBox("currentStatus", "Current status", 5, 45, 226, 55, this);
 
             // Current status labels
             WinFormHelpers.CreateLabel("djangoCurrentHpLabel", "LIFE :", 7, 19, 34, 15, _currentStatusGroupBox);
@@ -139,7 +139,7 @@ namespace BokInterface {
         private void AddZoktaiCurrentSkillSection() {
 
             // Section
-            _bok2_currentSkillGroupBox = WinFormHelpers.CreateGroupBox("currentSkill", "Skill", 92, 86, 110, 104, this);
+            _bok2_currentSkillGroupBox = WinFormHelpers.CreateGroupBox("currentSkill", "Skill", 92, 106, 110, 104, this);
 
             // Sword
             WinFormHelpers.CreateLabel("swordSkillLabel", "Sword", 6, 20, 54, 15, _bok2_currentSkillGroupBox, textAlignment: "MiddleLeft");
@@ -165,7 +165,7 @@ namespace BokInterface {
         private void AddZoktaiCurrentStatsSection() {
 
             // Section
-            _currentStatsGroupBox = WinFormHelpers.CreateGroupBox("currentStats", "Stats", 5, 86, 75, 106, this);
+            _currentStatsGroupBox = WinFormHelpers.CreateGroupBox("currentStats", "Stats", 5, 106, 75, 106, this);
 
             // VIT
             WinFormHelpers.CreateLabel("vitRowLabel", "VIT", 6, 19, 27, 15, _currentStatsGroupBox, textAlignment: "MiddleLeft");

@@ -29,18 +29,18 @@ namespace BokInterface {
             // If E3 demo / beta, update the game name label
             string version = "";
             if (currentGameId == 1246311233) {
-                version = " (E3 demo / beta)";
+                version = " (E3 demo)";
             }
 
             // Current game name
-            WinFormHelpers.CreateLabel("currentGameName", currentGameName + version, 0, 0, Width, 20, this, WinFormHelpers.gameNameBackground, textAlignment: "MiddleLeft");
+            WinFormHelpers.CreateLabel("currentGameName", currentGameName + version, 0, _menuBar.Height, Width, 20, this, WinFormHelpers.gameNameBackground, textAlignment: "MiddleLeft");
 
             // Sections
             AddBoktaiCurrentStatusSection();
             AddMiscDataSection();
 
             // Main window
-            SetMainWindow("Bok Interface", 236, 258);
+            SetMainWindow("Bok Interface", 236, 250 + _menuBar.Height);
             ResumeLayout(false);
         }
 
@@ -99,7 +99,7 @@ namespace BokInterface {
         private void AddBoktaiCurrentStatusSection() {
 
             // Section
-            _currentStatusGroupBox = WinFormHelpers.CreateGroupBox("currentStatus", "Current status", 5, 25, 226, 55, this);
+            _currentStatusGroupBox = WinFormHelpers.CreateGroupBox("currentStatus", "Current status", 5, 45, 226, 55, this);
 
             // Current status labels
             WinFormHelpers.CreateLabel("djangoCurrentHpLabel", "LIFE :", 7, 19, 34, 15, _currentStatusGroupBox);

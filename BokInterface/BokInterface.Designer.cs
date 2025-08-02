@@ -168,23 +168,23 @@ namespace BokInterface {
 		/// <summary>Adds the Misc. data section for the corresponding game</summary>
 		private void AddMiscDataSection() {
 
-			int positionY = 90;
+			int positionY = 110;
 			int groupHeight = 55;
 			bool enableCoffinSection = false;
 			switch (BokInterface.shorterGameName) {
 				case "Boktai":
-					positionY = 90;
+					positionY = 106;
 					groupHeight = 164;
 					enableCoffinSection = true;
 					break;
 				case "Zoktai":
-					positionY = 198;
+					positionY = 218;
 					break;
 				case "Shinbok":
-					positionY = 194;
+					positionY = 214;
 					break;
 				case "LunarKnights":
-					positionY = 105;
+					positionY = 125;
 					break;
 				default:
 					// If game is not handled, don't add anything & stop here
@@ -219,7 +219,7 @@ namespace BokInterface {
 
 		/// <summary>Generate the menu for the main window</summary>
 		private void GenerateMenu() {
-			MenuStrip menuBar = WinFormHelpers.CreateMenuStrip("menuBar", "", control: this);
+			_menuBar = WinFormHelpers.CreateMenuStrip("menuBar", "", control: this);
 
 			if (shorterGameName == "LunarKnights") {
 				return;
@@ -228,7 +228,7 @@ namespace BokInterface {
 			// Edit section
 			if (shorterGameName == "Zoktai" || shorterGameName == "Shinbok") {
 
-				ToolStripMenuItem editMenu = WinFormHelpers.CreateToolStripMenuItem("editMenu", "Edit", menuStrip: menuBar);
+				ToolStripMenuItem editMenu = WinFormHelpers.CreateToolStripMenuItem("editMenu", "Edit", menuStrip: _menuBar);
 
 				ToolStripMenuItem editStatusMenu = WinFormHelpers.CreateToolStripMenuItem("editStatusMenu", "&Status", menuItem: editMenu);
 				editStatusMenu.Click += new EventHandler(OpenStatusEditor);
@@ -264,7 +264,7 @@ namespace BokInterface {
 			}
 
 			// Misc tools section
-			ToolStripMenuItem toolsMenu = WinFormHelpers.CreateToolStripMenuItem("toolsMenu", "Tools", menuStrip: menuBar);
+			ToolStripMenuItem toolsMenu = WinFormHelpers.CreateToolStripMenuItem("toolsMenu", "Tools", menuStrip: _menuBar);
 
 			ToolStripMenuItem tileDataViewerMenu = WinFormHelpers.CreateToolStripMenuItem("tileDataViewerMenu", "&Tile data viewer", menuItem: toolsMenu);
 			tileDataViewerMenu.Click += new EventHandler(OpenTileDataViewer);

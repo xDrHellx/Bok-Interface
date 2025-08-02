@@ -41,7 +41,7 @@ namespace BokInterface {
             GenerateMenu();
 
             // Current game name
-            WinFormHelpers.CreateLabel("currentGameName", currentGameName, 0, 0, Width, 20, this, WinFormHelpers.gameNameBackground, textAlignment: "MiddleLeft");
+            WinFormHelpers.CreateLabel("currentGameName", currentGameName, 0, _menuBar.Height, Width, 20, this, WinFormHelpers.gameNameBackground, textAlignment: "MiddleLeft");
 
             // Sections
             AddShinbokCurrentStatusSection();
@@ -49,7 +49,7 @@ namespace BokInterface {
             AddMiscDataSection();
 
             // Main window
-            SetMainWindow("Bok Interface", 236, 253);
+            SetMainWindow("Bok Interface", 236, 249 + _menuBar.Height);
             ResumeLayout(false);
         }
 
@@ -114,7 +114,7 @@ namespace BokInterface {
         private void AddShinbokCurrentStatusSection() {
 
             // Section
-            _currentStatusGroupBox = WinFormHelpers.CreateGroupBox("currentStatus", "Current status", 5, 25, 226, 70, this);
+            _currentStatusGroupBox = WinFormHelpers.CreateGroupBox("currentStatus", "Current status", 5, 45, 226, 70, this);
 
             // Current status labels
             WinFormHelpers.CreateLabel("djangoCurrentHpLabel", "LIFE :", 7, 19, 34, 15, _currentStatusGroupBox);
@@ -134,7 +134,7 @@ namespace BokInterface {
         private void AddShinbokCurrentStatsSection() {
 
             // Section
-            _currentStatsGroupBox = WinFormHelpers.CreateGroupBox("currentStats", "Stats", 5, 101, 184, 87, this);
+            _currentStatsGroupBox = WinFormHelpers.CreateGroupBox("currentStats", "Stats", 5, 121, 184, 87, this);
 
             // Column names
             WinFormHelpers.CreateLabel("baseStatColumnName", "Base", 35, 19, 31, 15, _currentStatsGroupBox, WinFormHelpers.baseStatColor);

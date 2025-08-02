@@ -87,6 +87,7 @@ namespace BokInterface {
 
         #region Common elements
 
+        private MenuStrip _menuBar = new();
         private GroupBox _currentStatusGroupBox = new(),
             _currentStatsGroupBox = new(),
             _miscDataGroupBox = new();

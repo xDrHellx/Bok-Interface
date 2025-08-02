@@ -15,7 +15,7 @@ namespace BokInterface {
             WinFormHelpers.CreateLabel("extraText", "This tool only supports Boktai games.", 0, 20, Width, 20, this, WinFormHelpers.gameNameBackground, textAlignment: "MiddleLeft");
 
             // Window
-            SetMainWindow("Bok Interface", 350, 40);
+            SetMainWindow("Bok Interface", 236, 40);
             FormClosing += new System.Windows.Forms.FormClosingEventHandler(BokInterface_FormClosing);
             Load += new System.EventHandler(BokInterface_Load);
             ResumeLayout(false);

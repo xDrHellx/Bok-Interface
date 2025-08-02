@@ -23,7 +23,7 @@ namespace BokInterface {
             WinFormHelpers.CreateLabel("extraText", "No data available for this game yet.", 0, 20, Width, 20, this, WinFormHelpers.gameNameBackground, textAlignment: "MiddleLeft");
 
             // Main window
-            SetMainWindow("Bok Interface", 350, 40);
+            SetMainWindow("Bok Interface", 236, 40);
             ResumeLayout(false);
         }
 
