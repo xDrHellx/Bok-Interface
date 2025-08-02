@@ -149,6 +149,7 @@ namespace BokInterface.Addresses {
             Misc.Add("y_camera", new MemoryAddress(0x030047CA, note: "Camera Y position", domain: "IWRAM"));
             Misc.Add("z_camera", new MemoryAddress(0x030047CC, note: "Camera Z position", domain: "IWRAM"));
             Misc.Add("current_stat", new MemoryAddress(0x03002BE0, note: "For current stats", type: "U32", domain: "IWRAM"));
+            Misc.Add("rng_index", new MemoryAddress(0x030046B8, type: "U32", domain: "IWRAM"));
 
             // US version
             // Misc.Add("exp_table", new MemoryAddress(0x08CE3238));

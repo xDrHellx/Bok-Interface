@@ -120,6 +120,7 @@ namespace BokInterface.Addresses {
             Misc.Add("y_camera", new MemoryAddress(0x030046EA, note: "Camera Y position", domain: "IWRAM"));
             Misc.Add("z_camera", new MemoryAddress(0x030046EC, note: "Camera Z position", domain: "IWRAM"));
             Misc.Add("action_difficulty", new MemoryAddress(0x0203E8BC, note: "Action difficulty setting (0 = Easy | 1 = Normal | 2 = Hard)", domain: "System Bus"));
+            Misc.Add("rng_index", new MemoryAddress(0x03004620, type: "U32", domain: "IWRAM"));
         }
     }
 }

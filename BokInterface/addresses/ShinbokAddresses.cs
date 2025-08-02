@@ -155,10 +155,11 @@ namespace BokInterface.Addresses {
             Misc.Add("world_state", new MemoryAddress(0x0203DB08, note: "Story progress & dungeon states", type: "U32", domain: "EWRAM"));
             Misc.Add("scratch", new MemoryAddress(0x0203E308, type: "U32", domain: "EWRAM"));
             Misc.Add("map_data", new MemoryAddress(0x030052F4, type: "U32", domain: "IWRAM"));
+            Misc.Add("boss_hp", new MemoryAddress(0x0200EEC0, domain: "EWRAM"));
             Misc.Add("x_camera", new MemoryAddress(0x03005418, note: "Camera X position", domain: "IWRAM"));
             Misc.Add("y_camera", new MemoryAddress(0x0300541A, note: "Camera Y position", domain: "IWRAM"));
             Misc.Add("z_camera", new MemoryAddress(0x0300541C, note: "Camera Z position", domain: "IWRAM"));
-            Misc.Add("boss_hp", new MemoryAddress(0x0200EEC0, domain: "EWRAM"));
+            Misc.Add("rng_index", new MemoryAddress(0x03005308, type: "U32", domain: "IWRAM"));
         }
     }
 }
