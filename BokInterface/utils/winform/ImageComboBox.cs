@@ -7,10 +7,9 @@ using BokInterface.Weapons;
 using BokInterface.Abilities;
 using BokInterface.Accessories;
 
-namespace BokInterface.All {
+namespace BokInterface.Utils {
     ///<summary>Class for ComboBox with images next to selectable options</summary>
-    class ImageComboBox : ComboBox {
-        public ImageComboBox() { }
+    public class ImageComboBox : ComboBox {
 
         // Draws the items into the object
         protected override void OnDrawItem(DrawItemEventArgs e) {

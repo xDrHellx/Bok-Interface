@@ -4,13 +4,13 @@ using System.Windows.Forms;
 
 using BokInterface.Abilities;
 using BokInterface.Addresses;
-using BokInterface.All;
+using BokInterface.Utils;
 
 namespace BokInterface.Weapons {
     /// <summary>Weapons editor for Boktai 3</summary>
     class ShinbokWeaponsEditor : WeaponsEditor {
 
-        #region Instances
+        #region Properties
 
         protected readonly List<RadioButton> radioButtons = [];
         private readonly MemoryValues _memoryValues;
@@ -21,6 +21,8 @@ namespace BokInterface.Weapons {
         private readonly ShinbokSwordAttackPatterns _shinbokSwordAttackPatterns;
 
         #endregion
+
+        #region Constructor
 
         public ShinbokWeaponsEditor(BokInterface bokInterface, MemoryValues memoryValues, ShinbokAddresses ShinbokAddresses) {
 
@@ -44,6 +46,10 @@ namespace BokInterface.Weapons {
             AddElements();
             Show();
         }
+
+        #endregion
+
+        #region Elements
 
         protected override void AddElements() {
 
@@ -394,6 +400,10 @@ namespace BokInterface.Weapons {
             }
         }
 
+        #endregion
+
+        #region Values setting
+
         protected override void SetValues() {
 
             // Store the previous setting for BizHawk being paused
@@ -617,5 +627,7 @@ namespace BokInterface.Weapons {
 
             return null;
         }
+
+        #endregion
     }
 }

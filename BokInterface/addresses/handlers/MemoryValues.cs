@@ -1,41 +1,29 @@
 using System.Collections.Generic;
 
-using BokInterface.Addresses;
-
-namespace BokInterface.All {
-
+namespace BokInterface.Addresses {
     /// <summary>Class containing instances of memory values for the current game</summary>
     class MemoryValues {
 
-        #region Properties
+        #region Properties / lists
 
-        /// <summary>Django-related memory values</summary>
-        public IDictionary<string, DynamicMemoryValue> Django = new Dictionary<string, DynamicMemoryValue>();
-        /// <summary>Sabata-related memory values</summary>
-        public IDictionary<string, DynamicMemoryValue> Sabata = new Dictionary<string, DynamicMemoryValue>();
-        /// <summary>Solls-related memory values</summary>
-        public IDictionary<string, DynamicMemoryValue> Solls = new Dictionary<string, DynamicMemoryValue>();
-        /// <summary>Inventory-related memory values</summary>
-        public IDictionary<string, DynamicMemoryValue> Inventory = new Dictionary<string, DynamicMemoryValue>();
-        /// <summary>Bike-related memory values</summary>
-        public IDictionary<string, DynamicMemoryValue> Bike = new Dictionary<string, DynamicMemoryValue>();
-        /// <summary>Coffin-related memory values</summary>
-        public IDictionary<string, DynamicMemoryValue> Coffin = new Dictionary<string, DynamicMemoryValue>();
-        /// <summary>Misc memory values</summary>
-        public IDictionary<string, DynamicMemoryValue> Misc = new Dictionary<string, DynamicMemoryValue>();
-        /// <summary>U16 memory values</summary>
-        public IDictionary<string, MemoryAddress> U16 = new Dictionary<string, MemoryAddress>();
-        /// <summary>U32 memory values</summary>
-        public IDictionary<string, MemoryAddress> U32 = new Dictionary<string, MemoryAddress>();
+        public IDictionary<string, DynamicMemoryValue> Django = new Dictionary<string, DynamicMemoryValue>(),
+            Sabata = new Dictionary<string, DynamicMemoryValue>(),
+            Solls = new Dictionary<string, DynamicMemoryValue>(),
+            Inventory = new Dictionary<string, DynamicMemoryValue>(),
+            Bike = new Dictionary<string, DynamicMemoryValue>(),
+            Coffin = new Dictionary<string, DynamicMemoryValue>(),
+            Misc = new Dictionary<string, DynamicMemoryValue>();
+        public IDictionary<string, MemoryAddress> U16 = new Dictionary<string, MemoryAddress>(),
+            U32 = new Dictionary<string, MemoryAddress>();
 
         #endregion
+
+        #region Constructor
 
         /// <summary>Constructor</summary>
         /// <param name="shorterGameName">Shortened game name (used for setting the lists containing the memory values instances)</param>
         public MemoryValues(string shorterGameName) {
-
             ClearLists();
-
             switch (shorterGameName) {
                 case "Boktai":
                     InitializeBoktaiList();
@@ -54,10 +42,13 @@ namespace BokInterface.All {
             }
         }
 
+        #endregion
+
         /// <summary>Clears all lists</summary>
         private void ClearLists() {
             Django.Clear();
             Sabata.Clear();
+            Inventory.Clear();
             Solls.Clear();
             Bike.Clear();
             Coffin.Clear();
@@ -65,6 +56,8 @@ namespace BokInterface.All {
             U16.Clear();
             U32.Clear();
         }
+
+        #region Bok 1 lists init
 
         private void InitializeBoktaiList() {
             BoktaiAddresses memoryAddresses = new();
@@ -78,6 +71,10 @@ namespace BokInterface.All {
             Coffin.Add("x_position", new DynamicMemoryValue("x_position", memoryAddresses.Coffin["actor"].Address, memoryAddresses.Coffin["x_position"].Address));
             Coffin.Add("y_position", new DynamicMemoryValue("y_position", memoryAddresses.Coffin["actor"].Address, memoryAddresses.Coffin["y_position"].Address));
         }
+
+        #endregion
+
+        #region Bok 2 lists init
 
         private void InitializeZoktaiList() {
             ZoktaiAddresses memoryAddresses = new();
@@ -136,11 +133,9 @@ namespace BokInterface.All {
                 Inventory.Add("slot" + slotNumber + "_weapon", new DynamicMemoryValue("slot" + slotNumber + "_weapon", memoryAddresses.Misc["stat"].Address, memoryAddresses.Inventory["weapon_slot_" + slotNumber].Address, type: memoryAddresses.Inventory["weapon_slot_" + slotNumber].Type));
                 Inventory.Add("slot" + slotNumber + "_weapon_bonus", new DynamicMemoryValue("slot" + slotNumber + "_weapon_bonus", memoryAddresses.Misc["stat"].Address, memoryAddresses.Inventory["weapon_slot_" + slotNumber + "_bonus"].Address, type: memoryAddresses.Inventory["weapon_slot_" + slotNumber + "_bonus"].Type));
                 Inventory.Add("slot" + slotNumber + "_weapon_durability", new DynamicMemoryValue("slot" + slotNumber + "_weapon_durability", memoryAddresses.Misc["stat"].Address, memoryAddresses.Inventory["weapon_slot_" + slotNumber + "_durability"].Address, type: memoryAddresses.Inventory["weapon_slot_" + slotNumber + "_durability"].Type));
-
                 Inventory.Add("slot" + slotNumber + "_weapon_forgedBy_1", new DynamicMemoryValue("slot" + slotNumber + "_weapon_forgedBy_1", memoryAddresses.Misc["stat"].Address, memoryAddresses.Inventory["weapon_slot_" + slotNumber + "_forgedBy_1"].Address, type: memoryAddresses.Inventory["weapon_slot_" + slotNumber + "_forgedBy_1"].Type));
                 Inventory.Add("slot" + slotNumber + "_weapon_forgedBy_2", new DynamicMemoryValue("slot" + slotNumber + "_weapon_forgedBy_2", memoryAddresses.Misc["stat"].Address, memoryAddresses.Inventory["weapon_slot_" + slotNumber + "_forgedBy_2"].Address, type: memoryAddresses.Inventory["weapon_slot_" + slotNumber + "_forgedBy_2"].Type));
                 Inventory.Add("slot" + slotNumber + "_weapon_forgedBy_3", new DynamicMemoryValue("slot" + slotNumber + "_weapon_forgedBy_3", memoryAddresses.Misc["stat"].Address, memoryAddresses.Inventory["weapon_slot_" + slotNumber + "_forgedBy_3"].Address, type: memoryAddresses.Inventory["weapon_slot_" + slotNumber + "_forgedBy_3"].Type));
-
                 Inventory.Add("slot" + slotNumber + "_weapon_sp_ability_1", new DynamicMemoryValue("slot" + slotNumber + "_weapon_sp_ability_1", memoryAddresses.Misc["stat"].Address, memoryAddresses.Inventory["weapon_slot_" + slotNumber + "_sp_ability_1"].Address, type: memoryAddresses.Inventory["weapon_slot_" + slotNumber + "_sp_ability_1"].Type));
                 Inventory.Add("slot" + slotNumber + "_weapon_sp_ability_2", new DynamicMemoryValue("slot" + slotNumber + "_weapon_sp_ability_2", memoryAddresses.Misc["stat"].Address, memoryAddresses.Inventory["weapon_slot_" + slotNumber + "_sp_ability_2"].Address, type: memoryAddresses.Inventory["weapon_slot_" + slotNumber + "_sp_ability_2"].Type));
                 Inventory.Add("slot" + slotNumber + "_weapon_sp_ability_3", new DynamicMemoryValue("slot" + slotNumber + "_weapon_sp_ability_3", memoryAddresses.Misc["stat"].Address, memoryAddresses.Inventory["weapon_slot_" + slotNumber + "_sp_ability_3"].Address, type: memoryAddresses.Inventory["weapon_slot_" + slotNumber + "_sp_ability_3"].Type));
@@ -154,6 +149,10 @@ namespace BokInterface.All {
             Solls.Add("solar_bank", new DynamicMemoryValue("solar_bank", memoryAddresses.Misc["stat"].Address, memoryAddresses.Solls["solar_bank"].Address, memoryAddresses.Solls["solar_bank"].Type));
             Solls.Add("dark_loans", new DynamicMemoryValue("dark_loans", memoryAddresses.Misc["stat"].Address, memoryAddresses.Solls["dark_loans"].Address, memoryAddresses.Solls["dark_loans"].Type));
         }
+
+        #endregion
+
+        #region Bok 3 lists init
 
         private void InitializeShinbokList() {
             ShinbokAddresses memoryAddresses = new();
@@ -172,23 +171,19 @@ namespace BokInterface.All {
 
             // Stats
             Django.Add("sum_base_cards_vit", new DynamicMemoryValue("sum_base_cards_vit", memoryAddresses.Misc["actor"].Address, memoryAddresses.Django["current_sum_base_cards_vit"].Address));
-            Django.Add("equips_vit", new DynamicMemoryValue("equips_vit", memoryAddresses.Misc["actor"].Address, memoryAddresses.Django["current_equips_vit"].Address));
-
             Django.Add("sum_base_cards_spr", new DynamicMemoryValue("sum_base_cards_spr", memoryAddresses.Misc["actor"].Address, memoryAddresses.Django["current_sum_base_cards_spr"].Address));
-            Django.Add("equips_spr", new DynamicMemoryValue("equips_spr", memoryAddresses.Misc["actor"].Address, memoryAddresses.Django["current_equips_spr"].Address));
-
             Django.Add("sum_base_cards_str", new DynamicMemoryValue("sum_base_cards_str", memoryAddresses.Misc["actor"].Address, memoryAddresses.Django["current_sum_base_cards_str"].Address));
+            Django.Add("equips_vit", new DynamicMemoryValue("equips_vit", memoryAddresses.Misc["actor"].Address, memoryAddresses.Django["current_equips_vit"].Address));
+            Django.Add("equips_spr", new DynamicMemoryValue("equips_spr", memoryAddresses.Misc["actor"].Address, memoryAddresses.Django["current_equips_spr"].Address));
             Django.Add("equips_str", new DynamicMemoryValue("equips_str", memoryAddresses.Misc["actor"].Address, memoryAddresses.Django["current_equips_str"].Address));
 
             // Will be applied when switching room
             Misc.Add("persistent_hp", new DynamicMemoryValue("persistent_hp", memoryAddresses.Misc["stat"].Address, memoryAddresses.Django["persistent_hp"].Address, memoryAddresses.Django["persistent_hp"].Type));
             Misc.Add("persistent_ene", new DynamicMemoryValue("persistent_ene", memoryAddresses.Misc["stat"].Address, memoryAddresses.Django["persistent_ene"].Address, memoryAddresses.Django["persistent_ene"].Type));
             Misc.Add("persistent_trc", new DynamicMemoryValue("persistent_trc", memoryAddresses.Misc["stat"].Address, memoryAddresses.Django["persistent_trc"].Address, memoryAddresses.Django["persistent_trc"].Type));
-
             Misc.Add("base_vit", new DynamicMemoryValue("base_vit", memoryAddresses.Misc["stat"].Address, memoryAddresses.Django["persistent_base_vit"].Address, memoryAddresses.Django["persistent_base_vit"].Type));
             Misc.Add("base_spr", new DynamicMemoryValue("base_spr", memoryAddresses.Misc["stat"].Address, memoryAddresses.Django["persistent_base_spr"].Address, memoryAddresses.Django["persistent_base_spr"].Type));
             Misc.Add("base_str", new DynamicMemoryValue("base_str", memoryAddresses.Misc["stat"].Address, memoryAddresses.Django["persistent_base_str"].Address, memoryAddresses.Django["persistent_base_str"].Type));
-
             Misc.Add("cards_vit", new DynamicMemoryValue("cards_vit", memoryAddresses.Misc["stat"].Address, memoryAddresses.Django["persistent_cards_vit"].Address, memoryAddresses.Django["persistent_cards_vit"].Type));
             Misc.Add("cards_spr", new DynamicMemoryValue("cards_spr", memoryAddresses.Misc["stat"].Address, memoryAddresses.Django["persistent_cards_spr"].Address, memoryAddresses.Django["persistent_cards_spr"].Type));
             Misc.Add("cards_str", new DynamicMemoryValue("cards_str", memoryAddresses.Misc["stat"].Address, memoryAddresses.Django["persistent_cards_str"].Address, memoryAddresses.Django["persistent_cards_str"].Type));
@@ -226,29 +221,35 @@ namespace BokInterface.All {
                 // Weapon slots & properties
                 Inventory.Add("slot" + slotNumber + "_weapon", new DynamicMemoryValue("slot" + slotNumber + "_weapon", memoryAddresses.Misc["stat"].Address, memoryAddresses.Inventory["weapon_slot_" + slotNumber].Address, type: memoryAddresses.Inventory["weapon_slot_" + slotNumber].Type));
                 Inventory.Add("slot" + slotNumber + "_weapon_durability", new DynamicMemoryValue("slot" + slotNumber + "_weapon_durability", memoryAddresses.Misc["stat"].Address, memoryAddresses.Inventory["weapon_slot_" + slotNumber + "_durability"].Address, type: memoryAddresses.Inventory["weapon_slot_" + slotNumber + "_durability"].Type));
-
                 Inventory.Add("slot" + slotNumber + "_weapon_sp_ability_1", new DynamicMemoryValue("slot" + slotNumber + "_weapon_sp_ability_1", memoryAddresses.Misc["stat"].Address, memoryAddresses.Inventory["weapon_slot_" + slotNumber + "_sp_ability_1"].Address, type: memoryAddresses.Inventory["weapon_slot_" + slotNumber + "_sp_ability_1"].Type));
                 Inventory.Add("slot" + slotNumber + "_weapon_sp_ability_2", new DynamicMemoryValue("slot" + slotNumber + "_weapon_sp_ability_2", memoryAddresses.Misc["stat"].Address, memoryAddresses.Inventory["weapon_slot_" + slotNumber + "_sp_ability_2"].Address, type: memoryAddresses.Inventory["weapon_slot_" + slotNumber + "_sp_ability_2"].Type));
-
                 Inventory.Add("slot" + slotNumber + "_weapon_refine", new DynamicMemoryValue("slot" + slotNumber + "_weapon_refine", memoryAddresses.Misc["stat"].Address, memoryAddresses.Inventory["weapon_slot_" + slotNumber + "_refine"].Address, type: memoryAddresses.Inventory["weapon_slot_" + slotNumber + "_refine"].Type));
                 Inventory.Add("slot" + slotNumber + "_weapon_pattern", new DynamicMemoryValue("slot" + slotNumber + "_weapon_pattern", memoryAddresses.Misc["stat"].Address, memoryAddresses.Inventory["weapon_slot_" + slotNumber + "_pattern"].Address, type: memoryAddresses.Inventory["weapon_slot_" + slotNumber + "_pattern"].Type));
             }
 
             // Gun lenses & frames inventories
-            for (int i = 0; i < 8; i++) {
-                int slotNumber = i + 1;
-                Inventory.Add("slot" + slotNumber + "_gun_lens", new DynamicMemoryValue("slot" + slotNumber + "_gun_lens", memoryAddresses.Misc["stat"].Address, memoryAddresses.Inventory["gun_lens_slot_" + slotNumber].Address));
-            }
-
             for (int i = 0; i < 12; i++) {
                 int slotNumber = i + 1;
+
+                // 12 Frame slots
                 Inventory.Add("slot" + slotNumber + "_gun_frame", new DynamicMemoryValue("slot" + slotNumber + "_gun_frame", memoryAddresses.Misc["stat"].Address, memoryAddresses.Inventory["gun_frame_slot_" + slotNumber].Address));
+
+                // 8 Lens slots
+                if (i < 8) {
+                    Inventory.Add("slot" + slotNumber + "_gun_lens", new DynamicMemoryValue("slot" + slotNumber + "_gun_lens", memoryAddresses.Misc["stat"].Address, memoryAddresses.Inventory["gun_lens_slot_" + slotNumber].Address));
+                }
             }
 
             // U32
             U32.Add("total_exp_until_next_level", memoryAddresses.Django["total_exp_until_next_level"]);
         }
 
+        #endregion
+
+        #region Bok DS / LK lists init
+
         private void InitializeLunarKnightsList() { }
+
+        #endregion
     }
 }

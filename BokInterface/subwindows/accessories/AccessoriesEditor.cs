@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 
-using BokInterface.All;
+using BokInterface.Utils;
 
 namespace BokInterface.Accessories {
     /// <summary>Basis class for accessories (armors) editor subclasses</summary>
@@ -52,6 +52,7 @@ namespace BokInterface.Accessories {
             Font = WinFormHelpers.defaultFont;
             AutoScroll = true;
             ClientSize = new Size(width, height);
+            MaximizeBox = false;
         }
 
         /// <summary>Add elements to the subwindow</summary>

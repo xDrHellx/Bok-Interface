@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 
-using BokInterface.All;
+using BokInterface.Utils;
 
 namespace BokInterface.Magics {
     /// <summary>Basis class for magics editor subclasses</summary>
@@ -36,6 +36,7 @@ namespace BokInterface.Magics {
             Font = WinFormHelpers.defaultFont;
             AutoScroll = true;
             ClientSize = new Size(width, height);
+            MaximizeBox = false;
         }
 
         /// <summary>Add elements to the subwindow</summary>

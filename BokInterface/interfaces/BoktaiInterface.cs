@@ -1,48 +1,52 @@
 using System;
 using System.Drawing;
+using System.Windows.Forms;
 
 using BokInterface.Addresses;
-using BokInterface.All;
+using BokInterface.Utils;
 
 /**
  * File for the Boktai TSiiYH interface itself
  */
 
 namespace BokInterface {
-
     partial class BokInterface {
 
         #region Properties
 
         private readonly BoktaiAddresses _boktaiAddresses = new();
-        private System.Windows.Forms.Label _bok1_currentStatusHpValue = new();
-        private System.Windows.Forms.Label _bok1_currentStatusEneValue = new();
+        private Label _bok1_currentStatusHpValue = new();
+        private Label _bok1_currentStatusEneValue = new();
 
         #endregion
 
+        #region Show interface
+
         private void ShowBoktaiInterface() {
+
+            GenerateMenu();
 
             // If E3 demo / beta, update the game name label
             string version = "";
-            int gameNameLabelWidth = 171;
             if (currentGameId == 1246311233) {
-                version = " (E3 demo / beta)";
-                gameNameLabelWidth = 301;
+                version = " (E3 demo)";
             }
 
             // Current game name
-            WinFormHelpers.CreateLabel("currentGameName", currentGameName + version, 5, 5, gameNameLabelWidth, 20, this, textAlignment: "MiddleLeft");
+            WinFormHelpers.CreateLabel("currentGameName", currentGameName + version, 0, _menuBar.Height, Width, 20, this, WinFormHelpers.gameNameBackground, textAlignment: "MiddleLeft");
 
             // Sections
             AddBoktaiCurrentStatusSection();
             AddMiscDataSection();
-            AddToolsSection();
 
             // Main window
-            SetMainWindow("Bok Interface" + (shorterGameName != "" ? " - " + shorterGameName : ""), 345, 500);
-
+            SetMainWindow("Bok Interface", 236, 250 + _menuBar.Height);
             ResumeLayout(false);
         }
+
+        #endregion
+
+        #region Update
 
         private void UpdateBoktaiInterface() {
             /**
@@ -88,18 +92,24 @@ namespace BokInterface {
             }
         }
 
+        #endregion
+
+        #region Elements
+
         private void AddBoktaiCurrentStatusSection() {
 
             // Section
-            currentStatusGroupBox = WinFormHelpers.CreateGroupBox("currentStatus", "Current status", 5, 25, 226, 55, this);
+            _currentStatusGroupBox = WinFormHelpers.CreateGroupBox("currentStatus", "Current status", 5, 45, 226, 55, this);
 
             // Current status labels
-            WinFormHelpers.CreateLabel("djangoCurrentHpLabel", "LIFE :", 7, 19, 34, 15, currentStatusGroupBox);
-            WinFormHelpers.CreateLabel("djangoCurrentEneLabel", "ENE :", 7, 34, 34, 15, currentStatusGroupBox);
+            WinFormHelpers.CreateLabel("djangoCurrentHpLabel", "LIFE :", 7, 19, 34, 15, _currentStatusGroupBox);
+            WinFormHelpers.CreateLabel("djangoCurrentEneLabel", "ENE :", 7, 34, 34, 15, _currentStatusGroupBox);
 
             // Current status values
-            _bok1_currentStatusHpValue = WinFormHelpers.CreateLabel("djangoCurrentHpValue", "", 44, 19, 31, 15, currentStatusGroupBox);
-            _bok1_currentStatusEneValue = WinFormHelpers.CreateLabel("djangoCurrentEneValue", "", 44, 34, 31, 15, currentStatusGroupBox);
+            _bok1_currentStatusHpValue = WinFormHelpers.CreateLabel("djangoCurrentHpValue", "", 44, 19, 31, 15, _currentStatusGroupBox);
+            _bok1_currentStatusEneValue = WinFormHelpers.CreateLabel("djangoCurrentEneValue", "", 44, 34, 31, 15, _currentStatusGroupBox);
         }
+
+        #endregion
     }
 }

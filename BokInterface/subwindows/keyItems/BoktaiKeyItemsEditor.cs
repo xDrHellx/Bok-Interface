@@ -1,7 +1,6 @@
 using System.Windows.Forms;
 
 using BokInterface.Addresses;
-using BokInterface.All;
 
 namespace BokInterface.KeyItems {
     ///<summary>Key items editor for Boktai</summary>
@@ -11,13 +10,15 @@ namespace BokInterface.KeyItems {
     ///</remarks>
     class BoktaiKeyItemsEditor : KeyItemsEditor {
 
-        #region Instances
+        #region Properties
 
         private readonly MemoryValues _memoryValues;
         private readonly BokInterface _bokInterface;
         private readonly BoktaiAddresses _boktaiAddresses;
 
         #endregion
+
+        #region Constructor
 
         public BoktaiKeyItemsEditor(BokInterface bokInterface, MemoryValues memoryValues, BoktaiAddresses BoktaiAddresses) {
 
@@ -38,8 +39,18 @@ namespace BokInterface.KeyItems {
             Show();
         }
 
+        #endregion
+
+        #region Elements
+
         protected override void AddElements() { }
 
+        #endregion
+
+        #region Values setting
+
         protected override void SetValues() { }
+
+        #endregion
     }
 }

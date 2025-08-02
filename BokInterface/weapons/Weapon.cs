@@ -14,17 +14,14 @@ namespace BokInterface.Weapons {
         public Image? icon = null;
         ///<summary>Weapon durability (if it has a +X bonus</summary>
         public int durability;
-        /// <summary>Bonus if applicable (can be negative, maluses are possible through forging)</summary>
-        public int bonus;
         /// <summary>SP effect the weapon can obtain (SP ability in-game)</summary>
         public string spEffect;
         /// <summary>Base weapon damage (Power in-game)</summary>
         public int baseDamage;
         /// <summary>Level required to equip</summary>
         public int level;
+        /// <summary>Row when viewed in the library</summary>
         public int row;
-        /// <summary>Indicates if R-Rank weapon</summary>
-        public bool rRank;
         /// <summary>Indicates if event weapon (ex: Astro Sword)</summary>
         public bool eventWeapon;
         /// <summary>Indicates if the weapon adjusts to Django's level (Level and Power set to "??" in-game)</summary>
@@ -34,20 +31,17 @@ namespace BokInterface.Weapons {
         /// <summary>Price when selling</summary>
         public int sellPrice;
 
-        public Weapon(string name, uint value, string type, string icon = "", int durability = 0, int bonus = 0, string spEffect = "", int baseDamage = 1, int level = 1, int row = 1, bool rRank = false, int buyPrice = 0, bool eventWeapon = false, bool adjustToLevel = false) {
+        public Weapon(string name, uint value, string type, string icon = "", int durability = 0, string spEffect = "", int baseDamage = 1, int level = 1, int row = 1, int buyPrice = 0, bool eventWeapon = false, bool adjustToLevel = false) {
             this.name = name;
             this.value = value;
             this.type = type;
             this.durability = durability;
-            this.bonus = bonus;
             this.spEffect = spEffect;
             this.baseDamage = baseDamage;
             this.level = level;
             this.row = row;
-            this.rRank = rRank;
             this.eventWeapon = eventWeapon;
             this.adjustToLevel = adjustToLevel;
-
             this.buyPrice = buyPrice;
 
             // Price for selling is always the buying price divided by 2 (or 0 if it cannot be sold)

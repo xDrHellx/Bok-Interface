@@ -2,14 +2,12 @@ using System;
 using System.Drawing;
 using System.Windows.Forms;
 
-namespace BokInterface.All {
+namespace BokInterface.Utils {
     /// <summary>Class for CheckGroupBox (GroupBox with a Checkbox)</summary>
     public class CheckGroupBox : GroupBox {
 
         /// <summary>CheckBox instance</summary>
         private readonly CheckBox _checkBoxInstance;
-        /// <summary>Event handler for checking or unchecking</summary>
-        public event EventHandler? CheckedChanged;
 
         /// <summary>Add the CheckBox to the control</summary>
         public CheckGroupBox() {

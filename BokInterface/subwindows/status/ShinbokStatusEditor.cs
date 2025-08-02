@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Windows.Forms;
 
 using BokInterface.Addresses;
-using BokInterface.All;
-using BokInterface.ExpTables;
+using BokInterface.Utils;
+using BokInterface.Tables;
 
 /**
  * Note :
@@ -17,13 +17,15 @@ namespace BokInterface.Status {
     /// <summary>Status editor for Boktai 3</summary>
     class ShinbokStatusEditor : StatusEditor {
 
-        #region Instances
+        #region Properties
 
         private readonly MemoryValues _memoryValues;
         private readonly BokInterface _bokInterface;
         private readonly ShinbokAddresses _shinbokAddresses;
 
         #endregion
+
+        #region Constructor
 
         public ShinbokStatusEditor(BokInterface bokInterface, MemoryValues memoryValues, ShinbokAddresses shinbokAddresses) {
 
@@ -43,6 +45,10 @@ namespace BokInterface.Status {
             AddElements();
             Show();
         }
+
+        #endregion
+
+        #region Elements
 
         protected override void AddElements() {
 
@@ -112,6 +118,10 @@ namespace BokInterface.Status {
                 }
             });
         }
+
+        #endregion
+
+        #region Values setting
 
         protected override IDictionary<string, decimal> GetDefaultValues() {
 
@@ -199,7 +209,7 @@ namespace BokInterface.Status {
              */
             if (_memoryValues.U32.ContainsKey("total_exp_until_next_level") == true && _memoryValues.Django.ContainsKey("level")) {
                 int level = (int)_memoryValues.Django["level"].Value;
-                _memoryValues.U32["total_exp_until_next_level"].Value = level < 99 ? DjangoExpTable.shinbok[level] : 0;
+                _memoryValues.U32["total_exp_until_next_level"].Value = level < 99 ? BokTables.djangoExp[level] : 0;
             }
 
             /**
@@ -287,5 +297,7 @@ namespace BokInterface.Status {
                 _memoryValues.Django[key].Value = basePoints + cardPoints;
             }
         }
+
+        #endregion
     }
 }

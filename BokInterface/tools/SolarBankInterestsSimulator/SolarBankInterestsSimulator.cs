@@ -4,7 +4,7 @@ using System.Data;
 using System.Drawing;
 using System.Windows.Forms;
 
-using BokInterface.All;
+using BokInterface.Utils;
 
 namespace BokInterface.Tools.SolarBankInterestsSimulator {
     /// <summary>Class for the Solar bank interests simulator for Bok 2 and 3</summary>
@@ -52,6 +52,7 @@ namespace BokInterface.Tools.SolarBankInterestsSimulator {
             Font = WinFormHelpers.defaultFont;
             AutoScroll = true;
             ClientSize = new Size(500, 208);
+            MaximizeBox = false;
 
             // Add elements & show the subwindow
             AddControls();

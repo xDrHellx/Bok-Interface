@@ -20,6 +20,7 @@ namespace BokInterface.Weapons {
             this.value = value;
             this.power = power;
             this.cost = cost;
+
             if (icon != "") {
                 try {
                     this.icon = (Image)ResourceLoader.LoadResource("ShinbokResources", icon);

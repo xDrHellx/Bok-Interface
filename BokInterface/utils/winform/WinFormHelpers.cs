@@ -3,30 +3,29 @@ using System.Data;
 using System.Drawing;
 using System.Windows.Forms;
 
-namespace BokInterface.All {
-
+namespace BokInterface.Utils {
     /// <summary>
-    /// Class for WinForm Helpers
-    /// <para><example>WinForm elements generation methods</example></para>
+    ///     Class for WinForm Helpers.<br/>
+    ///     <i>IE WinForm elements related methods.</i>
     /// </summary>
     static class WinFormHelpers {
+
+        #region Properties
 
         /// <summary>Tooltip for values that only updates after switching rooms</summary>
         public static ToolTip toolTip = CreateToolTip();
 
-        /// <summary>Color for base stat points (Boktai 2, 3, LK)</summary>
-        public static string baseStatColor = "#FFE600";
+        /// <summary>Color for the game label</summary>
+        public static readonly string gameNameBackground = "#EFE6BD";
 
-        /// <summary>Color for base stat points obtained from cards (Boktai 3)</summary>
-        public static string cardsStatColor = "#f7df02";
+        /// <summary>Color for stat points obtained through leveling up (Boktai 2, 3, LK)</summary>
+        public static readonly string baseStatColor = "#FFE600";
 
-        /// <summary>
-        /// <para>
-        /// Color for stat points from accessories (Boktai 3) <br/>
-        /// These points does not affect as many things as base stat points
-        /// </para>
-        /// <example>For example STR points from accessories does not affect coffin carrying speed</example>
-        /// </summary>
+        /// <summary>Color for stat points obtained from cards (Boktai 3)</summary>
+        public static readonly string cardsStatColor = "#F7DF02";
+
+        /// <summary>Color for stat points from accessories (Boktai 3) <br/></summary>
+        /// <remarks><i>Note: STR points from accessories are broken in Boktai 3 and will not affect anything</i></remarks>
         public static string equipsStatColor = "#FFA529";
 
         /// <summary>Color for the total amount of points for a specific stat (Boktai 2, 3, LK)</summary>
@@ -36,14 +35,9 @@ namespace BokInterface.All {
         public static Padding defaultMargin = new(3, 0, 3, 0);
         public static AnchorStyles defaultAnchor = AnchorStyles.Top | AnchorStyles.Left;
 
-        /// <summary>Get the specified icon if it exist</summary>
-		/// <param name="fileName">File name (without .ico extension)</param>
-		/// <returns><c>System.Drawing.Icon</c>Specified Icon instance (or default if the specified icon could not be found)</returns>
-		public static Icon? GetIcon(string fileName) {
-            return fileName == "" ? null : (Icon)Properties.Resources.ResourceManager.GetObject(fileName);
-        }
+        #endregion
 
-        #region Form elements
+        #region Standard elements
 
         /// <summary>Simplified method for creating a group box</summary>
         /// <param name="name">Group name</param>
@@ -55,7 +49,6 @@ namespace BokInterface.All {
         /// <param name="control">Control instance if the element is to be attached to it directly</param>
         /// <returns><c>GroupBox</c>Instance</returns>
         public static GroupBox CreateGroupBox(string name, string text, int positionX, int positionY, int width, int height, Control? control = null) {
-
             GroupBox groupBox = new() {
                 Name = name,
                 Text = text,
@@ -69,7 +62,6 @@ namespace BokInterface.All {
 
             // If a Control instance is passed, add the generated element to it
             control?.Controls.Add(groupBox);
-
             return groupBox;
         }
 
@@ -86,7 +78,6 @@ namespace BokInterface.All {
         /// <param name="textAlignment">Text alignment, by default "MiddleCenter" (see System.Drawing.ContentAlignment for possible values)</param>
         /// <returns><c>Label</c>Instance</returns>
         public static Label CreateLabel(string name, string text, int positionX, int positionY, int width, int height, Control? control = null, string colorHex = "", Padding margin = new Padding(), string textAlignment = "MiddleCenter") {
-
             Label label = new() {
                 Name = name,
                 Text = text,
@@ -96,7 +87,8 @@ namespace BokInterface.All {
                 TabIndex = 2,
                 Anchor = defaultAnchor,
                 Margin = defaultMargin,
-                Font = defaultFont
+                Font = defaultFont,
+                TextAlign = GetTextAlignment(textAlignment)
             };
 
             if (colorHex != "") {
@@ -109,12 +101,8 @@ namespace BokInterface.All {
                 margin.Left = 3;
             }
 
-            // Text alignment
-            label.TextAlign = GetTextAlignment(textAlignment);
-
             // If a Control instance is passed, add the generated element to it
             control?.Controls.Add(label);
-
             return label;
         }
 
@@ -127,7 +115,6 @@ namespace BokInterface.All {
         /// <param name="vertical">True if the separator should be vertical (False by default)</param>
         /// <returns><c>Label</c>Instance</returns>
         public static Label CreateSeparator(string name, int positionX, int positionY, int length, Control? control = null, bool vertical = false) {
-
             Label separator = new() {
                 Name = name,
                 Location = new Point(positionX, positionY),
@@ -158,7 +145,6 @@ namespace BokInterface.All {
         /// <param name="enabled">True if it should be enabled (True by default)</param>
         /// <returns><c>Button</c>Instance</returns>
         public static Button CreateButton(string name, string text, int positionX, int positionY, int width, int height, Control? control = null, string colorHex = "", Padding margin = new Padding(), string textAlignment = "MiddleCenter", bool enabled = true) {
-
             Button btn = new() {
                 Name = name,
                 Text = text,
@@ -169,7 +155,8 @@ namespace BokInterface.All {
                 Anchor = defaultAnchor,
                 Margin = defaultMargin,
                 Font = defaultFont,
-                Enabled = enabled
+                Enabled = enabled,
+                TextAlign = GetTextAlignment(textAlignment)
             };
 
             if (colorHex != "") {
@@ -182,12 +169,8 @@ namespace BokInterface.All {
                 margin.Left = 3;
             }
 
-            // Text alignment
-            btn.TextAlign = GetTextAlignment(textAlignment);
-
             // If a Control instance is passed, add the generated element to it
             control?.Controls.Add(btn);
-
             return btn;
         }
 
@@ -198,10 +181,11 @@ namespace BokInterface.All {
         /// <param name="height">Height (in pixels)</param>
         /// <param name="parentForm">Form the subwindow is attached to (this will make the subwindow always show in front of its parent, by default it shows in front of the main window)</param>
         /// <param name="icon">Subwindow icon (by default retrieves the one from the main interface window)</param>
+        /// <param name="maximizeBtn">Enable maximize button (True by default)</param>
+        /// <param name="minimizeBtn">Enable minimize button (True by default)</param>
         /// <returns><c>Form</c>Instance</returns>
-        public static Form CreateSubWindow(string name, string title, int width, int height, Form? parentForm = null, string icon = "") {
-
-            Form form = new() {
+        public static Form CreateSubWindow(string name, string title, int width, int height, Form? parentForm = null, string icon = "", bool maximizeBtn = true, bool minimizeBtn = true) {
+            return new() {
                 Name = name,
                 Text = title,
                 Icon = icon == "" && parentForm != null && parentForm.Icon != null ? parentForm.Icon : GetIcon(icon),
@@ -211,10 +195,10 @@ namespace BokInterface.All {
                 BackColor = SystemColors.Control,
                 Font = defaultFont,
                 ClientSize = new Size(width, height),
-                Owner = parentForm
+                Owner = parentForm,
+                MaximizeBox = maximizeBtn,
+                MinimizeBox = minimizeBtn
             };
-
-            return form;
         }
 
         /// <summary>Simplified method for creating a numeric input field</summary>
@@ -234,7 +218,6 @@ namespace BokInterface.All {
         /// <param name="enabled">True if it should be enabled (True by default)</param>
         /// <returns><c>NumericUpDown</c>Instance</returns>
         public static NumericUpDown CreateNumericUpDown(string name, decimal defaultValue, int positionX, int positionY, int width, int height, decimal minValue = 0, decimal maxValue = 99, int nbDecimals = 0, Control? control = null, string colorHex = "", Padding margin = new Padding(), string valueAlignment = "Left", bool enabled = true) {
-
             NumericUpDown numUpDown = new() {
                 Name = name,
                 Minimum = minValue,
@@ -249,7 +232,12 @@ namespace BokInterface.All {
                 Font = defaultFont,
                 Increment = (decimal)(maxValue > 500 ? 10 : (nbDecimals == 2 ? 0.05 : (nbDecimals == 1 ? 0.5 : 1))),
                 DecimalPlaces = nbDecimals,
-                Enabled = enabled
+                Enabled = enabled,
+                TextAlign = valueAlignment switch {
+                    "Right" => HorizontalAlignment.Right,
+                    "Center" => HorizontalAlignment.Center,
+                    _ => HorizontalAlignment.Left,
+                }
             };
 
             if (colorHex != "") {
@@ -262,16 +250,8 @@ namespace BokInterface.All {
                 margin.Left = 3;
             }
 
-            // Value alignment
-            numUpDown.TextAlign = valueAlignment switch {
-                "Right" => HorizontalAlignment.Right,
-                "Center" => HorizontalAlignment.Center,
-                _ => HorizontalAlignment.Left,
-            };
-
             // If a Control instance is passed, add the generated element to it
             control?.Controls.Add(numUpDown);
-
             return numUpDown;
         }
 
@@ -287,7 +267,6 @@ namespace BokInterface.All {
         /// <param name="control">Control instance if the element is to be attached to it directly</param>
         /// <returns><c>CheckBox</c>Instance</returns>
         public static CheckBox CreateCheckBox(string name, string text, int positionX, int positionY, int width, int height, bool isCheckedByDefault = false, bool checkboxOnRight = false, Control? control = null) {
-
             CheckBox checkBox = new() {
                 Name = name,
                 Text = text,
@@ -304,25 +283,18 @@ namespace BokInterface.All {
 
             // If a Control instance is passed, add the generated element to it
             control?.Controls.Add(checkBox);
-
             return checkBox;
         }
 
         /// <summary>Simplified method for creating a tooltip</summary>
         /// <returns><c>ToolTip<c/>Instance</returns>
         public static ToolTip CreateToolTip() {
-
-            ToolTip toolTip = new() {
-                // Always shows tooltip even if window isn't focused
-                ShowAlways = true,
-
-                // Set tooltip delays
-                AutoPopDelay = 5000,
+            return new() {
+                ShowAlways = true,      // Always shows tooltip even if window isn't focused
+                AutoPopDelay = 5000,    // Set tooltip delays
                 InitialDelay = 1000,
                 ReshowDelay = 500
             };
-
-            return toolTip;
         }
 
         /// <summary>Simplified method for creating a data grid view</summary>
@@ -336,7 +308,6 @@ namespace BokInterface.All {
         /// <param name="dockStyle">DockStyle (by default None)</param>
         /// <returns><c>DataGridView</c>Instance</returns>
         public static DataGridView CreateDataGridView(string name, DataTable data, int positionX, int positionY, int width, int height, Control? control = null, DockStyle dockStyle = DockStyle.None) {
-
             DataGridView gridView = new() {
                 Name = name,
                 DataSource = data,
@@ -350,7 +321,7 @@ namespace BokInterface.All {
                 AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill,
                 Dock = dockStyle,
                 EnableHeadersVisualStyles = false,
-                ReadOnly = true
+                ReadOnly = true,
             };
 
             // Set a specific color for the header
@@ -358,7 +329,6 @@ namespace BokInterface.All {
 
             // If a Control instance is passed, add the generated element to it
             control?.Controls.Add(gridView);
-
             return gridView;
         }
 
@@ -375,7 +345,6 @@ namespace BokInterface.All {
         /// <param name="enabled">True if it should be enabled (True by default)</param>
         /// <returns><c>ComboBox</c>Instance</returns>
         public static ComboBox CreateDropDownList(string name, int positionX, int positionY, int width, int height, Control? control = null, int dropDownWidth = 0, int dropDownHeight = 0, int visibleOptions = 0, bool enabled = true) {
-
             ComboBox dropDownList = new() {
                 Name = name,
                 Location = new Point(positionX, positionY),
@@ -401,7 +370,6 @@ namespace BokInterface.All {
 
             // If a Control instance is passed, add the generated element to it
             control?.Controls.Add(dropDownList);
-
             return dropDownList;
         }
 
@@ -416,7 +384,6 @@ namespace BokInterface.All {
         /// <param name="enabled">True if it should be enabled (True by default)</param>
         /// <returns><c>Panel</c>Instance</returns>
         public static Panel CreatePanel(string name, int positionX, int positionY, int width, int height, Control? control = null, bool autoScroll = true, bool enabled = true) {
-
             Panel panel = new() {
                 Name = name,
                 Location = new Point(positionX, positionY),
@@ -429,7 +396,6 @@ namespace BokInterface.All {
             };
 
             control?.Controls.Add(panel);
-
             return panel;
         }
 
@@ -445,7 +411,6 @@ namespace BokInterface.All {
         /// <param name="readOnly">True if text should be readonly (True by default)</param>
         /// <returns><c>TextBox</c>Instance</returns>
         public static TextBox CreateTextBox(string name, string text, int positionX, int positionY, int width, int height, Control? control = null, bool multiLine = true, bool readOnly = true) {
-
             TextBox textBox = new() {
                 Name = name,
                 Location = new Point(positionX, positionY),
@@ -459,7 +424,6 @@ namespace BokInterface.All {
             };
 
             control?.Controls.Add(textBox);
-
             return textBox;
         }
 
@@ -475,7 +439,6 @@ namespace BokInterface.All {
         /// <param name="isCheckedByDefault">Set to true if the CheckBox has to be checked when initiated</param>
         /// <returns><c>RadioButton</c>Instance</returns>
         public static RadioButton CreateRadioButton(string name, string text, int positionX, int positionY, int width, int height, Control? control = null, object? tag = null, bool isCheckedByDefault = false) {
-
             RadioButton radioBtn = new() {
                 Name = name,
                 Text = text,
@@ -491,7 +454,6 @@ namespace BokInterface.All {
             };
 
             control?.Controls.Add(radioBtn);
-
             return radioBtn;
         }
 
@@ -502,9 +464,9 @@ namespace BokInterface.All {
         /// <param name="width">Width (in pixels)</param>
         /// <param name="height">Height (in pixels)</param>
         /// <param name="control">Control instance if the element is to be attached to it directly</param>
+        /// <param name="selectedIndex">Selected index at start (by default none)</param>
         /// <returns><c>TabControl</c>Instance</returns>
-        public static TabControl CreateTabControl(string name, int positionX, int positionY, int width, int height, Control? control = null) {
-
+        public static TabControl CreateTabControl(string name, int positionX, int positionY, int width, int height, Control? control = null, int selectedIndex = -1) {
             TabControl tabCtrl = new() {
                 Name = name,
                 Location = new Point(positionX, positionY),
@@ -514,11 +476,10 @@ namespace BokInterface.All {
                 Anchor = defaultAnchor,
                 Margin = defaultMargin,
                 Font = defaultFont,
-                // SelectedIndex = 1
+                SelectedIndex = selectedIndex
             };
 
             control?.Controls.Add(tabCtrl);
-
             return tabCtrl;
         }
 
@@ -527,8 +488,8 @@ namespace BokInterface.All {
         /// <param name="text">TabPage text</param>
         /// <param name="bgColorHex">Background color (hex code) (if none, defaults to white for visibility)</param>
         /// <param name="tabControl">TabControl instance if the element is to be attached to it directly</param>
+        /// <returns><c>TabPage</c>Instance</returns>
         public static TabPage CreateTabPage(string name, string text, string bgColorHex = "", TabControl? tabControl = null) {
-
             TabPage tabPage = new() {
                 Name = name,
                 Text = text,
@@ -541,8 +502,53 @@ namespace BokInterface.All {
             };
 
             tabControl?.Controls.Add(tabPage);
-
             return tabPage;
+        }
+
+        /// <summary>Simplified method for creating a MenuStrip</summary>
+        /// <param name="name">Name</param>
+        /// <param name="text">Text</param>
+        /// <param name="bgColorHex">Background color (hex code) (if none, defaults to white for visibility)</param>
+        /// <param name="control">Control instance if the element is to be attached to it directly</param>
+        /// <returns><c>MenuStrip</c>Instance</returns>
+        public static MenuStrip CreateMenuStrip(string name, string text, string bgColorHex = "", Control? control = null) {
+            MenuStrip menu = new() {
+                Name = name,
+                Text = text,
+                TabIndex = 1,
+                AutoSize = false,
+                Anchor = defaultAnchor,
+                Margin = defaultMargin,
+                Font = defaultFont,
+                BackColor = bgColorHex != "" ? ColorTranslator.FromHtml(bgColorHex) : Color.White
+            };
+
+            control?.Controls.Add(menu);
+            return menu;
+        }
+
+        /// <summary>Simplified method for creating a ToolStripMenuItem</summary>
+        /// <param name="name">Name</param>
+        /// <param name="text">Text</param>
+        /// <param name="bgColorHex">Background color (hex code) (if none, defaults to white for visibility)</param>
+        /// <param name="toolTipText">Text on hover / tooltip</param>
+        /// <param name="menuStrip">MenuStrip instance if the element is to be attached to it directly</param>
+        /// <param name="ToolStripMenuItem">ToolStripMenuItem instance if the element is to be attached to it directly</param>
+        /// <returns><c>ToolStripMenuItem</c>Instance</returns>
+        public static ToolStripMenuItem CreateToolStripMenuItem(string name, string text, string bgColorHex = "", string toolTipText = "", MenuStrip? menuStrip = null, ToolStripMenuItem? menuItem = null) {
+            ToolStripMenuItem item = new() {
+                Name = name,
+                Text = text,
+                AutoSize = true,
+                Anchor = defaultAnchor,
+                Font = defaultFont,
+                BackColor = bgColorHex != "" ? ColorTranslator.FromHtml(bgColorHex) : Color.White,
+                ToolTipText = toolTipText
+            };
+
+            menuStrip?.Items.Add(item);
+            menuItem?.DropDownItems.Add(item);
+            return item;
         }
 
         #endregion
@@ -577,7 +583,6 @@ namespace BokInterface.All {
 
             // If a Control instance is passed, add the generated element to it
             control?.Controls.Add(label);
-
             return label;
         }
 
@@ -607,7 +612,6 @@ namespace BokInterface.All {
 
             // If a Control instance is passed, add the generated element to it
             control?.Controls.Add(label);
-
             return label;
         }
 
@@ -624,7 +628,6 @@ namespace BokInterface.All {
         /// <param name="enabled">True if it should be enabled (True by default)</param>
         /// <returns><c>ComboBox</c>Instance</returns>
         public static ImageComboBox CreateImageDropdownList(string name, int positionX, int positionY, int width, int height, Control? control = null, int dropDownWidth = 0, int dropDownHeight = 0, int visibleOptions = 0, bool enabled = true) {
-
             ImageComboBox dropDownList = new() {
                 Name = name,
                 Location = new Point(positionX, positionY),
@@ -651,7 +654,6 @@ namespace BokInterface.All {
 
             // If a Control instance is passed, add the generated element to it
             control?.Controls.Add(dropDownList);
-
             return dropDownList;
         }
 
@@ -666,7 +668,6 @@ namespace BokInterface.All {
         /// <param name="control">Control instance if the element is to be attached to it directly</param>
         /// <returns><c>CheckGroupBox</c>Instance</returns>
         public static CheckGroupBox CreateCheckGroupBox(string name, string text, int positionX, int positionY, int width, int height, bool isCheckedByDefault = false, Control? control = null) {
-
             CheckGroupBox checkGroupBox = new() {
                 Name = name,
                 Text = text,
@@ -682,13 +683,12 @@ namespace BokInterface.All {
 
             // If a Control instance is passed, add the generated element to it
             control?.Controls.Add(checkGroupBox);
-
             return checkGroupBox;
         }
 
         #endregion
 
-        #region Simplified adding
+        #region Tooltips
 
         /// <summary>Simplified method for adding the values warning tooltip to a list of labels</summary>
         /// <param name="labels">List of labels</param>
@@ -708,7 +708,14 @@ namespace BokInterface.All {
 
         #endregion
 
-        #region Simplified checks
+        #region Misc
+
+        /// <summary>Get the specified icon if it exist</summary>
+        /// <param name="fileName">File name (without .ico extension)</param>
+        /// <returns><c>System.Drawing.Icon</c>Specified Icon instance (or default if the specified icon could not be found)</returns>
+        public static Icon? GetIcon(string fileName) {
+            return fileName == "" ? null : (Icon)Properties.Resources.ResourceManager.GetObject(fileName);
+        }
 
         /// <summary>Get the name of the icon corresponding to the current game</summary>
         /// <returns><c>string</c>Icon name</returns>
