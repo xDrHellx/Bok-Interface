@@ -520,7 +520,8 @@ namespace BokInterface.Utils {
                 Anchor = defaultAnchor,
                 Margin = defaultMargin,
                 Font = defaultFont,
-                BackColor = bgColorHex != "" ? ColorTranslator.FromHtml(bgColorHex) : Color.White
+                BackColor = bgColorHex != "" ? ColorTranslator.FromHtml(bgColorHex) : Color.White,
+                ShowItemToolTips = true
             };
 
             control?.Controls.Add(menu);

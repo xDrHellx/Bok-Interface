@@ -29,6 +29,10 @@ namespace BokInterface {
             _bok2_djangoFistsSkill = new(),
             _bok2_djangoGunSkill = new();
         private GroupBox _bok2_currentSkillGroupBox = new();
+        private ToolStripMenuItem _enableBlindboxLvl3 = new(),
+            _enableBlindboxLvl4 = new(),
+            _enableBlindboxLvl5ValentineDay = new(),
+            _enableStarPiece = new();
 
         #endregion
 
@@ -37,6 +41,7 @@ namespace BokInterface {
         private void ShowZoktaiInterface() {
 
             GenerateMenu();
+            AddZoktaiDownloadableEventsMenu();
 
             // If JP version, update the game name label to add the version
             string version = "";
@@ -112,6 +117,12 @@ namespace BokInterface {
                 _currentSpeedLabel.Text = "Current movement speed : " + Math.Round(speed3D, 3);
                 _averageSpeedLabel.Text = "Average over 60 frames : " + averageSpeed.ToString();
             }
+
+            // Update the menus for in-game events
+            UpdateZoktaiEvent(_enableBlindboxLvl3, "blindbox_lvl_3", 0x8E67);
+            UpdateZoktaiEvent(_enableBlindboxLvl4, "blindbox_lvl_4", 0x8FAA);
+            UpdateZoktaiEvent(_enableBlindboxLvl5ValentineDay, "blindbox_lvl_5_valentine_day", 0x90E0);
+            UpdateZoktaiEvent(_enableStarPiece, "star_piece", 0x8FD6);
         }
 
         #endregion
@@ -186,6 +197,69 @@ namespace BokInterface {
             // Stat points to allocate
             WinFormHelpers.CreateLabel("statPointsLabel", "Add", 6, 84, 29, 15, _currentStatsGroupBox, textAlignment: "MiddleLeft");
             _bok2_djangoStatPoints = WinFormHelpers.CreateLabel("djangoStatPoints", "", 35, 84, 31, 15, _currentStatsGroupBox, WinFormHelpers.totalStatColor, textAlignment: "MiddleRight");
+        }
+
+        #endregion
+
+        #region Game-specific menus
+
+        private void AddZoktaiDownloadableEventsMenu() {
+            if (shorterGameName != "Zoktai") {
+                return;
+            }
+
+            string eventToolTipText = "Cannot be disabled except by loading savestates or deleting savefiles.";
+            ToolStripMenuItem eventsMenu = WinFormHelpers.CreateToolStripMenuItem("eventsMenu", "JoySpots events", menuStrip: _menuBar);
+
+            _enableBlindboxLvl3 = WinFormHelpers.CreateToolStripMenuItem("enableBlindboxLvl3", "&Blindbox Lv. 3", toolTipText: eventToolTipText, menuItem: eventsMenu);
+            AddZoktaiJoySpotsEventHandler(_enableBlindboxLvl3, "blindbox_lvl_3", 0x8E67);
+
+            _enableBlindboxLvl4 = WinFormHelpers.CreateToolStripMenuItem("enableBlindboxLvl4", "&Blindbox Lv. 4", toolTipText: eventToolTipText, menuItem: eventsMenu);
+            AddZoktaiJoySpotsEventHandler(_enableBlindboxLvl4, "blindbox_lvl_4", 0x8FAA);
+
+            _enableBlindboxLvl5ValentineDay = WinFormHelpers.CreateToolStripMenuItem("enableBlindboxLvl5ValentineDay", "&Blindbox Lv. 5 && Valentine's Day", toolTipText: eventToolTipText + " Valentine's Day only triggers on February 14th.", menuItem: eventsMenu);
+            AddZoktaiJoySpotsEventHandler(_enableBlindboxLvl5ValentineDay, "blindbox_lvl_5_valentine_day", 0x90E0);
+
+            _enableStarPiece = WinFormHelpers.CreateToolStripMenuItem("enableStarPiece", "&Star Piece from ???", toolTipText: eventToolTipText, menuItem: eventsMenu);
+            AddZoktaiJoySpotsEventHandler(_enableStarPiece, "star_piece", 0x8FD6);
+        }
+
+        /// <summary>Add a Click event on a menu item for a Zoktai / Bok 2 JoySpots event</summary>
+        /// <param name="menuItem">Menu item</param>
+        /// <param name="memKey">Related key within the _zoktaiAddresses.JoySpots dictionnary</param>
+        /// <param name="onCheckedValue">Value to set on the key when the menu item is checked</param>
+        private void AddZoktaiJoySpotsEventHandler(ToolStripMenuItem menuItem, string memKey, uint onCheckedValue, uint onUncheckedValue = 0x0) {
+            if (shorterGameName != "Zoktai" || _zoktaiAddresses.JoySpots.ContainsKey(memKey) == false) {
+                return;
+            }
+
+            // Add the Click event
+            menuItem.Click += (s, e) => {
+                /**
+                 * If the downloadable event is already enabled, check the menu item & stop
+                 * Downloadable events cannot be disabled except by deleting savefiles or loading savestates
+                 */
+                if (_zoktaiAddresses.JoySpots[memKey].Value == onCheckedValue) {
+                    menuItem.Checked = true;
+                    return;
+                }
+
+                menuItem.Checked = !menuItem.Checked;
+                _zoktaiAddresses.JoySpots[memKey].Value = menuItem.Checked == true ? onCheckedValue : onUncheckedValue;
+            };
+        }
+
+        /// <summary>Update an event menu item for a Zoktai / Bok 2 downloadable event</summary>
+        /// <param name="menuItem">Menu item</param>
+        /// <param name="memKey">Related key within the _zoktaiAddresses.JoySpots dictionnary</param>
+        /// <param name="onCheckedValue">Value used for enabling the downloadable event</param>
+        private void UpdateZoktaiEvent(ToolStripMenuItem menuItem, string memKey, uint onCheckedValue) {
+            if (shorterGameName != "Zoktai" || _zoktaiAddresses.JoySpots.ContainsKey(memKey) == false) {
+                return;
+            }
+
+            // Check / uncheck the menu item based on if the downloadable event is enabled or not
+            menuItem.Checked = _zoktaiAddresses.JoySpots[memKey].Value == onCheckedValue;
         }
 
         #endregion
