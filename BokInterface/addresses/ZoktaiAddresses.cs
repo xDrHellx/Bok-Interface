@@ -28,6 +28,9 @@ namespace BokInterface.Addresses {
         /// </summary>
         public IDictionary<string, MemoryAddress> Misc = new Dictionary<string, MemoryAddress>();
 
+        /// <summary>Events-related memory addresses</summary>
+        public IDictionary<string, MemoryAddress> Events = new Dictionary<string, MemoryAddress>();
+
         /// <summary>Note for MemoryAddress instances (for less repetition)</summary>
         private string _note = "";
 
@@ -36,6 +39,7 @@ namespace BokInterface.Addresses {
             InitInventoryAddresses();
             InitSollsAddresses();
             InitMiscAddresses();
+            InitEventsAddresses();
         }
 
         private void InitPlayableCharactersAddresses() {
@@ -159,6 +163,14 @@ namespace BokInterface.Addresses {
             Solls.Add("solar_station", new MemoryAddress(0x3BC, note: "Solar station balance", type: "U32", domain: "EWRAM"));
             Solls.Add("solar_bank", new MemoryAddress(0x910, note: "Solar bank balance", type: "U32", domain: "EWRAM"));
             Solls.Add("dark_loans", new MemoryAddress(0x1C4, note: "Dark loans", domain: "EWRAM"));
+        }
+
+        private void InitEventsAddresses() {
+            // Note: These events could be activated from "Joy Spots" in Japan with the wireless adapter
+            Events.Add("blindbox_lvl_3", new MemoryAddress(0x030016D8, note: "Blindbox Lv. 3 from ??? event (set value to 0x8E67 to activate)", domain: "System Bus"));
+            Events.Add("blindbox_lvl_4", new MemoryAddress(0x030016DA, note: "Blindbox Lv. 4 from ??? event (set value to 0x8FAA to activate)", domain: "System Bus"));
+            Events.Add("blindbox_lvl_5_valentine_day", new MemoryAddress(0x030016DC, note: "Blindbox Lv. 5 from ??? & Valentine Day (only on February 14th) events (set value to 0x90E0 to activate)", domain: "System Bus"));
+            Events.Add("star_piece", new MemoryAddress(0x030016DE, note: "Star Piece from ??? event (set value to 0x8FD6 to activate)", domain: "System Bus"));
         }
     }
 }
