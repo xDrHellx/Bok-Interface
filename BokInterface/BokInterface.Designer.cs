@@ -66,27 +66,25 @@ namespace BokInterface {
 			// Show corresponding interface
 			switch (shorterGameName) {
 				case "Boktai":
-					_interfaceActivated = true;
 					ShowBoktaiInterface();
 					break;
 				case "Zoktai":
-					_interfaceActivated = true;
 					ShowZoktaiInterface();
 					break;
 				case "Shinbok":
-					_interfaceActivated = true;
 					ShowShinbokInterface();
 					break;
 				case "LunarKnights":
-					_interfaceActivated = true;
 					ShowLunarKnightsInterface();
 					break;
 				default:
 					// If not a Boktai game, show the "Game not recognized" window & stop here
 					_interfaceActivated = false;
 					ShowGameNotRecognizedWindow();
-					break;
+					return;
 			}
+
+			_interfaceActivated = true;
 		}
 
 		#endregion
@@ -168,8 +166,8 @@ namespace BokInterface {
 		/// <summary>Adds the Misc. data section for the corresponding game</summary>
 		private void AddMiscDataSection() {
 
-			int positionY = 110;
-			int groupHeight = 55;
+			int positionY = 110,
+				groupHeight = 55;
 			bool enableCoffinSection = false;
 			switch (BokInterface.shorterGameName) {
 				case "Boktai":
@@ -219,11 +217,13 @@ namespace BokInterface {
 
 		/// <summary>Generate the menu for the main window</summary>
 		private void GenerateMenu() {
-			_menuBar = WinFormHelpers.CreateMenuStrip("menuBar", "", control: this);
 
+			// No menu for Bok DS / LK yet
 			if (shorterGameName == "LunarKnights") {
 				return;
 			}
+
+			_menuBar = WinFormHelpers.CreateMenuStrip("menuBar", "", control: this);
 
 			// Edit section
 			if (shorterGameName == "Zoktai" || shorterGameName == "Shinbok") {
@@ -286,8 +286,6 @@ namespace BokInterface {
 		#region Openers - Editors
 		protected void OpenStatusEditor(object sender, EventArgs e) {
 			if (statusEditorOpened == false) {
-
-				// Open editor for the current game
 				switch (shorterGameName) {
 					case "Boktai":
 						_subwindows.Add(new BoktaiStatusEditor(this, _memoryValues, _boktaiAddresses));
@@ -302,7 +300,7 @@ namespace BokInterface {
 						_subwindows.Add(new LunarKnightsStatusEditor(this, _memoryValues, _lunarKnightsAddresses));
 						break;
 					default:
-						// If game is not handled, do nothing
+						// If game is not handled, stop
 						return;
 				}
 
@@ -312,8 +310,6 @@ namespace BokInterface {
 
 		protected void OpenInventoryEditor(object sender, EventArgs e) {
 			if (inventoryEditorOpened == false) {
-
-				// Open editor for the current game
 				switch (shorterGameName) {
 					case "Boktai":
 						_subwindows.Add(new BoktaiInventoryEditor(this, _memoryValues, _boktaiAddresses));
@@ -328,7 +324,7 @@ namespace BokInterface {
 						_subwindows.Add(new LunarKnightsInventoryEditor(this, _memoryValues, _lunarKnightsAddresses));
 						break;
 					default:
-						// If game is not handled, do nothing
+						// If game is not handled, stop
 						return;
 				}
 
@@ -338,8 +334,6 @@ namespace BokInterface {
 
 		protected void OpenKeyItemsEditor(object sender, EventArgs e) {
 			if (keyItemsEditorOpened == false) {
-
-				// Open editor for the current game
 				switch (shorterGameName) {
 					case "Boktai":
 						_subwindows.Add(new BoktaiKeyItemsEditor(this, _memoryValues, _boktaiAddresses));
@@ -354,7 +348,7 @@ namespace BokInterface {
 						_subwindows.Add(new LunarKnightsKeyItemsEditor(this, _memoryValues, _lunarKnightsAddresses));
 						break;
 					default:
-						// If game is not handled, do nothing
+						// If game is not handled, stop
 						return;
 				}
 
@@ -364,12 +358,7 @@ namespace BokInterface {
 
 		protected void OpenEquipsEditor(object sender, EventArgs e) {
 			if (equipsEditorOpened == false) {
-
-				// Open editor for the current game
 				switch (shorterGameName) {
-					case "Boktai":
-						// _subwindows.Add(new BoktaiAccessoriesEditor(this, _memoryValues, _boktaiAddresses));
-						break;
 					case "Zoktai":
 						_subwindows.Add(new ZoktaiAccessoriesEditor(this, _memoryValues, _zoktaiAddresses));
 						break;
@@ -380,7 +369,7 @@ namespace BokInterface {
 						// _subwindows.Add(new LunarKnightsAccessoriesEditor(this, _memoryValues, _lunarKnightsAddresses));
 						break;
 					default:
-						// If game is not handled, do nothing
+						// If game is not handled or does not have accessories, stop
 						return;
 				}
 
@@ -390,20 +379,16 @@ namespace BokInterface {
 
 		protected void OpenSolarGunEditor(object sender, EventArgs e) {
 			if (solarGunEditorOpened == false) {
-				// Open editor for the current game
 				switch (shorterGameName) {
 					case "Boktai":
 						// None yet
 						break;
-					case "Zoktai":
-						// None, solar gun is handled via Weapons Inventory
-						break;
 					case "Shinbok":
 						_subwindows.Add(new ShinbokSolarGunEditor(this, _memoryValues, _shinbokAddresses));
 						break;
-					case "LunarKnights":
 					default:
-						// If game is not handled, do nothing
+						// If game is not handled, stop
+						// Note: for Zoktai / Bok 2 the solar gun is handled via the Weapons Inventory
 						return;
 				}
 				solarGunEditorOpened = true;
@@ -412,8 +397,6 @@ namespace BokInterface {
 
 		protected void OpenWeaponsEditor(object sender, EventArgs e) {
 			if (weaponsEditorOpened == false) {
-
-				// Open editor for the current game
 				switch (shorterGameName) {
 					case "Boktai":
 						_subwindows.Add(new BoktaiWeaponsEditor(this, _memoryValues, _boktaiAddresses));
@@ -428,7 +411,7 @@ namespace BokInterface {
 						_subwindows.Add(new LunarKnightsWeaponsEditor(this, _memoryValues, _lunarKnightsAddresses));
 						break;
 					default:
-						// If game is not handled, do nothing
+						// If game is not handled, stop
 						return;
 				}
 
@@ -439,9 +422,6 @@ namespace BokInterface {
 		protected void OpenMagicsEditor(object sender, EventArgs e) {
 			if (magicsEditorOpened == false) {
 				switch (shorterGameName) {
-					case "Boktai":
-						// No magics in Bok 1
-						return;
 					case "Zoktai":
 						_subwindows.Add(new ZoktaiMagicsEditor(this, _memoryValues, _zoktaiAddresses));
 						break;
@@ -449,11 +429,8 @@ namespace BokInterface {
 						// _subwindows.Add(new ShinbokMagicsEditor(this, _memoryValues, _shinbokAddresses));
 						// break;
 						return;
-					case "LunarKnights":
-						// No magics in LK / DS
-						return;
 					default:
-						// If game is not handled, do nothing
+						// If game is not handled or does not have magics, stop
 						return;
 				}
 
@@ -467,12 +444,11 @@ namespace BokInterface {
 
 		private void OpenTileDataViewer(object sender, EventArgs e) {
 
-            // If tool is already active, stop
+            // Check if the tool is already active
             if (tileDataViewerActive == true) {
                 return;
             }
 
-            tileDataViewerActive = true;
             switch (shorterGameName) {
                 case "Boktai":
                     _tileDataViewer = new BoktaiTileDataViewer(this, _boktaiAddresses);
@@ -487,10 +463,11 @@ namespace BokInterface {
                     _tileDataViewer = new LunarKnightsTileDataViewer(this, _lunarKnightsAddresses);
                     break;
                 default:
-                    // If game not handled, indicate that the tool isn't active & stop here
-                    tileDataViewerActive = false;
+                    // If game not handled, stop
                     return;
             }
+
+            tileDataViewerActive = true;
 
             // Initialize the loop to update / redraw automatically & add the on-close event handler
             _tileDataViewer.InitializeFrameLoop();
@@ -510,7 +487,6 @@ namespace BokInterface {
                 return;
             }
 
-            memValuesListingActive = true;
             switch (shorterGameName) {
                 case "Boktai":
                     _memValuesListing = new MemoryValuesListing(this, _boktaiAddresses);
@@ -525,10 +501,11 @@ namespace BokInterface {
                     _memValuesListing = new MemoryValuesListing(this, _lunarKnightsAddresses);
                     break;
                 default:
-                    // If game not handled, indicate that the tool isn't active & stop here
-                    memValuesListingActive = false;
+                    // If game not handled, stop
                     return;
             }
+
+            memValuesListingActive = true;
 
             // Add the on-close event handler
             _memValuesListing.FormClosing += new FormClosingEventHandler(delegate (object sender, FormClosingEventArgs e) {
@@ -543,17 +520,17 @@ namespace BokInterface {
                 return;
             }
 
-            solarBankInterestsSimActive = true;
             switch (shorterGameName) {
                 case "Zoktai":
                 case "Shinbok":
                     _solarBankInterestsSim = new SolarBankInterestsSimulator(this);
                     break;
                 default:
-                    // If game not handled, indicate that the tool isn't active & stop here
-                    solarBankInterestsSimActive = false;
+                    // If game not handled, stop
                     return;
             }
+
+            solarBankInterestsSimActive = true;
 
             // Add the on-close event handler
             _solarBankInterestsSim.FormClosing += new FormClosingEventHandler(delegate (object sender, FormClosingEventArgs e) {
@@ -562,7 +539,7 @@ namespace BokInterface {
                 _solarBankInterestsSim = null;
             });
         }
-		
+
 		#endregion
 	}
 }
