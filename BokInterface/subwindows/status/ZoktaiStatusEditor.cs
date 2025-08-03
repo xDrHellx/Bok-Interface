@@ -202,7 +202,7 @@ namespace BokInterface.Status {
             /**
              * If the total EXP until next level & current level are available,
              * we'll use these to prevent the game from adjusting the level while setting new values
-             * 
+             *
              * We'll set the total EXP until next level to the maximum possible to prevent that from happening
              */
             if (_memoryValues.U32.ContainsKey("total_exp_until_next_level") == true) {
@@ -278,7 +278,7 @@ namespace BokInterface.Status {
                             case "agi":
                                 /**
                                  * For stats we also update the "persistent" stat address
-                                 * 
+                                 *
                                  * We do this because updating "current" stat value is not enough,
                                  * when switching room the game would set back the old values
                                  */

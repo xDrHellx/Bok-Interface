@@ -165,7 +165,7 @@ namespace BokInterface.Inventory {
                 /**
                  * We also call the method directly to update the durability fields
                  * when the subwindow is generated
-                 * 
+                 *
                  * It's possible that we retrieved the current inventory so we need to do that
                  */
                 UpdateMaxDurabilityField(dropdown);
@@ -364,7 +364,7 @@ namespace BokInterface.Inventory {
 
                     /**
                      * If the value is 32768 or higher : it's a chocolate-covered item
-                     * 
+                     *
                      * In that case we need to pre-select the checkbox for the slot
                      * We'll also remove the offset from the value in the durability field to keep it simple for the user
                      */

@@ -90,7 +90,7 @@ namespace BokInterface.Tools.TileDataViewer {
 
             /*
                 Bitmask refs:
-                
+
                 0000 0000 0000 0001 = ???
                 0000 0000 0000 0010 = wall
                 0000 0000 0000 0100 = ??? seems to be used for some room entrances/exits

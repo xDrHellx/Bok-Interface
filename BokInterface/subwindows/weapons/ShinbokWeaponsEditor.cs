@@ -531,9 +531,9 @@ namespace BokInterface.Weapons {
         protected override void SetDefaultValues() {
 
             /**
-			 * If Django's current HP is a valid, try retrieving the current weapons inventory
-			 * (Django's current HP goes below 0 or above 1000 when switching rooms, during bike races or on world map)
-			 */
+             * If Django's current HP is a valid, try retrieving the current weapons inventory
+             * (Django's current HP goes below 0 or above 1000 when switching rooms, during bike races or on world map)
+             */
             uint djangoCurrentHp = _memoryValues.Django["current_hp"].Value;
             if (djangoCurrentHp >= 0 && djangoCurrentHp <= 1000) {
                 foreach (ImageComboBox dropdown in dropDownLists) {
@@ -543,7 +543,7 @@ namespace BokInterface.Weapons {
                     if (fieldParts.Length >= 4 && fieldParts[3] != null && fieldParts[3].Substring(0, 10) == "sp_ability") {
                         /**
                          * If it's for an SP ability
-                         * 
+                         *
                          * Set the name of the key to retrieve the value from based on the dropdown's name (for example inventory_slotX_weapon => slotX_weapon)
                          * Then try getting the corresponding ability & preselect it
                          */

@@ -52,7 +52,7 @@ namespace BokInterface {
             /**
              * Check if the pointer to the stat structure is available, ie if the value is "valid"
              * The value for the stat structure would be 0 during room transitions or at the title screen
-             * 
+             *
              * Also check if Django isn't dead (current HP > 0), which means that he can move
              */
             uint statStructurePointer = _boktaiAddresses.Misc["stat"].Value;

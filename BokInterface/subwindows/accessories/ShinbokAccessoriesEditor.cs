@@ -189,9 +189,9 @@ namespace BokInterface.Accessories {
         protected override void SetDefaultValues() {
 
             /**
-			 * If Django's current HP is a valid, try retrieving the current accessory inventory
-			 * (Django's current HP goes below 0 or above 1000 when switching rooms, during bike races or on world map)
-			 */
+             * If Django's current HP is a valid, try retrieving the current accessory inventory
+             * (Django's current HP goes below 0 or above 1000 when switching rooms, during bike races or on world map)
+             */
             uint djangoCurrentHp = _memoryValues.Django["current_hp"].Value;
             if (djangoCurrentHp >= 0 && djangoCurrentHp <= 1000) {
                 foreach (ImageComboBox dropdown in dropDownLists) {

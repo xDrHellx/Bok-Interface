@@ -69,7 +69,7 @@ namespace BokInterface {
 
             /**
              * Update values by retrieving from memory addresses
-             * 
+             *
              * In some cases we only update when the values are "valid"
              * For example "stat" is 0 during room transitions or at the title screen
              */

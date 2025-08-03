@@ -25,7 +25,7 @@ namespace BokInterface.Items {
                  * Special case for "Chocolate-Covered" :
                  * If a covered item was passed, retrieve its rottenAt value & set it for the "Chocolate-Covered" instance
                  * If none was passed, just call the GetRottensAt function to set the default value
-                 * 
+                 *
                  * We do this because the game stores the value of the covered item's own durability
                  * It's possible to set this item without it covering anything, however by normal means, it only exists if chocolate did cover another item
                  */

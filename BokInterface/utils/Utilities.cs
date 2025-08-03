@@ -290,7 +290,7 @@ namespace BokInterface.Utils {
             } else if (bonus < 0) {
                 /**
                  * Malus (-01 & below)
-                 * 
+                 *
                  * Negative values starts at 256 and go further down,
                  * so we convert the negative decimal value that was passed & substract 256 by that value
                  */

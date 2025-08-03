@@ -453,7 +453,7 @@ namespace BokInterface.Weapons {
                     if (fieldParts.Length >= 4 && fieldParts[3] != null && fieldParts[3].Substring(0, 10) == "sp_ability") {
                         /**
                          * If it's for an SP ability
-                         * 
+                         *
                          * Set the name of the key to retrieve the value from based on the dropdown's name (for example inventory_slotX_weapon => slotX_weapon)
                          * Then try getting the corresponding ability & preselect it
                          */
@@ -481,10 +481,10 @@ namespace BokInterface.Weapons {
 
                     /**
                      * Set the value
-                     * 
+                     *
                      * If the field corresponds to a weapon bonus or malus, we adjust the value
                      * This is because maluses are handled differently by the game
-                     * 
+                     *
                      * For example : 255 = -01 & 246 = -10
                      */
                     bonusRelatedField.Value = fieldParts[2] == "weapon_bonus" ? Utilities.ConvertValueToWeaponBonus(_memoryValues.Inventory[memValuesKey].Value) : _memoryValues.Inventory[memValuesKey].Value;
@@ -523,7 +523,7 @@ namespace BokInterface.Weapons {
             /**
              * For some reason there are duplicates within the game,
              * so in these cases we set it to the "original" instead of keeping the duplicate's value
-             * 
+             *
              * This is also to prevent having to show duplicate SP abilities in dropdown lists
              */
             switch (value) {

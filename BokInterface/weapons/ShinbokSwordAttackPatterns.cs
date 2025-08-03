@@ -20,7 +20,7 @@ namespace BokInterface.Weapons {
                     V = Vertical slash (equivalent of Bok 2 hammer)
                     H = Horizontal slash (equivalent of Bok 2 sword)
                     P = Piercing / Thrusting (equivalent of Bok 2 spear)
-                
+
                 Number corresponds to the recovery time after an attack.
                 The higher the number, the longer it takes.
 

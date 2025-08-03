@@ -60,19 +60,19 @@ namespace BokInterface {
         private void UpdateShinbokInterface() {
 
             /**
-			 * Preparing memory addresses
-			 *
-			 * This is necessary because some memory addresses changes based on areas
-			 * So we need to combine multiple addresses to get the actual value all the time
-			 */
+             * Preparing memory addresses
+             *
+             * This is necessary because some memory addresses changes based on areas
+             * So we need to combine multiple addresses to get the actual value all the time
+             */
             uint djangoCurrentHp = _memoryValues.Django["current_hp"].Value;
 
             /**
-			 * Updating values by retrieving from memory addresses
-			 *
-			 * In some cases we only update when the value is "valid"
-			 * For example Django's current HP goes below 0 or above 1000 when switching rooms, during bike races or on world map
-			 */
+             * Updating values by retrieving from memory addresses
+             *
+             * In some cases we only update when the value is "valid"
+             * For example Django's current HP goes below 0 or above 1000 when switching rooms, during bike races or on world map
+             */
             if (djangoCurrentHp >= 0 && djangoCurrentHp <= 1000) {
                 _bok3_currentStatusHpValue.Text = djangoCurrentHp.ToString();
                 _bok3_currentStatusEneValue.Text = _memoryValues.Django["current_ene"].Value.ToString();

@@ -8,7 +8,7 @@ using BokInterface.Tables;
 
 /**
  * Note :
- * 
+ *
  * Due to how the game works, stat points from accessories cannot be updated here
  * The game checks equipped accessories when switching room
  */
@@ -178,7 +178,7 @@ namespace BokInterface.Status {
             /**
              * If the total EXP until next level & current level are available,
              * we'll use these to prevent the game from adjusting the level while setting new values
-             * 
+             *
              * We'll set the total EXP until next level to the maximum possible to prevent that from happening
              */
             if (_memoryValues.U32.ContainsKey("total_exp_until_next_level") == true) {
@@ -251,7 +251,7 @@ namespace BokInterface.Status {
                                 /**
                                  * Due to how the game works we have to set the sum of base + card stats
                                  * This allows stats to be updated in the current roomand stay when switching room
-                                 * 
+                                 *
                                  * We'll start by getting the key needed for the stat
                                  */
                                 string[] valueKeyParts = valueKey.Split(['_'], 2);
