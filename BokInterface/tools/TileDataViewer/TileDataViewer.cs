@@ -135,10 +135,16 @@ namespace BokInterface.Tools.TileDataViewer {
             /**
              * Draw Django
              * If both values are at 0, it might be due to a soft reset, so we get the addresses again
+            *  We also get them again if at least one the values is higher than the map's width or height
+            * (i am currently unsure what causes this but it can happen when initializing the tool during the GBA screen & then loading a savestate)
              */
             uint djangoX = APIs.Memory.ReadU16(djangoXposAddress);
             uint djangoY = APIs.Memory.ReadU16(djangoYposAddress);
-            if (djangoX == 0 && djangoY == 0) {
+            if (
+                (djangoX == 0 && djangoY == 0)
+                || djangoX > tileWidth
+                || djangoY > tileHeight
+            ) {
                 SetGameAddresses();
                 djangoX = APIs.Memory.ReadU16(djangoXposAddress);
                 djangoY = APIs.Memory.ReadU16(djangoYposAddress);

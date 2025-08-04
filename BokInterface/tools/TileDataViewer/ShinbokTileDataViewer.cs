@@ -25,8 +25,8 @@ namespace BokInterface.Tools.TileDataViewer {
 
         protected override void SetGameAddresses() {
             mapDataAddress = _memAddresses.Misc["map_data"].Address;
-            djangoXposAddress = APIs.Memory.ReadU32(_memAddresses.Misc["stat"].Address) + _memAddresses.Django["x_position"].Address;
-            djangoYposAddress = APIs.Memory.ReadU32(_memAddresses.Misc["stat"].Address) + _memAddresses.Django["y_position"].Address;
+            djangoXposAddress = APIs.Memory.ReadU32(_memAddresses.Misc["actor"].Address) + _memAddresses.Django["x_position"].Address;
+            djangoYposAddress = APIs.Memory.ReadU32(_memAddresses.Misc["actor"].Address) + _memAddresses.Django["y_position"].Address;
         }
 
         #endregion
