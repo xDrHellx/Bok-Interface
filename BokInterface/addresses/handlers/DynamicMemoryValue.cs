@@ -16,5 +16,10 @@ namespace BokInterface.Addresses {
             get => Utilities.ReadDynamicAddress(_firstAddress, _secondAddress, _type);
             set => Utilities.WriteDynamicAddress(value, _firstAddress, _secondAddress, _type);
         }
+
+        /// <summary>Dynamic address (obtained by combining the value of the first address with the second address)</summary>
+        public uint Address {
+            get => APIs.Memory.ReadU32(_firstAddress) + _secondAddress;
+        }
     }
 }
