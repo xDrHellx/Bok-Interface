@@ -106,42 +106,6 @@ namespace BokInterface {
             _subwindows.Clear();
             _currentStatusGroupBox.Controls.Clear();
             _currentStatsGroupBox.Controls.Clear();
-            _inventoryGroupBox.Controls.Clear();
-            _editGroupBox.Controls.Clear();
-            _extrasGroupBox.Controls.Clear();
-
-            // Tools selection subwindow elements
-            _miscToolsSelectionWindow.Controls.Clear();
-            _miscToolsSelectionWindow.Close();
-            miscToolsSelectorOpened = false;
-
-            // Extra tools
-            ClearExtraTools();
-        }
-
-        /// <summary>Clears subwindows related to extra tools</summary>
-        private void ClearExtraTools() {
-
-            // Tile Data Viewer
-            if (_tileDataViewer != null) {
-                _tileDataViewer.Controls.Clear();
-                _tileDataViewer.Close();
-                tileDataViewerActive = false;
-            }
-
-            // Memory Values Listing
-            if (_memValuesListing != null) {
-                _memValuesListing.Controls.Clear();
-                _memValuesListing.Close();
-                memValuesListingActive = false;
-            }
-
-            // Solar bank interests simulator
-            if (_solarBankInterestsSim != null) {
-                _solarBankInterestsSim.Controls.Clear();
-                _solarBankInterestsSim.Close();
-                solarBankInterestsSimActive = false;
-            }
         }
 
         #endregion
@@ -286,147 +250,202 @@ namespace BokInterface {
         #region Openers - Editors
         protected void OpenStatusEditor(object sender, EventArgs e) {
             if (statusEditorOpened == false) {
+                StatusEditor statusEditor = null;
                 switch (shorterGameName) {
                     case "Boktai":
-                        _subwindows.Add(new BoktaiStatusEditor(this, _memoryValues, _boktaiAddresses));
+                        statusEditor = new BoktaiStatusEditor(this, _memoryValues, _boktaiAddresses);
                         break;
                     case "Zoktai":
-                        _subwindows.Add(new ZoktaiStatusEditor(this, _memoryValues, _zoktaiAddresses));
+                        statusEditor = new ZoktaiStatusEditor(this, _memoryValues, _zoktaiAddresses);
                         break;
                     case "Shinbok":
-                        _subwindows.Add(new ShinbokStatusEditor(this, _memoryValues, _shinbokAddresses));
+                        statusEditor = new ShinbokStatusEditor(this, _memoryValues, _shinbokAddresses);
                         break;
                     case "LunarKnights":
-                        _subwindows.Add(new LunarKnightsStatusEditor(this, _memoryValues, _lunarKnightsAddresses));
+                        statusEditor = new LunarKnightsStatusEditor(this, _memoryValues, _lunarKnightsAddresses);
                         break;
                     default:
                         // If game is not handled, stop
                         return;
                 }
 
-                statusEditorOpened = true;
+                /**
+                 * Add the subwindow to the list of activate subwindows
+                 * Indicate that it's active via the menuItem check & the boolean
+                 */
+                _subwindows.Add(statusEditor);
+                ToolStripMenuItem menuItem = (ToolStripMenuItem)sender;
+                statusEditorOpened = menuItem.Checked = true;
+
+                // Add the on-close event handler
+                statusEditor.FormClosing += new FormClosingEventHandler(delegate (object sender, FormClosingEventArgs e) {
+                    statusEditorOpened = menuItem.Checked = false;
+                    statusEditor.Dispose();
+                });
             }
         }
 
         protected void OpenInventoryEditor(object sender, EventArgs e) {
             if (inventoryEditorOpened == false) {
+                InventoryEditor inventoryEditor = null;
                 switch (shorterGameName) {
                     case "Boktai":
-                        _subwindows.Add(new BoktaiInventoryEditor(this, _memoryValues, _boktaiAddresses));
+                        inventoryEditor = new BoktaiInventoryEditor(this, _memoryValues, _boktaiAddresses);
                         break;
                     case "Zoktai":
-                        _subwindows.Add(new ZoktaiInventoryEditor(this, _memoryValues, _zoktaiAddresses));
+                        inventoryEditor = new ZoktaiInventoryEditor(this, _memoryValues, _zoktaiAddresses);
                         break;
                     case "Shinbok":
-                        _subwindows.Add(new ShinbokInventoryEditor(this, _memoryValues, _shinbokAddresses));
+                        inventoryEditor = new ShinbokInventoryEditor(this, _memoryValues, _shinbokAddresses);
                         break;
                     case "LunarKnights":
-                        _subwindows.Add(new LunarKnightsInventoryEditor(this, _memoryValues, _lunarKnightsAddresses));
+                        inventoryEditor = new LunarKnightsInventoryEditor(this, _memoryValues, _lunarKnightsAddresses);
                         break;
                     default:
                         // If game is not handled, stop
                         return;
                 }
 
-                inventoryEditorOpened = true;
+                _subwindows.Add(inventoryEditor);
+                ToolStripMenuItem menuItem = (ToolStripMenuItem)sender;
+                inventoryEditorOpened = menuItem.Checked = true;
+
+                inventoryEditor.FormClosing += new FormClosingEventHandler(delegate (object sender, FormClosingEventArgs e) {
+                    inventoryEditorOpened = menuItem.Checked = false;
+                    inventoryEditor.Dispose();
+                });
             }
         }
 
         protected void OpenKeyItemsEditor(object sender, EventArgs e) {
             if (keyItemsEditorOpened == false) {
+                KeyItemsEditor keyItemsEditor = null;
                 switch (shorterGameName) {
                     case "Boktai":
-                        _subwindows.Add(new BoktaiKeyItemsEditor(this, _memoryValues, _boktaiAddresses));
+                        keyItemsEditor = new BoktaiKeyItemsEditor(this, _memoryValues, _boktaiAddresses);
                         break;
                     case "Zoktai":
-                        _subwindows.Add(new ZoktaiKeyItemsEditor(this, _memoryValues, _zoktaiAddresses));
+                        keyItemsEditor = new ZoktaiKeyItemsEditor(this, _memoryValues, _zoktaiAddresses);
                         break;
                     case "Shinbok":
-                        _subwindows.Add(new ShinbokKeyItemsEditor(this, _memoryValues, _shinbokAddresses));
+                        keyItemsEditor = new ShinbokKeyItemsEditor(this, _memoryValues, _shinbokAddresses);
                         break;
                     case "LunarKnights":
-                        _subwindows.Add(new LunarKnightsKeyItemsEditor(this, _memoryValues, _lunarKnightsAddresses));
+                        keyItemsEditor = new LunarKnightsKeyItemsEditor(this, _memoryValues, _lunarKnightsAddresses);
                         break;
                     default:
                         // If game is not handled, stop
                         return;
                 }
 
-                keyItemsEditorOpened = true;
+                _subwindows.Add(keyItemsEditor);
+                ToolStripMenuItem menuItem = (ToolStripMenuItem)sender;
+                keyItemsEditorOpened = menuItem.Checked = true;
+
+                keyItemsEditor.FormClosing += new FormClosingEventHandler(delegate (object sender, FormClosingEventArgs e) {
+                    keyItemsEditorOpened = menuItem.Checked = false;
+                    keyItemsEditor.Dispose();
+                });
             }
         }
 
         protected void OpenEquipsEditor(object sender, EventArgs e) {
             if (equipsEditorOpened == false) {
+                AccessoriesEditor accessoriesEditor = null;
                 switch (shorterGameName) {
                     case "Zoktai":
-                        _subwindows.Add(new ZoktaiAccessoriesEditor(this, _memoryValues, _zoktaiAddresses));
+                        accessoriesEditor = new ZoktaiAccessoriesEditor(this, _memoryValues, _zoktaiAddresses);
                         break;
                     case "Shinbok":
-                        _subwindows.Add(new ShinbokAccessoriesEditor(this, _memoryValues, _shinbokAddresses));
+                        accessoriesEditor = new ShinbokAccessoriesEditor(this, _memoryValues, _shinbokAddresses);
                         break;
                     case "LunarKnights":
-                        // _subwindows.Add(new LunarKnightsAccessoriesEditor(this, _memoryValues, _lunarKnightsAddresses));
+                        // accessoriesEditor = new LunarKnightsAccessoriesEditor(this, _memoryValues, _lunarKnightsAddresses);
                         break;
                     default:
                         // If game is not handled or does not have accessories, stop
                         return;
                 }
 
-                equipsEditorOpened = true;
+                _subwindows.Add(accessoriesEditor);
+                ToolStripMenuItem menuItem = (ToolStripMenuItem)sender;
+                equipsEditorOpened = menuItem.Checked = true;
+
+                accessoriesEditor.FormClosing += new FormClosingEventHandler(delegate (object sender, FormClosingEventArgs e) {
+                    equipsEditorOpened = menuItem.Checked = false;
+                    accessoriesEditor.Dispose();
+                });
             }
         }
 
         protected void OpenSolarGunEditor(object sender, EventArgs e) {
             if (solarGunEditorOpened == false) {
+                SolarGunEditor solarGunEditor = null;
                 switch (shorterGameName) {
                     case "Boktai":
                         // None yet
                         break;
                     case "Shinbok":
-                        _subwindows.Add(new ShinbokSolarGunEditor(this, _memoryValues, _shinbokAddresses));
+                        solarGunEditor = new ShinbokSolarGunEditor(this, _memoryValues, _shinbokAddresses);
                         break;
                     default:
                         // If game is not handled, stop
                         // Note: for Zoktai / Bok 2 the solar gun is handled via the Weapons Inventory
                         return;
                 }
-                solarGunEditorOpened = true;
+
+                _subwindows.Add(solarGunEditor);
+                ToolStripMenuItem menuItem = (ToolStripMenuItem)sender;
+                solarGunEditorOpened = menuItem.Checked = true;
+
+                solarGunEditor.FormClosing += new FormClosingEventHandler(delegate (object sender, FormClosingEventArgs e) {
+                    solarGunEditorOpened = menuItem.Checked = false;
+                    solarGunEditor.Dispose();
+                });
             }
         }
 
         protected void OpenWeaponsEditor(object sender, EventArgs e) {
             if (weaponsEditorOpened == false) {
+                WeaponsEditor weaponsEditor = null;
                 switch (shorterGameName) {
                     case "Boktai":
-                        _subwindows.Add(new BoktaiWeaponsEditor(this, _memoryValues, _boktaiAddresses));
+                        weaponsEditor = new BoktaiWeaponsEditor(this, _memoryValues, _boktaiAddresses);
                         break;
                     case "Zoktai":
-                        _subwindows.Add(new ZoktaiWeaponsEditor(this, _memoryValues, _zoktaiAddresses));
+                        weaponsEditor = new ZoktaiWeaponsEditor(this, _memoryValues, _zoktaiAddresses);
                         break;
                     case "Shinbok":
-                        _subwindows.Add(new ShinbokWeaponsEditor(this, _memoryValues, _shinbokAddresses));
+                        weaponsEditor = new ShinbokWeaponsEditor(this, _memoryValues, _shinbokAddresses);
                         break;
                     case "LunarKnights":
-                        _subwindows.Add(new LunarKnightsWeaponsEditor(this, _memoryValues, _lunarKnightsAddresses));
+                        weaponsEditor = new LunarKnightsWeaponsEditor(this, _memoryValues, _lunarKnightsAddresses);
                         break;
                     default:
                         // If game is not handled, stop
                         return;
                 }
 
-                weaponsEditorOpened = true;
+                _subwindows.Add(weaponsEditor);
+                ToolStripMenuItem menuItem = (ToolStripMenuItem)sender;
+                weaponsEditorOpened = menuItem.Checked = true;
+
+                weaponsEditor.FormClosing += new FormClosingEventHandler(delegate (object sender, FormClosingEventArgs e) {
+                    weaponsEditorOpened = menuItem.Checked = false;
+                    weaponsEditor.Dispose();
+                });
             }
         }
 
         protected void OpenMagicsEditor(object sender, EventArgs e) {
             if (magicsEditorOpened == false) {
+                MagicsEditor magicsEditor = null;
                 switch (shorterGameName) {
                     case "Zoktai":
-                        _subwindows.Add(new ZoktaiMagicsEditor(this, _memoryValues, _zoktaiAddresses));
+                        magicsEditor = new ZoktaiMagicsEditor(this, _memoryValues, _zoktaiAddresses);
                         break;
                     case "Shinbok":
-                        // _subwindows.Add(new ShinbokMagicsEditor(this, _memoryValues, _shinbokAddresses));
+                        // magicsEditor = new ShinbokMagicsEditor(this, _memoryValues, _shinbokAddresses);
                         // break;
                         return;
                     default:
@@ -434,7 +453,14 @@ namespace BokInterface {
                         return;
                 }
 
-                magicsEditorOpened = true;
+                _subwindows.Add(magicsEditor);
+                ToolStripMenuItem menuItem = (ToolStripMenuItem)sender;
+                magicsEditorOpened = menuItem.Checked = true;
+
+                magicsEditor.FormClosing += new FormClosingEventHandler(delegate (object sender, FormClosingEventArgs e) {
+                    magicsEditorOpened = menuItem.Checked = false;
+                    magicsEditor.Dispose();
+                });
             }
         }
 
@@ -449,36 +475,39 @@ namespace BokInterface {
                 return;
             }
 
+            TileDataViewer tileDataViewer = null;
             switch (shorterGameName) {
                 case "Boktai":
-                    _tileDataViewer = new BoktaiTileDataViewer(this, _boktaiAddresses);
+                    tileDataViewer = new BoktaiTileDataViewer(this, _boktaiAddresses);
                     break;
                 case "Zoktai":
-                    _tileDataViewer = new ZoktaiTileDataViewer(this, _zoktaiAddresses);
+                    tileDataViewer = new ZoktaiTileDataViewer(this, _zoktaiAddresses);
                     break;
                 case "Shinbok":
-                    _tileDataViewer = new ShinbokTileDataViewer(this, _shinbokAddresses);
+                    tileDataViewer = new ShinbokTileDataViewer(this, _shinbokAddresses);
                     break;
                 case "LunarKnights":
-                    _tileDataViewer = new LunarKnightsTileDataViewer(this, _lunarKnightsAddresses);
+                    tileDataViewer = new LunarKnightsTileDataViewer(this, _lunarKnightsAddresses);
                     break;
                 default:
                     // If game not handled, stop
                     return;
             }
 
-            tileDataViewerActive = true;
+            _subwindows.Add(tileDataViewer);
+            ToolStripMenuItem menuItem = (ToolStripMenuItem)sender;
+            tileDataViewerActive = menuItem.Checked = true;
 
             // Initialize the loop to update / redraw automatically & add the on-close event handler
-            _tileDataViewer.InitializeFrameLoop();
-            _tileDataViewer.FormClosing += new FormClosingEventHandler(delegate (object sender, FormClosingEventArgs e) {
+            tileDataViewer.InitializeFrameLoop();
+            tileDataViewer.FormClosing += new FormClosingEventHandler(delegate (object sender, FormClosingEventArgs e) {
                 /**
                  * Remove the function from the list of functions to call each frame
                  * Also set instance with null to prevent it from doing anything else
                  */
-                tileDataViewerActive = false;
-                functionsList.RemoveAt(_tileDataViewer.index);
-                _tileDataViewer = null;
+                tileDataViewerActive = menuItem.Checked = false;
+                functionsList.RemoveAt(tileDataViewer.index);
+                tileDataViewer.Dispose();
             });
         }
 
@@ -487,31 +516,32 @@ namespace BokInterface {
                 return;
             }
 
+            MemoryValuesListing memoryValuesListing = null;
             switch (shorterGameName) {
                 case "Boktai":
-                    _memValuesListing = new MemoryValuesListing(this, _boktaiAddresses);
+                    memoryValuesListing = new MemoryValuesListing(this, _boktaiAddresses);
                     break;
                 case "Zoktai":
-                    _memValuesListing = new MemoryValuesListing(this, _zoktaiAddresses);
+                    memoryValuesListing = new MemoryValuesListing(this, _zoktaiAddresses);
                     break;
                 case "Shinbok":
-                    _memValuesListing = new MemoryValuesListing(this, _shinbokAddresses);
+                    memoryValuesListing = new MemoryValuesListing(this, _shinbokAddresses);
                     break;
                 case "LunarKnights":
-                    _memValuesListing = new MemoryValuesListing(this, _lunarKnightsAddresses);
+                    memoryValuesListing = new MemoryValuesListing(this, _lunarKnightsAddresses);
                     break;
                 default:
                     // If game not handled, stop
                     return;
             }
 
-            memValuesListingActive = true;
+            _subwindows.Add(memoryValuesListing);
+            ToolStripMenuItem menuItem = (ToolStripMenuItem)sender;
+            memValuesListingActive = menuItem.Checked = true;
 
-            // Add the on-close event handler
-            _memValuesListing.FormClosing += new FormClosingEventHandler(delegate (object sender, FormClosingEventArgs e) {
-                // Indicate that the tool isn't active anymore & set instance to null to prevent it from doing anything else
-                memValuesListingActive = false;
-                _memValuesListing = null;
+            memoryValuesListing.FormClosing += new FormClosingEventHandler(delegate (object sender, FormClosingEventArgs e) {
+                memValuesListingActive = menuItem.Checked = false;
+                memoryValuesListing.Dispose();
             });
         }
 
@@ -520,23 +550,24 @@ namespace BokInterface {
                 return;
             }
 
+            SolarBankInterestsSimulator solarBankInterestsSimulator = null;
             switch (shorterGameName) {
                 case "Zoktai":
                 case "Shinbok":
-                    _solarBankInterestsSim = new SolarBankInterestsSimulator(this);
+                    solarBankInterestsSimulator = new SolarBankInterestsSimulator(this);
                     break;
                 default:
                     // If game not handled, stop
                     return;
             }
 
-            solarBankInterestsSimActive = true;
+            _subwindows.Add(solarBankInterestsSimulator);
+            ToolStripMenuItem menuItem = (ToolStripMenuItem)sender;
+            solarBankInterestsSimActive = menuItem.Checked = true;
 
-            // Add the on-close event handler
-            _solarBankInterestsSim.FormClosing += new FormClosingEventHandler(delegate (object sender, FormClosingEventArgs e) {
-                // Indicate that the tool isn't active anymore & set instance to null just in case, to prevent it from doing anything else
-                solarBankInterestsSimActive = false;
-                _solarBankInterestsSim = null;
+            solarBankInterestsSimulator.FormClosing += new FormClosingEventHandler(delegate (object sender, FormClosingEventArgs e) {
+                solarBankInterestsSimActive = menuItem.Checked = false;
+                solarBankInterestsSimulator.Dispose();
             });
         }
 

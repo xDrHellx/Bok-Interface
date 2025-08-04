@@ -9,9 +9,6 @@ using System.Collections.Generic;
 
 using BokInterface.Utils;
 using BokInterface.Calculators;
-using BokInterface.Tools.TileDataViewer;
-using BokInterface.Tools.MemoryValuesListing;
-using BokInterface.Tools.SolarBankInterestsSimulator;
 using BokInterface.Addresses;
 
 /**
@@ -61,15 +58,11 @@ namespace BokInterface {
         private MemoryValues _memoryValues = new("");
         /// <summary>Movement calculator instance</summary>
         private MovementCalculator _movementCalculator = new();
-        private TileDataViewer? _tileDataViewer;
-        private MemoryValuesListing? _memValuesListing;
-        private SolarBankInterestsSimulator? _solarBankInterestsSim;
 
         #endregion
 
         #region Subwindows
 
-        private readonly Form _miscToolsSelectionWindow = new();
         private readonly List<Form> _subwindows = [];
         public bool statusEditorOpened = false,
             inventoryEditorOpened = false,
@@ -91,9 +84,6 @@ namespace BokInterface {
         private GroupBox _currentStatusGroupBox = new(),
             _currentStatsGroupBox = new(),
             _miscDataGroupBox = new();
-        private readonly GroupBox _inventoryGroupBox = new(),
-            _editGroupBox = new(),
-            _extrasGroupBox = new();
 
         // Misc data labels
         private Label _averageSpeedLabel = new(),
@@ -121,9 +111,6 @@ namespace BokInterface {
 
             // Reset the variables for initializing the corresponding game's interface
             ResetInitializationVariables();
-
-            // Clear subwindows related to extra tools to prevent errors caused by switching between games
-            ClearExtraTools();
 
             // Try initializing the interface again
             InitializeInterface();
