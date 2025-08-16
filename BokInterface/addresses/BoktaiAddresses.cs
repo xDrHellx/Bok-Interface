@@ -46,22 +46,23 @@ namespace BokInterface.Addresses {
         }
 
         private void InitInventoryAddresses() {
-            Inventory.Add("grenade_amounts", new MemoryAddress(0x0203D80A, domain: "EWRAM"));
-            Inventory.Add("battery_charges", new MemoryAddress(0x0203D818, domain: "EWRAM"));
             Inventory.Add("equipped_lens", new MemoryAddress(0x0203D88C, domain: "EWRAM"));
             Inventory.Add("equipped_frame", new MemoryAddress(0x0203D88E, domain: "EWRAM"));
             Inventory.Add("equipped_grenades", new MemoryAddress(0x0203D890, domain: "EWRAM"));
             Inventory.Add("equipped_battery", new MemoryAddress(0x0203D892, domain: "EWRAM"));
-            Inventory.Add("pineapple_grenade_charge", new MemoryAddress(0x0203D894, domain: "EWRAM"));
-            // Inventory.Add("astro_battery_unlocked", new MemoryAddress(0x0203d8b0, type: "U32", domain: "EWRAM")); // must be set to *(*0x03001C90 + 0x7DC)
-            Inventory.Add("item_size", new MemoryAddress(0x0203DC18, domain: "EWRAM"));
-            Inventory.Add("item_ids", new MemoryAddress(0x0203DC1A, domain: "EWRAM"));
-            Inventory.Add("item_amounts", new MemoryAddress(0x0203DC6E, domain: "EWRAM"));
-            Inventory.Add("grenades_limit", new MemoryAddress(0x0203DCC2, domain: "EWRAM"));
+            // Inventory.Add("astro_battery_unlocked", new MemoryAddress(0x0203D8B0, type: "U32", domain: "EWRAM")); // must be set to *(*0x03001C90 + 0x7DC)
+            Inventory.Add("items_order", new MemoryAddress(0x0203DC18, domain: "EWRAM"));
+            Inventory.Add("items_ids", new MemoryAddress(0x0203DC1A, domain: "EWRAM"));
+            Inventory.Add("items_amounts", new MemoryAddress(0x0203DC6E, domain: "EWRAM"));
             Inventory.Add("lenses", new MemoryAddress(0x0203DCC4, note: "bitmask, 1 bit per lens & level", type: "U32", domain: "EWRAM"));
+            Inventory.Add("lenses_exp", new MemoryAddress(0x0203DCD8, domain: "EWRAM"));
             Inventory.Add("frames", new MemoryAddress(0x0203DCC8, note: "bitmask", type: "U32", domain: "EWRAM"));
             Inventory.Add("batteries", new MemoryAddress(0x0203DCD0, note: "bitmask", type: "U32", domain: "EWRAM"));
-            Inventory.Add("lenses_exp", new MemoryAddress(0x0203DCD8, domain: "EWRAM"));
+            Inventory.Add("battery_charges", new MemoryAddress(0x0203D818, domain: "EWRAM"));
+            Inventory.Add("grenades", new MemoryAddress(0x0203D80A, note: "bitmask", type: "U32", domain: "EWRAM"));
+            Inventory.Add("grenade_amounts", new MemoryAddress(0x0203D80A, domain: "EWRAM"));
+            Inventory.Add("pineapple_grenade_charge", new MemoryAddress(0x0203D894, domain: "EWRAM"));
+            Inventory.Add("grenades_limit", new MemoryAddress(0x0203DCC2, domain: "EWRAM"));
         }
 
         private void InitMapAddresses() {
