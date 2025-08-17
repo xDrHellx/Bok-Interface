@@ -71,14 +71,14 @@ namespace BokInterface.Weapons {
 
         /// <summary>Init instances for Batteries</summary>
         private void InitBatteries() {
-            Batteries.Add("Single", new BoktaiBattery("Single", "single"));
-            Batteries.Add("Double", new BoktaiBattery("Double", "double"));
-            Batteries.Add("Triple", new BoktaiBattery("Triple", "triple"));
-            Batteries.Add("Quad", new BoktaiBattery("Quad", "quad"));
-            Batteries.Add("Quint", new BoktaiBattery("Quint", "quint"));
-            Batteries.Add("Infinite", new BoktaiBattery("Infinite", "infinite"));
-            Batteries.Add("Chaos", new BoktaiBattery("Chaos", "chaos"));
-            Batteries.Add("Astro", new BoktaiBattery("Astro", "astro")); // Requires unlocking in 0x0203D8B0
+            Batteries.Add("Single", new BoktaiBattery("Single", "single_battery"));
+            Batteries.Add("Double", new BoktaiBattery("Double", "double_battery"));
+            Batteries.Add("Triple", new BoktaiBattery("Triple", "triple_battery"));
+            Batteries.Add("Quad", new BoktaiBattery("Quad", "quad_battery"));
+            Batteries.Add("Quint", new BoktaiBattery("Quint", "quint_battery"));
+            Batteries.Add("Infinite", new BoktaiBattery("Infinite", "infinite_battery"));
+            Batteries.Add("Chaos", new BoktaiBattery("Chaos", "chaos_battery"));
+            Batteries.Add("Astro", new BoktaiBattery("Astro", "astro_battery")); // Requires unlocking in 0x0203D8B0
         }
 
         /// <summary>Init instances for Grenades</summary>
