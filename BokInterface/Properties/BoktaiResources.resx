@@ -118,6 +118,30 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="sol_lens" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok\lenses\sol.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="luna_lens" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok\lenses\luna.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="flame_lens" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok\lenses\flame.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="frost_lens" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok\lenses\frost.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="cloud_lens" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok\lenses\cloud.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="earth_lens" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok\lenses\earth.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="dark_lens" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok\lenses\dark.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="star_lens" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\bok\lenses\star.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="fighter" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\img\bok\frames\fighter.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>

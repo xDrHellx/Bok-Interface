@@ -53,10 +53,88 @@ namespace BokInterface.Properties {
         }
 
         /// <summary>Looks up a localized resource of type System.Drawing.Bitmap.</summary>
-        internal static System.Drawing.Bitmap fighter
+        internal static System.Drawing.Bitmap sol_lens
         {
             get
             {
+                object obj = ResourceManager.GetObject("sol_lens", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+
+        /// <summary>Looks up a localized resource of type System.Drawing.Bitmap.</summary>
+        internal static System.Drawing.Bitmap luna_lens
+        {
+            get
+            {
+                object obj = ResourceManager.GetObject("luna_lens", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+
+        /// <summary>Looks up a localized resource of type System.Drawing.Bitmap.</summary>
+        internal static System.Drawing.Bitmap flame_lens
+        {
+            get
+            {
+                object obj = ResourceManager.GetObject("flame_lens", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+
+        /// <summary>Looks up a localized resource of type System.Drawing.Bitmap.</summary>
+        internal static System.Drawing.Bitmap frost_lens
+        {
+            get
+            {
+                object obj = ResourceManager.GetObject("frost_lens", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+
+        /// <summary>Looks up a localized resource of type System.Drawing.Bitmap.</summary>
+        internal static System.Drawing.Bitmap cloud_lens
+        {
+            get
+            {
+                object obj = ResourceManager.GetObject("cloud_lens", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+
+        /// <summary>Looks up a localized resource of type System.Drawing.Bitmap.</summary>
+        internal static System.Drawing.Bitmap earth_lens
+        {
+            get
+            {
+                object obj = ResourceManager.GetObject("earth_lens", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+
+        /// <summary>Looks up a localized resource of type System.Drawing.Bitmap.</summary>
+        internal static System.Drawing.Bitmap dark_lens
+        {
+            get
+            {
+                object obj = ResourceManager.GetObject("dark_lens", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+
+        /// <summary>Looks up a localized resource of type System.Drawing.Bitmap.</summary>
+        internal static System.Drawing.Bitmap star_lens
+        {
+            get
+            {
+                object obj = ResourceManager.GetObject("star_lens", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+
+        /// <summary>Looks up a localized resource of type System.Drawing.Bitmap.</summary>
+        internal static System.Drawing.Bitmap fighter {
+            get {
                 object obj = ResourceManager.GetObject("fighter", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
