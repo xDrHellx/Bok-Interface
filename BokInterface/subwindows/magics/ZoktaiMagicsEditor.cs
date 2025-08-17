@@ -140,6 +140,13 @@ namespace BokInterface.Magics {
         #region Values setting
 
         protected override void SetValues() {
+
+            // Store the previous setting for BizHawk being paused
+            _bokInterface._previousIsPauseSetting = APIs.Client.IsPaused();
+
+            // Pause BizHawk
+            APIs.Client.Pause();
+
             /**
              * Retrieve the current magics value from the memory address
              * We'll use it as a base for updating the bitmask it contains
@@ -167,6 +174,14 @@ namespace BokInterface.Magics {
 
             // Set the updated value to the memory address
             _memoryValues.Inventory["magics"].Value = newMagicValue;
+
+            /**
+             * If BizHawk was not paused before setting values, unpause it
+             * Otherwise keep it paused
+             */
+            if (_bokInterface._previousIsPauseSetting == true) {
+                APIs.Client.Unpause();
+            }
         }
 
         protected override void SetDefaultValues() {
