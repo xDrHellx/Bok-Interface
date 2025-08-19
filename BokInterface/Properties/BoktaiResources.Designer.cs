@@ -469,5 +469,65 @@ namespace BokInterface.Properties {
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
+
+        /// <summary>Looks up a localized resource of type System.Drawing.Bitmap.</summary>
+        internal static System.Drawing.Bitmap pineapple
+        {
+            get
+            {
+                object obj = ResourceManager.GetObject("pineapple", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+
+        /// <summary>Looks up a localized resource of type System.Drawing.Bitmap.</summary>
+        internal static System.Drawing.Bitmap rising_sun
+        {
+            get
+            {
+                object obj = ResourceManager.GetObject("rising_sun", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+
+        /// <summary>Looks up a localized resource of type System.Drawing.Bitmap.</summary>
+        internal static System.Drawing.Bitmap flash
+        {
+            get
+            {
+                object obj = ResourceManager.GetObject("flash", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+
+        /// <summary>Looks up a localized resource of type System.Drawing.Bitmap.</summary>
+        internal static System.Drawing.Bitmap scan
+        {
+            get
+            {
+                object obj = ResourceManager.GetObject("scan", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+
+        /// <summary>Looks up a localized resource of type System.Drawing.Bitmap.</summary>
+        internal static System.Drawing.Bitmap change
+        {
+            get
+            {
+                object obj = ResourceManager.GetObject("change", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+
+        /// <summary>Looks up a localized resource of type System.Drawing.Bitmap.</summary>
+        internal static System.Drawing.Bitmap nightmare
+        {
+            get
+            {
+                object obj = ResourceManager.GetObject("nightmare", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
     }
 }
