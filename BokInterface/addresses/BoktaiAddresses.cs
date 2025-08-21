@@ -59,10 +59,9 @@ namespace BokInterface.Addresses {
             Inventory.Add("frames", new MemoryAddress(0x0203DCC8, note: "bitmask", type: "U32", domain: "EWRAM"));
             Inventory.Add("batteries", new MemoryAddress(0x0203DCD0, note: "bitmask", type: "U32", domain: "EWRAM"));
             Inventory.Add("battery_charges", new MemoryAddress(0x0203D818, domain: "EWRAM"));
-            Inventory.Add("grenades", new MemoryAddress(0x0203D80A, note: "bitmask", type: "U32", domain: "EWRAM"));
             Inventory.Add("grenade_amounts", new MemoryAddress(0x0203D80A, domain: "EWRAM"));
-            Inventory.Add("pineapple_grenade_charge", new MemoryAddress(0x0203D894, domain: "EWRAM"));
-            Inventory.Add("grenades_limit", new MemoryAddress(0x0203DCC2, domain: "EWRAM"));
+            Inventory.Add("pineapple_grenade_charges", new MemoryAddress(0x0203D894, domain: "EWRAM"));
+            Inventory.Add("grenades_limit", new MemoryAddress(0x0203DCC2, note: "Can only hold 20 of each grenades if disabled", domain: "EWRAM"));
         }
 
         private void InitMapAddresses() {
