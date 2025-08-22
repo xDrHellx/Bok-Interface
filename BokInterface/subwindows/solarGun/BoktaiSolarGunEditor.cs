@@ -189,6 +189,12 @@ namespace BokInterface.solarGun {
                 // Increment n & position for the next battery
                 posX += 50;
                 n++;
+
+                // If Astro Battery, add warning about having to unlock it via the event menu
+                if (n == 7) {
+                    WinFormHelpers.CreateImageLabel("tooltip", "warning", 5, 86, batteriesTab);
+                    WinFormHelpers.CreateLabel("astro_battery_unlock_warning", "Astro battery must be enabled via the Event menu of the interface to appear in the inventory.", 27, 75, 375, 40, batteriesTab, textAlignment: "MiddleLeft");
+                }
             }
         }
 

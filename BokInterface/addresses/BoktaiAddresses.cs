@@ -50,7 +50,6 @@ namespace BokInterface.Addresses {
             Inventory.Add("equipped_frame", new MemoryAddress(0x0203D88E, domain: "EWRAM"));
             Inventory.Add("equipped_grenades", new MemoryAddress(0x0203D890, domain: "EWRAM"));
             Inventory.Add("equipped_battery", new MemoryAddress(0x0203D892, domain: "EWRAM"));
-            // Inventory.Add("astro_battery_unlocked", new MemoryAddress(0x0203D8B0, type: "U32", domain: "EWRAM")); // must be set to *(*0x03001C90 + 0x7DC)
             Inventory.Add("items_order", new MemoryAddress(0x0203DC18, domain: "EWRAM"));
             Inventory.Add("items_ids", new MemoryAddress(0x0203DC1A, domain: "EWRAM"));
             Inventory.Add("items_amounts", new MemoryAddress(0x0203DC6E, domain: "EWRAM"));
@@ -119,6 +118,8 @@ namespace BokInterface.Addresses {
             Misc.Add("x_camera", new MemoryAddress(0x030046E8, note: "Camera X position", domain: "IWRAM"));
             Misc.Add("y_camera", new MemoryAddress(0x030046EA, note: "Camera Y position", domain: "IWRAM"));
             Misc.Add("z_camera", new MemoryAddress(0x030046EC, note: "Camera Z position", domain: "IWRAM"));
+            Misc.Add("astro_battery_unlock_password", new MemoryAddress(0x7DC, note: "Password for unlocking the Astro Battery", type: "U32", domain: "IWRAM"));
+            Misc.Add("astro_battery_unlock_value", new MemoryAddress(0x0203D8B0, type: "U32", note: "Must be set to the password address to unlock the Astro Battery", domain: "EWRAM"));
             Misc.Add("action_difficulty", new MemoryAddress(0x0203E8BC, note: "Action difficulty setting (0 = Easy | 1 = Normal | 2 = Hard)", domain: "System Bus"));
             Misc.Add("rng_index", new MemoryAddress(0x03004620, type: "U32", domain: "IWRAM"));
         }
