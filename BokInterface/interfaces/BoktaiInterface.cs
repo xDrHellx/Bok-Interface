@@ -73,6 +73,9 @@ namespace BokInterface {
                 // Update the fields
                 _currentSpeedLabel.Text = "Current movement speed : " + Math.Round(speed3D, 3);
                 _averageSpeedLabel.Text = "Average over 60 frames : " + averageSpeed.ToString();
+
+                // Indicate if the Astro Battery event is enabled
+                _enableAstroBattery.Checked = _memoryValues.Misc["astro_battery_unlocked"].Value == _boktaiAddresses.Misc["astro_battery_unlock_value"].Value;
             }
 
             // If the coffin data if available
@@ -123,9 +126,17 @@ namespace BokInterface {
 
             ToolStripMenuItem eventsMenu = WinFormHelpers.CreateToolStripMenuItem("eventsMenu", "Events", menuStrip: _menuBar);
 
-            _enableAstroBattery = WinFormHelpers.CreateToolStripMenuItem("enableAstroBattery", "&Enable Astro Battery", toolTipText: "Enable the event for allowing the Astro Battery to be shown in the inventory", menuItem: eventsMenu);
+            _enableAstroBattery = WinFormHelpers.CreateToolStripMenuItem("enableAstroBattery", "&Enable Astro Battery", toolTipText: "Enable the event for allowing the Astro Battery to be shown in the inventory. Cannot be disabled except by loading savestates or deleting savefiles.", menuItem: eventsMenu);
             _enableAstroBattery.Click += (s, e) => {
-                // This event can be disabled (unlike Boktai 2 JoySpots events)
+                /**
+                 * If the downloadable event is already enabled, check the menu item & stop
+                 * That event cannot be disabled except by deleting savefiles or loading savestates
+                 */
+                if (_memoryValues.Misc["astro_battery_unlocked"].Value == _boktaiAddresses.Misc["astro_battery_unlock_value"].Value) {
+                    _enableAstroBattery.Checked = true;
+                    return;
+                }
+
                 _enableAstroBattery.Checked = !_enableAstroBattery.Checked;
                 _memoryValues.Misc["astro_battery_unlocked"].Value = _enableAstroBattery.Checked == true ? _boktaiAddresses.Misc["astro_battery_unlock_value"].Value : 0x0;
             };
