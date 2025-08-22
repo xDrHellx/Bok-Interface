@@ -1,8 +1,8 @@
 using System.Drawing;
 
 namespace BokInterface.Weapons {
-    /// <summary>Class for representing a Gun Lens in Shinbok</summary>
-    class ShinbokLens {
+    /// <summary>Base class for representing a Gun Lens</summary>
+    abstract class Lens {
 
         /// <summary>Lens name</summary>
         public string name;
@@ -12,18 +12,15 @@ namespace BokInterface.Weapons {
         public string element;
         /// <summary>Lens icon</summary>
         public Image? icon = null;
-        /// <summary>Indicates if obtained from event</summary>
-        public bool eventLens;
 
-        public ShinbokLens(string name, uint value, string element, string icon = "", bool eventLens = false) {
+        public Lens(string name, uint value, string element, string icon = "") {
             this.name = name;
             this.value = value;
             this.element = element;
-            this.eventLens = eventLens;
 
             if (icon != "") {
                 try {
-                    this.icon = (Image)ResourceLoader.LoadResource("ShinbokResources", icon);
+                    this.icon = (Image)Properties.Resources.ResourceManager.GetObject(icon);
                 } catch { }
             }
         }

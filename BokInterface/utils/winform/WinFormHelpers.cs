@@ -552,6 +552,41 @@ namespace BokInterface.Utils {
             return item;
         }
 
+        /// <summary>Simplified method for creating a PictureBox</summary>
+        /// <param name="name">PictureBox name</param>
+        /// <param name="image">PictureBox image</param>
+        /// <param name="positionX">X position</param>
+        /// <param name="positionY">Y position</param>
+        /// <param name="control"></param>
+        /// <param name="sizeMode">SizeMode, by default "AutoSize" (see System.Windows.Forms.PictureBoxSizeMode for possible values)</param>
+        /// <param name="width">Width if SizeMode is not set to "AutoSize"</param>
+        /// <param name="height">Height if SizeMode is not set to "AutoSize"</param>
+        /// <param name="bgColorHex">Background color (hex code)</param>
+        /// <returns><c>PictureBox</c>Instance</returns>
+        public static PictureBox CreatePictureBox(string name, Image image, int positionX, int positionY, Control? control = null, string sizeMode = "AutoSize", int width = 0, int height = 0, string bgColorHex = "") {
+            PictureBox pictureBox = new() {
+                Name = name,
+                Image = image,
+                SizeMode = GetSizeMode(sizeMode),
+                Location = new Point(positionX, positionY),
+                AutoSize = false,
+                Anchor = defaultAnchor,
+                Margin = defaultMargin,
+                Font = defaultFont
+            };
+
+            if (sizeMode != "AutoSize") {
+                pictureBox.Size = new Size(width, height);
+            }
+
+            if (bgColorHex != "") {
+                pictureBox.BackColor = ColorTranslator.FromHtml(bgColorHex);
+            }
+
+            control?.Controls.Add(pictureBox);
+            return pictureBox;
+        }
+
         #endregion
 
         #region Custom elements
@@ -658,7 +693,7 @@ namespace BokInterface.Utils {
             return dropDownList;
         }
 
-        /// <summary>Simplified method for creating a CheckGroupBox</summary>
+        /// <summary>Simplified method for creating a groupbox with a checkbox attached to it</summary>
         /// <param name="name">Field name</param>
         /// <param name="text">Field text</param>
         /// <param name="positionX">X position</param>
@@ -685,6 +720,45 @@ namespace BokInterface.Utils {
             // If a Control instance is passed, add the generated element to it
             control?.Controls.Add(checkGroupBox);
             return checkGroupBox;
+        }
+
+        /// <summary>
+        ///     Simplified method for creating an image with a checkbox attached to it<br/>
+        ///     <remarks><i>The size is determined by the image</i></remarks>
+        /// </summary>
+        /// <param name="name">Element name</param>
+        /// <param name="image">Image</param>
+        /// <param name="positionX">X position</param>
+        /// <param name="positionY">Y position</param>
+        /// <param name="isCheckedByDefault">Set to true if the CheckBox has to be checked when initiated</param>
+        /// <param name="control">Control instance if the element is to be attached to it directly</param>
+        /// <param name="clickOnImage">Set to true if the checkbox can be checked by clicking on the image (True by default)</param>
+        /// <param name="sizeMode">SizeMode, by default "AutoSize" (see System.Windows.Forms.PictureBoxSizeMode for possible values)</param>
+        /// <param name="width">Width if SizeMode is not set to "AutoSize"</param>
+        /// <param name="height">Height if SizeMode is not set to "AutoSize"</param>
+        /// <param name="bgColorHex">Background color (hex code)</param>
+        /// <returns><c>ImageCheckBox</c>Instance</returns>
+        public static ImageCheckBox CreateImageCheckBox(string name, Image image, int positionX, int positionY, bool isCheckedByDefault = false, Control? control = null, bool clickOnImage = true, string sizeMode = "AutoSize", int width = 0, int height = 0, string bgColorHex = "") {
+            ImageCheckBox imageCheckBox = new() {
+                Name = name,
+                Image = image,
+                Location = new Point(positionX, positionY),
+                AutoSize = false,
+                SizeMode = GetSizeMode(sizeMode),
+                Checked = isCheckedByDefault,
+                CheckWithImage = clickOnImage
+            };
+
+            if (sizeMode != "AutoSize") {
+                imageCheckBox.Size = new Size(width, height);
+            }
+
+            if (bgColorHex != "") {
+                imageCheckBox.BackColor = ColorTranslator.FromHtml(bgColorHex);
+            }
+
+            control?.Controls.Add(imageCheckBox);
+            return imageCheckBox;
         }
 
         #endregion
@@ -744,6 +818,19 @@ namespace BokInterface.Utils {
                 "TopLeft" => ContentAlignment.TopLeft,
                 "TopRight" => ContentAlignment.TopRight,
                 _ => ContentAlignment.MiddleCenter
+            };
+        }
+
+        /// <summary>Get the corresponding PictureBoxSizeMode based on a string</summary>
+        /// <param name="value">SizeMode string</param>
+        /// <returns><c>System.Windows.Forms.PictureBoxSizeMode</c>SizeMode object</returns>
+        private static PictureBoxSizeMode GetSizeMode(string value) {
+            return value switch {
+                "CenterImage" => PictureBoxSizeMode.CenterImage,
+                "Normal" => PictureBoxSizeMode.Normal,
+                "StretchImage" => PictureBoxSizeMode.StretchImage,
+                "Zoom" => PictureBoxSizeMode.Zoom,
+                _ => PictureBoxSizeMode.AutoSize
             };
         }
 

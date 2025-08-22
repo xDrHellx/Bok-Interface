@@ -190,40 +190,46 @@ namespace BokInterface {
             _menuBar = WinFormHelpers.CreateMenuStrip("menuBar", "", control: this);
 
             // Edit section
-            if (shorterGameName == "Zoktai" || shorterGameName == "Shinbok") {
+            if (shorterGameName == "Zoktai" || shorterGameName == "Shinbok" || shorterGameName == "Boktai") {
 
                 ToolStripMenuItem editMenu = WinFormHelpers.CreateToolStripMenuItem("editMenu", "Edit", menuStrip: _menuBar);
 
-                ToolStripMenuItem editStatusMenu = WinFormHelpers.CreateToolStripMenuItem("editStatusMenu", "&Status", menuItem: editMenu);
-                editStatusMenu.Click += new EventHandler(OpenStatusEditor);
-                editMenu.DropDownItems.Add(editStatusMenu);
+                if (shorterGameName != "Boktai") {
 
-                ToolStripMenuItem editItemsMenu = WinFormHelpers.CreateToolStripMenuItem("edititemsMenu", "&Items", menuItem: editMenu);
-                editItemsMenu.Click += new EventHandler(OpenInventoryEditor);
-                editMenu.DropDownItems.Add(editItemsMenu);
+                    ToolStripMenuItem editStatusMenu = WinFormHelpers.CreateToolStripMenuItem("editStatusMenu", "&Status", menuItem: editMenu);
+                    editStatusMenu.Click += new EventHandler(OpenStatusEditor);
+                    editMenu.DropDownItems.Add(editStatusMenu);
 
-                ToolStripMenuItem editKeyItemsMenu = WinFormHelpers.CreateToolStripMenuItem("editKeyitemsMenu", "&Key items", menuItem: editMenu);
-                editKeyItemsMenu.Click += new EventHandler(OpenKeyItemsEditor);
-                editMenu.DropDownItems.Add(editKeyItemsMenu);
+                    ToolStripMenuItem editItemsMenu = WinFormHelpers.CreateToolStripMenuItem("edititemsMenu", "&Items", menuItem: editMenu);
+                    editItemsMenu.Click += new EventHandler(OpenInventoryEditor);
+                    editMenu.DropDownItems.Add(editItemsMenu);
 
-                ToolStripMenuItem editWeaponsMenu = WinFormHelpers.CreateToolStripMenuItem("editWeaponsMenu", "&Weapons", menuItem: editMenu);
-                editWeaponsMenu.Click += new EventHandler(OpenWeaponsEditor);
-                editMenu.DropDownItems.Add(editWeaponsMenu);
+                    ToolStripMenuItem editKeyItemsMenu = WinFormHelpers.CreateToolStripMenuItem("editKeyitemsMenu", "&Key items", menuItem: editMenu);
+                    editKeyItemsMenu.Click += new EventHandler(OpenKeyItemsEditor);
+                    editMenu.DropDownItems.Add(editKeyItemsMenu);
 
-                if (shorterGameName == "Shinbok") {
+                    ToolStripMenuItem editWeaponsMenu = WinFormHelpers.CreateToolStripMenuItem("editWeaponsMenu", "&Weapons", menuItem: editMenu);
+                    editWeaponsMenu.Click += new EventHandler(OpenWeaponsEditor);
+                    editMenu.DropDownItems.Add(editWeaponsMenu);
+                }
+
+                if (shorterGameName == "Shinbok" || shorterGameName == "Boktai") {
                     ToolStripMenuItem editGunMenu = WinFormHelpers.CreateToolStripMenuItem("editGunMenu", "&Solar gun", menuItem: editMenu);
                     editGunMenu.Click += new EventHandler(OpenSolarGunEditor);
                     editMenu.DropDownItems.Add(editGunMenu);
                 }
 
-                ToolStripMenuItem editAccessoriesMenu = WinFormHelpers.CreateToolStripMenuItem("editAccessoriesMenu", shorterGameName == "Zoktai" ? "&Protectors" : "&Accessories", menuItem: editMenu);
-                editAccessoriesMenu.Click += new EventHandler(OpenEquipsEditor);
-                editMenu.DropDownItems.Add(editAccessoriesMenu);
+                if (shorterGameName != "Boktai") {
 
-                if (shorterGameName == "Zoktai") {
-                    ToolStripMenuItem editMagicsMenu = WinFormHelpers.CreateToolStripMenuItem("editMagicsMenu", "&Magics", menuItem: editMenu);
-                    editMagicsMenu.Click += new EventHandler(OpenMagicsEditor);
-                    editMenu.DropDownItems.Add(editMagicsMenu);
+                    ToolStripMenuItem editAccessoriesMenu = WinFormHelpers.CreateToolStripMenuItem("editAccessoriesMenu", shorterGameName == "Zoktai" ? "&Protectors" : "&Accessories", menuItem: editMenu);
+                    editAccessoriesMenu.Click += new EventHandler(OpenEquipsEditor);
+                    editMenu.DropDownItems.Add(editAccessoriesMenu);
+
+                    if (shorterGameName == "Zoktai") {
+                        ToolStripMenuItem editMagicsMenu = WinFormHelpers.CreateToolStripMenuItem("editMagicsMenu", "&Magics", menuItem: editMenu);
+                        editMagicsMenu.Click += new EventHandler(OpenMagicsEditor);
+                        editMenu.DropDownItems.Add(editMagicsMenu);
+                    }
                 }
             }
 
@@ -402,7 +408,7 @@ namespace BokInterface {
             SolarGunEditor solarGunEditor = null;
             switch (shorterGameName) {
                 case "Boktai":
-                    // None yet
+                    solarGunEditor = new BoktaiSolarGunEditor(this, _memoryValues, _boktaiAddresses);
                     break;
                 case "Shinbok":
                     solarGunEditor = new ShinbokSolarGunEditor(this, _memoryValues, _shinbokAddresses);

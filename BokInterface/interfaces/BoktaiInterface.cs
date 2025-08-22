@@ -17,6 +17,7 @@ namespace BokInterface {
         private readonly BoktaiAddresses _boktaiAddresses = new();
         private Label _bok1_currentStatusHpValue = new();
         private Label _bok1_currentStatusEneValue = new();
+        private ToolStripMenuItem _enableAstroBattery = new();
 
         #endregion
 
@@ -25,6 +26,7 @@ namespace BokInterface {
         private void ShowBoktaiInterface() {
 
             GenerateMenu();
+            AddBoktaiEventsMenu();
 
             // If E3 demo / beta, update the game name label
             string version = "";
@@ -71,6 +73,9 @@ namespace BokInterface {
                 // Update the fields
                 _currentSpeedLabel.Text = "Current movement speed : " + Math.Round(speed3D, 3);
                 _averageSpeedLabel.Text = "Average over 60 frames : " + averageSpeed.ToString();
+
+                // Indicate if the Astro Battery event is enabled
+                _enableAstroBattery.Checked = _memoryValues.Misc["astro_battery_unlocked"].Value == _boktaiAddresses.Misc["astro_battery_unlock_value"].Value;
             }
 
             // If the coffin data if available
@@ -108,6 +113,33 @@ namespace BokInterface {
             // Current status values
             _bok1_currentStatusHpValue = WinFormHelpers.CreateLabel("djangoCurrentHpValue", "", 44, 19, 31, 15, _currentStatusGroupBox);
             _bok1_currentStatusEneValue = WinFormHelpers.CreateLabel("djangoCurrentEneValue", "", 44, 34, 31, 15, _currentStatusGroupBox);
+        }
+
+        #endregion
+
+        #region Game-specific menus
+
+        private void AddBoktaiEventsMenu() {
+            if (shorterGameName != "Boktai") {
+                return;
+            }
+
+            ToolStripMenuItem eventsMenu = WinFormHelpers.CreateToolStripMenuItem("eventsMenu", "Events", menuStrip: _menuBar);
+
+            _enableAstroBattery = WinFormHelpers.CreateToolStripMenuItem("enableAstroBattery", "&Enable Astro Battery", toolTipText: "Enable the event for allowing the Astro Battery to be shown in the inventory. Cannot be disabled except by loading savestates or deleting savefiles.", menuItem: eventsMenu);
+            _enableAstroBattery.Click += (s, e) => {
+                /**
+                 * If the downloadable event is already enabled, check the menu item & stop
+                 * That event cannot be disabled except by deleting savefiles or loading savestates
+                 */
+                if (_memoryValues.Misc["astro_battery_unlocked"].Value == _boktaiAddresses.Misc["astro_battery_unlock_value"].Value) {
+                    _enableAstroBattery.Checked = true;
+                    return;
+                }
+
+                _enableAstroBattery.Checked = !_enableAstroBattery.Checked;
+                _memoryValues.Misc["astro_battery_unlocked"].Value = _enableAstroBattery.Checked == true ? _boktaiAddresses.Misc["astro_battery_unlock_value"].Value : 0x0;
+            };
         }
 
         #endregion

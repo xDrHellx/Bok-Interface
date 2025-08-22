@@ -9,7 +9,6 @@ namespace BokInterface.Utils {
         /// <summary>CheckBox instance</summary>
         private readonly CheckBox _checkBoxInstance;
 
-        /// <summary>Add the CheckBox to the control</summary>
         public CheckGroupBox() {
             _checkBoxInstance = new CheckBox {
                 Location = new Point(8, 0)
@@ -21,10 +20,10 @@ namespace BokInterface.Utils {
             Controls.Add(_checkBoxInstance);
         }
 
-        /// <summary>Keep the CheckBox text synced with our text</summary>
         public override string Text {
             get { return base.Text; }
             set {
+                // Also update the CheckBox's text
                 base.Text = _checkBoxInstance.Text = value;
                 _checkBoxInstance.TabIndex = TabIndex + 1;
                 _checkBoxInstance.AutoSize = true;
