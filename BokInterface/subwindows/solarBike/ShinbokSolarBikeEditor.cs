@@ -4,8 +4,8 @@ using System.Drawing;
 using System.Windows.Forms;
 
 using BokInterface.Addresses;
-using BokInterface.All;
 using BokInterface.Bike;
+using BokInterface.Utils;
 
 namespace BokInterface.solarBike {
     /// <summary>Solar bike editor for Boktai 3</summary>

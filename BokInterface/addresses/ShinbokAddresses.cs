@@ -40,7 +40,7 @@ namespace BokInterface.Addresses {
         public IDictionary<string, MemoryAddress> Misc = new Dictionary<string, MemoryAddress>();
 
         /// <summary>Note for MemoryAddress instances (for less repetition)</summary>
-        private readonly string _note = "";
+        private string _note = "";
 
         public ShinbokAddresses() {
             InitDjangoAddresses();
@@ -92,7 +92,6 @@ namespace BokInterface.Addresses {
         }
 
         private void InitBikeAddresses() {
-            _note = "Equipped bike part";
 
             // Bike.Add("name", new MemoryAddress(0x780, note: "Bike name", domain: "EWRAM"));
             Bike.Add("points", new MemoryAddress(0x7B2, note: "Points from races", domain: "EWRAM"));
