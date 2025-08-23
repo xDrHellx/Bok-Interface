@@ -1,14 +1,20 @@
 using System.Windows.Forms;
 
 using BokInterface.Addresses;
-using BokInterface.All;
+using BokInterface.Utils;
 
 namespace BokInterface.Tools.TileDataViewer {
     /// <summary>TDViewer tool for Boktai</summary>
     class BoktaiTileDataViewer : TileDataViewer {
 
+        #region Properties
+
         private readonly BokInterface _bokInterface;
         private readonly BoktaiAddresses _memAddresses;
+
+        #endregion
+
+        #region Constructor | Init
 
         public BoktaiTileDataViewer(BokInterface bokInterface, BoktaiAddresses boktaiAddresses) {
             Owner = _bokInterface = bokInterface;
@@ -23,70 +29,97 @@ namespace BokInterface.Tools.TileDataViewer {
             djangoYposAddress = _memAddresses.Django["y_position"].Address;
         }
 
-        /// <summary>Draws tile effect icons for Boktai</summary>
+        #endregion
+
+        #region Drawing
+
+        /// <summary>Draw tile effect icons</summary>
         /// <param name="e">Painting event used for drawing</param>
         /// <param name="tileEffect">Value for the tile's effect</param>
         /// <param name="posX">X position of the tile</param>
         /// <param name="posY">Y position of the tile</param>
         /// <param name="scale">Scale (used for drawing)</param>
-        protected override void DrawTileEffect(PaintEventArgs e, uint tileEffect, int posX, int posY, int scale) {
+        protected override void DrawTileEffects(PaintEventArgs e, uint tileEffect, int posX, int posY, int scale) {
 
             // Only handle values between a certain range (4096 = 1000 in hexadecimal)
-            if (tileEffect > 0 && tileEffect < 4096) {
+            if (tileEffect == 0 || tileEffect >= 4096) {
+                return;
+            }
 
-                /**
-                 * Get the hexadecimal value of the tile effect
-                 * We'll use this for comparison because of current findings
-                 */
-                string hex = Utilities.IntToHex(tileEffect);
+            // Loop over effect bits
+            for (int i = 0; i < 16; i++) {
 
-                // Handle the tile effect
-                switch (hex) {
-                    case "1":                   /// ??? (Something on stairs in the first room of Deserted Arsenal)
+                // If the effect is deactivated on this tile, skip to the next bit
+                if (Utilities.IsBitOne(tileEffect, i) == false) {
+                    continue;
+                }
+
+                // Show the icon for the effect on the tile
+                string effectName = GetTileEffectName(i);
+                switch (effectName) {
+                    case "":
+                        // Debug / study mode only
+                        if (_debugMode == true) {
+                            /**
+                             * If tile effect is currently not handled:
+                             * - Get the hexadecimal value of the tile effect
+                             * - Print its values on-screen & show its position on the tilemap to study it
+                             */
+                            string hex = Utilities.IntToHex(tileEffect);
+                            APIs.Gui.AddMessage("bit : " + i + " | hex : " + hex.ToString() + " ( uint : " + tileEffect + ")");
+                            DrawTileImage(e, "qmark", posX * scale, posY * scale);
+                        }
                         break;
-                    case "2":                   /// Wall
-                        /**
-                         * Commented because if a block is pushed where the "wall" is,
-                         * you can walk on it, making the tilemap misleading
-                         *
-                         * For example the first area of Firetop Mountain has a "wall" that can be "filled" with a pushable block
-                         */
-                        // this.DrawFilledRectangle(e, blackColor, 5 + posX * scale, 5 + posY * scale, scale);
+                    case "ignore":
+                        // Ignore effect, mostly used for debugging / studying effects
                         break;
-                    case "3":                   /// Levers in Bloodrust Mansion before the garden
+                    case "wall":
+                        // Walls are ignored to prevent the tilemap from looking messy
                         break;
-                    case "4":                   // Exit / entry (inconsistent)
-                        DrawTileImage(e, "exit", 5 + posX * scale, 5 + posY * scale);
-                        break;
-                    case "8":                   /// ??? (something right before Garmr cutscene)
-                        break;
-                    case "C":                   /// ??? (sometimes used for downward stairs that also have an exit, can be seen in Dark Castle)
-                        break;
-                    case "20":                  /// Noise tile (makes sound)
-                        DrawTileImage(e, "sound", 5 + posX * scale, 5 + posY * scale);
-                        break;
-                    case "40":                  /// Ice
-                        DrawTileImage(e, "ice", 5 + posX * scale, 5 + posY * scale);
-                        break;
-                    case "80":                  /// Lava
-                    case "84":
-                    case "86":
-                        DrawTileImage(e, "lava", 5 + posX * scale, 5 + posY * scale);
-                        break;
-                    case "100":                 /// Void (fall & die)
-                        DrawFilledRectangle(e, s_blackColor, 5 + posX * scale, 5 + posY * scale, scale);
-                        break;
-                    case "203":                 /// Unwalkable parts of the roofs in Bloodrust Mansion
-                        break;
-                    case "802":                 /// ??? (something in Permafrost before Garmr)
+                    case "void":
+                        DrawFilledRectangle(e, s_blackColor, posX * scale, posY * scale, scale);
                         break;
                     default:
-                        // If tile effect is currently not handled, print its values on-screen & show its position on the tilemap to study it
-                        // APIs.Gui.AddMessage("hex : " + hex.ToString() + " ( uint : " + tileEffect + ")");
-                        // this.DrawTileImage(e, "qmark", 5 + posX * scale, 5 + posY * scale);
+                        DrawTileImage(e, effectName, posX * scale, posY * scale);
                         break;
                 }
             }
         }
+
+        protected override string GetTileEffectName(int bitNb) {
+
+            /*
+                Bitmask refs:
+
+                0000 0000 0000 0001 = ???
+                0000 0000 0000 0010 = wall
+                0000 0000 0000 0100 = ??? seems to be used for some room entrances/exits
+                0000 0000 0000 1000 = ???
+                0000 0000 0001 0000 = ???
+                0000 0000 0010 0000 = noise tile
+                0000 0000 0100 0000 = ice
+                0000 0000 1000 0000 = lava
+                0000 0001 0000 0000 = void (fall down and die)
+                0000 0010 0000 0000 = ???
+                0000 0100 0000 0000 = unknown (wall-ish)
+                0000 1000 0000 0000 = unknown (sometimes used near loading zones pointing NW)
+                0001 0000 0000 0000 = unknown (sometimes used near loading zones pointing NE)
+                0010 0000 0000 0000 = ???
+                0100 0000 0000 0000 = ???
+                1000 0000 0000 0000 = ???
+            */
+
+            return bitNb switch {
+                1 => "wall",
+                2 => "exit",
+                5 => "sound",   // Noise tile, makes sound on step
+                6 => "ice",
+                7 => "lava",
+                8 => "void",    // Fall down and die
+                _ => ""         // Unknown / undocumented effect
+            };
+        }
+
+        #endregion
     }
 }

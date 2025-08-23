@@ -1,54 +1,60 @@
 using System;
 using System.Drawing;
+using System.Windows.Forms;
 
 using BokInterface.Addresses;
-using BokInterface.All;
+using BokInterface.Utils;
 
 /**
  * File for the Boktai TSiiYH interface itself
  */
 
 namespace BokInterface {
-
     partial class BokInterface {
 
         #region Properties
 
         private readonly BoktaiAddresses _boktaiAddresses = new();
-        private System.Windows.Forms.Label _bok1_currentStatusHpValue = new();
-        private System.Windows.Forms.Label _bok1_currentStatusEneValue = new();
+        private Label _bok1_currentStatusHpValue = new();
+        private Label _bok1_currentStatusEneValue = new();
+        private ToolStripMenuItem _enableAstroBattery = new();
 
         #endregion
 
+        #region Show interface
+
         private void ShowBoktaiInterface() {
+
+            GenerateMenu();
+            AddBoktaiEventsMenu();
 
             // If E3 demo / beta, update the game name label
             string version = "";
-            int gameNameLabelWidth = 171;
             if (currentGameId == 1246311233) {
-                version = " (E3 demo / beta)";
-                gameNameLabelWidth = 301;
+                version = " (E3 demo)";
             }
 
             // Current game name
-            WinFormHelpers.CreateLabel("currentGameName", currentGameName + version, 5, 5, gameNameLabelWidth, 20, this, textAlignment: "MiddleLeft");
+            WinFormHelpers.CreateLabel("currentGameName", currentGameName + version, 0, _menuBar.Height, Width, 20, this, WinFormHelpers.gameNameBackground, textAlignment: "MiddleLeft");
 
             // Sections
             AddBoktaiCurrentStatusSection();
             AddMiscDataSection();
-            AddToolsSection();
 
             // Main window
-            SetMainWindow("Bok Interface" + (shorterGameName != "" ? " - " + shorterGameName : ""), 345, 500);
-
+            SetMainWindow("Bok Interface", 236, 250 + _menuBar.Height);
             ResumeLayout(false);
         }
+
+        #endregion
+
+        #region Update
 
         private void UpdateBoktaiInterface() {
             /**
              * Check if the pointer to the stat structure is available, ie if the value is "valid"
              * The value for the stat structure would be 0 during room transitions or at the title screen
-             * 
+             *
              * Also check if Django isn't dead (current HP > 0), which means that he can move
              */
             uint statStructurePointer = _boktaiAddresses.Misc["stat"].Value;
@@ -67,6 +73,9 @@ namespace BokInterface {
                 // Update the fields
                 _currentSpeedLabel.Text = "Current movement speed : " + Math.Round(speed3D, 3);
                 _averageSpeedLabel.Text = "Average over 60 frames : " + averageSpeed.ToString();
+
+                // Indicate if the Astro Battery event is enabled
+                _enableAstroBattery.Checked = _memoryValues.Misc["astro_battery_unlocked"].Value == _boktaiAddresses.Misc["astro_battery_unlock_value"].Value;
             }
 
             // If the coffin data if available
@@ -88,18 +97,51 @@ namespace BokInterface {
             }
         }
 
+        #endregion
+
+        #region Elements
+
         private void AddBoktaiCurrentStatusSection() {
 
             // Section
-            currentStatusGroupBox = WinFormHelpers.CreateGroupBox("currentStatus", "Current status", 5, 25, 226, 55, this);
+            _currentStatusGroupBox = WinFormHelpers.CreateGroupBox("currentStatus", "Current status", 5, 45, 226, 55, this);
 
             // Current status labels
-            WinFormHelpers.CreateLabel("djangoCurrentHpLabel", "LIFE :", 7, 19, 34, 15, currentStatusGroupBox);
-            WinFormHelpers.CreateLabel("djangoCurrentEneLabel", "ENE :", 7, 34, 34, 15, currentStatusGroupBox);
+            WinFormHelpers.CreateLabel("djangoCurrentHpLabel", "LIFE :", 7, 19, 34, 15, _currentStatusGroupBox);
+            WinFormHelpers.CreateLabel("djangoCurrentEneLabel", "ENE :", 7, 34, 34, 15, _currentStatusGroupBox);
 
             // Current status values
-            _bok1_currentStatusHpValue = WinFormHelpers.CreateLabel("djangoCurrentHpValue", "", 44, 19, 31, 15, currentStatusGroupBox);
-            _bok1_currentStatusEneValue = WinFormHelpers.CreateLabel("djangoCurrentEneValue", "", 44, 34, 31, 15, currentStatusGroupBox);
+            _bok1_currentStatusHpValue = WinFormHelpers.CreateLabel("djangoCurrentHpValue", "", 44, 19, 31, 15, _currentStatusGroupBox);
+            _bok1_currentStatusEneValue = WinFormHelpers.CreateLabel("djangoCurrentEneValue", "", 44, 34, 31, 15, _currentStatusGroupBox);
         }
+
+        #endregion
+
+        #region Game-specific menus
+
+        private void AddBoktaiEventsMenu() {
+            if (shorterGameName != "Boktai") {
+                return;
+            }
+
+            ToolStripMenuItem eventsMenu = WinFormHelpers.CreateToolStripMenuItem("eventsMenu", "Events", menuStrip: _menuBar);
+
+            _enableAstroBattery = WinFormHelpers.CreateToolStripMenuItem("enableAstroBattery", "&Enable Astro Battery", toolTipText: "Enable the event for allowing the Astro Battery to be shown in the inventory. Cannot be disabled except by loading savestates or deleting savefiles.", menuItem: eventsMenu);
+            _enableAstroBattery.Click += (s, e) => {
+                /**
+                 * If the downloadable event is already enabled, check the menu item & stop
+                 * That event cannot be disabled except by deleting savefiles or loading savestates
+                 */
+                if (_memoryValues.Misc["astro_battery_unlocked"].Value == _boktaiAddresses.Misc["astro_battery_unlock_value"].Value) {
+                    _enableAstroBattery.Checked = true;
+                    return;
+                }
+
+                _enableAstroBattery.Checked = !_enableAstroBattery.Checked;
+                _memoryValues.Misc["astro_battery_unlocked"].Value = _enableAstroBattery.Checked == true ? _boktaiAddresses.Misc["astro_battery_unlock_value"].Value : 0x0;
+            };
+        }
+
+        #endregion
     }
 }

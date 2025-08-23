@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using System.Windows.Forms;
 
 using BokInterface.Addresses;
-using BokInterface.All;
+using BokInterface.Utils;
 using BokInterface.Items;
 
 namespace BokInterface.Inventory {
     /// <summary>Inventory editor for Boktai 2</summary>
     class ZoktaiInventoryEditor : InventoryEditor {
 
-        #region Instances
+        #region Properties
 
         private readonly MemoryValues _memoryValues;
         private readonly BokInterface _bokInterface;
@@ -26,6 +26,8 @@ namespace BokInterface.Inventory {
         private readonly int _chocolateCoveredDurabilityOffset = 32768;
 
         #endregion
+
+        #region Constructor
 
         public ZoktaiInventoryEditor(BokInterface bokInterface, MemoryValues memoryValues, ZoktaiAddresses zoktaiAddresses) {
 
@@ -47,6 +49,10 @@ namespace BokInterface.Inventory {
             AddElements();
             Show();
         }
+
+        #endregion
+
+        #region Elements
 
         protected override void AddElements() {
 
@@ -158,7 +164,7 @@ namespace BokInterface.Inventory {
                 /**
                  * We also call the method directly to update the durability fields
                  * when the subwindow is generated
-                 * 
+                 *
                  * It's possible that we retrieved the current inventory so we need to do that
                  */
                 UpdateMaxDurabilityField(dropdown);
@@ -193,6 +199,44 @@ namespace BokInterface.Inventory {
             slot15group = WinFormHelpers.CreateCheckGroupBox("slot15group", "Slot 15", 317, 310, 150, 95, control: this);
             slot16group = WinFormHelpers.CreateCheckGroupBox("slot16group", "Slot 16", 473, 310, 150, 95, control: this);
         }
+
+        ///<summary>Generates the options for the dropdowns</summary>
+        private void GenerateDropDownOptions() {
+            foreach (ImageComboBox dropdown in dropDownLists) {
+                dropdown.DataSource = new BindingSource(_zoktaiItems.Items, null);
+                dropdown.DisplayMember = "Key";
+                dropdown.ValueMember = "Value";
+            }
+        }
+
+        /// <summary>Updates the Maximum parameter for a durability field</summary>
+        /// <param name="dropdown">The dropdown that the durability field is related to</param>
+        private void UpdateMaxDurabilityField(ImageComboBox dropdown) {
+
+            // Separate the dropdown's name into parts & get the selected item
+            string[] fieldParts = dropdown.Name.Split(['_'], 3);
+            KeyValuePair<string, Item> selectedOption = (KeyValuePair<string, Item>)dropdown.SelectedItem;
+            Item? selectedItem = selectedOption.Value;
+            if (selectedItem != null) {
+
+                // Get the related durability field by using the dropdown's name
+                string durabilityFieldName = fieldParts[0] + "_" + fieldParts[1] + "_durability";
+                foreach (NumericUpDown field in numericUpDowns) {
+                    /**
+                     * If it's the field we're looking for,
+                     * update the max value based on the selected item & stop the loop
+                     */
+                    if (field.Name == durabilityFieldName) {
+                        field.Maximum = selectedItem.rottenAt > 0 ? selectedItem.rottenAt - 1 : 0;
+                        break;
+                    }
+                }
+            }
+        }
+
+        #endregion
+
+        #region Values setting
 
         protected override void SetValues() {
 
@@ -285,54 +329,6 @@ namespace BokInterface.Inventory {
             }
         }
 
-        ///<summary>Generates the options for the dropdowns</summary>
-        private void GenerateDropDownOptions() {
-            foreach (ImageComboBox dropdown in dropDownLists) {
-                dropdown.DataSource = new BindingSource(_zoktaiItems.Items, null);
-                dropdown.DisplayMember = "Key";
-                dropdown.ValueMember = "Value";
-            }
-        }
-
-        ///<summary>Get an item from the items list by using its value</summary>
-        ///<param name="value"><c>decimal</c>Value</param>
-        ///<returns><c>Item</c>Item</returns>
-        private Item? GetItemByValue(decimal value) {
-            foreach (KeyValuePair<string, Item> index in _zoktaiItems.Items) {
-                Item item = index.Value;
-                if (item.value == value) {
-                    return item;
-                }
-            }
-
-            return null;
-        }
-
-        /// <summary>Updates the Maximum parameter for a durability field</summary>
-        /// <param name="dropdown">The dropdown that the durability field is related to</param>
-        private void UpdateMaxDurabilityField(ImageComboBox dropdown) {
-
-            // Separate the dropdown's name into parts & get the selected item
-            string[] fieldParts = dropdown.Name.Split(['_'], 3);
-            KeyValuePair<string, Item> selectedOption = (KeyValuePair<string, Item>)dropdown.SelectedItem;
-            Item? selectedItem = selectedOption.Value;
-            if (selectedItem != null) {
-
-                // Get the related durability field by using the dropdown's name
-                string durabilityFieldName = fieldParts[0] + "_" + fieldParts[1] + "_durability";
-                foreach (NumericUpDown field in numericUpDowns) {
-                    /**
-                     * If it's the field we're looking for,
-                     * update the max value based on the selected item & stop the loop
-                     */
-                    if (field.Name == durabilityFieldName) {
-                        field.Maximum = selectedItem.rottenAt > 0 ? selectedItem.rottenAt - 1 : 0;
-                        break;
-                    }
-                }
-            }
-        }
-
         protected override void SetDefaultValues() {
 
             // If "current stat" is a valid value, get the current inventory
@@ -360,7 +356,7 @@ namespace BokInterface.Inventory {
 
                     /**
                      * If the value is 32768 or higher : it's a chocolate-covered item
-                     * 
+                     *
                      * In that case we need to pre-select the checkbox for the slot
                      * We'll also remove the offset from the value in the durability field to keep it simple for the user
                      */
@@ -393,5 +389,21 @@ namespace BokInterface.Inventory {
                 }
             }
         }
+
+        ///<summary>Get an item from the items list by using its value</summary>
+        ///<param name="value"><c>decimal</c>Value</param>
+        ///<returns><c>Item</c>Item</returns>
+        private Item? GetItemByValue(decimal value) {
+            foreach (KeyValuePair<string, Item> index in _zoktaiItems.Items) {
+                Item item = index.Value;
+                if (item.value == value) {
+                    return item;
+                }
+            }
+
+            return null;
+        }
+
+        #endregion
     }
 }

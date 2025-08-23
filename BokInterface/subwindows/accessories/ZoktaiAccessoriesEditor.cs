@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Windows.Forms;
 
 using BokInterface.Addresses;
-using BokInterface.All;
+using BokInterface.Utils;
 
 namespace BokInterface.Accessories {
     class ZoktaiAccessoriesEditor : AccessoriesEditor {
@@ -16,6 +16,8 @@ namespace BokInterface.Accessories {
         private readonly ZoktaiAccessories _zoktaiAccessories;
 
         #endregion
+
+        #region Constructor
 
         public ZoktaiAccessoriesEditor(BokInterface bokInterface, MemoryValues memoryValues, ZoktaiAddresses zoktaiAddresses) {
 
@@ -38,6 +40,10 @@ namespace BokInterface.Accessories {
             AddElements();
             Show();
         }
+
+        #endregion
+
+        #region Elements
 
         protected override void AddElements() {
 
@@ -104,6 +110,19 @@ namespace BokInterface.Accessories {
             slot16group = WinFormHelpers.CreateCheckGroupBox("slot16group", "Slot 16", 533, 161, 170, 49, control: this);
         }
 
+        ///<summary>Generates the options for the dropdowns</summary>
+        private void GenerateDropDownOptions() {
+            foreach (ImageComboBox dropdown in dropDownLists) {
+                dropdown.DataSource = new BindingSource(_zoktaiAccessories.All, null);
+                dropdown.DisplayMember = "Key";
+                dropdown.ValueMember = "Value";
+            }
+        }
+
+        #endregion
+
+        #region Values setting
+
         protected override void SetValues() {
 
             // Store the previous setting for BizHawk being paused
@@ -168,29 +187,6 @@ namespace BokInterface.Accessories {
             }
         }
 
-        ///<summary>Generates the options for the dropdowns</summary>
-        private void GenerateDropDownOptions() {
-            foreach (ImageComboBox dropdown in dropDownLists) {
-                dropdown.DataSource = new BindingSource(_zoktaiAccessories.All, null);
-                dropdown.DisplayMember = "Key";
-                dropdown.ValueMember = "Value";
-            }
-        }
-
-        ///<summary>Get an accessory from the accessories list by using its value</summary>
-        ///<param name="value"><c>decimal</c>Value</param>
-        ///<returns><c>Accessory</c>Accessory</returns>
-        private Accessory? GetAccessoryByValue(decimal value) {
-            foreach (KeyValuePair<string, Accessory> index in _zoktaiAccessories.All) {
-                Accessory accessory = index.Value;
-                if (accessory.value == value) {
-                    return accessory;
-                }
-            }
-
-            return null;
-        }
-
         protected override void SetDefaultValues() {
 
             // If "current stat" is a valid value, get the current inventory
@@ -214,5 +210,21 @@ namespace BokInterface.Accessories {
                 }
             }
         }
+
+        ///<summary>Get an accessory from the accessories list by using its value</summary>
+        ///<param name="value"><c>decimal</c>Value</param>
+        ///<returns><c>Accessory</c>Accessory</returns>
+        private Accessory? GetAccessoryByValue(decimal value) {
+            foreach (KeyValuePair<string, Accessory> index in _zoktaiAccessories.All) {
+                Accessory accessory = index.Value;
+                if (accessory.value == value) {
+                    return accessory;
+                }
+            }
+
+            return null;
+        }
+
+        #endregion
     }
 }

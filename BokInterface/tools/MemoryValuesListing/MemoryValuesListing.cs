@@ -4,24 +4,19 @@ using System.Drawing;
 using System.Windows.Forms;
 
 using BokInterface.Addresses;
-using BokInterface.All;
+using BokInterface.Utils;
 
 namespace BokInterface.Tools.MemoryValuesListing {
     /// <summary>Shows the list of all memory addresses listed for a game with their values, based on the ones added in the Bok Interface itself</summary>
     class MemoryValuesListing : Form {
 
-        #region Tool properties & instances
+        #region Properties
 
         public int index = 0;
         private readonly DataTable _dataTable = new();
         private DataGridView? _dataGridView;
         private readonly BokInterface _bokInterface;
         private readonly dynamic? _memAddresses;
-
-        #endregion
-
-        #region Subwindow properties
-
         protected string name = "memoryValuesListing",
             title = "Memory Values List";
         protected int width = 650,
@@ -77,7 +72,7 @@ namespace BokInterface.Tools.MemoryValuesListing {
 
         #endregion
 
-        #region Drawing methods
+        #region Drawing
 
         protected override void OnPaint(PaintEventArgs e) {
             base.OnPaint(e);
@@ -87,7 +82,7 @@ namespace BokInterface.Tools.MemoryValuesListing {
 
         #endregion
 
-        #region DataTable generation methods
+        #region DataTable generation
 
         /// <summary>Generate the Data Table containing the memory addresses, values and infos</summary>
         private void GenerateDataTable() {
@@ -105,8 +100,9 @@ namespace BokInterface.Tools.MemoryValuesListing {
                 return;
             }
 
-            // Show table in subwindow & set columns styles
+            // Show table in subwindow, prevent preselecting the first row when opening the list & set columns styles
             _dataGridView = WinFormHelpers.CreateDataGridView("mvlGrid", _dataTable, 5, 5, ClientSize.Width - 10, ClientSize.Height - 10, this, DockStyle.Fill);
+            _dataGridView.ClearSelection();
             SetColumnsStyle();
         }
 
@@ -179,6 +175,7 @@ namespace BokInterface.Tools.MemoryValuesListing {
                     GenerateRows(_memAddresses.Inventory, "Inventory");
                     GenerateRows(_memAddresses.Magics, "Magics");
                     GenerateRows(_memAddresses.Misc, "Misc");
+                    GenerateRows(_memAddresses.JoySpots, "Downloadable events (Joy Spots)");
                     return true;
                 case "Shinbok":
                     GenerateRows(_memAddresses.Django, "Django");

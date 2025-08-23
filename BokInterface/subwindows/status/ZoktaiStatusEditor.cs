@@ -3,27 +3,24 @@ using System.Collections.Generic;
 using System.Windows.Forms;
 
 using BokInterface.Addresses;
-using BokInterface.All;
-using BokInterface.ExpTables;
+using BokInterface.Utils;
+using BokInterface.Tables;
 
 namespace BokInterface.Status {
     /// <summary>Status editor for Boktai 2</summary>
     class ZoktaiStatusEditor : StatusEditor {
 
-        #region Instances
+        #region Properties
 
         private readonly MemoryValues _memoryValues;
         private readonly BokInterface _bokInterface;
         private readonly ZoktaiAddresses _zoktaiAddresses;
-
-        #endregion
-
-        #region Form elements
-
         protected readonly List<CheckBox> statusCheckBoxes = [];
         protected CheckGroupBox kaamosGroupBox = new();
 
         #endregion
+
+        #region Constructor
 
         public ZoktaiStatusEditor(BokInterface bokInterface, MemoryValues memoryValues, ZoktaiAddresses zoktaiAddresses) {
 
@@ -43,6 +40,10 @@ namespace BokInterface.Status {
             AddElements();
             Show();
         }
+
+        #endregion
+
+        #region Elements
 
         protected override void AddElements() {
 
@@ -123,6 +124,10 @@ namespace BokInterface.Status {
             });
         }
 
+        #endregion
+
+        #region Values setting
+
         protected override IDictionary<string, decimal> GetDefaultValues() {
 
             IDictionary<string, decimal> defaultValues = new Dictionary<string, decimal>();
@@ -197,7 +202,7 @@ namespace BokInterface.Status {
             /**
              * If the total EXP until next level & current level are available,
              * we'll use these to prevent the game from adjusting the level while setting new values
-             * 
+             *
              * We'll set the total EXP until next level to the maximum possible to prevent that from happening
              */
             if (_memoryValues.U32.ContainsKey("total_exp_until_next_level") == true) {
@@ -241,7 +246,7 @@ namespace BokInterface.Status {
              */
             if (_memoryValues.U32.ContainsKey("total_exp_until_next_level") == true && _memoryValues.Django.ContainsKey("level")) {
                 int level = (int)_memoryValues.Django["level"].Value;
-                _memoryValues.U32["total_exp_until_next_level"].Value = level < 99 ? DjangoExpTable.zoktai[level] : 0;
+                _memoryValues.U32["total_exp_until_next_level"].Value = level < 99 ? BokTables.djangoExp[level] : 0;
             }
 
             /**
@@ -273,7 +278,7 @@ namespace BokInterface.Status {
                             case "agi":
                                 /**
                                  * For stats we also update the "persistent" stat address
-                                 * 
+                                 *
                                  * We do this because updating "current" stat value is not enough,
                                  * when switching room the game would set back the old values
                                  */
@@ -336,5 +341,7 @@ namespace BokInterface.Status {
                     break;
             }
         }
+
+        #endregion
     }
 }

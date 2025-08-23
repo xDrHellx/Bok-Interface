@@ -1,12 +1,11 @@
 using BokInterface.Addresses;
-using BokInterface.All;
+using BokInterface.Utils;
 
 /**
  * File for the Boktai DS / Lunar Knights interface itself
  */
 
 namespace BokInterface {
-
     partial class BokInterface {
 
         #region Properties
@@ -15,28 +14,29 @@ namespace BokInterface {
 
         #endregion
 
+        #region Show interface
+
         private void ShowLunarKnightsInterface() {
 
             // Current game name
-            WinFormHelpers.CreateLabel("currentGameName", currentGameName, 5, 5, 141, 20, this, textAlignment: "MiddleLeft");
-
-            // Sections
-            AddLunarKnightsCurrentStatusSection();
-            AddMiscDataSection();
-            AddToolsSection();
+            WinFormHelpers.CreateLabel("currentGameName", currentGameName, 0, 0, Width, 20, this, WinFormHelpers.gameNameBackground, textAlignment: "MiddleLeft");
+            WinFormHelpers.CreateLabel("extraText", "No data available for this game yet.", 0, 20, Width, 20, this, WinFormHelpers.gameNameBackground, textAlignment: "MiddleLeft");
 
             // Main window
-            SetMainWindow("Bok Interface" + (shorterGameName != "" ? " - " + shorterGameName : ""), 345, 500);
-
+            SetMainWindow("Bok Interface", 236, 40);
             ResumeLayout(false);
         }
 
+        #endregion
+
+        #region Update
+
         private void UpdateLunarKnightsInterface() { }
 
-        private void AddLunarKnightsCurrentStatusSection() {
+        #endregion
 
-            // Section
-            currentStatusGroupBox = WinFormHelpers.CreateGroupBox("currentStatus", "Current status", 5, 25, 226, 70, this);
-        }
+        #region Elements
+
+        #endregion
     }
 }
