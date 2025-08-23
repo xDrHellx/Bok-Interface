@@ -31,12 +31,6 @@ namespace BokInterface.Accessories {
             SetFormParameters(691, 240);
             Text = "Protectors editor";
 
-            // Add the onClose event to the subwindow
-            FormClosing += new FormClosingEventHandler(delegate (object sender, FormClosingEventArgs e) {
-                _bokInterface.equipsEditorOpened = false;
-            });
-
-            // Add elements & show the subwindow
             AddElements();
             Show();
         }

@@ -38,13 +38,6 @@ namespace BokInterface.solarGun {
             Icon = _bokInterface.Icon;
 
             SetFormParameters(411, 279);
-
-            // Add the onClose event to the subwindow
-            FormClosing += new FormClosingEventHandler(delegate (object sender, FormClosingEventArgs e) {
-                _bokInterface.solarGunEditorOpened = false;
-            });
-
-            // Add elements & show the subwindow
             AddElements();
             Show();
         }

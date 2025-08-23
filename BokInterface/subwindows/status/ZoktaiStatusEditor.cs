@@ -30,13 +30,6 @@ namespace BokInterface.Status {
             Icon = _bokInterface.Icon;
 
             SetFormParameters(447, 279);
-
-            // Add the onClose event to the subwindow
-            FormClosing += new FormClosingEventHandler(delegate (object sender, FormClosingEventArgs e) {
-                _bokInterface.statusEditorOpened = false;
-            });
-
-            // Add elements & show the subwindow
             AddElements();
             Show();
         }
