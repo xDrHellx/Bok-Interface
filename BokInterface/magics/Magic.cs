@@ -4,9 +4,11 @@ namespace BokInterface.Magics {
     ///<summary>Base class for representing a magic</summary>
     abstract class Magic {
 
+        /// <summary>Magic name</summary>
         public string name;
         /// <summary>Magic type (Luna, Sol, Dark, ...)</summary>
         public string type;
+        /// <summary>Magic Icon</summary>
         public Image? icon = null;
         /// <summary>Description (usually corresponds to the in-game text</summary>
         public string description;

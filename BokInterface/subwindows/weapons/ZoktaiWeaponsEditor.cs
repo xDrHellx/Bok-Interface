@@ -4,13 +4,13 @@ using System.Windows.Forms;
 
 using BokInterface.Abilities;
 using BokInterface.Addresses;
-using BokInterface.All;
+using BokInterface.Utils;
 
 namespace BokInterface.Weapons {
     /// <summary>Weapons editor for Boktai 2</summary>
     class ZoktaiWeaponsEditor : WeaponsEditor {
 
-        #region Instances
+        #region Properties
 
         private readonly MemoryValues _memoryValues;
         private readonly BokInterface _bokInterface;
@@ -19,6 +19,8 @@ namespace BokInterface.Weapons {
         private readonly ZoktaiAbilities _zoktaiAbilities;
 
         #endregion
+
+        #region Constructor
 
         public ZoktaiWeaponsEditor(BokInterface bokInterface, MemoryValues memoryValues, ZoktaiAddresses zoktaiAddresses) {
 
@@ -31,16 +33,13 @@ namespace BokInterface.Weapons {
             Icon = _bokInterface.Icon;
 
             SetFormParameters(699, 326);
-
-            // Add the onClose event to the subwindow
-            FormClosing += new FormClosingEventHandler(delegate (object sender, FormClosingEventArgs e) {
-                _bokInterface.weaponsEditorOpened = false;
-            });
-
-            // Add elements & show the subwindow
             AddElements();
             Show();
         }
+
+        #endregion
+
+        #region Elements
 
         protected override void AddElements() {
 
@@ -313,6 +312,30 @@ namespace BokInterface.Weapons {
             );
         }
 
+        ///<summary>Generates the options for the weapon selection & SP abilities dropdowns</summary>
+        private void GenerateDropDownOptions() {
+            foreach (ImageComboBox dropdown in dropDownLists) {
+
+                // Indicate what the dropdown field is for
+                string[] fieldParts = dropdown.Name.Split(['_'], 4);
+                if (fieldParts.Length >= 4 && fieldParts[3] != null && fieldParts[3].Substring(0, 10) == "sp_ability") {
+                    // If dropdown is for an SP ability
+                    dropdown.DataSource = new BindingSource(_zoktaiAbilities.Weapons, null);
+                    dropdown.DisplayMember = "Key";
+                    dropdown.ValueMember = "Value";
+                } else {
+                    // If dropdown is for the weapon itself
+                    dropdown.DataSource = new BindingSource(_zoktaiWeapons.All, null);
+                    dropdown.DisplayMember = "Key";
+                    dropdown.ValueMember = "Value";
+                }
+            }
+        }
+
+        #endregion
+
+        #region Values setting
+
         protected override void SetValues() {
 
             // Store the previous setting for BizHawk being paused
@@ -411,26 +434,6 @@ namespace BokInterface.Weapons {
             }
         }
 
-        ///<summary>Generates the options for the weapon selection & SP abilities dropdowns</summary>
-        private void GenerateDropDownOptions() {
-            foreach (ImageComboBox dropdown in dropDownLists) {
-
-                // Indicate what the dropdown field is for
-                string[] fieldParts = dropdown.Name.Split(['_'], 4);
-                if (fieldParts.Length >= 4 && fieldParts[3] != null && fieldParts[3].Substring(0, 10) == "sp_ability") {
-                    // If dropdown is for an SP ability
-                    dropdown.DataSource = new BindingSource(_zoktaiAbilities.Weapons, null);
-                    dropdown.DisplayMember = "Key";
-                    dropdown.ValueMember = "Value";
-                } else {
-                    // If dropdown is for the weapon itself
-                    dropdown.DataSource = new BindingSource(_zoktaiWeapons.All, null);
-                    dropdown.DisplayMember = "Key";
-                    dropdown.ValueMember = "Value";
-                }
-            }
-        }
-
         protected override void SetDefaultValues() {
 
             // If "current stat" is a valid value, get the current inventory
@@ -443,7 +446,7 @@ namespace BokInterface.Weapons {
                     if (fieldParts.Length >= 4 && fieldParts[3] != null && fieldParts[3].Substring(0, 10) == "sp_ability") {
                         /**
                          * If it's for an SP ability
-                         * 
+                         *
                          * Set the name of the key to retrieve the value from based on the dropdown's name (for example inventory_slotX_weapon => slotX_weapon)
                          * Then try getting the corresponding ability & preselect it
                          */
@@ -471,10 +474,10 @@ namespace BokInterface.Weapons {
 
                     /**
                      * Set the value
-                     * 
+                     *
                      * If the field corresponds to a weapon bonus or malus, we adjust the value
                      * This is because maluses are handled differently by the game
-                     * 
+                     *
                      * For example : 255 = -01 & 246 = -10
                      */
                     bonusRelatedField.Value = fieldParts[2] == "weapon_bonus" ? Utilities.ConvertValueToWeaponBonus(_memoryValues.Inventory[memValuesKey].Value) : _memoryValues.Inventory[memValuesKey].Value;
@@ -513,7 +516,7 @@ namespace BokInterface.Weapons {
             /**
              * For some reason there are duplicates within the game,
              * so in these cases we set it to the "original" instead of keeping the duplicate's value
-             * 
+             *
              * This is also to prevent having to show duplicate SP abilities in dropdown lists
              */
             switch (value) {
@@ -550,5 +553,7 @@ namespace BokInterface.Weapons {
                 _memoryValues.Inventory["slot" + slot + "_weapon_forgedBy_3"].Value = 1802663796;
             }
         }
+
+        #endregion
     }
 }

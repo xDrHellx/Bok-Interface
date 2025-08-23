@@ -20,13 +20,16 @@ namespace BokInterface.Addresses {
         public IDictionary<string, MemoryAddress> Solls = new Dictionary<string, MemoryAddress>();
 
         /// <summary>
-        /// <para>Misc memory addresses</para>
-        /// <para>
-        ///     These are used in combination with other memory addresses to get / set values that are "dynamic"<br/>
-        ///     For example the memory address for Django's current HP is different based on which "room sections" he is in
-        /// </para>
+        ///     <para>Misc memory addresses</para>
+        ///     <para>
+        ///         These are used in combination with other memory addresses to get / set values that are "dynamic."<br/>
+        ///         <i>For example the memory address for Django's current HP is different based on which "room sections" he is in.</i>
+        ///     </para>
         /// </summary>
         public IDictionary<string, MemoryAddress> Misc = new Dictionary<string, MemoryAddress>();
+
+        /// <summary>Downloadable events / JoySpots related memory addresses</summary>
+        public IDictionary<string, MemoryAddress> JoySpots = new Dictionary<string, MemoryAddress>();
 
         /// <summary>Note for MemoryAddress instances (for less repetition)</summary>
         private string _note = "";
@@ -36,6 +39,7 @@ namespace BokInterface.Addresses {
             InitInventoryAddresses();
             InitSollsAddresses();
             InitMiscAddresses();
+            InitJoySpotsAddresses();
         }
 
         private void InitPlayableCharactersAddresses() {
@@ -103,21 +107,16 @@ namespace BokInterface.Addresses {
         }
 
         private void InitInventoryAddresses() {
+            _note = "ForgedBy Name (added when forging & used for the multiplayer shop)";
 
-            // Set these using a loop to simplify
             for (int i = 0; i < 16; i++) {
-
                 int slotNumber = 1 + i;
 
-                // Items & durability (2 bytes each)
+                // Items, durability, key items & accessories (2 bytes each)
                 uint addressOffset = 0x2 * (uint)i;
                 Inventory.Add("item_slot_" + slotNumber, new MemoryAddress(0x70 + addressOffset, note: "Item slot", domain: "EWRAM"));
                 Inventory.Add("item_slot_durability_" + slotNumber, new MemoryAddress(0xD0 + addressOffset, note: "Item durability (for spoiling)", domain: "EWRAM"));
-
-                // Key items (2 bytes)
                 Inventory.Add("key_item_slot_" + slotNumber, new MemoryAddress(0x130 + addressOffset, note: "Key item inventory slot", domain: "EWRAM"));
-
-                // Accessories (2 bytes)
                 Inventory.Add("accessory_slot_" + slotNumber, new MemoryAddress(0x150 + addressOffset, note: "Accessory inventory slot", domain: "EWRAM"));
 
                 // Weapons & parameters
@@ -131,7 +130,6 @@ namespace BokInterface.Addresses {
                 Inventory.Add("weapon_slot_" + slotNumber + "_durability", new MemoryAddress(0x3D2 + addressOffset, note: "Durability (for the bonus / malus)", domain: "EWRAM"));
 
                 // Forged by, simplified into 3 addresses (4 bytes each)
-                _note = "ForgedBy Name (added when forging & used for the multiplayer shop)";
                 Inventory.Add("weapon_slot_" + slotNumber + "_forgedBy_1", new MemoryAddress(0x3D4 + addressOffset, note: _note + "(part 1)", domain: "EWRAM", type: "U32"));
                 Inventory.Add("weapon_slot_" + slotNumber + "_forgedBy_2", new MemoryAddress(0x3D8 + addressOffset, note: _note + "(part 2)", domain: "EWRAM", type: "U32"));
                 Inventory.Add("weapon_slot_" + slotNumber + "_forgedBy_3", new MemoryAddress(0x3DC + addressOffset, note: _note + "(part 3)", domain: "EWRAM", type: "U32"));
@@ -155,18 +153,24 @@ namespace BokInterface.Addresses {
             Misc.Add("y_camera", new MemoryAddress(0x030047CA, note: "Camera Y position", domain: "IWRAM"));
             Misc.Add("z_camera", new MemoryAddress(0x030047CC, note: "Camera Z position", domain: "IWRAM"));
             Misc.Add("current_stat", new MemoryAddress(0x03002BE0, note: "For current stats", type: "U32", domain: "IWRAM"));
+            Misc.Add("rng_index", new MemoryAddress(0x030046B8, type: "U32", domain: "IWRAM"));
 
-            /*
-             * US version 
-             */
-
-            // Misc.Add("exp_table", new MemoryAddress(0x08ce3238));
+            // US version
+            // Misc.Add("exp_table", new MemoryAddress(0x08CE3238));
         }
 
         private void InitSollsAddresses() {
             Solls.Add("solar_station", new MemoryAddress(0x3BC, note: "Solar station balance", type: "U32", domain: "EWRAM"));
             Solls.Add("solar_bank", new MemoryAddress(0x910, note: "Solar bank balance", type: "U32", domain: "EWRAM"));
             Solls.Add("dark_loans", new MemoryAddress(0x1C4, note: "Dark loans", domain: "EWRAM"));
+        }
+
+        private void InitJoySpotsAddresses() {
+            // Note: These events could be activated from "Joy Spots" in Japan with the wireless adapter
+            JoySpots.Add("blindbox_lvl_3", new MemoryAddress(0x030016D8, note: "Blindbox Lv. 3 from ??? (set value to 0x8E67 to activate)", domain: "System Bus"));
+            JoySpots.Add("blindbox_lvl_4", new MemoryAddress(0x030016DA, note: "Blindbox Lv. 4 from ??? (set value to 0x8FAA to activate)", domain: "System Bus"));
+            JoySpots.Add("blindbox_lvl_5_valentine_day", new MemoryAddress(0x030016DC, note: "Blindbox Lv. 5 from ??? & Valentine Day (only on February 14th, set value to 0x90E0 to activate)", domain: "System Bus"));
+            JoySpots.Add("star_piece", new MemoryAddress(0x030016DE, note: "Star Piece from ??? (set value to 0x8FD6 to activate)", domain: "System Bus"));
         }
     }
 }

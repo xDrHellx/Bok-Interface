@@ -4,13 +4,13 @@ using System.Windows.Forms;
 
 using BokInterface.Abilities;
 using BokInterface.Addresses;
-using BokInterface.All;
+using BokInterface.Utils;
 
 namespace BokInterface.Weapons {
     /// <summary>Weapons editor for Boktai 3</summary>
     class ShinbokWeaponsEditor : WeaponsEditor {
 
-        #region Instances
+        #region Properties
 
         protected readonly List<RadioButton> radioButtons = [];
         private readonly MemoryValues _memoryValues;
@@ -21,6 +21,8 @@ namespace BokInterface.Weapons {
         private readonly ShinbokSwordAttackPatterns _shinbokSwordAttackPatterns;
 
         #endregion
+
+        #region Constructor
 
         public ShinbokWeaponsEditor(BokInterface bokInterface, MemoryValues memoryValues, ShinbokAddresses ShinbokAddresses) {
 
@@ -34,16 +36,13 @@ namespace BokInterface.Weapons {
             Icon = _bokInterface.Icon;
 
             SetFormParameters(699, 312);
-
-            // Add the onClose event to the subwindow
-            FormClosing += new FormClosingEventHandler(delegate (object sender, FormClosingEventArgs e) {
-                _bokInterface.weaponsEditorOpened = false;
-            });
-
-            // Add elements & show the subwindow
             AddElements();
             Show();
         }
+
+        #endregion
+
+        #region Elements
 
         protected override void AddElements() {
 
@@ -394,6 +393,10 @@ namespace BokInterface.Weapons {
             }
         }
 
+        #endregion
+
+        #region Values setting
+
         protected override void SetValues() {
 
             // Store the previous setting for BizHawk being paused
@@ -521,9 +524,9 @@ namespace BokInterface.Weapons {
         protected override void SetDefaultValues() {
 
             /**
-			 * If Django's current HP is a valid, try retrieving the current weapons inventory
-			 * (Django's current HP goes below 0 or above 1000 when switching rooms, during bike races or on world map)
-			 */
+             * If Django's current HP is a valid, try retrieving the current weapons inventory
+             * (Django's current HP goes below 0 or above 1000 when switching rooms, during bike races or on world map)
+             */
             uint djangoCurrentHp = _memoryValues.Django["current_hp"].Value;
             if (djangoCurrentHp >= 0 && djangoCurrentHp <= 1000) {
                 foreach (ImageComboBox dropdown in dropDownLists) {
@@ -533,7 +536,7 @@ namespace BokInterface.Weapons {
                     if (fieldParts.Length >= 4 && fieldParts[3] != null && fieldParts[3].Substring(0, 10) == "sp_ability") {
                         /**
                          * If it's for an SP ability
-                         * 
+                         *
                          * Set the name of the key to retrieve the value from based on the dropdown's name (for example inventory_slotX_weapon => slotX_weapon)
                          * Then try getting the corresponding ability & preselect it
                          */
@@ -617,5 +620,7 @@ namespace BokInterface.Weapons {
 
             return null;
         }
+
+        #endregion
     }
 }

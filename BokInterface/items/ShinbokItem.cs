@@ -4,14 +4,7 @@ namespace BokInterface.Items {
     ///<summary>Class representing an item for Shinbok</summary>
     class ShinbokItem : Item {
 
-        public ShinbokItem(string name, uint value, string icon = "", bool perishable = false, int durability = 0, Item? coveredItem = null, int buyPrice = 0) : base(name, value) {
-
-            this.perishable = perishable;
-            this.coveredItem = coveredItem;
-            this.buyPrice = buyPrice;
-
-            // Price for selling is always the buying price divided by 2 (or 0 if it cannot be sold)
-            sellPrice = buyPrice > 0 ? buyPrice / 2 : 0;
+        public ShinbokItem(string name, uint value, string icon = "", bool perishable = false, int durability = 0, Item? coveredItem = null, int buyPrice = 0) : base(name, value, icon, perishable, durability, coveredItem, buyPrice) {
 
             // If an icon was specified try getting & setting it to the property
             if (icon != "") {
@@ -32,7 +25,7 @@ namespace BokInterface.Items {
                  * Special case for "Chocolate-Covered" :
                  * If a covered item was passed, retrieve its rottenAt value & set it for the "Chocolate-Covered" instance
                  * If none was passed, just call the GetRottensAt function to set the default value
-                 * 
+                 *
                  * We do this because the game stores the value of the covered item's own durability
                  * It's possible to set this item without it covering anything, however by normal means, it only exists if chocolate did cover another item
                  */

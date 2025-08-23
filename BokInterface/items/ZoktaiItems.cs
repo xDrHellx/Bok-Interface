@@ -4,8 +4,8 @@ namespace BokInterface.Items {
     /// <summary>Class for Zoktai item instances and lists</summary>
     class ZoktaiItems {
 
-        public Dictionary<string, Item> Items = [];
-        public Dictionary<string, Item> KeyItems = [];
+        public Dictionary<string, Item> Items = [],
+            KeyItems = [];
 
         public ZoktaiItems() {
             InitItems();

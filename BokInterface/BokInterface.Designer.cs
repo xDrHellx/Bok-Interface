@@ -5,7 +5,18 @@ using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 
-using BokInterface.All;
+using BokInterface;
+using BokInterface.Utils;
+using BokInterface.Inventory;
+using BokInterface.KeyItems;
+using BokInterface.Magics;
+using BokInterface.solarGun;
+using BokInterface.Status;
+using BokInterface.Tools.MemoryValuesListing;
+using BokInterface.Tools.SolarBankInterestsSimulator;
+using BokInterface.Tools.TileDataViewer;
+using BokInterface.Weapons;
+using BokInterface.Accessories;
 
 /**
  * File for the external window part of the Bok interface
@@ -13,240 +24,609 @@ using BokInterface.All;
 
 namespace BokInterface {
 
-	partial class BokInterface {
+    partial class BokInterface {
 
-		#region Main interface properties
+        #region Designer variable
 
-		/// <summary>Required designer variable</summary>
-		private IContainer components = null;
+        /// <summary>Required designer variable</summary>
+        private IContainer _components = null;
 
-		#endregion
+        #endregion
 
-		#region Common interface elements properties
+        /// <summary>Clean up any resources being used</summary>
+        /// <param name="disposing">True if managed resources should be disposed; otherwise, false</param>
+        protected override void Dispose(bool disposing) {
+            if (disposing && (_components != null)) {
+                _components.Dispose();
+            }
 
-		private System.Windows.Forms.GroupBox currentStatusGroupBox = new(),
-			currentStatsGroupBox = new(),
-			inventoryGroupBox = new(),
-			editGroupBox = new(),
-			extrasGroupBox = new(),
-			miscDataGroupBox = new();
-		// Misc data labels
-		private System.Windows.Forms.Label _averageSpeedLabel = new(),
-			_currentSpeedLabel = new(),
-			_coffinDamageLabel = new(),
-			_coffinWindupTimerLabel = new(),
-			_coffinShakeTimerLabel = new(),
-			_coffinShakeDurationLabel = new(),
-			_coffinEscapeTimerLabel = new(),
-			_coffinDistanceLabel = new();
+            base.Dispose(disposing);
+        }
 
-		#endregion
+        #region WinForm Designer
 
-		#region Subwindows properties
+        /// <summary>Required method for Designer support - do not modify the contents of this method with the code editor</summary>
+        private void InitializeComponent() {
 
-		private System.Windows.Forms.Form miscToolsSelectionWindow = new();
-		private List<System.Windows.Forms.Form> subwindows = new();
+            /**
+             * Clear the interface
+             * The Bok Interface supports all 4 games, so we need to do that
+             */
+            ClearInterface();
 
-		#endregion
+            // Set corresponding game icon (or default icon if not available)
+            Icon = WinFormHelpers.GetIcon(WinFormHelpers.GetGameIconName());
 
-		/// <summary>Clean up any resources being used</summary>
-		/// <param name="disposing">True if managed resources should be disposed; otherwise, false</param>
-		protected override void Dispose(bool disposing) {
-			if (disposing && (components != null)) {
-				components.Dispose();
-			}
+            // Try initializing the memory values instances dictionnaries
+            _memoryValues = new(shorterGameName);
 
-			base.Dispose(disposing);
-		}
+            // Re-initialize the MovementCalculator to reset its properties values
+            _movementCalculator = new();
 
-		#region Windows Form Designer generated code
+            // Show corresponding interface
+            switch (shorterGameName) {
+                case "Boktai":
+                    ShowBoktaiInterface();
+                    break;
+                case "Zoktai":
+                    ShowZoktaiInterface();
+                    break;
+                case "Shinbok":
+                    ShowShinbokInterface();
+                    break;
+                case "LunarKnights":
+                    ShowLunarKnightsInterface();
+                    break;
+                default:
+                    // If not a Boktai game, show the "Game not recognized" window & stop here
+                    _interfaceActivated = false;
+                    ShowGameNotRecognizedWindow();
+                    return;
+            }
 
-		/// <summary>Required method for Designer support - do not modify the contents of this method with the code editor</summary>
-		private void InitializeComponent() {
+            _interfaceActivated = true;
+        }
 
-			/**
-			 * Clear the interface
-			 * The Bok Interface supports all 4 games, so we need to do that
-			 */
-			ClearInterface();
+        #endregion
 
-			// Set corresponding game icon (or default icon if not available)
-			Icon = WinFormHelpers.GetIcon(WinFormHelpers.GetGameIconName());
+        #region Clearing methods
 
-			// Try initializing the memory values instances dictionnaries
-			_memoryValues = new(shorterGameName);
+        /// <summary>Clears the interface window and all other sections within it</summary>
+        private void ClearInterface() {
 
-			// Re-initialize the MovementCalculator to reset its properties values
-			_movementCalculator = new();
+            // Close all subwindows
+            foreach (Form subwindow in _subwindows) {
+                if (subwindow != null && subwindow.IsDisposed == false) {
+                    subwindow.Close();
+                }
+            }
 
-			// Show corresponding interface
-			switch (shorterGameName) {
-				case "Boktai":
-					interfaceActivated = true;
-					ShowBoktaiInterface();
-					break;
-				case "Zoktai":
-					interfaceActivated = true;
-					ShowZoktaiInterface();
-					break;
-				case "Shinbok":
-					interfaceActivated = true;
-					ShowShinbokInterface();
-					break;
-				case "LunarKnights":
-					interfaceActivated = true;
-					ShowLunarKnightsInterface();
-					break;
-				default:
-					// If not a Boktai game, show the "Game not recognized" window & stop here
-					interfaceActivated = false;
-					ShowGameNotRecognizedWindow();
-					break;
-			}
-		}
+            // Main window elements
+            Controls.Clear();
+            _subwindows.Clear();
+            _currentStatusGroupBox.Controls.Clear();
+            _currentStatsGroupBox.Controls.Clear();
+        }
 
-		/// <summary>Clears the interface window and all other sections within it</summary>
-		private void ClearInterface() {
+        #endregion
 
-			// Close all subwindows
-			foreach (Form subwindow in subwindows) {
-				if (subwindow != null && subwindow.IsDisposed == false) {
-					subwindow.Close();
-				}
-			}
+        #region Elements & window
 
-			// Main window elements
-			Controls.Clear();
-			subwindows.Clear();
-			currentStatusGroupBox.Controls.Clear();
-			currentStatsGroupBox.Controls.Clear();
-			inventoryGroupBox.Controls.Clear();
-			editGroupBox.Controls.Clear();
-			extrasGroupBox.Controls.Clear();
+        /// <summary>Simplified method for setting the main window of the interface</summary>
+        /// <param name="name">Window name</param>
+        /// <param name="width">Width</param>
+        /// <param name="height">Height</param>
+        private void SetMainWindow(string name, Int32 width, Int32 height) {
+            Name = name;
+            AutoScaleDimensions = new System.Drawing.SizeF(6F, 15F);
+            AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit;
+            FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            BackColor = System.Drawing.SystemColors.Control;
+            Font = WinFormHelpers.defaultFont;
+            ClientSize = new System.Drawing.Size(width, height);
+            MaximizeBox = MinimizeBox = false;
+        }
 
-			// Tools selection subwindow elements
-			miscToolsSelectionWindow.Controls.Clear();
-			miscToolsSelectionWindow.Close();
-			miscToolsSelectorOpened = false;
+        /// <summary>Adds the Misc. data section for the corresponding game</summary>
+        private void AddMiscDataSection() {
 
-			// Extra tools
-			ClearExtraTools();
-		}
+            int positionY = 110,
+                groupHeight = 55;
+            bool enableCoffinSection = false;
+            switch (BokInterface.shorterGameName) {
+                case "Boktai":
+                    positionY = 106;
+                    groupHeight = 164;
+                    enableCoffinSection = true;
+                    break;
+                case "Zoktai":
+                    positionY = 218;
+                    break;
+                case "Shinbok":
+                    positionY = 214;
+                    break;
+                case "LunarKnights":
+                    positionY = 125;
+                    break;
+                default:
+                    // If game is not handled, don't add anything & stop here
+                    return;
+            }
 
-		/// <summary>Clears subwindows related to extra tools</summary>
-		private void ClearExtraTools() {
+            _miscDataGroupBox = WinFormHelpers.CreateGroupBox("miscData", "Misc. data", 5, positionY, 226, groupHeight, this);
 
-			// Tile Data Viewer
-			if (_tileDataViewer != null) {
-				_tileDataViewer.Controls.Clear();
-				_tileDataViewer.Close();
-				tileDataViewerActive = false;
-			}
+            // Average speed
+            _currentSpeedLabel = WinFormHelpers.CreateLabel("currentMovementSpeed", "Current movement speed : ", 7, 19, 200, 15, _miscDataGroupBox, textAlignment: "MiddleLeft");
+            _averageSpeedLabel = WinFormHelpers.CreateLabel("averageMovementSpeed", "Average over 60 frames : ", 7, 34, 200, 15, _miscDataGroupBox, textAlignment: "MiddleLeft");
 
-			// Memory Values Listing
-			if (_memValuesListing != null) {
-				_memValuesListing.Controls.Clear();
-				_memValuesListing.Close();
-				memValuesListingActive = false;
-			}
+            // Add the coffin section if enabled
+            if (enableCoffinSection == true) {
 
-			// Solar bank interests simulator
-			if (_solarBankInterestsSim != null) {
-				_solarBankInterestsSim.Controls.Clear();
-				_solarBankInterestsSim.Close();
-				solarBankInterestsSimActive = false;
-			}
-		}
+                WinFormHelpers.CreateSeparator("miscDataSeparator", 5, 51, 216, _miscDataGroupBox);
+                WinFormHelpers.CreateLabel("coffinSection", "Coffin data", 5, 53, 80, 15, _miscDataGroupBox, textAlignment: "MiddleLeft").Font = new("Segoe UI", 9, FontStyle.Underline, GraphicsUnit.Point);
 
-		/// <summary>Simplified method for setting the main window of the interface</summary>
-		/// <param name="name">Window name</param>
-		/// <param name="width">Width</param>
-		/// <param name="height">Height</param>
-		private void SetMainWindow(string name, Int32 width, Int32 height) {
-			Name = name;
-			AutoScaleDimensions = new System.Drawing.SizeF(6F, 15F);
-			AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit;
-			FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-			BackColor = System.Drawing.SystemColors.Control;
-			Font = WinFormHelpers.defaultFont;
-			ClientSize = new System.Drawing.Size(width, height);
-		}
+                // Coffin data
+                _coffinDamageLabel = WinFormHelpers.CreateLabel("coffinDamage", "Damage : ", 5, 68, 200, 15, _miscDataGroupBox, textAlignment: "MiddleLeft");
+                _coffinWindupTimerLabel = WinFormHelpers.CreateLabel("coffinWindupTimer", "Windup begins in : ", 5, 83, 200, 15, _miscDataGroupBox, textAlignment: "MiddleLeft");
+                _coffinShakeTimerLabel = WinFormHelpers.CreateLabel("coffnShakeTimer", "Windup : ", 5, 98, 200, 15, _miscDataGroupBox, textAlignment: "MiddleLeft");
+                _coffinShakeDurationLabel = WinFormHelpers.CreateLabel("coffinShakeDuration", "Duration : ", 5, 113, 200, 15, _miscDataGroupBox, textAlignment: "MiddleLeft");
+                _coffinEscapeTimerLabel = WinFormHelpers.CreateLabel("coffinEscapeTimer", "Begins escaping in : ", 5, 128, 200, 15, _miscDataGroupBox, textAlignment: "MiddleLeft");
+                _coffinDistanceLabel = WinFormHelpers.CreateLabel("coffinDistance", "Distance : ", 5, 143, 200, 15, _miscDataGroupBox, textAlignment: "MiddleLeft");
+            }
+        }
 
-		/// <summary>Adds the Tools section for the corresponding game</summary>
-		private void AddToolsSection() {
-			int btnWidthOffset = 0;
-			switch (BokInterface.shorterGameName) {
-				case "Boktai":
-					extrasGroupBox = WinFormHelpers.CreateGroupBox("extraTools", "Tools", 237, 25, 87, 52, this);
-					break;
-				case "Zoktai":
-					extrasGroupBox = WinFormHelpers.CreateGroupBox("extraTools", "Tools", 237, 214, 87, 52, this);
-					break;
-				case "Shinbok":
-					extrasGroupBox = WinFormHelpers.CreateGroupBox("extraTools", "Tools", 237, 214, 97, 52, this);
-					btnWidthOffset += 10;
-					break;
-				case "LunarKnights":
-					extrasGroupBox = WinFormHelpers.CreateGroupBox("extraTools", "Tools", 237, 25, 87, 52, this);
-					break;
-				default:
-					// If game is not handled, don't add anything & stop here
-					return;
-			}
+        #endregion
 
-			// Add Misc Tools button
-			Button miscToolsBtn = WinFormHelpers.CreateButton("showExtraTools", "Misc tools", 6, 21, 75 + btnWidthOffset, 23, extrasGroupBox); // 17
-			miscToolsBtn.Click += new System.EventHandler(OpenMiscToolsSelector);
-		}
+        #region Menu
 
-		/// <summary>Adds the Misc. data section for the corresponding game</summary>
-		private void AddMiscDataSection() {
+        /// <summary>Generate the menu for the main window</summary>
+        private void GenerateMenu() {
 
-			int positionY = 90;
-			int groupHeight = 55;
-			bool enableCoffinSection = false;
-			switch (BokInterface.shorterGameName) {
-				case "Boktai":
-					positionY = 90;
-					groupHeight = 164;
-					enableCoffinSection = true;
-					break;
-				case "Zoktai":
-					positionY = 198;
-					break;
-				case "Shinbok":
-					positionY = 194;
-					break;
-				case "LunarKnights":
-					positionY = 105;
-					break;
-				default:
-					// If game is not handled, don't add anything & stop here
-					return;
-			}
+            // No menu for Bok DS / LK yet
+            if (shorterGameName == "LunarKnights") {
+                return;
+            }
 
-			miscDataGroupBox = WinFormHelpers.CreateGroupBox("miscData", "Misc. data", 5, positionY, 226, groupHeight, this);
+            _menuBar = WinFormHelpers.CreateMenuStrip("menuBar", "", control: this);
 
-			// Average speed
-			_currentSpeedLabel = WinFormHelpers.CreateLabel("currentMovementSpeed", "Current movement speed : ", 7, 19, 200, 15, miscDataGroupBox, textAlignment: "MiddleLeft");
-			_averageSpeedLabel = WinFormHelpers.CreateLabel("averageMovementSpeed", "Average over 60 frames : ", 7, 34, 200, 15, miscDataGroupBox, textAlignment: "MiddleLeft");
+            // Edit section
+            if (shorterGameName == "Zoktai" || shorterGameName == "Shinbok" || shorterGameName == "Boktai") {
 
-			// Add the coffin section if enabled
-			if (enableCoffinSection == true) {
+                ToolStripMenuItem editMenu = WinFormHelpers.CreateToolStripMenuItem("editMenu", "Edit", menuStrip: _menuBar);
 
-				WinFormHelpers.CreateSeparator("miscDataSeparator", 5, 51, 216, miscDataGroupBox);
-				WinFormHelpers.CreateLabel("coffinSection", "Coffin data", 5, 53, 80, 15, miscDataGroupBox, textAlignment: "MiddleLeft").Font = new("Segoe UI", 9, FontStyle.Underline, GraphicsUnit.Point);
+                if (shorterGameName != "Boktai") {
 
-				// Coffin data
-				_coffinDamageLabel = WinFormHelpers.CreateLabel("coffinDamage", "Damage : ", 5, 68, 200, 15, miscDataGroupBox, textAlignment: "MiddleLeft");
-				_coffinWindupTimerLabel = WinFormHelpers.CreateLabel("coffinWindupTimer", "Windup begins in : ", 5, 83, 200, 15, miscDataGroupBox, textAlignment: "MiddleLeft");
-				_coffinShakeTimerLabel = WinFormHelpers.CreateLabel("coffnShakeTimer", "Windup : ", 5, 98, 200, 15, miscDataGroupBox, textAlignment: "MiddleLeft");
-				_coffinShakeDurationLabel = WinFormHelpers.CreateLabel("coffinShakeDuration", "Duration : ", 5, 113, 200, 15, miscDataGroupBox, textAlignment: "MiddleLeft");
-				_coffinEscapeTimerLabel = WinFormHelpers.CreateLabel("coffinEscapeTimer", "Begins escaping in : ", 5, 128, 200, 15, miscDataGroupBox, textAlignment: "MiddleLeft");
-				_coffinDistanceLabel = WinFormHelpers.CreateLabel("coffinDistance", "Distance : ", 5, 143, 200, 15, miscDataGroupBox, textAlignment: "MiddleLeft");
-			}
-		}
+                    ToolStripMenuItem editStatusMenu = WinFormHelpers.CreateToolStripMenuItem("editStatusMenu", "&Status", menuItem: editMenu);
+                    editStatusMenu.Click += new EventHandler(OpenStatusEditor);
+                    editMenu.DropDownItems.Add(editStatusMenu);
 
-		#endregion
-	}
+                    ToolStripMenuItem editItemsMenu = WinFormHelpers.CreateToolStripMenuItem("edititemsMenu", "&Items", menuItem: editMenu);
+                    editItemsMenu.Click += new EventHandler(OpenInventoryEditor);
+                    editMenu.DropDownItems.Add(editItemsMenu);
+
+                    ToolStripMenuItem editKeyItemsMenu = WinFormHelpers.CreateToolStripMenuItem("editKeyitemsMenu", "&Key items", menuItem: editMenu);
+                    editKeyItemsMenu.Click += new EventHandler(OpenKeyItemsEditor);
+                    editMenu.DropDownItems.Add(editKeyItemsMenu);
+
+                    ToolStripMenuItem editWeaponsMenu = WinFormHelpers.CreateToolStripMenuItem("editWeaponsMenu", "&Weapons", menuItem: editMenu);
+                    editWeaponsMenu.Click += new EventHandler(OpenWeaponsEditor);
+                    editMenu.DropDownItems.Add(editWeaponsMenu);
+                }
+
+                if (shorterGameName == "Shinbok" || shorterGameName == "Boktai") {
+                    ToolStripMenuItem editGunMenu = WinFormHelpers.CreateToolStripMenuItem("editGunMenu", "&Solar gun", menuItem: editMenu);
+                    editGunMenu.Click += new EventHandler(OpenSolarGunEditor);
+                    editMenu.DropDownItems.Add(editGunMenu);
+                }
+
+                if (shorterGameName != "Boktai") {
+
+                    ToolStripMenuItem editAccessoriesMenu = WinFormHelpers.CreateToolStripMenuItem("editAccessoriesMenu", shorterGameName == "Zoktai" ? "&Protectors" : "&Accessories", menuItem: editMenu);
+                    editAccessoriesMenu.Click += new EventHandler(OpenEquipsEditor);
+                    editMenu.DropDownItems.Add(editAccessoriesMenu);
+
+                    if (shorterGameName == "Zoktai") {
+                        ToolStripMenuItem editMagicsMenu = WinFormHelpers.CreateToolStripMenuItem("editMagicsMenu", "&Magics", menuItem: editMenu);
+                        editMagicsMenu.Click += new EventHandler(OpenMagicsEditor);
+                        editMenu.DropDownItems.Add(editMagicsMenu);
+                    }
+                }
+            }
+
+            // Misc tools section
+            ToolStripMenuItem toolsMenu = WinFormHelpers.CreateToolStripMenuItem("toolsMenu", "Tools", menuStrip: _menuBar);
+
+            ToolStripMenuItem tileDataViewerMenu = WinFormHelpers.CreateToolStripMenuItem("tileDataViewerMenu", "&Tile data viewer", menuItem: toolsMenu);
+            tileDataViewerMenu.Click += new EventHandler(OpenTileDataViewer);
+            toolsMenu.DropDownItems.Add(tileDataViewerMenu);
+
+            ToolStripMenuItem memoryValuesListMenu = WinFormHelpers.CreateToolStripMenuItem("memoryValuesListMenu", "&Memory values list", menuItem: toolsMenu);
+            memoryValuesListMenu.Click += new EventHandler(OpenMemoryValuesList);
+            toolsMenu.DropDownItems.Add(memoryValuesListMenu);
+
+            if (shorterGameName != "Boktai") {
+                ToolStripMenuItem solarBankInterestsSimMenu = WinFormHelpers.CreateToolStripMenuItem("solarBankInterestsSimMenu", "&Solar bank interests simulator", menuItem: toolsMenu);
+                solarBankInterestsSimMenu.Click += new EventHandler(OpenSolarBankInterestsSim);
+                toolsMenu.DropDownItems.Add(solarBankInterestsSimMenu);
+            }
+        }
+
+        #endregion
+
+        #region Openers - Editors
+        protected void OpenStatusEditor(object sender, EventArgs e) {
+
+            // Check if the subwindow has already been instanciated and if so, show & focus on it
+            if (statusEditorOpened == true) {
+                ShowExistingSubwindow("BokInterface.Status.StatusEditor");
+                return;
+            }
+
+            // Otherwise instanciate the subwindow
+            StatusEditor statusEditor = null;
+            switch (shorterGameName) {
+                case "Boktai":
+                    statusEditor = new BoktaiStatusEditor(this, _memoryValues, _boktaiAddresses);
+                    break;
+                case "Zoktai":
+                    statusEditor = new ZoktaiStatusEditor(this, _memoryValues, _zoktaiAddresses);
+                    break;
+                case "Shinbok":
+                    statusEditor = new ShinbokStatusEditor(this, _memoryValues, _shinbokAddresses);
+                    break;
+                case "LunarKnights":
+                    statusEditor = new LunarKnightsStatusEditor(this, _memoryValues, _lunarKnightsAddresses);
+                    break;
+                default:
+                    // If game is not handled, stop
+                    return;
+            }
+
+            /**
+             * Add the subwindow to the list of activate subwindows
+             * Indicate that it's active via the menuItem check & the boolean
+             */
+            _subwindows.Add(statusEditor);
+            ToolStripMenuItem menuItem = (ToolStripMenuItem)sender;
+            statusEditorOpened = menuItem.Checked = true;
+
+            // Add the on-close event handler
+            statusEditor.FormClosing += new FormClosingEventHandler(delegate (object sender, FormClosingEventArgs e) {
+                statusEditorOpened = menuItem.Checked = false;
+                statusEditor.Dispose();
+            });
+        }
+
+        protected void OpenInventoryEditor(object sender, EventArgs e) {
+            if (inventoryEditorOpened == true) {
+                ShowExistingSubwindow("BokInterface.Inventory.InventoryEditor");
+                return;
+            }
+
+            InventoryEditor inventoryEditor = null;
+            switch (shorterGameName) {
+                case "Boktai":
+                    inventoryEditor = new BoktaiInventoryEditor(this, _memoryValues, _boktaiAddresses);
+                    break;
+                case "Zoktai":
+                    inventoryEditor = new ZoktaiInventoryEditor(this, _memoryValues, _zoktaiAddresses);
+                    break;
+                case "Shinbok":
+                    inventoryEditor = new ShinbokInventoryEditor(this, _memoryValues, _shinbokAddresses);
+                    break;
+                case "LunarKnights":
+                    inventoryEditor = new LunarKnightsInventoryEditor(this, _memoryValues, _lunarKnightsAddresses);
+                    break;
+                default:
+                    // If game is not handled, stop
+                    return;
+            }
+
+            _subwindows.Add(inventoryEditor);
+            ToolStripMenuItem menuItem = (ToolStripMenuItem)sender;
+            inventoryEditorOpened = menuItem.Checked = true;
+
+            inventoryEditor.FormClosing += new FormClosingEventHandler(delegate (object sender, FormClosingEventArgs e) {
+                inventoryEditorOpened = menuItem.Checked = false;
+                inventoryEditor.Dispose();
+            });
+        }
+
+        protected void OpenKeyItemsEditor(object sender, EventArgs e) {
+            if (keyItemsEditorOpened == true) {
+                ShowExistingSubwindow("BokInterface.KeyItems.KeyItemsEditor");
+                return;
+            }
+
+            KeyItemsEditor keyItemsEditor = null;
+            switch (shorterGameName) {
+                case "Boktai":
+                    keyItemsEditor = new BoktaiKeyItemsEditor(this, _memoryValues, _boktaiAddresses);
+                    break;
+                case "Zoktai":
+                    keyItemsEditor = new ZoktaiKeyItemsEditor(this, _memoryValues, _zoktaiAddresses);
+                    break;
+                case "Shinbok":
+                    keyItemsEditor = new ShinbokKeyItemsEditor(this, _memoryValues, _shinbokAddresses);
+                    break;
+                case "LunarKnights":
+                    keyItemsEditor = new LunarKnightsKeyItemsEditor(this, _memoryValues, _lunarKnightsAddresses);
+                    break;
+                default:
+                    // If game is not handled, stop
+                    return;
+            }
+
+            _subwindows.Add(keyItemsEditor);
+            ToolStripMenuItem menuItem = (ToolStripMenuItem)sender;
+            keyItemsEditorOpened = menuItem.Checked = true;
+
+            keyItemsEditor.FormClosing += new FormClosingEventHandler(delegate (object sender, FormClosingEventArgs e) {
+                keyItemsEditorOpened = menuItem.Checked = false;
+                keyItemsEditor.Dispose();
+            });
+        }
+
+        protected void OpenEquipsEditor(object sender, EventArgs e) {
+            if (equipsEditorOpened == true) {
+                ShowExistingSubwindow("BokInterface.Accessories.AccessoriesEditor");
+                return;
+            }
+
+            AccessoriesEditor accessoriesEditor = null;
+            switch (shorterGameName) {
+                case "Zoktai":
+                    accessoriesEditor = new ZoktaiAccessoriesEditor(this, _memoryValues, _zoktaiAddresses);
+                    break;
+                case "Shinbok":
+                    accessoriesEditor = new ShinbokAccessoriesEditor(this, _memoryValues, _shinbokAddresses);
+                    break;
+                case "LunarKnights":
+                    // accessoriesEditor = new LunarKnightsAccessoriesEditor(this, _memoryValues, _lunarKnightsAddresses);
+                    break;
+                default:
+                    // If game is not handled or does not have accessories, stop
+                    return;
+            }
+
+            _subwindows.Add(accessoriesEditor);
+            ToolStripMenuItem menuItem = (ToolStripMenuItem)sender;
+            equipsEditorOpened = menuItem.Checked = true;
+
+            accessoriesEditor.FormClosing += new FormClosingEventHandler(delegate (object sender, FormClosingEventArgs e) {
+                equipsEditorOpened = menuItem.Checked = false;
+                accessoriesEditor.Dispose();
+            });
+        }
+
+        protected void OpenSolarGunEditor(object sender, EventArgs e) {
+            if (solarGunEditorOpened == true) {
+                ShowExistingSubwindow("BokInterface.solarGun.SolarGunEditor");
+                return;
+            }
+
+            SolarGunEditor solarGunEditor = null;
+            switch (shorterGameName) {
+                case "Boktai":
+                    solarGunEditor = new BoktaiSolarGunEditor(this, _memoryValues, _boktaiAddresses);
+                    break;
+                case "Shinbok":
+                    solarGunEditor = new ShinbokSolarGunEditor(this, _memoryValues, _shinbokAddresses);
+                    break;
+                default:
+                    // If game is not handled, stop
+                    // Note: for Zoktai / Bok 2 the solar gun is handled via the Weapons Inventory
+                    return;
+            }
+
+            _subwindows.Add(solarGunEditor);
+            ToolStripMenuItem menuItem = (ToolStripMenuItem)sender;
+            solarGunEditorOpened = menuItem.Checked = true;
+
+            solarGunEditor.FormClosing += new FormClosingEventHandler(delegate (object sender, FormClosingEventArgs e) {
+                solarGunEditorOpened = menuItem.Checked = false;
+                solarGunEditor.Dispose();
+            });
+        }
+
+        protected void OpenWeaponsEditor(object sender, EventArgs e) {
+            if (weaponsEditorOpened == true) {
+                ShowExistingSubwindow("BokInterface.Weapons.WeaponsEditor");
+                return;
+            }
+
+            WeaponsEditor weaponsEditor = null;
+            switch (shorterGameName) {
+                case "Zoktai":
+                    weaponsEditor = new ZoktaiWeaponsEditor(this, _memoryValues, _zoktaiAddresses);
+                    break;
+                case "Shinbok":
+                    weaponsEditor = new ShinbokWeaponsEditor(this, _memoryValues, _shinbokAddresses);
+                    break;
+                case "LunarKnights":
+                    weaponsEditor = new LunarKnightsWeaponsEditor(this, _memoryValues, _lunarKnightsAddresses);
+                    break;
+                default:
+                    // If game is not handled, stop
+                    // Note: Bok 1 only has the solar gun
+                    return;
+            }
+
+            _subwindows.Add(weaponsEditor);
+            ToolStripMenuItem menuItem = (ToolStripMenuItem)sender;
+            weaponsEditorOpened = menuItem.Checked = true;
+
+            weaponsEditor.FormClosing += new FormClosingEventHandler(delegate (object sender, FormClosingEventArgs e) {
+                weaponsEditorOpened = menuItem.Checked = false;
+                weaponsEditor.Dispose();
+            });
+        }
+
+        protected void OpenMagicsEditor(object sender, EventArgs e) {
+            if (magicsEditorOpened == true) {
+                ShowExistingSubwindow("BokInterface.Magics.MagicsEditor");
+                return;
+            }
+
+            MagicsEditor magicsEditor = null;
+            switch (shorterGameName) {
+                case "Zoktai":
+                    magicsEditor = new ZoktaiMagicsEditor(this, _memoryValues, _zoktaiAddresses);
+                    break;
+                case "Shinbok":
+                    // magicsEditor = new ShinbokMagicsEditor(this, _memoryValues, _shinbokAddresses);
+                    // break;
+                    return;
+                default:
+                    // If game is not handled or does not have magics, stop
+                    return;
+            }
+
+            _subwindows.Add(magicsEditor);
+            ToolStripMenuItem menuItem = (ToolStripMenuItem)sender;
+            magicsEditorOpened = menuItem.Checked = true;
+
+            magicsEditor.FormClosing += new FormClosingEventHandler(delegate (object sender, FormClosingEventArgs e) {
+                magicsEditorOpened = menuItem.Checked = false;
+                magicsEditor.Dispose();
+            });
+        }
+
+        #endregion
+
+        #region Openers - Tools
+
+        private void OpenTileDataViewer(object sender, EventArgs e) {
+            if (tileDataViewerActive == true) {
+                ShowExistingSubwindow("BokInterface.Tools.TileDataViewer.TileDataViewer");
+                return;
+            }
+
+            TileDataViewer tileDataViewer = null;
+            switch (shorterGameName) {
+                case "Boktai":
+                    tileDataViewer = new BoktaiTileDataViewer(this, _boktaiAddresses);
+                    break;
+                case "Zoktai":
+                    tileDataViewer = new ZoktaiTileDataViewer(this, _zoktaiAddresses);
+                    break;
+                case "Shinbok":
+                    tileDataViewer = new ShinbokTileDataViewer(this, _shinbokAddresses);
+                    break;
+                case "LunarKnights":
+                    tileDataViewer = new LunarKnightsTileDataViewer(this, _lunarKnightsAddresses);
+                    break;
+                default:
+                    // If game not handled, stop
+                    return;
+            }
+
+            _subwindows.Add(tileDataViewer);
+            ToolStripMenuItem menuItem = (ToolStripMenuItem)sender;
+            tileDataViewerActive = menuItem.Checked = true;
+
+            // Initialize the loop to update / redraw automatically & add the on-close event handler
+            tileDataViewer.InitializeFrameLoop();
+            tileDataViewer.FormClosing += new FormClosingEventHandler(delegate (object sender, FormClosingEventArgs e) {
+                /**
+                 * Remove the function from the list of functions to call each frame
+                 * Also set instance with null to prevent it from doing anything else
+                 */
+                tileDataViewerActive = menuItem.Checked = false;
+                functionsList.RemoveAt(tileDataViewer.index);
+                tileDataViewer.Dispose();
+            });
+        }
+
+        private void OpenMemoryValuesList(object sender, EventArgs e) {
+            if (memValuesListingActive == true) {
+                ShowExistingSubwindow("BokInterface.Tools.MemoryValuesListing.MemoryValuesListing");
+                return;
+            }
+
+            MemoryValuesListing memoryValuesListing = null;
+            switch (shorterGameName) {
+                case "Boktai":
+                    memoryValuesListing = new MemoryValuesListing(this, _boktaiAddresses);
+                    break;
+                case "Zoktai":
+                    memoryValuesListing = new MemoryValuesListing(this, _zoktaiAddresses);
+                    break;
+                case "Shinbok":
+                    memoryValuesListing = new MemoryValuesListing(this, _shinbokAddresses);
+                    break;
+                case "LunarKnights":
+                    memoryValuesListing = new MemoryValuesListing(this, _lunarKnightsAddresses);
+                    break;
+                default:
+                    // If game not handled, stop
+                    return;
+            }
+
+            _subwindows.Add(memoryValuesListing);
+            ToolStripMenuItem menuItem = (ToolStripMenuItem)sender;
+            memValuesListingActive = menuItem.Checked = true;
+
+            memoryValuesListing.FormClosing += new FormClosingEventHandler(delegate (object sender, FormClosingEventArgs e) {
+                memValuesListingActive = menuItem.Checked = false;
+                memoryValuesListing.Dispose();
+            });
+        }
+
+        private void OpenSolarBankInterestsSim(object sender, EventArgs e) {
+            if (solarBankInterestsSimActive == true) {
+                ShowExistingSubwindow("BokInterface.Tools.SolarBankInterestsSimulator.SolarBankInterestsSimulator");
+                return;
+            }
+
+            SolarBankInterestsSimulator solarBankInterestsSimulator = null;
+            switch (shorterGameName) {
+                case "Zoktai":
+                case "Shinbok":
+                    solarBankInterestsSimulator = new SolarBankInterestsSimulator(this);
+                    break;
+                default:
+                    // If game not handled, stop
+                    return;
+            }
+
+            _subwindows.Add(solarBankInterestsSimulator);
+            ToolStripMenuItem menuItem = (ToolStripMenuItem)sender;
+            solarBankInterestsSimActive = menuItem.Checked = true;
+
+            solarBankInterestsSimulator.FormClosing += new FormClosingEventHandler(delegate (object sender, FormClosingEventArgs e) {
+                solarBankInterestsSimActive = menuItem.Checked = false;
+                solarBankInterestsSimulator.Dispose();
+            });
+        }
+
+        #endregion
+
+        #region Other methods
+
+        /// <summary>Show an already existing subwindow</summary>
+        /// <param name="type">Full type of the subwindow with namespace</param>
+        private void ShowExistingSubwindow(string type) {
+
+            // Store the type into a proper variable
+            Type instanceType = Type.GetType(type);
+            if (instanceType == null) {
+                return;
+            }
+
+            // Get the instance that is of this type (there can only be one due to how )
+            Form instance = _subwindows.FirstOrDefault(x => instanceType.IsInstanceOfType(x));
+            if (instance != null) {
+
+                // Show the subwindow (even if it's minimized)
+                if (instance.WindowState == FormWindowState.Minimized) {
+                    instance.WindowState = FormWindowState.Normal;
+                }
+
+                instance.Activate();
+            }
+        }
+
+        #endregion
+    }
 }

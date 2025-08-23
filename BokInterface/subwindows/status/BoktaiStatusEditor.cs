@@ -1,21 +1,22 @@
-using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
 
 using BokInterface.Addresses;
-using BokInterface.All;
+using BokInterface.Utils;
 
 namespace BokInterface.Status {
     /// <summary>Status editor for Boktai</summary>
     class BoktaiStatusEditor : StatusEditor {
 
-        #region Instances
+        #region Properties
 
         private readonly MemoryValues _memoryValues;
         private readonly BokInterface _bokInterface;
         private readonly BoktaiAddresses _boktaiAddresses;
 
         #endregion
+
+        #region Constructor
 
         public BoktaiStatusEditor(BokInterface bokInterface, MemoryValues memoryValues, BoktaiAddresses boktaiAddresses) {
 
@@ -25,16 +26,13 @@ namespace BokInterface.Status {
             Icon = _bokInterface.Icon;
 
             SetFormParameters(203, 144);
-
-            // Add the onClose event to the subwindow
-            FormClosing += new FormClosingEventHandler(delegate (object sender, FormClosingEventArgs e) {
-                _bokInterface.statusEditorOpened = false;
-            });
-
-            // Add elements & show the subwindow
             AddElements();
             Show();
         }
+
+        #endregion
+
+        #region Elements
 
         protected override void AddElements() {
 
@@ -50,6 +48,10 @@ namespace BokInterface.Status {
             //     }
             // });
         }
+
+        #endregion
+
+        #region Values setting
 
         protected override void SetValues() {
 
@@ -103,5 +105,7 @@ namespace BokInterface.Status {
             IDictionary<string, decimal> defaultValues = new Dictionary<string, decimal>();
             return defaultValues;
         }
+
+        #endregion
     }
 }
