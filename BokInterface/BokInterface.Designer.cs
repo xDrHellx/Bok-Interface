@@ -444,9 +444,6 @@ namespace BokInterface {
 
             WeaponsEditor weaponsEditor = null;
             switch (shorterGameName) {
-                case "Boktai":
-                    weaponsEditor = new BoktaiWeaponsEditor(this, _memoryValues, _boktaiAddresses);
-                    break;
                 case "Zoktai":
                     weaponsEditor = new ZoktaiWeaponsEditor(this, _memoryValues, _zoktaiAddresses);
                     break;
@@ -458,6 +455,7 @@ namespace BokInterface {
                     break;
                 default:
                     // If game is not handled, stop
+                    // Note: Bok 1 only has the solar gun
                     return;
             }
 

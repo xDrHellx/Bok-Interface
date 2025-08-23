@@ -1,5 +1,3 @@
-using System.Windows.Forms;
-
 using BokInterface.Addresses;
 
 namespace BokInterface.Inventory {
@@ -24,13 +22,6 @@ namespace BokInterface.Inventory {
             Icon = _bokInterface.Icon;
 
             SetFormParameters(400, 400);
-
-            // Add the onClose event to the subwindow
-            FormClosing += new FormClosingEventHandler(delegate (object sender, FormClosingEventArgs e) {
-                _bokInterface.inventoryEditorOpened = false;
-            });
-
-            // Add elements & show the subwindow
             AddElements();
             Show();
         }

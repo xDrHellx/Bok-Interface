@@ -33,13 +33,6 @@ namespace BokInterface.Magics {
             _zoktaiMagics = new();
 
             SetFormParameters(281, 249);
-
-            // Add the onClose event to the subwindow
-            FormClosing += new FormClosingEventHandler(delegate (object sender, FormClosingEventArgs e) {
-                _bokInterface.magicsEditorOpened = false;
-            });
-
-            // Add elements & show the subwindow
             AddElements();
             Show();
         }

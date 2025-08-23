@@ -33,13 +33,6 @@ namespace BokInterface.Weapons {
             Icon = _bokInterface.Icon;
 
             SetFormParameters(699, 326);
-
-            // Add the onClose event to the subwindow
-            FormClosing += new FormClosingEventHandler(delegate (object sender, FormClosingEventArgs e) {
-                _bokInterface.weaponsEditorOpened = false;
-            });
-
-            // Add elements & show the subwindow
             AddElements();
             Show();
         }
