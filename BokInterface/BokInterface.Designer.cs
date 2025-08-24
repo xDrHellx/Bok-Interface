@@ -200,9 +200,13 @@ namespace BokInterface {
                     editStatusMenu.Click += new EventHandler(OpenStatusEditor);
                     editMenu.DropDownItems.Add(editStatusMenu);
 
-                    ToolStripMenuItem editItemsMenu = WinFormHelpers.CreateToolStripMenuItem("edititemsMenu", "&Items", menuItem: editMenu);
-                    editItemsMenu.Click += new EventHandler(OpenInventoryEditor);
-                    editMenu.DropDownItems.Add(editItemsMenu);
+                }
+
+                ToolStripMenuItem editItemsMenu = WinFormHelpers.CreateToolStripMenuItem("edititemsMenu", "&Items", menuItem: editMenu);
+                editItemsMenu.Click += new EventHandler(OpenInventoryEditor);
+                editMenu.DropDownItems.Add(editItemsMenu);
+
+                if (shorterGameName != "Boktai") {
 
                     ToolStripMenuItem editKeyItemsMenu = WinFormHelpers.CreateToolStripMenuItem("editKeyitemsMenu", "&Key items", menuItem: editMenu);
                     editKeyItemsMenu.Click += new EventHandler(OpenKeyItemsEditor);
