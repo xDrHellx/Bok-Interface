@@ -226,6 +226,11 @@ namespace BokInterface {
             // HUD
             if (shorterGameName != "Boktai") {
                 ToolStripMenuItem hudMenu = WinFormHelpers.CreateToolStripMenuItem("hudMenu", "HUD", menuStrip: _menuBar);
+                AddDropdownMenuItem("enableGui", "Enable GUI", hudMenu, (sender, e) => {
+                    if (sender is ToolStripMenuItem menuItem) {
+                        menuItem.Checked = _showGui = !_showGui;
+                    }
+                });
             }
         }
 
