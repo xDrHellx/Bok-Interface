@@ -195,59 +195,37 @@ namespace BokInterface {
                 ToolStripMenuItem editMenu = WinFormHelpers.CreateToolStripMenuItem("editMenu", "Edit", menuStrip: _menuBar);
 
                 if (shorterGameName != "Boktai") {
-
-                    ToolStripMenuItem editStatusMenu = WinFormHelpers.CreateToolStripMenuItem("editStatusMenu", "&Status", menuItem: editMenu);
-                    editStatusMenu.Click += new EventHandler(OpenStatusEditor);
-                    editMenu.DropDownItems.Add(editStatusMenu);
-
-                    ToolStripMenuItem editItemsMenu = WinFormHelpers.CreateToolStripMenuItem("edititemsMenu", "&Items", menuItem: editMenu);
-                    editItemsMenu.Click += new EventHandler(OpenInventoryEditor);
-                    editMenu.DropDownItems.Add(editItemsMenu);
-
-                    ToolStripMenuItem editKeyItemsMenu = WinFormHelpers.CreateToolStripMenuItem("editKeyitemsMenu", "&Key items", menuItem: editMenu);
-                    editKeyItemsMenu.Click += new EventHandler(OpenKeyItemsEditor);
-                    editMenu.DropDownItems.Add(editKeyItemsMenu);
-
-                    ToolStripMenuItem editWeaponsMenu = WinFormHelpers.CreateToolStripMenuItem("editWeaponsMenu", "&Weapons", menuItem: editMenu);
-                    editWeaponsMenu.Click += new EventHandler(OpenWeaponsEditor);
-                    editMenu.DropDownItems.Add(editWeaponsMenu);
+                    AddDropdownMenuItem("editStatusMenu", "Status", editMenu, OpenStatusEditor);
+                    AddDropdownMenuItem("edititemsMenu", "Items", editMenu, OpenInventoryEditor);
+                    AddDropdownMenuItem("editKeyitemsMenu", "Key items", editMenu, OpenKeyItemsEditor);
+                    AddDropdownMenuItem("editWeaponsMenu", "Weapons", editMenu, OpenWeaponsEditor);
                 }
 
                 if (shorterGameName == "Shinbok" || shorterGameName == "Boktai") {
-                    ToolStripMenuItem editGunMenu = WinFormHelpers.CreateToolStripMenuItem("editGunMenu", "&Solar gun", menuItem: editMenu);
-                    editGunMenu.Click += new EventHandler(OpenSolarGunEditor);
-                    editMenu.DropDownItems.Add(editGunMenu);
+                    AddDropdownMenuItem("editGunMenu", "Solar gun", editMenu, OpenSolarGunEditor);
                 }
 
                 if (shorterGameName != "Boktai") {
 
-                    ToolStripMenuItem editAccessoriesMenu = WinFormHelpers.CreateToolStripMenuItem("editAccessoriesMenu", shorterGameName == "Zoktai" ? "&Protectors" : "&Accessories", menuItem: editMenu);
-                    editAccessoriesMenu.Click += new EventHandler(OpenEquipsEditor);
-                    editMenu.DropDownItems.Add(editAccessoriesMenu);
-
+                    AddDropdownMenuItem("editAccessoriesMenu", shorterGameName == "Zoktai" ? "Protectors" : "Accessories", editMenu, OpenEquipsEditor);
                     if (shorterGameName == "Zoktai") {
-                        ToolStripMenuItem editMagicsMenu = WinFormHelpers.CreateToolStripMenuItem("editMagicsMenu", "&Magics", menuItem: editMenu);
-                        editMagicsMenu.Click += new EventHandler(OpenMagicsEditor);
-                        editMenu.DropDownItems.Add(editMagicsMenu);
+                        AddDropdownMenuItem("editMagicsMenu", "Magics", editMenu, OpenMagicsEditor);
                     }
                 }
             }
 
             // Misc tools section
             ToolStripMenuItem toolsMenu = WinFormHelpers.CreateToolStripMenuItem("toolsMenu", "Tools", menuStrip: _menuBar);
-
-            ToolStripMenuItem tileDataViewerMenu = WinFormHelpers.CreateToolStripMenuItem("tileDataViewerMenu", "&Tile data viewer", menuItem: toolsMenu);
-            tileDataViewerMenu.Click += new EventHandler(OpenTileDataViewer);
-            toolsMenu.DropDownItems.Add(tileDataViewerMenu);
-
-            ToolStripMenuItem memoryValuesListMenu = WinFormHelpers.CreateToolStripMenuItem("memoryValuesListMenu", "&Memory values list", menuItem: toolsMenu);
-            memoryValuesListMenu.Click += new EventHandler(OpenMemoryValuesList);
-            toolsMenu.DropDownItems.Add(memoryValuesListMenu);
+            AddDropdownMenuItem("tileDataViewerMenu", "Tile data viewer", toolsMenu, OpenTileDataViewer);
+            AddDropdownMenuItem("memoryValuesListMenu", "Memory values list", toolsMenu, OpenMemoryValuesList);
 
             if (shorterGameName != "Boktai") {
-                ToolStripMenuItem solarBankInterestsSimMenu = WinFormHelpers.CreateToolStripMenuItem("solarBankInterestsSimMenu", "&Solar bank interests simulator", menuItem: toolsMenu);
-                solarBankInterestsSimMenu.Click += new EventHandler(OpenSolarBankInterestsSim);
-                toolsMenu.DropDownItems.Add(solarBankInterestsSimMenu);
+                AddDropdownMenuItem("solarBankInterestsSimMenu", "Solar bank interests simulator", toolsMenu, OpenSolarBankInterestsSim);
+            }
+
+            // HUD
+            if (shorterGameName != "Boktai") {
+                ToolStripMenuItem hudMenu = WinFormHelpers.CreateToolStripMenuItem("hudMenu", "HUD", menuStrip: _menuBar);
             }
         }
 
@@ -625,6 +603,18 @@ namespace BokInterface {
 
                 instance.Activate();
             }
+        }
+
+        /// <summary>Add an item (submenu) to a menu dropdown</summary>
+        /// <param name="name">Submenu name</param>
+        /// <param name="text">Submenu text (without the <![CDATA[&]]> at the start)</param>
+        /// <param name="parent">Menu the submenu is attached to</param>
+        /// <param name="onClick">OnClick event</param>
+        /// <param name="tooltip">ToolTipText (by default none)</param>
+        private void AddDropdownMenuItem(string name, string text, ToolStripMenuItem parent, EventHandler onClick, string tooltip = "") {
+            ToolStripMenuItem menuItem = WinFormHelpers.CreateToolStripMenuItem(name, "&" + text, toolTipText: tooltip, menuItem: parent);
+            menuItem.Click += new EventHandler(onClick);
+            parent.DropDownItems.Add(menuItem);
         }
 
         #endregion
