@@ -154,6 +154,11 @@ namespace BokInterface.Addresses {
             Misc.Add("z_camera", new MemoryAddress(0x030047CC, note: "Camera Z position", domain: "IWRAM"));
             Misc.Add("current_stat", new MemoryAddress(0x03002BE0, note: "For current stats", type: "U32", domain: "IWRAM"));
             Misc.Add("rng_index", new MemoryAddress(0x030046B8, type: "U32", domain: "IWRAM"));
+            Misc.Add("rtc_date", new MemoryAddress(0x030047E0, type: "U32", note: "Binary-code decimal, yyyymmdd format", domain: "IWRAM"));
+            Misc.Add("rtc_hours", new MemoryAddress(0x030047E4, type: "U8", domain: "IWRAM"));
+            Misc.Add("rtc_minutes", new MemoryAddress(0x030047E5, type: "U8", domain: "IWRAM"));
+            Misc.Add("rtc_seconds", new MemoryAddress(0x030047E6, type: "U8", domain: "IWRAM"));
+            Misc.Add("rtc_frames", new MemoryAddress(0x030047E7, type: "U8", domain: "IWRAM"));
 
             // US version
             // Misc.Add("exp_table", new MemoryAddress(0x08CE3238));

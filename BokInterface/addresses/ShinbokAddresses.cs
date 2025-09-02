@@ -47,6 +47,7 @@ namespace BokInterface.Addresses {
             InitBikeAddresses();
             InitInventoryAddresses();
             InitGunAddresses();
+            InitSollsAddresses();
             InitMiscAddresses();
         }
 
@@ -84,11 +85,6 @@ namespace BokInterface.Addresses {
             Django.Add("persistent_cards_vit", new MemoryAddress(0x20, note: "Stat points from cards, " + _note.ToLower(), domain: "EWRAM"));
             Django.Add("persistent_cards_spr", new MemoryAddress(0x22, note: "Stat points from cards, " + _note.ToLower(), domain: "EWRAM"));
             Django.Add("persistent_cards_str", new MemoryAddress(0x24, note: "Stat points from cards, " + _note.ToLower(), domain: "EWRAM"));
-
-            // Add Solls addresses
-            Solls.Add("solar_station", new MemoryAddress(0x77C, note: "Solar station balance", domain: "EWRAM"));
-            Solls.Add("solar_bank", new MemoryAddress(0x7B0, note: "Solar bank balance", domain: "EWRAM"));
-            Solls.Add("dark_loans", new MemoryAddress(0x50C, note: "Dark loans", domain: "EWRAM"));
         }
 
         private void InitBikeAddresses() {
@@ -148,6 +144,12 @@ namespace BokInterface.Addresses {
             }
         }
 
+        private void InitSollsAddresses() {
+            Solls.Add("solar_station", new MemoryAddress(0x77C, note: "Solar station balance", domain: "EWRAM"));
+            Solls.Add("solar_bank", new MemoryAddress(0x7B0, note: "Solar bank balance", domain: "EWRAM"));
+            Solls.Add("dark_loans", new MemoryAddress(0x50C, note: "Dark loans", domain: "EWRAM"));
+        }
+
         private void InitMiscAddresses() {
             // Misc.Add("equips_stat", 0x02004094);
             Misc.Add("actor", new MemoryAddress(0x02000580, note: "Pointer to Django's actor data", type: "U32", domain: "EWRAM"));
@@ -160,6 +162,11 @@ namespace BokInterface.Addresses {
             Misc.Add("y_camera", new MemoryAddress(0x0300541A, note: "Camera Y position", domain: "IWRAM"));
             Misc.Add("z_camera", new MemoryAddress(0x0300541C, note: "Camera Z position", domain: "IWRAM"));
             Misc.Add("rng_index", new MemoryAddress(0x03005308, type: "U32", domain: "IWRAM"));
+            Misc.Add("rtc_date", new MemoryAddress(0x03005430, type: "U32", note: "Binary-code decimal, yyyymmdd format", domain: "IWRAM"));
+            Misc.Add("rtc_hours", new MemoryAddress(0x03005434, type: "U8", domain: "IWRAM"));
+            Misc.Add("rtc_minutes", new MemoryAddress(0x03005435, type: "U8", domain: "IWRAM"));
+            Misc.Add("rtc_seconds", new MemoryAddress(0x03005436, type: "U8", domain: "IWRAM"));
+            Misc.Add("rtc_frames", new MemoryAddress(0x03005437, type: "U8", domain: "IWRAM"));
         }
     }
 }
