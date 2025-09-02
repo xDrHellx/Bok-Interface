@@ -123,6 +123,10 @@ namespace BokInterface {
             UpdateZoktaiEvent(_enableBlindboxLvl4, "blindbox_lvl_4", 0x8FAA);
             UpdateZoktaiEvent(_enableBlindboxLvl5ValentineDay, "blindbox_lvl_5_valentine_day", 0x90E0);
             UpdateZoktaiEvent(_enableStarPiece, "star_piece", 0x8FD6);
+
+            if (_showGui == true) {
+                ShowZoktaiGui();
+            }
         }
 
         #endregion
@@ -260,6 +264,15 @@ namespace BokInterface {
 
             // Check / uncheck the menu item based on if the downloadable event is enabled or not
             menuItem.Checked = _zoktaiAddresses.JoySpots[memKey].Value == onCheckedValue;
+        }
+
+        #endregion
+
+        #region GUI
+
+        private void ShowZoktaiGui() {
+            APIs.Gui.Text(3, GetScreenHeight() / 2, "RTC:");
+            APIs.Gui.Text(50, GetScreenHeight() / 2, _zoktaiAddresses.Misc["rtc_hours"].Value + ":" + _zoktaiAddresses.Misc["rtc_minutes"].Value + ":" + _zoktaiAddresses.Misc["rtc_seconds"].Value);
         }
 
         #endregion

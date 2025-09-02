@@ -105,6 +105,10 @@ namespace BokInterface {
                 _currentSpeedLabel.Text = "Current movement speed : " + Math.Round(speed3D, 3);
                 _averageSpeedLabel.Text = "Average over 60 frames : " + averageSpeed.ToString();
             }
+
+            if (_showGui == true) {
+                ShowShinbokGui();
+            }
         }
 
         #endregion
@@ -162,6 +166,15 @@ namespace BokInterface {
             _bok3_djangoCardsStr = WinFormHelpers.CreateLabel("djangoCardsStr", "", 66, 64, 37, 15, _currentStatsGroupBox, WinFormHelpers.cardsStatColor, textAlignment: "MiddleRight");
             _bok3_djangoEquipsStr = WinFormHelpers.CreateLabel("djangoEquipsStr", "", 103, 64, 42, 15, _currentStatsGroupBox, WinFormHelpers.equipsStatColor, textAlignment: "MiddleRight");
             _bok3_djangoTotalStr = WinFormHelpers.CreateLabel("djangoTotalStr", "", 145, 64, 32, 15, _currentStatsGroupBox, WinFormHelpers.totalStatColor, textAlignment: "MiddleRight");
+        }
+
+        #endregion
+
+        #region GUI
+
+        private void ShowShinbokGui() {
+            APIs.Gui.Text(3, GetScreenHeight() / 2, "RTC:");
+            APIs.Gui.Text(50, GetScreenHeight() / 2, _shinbokAddresses.Misc["rtc_hours"].Value + ":" + _shinbokAddresses.Misc["rtc_minutes"].Value + ":" + _shinbokAddresses.Misc["rtc_seconds"].Value);
         }
 
         #endregion
