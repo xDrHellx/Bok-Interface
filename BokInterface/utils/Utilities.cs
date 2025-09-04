@@ -314,5 +314,16 @@ namespace BokInterface.Utils {
         }
 
         #endregion
+
+        #region Interest rate
+
+        /// <summary>Get the Solar bank's interest rate from the value stored in memory</summary>
+        /// <param name="storedInterestRateValue">Value stored in memory (for example 66 for 3.125000)</param>
+        /// <returns><c>string</c>Solar bank interest rate</returns>
+        public static string GetInterestRateFromValue(uint storedInterestRateValue) {
+            return (((storedInterestRateValue / 64.0) - 1.0) * 100.0).ToString("F6", System.Globalization.CultureInfo.InvariantCulture);
+        }
+
+        #endregion
     }
 }
