@@ -54,9 +54,9 @@ namespace BokInterface.Addresses {
         private void InitDjangoAddresses() {
 
             // Position coordinates
-            Django.Add("x_position", new MemoryAddress(0x30, note: "Django X position", domain: "EWRAM"));
-            Django.Add("y_position", new MemoryAddress(0x34, note: "Django Y position", domain: "EWRAM"));
-            Django.Add("z_position", new MemoryAddress(0x32, note: "Django Z position", domain: "EWRAM"));
+            Django.Add("x_position", new MemoryAddress(0x30, "Django X position", domain: "EWRAM"));
+            Django.Add("y_position", new MemoryAddress(0x34, "Django Y position", domain: "EWRAM"));
+            Django.Add("z_position", new MemoryAddress(0x32, "Django Z position", domain: "EWRAM"));
 
             // Current stats
             _note = "Used for damage calculations, will be copied to its Persistent equivalent on screen transition. Must be combined with the \"stat\" memory address' value";
@@ -67,38 +67,38 @@ namespace BokInterface.Addresses {
             Django.Add("exp", new MemoryAddress(0x48, type: "U32", domain: "EWRAM"));
             Django.Add("total_exp_until_next_level", new MemoryAddress(0x1BC8, type: "U32", domain: "EWRAM"));
             Django.Add("stat_points", new MemoryAddress(0x42, domain: "EWRAM"));
-            Django.Add("current_equips_vit", new MemoryAddress(0x332, note: "Stat points from accessories, " + _note.ToLower(), domain: "EWRAM"));
-            Django.Add("current_equips_spr", new MemoryAddress(0x334, note: "Stat points from accessories, " + _note.ToLower(), domain: "EWRAM"));
-            Django.Add("current_equips_str", new MemoryAddress(0x336, note: "Stat points from accessories, " + _note.ToLower(), domain: "EWRAM"));
-            Django.Add("current_sum_base_cards_vit", new MemoryAddress(0x41C, note: "Sum of base stat & points from cards, " + _note.ToLower(), domain: "EWRAM"));
-            Django.Add("current_sum_base_cards_spr", new MemoryAddress(0x41E, note: "Sum of base stat & points from cards, " + _note.ToLower(), domain: "EWRAM"));
-            Django.Add("current_sum_base_cards_str", new MemoryAddress(0x420, note: "Sum of base stat & points from cards, " + _note.ToLower(), domain: "EWRAM"));
+            Django.Add("current_equips_vit", new MemoryAddress(0x332, "Stat points from accessories, " + _note.ToLower(), domain: "EWRAM"));
+            Django.Add("current_equips_spr", new MemoryAddress(0x334, "Stat points from accessories, " + _note.ToLower(), domain: "EWRAM"));
+            Django.Add("current_equips_str", new MemoryAddress(0x336, "Stat points from accessories, " + _note.ToLower(), domain: "EWRAM"));
+            Django.Add("current_sum_base_cards_vit", new MemoryAddress(0x41C, "Sum of base stat & points from cards, " + _note.ToLower(), domain: "EWRAM"));
+            Django.Add("current_sum_base_cards_spr", new MemoryAddress(0x41E, "Sum of base stat & points from cards, " + _note.ToLower(), domain: "EWRAM"));
+            Django.Add("current_sum_base_cards_str", new MemoryAddress(0x420, "Sum of base stat & points from cards, " + _note.ToLower(), domain: "EWRAM"));
 
             // Persistent stats (used on screen transitions & save data)
             _note = "Also corresponds to values from Save Data";
             Django.Add("persistent_hp", new MemoryAddress(0x28, domain: "EWRAM"));
             Django.Add("persistent_ene", new MemoryAddress(0x2C, domain: "EWRAM"));
             Django.Add("persistent_trc", new MemoryAddress(0x608, domain: "EWRAM"));
-            Django.Add("persistent_base_vit", new MemoryAddress(0x18, note: _note, domain: "EWRAM"));
-            Django.Add("persistent_base_spr", new MemoryAddress(0x1A, note: _note, domain: "EWRAM"));
-            Django.Add("persistent_base_str", new MemoryAddress(0x1C, note: _note, domain: "EWRAM"));
-            Django.Add("persistent_cards_vit", new MemoryAddress(0x20, note: "Stat points from cards, " + _note.ToLower(), domain: "EWRAM"));
-            Django.Add("persistent_cards_spr", new MemoryAddress(0x22, note: "Stat points from cards, " + _note.ToLower(), domain: "EWRAM"));
-            Django.Add("persistent_cards_str", new MemoryAddress(0x24, note: "Stat points from cards, " + _note.ToLower(), domain: "EWRAM"));
+            Django.Add("persistent_base_vit", new MemoryAddress(0x18, _note, domain: "EWRAM"));
+            Django.Add("persistent_base_spr", new MemoryAddress(0x1A, _note, domain: "EWRAM"));
+            Django.Add("persistent_base_str", new MemoryAddress(0x1C, _note, domain: "EWRAM"));
+            Django.Add("persistent_cards_vit", new MemoryAddress(0x20, "Stat points from cards, " + _note.ToLower(), domain: "EWRAM"));
+            Django.Add("persistent_cards_spr", new MemoryAddress(0x22, "Stat points from cards, " + _note.ToLower(), domain: "EWRAM"));
+            Django.Add("persistent_cards_str", new MemoryAddress(0x24, "Stat points from cards, " + _note.ToLower(), domain: "EWRAM"));
         }
 
         private void InitBikeAddresses() {
             _note = "Equipped bike part";
             // Bike.Add("name", new MemoryAddress(0x780, note: "Bike name", domain: "EWRAM"));
-            Bike.Add("points", new MemoryAddress(0x7B2, note: "Points from races", domain: "EWRAM"));
-            Bike.Add("battle_matches", new MemoryAddress(0x7B4, note: "Number of Bike Battles matches", domain: "EWRAM"));
-            Bike.Add("battle_wins", new MemoryAddress(0x7B6, note: "Number of Bike Battles won", domain: "EWRAM"));
-            Bike.Add("front", new MemoryAddress(0x7B8, note: _note, domain: "EWRAM"));
-            Bike.Add("tires", new MemoryAddress(0x7BC, note: _note, domain: "EWRAM"));
-            Bike.Add("body", new MemoryAddress(0x7C0, note: _note, domain: "EWRAM"));
-            Bike.Add("special", new MemoryAddress(0x7C4, note: _note, domain: "EWRAM"));
-            Bike.Add("color", new MemoryAddress(0x07F8, note: _note, domain: "EWRAM"));
-            Bike.Add("options", new MemoryAddress(0x81C, note: _note, domain: "EWRAM"));
+            Bike.Add("points", new MemoryAddress(0x7B2, "Points from races", domain: "EWRAM"));
+            Bike.Add("battle_matches", new MemoryAddress(0x7B4, "Number of Bike Battles matches", domain: "EWRAM"));
+            Bike.Add("battle_wins", new MemoryAddress(0x7B6, "Number of Bike Battles won", domain: "EWRAM"));
+            Bike.Add("front", new MemoryAddress(0x7B8, _note, domain: "EWRAM"));
+            Bike.Add("tires", new MemoryAddress(0x7BC, _note, domain: "EWRAM"));
+            Bike.Add("body", new MemoryAddress(0x7C0, _note, domain: "EWRAM"));
+            Bike.Add("special", new MemoryAddress(0x7C4, _note, domain: "EWRAM"));
+            Bike.Add("color", new MemoryAddress(0x07F8, _note, domain: "EWRAM"));
+            Bike.Add("options", new MemoryAddress(0x81C, _note, domain: "EWRAM"));
         }
 
         /// <summary>Init Inventory-related memory addresses</summary>
@@ -145,28 +145,30 @@ namespace BokInterface.Addresses {
         }
 
         private void InitSollsAddresses() {
-            Solls.Add("solar_station", new MemoryAddress(0x77C, note: "Solar station balance", domain: "EWRAM"));
-            Solls.Add("solar_bank", new MemoryAddress(0x7B0, note: "Solar bank balance", domain: "EWRAM"));
-            Solls.Add("dark_loans", new MemoryAddress(0x50C, note: "Dark loans", domain: "EWRAM"));
+            Solls.Add("solar_station", new MemoryAddress(0x77C, "Solar station balance", domain: "EWRAM"));
+            Solls.Add("solar_bank", new MemoryAddress(0x7B0, "Solar bank balance", domain: "EWRAM"));
+            Solls.Add("dark_loans", new MemoryAddress(0x50C, "Dark loans", domain: "EWRAM"));
+            Solls.Add("interest_rate", new MemoryAddress(0x598, "Solar Bank interest rate", domain: "EWRAM"));
         }
 
         private void InitMiscAddresses() {
             // Misc.Add("equips_stat", 0x02004094);
-            Misc.Add("actor", new MemoryAddress(0x02000580, note: "Pointer to Django's actor data", type: "U32", domain: "EWRAM"));
-            Misc.Add("stat", new MemoryAddress(0x02000710, note: "Stats & inventory", type: "U32", domain: "EWRAM"));
-            Misc.Add("world_state", new MemoryAddress(0x0203DB08, note: "Story progress & dungeon states", type: "U32", domain: "EWRAM"));
+            Misc.Add("actor", new MemoryAddress(0x02000580, "Pointer to Django's actor data", type: "U32", domain: "EWRAM"));
+            Misc.Add("stat", new MemoryAddress(0x02000710, "Stats & inventory", type: "U32", domain: "EWRAM"));
+            Misc.Add("world_state", new MemoryAddress(0x0203DB08, "Story progress & dungeon states", type: "U32", domain: "EWRAM"));
             Misc.Add("scratch", new MemoryAddress(0x0203E308, type: "U32", domain: "EWRAM"));
             Misc.Add("map_data", new MemoryAddress(0x030052F4, type: "U32", domain: "IWRAM"));
             Misc.Add("boss_hp", new MemoryAddress(0x0200EEC0, domain: "EWRAM"));
-            Misc.Add("x_camera", new MemoryAddress(0x03005418, note: "Camera X position", domain: "IWRAM"));
-            Misc.Add("y_camera", new MemoryAddress(0x0300541A, note: "Camera Y position", domain: "IWRAM"));
-            Misc.Add("z_camera", new MemoryAddress(0x0300541C, note: "Camera Z position", domain: "IWRAM"));
+            Misc.Add("x_camera", new MemoryAddress(0x03005418, "Camera X position", domain: "IWRAM"));
+            Misc.Add("y_camera", new MemoryAddress(0x0300541A, "Camera Y position", domain: "IWRAM"));
+            Misc.Add("z_camera", new MemoryAddress(0x0300541C, "Camera Z position", domain: "IWRAM"));
             Misc.Add("rng_index", new MemoryAddress(0x03005308, type: "U32", domain: "IWRAM"));
-            Misc.Add("rtc_date", new MemoryAddress(0x03005430, type: "U32", note: "Binary-code decimal, yyyymmdd format", domain: "IWRAM"));
+            Misc.Add("rtc_date", new MemoryAddress(0x03005430, "Binary-code decimal (yyyymmdd format)", type: "U32", domain: "IWRAM"));
             Misc.Add("rtc_hours", new MemoryAddress(0x03005434, type: "U8", domain: "IWRAM"));
             Misc.Add("rtc_minutes", new MemoryAddress(0x03005435, type: "U8", domain: "IWRAM"));
             Misc.Add("rtc_seconds", new MemoryAddress(0x03005436, type: "U8", domain: "IWRAM"));
             Misc.Add("rtc_frames", new MemoryAddress(0x03005437, type: "U8", domain: "IWRAM"));
+            Misc.Add("igt_frame_counter", new MemoryAddress(0x614, "In-Game Time frame counter for the current save file", type: "U32", domain: "EWRAM"));
         }
     }
 }
