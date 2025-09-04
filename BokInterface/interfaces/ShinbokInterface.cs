@@ -173,8 +173,11 @@ namespace BokInterface {
         #region GUI
 
         private void ShowShinbokGui() {
-            APIs.Gui.Text(3, GetScreenHeight() / 2, "RTC:");
-            APIs.Gui.Text(50, GetScreenHeight() / 2, _shinbokAddresses.Misc["rtc_hours"].Value + ":" + _shinbokAddresses.Misc["rtc_minutes"].Value + ":" + _shinbokAddresses.Misc["rtc_seconds"].Value);
+
+            // RTC
+            int halfScreenHeight = GetScreenHeight() / 2;
+            APIs.Gui.Text(3, halfScreenHeight, "RTC:");
+            APIs.Gui.Text(50, halfScreenHeight, Utilities.FormatTimeTo24(_shinbokAddresses.Misc["rtc_hours"].Value, _shinbokAddresses.Misc["rtc_minutes"].Value, _shinbokAddresses.Misc["rtc_seconds"].Value));
         }
 
         #endregion

@@ -241,6 +241,18 @@ namespace BokInterface.Utils {
             return string.Concat(formattedName[0].ToString().ToUpper(), formattedName.Substring(1));
         }
 
+        /// <summary>Format time to a proper 24h format</summary>
+        /// <param name="hours">Hours</param>
+        /// <param name="minutes">Minutes</param>
+        /// <param name="seconds">Seconds</param>
+        /// <returns><c>string</c>Formatted time <i>(4:20:1 => 04:20:01)</i></returns>
+        public static string FormatTimeTo24(uint hours, uint minutes, uint seconds) {
+            string hoursString = (hours < 10 ? "0" : "") + hours;
+            string minutesString = (minutes < 10 ? "0" : "") + minutes;
+            string secondsString = (seconds < 10 ? "0" : "") + seconds;
+            return hoursString + ":" + minutesString + ":" + secondsString;
+        }
+
         #endregion
 
         #region Weapon bonuses

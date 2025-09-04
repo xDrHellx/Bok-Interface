@@ -271,8 +271,11 @@ namespace BokInterface {
         #region GUI
 
         private void ShowZoktaiGui() {
-            APIs.Gui.Text(3, GetScreenHeight() / 2, "RTC:");
-            APIs.Gui.Text(50, GetScreenHeight() / 2, _zoktaiAddresses.Misc["rtc_hours"].Value + ":" + _zoktaiAddresses.Misc["rtc_minutes"].Value + ":" + _zoktaiAddresses.Misc["rtc_seconds"].Value);
+
+            // RTC
+            int halfScreenHeight = GetScreenHeight() / 2;
+            APIs.Gui.Text(3, halfScreenHeight, "RTC:");
+            APIs.Gui.Text(50, halfScreenHeight, Utilities.FormatTimeTo24(_zoktaiAddresses.Misc["rtc_hours"].Value, _zoktaiAddresses.Misc["rtc_minutes"].Value, _zoktaiAddresses.Misc["rtc_seconds"].Value));
         }
 
         #endregion
