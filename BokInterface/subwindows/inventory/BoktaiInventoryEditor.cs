@@ -117,6 +117,12 @@ namespace BokInterface.Inventory {
 
                 NumericUpDown amountField = WinFormHelpers.CreateNumericUpDown(entry.Key + "_amount", 0, 71, 35, 44, 18, control: group);
                 amountField.Tag = keyItem.value;
+
+                // Restrict the maximum amount that can be set for everything except Keys & Silver Coins
+                if (keyItem.value < 30 || keyItem.value > 34) {
+                    amountField.Maximum = 1;
+                }
+
                 numericUpDowns.Add(amountField);
 
                 n++;
