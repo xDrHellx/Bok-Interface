@@ -51,6 +51,10 @@ namespace BokInterface.Inventory {
             // Set default values for each field
             SetDefaultValues();
 
+            // Add warning
+            Label expWarning = WinFormHelpers.CreateImageLabel("tooltip", "warning", 5, 382, this);
+            WinFormHelpers.CreateLabel("warning", "Graphics will be updated upon switching tab in-game.", 23, 375, 293, 30, this, textAlignment: "MiddleLeft");
+
             // Button for setting values & its events
             Button setValuesButton = WinFormHelpers.CreateButton("setStatusButton", "Set values", 315, 382, 75, 23, this);
             setValuesButton.Click += new EventHandler(delegate (object sender, EventArgs e) {
