@@ -199,7 +199,6 @@ namespace BokInterface {
                     ToolStripMenuItem editStatusMenu = WinFormHelpers.CreateToolStripMenuItem("editStatusMenu", "&Status", menuItem: editMenu);
                     editStatusMenu.Click += new EventHandler(OpenStatusEditor);
                     editMenu.DropDownItems.Add(editStatusMenu);
-
                 }
 
                 ToolStripMenuItem editItemsMenu = WinFormHelpers.CreateToolStripMenuItem("edititemsMenu", "&Items", menuItem: editMenu);
