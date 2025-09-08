@@ -6,9 +6,12 @@ namespace BokInterface.Items {
 
         /// <summary>Amount for this item</summary>
         public int amount;
+        /// <summary>Slot (position) in the inventory</summary>
+        public int slot;
 
-        public BoktaiItem(string name, uint value, string icon = "", int amount = 0) : base(name, value, icon) {
+        public BoktaiItem(string name, uint value, string icon = "", int amount = 0, int slot = 0) : base(name, value, icon) {
             this.amount = amount;
+            this.slot = slot;
 
             if (icon != "") {
                 try {
