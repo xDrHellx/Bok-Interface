@@ -76,6 +76,16 @@ namespace BokInterface.Utils {
                 if (optionItem.icon != null) {
                     e.Graphics.DrawImage(optionItem.icon, e.Bounds.Left, e.Bounds.Top + 1);
                 }
+            } else if (Items[e.Index].GetType() == typeof(KeyValuePair<string, BoktaiItem>)) {
+
+                // For Boktai: TSiiYH items
+                KeyValuePair<string, BoktaiItem> option = (KeyValuePair<string, BoktaiItem>)Items[e.Index];
+                BoktaiItem optionItem = option.Value;
+                e.Graphics.DrawString(optionItem.name, e.Font, new SolidBrush(e.ForeColor), e.Bounds.Left + 16, e.Bounds.Top + 1);
+                if (optionItem.icon != null) {
+                    e.Graphics.DrawImage(optionItem.icon, e.Bounds.Left, e.Bounds.Top + 1);
+                }
+
             } else {
                 // Default item
                 ImageComboBoxItem item = new(Items[e.Index].ToString());

@@ -6,7 +6,6 @@ namespace BokInterface.Items {
 
         public ZoktaiItem(string name, uint value, string icon = "", bool perishable = false, int durability = 0, Item? coveredItem = null, int buyPrice = 0) : base(name, value, icon, perishable, durability, coveredItem, buyPrice) {
 
-            // If an icon was specified try getting & setting it to the property
             if (icon != "") {
                 try {
                     this.icon = (Image)ResourceLoader.LoadResource("ZoktaiResources", icon);
@@ -35,9 +34,6 @@ namespace BokInterface.Items {
             this.durability = durability < rottenAt ? durability : 0;
         }
 
-        /// <summary>Returns the item this instance should rott into</summary>
-        /// <param name="value">Instance item value</param>
-        /// <returns><c>String</c>Item name</returns>
         protected override string GetRottsInto(uint value) {
             return value switch {
                 // Redshroom & Blueshroom
@@ -57,9 +53,6 @@ namespace BokInterface.Items {
             };
         }
 
-        /// <summary>Returns the value at which this instance should turn into a rotten item</summary>
-        /// <param name="value">Instance item value</param>
-        /// <returns><c>Int</c>Rottens at value</returns>
         protected override int GetRottensAt(uint value) {
             return value switch {
                 9 or 10 or 13 => 7680,

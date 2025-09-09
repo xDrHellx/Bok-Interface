@@ -195,10 +195,24 @@ namespace BokInterface {
                 ToolStripMenuItem editMenu = WinFormHelpers.CreateToolStripMenuItem("editMenu", "Edit", menuStrip: _menuBar);
 
                 if (shorterGameName != "Boktai") {
-                    AddDropdownMenuItem("editStatusMenu", "Status", editMenu, OpenStatusEditor);
-                    AddDropdownMenuItem("edititemsMenu", "Items", editMenu, OpenInventoryEditor);
-                    AddDropdownMenuItem("editKeyitemsMenu", "Key items", editMenu, OpenKeyItemsEditor);
-                    AddDropdownMenuItem("editWeaponsMenu", "Weapons", editMenu, OpenWeaponsEditor);
+                    ToolStripMenuItem editStatusMenu = WinFormHelpers.CreateToolStripMenuItem("editStatusMenu", "&Status", menuItem: editMenu);
+                    editStatusMenu.Click += new EventHandler(OpenStatusEditor);
+                    editMenu.DropDownItems.Add(editStatusMenu);
+                }
+
+                ToolStripMenuItem editItemsMenu = WinFormHelpers.CreateToolStripMenuItem("edititemsMenu", "&Items", menuItem: editMenu);
+                editItemsMenu.Click += new EventHandler(OpenInventoryEditor);
+                editMenu.DropDownItems.Add(editItemsMenu);
+
+                if (shorterGameName != "Boktai") {
+
+                    ToolStripMenuItem editKeyItemsMenu = WinFormHelpers.CreateToolStripMenuItem("editKeyitemsMenu", "&Key items", menuItem: editMenu);
+                    editKeyItemsMenu.Click += new EventHandler(OpenKeyItemsEditor);
+                    editMenu.DropDownItems.Add(editKeyItemsMenu);
+
+                    ToolStripMenuItem editWeaponsMenu = WinFormHelpers.CreateToolStripMenuItem("editWeaponsMenu", "&Weapons", menuItem: editMenu);
+                    editWeaponsMenu.Click += new EventHandler(OpenWeaponsEditor);
+                    editMenu.DropDownItems.Add(editWeaponsMenu);
                 }
 
                 if (shorterGameName == "Shinbok" || shorterGameName == "Boktai") {
