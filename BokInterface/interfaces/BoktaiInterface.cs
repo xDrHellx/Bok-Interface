@@ -1,9 +1,11 @@
 using System;
 using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
 
 using BokInterface.Addresses;
 using BokInterface.Utils;
+using BokInterface.Weapons;
 
 /**
  * File for the Boktai TSiiYH interface itself
@@ -15,6 +17,7 @@ namespace BokInterface {
         #region Properties
 
         private readonly BoktaiAddresses _boktaiAddresses = new();
+        private readonly BoktaiGuns _boktaiGuns = new();
         private Label _bok1_currentStatusHpValue = new();
         private Label _bok1_currentStatusEneValue = new();
         private ToolStripMenuItem _enableAstroBattery = new();
@@ -69,7 +72,9 @@ namespace BokInterface {
                     // Values aren't available for Infinite & Astro batteries
                     _bok1_currentStatusEneValue.Text = "-";
                 } else {
-                    _bok1_currentStatusEneValue.Text = APIs.Memory.ReadU16(_boktaiAddresses.Inventory["battery_charges"].Address + (battery * 2)).ToString();
+                    // Otherwise get the capacity for that battery
+                    int capacity = _boktaiGuns.Batteries.ElementAt((int)battery).Value.capacity;
+                    _bok1_currentStatusEneValue.Text = APIs.Memory.ReadU16(_boktaiAddresses.Inventory["battery_charges"].Address + (battery * 2)) + " / " + (capacity * 1024);
                 }
 
                 // Update the current & average speed
@@ -122,8 +127,8 @@ namespace BokInterface {
             WinFormHelpers.CreateLabel("djangoCurrentEneLabel", "ENE :", 7, 34, 34, 15, _currentStatusGroupBox);
 
             // Current status values
-            _bok1_currentStatusHpValue = WinFormHelpers.CreateLabel("djangoCurrentHpValue", "", 44, 19, 31, 15, _currentStatusGroupBox, textAlignment: "MiddleRight");
-            _bok1_currentStatusEneValue = WinFormHelpers.CreateLabel("djangoCurrentEneValue", "", 44, 34, 31, 15, _currentStatusGroupBox, textAlignment: "MiddleRight");
+            _bok1_currentStatusHpValue = WinFormHelpers.CreateLabel("djangoCurrentHpValue", "", 44, 19, 67, 15, _currentStatusGroupBox, textAlignment: "MiddleRight");
+            _bok1_currentStatusEneValue = WinFormHelpers.CreateLabel("djangoCurrentEneValue", "", 44, 34, 67, 15, _currentStatusGroupBox, textAlignment: "MiddleRight");
         }
 
         #endregion
