@@ -1,3 +1,5 @@
+using System.Windows.Forms;
+
 using BokInterface.Utils;
 
 /**
@@ -34,6 +36,20 @@ namespace BokInterface {
         /// <returns><c>int</c>Width</returns>
         private int GetScreenWidth() {
             return APIs.Client.ScreenWidth();
+        }
+
+        #endregion
+
+        #region GUI data
+
+        /// <summary>Generate the menu related to the HUD / GUI data</summary>
+        private void GenerateHudMenu() {
+            if (shorterGameName == "LunarKnights") {
+                return;
+            }
+
+            ToolStripMenuItem hudMenu = WinFormHelpers.CreateToolStripMenuItem("hudMenu", "HUD", menuStrip: _menuBar);
+            AddDropdownMenuItem("enableGui", "Enable GUI", hudMenu, (sender, e) => ToggleGuiData(sender, ref _showGui));
         }
 
         #endregion
