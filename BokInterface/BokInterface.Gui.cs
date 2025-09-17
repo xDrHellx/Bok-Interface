@@ -10,6 +10,16 @@ namespace BokInterface {
 
     partial class BokInterface {
 
+        #region GUI data properties
+
+        private bool _showGui,
+            _showRtc,
+            _showIgtFrameCounter,
+            _showInterestRate,
+            _showBossHp;
+
+        #endregion
+
         #region GUI related code
 
         public static int gbaScreenWidth = 0xF0;
@@ -50,6 +60,10 @@ namespace BokInterface {
 
             ToolStripMenuItem hudMenu = WinFormHelpers.CreateToolStripMenuItem("hudMenu", "HUD", menuStrip: _menuBar);
             AddDropdownMenuItem("enableGui", "Enable GUI", hudMenu, (sender, e) => ToggleGuiData(sender, ref _showGui));
+            AddDropdownMenuItem("showRtc", "Real-time clock", hudMenu, (sender, e) => ToggleGuiData(sender, ref _showRtc));
+            AddDropdownMenuItem("showIgtFrameCounter", "Frame since game start", hudMenu, (sender, e) => ToggleGuiData(sender, ref _showIgtFrameCounter));
+            AddDropdownMenuItem("showInterestRate", "Interest rate", hudMenu, (sender, e) => ToggleGuiData(sender, ref _showInterestRate));
+            AddDropdownMenuItem("showBossHp", "Boss HP", hudMenu, (sender, e) => ToggleGuiData(sender, ref _showBossHp));
         }
 
         #endregion

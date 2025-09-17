@@ -274,16 +274,22 @@ namespace BokInterface {
 
             // RTC
             int halfScreenHeight = GetScreenHeight() / 2;
-            APIs.Gui.Text(3, halfScreenHeight, "RTC:");
-            APIs.Gui.Text(50, halfScreenHeight, Utilities.FormatTimeTo24(_zoktaiAddresses.Misc["rtc_hours"].Value, _zoktaiAddresses.Misc["rtc_minutes"].Value, _zoktaiAddresses.Misc["rtc_seconds"].Value));
+            if (_showRtc == true) {
+                APIs.Gui.Text(3, halfScreenHeight, "RTC:");
+                APIs.Gui.Text(50, halfScreenHeight, Utilities.FormatTimeTo24(_zoktaiAddresses.Misc["rtc_hours"].Value, _zoktaiAddresses.Misc["rtc_minutes"].Value, _zoktaiAddresses.Misc["rtc_seconds"].Value));
+            }
 
             // Frames since game start
-            APIs.Gui.Text(3, halfScreenHeight + 15, "IGT:");
-            APIs.Gui.Text(50, halfScreenHeight + 15, _memoryValues.Misc["igt_frame_counter"].Value.ToString());
+            if (_showIgtFrameCounter == true) {
+                APIs.Gui.Text(3, halfScreenHeight + 15, "IGT:");
+                APIs.Gui.Text(50, halfScreenHeight + 15, _memoryValues.Misc["igt_frame_counter"].Value.ToString());
+            }
 
             // Interest rate
-            APIs.Gui.Text(3, halfScreenHeight + 30, "Interest rate:");
-            APIs.Gui.Text(150, halfScreenHeight + 30, Utilities.GetInterestRateFromValue(_memoryValues.Solls["interest_rate"].Value));
+            if (_showInterestRate == true) {
+                APIs.Gui.Text(3, halfScreenHeight + 30, "Interest rate:");
+                APIs.Gui.Text(150, halfScreenHeight + 30, Utilities.GetInterestRateFromValue(_memoryValues.Solls["interest_rate"].Value));
+            }
         }
 
         #endregion

@@ -36,8 +36,7 @@ namespace BokInterface {
         private bool _supportedGame = false,
             _interfaceActivated = false,
             _isDS = false,
-            _previousDisplayMessagesSetting = true,
-            _showGui = false;
+            _previousDisplayMessagesSetting = true;
         private int _retryCount = 0;
         public bool _previousIsPauseSetting = false;
         /// <summary>List of functions to call each frame</summary>
@@ -273,7 +272,7 @@ namespace BokInterface {
         /// <summary>Resets the variables used for initializing the interface</summary>
         protected void ResetInitializationVariables() {
             _retryCount = 0;
-            _isDS = _supportedGame = _interfaceActivated = _showGui = false;
+            _isDS = _supportedGame = _interfaceActivated = _showGui = _showRtc = _showIgtFrameCounter = _showInterestRate = _showBossHp = false;
             currentGameName = shorterGameName = "";
         }
 

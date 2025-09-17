@@ -170,13 +170,17 @@ namespace BokInterface {
 
             // Frames since game start
             int halfScreenHeight = GetScreenHeight() / 2;
-            APIs.Gui.Text(3, halfScreenHeight + 15, "IGT:");
-            APIs.Gui.Text(50, halfScreenHeight + 15, _boktaiAddresses.Misc["igt_frame_counter"].Value.ToString());
+            if (_showIgtFrameCounter == true) {
+                APIs.Gui.Text(3, halfScreenHeight + 15, "IGT:");
+                APIs.Gui.Text(50, halfScreenHeight + 15, _boktaiAddresses.Misc["igt_frame_counter"].Value.ToString());
+            }
 
             // Boss HP (if available)
-            uint bossHp = _boktaiAddresses.Misc["boss_hp"].Value;
-            if (bossHp > 0) {
-                APIs.Gui.Text(GetScreenWidth() - 127, 1, "Boss: " + bossHp);
+            if (_showBossHp == true) {
+                uint bossHp = _boktaiAddresses.Misc["boss_hp"].Value;
+                if (bossHp > 0) {
+                    APIs.Gui.Text(GetScreenWidth() - 127, 1, "Boss: " + bossHp);
+                }
             }
         }
 
