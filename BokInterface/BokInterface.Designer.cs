@@ -237,8 +237,8 @@ namespace BokInterface {
                 AddDropdownMenuItem("solarBankInterestsSimMenu", "Solar bank interests simulator", toolsMenu, OpenSolarBankInterestsSim);
             }
 
-            // HUD / GUI
-            GenerateHudMenu();
+            // GUI
+            GenerateGuiMenu();
         }
 
         #endregion

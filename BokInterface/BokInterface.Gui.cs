@@ -52,18 +52,21 @@ namespace BokInterface {
 
         #region GUI data
 
-        /// <summary>Generate the menu related to the HUD / GUI data</summary>
-        private void GenerateHudMenu() {
+        /// <summary>Generate the menu related to the GUI data</summary>
+        private void GenerateGuiMenu() {
             if (shorterGameName == "LunarKnights") {
                 return;
             }
 
-            ToolStripMenuItem hudMenu = WinFormHelpers.CreateToolStripMenuItem("hudMenu", "HUD", menuStrip: _menuBar);
-            AddDropdownMenuItem("enableGui", "Enable GUI", hudMenu, (sender, e) => ToggleGuiData(sender, ref _showGui));
-            AddDropdownMenuItem("showRtc", "Real-time clock", hudMenu, (sender, e) => ToggleGuiData(sender, ref _showRtc));
-            AddDropdownMenuItem("showIgtFrameCounter", "Frame since game start", hudMenu, (sender, e) => ToggleGuiData(sender, ref _showIgtFrameCounter));
-            AddDropdownMenuItem("showInterestRate", "Interest rate", hudMenu, (sender, e) => ToggleGuiData(sender, ref _showInterestRate));
-            AddDropdownMenuItem("showBossHp", "Boss HP", hudMenu, (sender, e) => ToggleGuiData(sender, ref _showBossHp));
+            ToolStripMenuItem guiMenu = WinFormHelpers.CreateToolStripMenuItem("guiMenu", "GUI", menuStrip: _menuBar);
+            AddDropdownMenuItem("enableGui", "Enable GUI", guiMenu, (sender, e) => ToggleGuiData(sender, ref _showGui));
+            AddDropdownMenuItem("showRtc", "Real-time clock", guiMenu, (sender, e) => ToggleGuiData(sender, ref _showRtc));
+            AddDropdownMenuItem("showIgtFrameCounter", "Frame since game start", guiMenu, (sender, e) => ToggleGuiData(sender, ref _showIgtFrameCounter));
+            AddDropdownMenuItem("showInterestRate", "Interest rate", guiMenu, (sender, e) => ToggleGuiData(sender, ref _showInterestRate));
+
+            if (shorterGameName == "Boktai") {
+                AddDropdownMenuItem("showBossHp", "Boss HP", guiMenu, (sender, e) => ToggleGuiData(sender, ref _showBossHp));
+            }
         }
 
         #endregion
