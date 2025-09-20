@@ -88,6 +88,8 @@ namespace BokInterface.Addresses {
 
             Django.Add("current_hp", new DynamicMemoryValue("current_hp", memoryAddresses.Misc["current_stat"].Address, memoryAddresses.Django["current_hp"].Address));
             Django.Add("current_ene", new DynamicMemoryValue("current_ene", memoryAddresses.Misc["current_stat"].Address, memoryAddresses.Django["current_ene"].Address));
+            Django.Add("max_hp", new DynamicMemoryValue("max_hp", memoryAddresses.Misc["current_stat"].Address, memoryAddresses.Django["max_hp"].Address));
+            Django.Add("max_ene", new DynamicMemoryValue("max_ene", memoryAddresses.Misc["current_stat"].Address, memoryAddresses.Django["max_ene"].Address));
 
             Django.Add("level", new DynamicMemoryValue("level", memoryAddresses.Misc["stat"].Address, memoryAddresses.Django["level"].Address));
             Django.Add("exp", new DynamicMemoryValue("exp", memoryAddresses.Misc["stat"].Address, memoryAddresses.Django["exp"].Address, memoryAddresses.Django["exp"].Type));
@@ -171,6 +173,8 @@ namespace BokInterface.Addresses {
             Django.Add("current_hp", new DynamicMemoryValue("current_hp", memoryAddresses.Misc["actor"].Address, memoryAddresses.Django["current_hp"].Address));
             Django.Add("current_ene", new DynamicMemoryValue("current_ene", memoryAddresses.Misc["actor"].Address, memoryAddresses.Django["current_ene"].Address));
             Django.Add("current_trc", new DynamicMemoryValue("current_trc", memoryAddresses.Misc["actor"].Address, memoryAddresses.Django["current_trc"].Address));
+            Django.Add("max_hp", new DynamicMemoryValue("max_hp", memoryAddresses.Misc["actor"].Address, memoryAddresses.Django["max_hp"].Address));
+            Django.Add("max_ene", new DynamicMemoryValue("max_ene", memoryAddresses.Misc["actor"].Address, memoryAddresses.Django["max_ene"].Address));
 
             Django.Add("level", new DynamicMemoryValue("level", memoryAddresses.Misc["stat"].Address, memoryAddresses.Django["level"].Address));
             Django.Add("exp", new DynamicMemoryValue("exp", memoryAddresses.Misc["stat"].Address, memoryAddresses.Django["exp"].Address, memoryAddresses.Django["exp"].Type));

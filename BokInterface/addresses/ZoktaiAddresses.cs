@@ -51,12 +51,14 @@ namespace BokInterface.Addresses {
 
             // Current stats
             _note = "Used for damage calculations, will be copied to its Persistent equivalent on screen transition. Must be combined with the \"stat\" memory address' value";
-            Django.Add("current_hp", new MemoryAddress(0x364, _note, domain: "EWRAM"));
-            Django.Add("current_ene", new MemoryAddress(0x368, _note, domain: "EWRAM"));
-            Django.Add("current_vit", new MemoryAddress(0x35C, _note, domain: "EWRAM"));
-            Django.Add("current_spr", new MemoryAddress(0x35E, _note, domain: "EWRAM"));
-            Django.Add("current_str", new MemoryAddress(0x360, _note, domain: "EWRAM"));
-            Django.Add("current_agi", new MemoryAddress(0x362, _note, domain: "EWRAM"));
+            Django.Add("current_hp", new MemoryAddress(0x364, note: _note, domain: "EWRAM"));
+            Django.Add("current_ene", new MemoryAddress(0x368, note: _note, domain: "EWRAM"));
+            Django.Add("current_vit", new MemoryAddress(0x35C, note: _note, domain: "EWRAM"));
+            Django.Add("current_spr", new MemoryAddress(0x35E, note: _note, domain: "EWRAM"));
+            Django.Add("current_str", new MemoryAddress(0x360, note: _note, domain: "EWRAM"));
+            Django.Add("current_agi", new MemoryAddress(0x362, note: _note, domain: "EWRAM"));
+            Django.Add("max_hp", new MemoryAddress(0x366, _note, domain: "EWRAM"));
+            Django.Add("max_ene", new MemoryAddress(0x36A, _note, domain: "EWRAM"));
 
             /**
              * Persistent stats (used on screen transitions & save data)
