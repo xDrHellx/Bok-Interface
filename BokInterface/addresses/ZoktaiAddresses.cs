@@ -57,6 +57,8 @@ namespace BokInterface.Addresses {
             Django.Add("current_spr", new MemoryAddress(0x35E, note: _note, domain: "EWRAM"));
             Django.Add("current_str", new MemoryAddress(0x360, note: _note, domain: "EWRAM"));
             Django.Add("current_agi", new MemoryAddress(0x362, note: _note, domain: "EWRAM"));
+            Django.Add("max_hp", new MemoryAddress(0x366, _note, domain: "EWRAM"));
+            Django.Add("max_ene", new MemoryAddress(0x36A, _note, domain: "EWRAM"));
 
             /**
              * Persistent stats (used on screen transitions & save data)
