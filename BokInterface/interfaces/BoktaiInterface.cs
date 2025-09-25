@@ -175,10 +175,13 @@ namespace BokInterface {
                 APIs.Gui.Text(50, halfScreenHeight + 15, _boktaiAddresses.Misc["igt_frame_counter"].Value.ToString());
             }
 
-            // Boss HP (if available)
+            /**
+             * Boss HP (if available)
+             * Also for some reason the value is set to 16416 during dungeon intros, so we ignore that value in particular
+             */
             if (_showBossHp == true) {
                 uint bossHp = _boktaiAddresses.Misc["boss_hp"].Value;
-                if (bossHp > 0) {
+                if (bossHp > 0 && bossHp != 16416) {
                     APIs.Gui.Text(GetScreenWidth() - 127, 1, "Boss: " + bossHp);
                 }
             }
