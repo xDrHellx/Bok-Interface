@@ -118,6 +118,9 @@ namespace BokInterface.Addresses {
             Misc.Add("str", new DynamicMemoryValue("str", memoryAddresses.Misc["stat"].Address, memoryAddresses.Django["persistent_str"].Address));
             Misc.Add("agi", new DynamicMemoryValue("agi", memoryAddresses.Misc["stat"].Address, memoryAddresses.Django["persistent_agi"].Address));
 
+            // Other stuff
+            Misc.Add("igt_frame_counter", new DynamicMemoryValue("igt_frame_counter", memoryAddresses.Misc["stat"].Address, memoryAddresses.Misc["igt_frame_counter"].Address, memoryAddresses.Misc["igt_frame_counter"].Type));
+
             // U32
             U32.Add("total_exp_until_next_level", memoryAddresses.Django["total_exp_until_next_level"]);
 
@@ -153,6 +156,7 @@ namespace BokInterface.Addresses {
             Solls.Add("solar_station", new DynamicMemoryValue("solar_station", memoryAddresses.Misc["stat"].Address, memoryAddresses.Solls["solar_station"].Address, memoryAddresses.Solls["solar_station"].Type));
             Solls.Add("solar_bank", new DynamicMemoryValue("solar_bank", memoryAddresses.Misc["stat"].Address, memoryAddresses.Solls["solar_bank"].Address, memoryAddresses.Solls["solar_bank"].Type));
             Solls.Add("dark_loans", new DynamicMemoryValue("dark_loans", memoryAddresses.Misc["stat"].Address, memoryAddresses.Solls["dark_loans"].Address, memoryAddresses.Solls["dark_loans"].Type));
+            Solls.Add("interest_rate", new DynamicMemoryValue("interest_rate", memoryAddresses.Misc["stat"].Address, memoryAddresses.Solls["interest_rate"].Address, memoryAddresses.Solls["interest_rate"].Type));
         }
 
         #endregion
@@ -195,10 +199,14 @@ namespace BokInterface.Addresses {
             Misc.Add("cards_spr", new DynamicMemoryValue("cards_spr", memoryAddresses.Misc["stat"].Address, memoryAddresses.Django["persistent_cards_spr"].Address, memoryAddresses.Django["persistent_cards_spr"].Type));
             Misc.Add("cards_str", new DynamicMemoryValue("cards_str", memoryAddresses.Misc["stat"].Address, memoryAddresses.Django["persistent_cards_str"].Address, memoryAddresses.Django["persistent_cards_str"].Type));
 
+            // Other stuff
+            Misc.Add("igt_frame_counter", new DynamicMemoryValue("igt_frame_counter", memoryAddresses.Misc["stat"].Address, memoryAddresses.Misc["igt_frame_counter"].Address, memoryAddresses.Misc["igt_frame_counter"].Type));
+
             // Solls
             Solls.Add("solar_station", new DynamicMemoryValue("solar_station", memoryAddresses.Misc["stat"].Address, memoryAddresses.Solls["solar_station"].Address, memoryAddresses.Solls["solar_station"].Type));
             Solls.Add("solar_bank", new DynamicMemoryValue("solar_bank", memoryAddresses.Misc["stat"].Address, memoryAddresses.Solls["solar_bank"].Address, memoryAddresses.Solls["solar_bank"].Type));
             Solls.Add("dark_loans", new DynamicMemoryValue("dark_loans", memoryAddresses.Misc["stat"].Address, memoryAddresses.Solls["dark_loans"].Address, memoryAddresses.Solls["dark_loans"].Type));
+            Solls.Add("interest_rate", new DynamicMemoryValue("interest_rate", memoryAddresses.Misc["stat"].Address, memoryAddresses.Solls["interest_rate"].Address, memoryAddresses.Solls["interest_rate"].Type));
 
             // Solar Bike
             // Bike.Add("name", new DynamicMemoryValue("name", memoryAddresses.Misc["stat"].Address, memoryAddresses.Bike["name"].Address));

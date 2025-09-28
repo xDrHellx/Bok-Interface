@@ -111,6 +111,10 @@ namespace BokInterface {
                 _coffinEscapeTimerLabel.Text = "Begins escaping in : " + _memoryValues.Coffin["own_movement_timer"].Value;
                 _coffinDistanceLabel.Text = "Distance : " + distance;
             }
+
+            if (_showGui == true) {
+                ShowBoktaiGui();
+            }
         }
 
         #endregion
@@ -156,6 +160,31 @@ namespace BokInterface {
                 _enableAstroBattery.Checked = !_enableAstroBattery.Checked;
                 _memoryValues.Misc["astro_battery_unlocked"].Value = _enableAstroBattery.Checked == true ? _boktaiAddresses.Misc["astro_battery_unlock_value"].Value : 0x0;
             };
+        }
+
+        #endregion
+
+        #region GUI
+
+        private void ShowBoktaiGui() {
+
+            // Frames since game start
+            int halfScreenHeight = GetScreenHeight() / 2;
+            if (_showIgtFrameCounter == true) {
+                APIs.Gui.Text(3, halfScreenHeight + 15, "IGT:");
+                APIs.Gui.Text(50, halfScreenHeight + 15, _boktaiAddresses.Misc["igt_frame_counter"].Value.ToString());
+            }
+
+            /**
+             * Boss HP (if available)
+             * Also for some reason the value is set to 16416 during dungeon intros, so we ignore that value in particular
+             */
+            if (_showBossHp == true) {
+                uint bossHp = _boktaiAddresses.Misc["boss_hp"].Value;
+                if (bossHp > 0 && bossHp != 16416) {
+                    APIs.Gui.Text(GetScreenWidth() - 127, 1, "Boss: " + bossHp);
+                }
+            }
         }
 
         #endregion

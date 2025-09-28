@@ -272,7 +272,7 @@ namespace BokInterface {
         /// <summary>Resets the variables used for initializing the interface</summary>
         protected void ResetInitializationVariables() {
             _retryCount = 0;
-            _isDS = _supportedGame = _interfaceActivated = false;
+            _isDS = _supportedGame = _interfaceActivated = _showGui = _showRtc = _showIgtFrameCounter = _showInterestRate = _showBossHp = false;
             currentGameName = shorterGameName = "";
         }
 

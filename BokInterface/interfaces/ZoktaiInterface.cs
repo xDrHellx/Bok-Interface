@@ -123,6 +123,10 @@ namespace BokInterface {
             UpdateZoktaiEvent(_enableBlindboxLvl4, "blindbox_lvl_4", 0x8FAA);
             UpdateZoktaiEvent(_enableBlindboxLvl5ValentineDay, "blindbox_lvl_5_valentine_day", 0x90E0);
             UpdateZoktaiEvent(_enableStarPiece, "star_piece", 0x8FD6);
+
+            if (_showGui == true) {
+                ShowZoktaiGui();
+            }
         }
 
         #endregion
@@ -260,6 +264,32 @@ namespace BokInterface {
 
             // Check / uncheck the menu item based on if the downloadable event is enabled or not
             menuItem.Checked = _zoktaiAddresses.JoySpots[memKey].Value == onCheckedValue;
+        }
+
+        #endregion
+
+        #region GUI
+
+        private void ShowZoktaiGui() {
+
+            // RTC
+            int halfScreenHeight = GetScreenHeight() / 2;
+            if (_showRtc == true) {
+                APIs.Gui.Text(3, halfScreenHeight, "RTC:");
+                APIs.Gui.Text(50, halfScreenHeight, Utilities.FormatTimeTo24(_zoktaiAddresses.Misc["rtc_hours"].Value, _zoktaiAddresses.Misc["rtc_minutes"].Value, _zoktaiAddresses.Misc["rtc_seconds"].Value));
+            }
+
+            // Frames since game start
+            if (_showIgtFrameCounter == true) {
+                APIs.Gui.Text(3, halfScreenHeight + 15, "IGT:");
+                APIs.Gui.Text(50, halfScreenHeight + 15, _memoryValues.Misc["igt_frame_counter"].Value.ToString());
+            }
+
+            // Interest rate
+            if (_showInterestRate == true) {
+                APIs.Gui.Text(3, halfScreenHeight + 30, "Interest rate:");
+                APIs.Gui.Text(150, halfScreenHeight + 30, Utilities.GetInterestRateFromValue(_memoryValues.Solls["interest_rate"].Value));
+            }
         }
 
         #endregion

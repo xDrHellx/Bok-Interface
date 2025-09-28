@@ -106,7 +106,7 @@ namespace BokInterface.Addresses {
             Misc.Add("world_state_backup", new MemoryAddress(0x0203EC00, note: "Backup of story progress & dungeon states", type: "U32", domain: "EWRAM"));
             Misc.Add("scratch", new MemoryAddress(0x0203F000, type: "U32", domain: "EWRAM"));
             Misc.Add("playthrough_count", new MemoryAddress(0x0203D8B6, note: "0 = New Game, 1 = NG+, 2 = NG++, ...", domain: "EWRAM"));
-            Misc.Add("frames_since_new_file", new MemoryAddress(0x0203D8FC, note: "IGT frames since creating save file", type: "U32", domain: "EWRAM"));
+            Misc.Add("igt_frame_counter", new MemoryAddress(0x0203D8FC, note: "IGT frames since creating save file", type: "U32", domain: "EWRAM"));
             Misc.Add("purification_immortal_hp", new MemoryAddress(0x0203DAF4, type: "U32", domain: "EWRAM"));
             // Misc.Add("story_progress", new MemoryAddress(0x0203E80E, domain: "EWRAM"));
             Misc.Add("item_effect_active", new MemoryAddress(0x03001C40, note: "bitmask", domain: "IWRAM"));
