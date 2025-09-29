@@ -175,6 +175,10 @@ namespace BokInterface {
             }
         }
 
+        #endregion
+
+        #region Menu
+
         /// <summary>Generate the menu for the main window</summary>
         private void GenerateMenu() {
 
