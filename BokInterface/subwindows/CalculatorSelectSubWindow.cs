@@ -1,7 +1,6 @@
-using System;
 using System.Windows.Forms;
 
-using BokInterface.CalcSubwindows;
+using BokInterface.Utils;
 
 /**
  * Main file for tools selection subwindows
@@ -42,8 +41,8 @@ namespace BokInterface {
         /// <param name="width">Width (in pixels)</param>
         /// <param name="height">Height (in pixels)</param>
         private void AddCalculatorsLabel(int posX = 5, int posY = 5, int width = 188, int height = 15) {
-            Label availableCalculatorsLabel = CreateLabel("availableCalculatorsLabel", "-- Calculators available --", posX, posY, width, height);
-            calculatorsSelectionWindow.Controls.Add(availableCalculatorsLabel);
+            Label availableCalculatorsLabel = WinFormHelpers.CreateLabel("availableCalculatorsLabel", "-- Calculators available --", posX, posY, width, height);
+            // calculatorsSelectionWindow.Controls.Add(availableCalculatorsLabel);
         }
 
         #endregion

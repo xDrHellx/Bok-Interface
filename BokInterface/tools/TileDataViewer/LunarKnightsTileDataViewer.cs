@@ -1,14 +1,19 @@
 using System.Windows.Forms;
 
 using BokInterface.Addresses;
-using BokInterface.All;
 
 namespace BokInterface.Tools.TileDataViewer {
     /// <summary>TDViewer tool for Lunar Knights / Boktai DS</summary>
     class LunarKnightsTileDataViewer : TileDataViewer {
 
+        #region Properties
+
         private readonly BokInterface _bokInterface;
         private readonly LunarKnightsAddresses _memAddresses;
+
+        #endregion
+
+        #region Constructor | Init
 
         public LunarKnightsTileDataViewer(BokInterface bokInterface, LunarKnightsAddresses lunarKnightsAddresses) {
             Owner = _bokInterface = bokInterface;
@@ -22,26 +27,22 @@ namespace BokInterface.Tools.TileDataViewer {
             mapDataAddress = djangoXposAddress = djangoYposAddress = 0;
         }
 
-        protected override void DrawTileEffect(PaintEventArgs e, uint tileEffect, int posX, int posY, int scale) {
+        #endregion
 
-            // Only handle values between a certain range (4096 = 1000 in hexadecimal)
-            if (tileEffect > 0 && tileEffect < 4096) {
+        #region Drawing
 
-                /**
-                 * Get the hexadecimal value of the tile effect
-                 * We'll use this for comparison because of current findings
-                 */
-                string hex = Utilities.IntToHex(tileEffect);
+        /// <summary>Draw tile effect icons</summary>
+        /// <param name="e">Painting event used for drawing</param>
+        /// <param name="tileEffect">Value for the tile's effect</param>
+        /// <param name="posX">X position of the tile</param>
+        /// <param name="posY">Y position of the tile</param>
+        /// <param name="scale">Scale (used for drawing)</param>
+        protected override void DrawTileEffects(PaintEventArgs e, uint tileEffect, int posX, int posY, int scale) { }
 
-                // Handle the tile effect
-                switch (hex) {
-                    default:
-                        // If tile effect is currently not handled, print its values on-screen & show its position on the tilemap to study it
-                        // APIs.Gui.AddMessage("hex : " + hex.ToString() + " ( uint : " + tileEffect + ")");
-                        // this.DrawTileImage(e, "qmark", 5 + posX * scale, 5 + posY * scale);
-                        break;
-                }
-            }
+        protected override string GetTileEffectName(int bitNb) {
+            return "";
         }
+
+        #endregion
     }
 }

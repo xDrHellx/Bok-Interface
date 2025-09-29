@@ -1,12 +1,15 @@
 using BizHawk.Client.Common;
 using BizHawk.Client.EmuHawk;
+
 using System;
 using System.Windows.Forms;
 using System.Drawing;
 using System.Linq;
 using System.Collections.Generic;
-using BokInterface.All;
+
+using BokInterface.Utils;
 using BokInterface.Calculators;
+using BokInterface.Addresses;
 
 /**
  * File for the main / initialization part of the Bok interface
@@ -22,7 +25,7 @@ namespace BokInterface {
     [ExternalToolEmbeddedIcon("BokInterface.img.django_head_16.png")]
     public partial class BokInterface : ToolFormBase, IExternalToolForm {
 
-        #region Properties
+        #region Tool properties
 
         protected override string WindowTitleStatic => "Bok Interface v0.1.9a";
         public override bool BlocksInputWhenFocused => false;
@@ -30,22 +33,12 @@ namespace BokInterface {
         public uint currentGameId;
         public static string currentGameName = "",
             shorterGameName = "";
-        protected bool supportedGame = false,
-            interfaceActivated = false,
-            isDS = false;
-        protected int retryCount = 0;
-        private bool _previousDisplayMessagesSetting = true;
+        private bool _supportedGame = false,
+            _interfaceActivated = false,
+            _isDS = false,
+            _previousDisplayMessagesSetting = true;
+        private int _retryCount = 0;
         public bool _previousIsPauseSetting = false;
-
-        /// <summary>
-        /// List of MemoryValues instances.<br/>
-        /// These are used for simplyfing getting and setting values from memory addresses that are "dynamic."
-        /// </summary>
-        private MemoryValues _memoryValues = new("");
-
-        /// <summary>Movement calculator instance</summary>
-        private MovementCalculator _movementCalculator = new();
-
         /// <summary>List of functions to call each frame</summary>
         public static List<Action> functionsList = [];
 
@@ -56,7 +49,54 @@ namespace BokInterface {
 
         #endregion
 
-        #region Main methods
+        #region Instances
+
+        /// <summary>
+        ///     List of MemoryValues instances.<br/>
+        ///     These are used for simplyfing getting and setting values from memory addresses that are "dynamic."
+        /// </summary>
+        private MemoryValues _memoryValues = new("");
+        /// <summary>Movement calculator instance</summary>
+        private MovementCalculator _movementCalculator = new();
+
+        #endregion
+
+        #region Subwindows
+
+        private readonly List<Form> _subwindows = [];
+        public bool statusEditorOpened = false,
+            inventoryEditorOpened = false,
+            keyItemsEditorOpened = false,
+            equipsEditorOpened = false,
+            solarGunEditorOpened = false,
+            weaponsEditorOpened = false,
+            magicsEditorOpened = false,
+            tileDataViewerActive = false,
+            memValuesListingActive = false,
+            solarBankInterestsSimActive = false;
+
+        #endregion
+
+        #region Common elements
+
+        private MenuStrip _menuBar = new();
+        private GroupBox _currentStatusGroupBox = new(),
+            _currentStatsGroupBox = new(),
+            _miscDataGroupBox = new();
+
+        // Misc data labels
+        private Label _averageSpeedLabel = new(),
+            _currentSpeedLabel = new(),
+            _coffinDamageLabel = new(),
+            _coffinWindupTimerLabel = new(),
+            _coffinShakeTimerLabel = new(),
+            _coffinShakeDurationLabel = new(),
+            _coffinEscapeTimerLabel = new(),
+            _coffinDistanceLabel = new();
+
+        #endregion
+
+        #region Init
 
         public BokInterface() {
             InitializeInterface();
@@ -68,11 +108,8 @@ namespace BokInterface {
             // Update the APIs, as some of them might not be available if a game is not loaded
             APIs.Update(MainForm);
 
+            // Reset the variables for initializing the corresponding game's interface
             ResetInitializationVariables();
-
-            // Clear subwindows related to calculators & extra tools to prevent errors caused by switching between games
-            ClearCalculators();
-            ClearExtraTools();
 
             // Try initializing the interface again
             InitializeInterface();
@@ -92,7 +129,7 @@ namespace BokInterface {
 
                 // Get & set the infos about the game currently running on BizHawk
                 DetectCurrentGame();
-                if (interfaceActivated == true) {
+                if (_interfaceActivated == true) {
                     ShowInterfaceIndicator();
                 } else {
                     /**
@@ -101,8 +138,8 @@ namespace BokInterface {
                      *
                      * 10 frames should be enough for this
                      */
-                    if (retryCount < 10) {
-                        retryCount++;
+                    if (_retryCount < 10) {
+                        _retryCount++;
                         DetectCurrentGame();
                     }
                 }
@@ -114,11 +151,11 @@ namespace BokInterface {
         /// <summary>Executed after every frame (except while turboing, use FastUpdateAfter for that)</summary>
         protected override void UpdateAfter() {
             try {
-                if (supportedGame == true) {
+                if (_supportedGame == true) {
                     ShowInterfaceIndicator();
 
                     // If the interface is not activated, reinitialize it
-                    if (interfaceActivated == false) {
+                    if (_interfaceActivated == false) {
                         InitializeComponent();
                     }
 
@@ -166,13 +203,17 @@ namespace BokInterface {
                      *
                      * 10 frames should be enough for this
                      */
-                    if (retryCount < 10) {
-                        retryCount++;
+                    if (_retryCount < 10) {
+                        _retryCount++;
                         DetectCurrentGame();
                     }
                 }
             } catch { }
         }
+
+        #endregion
+
+        #region Game detection
 
         /// <summary>
         /// Detects the current game <br/>
@@ -196,22 +237,22 @@ namespace BokInterface {
                 case 1246311253:    // JP
                     currentGameName = "Boktai: The Sun is in Your Hand";
                     shorterGameName = "Boktai";
-                    supportedGame = true;
-                    isDS = false;
+                    _supportedGame = true;
+                    _isDS = false;
                     break;
                 case 1345467221:    // EU
                 case 1160917845:    // US
                 case 1244803925:    // JP 1.0 & 1.1
                     currentGameName = "Boktai 2: Solar Boy Django";
                     shorterGameName = "Zoktai";
-                    supportedGame = true;
-                    isDS = false;
+                    _supportedGame = true;
+                    _isDS = false;
                     break;
                 case 1244869461:
                     currentGameName = "Boktai 3: Sabata's Counterattack";
                     shorterGameName = "Shinbok";
-                    supportedGame = true;
-                    isDS = false;
+                    _supportedGame = true;
+                    _isDS = false;
                     break;
                 case 1481329729:    // EU 1.1
                 case 1347112001:    // EU 1.0
@@ -219,20 +260,19 @@ namespace BokInterface {
                 case 1246448705:    // JP
                     currentGameName = "Boktai DS - Lunar Knights";
                     shorterGameName = "LunarKnights";
-                    supportedGame = true;
-                    isDS = true;
+                    _supportedGame = true;
+                    _isDS = true;
                     break;
                 default:
-                    currentGameName = shorterGameName = "";
-                    supportedGame = false;
+                    ResetInitializationVariables();
                     break;
             }
         }
 
         /// <summary>Resets the variables used for initializing the interface</summary>
         protected void ResetInitializationVariables() {
-            retryCount = 0;
-            isDS = supportedGame = interfaceActivated = false;
+            _retryCount = 0;
+            _isDS = _supportedGame = _interfaceActivated = _showGui = _showRtc = _showIgtFrameCounter = _showInterestRate = _showBossHp = false;
             currentGameName = shorterGameName = "";
         }
 

@@ -19,7 +19,6 @@ namespace BokInterface.Items {
         public int rottenAt = 0;
         public Image? icon = null;
         ///<summary>Covered item if this instance is "Chocolated-covered"</summary>
-        ///<remarks>Currently unused (research for implementation is needed)</remarks>
         public Item? coveredItem;
         ///<summary>The name of the item this can rott or melt into, if perishable</summary>
         public string rottsInto = "";
@@ -32,7 +31,6 @@ namespace BokInterface.Items {
             this.name = name;
             this.value = value;
             this.perishable = perishable;
-            this.durability = durability < rottenAt ? durability : 0;
             this.coveredItem = coveredItem;
             this.buyPrice = buyPrice;
 
@@ -56,6 +54,8 @@ namespace BokInterface.Items {
                  */
                 rottenAt = GetRottensAt(this.value);
             }
+
+            this.durability = durability < rottenAt ? durability : 0;
         }
 
         /// <summary>Returns the item this instance should rott into</summary>

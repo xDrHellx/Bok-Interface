@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Windows.Forms;
 
 using BokInterface.Addresses;
-using BokInterface.All;
-using BokInterface.ExpTables;
+using BokInterface.Utils;
+using BokInterface.Tables;
 
 /**
  * Note :
- * 
+ *
  * Due to how the game works, stat points from accessories cannot be updated here
  * The game checks equipped accessories when switching room
  */
@@ -17,13 +17,15 @@ namespace BokInterface.Status {
     /// <summary>Status editor for Boktai 3</summary>
     class ShinbokStatusEditor : StatusEditor {
 
-        #region Instances
+        #region Properties
 
         private readonly MemoryValues _memoryValues;
         private readonly BokInterface _bokInterface;
         private readonly ShinbokAddresses _shinbokAddresses;
 
         #endregion
+
+        #region Constructor
 
         public ShinbokStatusEditor(BokInterface bokInterface, MemoryValues memoryValues, ShinbokAddresses shinbokAddresses) {
 
@@ -33,16 +35,13 @@ namespace BokInterface.Status {
             Icon = _bokInterface.Icon;
 
             SetFormParameters(406, 195);
-
-            // Add the onClose event to the subwindow
-            FormClosing += new FormClosingEventHandler(delegate (object sender, FormClosingEventArgs e) {
-                _bokInterface.statusEditorOpened = false;
-            });
-
-            // Add elements & show the subwindow
             AddElements();
             Show();
         }
+
+        #endregion
+
+        #region Elements
 
         protected override void AddElements() {
 
@@ -113,6 +112,10 @@ namespace BokInterface.Status {
             });
         }
 
+        #endregion
+
+        #region Values setting
+
         protected override IDictionary<string, decimal> GetDefaultValues() {
 
             IDictionary<string, decimal> defaultValues = new Dictionary<string, decimal>();
@@ -168,7 +171,7 @@ namespace BokInterface.Status {
             /**
              * If the total EXP until next level & current level are available,
              * we'll use these to prevent the game from adjusting the level while setting new values
-             * 
+             *
              * We'll set the total EXP until next level to the maximum possible to prevent that from happening
              */
             if (_memoryValues.U32.ContainsKey("total_exp_until_next_level") == true) {
@@ -199,7 +202,7 @@ namespace BokInterface.Status {
              */
             if (_memoryValues.U32.ContainsKey("total_exp_until_next_level") == true && _memoryValues.Django.ContainsKey("level")) {
                 int level = (int)_memoryValues.Django["level"].Value;
-                _memoryValues.U32["total_exp_until_next_level"].Value = level < 99 ? DjangoExpTable.shinbok[level] : 0;
+                _memoryValues.U32["total_exp_until_next_level"].Value = level < 99 ? BokTables.djangoExp[level] : 0;
             }
 
             /**
@@ -241,7 +244,7 @@ namespace BokInterface.Status {
                                 /**
                                  * Due to how the game works we have to set the sum of base + card stats
                                  * This allows stats to be updated in the current roomand stay when switching room
-                                 * 
+                                 *
                                  * We'll start by getting the key needed for the stat
                                  */
                                 string[] valueKeyParts = valueKey.Split(['_'], 2);
@@ -287,5 +290,7 @@ namespace BokInterface.Status {
                 _memoryValues.Django[key].Value = basePoints + cardPoints;
             }
         }
+
+        #endregion
     }
 }

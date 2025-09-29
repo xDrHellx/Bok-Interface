@@ -3,29 +3,26 @@ using System.Collections.Generic;
 using System.Windows.Forms;
 
 using BokInterface.Addresses;
-using BokInterface.All;
+using BokInterface.Utils;
 
 namespace BokInterface.Magics {
     /// <summary>Magics editor for Boktai 2</summary>
     class ZoktaiMagicsEditor : MagicsEditor {
 
-        #region Instances
+        #region Properties
 
         private readonly MemoryValues _memoryValues;
         private readonly BokInterface _bokInterface;
         private readonly ZoktaiAddresses _zoktaiAddresses;
         private readonly ZoktaiMagics _zoktaiMagics;
-
-        #endregion
-
-        #region Form elements
-
         protected GroupBox lunaGroupBox = new(),
             solGroupBox = new(),
             darkGroupBox = new(),
             sabataGroupBox = new();
 
         #endregion
+
+        #region Constructor
 
         public ZoktaiMagicsEditor(BokInterface bokInterface, MemoryValues memoryValues, ZoktaiAddresses zoktaiAddresses) {
 
@@ -36,16 +33,13 @@ namespace BokInterface.Magics {
             _zoktaiMagics = new();
 
             SetFormParameters(281, 249);
-
-            // Add the onClose event to the subwindow
-            FormClosing += new FormClosingEventHandler(delegate (object sender, FormClosingEventArgs e) {
-                _bokInterface.magicsEditorOpened = false;
-            });
-
-            // Add elements & show the subwindow
             AddElements();
             Show();
         }
+
+        #endregion
+
+        #region Elements
 
         protected override void AddElements() {
 
@@ -134,7 +128,18 @@ namespace BokInterface.Magics {
             });
         }
 
+        #endregion
+
+        #region Values setting
+
         protected override void SetValues() {
+
+            // Store the previous setting for BizHawk being paused
+            _bokInterface._previousIsPauseSetting = APIs.Client.IsPaused();
+
+            // Pause BizHawk
+            APIs.Client.Pause();
+
             /**
              * Retrieve the current magics value from the memory address
              * We'll use it as a base for updating the bitmask it contains
@@ -162,6 +167,14 @@ namespace BokInterface.Magics {
 
             // Set the updated value to the memory address
             _memoryValues.Inventory["magics"].Value = newMagicValue;
+
+            /**
+             * If BizHawk was not paused before setting values, unpause it
+             * Otherwise keep it paused
+             */
+            if (_bokInterface._previousIsPauseSetting == true) {
+                APIs.Client.Unpause();
+            }
         }
 
         protected override void SetDefaultValues() {
@@ -190,5 +203,7 @@ namespace BokInterface.Magics {
                 }
             }
         }
+
+        #endregion
     }
 }

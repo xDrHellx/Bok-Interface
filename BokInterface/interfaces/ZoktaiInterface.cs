@@ -2,14 +2,13 @@ using System;
 using System.Windows.Forms;
 
 using BokInterface.Addresses;
-using BokInterface.All;
+using BokInterface.Utils;
 
 /**
  * File for the Zoktai (Boktai 2) interface itself
  */
 
 namespace BokInterface {
-
     partial class BokInterface {
 
         #region Properties
@@ -29,42 +28,44 @@ namespace BokInterface {
             _bok2_djangoHammerSkill = new(),
             _bok2_djangoFistsSkill = new(),
             _bok2_djangoGunSkill = new();
-        private Button _bok2_editStatusBtn = new(),
-            _bok2_editInventoryBtn = new(),
-            _bok2_editKeyItemsBtn = new(),
-            _bok2_editEquipsBtn = new(),
-            _bok2_editWeaponsBtn = new(),
-            _bok2_editMagicsBtn = new();
         private GroupBox _bok2_currentSkillGroupBox = new();
+        private ToolStripMenuItem _enableBlindboxLvl3 = new(),
+            _enableBlindboxLvl4 = new(),
+            _enableBlindboxLvl5ValentineDay = new(),
+            _enableStarPiece = new();
 
         #endregion
 
+        #region Show interface
+
         private void ShowZoktaiInterface() {
+
+            GenerateMenu();
+            AddZoktaiDownloadableEventsMenu();
 
             // If JP version, update the game name label to add the version
             string version = "";
-            int gameNameLabelWidth = 145;
             if (currentGameId == 1244803925) {
                 version = Utilities.GetGameVersion() == 1 ? " (v1.1)" : " (v1.0)";
-                gameNameLabelWidth = 180;
             }
 
             // Current game name
-            WinFormHelpers.CreateLabel("currentGameName", currentGameName + version, 5, 5, gameNameLabelWidth, 20, this, textAlignment: "MiddleLeft");
+            WinFormHelpers.CreateLabel("currentGameName", currentGameName + version, 0, _menuBar.Height, Width, 20, this, WinFormHelpers.gameNameBackground, textAlignment: "MiddleLeft");
 
             // Sections
             AddZoktaiCurrentStatusSection();
             AddZoktaiCurrentStatsSection();
             AddZoktaiCurrentSkillSection();
-            AddZoktaiEditSection();
             AddMiscDataSection();
-            AddToolsSection();
 
             // Main window
-            SetMainWindow("Bok Interface" + (shorterGameName != "" ? " - " + shorterGameName : ""), 329, 270);
-
+            SetMainWindow("Bok Interface", 236, 277);
             ResumeLayout(false);
         }
+
+        #endregion
+
+        #region Update
 
         private void UpdateZoktaiInterface() {
 
@@ -73,13 +74,13 @@ namespace BokInterface {
 
             /**
              * Update values by retrieving from memory addresses
-             * 
+             *
              * In some cases we only update when the values are "valid"
              * For example "stat" is 0 during room transitions or at the title screen
              */
             if (currentStat > 0) {
-                _bok2_currentStatusHpValue.Text = _memoryValues.Django["current_hp"].Value.ToString();
-                _bok2_currentStatusEneValue.Text = _memoryValues.Django["current_ene"].Value.ToString();
+                _bok2_currentStatusHpValue.Text = _memoryValues.Django["current_hp"].Value + " / " + _memoryValues.Django["max_hp"].Value;
+                _bok2_currentStatusEneValue.Text = _memoryValues.Django["current_ene"].Value + " / " + _memoryValues.Django["max_ene"].Value;
 
                 _bok2_djangoLevel.Text = _memoryValues.Django["level"].Value.ToString();
                 _bok2_djangoExp.Text = _memoryValues.Django["exp"].Value.ToString();
@@ -116,30 +117,44 @@ namespace BokInterface {
                 _currentSpeedLabel.Text = "Current movement speed : " + Math.Round(speed3D, 3);
                 _averageSpeedLabel.Text = "Average over 60 frames : " + averageSpeed.ToString();
             }
+
+            // Update the menus for in-game events
+            UpdateZoktaiEvent(_enableBlindboxLvl3, "blindbox_lvl_3", 0x8E67);
+            UpdateZoktaiEvent(_enableBlindboxLvl4, "blindbox_lvl_4", 0x8FAA);
+            UpdateZoktaiEvent(_enableBlindboxLvl5ValentineDay, "blindbox_lvl_5_valentine_day", 0x90E0);
+            UpdateZoktaiEvent(_enableStarPiece, "star_piece", 0x8FD6);
+
+            if (_showGui == true) {
+                ShowZoktaiGui();
+            }
         }
+
+        #endregion
+
+        #region Elements
 
         private void AddZoktaiCurrentStatusSection() {
 
             // Section
-            currentStatusGroupBox = WinFormHelpers.CreateGroupBox("currentStatus", "Current status", 5, 25, 226, 55, this);
+            _currentStatusGroupBox = WinFormHelpers.CreateGroupBox("currentStatus", "Current status", 5, 45, 226, 55, this);
 
             // Current status labels
-            WinFormHelpers.CreateLabel("djangoCurrentHpLabel", "LIFE :", 7, 19, 34, 15, currentStatusGroupBox);
-            WinFormHelpers.CreateLabel("djangoCurrentEneLabel", "ENE :", 7, 34, 34, 15, currentStatusGroupBox);
-            WinFormHelpers.CreateLabel("djangoCurrentLevelLabel", "Level :", 93, 19, 40, 15, currentStatusGroupBox);
-            WinFormHelpers.CreateLabel("djangoCurrentExpLabel", "EXP :", 93, 34, 33, 15, currentStatusGroupBox);
+            WinFormHelpers.CreateLabel("djangoCurrentHpLabel", "LIFE :", 7, 19, 34, 15, _currentStatusGroupBox);
+            WinFormHelpers.CreateLabel("djangoCurrentEneLabel", "ENE :", 7, 34, 34, 15, _currentStatusGroupBox);
+            WinFormHelpers.CreateLabel("djangoCurrentLevelLabel", "Level :", 123, 19, 40, 15, _currentStatusGroupBox);
+            WinFormHelpers.CreateLabel("djangoCurrentExpLabel", "EXP :", 123, 34, 33, 15, _currentStatusGroupBox);
 
             // Current status values
-            _bok2_currentStatusHpValue = WinFormHelpers.CreateLabel("djangoCurrentHpValue", "", 44, 19, 31, 15, currentStatusGroupBox);
-            _bok2_currentStatusEneValue = WinFormHelpers.CreateLabel("djangoCurrentHpValue", "", 44, 34, 31, 15, currentStatusGroupBox);
-            _bok2_djangoLevel = WinFormHelpers.CreateLabel("djangoCurrentLevelValue", "", 132, 19, 31, 15, currentStatusGroupBox);
-            _bok2_djangoExp = WinFormHelpers.CreateLabel("djangoCurrentExpValue", "", 132, 34, 43, 15, currentStatusGroupBox);
+            _bok2_currentStatusHpValue = WinFormHelpers.CreateLabel("djangoCurrentHpValue", "", 44, 19, 72, 15, _currentStatusGroupBox, textAlignment: "MiddleLeft");
+            _bok2_currentStatusEneValue = WinFormHelpers.CreateLabel("djangoCurrentHpValue", "", 44, 34, 72, 15, _currentStatusGroupBox, textAlignment: "MiddleLeft");
+            _bok2_djangoLevel = WinFormHelpers.CreateLabel("djangoCurrentLevelValue", "", 174, 19, 31, 15, _currentStatusGroupBox, textAlignment: "MiddleRight");
+            _bok2_djangoExp = WinFormHelpers.CreateLabel("djangoCurrentExpValue", "", 162, 34, 43, 15, _currentStatusGroupBox, textAlignment: "MiddleRight");
         }
 
         private void AddZoktaiCurrentSkillSection() {
 
             // Section
-            _bok2_currentSkillGroupBox = WinFormHelpers.CreateGroupBox("currentSkill", "Skill", 92, 86, 110, 104, this);
+            _bok2_currentSkillGroupBox = WinFormHelpers.CreateGroupBox("currentSkill", "Skill", 92, 106, 110, 104, this);
 
             // Sword
             WinFormHelpers.CreateLabel("swordSkillLabel", "Sword", 6, 20, 54, 15, _bok2_currentSkillGroupBox, textAlignment: "MiddleLeft");
@@ -165,48 +180,118 @@ namespace BokInterface {
         private void AddZoktaiCurrentStatsSection() {
 
             // Section
-            currentStatsGroupBox = WinFormHelpers.CreateGroupBox("currentStats", "Stats", 5, 86, 75, 106, this);
+            _currentStatsGroupBox = WinFormHelpers.CreateGroupBox("currentStats", "Stats", 5, 106, 75, 106, this);
 
             // VIT
-            WinFormHelpers.CreateLabel("vitRowLabel", "VIT", 6, 19, 27, 15, currentStatsGroupBox, textAlignment: "MiddleLeft");
-            _bok2_djangoVit = WinFormHelpers.CreateLabel("djangoVit", "", 35, 19, 31, 15, currentStatsGroupBox, WinFormHelpers.baseStatColor, textAlignment: "MiddleRight");
+            WinFormHelpers.CreateLabel("vitRowLabel", "VIT", 6, 19, 27, 15, _currentStatsGroupBox, textAlignment: "MiddleLeft");
+            _bok2_djangoVit = WinFormHelpers.CreateLabel("djangoVit", "", 35, 19, 31, 15, _currentStatsGroupBox, WinFormHelpers.baseStatColor, textAlignment: "MiddleRight");
 
             // SPR
-            WinFormHelpers.CreateLabel("sprRowLabel", "SPR", 6, 34, 27, 15, currentStatsGroupBox, textAlignment: "MiddleLeft");
-            _bok2_djangoSpr = WinFormHelpers.CreateLabel("djangoSpr", "", 35, 34, 31, 15, currentStatsGroupBox, WinFormHelpers.baseStatColor, textAlignment: "MiddleRight");
+            WinFormHelpers.CreateLabel("sprRowLabel", "SPR", 6, 34, 27, 15, _currentStatsGroupBox, textAlignment: "MiddleLeft");
+            _bok2_djangoSpr = WinFormHelpers.CreateLabel("djangoSpr", "", 35, 34, 31, 15, _currentStatsGroupBox, WinFormHelpers.baseStatColor, textAlignment: "MiddleRight");
 
             // STR
-            WinFormHelpers.CreateLabel("strRowLabel", "STR", 6, 49, 27, 15, currentStatsGroupBox, textAlignment: "MiddleLeft");
-            _bok2_djangoStr = WinFormHelpers.CreateLabel("djangoStr", "", 35, 49, 31, 15, currentStatsGroupBox, WinFormHelpers.baseStatColor, textAlignment: "MiddleRight");
+            WinFormHelpers.CreateLabel("strRowLabel", "STR", 6, 49, 27, 15, _currentStatsGroupBox, textAlignment: "MiddleLeft");
+            _bok2_djangoStr = WinFormHelpers.CreateLabel("djangoStr", "", 35, 49, 31, 15, _currentStatsGroupBox, WinFormHelpers.baseStatColor, textAlignment: "MiddleRight");
 
             // AGI
-            WinFormHelpers.CreateLabel("agiRowLabel", "AGI", 6, 64, 27, 15, currentStatsGroupBox, textAlignment: "MiddleLeft");
-            _bok2_djangoAgi = WinFormHelpers.CreateLabel("djangoAgi", "", 35, 64, 31, 15, currentStatsGroupBox, WinFormHelpers.baseStatColor, textAlignment: "MiddleRight");
+            WinFormHelpers.CreateLabel("agiRowLabel", "AGI", 6, 64, 27, 15, _currentStatsGroupBox, textAlignment: "MiddleLeft");
+            _bok2_djangoAgi = WinFormHelpers.CreateLabel("djangoAgi", "", 35, 64, 31, 15, _currentStatsGroupBox, WinFormHelpers.baseStatColor, textAlignment: "MiddleRight");
 
             // Stat points to allocate
-            WinFormHelpers.CreateLabel("statPointsLabel", "Add", 6, 84, 29, 15, currentStatsGroupBox, textAlignment: "MiddleLeft");
-            _bok2_djangoStatPoints = WinFormHelpers.CreateLabel("djangoStatPoints", "", 35, 84, 31, 15, currentStatsGroupBox, WinFormHelpers.totalStatColor, textAlignment: "MiddleRight");
+            WinFormHelpers.CreateLabel("statPointsLabel", "Add", 6, 84, 29, 15, _currentStatsGroupBox, textAlignment: "MiddleLeft");
+            _bok2_djangoStatPoints = WinFormHelpers.CreateLabel("djangoStatPoints", "", 35, 84, 31, 15, _currentStatsGroupBox, WinFormHelpers.totalStatColor, textAlignment: "MiddleRight");
         }
 
-        private void AddZoktaiEditSection() {
+        #endregion
 
-            // Section
-            editGroupBox = WinFormHelpers.CreateGroupBox("editButtons", "Edit", 237, 25, 87, 184, this);
+        #region Game-specific menus
 
-            _bok2_editStatusBtn = WinFormHelpers.CreateButton("editStatuts", "Status", 6, 19, 75, 23, editGroupBox);
-            _bok2_editInventoryBtn = WinFormHelpers.CreateButton("editItems", "Items", 6, 46, 75, 23, editGroupBox);
-            _bok2_editKeyItemsBtn = WinFormHelpers.CreateButton("editKeyItems", "Key items", 6, 73, 75, 23, editGroupBox);
-            _bok2_editWeaponsBtn = WinFormHelpers.CreateButton("editWeapons", "Weapons", 6, 100, 75, 23, editGroupBox);
-            _bok2_editEquipsBtn = WinFormHelpers.CreateButton("editEquips", "Protectors", 6, 127, 75, 23, editGroupBox);
-            _bok2_editMagicsBtn = WinFormHelpers.CreateButton("editMagics", "Magics", 6, 154, 75, 23, editGroupBox);
+        private void AddZoktaiDownloadableEventsMenu() {
+            if (shorterGameName != "Zoktai") {
+                return;
+            }
 
-            // Add onclick events
-            _bok2_editStatusBtn.Click += new EventHandler(OpenStatusEditor);
-            _bok2_editInventoryBtn.Click += new EventHandler(OpenInventoryEditor);
-            _bok2_editKeyItemsBtn.Click += new EventHandler(OpenKeyItemsEditor);
-            _bok2_editWeaponsBtn.Click += new EventHandler(OpenWeaponsEditor);
-            _bok2_editEquipsBtn.Click += new EventHandler(OpenEquipsEditor);
-            _bok2_editMagicsBtn.Click += new EventHandler(OpenMagicsEditor);
+            string eventToolTipText = "Cannot be disabled except by loading savestates or deleting savefiles.";
+            ToolStripMenuItem eventsMenu = WinFormHelpers.CreateToolStripMenuItem("eventsMenu", "JoySpots events", menuStrip: _menuBar);
+
+            _enableBlindboxLvl3 = WinFormHelpers.CreateToolStripMenuItem("enableBlindboxLvl3", "&Blindbox Lv. 3", toolTipText: eventToolTipText, menuItem: eventsMenu);
+            AddZoktaiJoySpotsEventHandler(_enableBlindboxLvl3, "blindbox_lvl_3", 0x8E67);
+
+            _enableBlindboxLvl4 = WinFormHelpers.CreateToolStripMenuItem("enableBlindboxLvl4", "&Blindbox Lv. 4", toolTipText: eventToolTipText, menuItem: eventsMenu);
+            AddZoktaiJoySpotsEventHandler(_enableBlindboxLvl4, "blindbox_lvl_4", 0x8FAA);
+
+            _enableBlindboxLvl5ValentineDay = WinFormHelpers.CreateToolStripMenuItem("enableBlindboxLvl5ValentineDay", "&Blindbox Lv. 5 && Valentine's Day", toolTipText: eventToolTipText + " Valentine's Day only triggers on February 14th.", menuItem: eventsMenu);
+            AddZoktaiJoySpotsEventHandler(_enableBlindboxLvl5ValentineDay, "blindbox_lvl_5_valentine_day", 0x90E0);
+
+            _enableStarPiece = WinFormHelpers.CreateToolStripMenuItem("enableStarPiece", "&Star Piece from ???", toolTipText: eventToolTipText, menuItem: eventsMenu);
+            AddZoktaiJoySpotsEventHandler(_enableStarPiece, "star_piece", 0x8FD6);
         }
+
+        /// <summary>Add a Click event on a menu item for a Zoktai / Bok 2 JoySpots event</summary>
+        /// <param name="menuItem">Menu item</param>
+        /// <param name="memKey">Related key within the _zoktaiAddresses.JoySpots dictionnary</param>
+        /// <param name="onCheckedValue">Value to set on the key when the menu item is checked</param>
+        private void AddZoktaiJoySpotsEventHandler(ToolStripMenuItem menuItem, string memKey, uint onCheckedValue, uint onUncheckedValue = 0x0) {
+            if (shorterGameName != "Zoktai" || _zoktaiAddresses.JoySpots.ContainsKey(memKey) == false) {
+                return;
+            }
+
+            // Add the Click event
+            menuItem.Click += (s, e) => {
+                /**
+                 * If the downloadable event is already enabled, check the menu item & stop
+                 * Downloadable events cannot be disabled except by deleting savefiles or loading savestates
+                 */
+                if (_zoktaiAddresses.JoySpots[memKey].Value == onCheckedValue) {
+                    menuItem.Checked = true;
+                    return;
+                }
+
+                menuItem.Checked = !menuItem.Checked;
+                _zoktaiAddresses.JoySpots[memKey].Value = menuItem.Checked == true ? onCheckedValue : onUncheckedValue;
+            };
+        }
+
+        /// <summary>Update an event menu item for a Zoktai / Bok 2 downloadable event</summary>
+        /// <param name="menuItem">Menu item</param>
+        /// <param name="memKey">Related key within the _zoktaiAddresses.JoySpots dictionnary</param>
+        /// <param name="onCheckedValue">Value used for enabling the downloadable event</param>
+        private void UpdateZoktaiEvent(ToolStripMenuItem menuItem, string memKey, uint onCheckedValue) {
+            if (shorterGameName != "Zoktai" || _zoktaiAddresses.JoySpots.ContainsKey(memKey) == false) {
+                return;
+            }
+
+            // Check / uncheck the menu item based on if the downloadable event is enabled or not
+            menuItem.Checked = _zoktaiAddresses.JoySpots[memKey].Value == onCheckedValue;
+        }
+
+        #endregion
+
+        #region GUI
+
+        private void ShowZoktaiGui() {
+
+            // RTC
+            int halfScreenHeight = GetScreenHeight() / 2;
+            if (_showRtc == true) {
+                APIs.Gui.Text(3, halfScreenHeight, "RTC:");
+                APIs.Gui.Text(50, halfScreenHeight, Utilities.FormatTimeTo24(_zoktaiAddresses.Misc["rtc_hours"].Value, _zoktaiAddresses.Misc["rtc_minutes"].Value, _zoktaiAddresses.Misc["rtc_seconds"].Value));
+            }
+
+            // Frames since game start
+            if (_showIgtFrameCounter == true) {
+                APIs.Gui.Text(3, halfScreenHeight + 15, "IGT:");
+                APIs.Gui.Text(50, halfScreenHeight + 15, _memoryValues.Misc["igt_frame_counter"].Value.ToString());
+            }
+
+            // Interest rate
+            if (_showInterestRate == true) {
+                APIs.Gui.Text(3, halfScreenHeight + 30, "Interest rate:");
+                APIs.Gui.Text(150, halfScreenHeight + 30, Utilities.GetInterestRateFromValue(_memoryValues.Solls["interest_rate"].Value));
+            }
+        }
+
+        #endregion
     }
 }
