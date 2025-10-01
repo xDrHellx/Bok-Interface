@@ -2,11 +2,13 @@ namespace BokInterface.Tools.Calculators {
     /// <summary>Class for calculations related to Boktai 2</summary>
     partial class ZoktaiCalculator {
 
+        #region Damage
+
         /// <summary>Calculate damage</summary>
-        /// <param name="attackDefenseDifference">Difference in Attack and Defense</param>
-        /// <param name="enchantmentMultiplier">Enchantment multiplier</param>
-        /// <param name="nightOrBackMultiplier">Multiplier from Back attack or Enchant Dark at night</param>
-        /// <param name="knockoutMultiplier">Knock-Out multiplier</param>
+        /// <param name="attackDefenseDifference">Difference in Attack and Defense from <see cref="GetAttackDefenseDifference"/></param>
+        /// <param name="enchantmentMultiplier">Enchantment multiplier from <see cref="GetEnchantmentMultiplier"/></param>
+        /// <param name="nightOrBackMultiplier">Multiplier from Back attack or Enchant Dark at night from <see cref="GetNightOrBackMultiplier"/></param>
+        /// <param name="knockoutMultiplier">Knock-Out multiplier from <see cref="GetKnockedOutMultiplier"/></param>
         /// <param name="spDamageIncrease">Increase in damage from "increases damage" SP effects</param>
         /// <returns><c>double</c>Damage dealt</returns>
         public static double CalculateDamage(double attackDefenseDifference, double enchantmentMultiplier, double nightOrBackMultiplier, double knockoutMultiplier, double spDamageIncrease) {
@@ -25,6 +27,8 @@ namespace BokInterface.Tools.Calculators {
             double difference = attack - defense;
             return difference <= 0 ? 1 : difference;
         }
+
+        #endregion
 
         #region Attack Power
 
@@ -59,7 +63,7 @@ namespace BokInterface.Tools.Calculators {
             // If charge is invalid, set it to the default
             charge = charge != 1.5 || charge != 2 ? 1 : charge;
 
-            // Extra damage based on the skill level
+            // Extra damage based on gun skill level
             int skillDamage = 0;
             if (gunSkillLevel == 99) {
                 skillDamage = 20;
@@ -86,15 +90,15 @@ namespace BokInterface.Tools.Calculators {
 
         #endregion
 
-        #region Enchantments & effects
+        #region Enchants & effects
 
         /// <summary>Get the enchantment multiplier related to elemental weaknesses</summary>
-        /// <param name="matchup">Result of matchup (neutral, resisted, effective, or not prevent) (by default not present)</param>
+        /// <param name="matchup">Result of matchup (neutral, resist, effective, or not present) (by default not present)</param>
         /// <returns><c>double</c>Multiplier</returns>
         public static double GetEnchantmentMultiplier(string matchup = "") {
             return (object)matchup switch {
                 "neutral" => (double)1.25,
-                "resisted" => (double)0.25,
+                "resist" => (double)0.25,
                 "effective" => 4,
                 _ => 1,
             };
@@ -104,7 +108,7 @@ namespace BokInterface.Tools.Calculators {
         /// <remarks>
         ///     <para>If performing both, the multiplier is only applied once.</para>
         ///     <para>
-        ///         The Player can be hit in the back, as can some enemies.<br/>
+        ///         The player can be hit in the back, as can some enemies.<br/>
         ///         If an enemy is frozen or knocked out, it cannot be hit in the back.
         ///     </para>
         /// </remarks>
@@ -116,10 +120,14 @@ namespace BokInterface.Tools.Calculators {
 
         /// <summary>Get the knock-out multiplier</summary>
         /// <remarks>
-        ///     <para>Certain enemies can be knocked out (immobile, stars circling above), by typical gameplay, such as Golems colliding, or Cockatrices petrifying each other.</para>
-        ///     <para>Many other normal enemies can also be knocked out by the SP effect “Randomly paralyzes enemies”.</para>
-        ///     <para>Bosses and mini bosses cannot be knocked out.</para>
-        ///     <para>The Player will incur this multiplier if they are hit while using Dash.</para>
+        ///     <para>
+        ///         Certain enemies can be knocked out (immobile, stars circling above), by typical gameplay, such as Golems colliding, or Cockatrices petrifying each other.<br/>
+        ///         Many other normal enemies can also be knocked out by the SP effect “Randomly paralyzes enemies”.
+        ///     </para>
+        ///     <para>
+        ///         Bosses and mini bosses cannot be knocked out.<br/>
+        ///         The player will incur this multiplier if they are hit while using Dash.
+        ///     </para>
         /// </remarks>
         /// <param name="knockedOut">True if knocked out</param>
         /// <returns><c>Int</c>Multiplier</returns>
@@ -129,14 +137,12 @@ namespace BokInterface.Tools.Calculators {
 
         #endregion
 
-        #region Misc damage calculations
+        #region Misc
 
         /// <summary>Get the damage done by C-Wolf magic</summary>
         /// <remarks>
-        ///     <para>
-        ///         Bypasses enemy's defense.<br/>
-        ///         Only a select group of enemies can be damaged by C-Wolf.
-        ///     </para>
+        ///     Bypasses enemy's defense.<br/>
+        ///     Only a select group of enemies can be damaged by C-Wolf.
         /// </remarks>
         /// <param name="vitality">VIT stat points</param>
         /// <param name="strength">STR stat points</param>
@@ -156,8 +162,8 @@ namespace BokInterface.Tools.Calculators {
 
         /// <summary>Get the damage done by The Tower card</summary>
         /// <remarks>
-        ///     <para>Damages all enemies on screen.</para>
-        ///     <para>If an enemy has multiple active body parts, each part will be damaged.</para>
+        ///     Damages all enemies on screen.<br/>
+        ///     <i>If an enemy has multiple active body parts, each part will be damaged.</i>
         /// </remarks>
         /// <param name="level">Player level</param>
         /// <returns><c>double</c>Damage</returns>
