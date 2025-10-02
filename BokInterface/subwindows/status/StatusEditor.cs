@@ -10,8 +10,8 @@ namespace BokInterface.Status {
 
         #region Properties
 
-        protected readonly string name = "statusEditWindow";
-        protected readonly string text = "Status editor";
+        protected readonly string name = "statusEditWindow",
+            text = "Status editor";
 
         #endregion
 

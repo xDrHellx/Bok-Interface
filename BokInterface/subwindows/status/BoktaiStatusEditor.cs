@@ -79,8 +79,8 @@ namespace BokInterface.Status {
                  * We only split on the first "_"
                  */
                 string[] fieldParts = fields[i].Name.Split(['_'], 2);
-                string subList = fieldParts[0];
-                string memoryValueKey = fieldParts[1];
+                string subList = fieldParts[0],
+                    memoryValueKey = fieldParts[1];
                 switch (subList) {
                     default:
                         if (_memoryValues.U16.ContainsKey(memoryValueKey) == true) {

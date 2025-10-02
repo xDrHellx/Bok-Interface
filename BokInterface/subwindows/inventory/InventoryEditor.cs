@@ -10,8 +10,8 @@ namespace BokInterface.Inventory {
 
         #region Properties
 
-        protected readonly string name = "inventoryEditWindow";
-        protected readonly string text = "Inventory editor";
+        protected readonly string name = "inventoryEditWindow",
+            text = "Inventory editor";
 
         #endregion
 

@@ -9,8 +9,8 @@ namespace BokInterface.solarGun {
 
         #region Properties
 
-        protected readonly string name = "solarGunEditWindow";
-        protected readonly string text = "Solar gun editor";
+        protected readonly string name = "solarGunEditWindow",
+            text = "Solar gun editor";
 
         #endregion
 
