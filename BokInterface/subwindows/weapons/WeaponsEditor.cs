@@ -10,8 +10,8 @@ namespace BokInterface.Weapons {
 
         #region Properties
 
-        protected readonly string name = "weaponsEditWindow";
-        protected readonly string text = "Weapons editor";
+        protected readonly string name = "weaponsEditWindow",
+            text = "Weapons editor";
 
         #endregion
 

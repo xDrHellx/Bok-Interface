@@ -10,8 +10,8 @@ namespace BokInterface.KeyItems {
 
         #region Properties
 
-        protected readonly string name = "keyItemsEditWindow";
-        protected readonly string text = "Key items editor";
+        protected readonly string name = "keyItemsEditWindow",
+            text = "Key items editor";
 
         #endregion
 

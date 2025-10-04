@@ -18,8 +18,8 @@ namespace BokInterface {
 
         private readonly BoktaiAddresses _boktaiAddresses = new();
         private readonly BoktaiGuns _boktaiGuns = new();
-        private Label _bok1_currentStatusHpValue = new();
-        private Label _bok1_currentStatusEneValue = new();
+        private Label _bok1_currentStatusHpValue = new(),
+            _bok1_currentStatusEneValue = new();
         private ToolStripMenuItem _enableAstroBattery = new();
 
         #endregion

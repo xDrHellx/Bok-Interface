@@ -217,8 +217,8 @@ namespace BokInterface.Utils {
         /// <returns><c>double</c>Distance</returns>
         public static double GetDistance(Point from, Point to) {
             return Math.Round(Math.Sqrt(
-                Math.Pow(from.X - to.X, 2) +
-                Math.Pow(from.Y - to.Y, 2)
+                Math.Pow(from.X - to.X, 2)
+                + Math.Pow(from.Y - to.Y, 2)
             ), 2);
         }
 
@@ -247,9 +247,9 @@ namespace BokInterface.Utils {
         /// <param name="seconds">Seconds</param>
         /// <returns><c>string</c>Formatted time <i>(4:20:1 => 04:20:01)</i></returns>
         public static string FormatTimeTo24(uint hours, uint minutes, uint seconds) {
-            string hoursString = (hours < 10 ? "0" : "") + hours;
-            string minutesString = (minutes < 10 ? "0" : "") + minutes;
-            string secondsString = (seconds < 10 ? "0" : "") + seconds;
+            string hoursString = (hours < 10 ? "0" : "") + hours,
+                minutesString = (minutes < 10 ? "0" : "") + minutes,
+                secondsString = (seconds < 10 ? "0" : "") + seconds;
             return hoursString + ":" + minutesString + ":" + secondsString;
         }
 

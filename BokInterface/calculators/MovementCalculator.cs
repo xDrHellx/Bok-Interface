@@ -50,9 +50,9 @@ namespace BokInterface.Calculators {
         public double Get3dMovementSpeed(int positionX, int positionY, int positionZ) {
 
             // Calculate the current speed per direction & in 3D
-            int speedX = positionX - _previousPosX;
-            int speedY = positionY - _previousPosY;
-            int speedZ = positionZ - _previousPosZ;
+            int speedX = positionX - _previousPosX,
+                speedY = positionY - _previousPosY,
+                speedZ = positionZ - _previousPosZ;
             double speed3D = Math.Sqrt(
                 Math.Pow(speedX, 2)
                 + Math.Pow(speedY, 2)
@@ -79,8 +79,8 @@ namespace BokInterface.Calculators {
         public double Get2dMovementSpeed(int positionX, int positionY) {
 
             // Calculate the current speed per direction & in 2D
-            int speedX = positionX - _previousPosX;
-            int speedY = positionY - _previousPosY;
+            int speedX = positionX - _previousPosX,
+                speedY = positionY - _previousPosY;
             double speed2D = Math.Sqrt(
                 Math.Pow(speedX, 2)
                 + Math.Pow(speedY, 2)

@@ -210,8 +210,8 @@ namespace BokInterface.Inventory {
                         }
 
                         // Get inventory size & prepare the pointer
-                        uint inventorySize = _boktaiAddresses.Inventory["items_order"].Value;
-                        uint bitPosition = (inventorySize + 1) * 2;
+                        uint inventorySize = _boktaiAddresses.Inventory["items_order"].Value,
+                            bitPosition = (inventorySize + 1) * 2;
 
                         // Add an extra slot to the current inventory & set values for the item on that slot
                         _boktaiAddresses.Inventory["items_order"].Value = inventorySize + 1;
