@@ -26,7 +26,7 @@ namespace BokInterface {
 
         #region Tool properties
 
-        protected override string WindowTitleStatic => "Bok Interface v0.1.9a";
+        protected override string WindowTitleStatic => "Bok Interface v0.2.0";
         public override bool BlocksInputWhenFocused => false;
         protected Icon? icon;
         public uint currentGameId;
@@ -259,8 +259,7 @@ namespace BokInterface {
                 case 1246448705:    // JP
                     currentGameName = "Boktai DS - Lunar Knights";
                     shorterGameName = "LunarKnights";
-                    _supportedGame = true;
-                    _isDS = true;
+                    _supportedGame = _isDS = true;
                     break;
                 default:
                     ResetInitializationVariables();
@@ -271,7 +270,7 @@ namespace BokInterface {
         /// <summary>Resets the variables used for initializing the interface</summary>
         protected void ResetInitializationVariables() {
             _retryCount = 0;
-            _isDS = _supportedGame = _interfaceActivated = false;
+            _isDS = _supportedGame = _interfaceActivated = _showGui = _showRtc = _showIgtFrameCounter = _showInterestRate = _showBossHp = false;
             currentGameName = shorterGameName = "";
         }
 

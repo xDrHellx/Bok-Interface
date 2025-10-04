@@ -114,8 +114,8 @@ namespace BokInterface.Tools.TextToWorldSpace {
 
             // Convert world to screen coordinates
             (double, double) screenCoordinates = WorldToScreen(x, y, z);
-            double posX = screenCoordinates.Item1;
-            double posY = screenCoordinates.Item2;
+            double posX = screenCoordinates.Item1,
+                posY = screenCoordinates.Item2;
 
             // Print text on screen at screen coordinates
             APIs.Gui.Text((int)posX, (int)posY, text, textColor);
@@ -128,15 +128,16 @@ namespace BokInterface.Tools.TextToWorldSpace {
         /// <returns><c>double, double, double</c>View coordinates(X, Y, Z)</returns>
         protected (double, double, double) WorldToView(double x, double y, double z) {
 
-            double scaledWorldZ = z * heightScale;
-            double worldX = x / 2;
-            double worldY = y / 2;
+            // Prepare world coordinates
+            double scaledWorldZ = z * heightScale,
+                worldX = x / 2,
+                worldY = y / 2,
+                worldY2 = (worldX + worldY) * planeScale;
 
-            double worldY2 = (worldX + worldY) * planeScale;
-
-            double viewX = (worldX - worldY) * planeScale;
-            double viewY = worldY2 - scaledWorldZ;
-            double viewZ = worldY2 + scaledWorldZ;
+            // Get wiew coordinates
+            double viewX = (worldX - worldY) * planeScale,
+                viewY = worldY2 - scaledWorldZ,
+                viewZ = worldY2 + scaledWorldZ;
 
             return (viewX, viewY, viewZ);
         }

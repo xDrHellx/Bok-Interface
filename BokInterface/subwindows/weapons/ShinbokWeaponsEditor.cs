@@ -12,13 +12,13 @@ namespace BokInterface.Weapons {
 
         #region Properties
 
-        protected readonly List<RadioButton> radioButtons = [];
         private readonly MemoryValues _memoryValues;
         private readonly BokInterface _bokInterface;
         private readonly ShinbokAddresses _shinbokAddresses;
         private readonly ShinbokWeapons _shinbokWeapons;
         private readonly ShinbokAbilities _shinbokAbilities;
         private readonly ShinbokSwordAttackPatterns _shinbokSwordAttackPatterns;
+        protected readonly List<RadioButton> radioButtons = [];
 
         #endregion
 

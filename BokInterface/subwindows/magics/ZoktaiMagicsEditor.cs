@@ -53,7 +53,8 @@ namespace BokInterface.Magics {
             sabataGroupBox.Hide();
 
             // Loop over all magics & add elements
-            int yPositionOffset = 1, n = 1;
+            int yPositionOffset = 1,
+                n = 1;
             string previousType = "";
             foreach (KeyValuePair<string, Magic> entry in _zoktaiMagics.All) {
 
@@ -144,8 +145,8 @@ namespace BokInterface.Magics {
              * Retrieve the current magics value from the memory address
              * We'll use it as a base for updating the bitmask it contains
              */
-            int bitPosition = 0;
-            int magic = (int)_memoryValues.Inventory["magics"].Value;
+            int bitPosition = 0,
+                magic = (int)_memoryValues.Inventory["magics"].Value;
             uint newMagicValue = (uint)magic;
             foreach (CheckBox checkbox in checkBoxes) {
                 if (checkbox.Enabled == false) {
@@ -182,8 +183,8 @@ namespace BokInterface.Magics {
             // If "current stat" is a valid value, get the current inventory
             uint currentStat = APIs.Memory.ReadU32(_zoktaiAddresses.Misc["current_stat"].Address);
             if (currentStat > 0) {
-                int bitPosition = 0;
-                int magic = (int)_memoryValues.Inventory["magics"].Value;
+                int bitPosition = 0,
+                    magic = (int)_memoryValues.Inventory["magics"].Value;
                 foreach (CheckBox checkBox in checkBoxes) {
                     if (checkBox.Enabled == false) {
                         continue;

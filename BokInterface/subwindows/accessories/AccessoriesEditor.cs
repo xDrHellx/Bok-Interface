@@ -10,8 +10,8 @@ namespace BokInterface.Accessories {
 
         #region Properties
 
-        protected readonly string name = "accessoriesEditWindow";
-        protected readonly string text = "Accessories editor";
+        protected readonly string name = "accessoriesEditWindow",
+            text = "Accessories editor";
 
         #endregion
 

@@ -237,10 +237,8 @@ namespace BokInterface {
                 AddDropdownMenuItem("solarBankInterestsSimMenu", "Solar bank interests simulator", toolsMenu, OpenSolarBankInterestsSim);
             }
 
-            // HUD
-            if (shorterGameName != "Boktai") {
-                ToolStripMenuItem hudMenu = WinFormHelpers.CreateToolStripMenuItem("hudMenu", "HUD", menuStrip: _menuBar);
-            }
+            // GUI
+            GenerateGuiMenu();
         }
 
         #endregion
@@ -629,6 +627,15 @@ namespace BokInterface {
             ToolStripMenuItem menuItem = WinFormHelpers.CreateToolStripMenuItem(name, "&" + text, toolTipText: tooltip, menuItem: parent);
             menuItem.Click += new EventHandler(onClick);
             parent.DropDownItems.Add(menuItem);
+        }
+
+        /// <summary>Reusable method for toggling the property and MenuItem related to GUI data shown on screen</summary>
+        /// <param name="menuItem">Menu / submenu</param>
+        /// <param name="property">Property</param>
+        private void ToggleGuiData(object menuItem, ref bool property) {
+            if (menuItem is ToolStripMenuItem menu) {
+                menu.Checked = property = !property;
+            }
         }
 
         #endregion
