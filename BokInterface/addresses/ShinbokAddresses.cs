@@ -1,5 +1,3 @@
-using System.Collections.Generic;
-
 namespace BokInterface.Addresses {
     /// <summary>Main class for Boktai 3 / Shinbok memory addresses</summary>
     public class ShinbokAddresses {
@@ -90,17 +88,33 @@ namespace BokInterface.Addresses {
         }
 
         private void InitBikeAddresses() {
-            _note = "Equipped bike part";
+
             // Bike.Add("name", new MemoryAddress(0x780, note: "Bike name", domain: "EWRAM"));
-            Bike.Add("points", new MemoryAddress(0x7B2, "Points from races", domain: "EWRAM"));
-            Bike.Add("battle_matches", new MemoryAddress(0x7B4, "Number of Bike Battles matches", domain: "EWRAM"));
-            Bike.Add("battle_wins", new MemoryAddress(0x7B6, "Number of Bike Battles won", domain: "EWRAM"));
-            Bike.Add("front", new MemoryAddress(0x7B8, _note, domain: "EWRAM"));
-            Bike.Add("tires", new MemoryAddress(0x7BC, _note, domain: "EWRAM"));
-            Bike.Add("body", new MemoryAddress(0x7C0, _note, domain: "EWRAM"));
-            Bike.Add("special", new MemoryAddress(0x7C4, _note, domain: "EWRAM"));
-            Bike.Add("color", new MemoryAddress(0x07F8, _note, domain: "EWRAM"));
-            Bike.Add("options", new MemoryAddress(0x81C, _note, domain: "EWRAM"));
+            Bike.Add("points", new MemoryAddress(0x7B2, note: "Points from races", domain: "EWRAM"));
+            Bike.Add("battle_matches", new MemoryAddress(0x7B4, note: "Number of Bike Battles matches", domain: "EWRAM"));
+            Bike.Add("battle_wins", new MemoryAddress(0x7B6, note: "Number of Bike Battles won", domain: "EWRAM"));
+
+            // Bike parts
+            _note = "Equipped bike part";
+            Bike.Add("front", new MemoryAddress(0x7A0, note: _note, domain: "EWRAM"));
+            Bike.Add("tires", new MemoryAddress(0x7A2, note: _note, domain: "EWRAM"));
+            Bike.Add("body", new MemoryAddress(0x7A4, note: _note, domain: "EWRAM"));
+            Bike.Add("special", new MemoryAddress(0x7A6, note: _note, domain: "EWRAM"));
+            Bike.Add("color", new MemoryAddress(0x81A, note: _note, domain: "EWRAM"));
+            Bike.Add("option_1", new MemoryAddress(0x7A8, note: _note, domain: "EWRAM"));
+            Bike.Add("option_2", new MemoryAddress(0x7AA, note: _note, domain: "EWRAM"));
+            Bike.Add("option_3", new MemoryAddress(0x7AC, note: _note, domain: "EWRAM"));
+            Bike.Add("option_4", new MemoryAddress(0x7AE, note: _note, domain: "EWRAM"));
+
+            // Selected parts in bike menus
+            // _note = "Selected bike part in menus";
+            /*
+                009F28	w	u	0	EWRAM	menu front
+                009F2A	w	h	0	EWRAM	menu body
+                009F2C	w	h	0	EWRAM	menu tires
+                009F2E	w	h	0	EWRAM	menu special
+                009F32	w	u	0	EWRAM	menu color
+            */
         }
 
         /// <summary>Init Inventory-related memory addresses</summary>
