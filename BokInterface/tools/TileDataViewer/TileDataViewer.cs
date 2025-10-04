@@ -123,8 +123,8 @@ namespace BokInterface.Tools.TileDataViewer {
             }
 
             // Get tile width & height
-            uint tileWidth = APIs.Memory.ReadU16(tileData + 4);
-            uint tileHeight = APIs.Memory.ReadU16(tileData + 6);
+            uint tileWidth = APIs.Memory.ReadU16(tileData + 4),
+                tileHeight = APIs.Memory.ReadU16(tileData + 6);
 
             // Draw map tiles data (effects, stairs, ...)
             DrawTileData(e, tileData, tileWidth, tileHeight);
@@ -138,8 +138,8 @@ namespace BokInterface.Tools.TileDataViewer {
             *  We also get them again if at least one the values is higher than the map's width or height
             * (i am currently unsure what causes this but it can happen when initializing the tool during the GBA screen & then loading a savestate)
              */
-            uint djangoX = APIs.Memory.ReadU16(djangoXposAddress);
-            uint djangoY = APIs.Memory.ReadU16(djangoYposAddress);
+            uint djangoX = APIs.Memory.ReadU16(djangoXposAddress),
+                djangoY = APIs.Memory.ReadU16(djangoYposAddress);
             if (
                 (djangoX == 0 && djangoY == 0)
                 || djangoX > tileWidth
@@ -166,8 +166,8 @@ namespace BokInterface.Tools.TileDataViewer {
             for (int tileY = 0; tileY < tileHeight - 1; tileY++) {
                 for (int tileX = 0; tileX < tileWidth - 1; tileX++) {
 
-                    uint tile = APIs.Memory.ReadU32(tileData + 0xC + (tileY * tileWidth + tileX) * 4);
-                    uint value = tile & 0xFF;
+                    uint tile = APIs.Memory.ReadU32(tileData + 0xC + (tileY * tileWidth + tileX) * 4),
+                        value = tile & 0xFF;
 
                     Color tileColor = colorPalette[(int)value + 1];
                     DrawFilledRectangle(e, tileColor, (int)(tileX * scale), (int)(tileY * scale), (int)scale);
@@ -181,8 +181,8 @@ namespace BokInterface.Tools.TileDataViewer {
             }
 
             // Adjust subwindow size based on the number of tiles to show
-            int width = (int)(tileWidth * scale) - 16;
-            int height = (int)(tileHeight * scale) - 16;
+            int width = (int)(tileWidth * scale) - 16,
+                height = (int)(tileHeight * scale) - 16;
             SetSubwindowSize(width > 192 ? width : 192, height > 144 ? height : 144);
         }
 
@@ -218,16 +218,16 @@ namespace BokInterface.Tools.TileDataViewer {
         protected void DrawZones(PaintEventArgs e, uint zonesData) {
 
             float zoneScale = scale / 256.0f;
-            uint zoneCount = APIs.Memory.ReadU8(zonesData);
-            uint zonePtr = zonesData + 4;
+            uint zoneCount = APIs.Memory.ReadU8(zonesData),
+                zonePtr = zonesData + 4;
 
             for (int i = 0; i < zoneCount; i++) {
 
                 // Get the top left & bottom right corners
-                int startX = APIs.Memory.ReadS16(zonePtr);
-                int startY = APIs.Memory.ReadS16(zonePtr + 2);
-                int endX = APIs.Memory.ReadS16(zonePtr + 4);
-                int endY = APIs.Memory.ReadS16(zonePtr + 6);
+                int startX = APIs.Memory.ReadS16(zonePtr),
+                    startY = APIs.Memory.ReadS16(zonePtr + 2),
+                    endX = APIs.Memory.ReadS16(zonePtr + 4),
+                    endY = APIs.Memory.ReadS16(zonePtr + 6);
 
                 // Draw the zone
                 e.Graphics.DrawRectangle(
@@ -303,9 +303,9 @@ namespace BokInterface.Tools.TileDataViewer {
             for (int i = 0; i < 255; i++) {
                 seed = (seed * 0x41C64E6D + 12345) & 0xFFFFFFFF;
 
-                uint r = (seed >> 8) & 0x1F;
-                uint g = (seed >> 13) & 0x1F;
-                uint b = (seed >> 18) & 0x1F;
+                uint r = (seed >> 8) & 0x1F,
+                    g = (seed >> 13) & 0x1F,
+                    b = (seed >> 18) & 0x1F;
 
                 // Generate color & convert to System.Drawing.Color
                 uint color = (alpha << 24) | (r << 19) | (g << 11) | (b << 3);

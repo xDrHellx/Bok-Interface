@@ -125,8 +125,8 @@ namespace BokInterface.Tools.SolarBankInterestsSimulator {
 
             // Get values from fields
             KeyValuePair<int, double> selectedRate = (KeyValuePair<int, double>)_interestsRateDropDown.SelectedItem;
-            double interestsRate = selectedRate.Value;
-            double currentSolls = (double)_baseSollsNumDown.Value;
+            double interestsRate = selectedRate.Value,
+                currentSolls = (double)_baseSollsNumDown.Value;
 
             // Generate data
             DataRow row = _dataTable.NewRow();

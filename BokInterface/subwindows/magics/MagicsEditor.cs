@@ -10,8 +10,8 @@ namespace BokInterface.Magics {
 
         #region Properties
 
-        protected readonly string name = "magicsEditWindow";
-        protected readonly string text = "Magics editor";
+        protected readonly string name = "magicsEditWindow",
+            text = "Magics editor";
 
         #endregion
 

@@ -217,8 +217,8 @@ namespace BokInterface.Utils {
         /// <returns><c>double</c>Distance</returns>
         public static double GetDistance(Point from, Point to) {
             return Math.Round(Math.Sqrt(
-                Math.Pow(from.X - to.X, 2) +
-                Math.Pow(from.Y - to.Y, 2)
+                Math.Pow(from.X - to.X, 2)
+                + Math.Pow(from.Y - to.Y, 2)
             ), 2);
         }
 
@@ -239,6 +239,18 @@ namespace BokInterface.Utils {
 
             string formattedName = name.Replace("_", " ");
             return string.Concat(formattedName[0].ToString().ToUpper(), formattedName[1..]);
+        }
+
+        /// <summary>Format time to a proper 24h format</summary>
+        /// <param name="hours">Hours</param>
+        /// <param name="minutes">Minutes</param>
+        /// <param name="seconds">Seconds</param>
+        /// <returns><c>string</c>Formatted time <i>(4:20:1 => 04:20:01)</i></returns>
+        public static string FormatTimeTo24(uint hours, uint minutes, uint seconds) {
+            string hoursString = (hours < 10 ? "0" : "") + hours,
+                minutesString = (minutes < 10 ? "0" : "") + minutes,
+                secondsString = (seconds < 10 ? "0" : "") + seconds;
+            return hoursString + ":" + minutesString + ":" + secondsString;
         }
 
         #endregion
@@ -299,6 +311,17 @@ namespace BokInterface.Utils {
 
             // If there is no bonus or malus
             return 0;
+        }
+
+        #endregion
+
+        #region Interest rate
+
+        /// <summary>Get the Solar bank's interest rate from the value stored in memory</summary>
+        /// <param name="storedInterestRateValue">Value stored in memory (for example 66 for 3.125000)</param>
+        /// <returns><c>string</c>Solar bank interest rate</returns>
+        public static string GetInterestRateFromValue(uint storedInterestRateValue) {
+            return (((storedInterestRateValue / 64.0) - 1.0) * 100.0).ToString("F6", System.Globalization.CultureInfo.InvariantCulture);
         }
 
         #endregion

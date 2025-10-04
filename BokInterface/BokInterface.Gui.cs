@@ -1,3 +1,5 @@
+using System.Windows.Forms;
+
 using BokInterface.Utils;
 
 /**
@@ -8,10 +10,20 @@ namespace BokInterface {
 
     partial class BokInterface {
 
-        #region GUI related code
+        #region GUI properties
 
-        public static int gbaScreenWidth = 0xF0;
-        public static int gbaScreenHeight = 0xA0;
+        public static readonly int gbaScreenWidth = 0xF0,
+            gbaScreenHeight = 0xA0;
+
+        private bool _showGui,
+            _showRtc,
+            _showIgtFrameCounter,
+            _showInterestRate,
+            _showBossHp;
+
+        #endregion
+
+        #region Interface indicator
 
         /// <summary>Shows the indicator for the Bok Interface</summary>
         private void ShowInterfaceIndicator() {
@@ -22,6 +34,10 @@ namespace BokInterface {
                 APIs.Gui.Text(3, GetScreenHeight(true) + 1, "Bok ON", System.Drawing.Color.Orange, "bottomright");
             }
         }
+
+        #endregion
+
+        #region Helpers
 
         /// <summary>Returns game screen height</summary>
         /// <param name="top">Set to true to return the height of the top screen for DS games</param>
@@ -34,6 +50,27 @@ namespace BokInterface {
         /// <returns><c>int</c>Width</returns>
         private int GetScreenWidth() {
             return APIs.Client.ScreenWidth();
+        }
+
+        #endregion
+
+        #region GUI data
+
+        /// <summary>Generate the menu related to the GUI data</summary>
+        private void GenerateGuiMenu() {
+            if (shorterGameName == "LunarKnights") {
+                return;
+            }
+
+            ToolStripMenuItem guiMenu = WinFormHelpers.CreateToolStripMenuItem("guiMenu", "GUI", menuStrip: _menuBar);
+            AddDropdownMenuItem("enableGui", "Enable GUI", guiMenu, (sender, e) => ToggleGuiData(sender, ref _showGui), "Necessary to show GUI data on screen");
+            AddDropdownMenuItem("showRtc", "Real-time clock", guiMenu, (sender, e) => ToggleGuiData(sender, ref _showRtc));
+            AddDropdownMenuItem("showIgtFrameCounter", "IGT frames", guiMenu, (sender, e) => ToggleGuiData(sender, ref _showIgtFrameCounter), "Frames for the current save file's In-Game Time");
+            AddDropdownMenuItem("showInterestRate", "Interest rate", guiMenu, (sender, e) => ToggleGuiData(sender, ref _showInterestRate), "Solar Bank interest rate");
+
+            if (shorterGameName == "Boktai") {
+                AddDropdownMenuItem("showBossHp", "Boss HP", guiMenu, (sender, e) => ToggleGuiData(sender, ref _showBossHp), "Only visible when data is available");
+            }
         }
 
         #endregion

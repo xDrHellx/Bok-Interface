@@ -55,7 +55,7 @@ namespace BokInterface.Items {
             KeyItems.Add("Circle Key", new BoktaiItem("Circle Key", 31, "circle_key"));
             KeyItems.Add("Triangle Key", new BoktaiItem("Triangle Key", 32, "triangle_key"));
             KeyItems.Add("Square Key", new BoktaiItem("Square Key", 33, "square_key"));
-            KeyItems.Add("X Key", new BoktaiItem("X Key", 34, "cross_key"));
+            KeyItems.Add("Cross Key", new BoktaiItem("Cross Key", 34, "cross_key"));
             KeyItems.Add("Sol Emblem", new BoktaiItem("Sol Emblem", 35, "sol_emblem"));
             KeyItems.Add("Luna Emblem", new BoktaiItem("Luna Emblem", 36, "luna_emblem"));
             KeyItems.Add("Flame Emblem", new BoktaiItem("Flame Emblem", 37, "flame_emblem"));

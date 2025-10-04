@@ -105,13 +105,13 @@ namespace BokInterface {
                 WinFormHelpers.AddToolTip(_bok2_djangoGunSkill, _memoryValues.Django["gun_skill"].Value + " EXP");
 
                 // Update the current & average speed
-                int positionX = (int)_memoryValues.Django["x_position"].Value;
-                int positionY = (int)_memoryValues.Django["y_position"].Value;
-                int positionZ = (int)_memoryValues.Django["z_position"].Value;
+                int positionX = (int)_memoryValues.Django["x_position"].Value,
+                    positionY = (int)_memoryValues.Django["y_position"].Value,
+                    positionZ = (int)_memoryValues.Django["z_position"].Value;
 
                 // Get the movement speed in 3D & the average speed
-                double speed3D = _movementCalculator.Get3dMovementSpeed(positionX, positionY, positionZ);
-                double averageSpeed = Math.Round(_movementCalculator.GetAverageSpeed(speed3D, 60), 3);
+                double speed3D = _movementCalculator.Get3dMovementSpeed(positionX, positionY, positionZ),
+                    averageSpeed = Math.Round(_movementCalculator.GetAverageSpeed(speed3D, 60), 3);
 
                 // Update the fields
                 _currentSpeedLabel.Text = "Current movement speed : " + Math.Round(speed3D, 3);
@@ -123,6 +123,10 @@ namespace BokInterface {
             UpdateZoktaiEvent(_enableBlindboxLvl4, "blindbox_lvl_4", 0x8FAA);
             UpdateZoktaiEvent(_enableBlindboxLvl5ValentineDay, "blindbox_lvl_5_valentine_day", 0x90E0);
             UpdateZoktaiEvent(_enableStarPiece, "star_piece", 0x8FD6);
+
+            if (_showGui == true) {
+                ShowZoktaiGui();
+            }
         }
 
         #endregion
@@ -260,6 +264,32 @@ namespace BokInterface {
 
             // Check / uncheck the menu item based on if the downloadable event is enabled or not
             menuItem.Checked = _zoktaiAddresses.JoySpots[memKey].Value == onCheckedValue;
+        }
+
+        #endregion
+
+        #region GUI
+
+        private void ShowZoktaiGui() {
+
+            // RTC
+            int halfScreenHeight = GetScreenHeight() / 2;
+            if (_showRtc == true) {
+                APIs.Gui.Text(3, halfScreenHeight, "RTC:");
+                APIs.Gui.Text(50, halfScreenHeight, Utilities.FormatTimeTo24(_zoktaiAddresses.Misc["rtc_hours"].Value, _zoktaiAddresses.Misc["rtc_minutes"].Value, _zoktaiAddresses.Misc["rtc_seconds"].Value));
+            }
+
+            // Frames since game start
+            if (_showIgtFrameCounter == true) {
+                APIs.Gui.Text(3, halfScreenHeight + 15, "IGT:");
+                APIs.Gui.Text(50, halfScreenHeight + 15, _memoryValues.Misc["igt_frame_counter"].Value.ToString());
+            }
+
+            // Interest rate
+            if (_showInterestRate == true) {
+                APIs.Gui.Text(3, halfScreenHeight + 30, "Interest rate:");
+                APIs.Gui.Text(150, halfScreenHeight + 30, Utilities.GetInterestRateFromValue(_memoryValues.Solls["interest_rate"].Value));
+            }
         }
 
         #endregion

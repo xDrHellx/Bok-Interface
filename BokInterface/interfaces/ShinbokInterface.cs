@@ -93,17 +93,21 @@ namespace BokInterface {
                 _bok3_djangoTotalStr.Text = (_memoryValues.Misc["base_str"].Value + _memoryValues.Misc["cards_str"].Value + _memoryValues.Django["equips_str"].Value).ToString();
 
                 // Update the current & average speed
-                int positionX = (int)_memoryValues.Django["x_position"].Value;
-                int positionY = (int)_memoryValues.Django["y_position"].Value;
-                int positionZ = (int)_memoryValues.Django["z_position"].Value;
+                int positionX = (int)_memoryValues.Django["x_position"].Value,
+                    positionY = (int)_memoryValues.Django["y_position"].Value,
+                    positionZ = (int)_memoryValues.Django["z_position"].Value;
 
                 // Get the movement speed in 3D & the average speed
-                double speed3D = _movementCalculator.Get3dMovementSpeed(positionX, positionY, positionZ);
-                double averageSpeed = Math.Round(_movementCalculator.GetAverageSpeed(speed3D, 60), 3);
+                double speed3D = _movementCalculator.Get3dMovementSpeed(positionX, positionY, positionZ),
+                    averageSpeed = Math.Round(_movementCalculator.GetAverageSpeed(speed3D, 60), 3);
 
                 // Update the fields
                 _currentSpeedLabel.Text = "Current movement speed : " + Math.Round(speed3D, 3);
                 _averageSpeedLabel.Text = "Average over 60 frames : " + averageSpeed.ToString();
+            }
+
+            if (_showGui == true) {
+                ShowShinbokGui();
             }
         }
 
@@ -162,6 +166,32 @@ namespace BokInterface {
             _bok3_djangoCardsStr = WinFormHelpers.CreateLabel("djangoCardsStr", "", 66, 64, 37, 15, _currentStatsGroupBox, WinFormHelpers.cardsStatColor, textAlignment: "MiddleRight");
             _bok3_djangoEquipsStr = WinFormHelpers.CreateLabel("djangoEquipsStr", "", 103, 64, 42, 15, _currentStatsGroupBox, WinFormHelpers.equipsStatColor, textAlignment: "MiddleRight");
             _bok3_djangoTotalStr = WinFormHelpers.CreateLabel("djangoTotalStr", "", 145, 64, 32, 15, _currentStatsGroupBox, WinFormHelpers.totalStatColor, textAlignment: "MiddleRight");
+        }
+
+        #endregion
+
+        #region GUI
+
+        private void ShowShinbokGui() {
+
+            // RTC
+            int halfScreenHeight = GetScreenHeight() / 2;
+            if (_showRtc == true) {
+                APIs.Gui.Text(3, halfScreenHeight, "RTC:");
+                APIs.Gui.Text(50, halfScreenHeight, Utilities.FormatTimeTo24(_shinbokAddresses.Misc["rtc_hours"].Value, _shinbokAddresses.Misc["rtc_minutes"].Value, _shinbokAddresses.Misc["rtc_seconds"].Value));
+            }
+
+            // Frames since game start
+            if (_showIgtFrameCounter == true) {
+                APIs.Gui.Text(3, halfScreenHeight + 15, "IGT:");
+                APIs.Gui.Text(50, halfScreenHeight + 15, _memoryValues.Misc["igt_frame_counter"].Value.ToString());
+            }
+
+            // Interest rate
+            if (_showInterestRate == true) {
+                APIs.Gui.Text(3, halfScreenHeight + 30, "Interest rate:");
+                APIs.Gui.Text(150, halfScreenHeight + 30, Utilities.GetInterestRateFromValue(_memoryValues.Solls["interest_rate"].Value));
+            }
         }
 
         #endregion
