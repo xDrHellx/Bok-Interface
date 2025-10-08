@@ -127,6 +127,16 @@ namespace BokInterface {
             MaximizeBox = MinimizeBox = false;
         }
 
+        /// <summary>Add the labels with the game info to the main window</summary>
+        private void AddCurrentGameInfo() {
+            WinFormHelpers.CreateLabel("currentGameName", WinFormHelpers.EscapeAmpersand(currentGameName), 0, _menuBar.Height, Width, 20, this, WinFormHelpers.gameNameBackground, textAlignment: "MiddleLeft");
+            Label regionVersionLabel = WinFormHelpers.CreateLabel("currentGameRegionVersion", region + " " + version, 0, _menuBar.Height, 20, 20, this, WinFormHelpers.gameVersionBackground, textAlignment: "MiddleLeft");
+            regionVersionLabel.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            regionVersionLabel.Width = TextRenderer.MeasureText(regionVersionLabel.Text, regionVersionLabel.Font).Width;
+            regionVersionLabel.Location = new Point(ClientSize.Width - regionVersionLabel.Width, regionVersionLabel.Location.Y);
+            regionVersionLabel.BringToFront();
+        }
+
         /// <summary>Adds the Misc. data section for the corresponding game</summary>
         private void AddMiscDataSection() {
 

@@ -42,15 +42,7 @@ namespace BokInterface {
 
             GenerateMenu();
             AddZoktaiDownloadableEventsMenu();
-
-            // If JP version, update the game name label to add the version
-            string version = "";
-            if (currentGameId == 1244803925) {
-                version = Utilities.GetGameVersion() == 1 ? " (v1.1)" : " (v1.0)";
-            }
-
-            // Current game name
-            WinFormHelpers.CreateLabel("currentGameName", currentGameName + version, 0, _menuBar.Height, Width, 20, this, WinFormHelpers.gameNameBackground, textAlignment: "MiddleLeft");
+            AddCurrentGameInfo();
 
             // Sections
             AddZoktaiCurrentStatusSection();

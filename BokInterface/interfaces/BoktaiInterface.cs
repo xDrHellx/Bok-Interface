@@ -30,15 +30,7 @@ namespace BokInterface {
 
             GenerateMenu();
             AddBoktaiEventsMenu();
-
-            // If E3 demo / beta, update the game name label
-            string version = "";
-            if (currentGameId == 1246311233) {
-                version = " (E3 demo)";
-            }
-
-            // Current game name
-            WinFormHelpers.CreateLabel("currentGameName", currentGameName + version, 0, _menuBar.Height, Width, 20, this, WinFormHelpers.gameNameBackground, textAlignment: "MiddleLeft");
+            AddCurrentGameInfo();
 
             // Sections
             AddBoktaiCurrentStatusSection();
