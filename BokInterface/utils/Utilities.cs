@@ -20,9 +20,10 @@ namespace BokInterface.Utils {
         }
 
         /// <summary>Get the value for the game's version</summary>
+        /// <param name="isDs">Indicate if the current game is on DS (False by default)</param>
         /// <returns><c>uint</c>Indicator (for example 0 for v1.0, 1 for v1.1, ...)</returns>
-        public static uint GetGameVersion() {
-            return APIs.Memory.ReadU8(0x080000bc, "Main RAM");
+        public static uint GetGameVersion(bool isDs = false) {
+            return APIs.Memory.ReadU8(isDs == false ? 0x080000BC : 0x3FFE1E, "Main RAM");
         }
 
         #endregion
