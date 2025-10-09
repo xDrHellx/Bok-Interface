@@ -63,7 +63,7 @@ namespace BokInterface.solarGun {
 
             // Add warning
             Label expWarning = WinFormHelpers.CreateImageLabel("tooltip", "warning", 5, 232, this);
-            WinFormHelpers.CreateLabel("warning", "Menu must be re-opened && gun parts must be equipped again for all changes to fully take effect.", 23, 222, 319, 40, this, textAlignment: "MiddleLeft");
+            WinFormHelpers.CreateLabel("warning", WinFormHelpers.EscapeAmpersand("Menu must be re-opened & gun parts must be equipped again for all changes to fully take effect."), 23, 222, 319, 40, this, textAlignment: "MiddleLeft");
 
             // Button for setting values & its events
             Button setValuesButton = WinFormHelpers.CreateButton("setStatusButton", "Set values", 346, 235, 75, 23, this);
