@@ -47,7 +47,7 @@ namespace BokInterface.Tools.MemoryValuesListing {
             InitializeSubwindowProperties();
         }
 
-        public MemoryValuesListing(BokInterface bokInterface, LunarKnightsAddresses lunarKnightsAddresses) {
+        public MemoryValuesListing(BokInterface bokInterface, DsAddresses lunarKnightsAddresses) {
             Owner = _bokInterface = bokInterface;
             _memAddresses = lunarKnightsAddresses;
             Icon = _bokInterface.Icon;

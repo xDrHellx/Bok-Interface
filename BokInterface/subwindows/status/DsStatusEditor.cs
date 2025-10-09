@@ -6,19 +6,19 @@ using BokInterface.Utils;
 
 namespace BokInterface.Status {
     /// <summary>Status editor for Lunar Knights / Boktai DS</summary>
-    class LunarKnightsStatusEditor : StatusEditor {
+    class DsStatusEditor : StatusEditor {
 
         #region Properties
 
         private readonly MemoryValues _memoryValues;
         private readonly BokInterface _bokInterface;
-        private readonly LunarKnightsAddresses _lunarKnightsAddresses;
+        private readonly DsAddresses _lunarKnightsAddresses;
 
         #endregion
 
         #region Constructor
 
-        public LunarKnightsStatusEditor(BokInterface bokInterface, MemoryValues memoryValues, LunarKnightsAddresses lunarKnightsAddresses) {
+        public DsStatusEditor(BokInterface bokInterface, MemoryValues memoryValues, DsAddresses lunarKnightsAddresses) {
 
             _memoryValues = memoryValues;
             _lunarKnightsAddresses = lunarKnightsAddresses;

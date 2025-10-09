@@ -1,20 +1,20 @@
 using BokInterface.Addresses;
 
-namespace BokInterface.KeyItems {
-    /// <summary>Key items editor for Lunar Knights / Boktai DS</summary>
-    class LunarKnightsKeyItemsEditor : KeyItemsEditor {
+namespace BokInterface.Weapons {
+    /// <summary>Weapons editor for Lunar Knights / Boktai DS</summary>
+    class DsWeaponsEditor : WeaponsEditor {
 
         #region Properties
 
         private readonly MemoryValues _memoryValues;
         private readonly BokInterface _bokInterface;
-        private readonly LunarKnightsAddresses _lunarKnightsAddresses;
+        private readonly DsAddresses _lunarKnightsAddresses;
 
         #endregion
 
         #region Constructor
 
-        public LunarKnightsKeyItemsEditor(BokInterface bokInterface, MemoryValues memoryValues, LunarKnightsAddresses LunarKnightsAddresses) {
+        public DsWeaponsEditor(BokInterface bokInterface, MemoryValues memoryValues, DsAddresses LunarKnightsAddresses) {
 
             _memoryValues = memoryValues;
             _lunarKnightsAddresses = LunarKnightsAddresses;

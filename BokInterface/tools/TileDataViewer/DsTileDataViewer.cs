@@ -4,18 +4,18 @@ using BokInterface.Addresses;
 
 namespace BokInterface.Tools.TileDataViewer {
     /// <summary>TDViewer tool for Lunar Knights / Boktai DS</summary>
-    class LunarKnightsTileDataViewer : TileDataViewer {
+    class DsTileDataViewer : TileDataViewer {
 
         #region Properties
 
         private readonly BokInterface _bokInterface;
-        private readonly LunarKnightsAddresses _memAddresses;
+        private readonly DsAddresses _memAddresses;
 
         #endregion
 
         #region Constructor | Init
 
-        public LunarKnightsTileDataViewer(BokInterface bokInterface, LunarKnightsAddresses lunarKnightsAddresses) {
+        public DsTileDataViewer(BokInterface bokInterface, DsAddresses lunarKnightsAddresses) {
             Owner = _bokInterface = bokInterface;
             _memAddresses = lunarKnightsAddresses;
             Icon = _bokInterface.Icon;

@@ -175,8 +175,9 @@ namespace BokInterface {
                         case "Shinbok":
                             UpdateShinbokInterface();
                             break;
+                        case "BoktaiDS":
                         case "LunarKnights":
-                            UpdateLunarKnightsInterface();
+                            UpdateDsInterface();
                             break;
                         default:
                             // If game is not handled, put back the old setting for displaying messages
@@ -256,11 +257,15 @@ namespace BokInterface {
                     _supportedGame = true;
                     _isDS = false;
                     break;
-                case 1481329729:    // EU 1.1
+                case 1246448705:    // Boktai DS
+                    currentGameName = "Boktai DS: Django & Sabata";
+                    shorterGameName = "BoktaiDS";
+                    _supportedGame = _isDS = true;
+                    break;
+                case 1162562625:    // Lunar Knights US
                 case 1347112001:    // EU 1.0
-                case 1162562625:    // US
-                case 1246448705:    // JP
-                    currentGameName = "Boktai DS - Lunar Knights";
+                case 1481329729:    // EU 1.1
+                    currentGameName = "Lunar Knights";
                     shorterGameName = "LunarKnights";
                     _supportedGame = _isDS = true;
                     break;

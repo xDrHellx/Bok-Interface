@@ -58,7 +58,7 @@ namespace BokInterface {
 
         /// <summary>Generate the menu related to the GUI data</summary>
         private void GenerateGuiMenu() {
-            if (shorterGameName == "LunarKnights") {
+            if (_isDS == true) {
                 return;
             }
 
