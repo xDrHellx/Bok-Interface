@@ -19,8 +19,8 @@ namespace BokInterface.Inventory {
 
         protected readonly List<CheckBox> checkBoxes = [];
         /// <summary>
-        /// <para>Default maximum durability value that can be set</para>
-        /// <para>This is eventually replaced based on dropdown selected items</para>
+        ///     Default maximum durability value that can be set.<br/>
+        ///     This is eventually replaced based on dropdown selected items.
         /// </summary>
         private readonly int _defaultMaxDurability = 7679;
         /// <summary>Durabiliy offset for "Chocolate-covered" items</summary>

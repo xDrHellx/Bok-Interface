@@ -51,7 +51,7 @@ namespace BokInterface.Status {
             // Sections
             statusGroupBox = WinFormHelpers.CreateCheckGroupBox("editStatusGroup", "Status", 5, 5, 123, 106, control: this);
             statsGroupBox = WinFormHelpers.CreateCheckGroupBox("editStatsGroup", "Stats", 134, 5, 124, 153, control: this);
-            expGroupBox = WinFormHelpers.CreateCheckGroupBox("editExpGroup", "Level && EXP", 5, 114, 123, 77, control: this);
+            expGroupBox = WinFormHelpers.CreateCheckGroupBox("editExpGroup", WinFormHelpers.EscapeAmpersand("Level & EXP"), 5, 114, 123, 77, control: this);
             sollsGroupBox = WinFormHelpers.CreateCheckGroupBox("editSollsGroup", "Solls", 264, 5, 137, 103, control: this);
 
             // Status
