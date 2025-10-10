@@ -321,10 +321,10 @@ namespace BokInterface {
                 case "Shinbok":
                     inventoryEditor = new ShinbokInventoryEditor(this, _memoryValues, _shinbokAddresses);
                     break;
-                // case "BoktaiDS":
-                // case "LunarKnights":
-                //     inventoryEditor = new dsInventoryEditor(this, _memoryValues, _dsAddresses);
-                //     break;
+                case "BoktaiDS":
+                case "LunarKnights":
+                    inventoryEditor = new dsInventoryEditor(this, _memoryValues, _dsAddresses);
+                    break;
                 default:
                     // If game is not handled, stop
                     return;

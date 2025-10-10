@@ -19,22 +19,22 @@ namespace BokInterface.Inventory {
 
         protected readonly List<ImageComboBox> dropDownLists = [];
         protected readonly List<NumericUpDown> numericUpDowns = [];
-        protected CheckGroupBox slot1group = new(),
-            slot2group = new(),
-            slot3group = new(),
-            slot4group = new(),
-            slot5group = new(),
-            slot6group = new(),
-            slot7group = new(),
-            slot8group = new(),
-            slot9group = new(),
-            slot10group = new(),
-            slot11group = new(),
-            slot12group = new(),
-            slot13group = new(),
-            slot14group = new(),
-            slot15group = new(),
-            slot16group = new();
+        protected CheckGroupBox? slot1group { get; set; }
+        protected CheckGroupBox? slot2group { get; set; }
+        protected CheckGroupBox? slot3group { get; set; }
+        protected CheckGroupBox? slot4group { get; set; }
+        protected CheckGroupBox? slot5group { get; set; }
+        protected CheckGroupBox? slot6group { get; set; }
+        protected CheckGroupBox? slot7group { get; set; }
+        protected CheckGroupBox? slot8group { get; set; }
+        protected CheckGroupBox? slot9group { get; set; }
+        protected CheckGroupBox? slot10group { get; set; }
+        protected CheckGroupBox? slot11group { get; set; }
+        protected CheckGroupBox? slot12group { get; set; }
+        protected CheckGroupBox? slot13group { get; set; }
+        protected CheckGroupBox? slot14group { get; set; }
+        protected CheckGroupBox? slot15group { get; set; }
+        protected CheckGroupBox? slot16group { get; set; }
 
         #endregion
 
