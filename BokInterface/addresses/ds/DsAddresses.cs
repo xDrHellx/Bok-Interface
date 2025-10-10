@@ -7,6 +7,6 @@ namespace BokInterface.Addresses {
         public IDictionary<string, MemoryAddress> Player = new Dictionary<string, MemoryAddress>();
         /// <summary>Inventory-related memory addresses</summary>
         public IDictionary<string, MemoryAddress> Inventory = new Dictionary<string, MemoryAddress>();
-        protected string note;
+        protected string note = "";
     }
 }

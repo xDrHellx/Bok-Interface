@@ -179,9 +179,9 @@ namespace BokInterface.Inventory {
             uint lucianCurrentHp = _memoryAddresses.Player["lucian_current_hp"].Value,
                 aaronCurrentHp = _memoryAddresses.Player["aaron_current_hp"].Value;
             if (
-                (lucianCurrentHp >= 0 && lucianCurrentHp <= 9999)
+                (lucianCurrentHp > 0 && lucianCurrentHp <= 9999)
                 ||
-                (aaronCurrentHp >= 0 && aaronCurrentHp <= 9999)
+                (aaronCurrentHp > 0 && aaronCurrentHp <= 9999)
             ) {
                 foreach (ImageComboBox dropdown in dropDownLists) {
                     /**
@@ -189,7 +189,7 @@ namespace BokInterface.Inventory {
                      * Then try getting the corresponding item & preselect it
                      */
                     string[] fieldParts = dropdown.Name.Split(['_'], 2);
-                    Item? selectedItem = GetItemByValue(_memoryValues.Inventory[fieldParts[1]].Value);
+                    Item? selectedItem = GetItemByValue(_memoryAddresses.Inventory[fieldParts[1]].Value);
                     if (selectedItem != null) {
                         dropdown.SelectedIndex = dropdown.FindStringExact(selectedItem.name);
                     }
