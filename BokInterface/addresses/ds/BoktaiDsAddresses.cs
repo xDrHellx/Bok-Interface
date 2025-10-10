@@ -3,8 +3,20 @@ namespace BokInterface.Addresses {
     public class BoktaiDsAddresses : DsAddresses {
 
         public BoktaiDsAddresses() {
+            InitPlayerAddresses();
             InitInventoryAddresses();
-            // 65535 = empty slot
+        }
+
+        private void InitPlayerAddresses() {
+
+            // TODO Need find proper addresses, with pointer to data (currently player values cannot be updated)
+            // Current stats
+            note = "Used for damage calculations, will be copied to its Persistent equivalent on screen transition. Must be combined with the \"stat\" memory address' value";
+            Player.Add("lucian_current_hp", new MemoryAddress(0x2211F6, note, domain: "Main RAM"));
+            Player.Add("aaron_current_hp", new MemoryAddress(0x2211F4, note, domain: "Main RAM"));
+
+            // Persistent stats (used on screen transitions & save data)
+            // note = "Also corresponds to values from Save Data";
         }
 
         private void InitInventoryAddresses() {
