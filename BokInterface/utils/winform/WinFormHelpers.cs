@@ -801,6 +801,7 @@ namespace BokInterface.Utils {
                 "Boktai" => "lita",
                 "Zoktai" => "ringo",
                 "Shinbok" => "trinity",
+                "BoktaiDS" => "lucian",
                 "LunarKnights" => "lucian",
                 _ => "nero"
             };
