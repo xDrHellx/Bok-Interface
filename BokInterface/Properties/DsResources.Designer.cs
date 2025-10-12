@@ -709,9 +709,9 @@ namespace BokInterface.Properties {
         }
 
         /// <summary>Looks up a localized resource of type System.Drawing.Bitmap.</summary>
-        internal static System.Drawing.Bitmap frech_picked_herbs {
+        internal static System.Drawing.Bitmap fresh_picked_herbs {
             get {
-                object obj = ResourceManager.GetObject("frech_picked_herbs", resourceCulture);
+                object obj = ResourceManager.GetObject("fresh_picked_herbs", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -741,9 +741,9 @@ namespace BokInterface.Properties {
         }
 
         /// <summary>Looks up a localized resource of type System.Drawing.Bitmap.</summary>
-        internal static System.Drawing.Bitmap frech_picked_mushrooms {
+        internal static System.Drawing.Bitmap fresh_picked_mushrooms {
             get {
-                object obj = ResourceManager.GetObject("frech_picked_mushrooms", resourceCulture);
+                object obj = ResourceManager.GetObject("fresh_picked_mushrooms", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
