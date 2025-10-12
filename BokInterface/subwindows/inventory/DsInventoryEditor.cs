@@ -161,7 +161,6 @@ namespace BokInterface.Inventory {
         private void SetMemoryValue(string subList, string valueKey, decimal value) {
             switch (subList) {
                 case "inventory":
-                    APIs.Gui.AddMessage(_memoryAddresses.Inventory.ContainsKey(valueKey).ToString() + " => " + valueKey);
                     if (_memoryAddresses.Inventory.ContainsKey(valueKey) == true) {
                         _memoryAddresses.Inventory[valueKey].Value = (uint)value;
                     }
