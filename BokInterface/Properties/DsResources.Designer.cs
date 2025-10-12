@@ -603,5 +603,181 @@ namespace BokInterface.Properties {
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
+
+        /// <summary>Looks up a localized resource of type System.Drawing.Bitmap.</summary>
+        internal static System.Drawing.Bitmap mobile_unit {
+            get {
+                object obj = ResourceManager.GetObject("mobile_unit", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+
+        /// <summary>Looks up a localized resource of type System.Drawing.Bitmap.</summary>
+        internal static System.Drawing.Bitmap solar_goggles {
+            get {
+                object obj = ResourceManager.GetObject("solar_goggles", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+
+        /// <summary>Looks up a localized resource of type System.Drawing.Bitmap.</summary>
+        internal static System.Drawing.Bitmap paper_bag {
+            get {
+                object obj = ResourceManager.GetObject("paper_bag", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+
+        /// <summary>Looks up a localized resource of type System.Drawing.Bitmap.</summary>
+        internal static System.Drawing.Bitmap letter_to_gatekeeper {
+            get {
+                object obj = ResourceManager.GetObject("letter_to_gatekeeper", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+
+        /// <summary>Looks up a localized resource of type System.Drawing.Bitmap.</summary>
+        internal static System.Drawing.Bitmap solar_sensor_ver_1 {
+            get {
+                object obj = ResourceManager.GetObject("solar_sensor_ver_1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+
+        /// <summary>Looks up a localized resource of type System.Drawing.Bitmap.</summary>
+        internal static System.Drawing.Bitmap solar_sensor_ver_2 {
+            get {
+                object obj = ResourceManager.GetObject("solar_sensor_ver_2", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+
+        /// <summary>Looks up a localized resource of type System.Drawing.Bitmap.</summary>
+        internal static System.Drawing.Bitmap solar_sensor_ver_3 {
+            get {
+                object obj = ResourceManager.GetObject("solar_sensor_ver_3", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+
+        /// <summary>Looks up a localized resource of type System.Drawing.Bitmap.</summary>
+        internal static System.Drawing.Bitmap red_key {
+            get {
+                object obj = ResourceManager.GetObject("red_key", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+
+        /// <summary>Looks up a localized resource of type System.Drawing.Bitmap.</summary>
+        internal static System.Drawing.Bitmap yellow_key {
+            get {
+                object obj = ResourceManager.GetObject("yellow_key", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+
+        /// <summary>Looks up a localized resource of type System.Drawing.Bitmap.</summary>
+        internal static System.Drawing.Bitmap blue_key {
+            get {
+                object obj = ResourceManager.GetObject("blue_key", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+
+        /// <summary>Looks up a localized resource of type System.Drawing.Bitmap.</summary>
+        internal static System.Drawing.Bitmap transer {
+            get {
+                object obj = ResourceManager.GetObject("transer", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+
+        /// <summary>Looks up a localized resource of type System.Drawing.Bitmap.</summary>
+        internal static System.Drawing.Bitmap visualizer {
+            get {
+                object obj = ResourceManager.GetObject("visualizer", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+
+        /// <summary>Looks up a localized resource of type System.Drawing.Bitmap.</summary>
+        internal static System.Drawing.Bitmap bouquet {
+            get {
+                object obj = ResourceManager.GetObject("bouquet", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+
+        /// <summary>Looks up a localized resource of type System.Drawing.Bitmap.</summary>
+        internal static System.Drawing.Bitmap frech_picked_herbs {
+            get {
+                object obj = ResourceManager.GetObject("frech_picked_herbs", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+
+        /// <summary>Looks up a localized resource of type System.Drawing.Bitmap.</summary>
+        internal static System.Drawing.Bitmap caravan_package_red {
+            get {
+                object obj = ResourceManager.GetObject("caravan_package_red", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+
+        /// <summary>Looks up a localized resource of type System.Drawing.Bitmap.</summary>
+        internal static System.Drawing.Bitmap caravan_package_blue {
+            get {
+                object obj = ResourceManager.GetObject("caravan_package_blue", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+
+        /// <summary>Looks up a localized resource of type System.Drawing.Bitmap.</summary>
+        internal static System.Drawing.Bitmap caravan_package_yellow {
+            get {
+                object obj = ResourceManager.GetObject("caravan_package_yellow", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+
+        /// <summary>Looks up a localized resource of type System.Drawing.Bitmap.</summary>
+        internal static System.Drawing.Bitmap frech_picked_mushrooms {
+            get {
+                object obj = ResourceManager.GetObject("frech_picked_mushrooms", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+
+        /// <summary>Looks up a localized resource of type System.Drawing.Bitmap.</summary>
+        internal static System.Drawing.Bitmap spare_bottlecap {
+            get {
+                object obj = ResourceManager.GetObject("spare_bottlecap", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+
+        /// <summary>Looks up a localized resource of type System.Drawing.Bitmap.</summary>
+        internal static System.Drawing.Bitmap luna_emblem {
+            get {
+                object obj = ResourceManager.GetObject("luna_emblem", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+
+        /// <summary>Looks up a localized resource of type System.Drawing.Bitmap.</summary>
+        internal static System.Drawing.Bitmap sol_emblem {
+            get {
+                object obj = ResourceManager.GetObject("sol_emblem", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+
+        /// <summary>Looks up a localized resource of type System.Drawing.Bitmap.</summary>
+        internal static System.Drawing.Bitmap dark_emblem {
+            get {
+                object obj = ResourceManager.GetObject("dark_emblem", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
     }
 }

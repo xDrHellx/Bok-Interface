@@ -124,6 +124,28 @@ namespace BokInterface.Items {
         ///<summary>Init key items instances</summary>
         private void InitKeyItems() {
             KeyItems.Add("Empty slot", new DsItem("Empty Slot", 65535));
+            KeyItems.Add("Mobile Unit", new DsItem("Mobile Unit", 96, "mobile_unit"));
+            KeyItems.Add("Solar Goggles", new DsItem("Solar Goggles", 97, "solar_goggles"));
+            KeyItems.Add("Paper Bag", new DsItem("Paper Bag", 98, "paper_bag"));
+            KeyItems.Add("Letter to Gatekeeper", new DsItem("Letter to Gatekeeper", 99, "letter_to_gatekeeper"));
+            KeyItems.Add("Solar Sensor Ver. 1", new DsItem("Solar Sensor Ver. 1", 100, "solar_sensor_ver_1"));
+            KeyItems.Add("Solar Sensor Ver. 2", new DsItem("Solar Sensor Ver. 2", 101, "solar_sensor_ver_2"));
+            KeyItems.Add("Solar Sensor Ver. 3", new DsItem("Solar Sensor Ver. 3", 102, "solar_sensor_ver_3"));
+            KeyItems.Add("Red Key", new DsItem("Red Key", 103, "red_key"));
+            KeyItems.Add("Yellow Key", new DsItem("Yellow Key", 104, "yellow_key"));
+            KeyItems.Add("Blue Key", new DsItem("Blue Key", 105, "blue_key"));
+            KeyItems.Add("Transer", new DsItem("Transer", 106, "transer"));
+            KeyItems.Add("Visualizer", new DsItem("Visualizer", 107, "visualizer"));
+            KeyItems.Add("Fresh-Picked Herbs", new DsItem("Fresh-Picked Herbs", 108, "fresh_picked_herbs"));
+            KeyItems.Add("Bouquet", new DsItem("Bouquet", 109, ""));
+            KeyItems.Add("Caravan Package (Red)", new DsItem("Caravan Package (Red)", 110, "caravan_package_red"));
+            KeyItems.Add("Caravan Package (Blue)", new DsItem("Caravan Package (Blue)", 111, "caravan_package_blue"));
+            KeyItems.Add("Caravan Package (Yellow)", new DsItem("Caravan Package (Yellow)", 112, "caravan_package_yellow"));
+            KeyItems.Add("Fresh-Picked Mushrooms", new DsItem("Fresh-Picked Mushrooms", 113, "fresh_picked_mushrooms"));
+            KeyItems.Add("Spare Bottlecap", new DsItem("Spare Bottlecap", 114, "spare_bottlecap"));
+            KeyItems.Add("Luna Emblem", new DsItem("Luna Emblem", 115, "luna_emblem"));
+            KeyItems.Add("Sol Emblem", new DsItem("Sol Emblem", 116, "sol_emblem"));
+            KeyItems.Add("Dark Emblem", new DsItem("Dark Emblem", 117, "dark_emblem"));
         }
     }
 }

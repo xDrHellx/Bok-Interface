@@ -325,4 +325,70 @@
   <data name="ryuusei" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\img\ds\items\ryuusei.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="mobile_unit" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\ds\items\mobile_unit.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="solar_goggles" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\ds\items\solar_goggles.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="paper_bag" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\ds\items\paper_bag.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="letter_to_gatekeeper" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\ds\items\letter_to_gatekeeper.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="solar_sensor_ver_1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\ds\items\solar_sensor_ver_1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="solar_sensor_ver_2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\ds\items\solar_sensor_ver_2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="solar_sensor_ver_3" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\ds\items\solar_sensor_ver_3.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="red_key" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\ds\items\red_key.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="yellow_key" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\ds\items\yellow_key.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="blue_key" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\ds\items\blue_key.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="transer" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\ds\items\transer.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="visualizer" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\ds\items\visualizer.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="bouquet" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\ds\items\bouquet.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="frech_picked_herbs" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\ds\items\frech_picked_herbs.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="caravan_package_red" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\ds\items\caravan_package_red.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="caravan_package_blue" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\ds\items\caravan_package_blue.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="caravan_package_yellow" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\ds\items\caravan_package_yellow.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="frech_picked_mushrooms" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\ds\items\frech_picked_mushrooms.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="spare_bottlecap" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\ds\items\spare_bottlecap.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="luna_emblem" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\ds\items\luna_emblem.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="sol_emblem" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\ds\items\sol_emblem.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="dark_emblem" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\ds\items\dark_emblem.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
 </root>
