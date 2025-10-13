@@ -209,16 +209,16 @@ namespace BokInterface {
             editItemsMenu.Click += new EventHandler(OpenInventoryEditor);
             editMenu.DropDownItems.Add(editItemsMenu);
 
-            // If DS / LK, stop here
-            if (_isDS == true) {
-                return;
-            }
-
             if (shorterGameName != "Boktai") {
 
                 ToolStripMenuItem editKeyItemsMenu = WinFormHelpers.CreateToolStripMenuItem("editKeyitemsMenu", "&Key items", menuItem: editMenu);
                 editKeyItemsMenu.Click += new EventHandler(OpenKeyItemsEditor);
                 editMenu.DropDownItems.Add(editKeyItemsMenu);
+
+                // If DS / LK, stop here
+                if (_isDS == true) {
+                    return;
+                }
 
                 ToolStripMenuItem editWeaponsMenu = WinFormHelpers.CreateToolStripMenuItem("editWeaponsMenu", "&Weapons", menuItem: editMenu);
                 editWeaponsMenu.Click += new EventHandler(OpenWeaponsEditor);
@@ -357,10 +357,10 @@ namespace BokInterface {
                 case "Shinbok":
                     keyItemsEditor = new ShinbokKeyItemsEditor(this, _memoryValues, _shinbokAddresses);
                     break;
-                // case "BoktaiDS":
-                // case "LunarKnights":
-                //     keyItemsEditor = new DsKeyItemsEditor(this, _memoryValues, _dsAddresses);
-                //     break;
+                case "BoktaiDS":
+                case "LunarKnights":
+                    keyItemsEditor = new DsKeyItemsEditor(this, _memoryValues, _dsAddresses);
+                    break;
                 default:
                     // If game is not handled, stop
                     return;

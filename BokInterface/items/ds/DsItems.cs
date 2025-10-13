@@ -137,7 +137,7 @@ namespace BokInterface.Items {
             KeyItems.Add("Transer", new DsItem("Transer", 106, "transer"));
             KeyItems.Add("Visualizer", new DsItem("Visualizer", 107, "visualizer"));
             KeyItems.Add("Fresh-Picked Herbs", new DsItem("Fresh-Picked Herbs", 108, "fresh_picked_herbs"));
-            KeyItems.Add("Bouquet", new DsItem("Bouquet", 109, ""));
+            KeyItems.Add("Bouquet", new DsItem("Bouquet", 109, "bouquet"));
             KeyItems.Add("Caravan Package (Red)", new DsItem("Caravan Package (Red)", 110, "caravan_package_red"));
             KeyItems.Add("Caravan Package (Blue)", new DsItem("Caravan Package (Blue)", 111, "caravan_package_blue"));
             KeyItems.Add("Caravan Package (Yellow)", new DsItem("Caravan Package (Yellow)", 112, "caravan_package_yellow"));

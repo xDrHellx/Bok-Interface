@@ -8,7 +8,7 @@ using BokInterface.Items;
 using BokInterface.Utils;
 
 namespace BokInterface.Inventory {
-    /// <summary>Inventory editor for Lunar Knights & Boktai DS</summary>
+    /// <summary>Inventory editor for Lunar Knights / Boktai DS</summary>
     class dsInventoryEditor : InventoryEditor {
 
         #region Properties
@@ -96,7 +96,7 @@ namespace BokInterface.Inventory {
                 // Offsets for position
                 xPos += 156;
                 if ((i % 4) == 0) {
-                    xPos = 0;
+                    xPos = 5;
                     yPos += 102;
                 }
             }
@@ -176,7 +176,7 @@ namespace BokInterface.Inventory {
              * (Invalid when below 0 or above 9999, ie when switching rooms or on world map)
              */
             uint lucianCurrentHp = _memoryAddresses.Player["lucian_current_hp"].Value,
-                aaronCurrentHp = _memoryAddresses.Player["aaron_current_hp"].Value;
+                aaronCurrentHp = _memoryAddresses.Player.ContainsKey("aaron_current_hp") ? _memoryAddresses.Player["aaron_current_hp"].Value : 0;
             if (
                 (lucianCurrentHp > 0 && lucianCurrentHp <= 9999)
                 ||
