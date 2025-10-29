@@ -38,7 +38,7 @@ namespace BokInterface.Items {
             return value switch {
                 // Redshroom & Blueshroom
                 23 or 24 => "Bad Mushroom",
-                // GariGari Soda & GariGari Cola
+                // GariGari Soda & GariGari Cola (can sometimes turn into "Winner Stick" too)
                 10 or 11 => "Loser Stick",
                 // Chocolate (if a Banana gets covered, it becomes a "Chocolate Banana", other items becomes "Chocolate-Covered")
                 6 => coveredItem != null ? (coveredItem.value == 20 ? "Chocolate Banana" : "Chocolate-Covered") : "Melted Chocolate",
