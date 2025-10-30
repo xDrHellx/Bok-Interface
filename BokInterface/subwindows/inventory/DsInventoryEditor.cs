@@ -17,10 +17,18 @@ namespace BokInterface.Inventory {
         private readonly BokInterface _bokInterface;
         private readonly DsAddresses _memoryAddresses;
         private readonly DsItems _dsItems;
+        protected readonly List<CheckBox> checkBoxes = [];
         protected CheckGroupBox? slot17group { get; set; }
         protected CheckGroupBox? slot18group { get; set; }
         protected CheckGroupBox? slot19group { get; set; }
         protected CheckGroupBox? slot20group { get; set; }
+        /// <summary>
+        ///     Default maximum durability value that can be set.<br/>
+        ///     This is eventually replaced based on dropdown selected items.
+        /// </summary>
+        private readonly int _defaultMaxDurability = 8704;
+        /// <summary>Durabiliy offset for "Chocolate-covered" items</summary>
+        private readonly int _chocolateCoveredDurabilityOffset = 32768;
 
         #endregion
 
@@ -54,9 +62,9 @@ namespace BokInterface.Inventory {
 
                     // Add elements
                     dropDownLists.Add(WinFormHelpers.CreateImageDropdownList($"inventory_item_slot_{i}", 5, 19, 140, 23, group, visibleOptions: 5));
-                    // WinFormHelpers.CreateLabel($"slot{i}", "Durability", 2, 50, 58, 15, group);
-                    // numericUpDowns.Add(WinFormHelpers.CreateNumericUpDown($"inventory_slot{i}_durability", 0, 95, 48, 50, 23, 0, 9999, control: group)); // 9999 = durability
-                    // checkBoxes.Add(WinFormHelpers.CreateCheckBox($"slot{i}_chocolate_covered", "Chocolate-covered", 12, 74, 134, 19, checkboxOnRight: true, control: group));
+                    WinFormHelpers.CreateLabel($"slot{i}", "Durability", 2, 50, 58, 15, group);
+                    numericUpDowns.Add(WinFormHelpers.CreateNumericUpDown($"inventory_item_slot_durability_{i}", 0, 95, 48, 50, 23, 0, _defaultMaxDurability, control: group));
+                    checkBoxes.Add(WinFormHelpers.CreateCheckBox($"item_slot_{i}_chocolate_covered", "Chocolate-covered", 12, 74, 134, 19, checkboxOnRight: true, control: group));
                 }
             }
 
@@ -66,9 +74,27 @@ namespace BokInterface.Inventory {
             // Set default values for each field
             SetDefaultValues();
 
-            // TODO Find item durability address
-            // TODO Find chocolated-covered offset
-            // TODO Find durability values for items
+            // TODO Find item durability address in EU & US
+            /**
+             * Due to some items taking longer to rott,
+             * For each slot, when another item is selected
+             * we update the highest durability value that can be set based on the selected item
+             */
+            foreach (ImageComboBox dropdown in dropDownLists) {
+
+                // Add on-change event
+                dropdown.SelectionChangeCommitted += new EventHandler(delegate (object sender, EventArgs e) {
+                    UpdateMaxDurabilityField(dropdown);
+                });
+
+                /**
+                 * We also call the method directly to update the durability fields
+                 * when the subwindow is generated
+                 *
+                 * It's possible that we retrieved the current inventory so we need to do that
+                 */
+                UpdateMaxDurabilityField(dropdown);
+            }
 
             // Button for setting values & its events
             Button setValuesButton = WinFormHelpers.CreateButton("setValuesButton", "Set values", 544, 511, 75, 23, this);
@@ -111,6 +137,31 @@ namespace BokInterface.Inventory {
             }
         }
 
+        /// <summary>Updates the Maximum parameter for a durability field</summary>
+        /// <param name="dropdown">The dropdown that the durability field is related to</param>
+        private void UpdateMaxDurabilityField(ImageComboBox dropdown) {
+
+            // Separate the dropdown's name into parts & get the selected item
+            string[] fieldParts = dropdown.Name.Split(['_'], 4);
+            KeyValuePair<string, Item> selectedOption = (KeyValuePair<string, Item>)dropdown.SelectedItem;
+            Item? selectedItem = selectedOption.Value;
+            if (selectedItem != null) {
+
+                // Get the related durability field by using the dropdown's name
+                string durabilityFieldName = fieldParts[0] + "_" + fieldParts[1] + "_" + fieldParts[2] + "_durability_" + fieldParts[3];
+                foreach (NumericUpDown field in numericUpDowns) {
+                    /**
+                     * If it's the field we're looking for,
+                     * update the max value based on the selected item & stop the loop
+                     */
+                    if (field.Name == durabilityFieldName) {
+                        field.Maximum = selectedItem.rottenAt > 0 ? selectedItem.rottenAt - 1 : 0;
+                        break;
+                    }
+                }
+            }
+        }
+
         #endregion
 
         #region Values setting
@@ -140,6 +191,34 @@ namespace BokInterface.Inventory {
                  */
                 string[] fieldParts = dropDownLists[i].Name.Split(['_'], 2);
                 SetMemoryValue(fieldParts[0], fieldParts[1], selectedItem.value);
+            }
+
+            // Durabilities (numericUpDowns)
+            for (int i = 0; i < numericUpDowns.Count; i++) {
+
+                if (numericUpDowns[i].Enabled == false) {
+                    continue;
+                }
+
+                string[] fieldParts = numericUpDowns[i].Name.Split(['_'], 2);
+
+                // Check if the chocolate-covered checkbox is enabled & checked
+                bool isChocolateCovered = false;
+                string[] nameParts = fieldParts[1].Split(['_'], 4);
+                string checkboxName = nameParts[0] + "_" + nameParts[1] + "_" + nameParts[3] + "_chocolate_covered";
+                foreach (CheckBox checkBox in checkBoxes) {
+                    if (checkBox.Name == checkboxName && checkBox.Checked == true) {
+                        isChocolateCovered = true;
+                        break;
+                    }
+                }
+
+                /**
+                 * If the checkbox is checked, adds the offset for chocolate-covered items to the value
+                 * Then set the value to the memory address
+                 */
+                decimal value = numericUpDowns[i].Value + (isChocolateCovered == true ? _chocolateCoveredDurabilityOffset : 0);
+                SetMemoryValue(fieldParts[0], fieldParts[1], value);
             }
 
             /**
@@ -193,10 +272,52 @@ namespace BokInterface.Inventory {
                         dropdown.SelectedIndex = dropdown.FindStringExact(selectedItem.name);
                     }
                 }
+
+                /**
+                 * For fields we need to handle a special case related to the "Chocolate-Covered" item
+                 * For that one in particular, durability has an offset of 32768
+                 */
+                foreach (NumericUpDown durabilityField in numericUpDowns) {
+
+                    // Get the different parts of the field's name
+                    string[] fieldParts = durabilityField.Name.Split(['_'], 2);
+
+                    // Get the current in-game value
+                    decimal ingameValue = _memoryAddresses.Inventory[fieldParts[1]].Value;
+
+                    /**
+                     * If the value is 32768 or higher : it's a chocolate-covered item
+                     *
+                     * In that case we need to pre-select the checkbox for the slot
+                     * We'll also remove the offset from the value in the durability field to keep it simple for the user
+                     */
+                    if (ingameValue >= _chocolateCoveredDurabilityOffset) {
+                        string[] nameParts = fieldParts[1].Split(['_'], 4);
+                        string checkboxName = nameParts[0] + "_" + nameParts[1] + "_" + nameParts[3] + "_chocolate_covered";
+                        foreach (CheckBox checkBox in checkBoxes) {
+                            if (checkBox.Name == checkboxName) {
+                                checkBox.Checked = true;
+                                break;
+                            }
+                        }
+
+                        durabilityField.Value = _memoryAddresses.Inventory[fieldParts[1]].Value - _chocolateCoveredDurabilityOffset;
+                    } else {
+                        /**
+                         * Otherwise it's another item : we can set the value directly
+                         * As for the chocolate-covered checkbox, it's unchecked by default
+                         */
+                        durabilityField.Value = ingameValue;
+                    }
+                }
             } else {
                 // If current stat is unvalid (for example because we are on the title screen or in a room transition), use specific values
                 foreach (ImageComboBox dropdown in dropDownLists) {
                     dropdown.SelectedIndex = 0;
+                }
+
+                foreach (NumericUpDown durabilityField in numericUpDowns) {
+                    durabilityField.Value = 0;
                 }
             }
         }
