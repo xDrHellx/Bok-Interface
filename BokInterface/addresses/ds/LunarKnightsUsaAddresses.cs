@@ -21,6 +21,7 @@ namespace BokInterface.Addresses {
                 // Items (2 bytes each)
                 uint addressOffset = 0x2 * (uint)i;
                 Inventory.Add("item_slot_" + slotNumber, new MemoryAddress(0x1EC058 + addressOffset, note: "Item slot", domain: "Main RAM"));
+                Inventory.Add("item_slot_durability_" + slotNumber, new MemoryAddress(0x1EC1C0 + addressOffset, note: "Durability for item in slot", domain: "Main RAM"));
                 Inventory.Add("key_item_slot_" + slotNumber, new MemoryAddress(0x1EC328 + addressOffset, note: "Key item slot", domain: "Main RAM"));
 
                 // Only 16 slots for accessories & 4 slots for shields
