@@ -74,7 +74,6 @@ namespace BokInterface.Inventory {
             // Set default values for each field
             SetDefaultValues();
 
-            // TODO Find item durability address in EU & US
             /**
              * Due to some items taking longer to rott,
              * For each slot, when another item is selected
@@ -95,6 +94,10 @@ namespace BokInterface.Inventory {
                  */
                 UpdateMaxDurabilityField(dropdown);
             }
+
+            // Add warning
+            Label expWarning = WinFormHelpers.CreateImageLabel("tooltip", "warning", 5, 515, this);
+            WinFormHelpers.CreateLabel("warning", "Inventory will be updated upon switching tab in-game or closing and reopening the menu.", 23, 508, 503, 30, this, textAlignment: "MiddleLeft");
 
             // Button for setting values & its events
             Button setValuesButton = WinFormHelpers.CreateButton("setValuesButton", "Set values", 544, 511, 75, 23, this);
