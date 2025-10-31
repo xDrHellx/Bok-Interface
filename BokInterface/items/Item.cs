@@ -58,17 +58,17 @@ namespace BokInterface.Items {
             this.durability = durability < rottenAt ? durability : 0;
         }
 
-        /// <summary>Returns the item this instance should rott into</summary>
+        /// <summary>Get the item this instance should rott into</summary>
         /// <param name="value">Instance item value</param>
         /// <returns><c>String</c>Item name</returns>
         protected abstract string GetRottsInto(uint value);
 
-        /// <summary>Returns the value at which this instance should turn into a rotten item</summary>
+        /// <summary>Get the value at which this instance should turn into a rotten item</summary>
         /// <param name="value">Instance item value</param>
         /// <returns><c>Int</c>Rottens at value</returns>
         protected abstract int GetRottensAt(uint value);
 
-        /// <summary>Returns the durability of the covered item (for "Chocolate-Covered" instances)</summary>
+        /// <summary>Get the durability of the covered item (for "Chocolate-Covered" instances)</summary>
         /// <returns><c>Int</c>Covered item durability</returns>
         public int GetCoveredItemDurability() {
             return durability - durabilityOffset;

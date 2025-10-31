@@ -144,7 +144,7 @@ namespace BokInterface.Inventory {
 
             /**
              * Due to some items taking longer to rott,
-             * For each slot, when the another item is selected
+             * For each slot, when another item is selected
              * we update the highest durability value that can be set based on the selected item
              */
             foreach (ImageComboBox dropdown in dropDownLists) {

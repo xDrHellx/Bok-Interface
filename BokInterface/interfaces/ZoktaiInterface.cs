@@ -42,15 +42,7 @@ namespace BokInterface {
 
             GenerateMenu();
             AddZoktaiDownloadableEventsMenu();
-
-            // If JP version, update the game name label to add the version
-            string version = "";
-            if (currentGameId == 1244803925) {
-                version = Utilities.GetGameVersion() == 1 ? " (v1.1)" : " (v1.0)";
-            }
-
-            // Current game name
-            WinFormHelpers.CreateLabel("currentGameName", currentGameName + version, 0, _menuBar.Height, Width, 20, this, WinFormHelpers.gameNameBackground, textAlignment: "MiddleLeft");
+            AddCurrentGameInfo();
 
             // Sections
             AddZoktaiCurrentStatusSection();
@@ -221,7 +213,7 @@ namespace BokInterface {
             _enableBlindboxLvl4 = WinFormHelpers.CreateToolStripMenuItem("enableBlindboxLvl4", "&Blindbox Lv. 4", toolTipText: eventToolTipText, menuItem: eventsMenu);
             AddZoktaiJoySpotsEventHandler(_enableBlindboxLvl4, "blindbox_lvl_4", 0x8FAA);
 
-            _enableBlindboxLvl5ValentineDay = WinFormHelpers.CreateToolStripMenuItem("enableBlindboxLvl5ValentineDay", "&Blindbox Lv. 5 && Valentine's Day", toolTipText: eventToolTipText + " Valentine's Day only triggers on February 14th.", menuItem: eventsMenu);
+            _enableBlindboxLvl5ValentineDay = WinFormHelpers.CreateToolStripMenuItem("enableBlindboxLvl5ValentineDay", "&" + WinFormHelpers.EscapeAmpersand("Blindbox Lv. 5 & Valentine's Day"), toolTipText: eventToolTipText + " Valentine's Day only triggers on February 14th.", menuItem: eventsMenu);
             AddZoktaiJoySpotsEventHandler(_enableBlindboxLvl5ValentineDay, "blindbox_lvl_5_valentine_day", 0x90E0);
 
             _enableStarPiece = WinFormHelpers.CreateToolStripMenuItem("enableStarPiece", "&Star Piece from ???", toolTipText: eventToolTipText, menuItem: eventsMenu);
