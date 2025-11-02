@@ -40,7 +40,7 @@ namespace BokInterface.Accessories {
             Head.Add("Eclipse Goggles", new DsAccessory("Eclipse Goggles", 13, type, "eclipse_goggles"));
             Head.Add("Cursed Mask", new DsAccessory("Cursed Mask", 14, type, "cursed_mask"));
             Head.Add("Warrior's Mask", new DsAccessory("Warrior's Mask", 15, type, "warrior_s_mask"));
-            Head.Add("PegasusRockHead", new DsAccessory("PegasusRockHead", 16, type, "pegasusrockhead"));
+            Head.Add("PegasusRockHead", new DsAccessory("PegasusRockHead", 16, type, "pegasusrockhead", crossOver: true));
         }
 
         ///<summary>Init accessory instances for Torso accessories</summary>
@@ -62,7 +62,7 @@ namespace BokInterface.Accessories {
             Torso.Add("Soul Saver", new DsAccessory("Soul Saver", 30, type, "soul_saver"));
             Torso.Add("Cursed Scarf", new DsAccessory("Cursed Scarf", 31, type, "cursed_scarf"));
             Torso.Add("Warrior's Scarf", new DsAccessory("Warrior's Scarf", 32, type, "warrior_s_scarf"));
-            Torso.Add("DragonRockBody", new DsAccessory("DragonRockBody", 33, type, "dragonrockbody"));
+            Torso.Add("DragonRockBody", new DsAccessory("DragonRockBody", 33, type, "dragonrockbody", crossOver: true));
         }
 
         ///<summary>Init accessory instances for Foot accessories</summary>
@@ -84,17 +84,16 @@ namespace BokInterface.Accessories {
             Foot.Add("Bounty Boots", new DsAccessory("Bounty Boots", 47, type, "bounty_boots"));
             Foot.Add("Cursed Boots", new DsAccessory("Cursed Boots", 48, type, "cursed_boots"));
             Foot.Add("Warrior's Boots", new DsAccessory("Warrior's Boots", 49, type, "warrior_s_boots"));
-            Foot.Add("LeoRockLeg", new DsAccessory("LeoRockLeg", 50, type, "leorockleg"));
+            Foot.Add("LeoRockLeg", new DsAccessory("LeoRockLeg", 50, type, "leorockleg", crossOver: true));
         }
 
         ///<summary>Init accessory instances for shields</summary>
         private void InitShieldList() {
-            string type = "shield";
-            Shield.Add("Silver Star", new DsAccessory("Silver Star", 51, type, "silver_star"));
-            Shield.Add("Red Cross", new DsAccessory("Red Cross", 52, type, "red_cross"));
-            Shield.Add("Snake Eyes", new DsAccessory("Snake Eyes", 53, type, "snake_eyes"));
-            Shield.Add("Blue Spine", new DsAccessory("Blue Spine", 54, type, "blue_spine"));
-            Shield.Add("Silver Star (duplicate)", new DsAccessory("Silver Star (duplicate)", 55, type, "silver_star"));
+            Shield.Add("Silver Star", new DsShield("Silver Star", 51, "silver_star"));
+            Shield.Add("Red Cross", new DsShield("Red Cross", 52, "red_cross"));
+            Shield.Add("Snake Eyes", new DsShield("Snake Eyes", 53, "snake_eyes"));
+            Shield.Add("Blue Spine", new DsShield("Blue Spine", 54, "blue_spine"));
+            Shield.Add("Silver Star (duplicate)", new DsShield("Silver Star (duplicate)", 55, "silver_star"));
         }
 
         ///<summary>Init the list containing Equipments accessories related to equipments (mostly used for editors)</summary>
