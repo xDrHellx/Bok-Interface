@@ -17,6 +17,7 @@ using BokInterface.Tools.SolarBankInterestsSimulator;
 using BokInterface.Tools.TileDataViewer;
 using BokInterface.Weapons;
 using BokInterface.Accessories;
+using BizHawk.Common;
 
 /**
  * File for the external window part of the Bok interface
@@ -194,52 +195,64 @@ namespace BokInterface {
         /// <summary>Generate the menu for the main window</summary>
         private void GenerateMenu() {
 
+            // Menu bar & Edit section
             _menuBar = WinFormHelpers.CreateMenuStrip("menuBar", "", control: this);
-
-            // Edit section
             ToolStripMenuItem editMenu = WinFormHelpers.CreateToolStripMenuItem("editMenu", "Edit", menuStrip: _menuBar);
 
-            if (shorterGameName == "Zoktai" || shorterGameName == "Shinbok") {
-                ToolStripMenuItem editStatusMenu = WinFormHelpers.CreateToolStripMenuItem("editStatusMenu", "&Status", menuItem: editMenu);
-                editStatusMenu.Click += new EventHandler(OpenStatusEditor);
-                editMenu.DropDownItems.Add(editStatusMenu);
-            }
+            if (_isDS == true) {
 
-            ToolStripMenuItem editItemsMenu = WinFormHelpers.CreateToolStripMenuItem("edititemsMenu", "&Items", menuItem: editMenu);
-            editItemsMenu.Click += new EventHandler(OpenInventoryEditor);
-            editMenu.DropDownItems.Add(editItemsMenu);
-
-            if (shorterGameName != "Boktai") {
+                // DS
+                ToolStripMenuItem editItemsMenu = WinFormHelpers.CreateToolStripMenuItem("edititemsMenu", "&Items", menuItem: editMenu);
+                editItemsMenu.Click += new EventHandler(OpenInventoryEditor);
+                editMenu.DropDownItems.Add(editItemsMenu);
 
                 ToolStripMenuItem editKeyItemsMenu = WinFormHelpers.CreateToolStripMenuItem("editKeyitemsMenu", "&Key items", menuItem: editMenu);
                 editKeyItemsMenu.Click += new EventHandler(OpenKeyItemsEditor);
                 editMenu.DropDownItems.Add(editKeyItemsMenu);
 
-                // If DS / LK, stop here
-                if (_isDS == true) {
-                    return;
+                AddDropdownMenuItem("editAccessoriesMenu", WinFormHelpers.EscapeAmpersand("Accessories & Shields"), editMenu, OpenEquipsEditor);
+            } else {
+
+                // GBA
+                if (shorterGameName == "Zoktai" || shorterGameName == "Shinbok") {
+                    ToolStripMenuItem editStatusMenu = WinFormHelpers.CreateToolStripMenuItem("editStatusMenu", "&Status", menuItem: editMenu);
+                    editStatusMenu.Click += new EventHandler(OpenStatusEditor);
+                    editMenu.DropDownItems.Add(editStatusMenu);
                 }
 
-                ToolStripMenuItem editWeaponsMenu = WinFormHelpers.CreateToolStripMenuItem("editWeaponsMenu", "&Weapons", menuItem: editMenu);
-                editWeaponsMenu.Click += new EventHandler(OpenWeaponsEditor);
-                editMenu.DropDownItems.Add(editWeaponsMenu);
-            }
+                ToolStripMenuItem editItemsMenu = WinFormHelpers.CreateToolStripMenuItem("edititemsMenu", "&Items", menuItem: editMenu);
+                editItemsMenu.Click += new EventHandler(OpenInventoryEditor);
+                editMenu.DropDownItems.Add(editItemsMenu);
 
-            if (shorterGameName == "Shinbok" || shorterGameName == "Boktai") {
-                AddDropdownMenuItem("editGunMenu", "Solar gun", editMenu, OpenSolarGunEditor);
-            }
+                if (shorterGameName != "Boktai") {
 
-            if (shorterGameName != "Boktai") {
+                    ToolStripMenuItem editKeyItemsMenu = WinFormHelpers.CreateToolStripMenuItem("editKeyitemsMenu", "&Key items", menuItem: editMenu);
+                    editKeyItemsMenu.Click += new EventHandler(OpenKeyItemsEditor);
+                    editMenu.DropDownItems.Add(editKeyItemsMenu);
 
-                AddDropdownMenuItem("editAccessoriesMenu", shorterGameName == "Zoktai" ? "Protectors" : "Accessories", editMenu, OpenEquipsEditor);
-                if (shorterGameName == "Zoktai") {
-                    AddDropdownMenuItem("editMagicsMenu", "Magics", editMenu, OpenMagicsEditor);
+                    if (_isDS == false) {
+                        ToolStripMenuItem editWeaponsMenu = WinFormHelpers.CreateToolStripMenuItem("editWeaponsMenu", "&Weapons", menuItem: editMenu);
+                        editWeaponsMenu.Click += new EventHandler(OpenWeaponsEditor);
+                        editMenu.DropDownItems.Add(editWeaponsMenu);
+                    }
                 }
-            }
 
-            // Misc tools & GUI sections
-            GenerateToolsMenu();
-            GenerateGuiMenu();
+                if (shorterGameName == "Shinbok" || shorterGameName == "Boktai") {
+                    AddDropdownMenuItem("editGunMenu", "Solar gun", editMenu, OpenSolarGunEditor);
+                }
+
+                if (shorterGameName != "Boktai") {
+
+                    AddDropdownMenuItem("editAccessoriesMenu", shorterGameName == "Zoktai" ? "Protectors" : "Accessories", editMenu, OpenEquipsEditor);
+                    if (shorterGameName == "Zoktai") {
+                        AddDropdownMenuItem("editMagicsMenu", "Magics", editMenu, OpenMagicsEditor);
+                    }
+                }
+
+                // Misc tools & GUI sections
+                GenerateToolsMenu();
+                GenerateGuiMenu();
+            }
         }
 
         /// <summary>Generate the menu related to misc tools</summary>
@@ -390,10 +403,10 @@ namespace BokInterface {
                 case "Shinbok":
                     accessoriesEditor = new ShinbokAccessoriesEditor(this, _memoryValues, _shinbokAddresses);
                     break;
-                // case "BoktaiDS":
-                // case "LunarKnights":
-                //     accessoriesEditor = new LunarKnightsAccessoriesEditor(this, _memoryValues, _dsAddresses);
-                //     break;
+                case "BoktaiDS":
+                case "LunarKnights":
+                    accessoriesEditor = new DsAccessoriesEditor(this, _memoryValues, _dsAddresses);
+                    break;
                 default:
                     // If game is not handled or does not have accessories, stop
                     return;
