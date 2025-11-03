@@ -9,7 +9,7 @@ namespace BokInterface.Accessories {
             Torso = [],
             Foot = [],
             Shield = [],
-            Equipments = [],
+            Equipment = [],
             All = [];
 
         public DsAccessories() {
@@ -98,8 +98,8 @@ namespace BokInterface.Accessories {
 
         ///<summary>Init the list containing Equipments accessories related to equipments (mostly used for editors)</summary>
         private void InitEquipmentsList() {
-            Equipments.Add("Empty slot", new DsAccessory("Empty slot", 65535, ""));
-            Equipments = Equipments
+            Equipment.Add("Empty slot", new DsAccessory("Empty slot", 65535, ""));
+            Equipment = Equipment
                 .Concat(Head)
                 .Concat(Torso)
                 .Concat(Foot)
@@ -108,7 +108,7 @@ namespace BokInterface.Accessories {
 
         ///<summary>Init the full list containing all accessories (mostly used for editors)</summary>
         private void InitFullList() {
-            All = Equipments
+            All = Equipment
                 .Concat(Shield)
                 .ToDictionary(e => e.Key, e => e.Value);
         }
