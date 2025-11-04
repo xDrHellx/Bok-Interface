@@ -1,16 +1,10 @@
-using System.Drawing;
-
 namespace BokInterface.Items {
     ///<summary>Class representing an item for Boktai DS / Lunar Knights</summary>
     class DsItem : Item {
 
-        public DsItem(string name, uint value, string icon = "", bool perishable = false, int durability = 0, Item? coveredItem = null, int buyPrice = 0) : base(name, value, icon, perishable, durability, coveredItem, buyPrice) {
+        protected override string library { get => "DsResources"; }
 
-            if (icon != "") {
-                try {
-                    this.icon = (Image)ResourceLoader.LoadResource("DsResources", icon);
-                } catch { }
-            }
+        public DsItem(string name, uint value, string icon = "", bool perishable = false, int durability = 0, Item? coveredItem = null, int buyPrice = 0) : base(name, value, icon, perishable, durability, coveredItem, buyPrice) {
 
             /**
              * If this item is perishable, set the item it will turn into to the property

@@ -12,16 +12,24 @@ namespace BokInterface.Magics {
         public Image? icon = null;
         /// <summary>Description (usually corresponds to the in-game text</summary>
         public string description;
+        /// <summary>Resource library for retrieving the icon</summary>
+        protected abstract string library { get; }
 
         public Magic(string name, string type, string icon = "", string description = "") {
             this.name = name;
             this.type = type;
             this.description = description;
+            SetIconResource(icon);
+        }
 
-            // If an icon was specified try getting & setting it to the property
-            if (icon != "") {
+        /// <summary>Simplified method for setting the instance's icon via resources</summary>
+        /// <param name="icon">Icon string</param>
+        /// <returns><c>Image</c>Resource</returns>
+        protected void SetIconResource(string iconString) {
+            icon = null;
+            if (iconString != "") {
                 try {
-                    this.icon = (Image)Properties.Resources.ResourceManager.GetObject(icon);
+                    icon = library != "" ? (Image)ResourceLoader.LoadResource(library, iconString) : (Image)Properties.Resources.ResourceManager.GetObject(iconString);
                 } catch { }
             }
         }

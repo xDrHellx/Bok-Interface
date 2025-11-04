@@ -1,0 +1,283 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
+using System.Windows.Forms;
+
+using BokInterface.Addresses;
+using BokInterface.Utils;
+
+namespace BokInterface.Accessories {
+    class DsAccessoriesEditor : AccessoriesEditor {
+
+        #region Properties
+
+        private readonly MemoryValues _memoryValues;
+        private readonly BokInterface _bokInterface;
+        private readonly DsAddresses _dsAddresses;
+        private readonly DsAccessories _dsAccessories;
+        protected readonly List<ImageComboBox> shieldDropdowns = [];
+        protected Dictionary<string, Accessory> shields = [];
+        protected TabControl inventoryTabControl = new();
+        protected TabPage accessoriesTab = new(),
+            shieldsTab = new();
+        protected CheckGroupBox? shieldSlot1group { get; set; }
+        protected CheckGroupBox? shieldSlot2group { get; set; }
+        protected CheckGroupBox? shieldSlot3group { get; set; }
+        protected CheckGroupBox? shieldSlot4group { get; set; }
+
+        #endregion
+
+        #region Constructor
+
+        public DsAccessoriesEditor(BokInterface bokInterface, MemoryValues memoryValues, DsAddresses dsAddresses) {
+
+            _memoryValues = memoryValues;
+            _dsAddresses = dsAddresses;
+            _dsAccessories = new();
+
+            Owner = _bokInterface = bokInterface;
+            Icon = _bokInterface.Icon;
+
+            SetFormParameters(726, 278);
+            AddElements();
+            Show();
+        }
+
+        #endregion
+
+        #region Elements
+
+        protected override void AddElements() {
+
+            // Generate the shields dictionnary for the dropdowns
+            GenerateShieldsDictionnary();
+
+            // Generate tabs, subelements & dropdown options
+            GenerateTabs();
+            GenerateDropDownOptions();
+
+            // Add warning
+            Label expWarning = WinFormHelpers.CreateImageLabel("tooltip", "warning", 5, 255, this);
+            WinFormHelpers.CreateLabel("warning", "Inventory will be updated upon switching tab in-game or closing and reopening the menu.", 23, 248, 503, 30, this, textAlignment: "MiddleLeft");
+
+            // Set default values for each field
+            SetDefaultValues();
+
+            // Button for setting values & its events
+            Button setValuesButton = WinFormHelpers.CreateButton("setValuesBtn", "Set values", 648, 252, 75, 23, this);
+            setValuesButton.Click += new EventHandler(delegate (object sender, EventArgs e) {
+                // Write the values for 10 frames
+                for (int i = 0; i < 10; i++) {
+                    SetValues();
+                }
+            });
+        }
+
+        /// <summary>Generate the dictionnary for shields (including empty slot)</summary>
+        protected void GenerateShieldsDictionnary() {
+            shields.Add("Empty slot", new DsAccessory("Empty slot", 65535, ""));
+            shields = shields
+                .Concat(_dsAccessories.Shield)
+                .ToDictionary(e => e.Key, e => e.Value);
+        }
+
+        ///<summary>Separated method for generating tabs and subelements</summary>
+        protected void GenerateTabs() {
+
+            // Tabs
+            inventoryTabControl = WinFormHelpers.CreateTabControl("inventory_ctrl", 5, 5, 718, 243, this);
+            accessoriesTab = WinFormHelpers.CreateTabPage("accessories_tab", "Accessories", tabControl: inventoryTabControl);
+            shieldsTab = WinFormHelpers.CreateTabPage("shields_tab", "Shields", tabControl: inventoryTabControl);
+
+            // Accessory slots
+            int xPos = 5,
+                yPos = 5;
+            for (int i = 1; i < 17; i++) {
+
+                // Generate the group for each property dynamically & add the dropdown to it
+                PropertyInfo property = GetType().GetProperty($"slot{i}group", BindingFlags.Instance | BindingFlags.NonPublic);
+                if (property != null) {
+                    CheckGroupBox group = WinFormHelpers.CreateCheckGroupBox($"slot{i}group", $"Slot {i}", xPos, yPos, 170, 49, control: accessoriesTab);
+                    property.SetValue(this, group);
+                    dropDownLists.Add(WinFormHelpers.CreateImageDropdownList($"inventory_accessory_slot_{i}", 5, 19, 160, 23, group, visibleOptions: 5));
+                }
+
+                // Offsets for position
+                xPos += 176;
+                if ((i % 4) == 0) {
+                    xPos = 5;
+                    yPos += 52;
+                }
+            }
+
+            // Shield slots
+            xPos = yPos = 5;
+            for (int i = 1; i < 5; i++) {
+
+                // Generate the group for each property dynamically & add the dropdown to it
+                PropertyInfo property = GetType().GetProperty($"shieldSlot{i}group", BindingFlags.Instance | BindingFlags.NonPublic);
+                if (property != null) {
+                    CheckGroupBox group = WinFormHelpers.CreateCheckGroupBox($"shieldSlot{i}group", $"Slot {i}", xPos, yPos, 170, 49, control: shieldsTab);
+                    property.SetValue(this, group);
+                    shieldDropdowns.Add(WinFormHelpers.CreateImageDropdownList($"inventory_shield_slot_{i}", 5, 19, 160, 23, group, visibleOptions: 5));
+                }
+
+                // Offsets for position
+                xPos += 176;
+                if ((i % 4) == 0) {
+                    xPos = 5;
+                    yPos += 52;
+                }
+            }
+        }
+
+        ///<summary>Generates the options for the dropdowns</summary>
+        private void GenerateDropDownOptions() {
+            foreach (ImageComboBox dropdown in dropDownLists) {
+                dropdown.DataSource = new BindingSource(_dsAccessories.Equipment, null);
+                dropdown.DisplayMember = "Key";
+                dropdown.ValueMember = "Value";
+            }
+
+            foreach (ImageComboBox dropdown in shieldDropdowns) {
+                dropdown.DataSource = new BindingSource(shields, null);
+                dropdown.DisplayMember = "Key";
+                dropdown.ValueMember = "Value";
+            }
+        }
+
+        #endregion
+
+        #region Values setting
+
+        protected override void SetValues() {
+
+            // Store the previous setting for BizHawk being paused
+            _bokInterface._previousIsPauseSetting = APIs.Client.IsPaused();
+
+            // Pause BizHawk
+            APIs.Client.Pause();
+
+            // Sets values for each accessory slot
+            for (int i = 0; i < dropDownLists.Count; i++) {
+
+                // If the slot is disabled, skip it
+                if (dropDownLists[i].Enabled == false) {
+                    continue;
+                }
+
+                KeyValuePair<string, Accessory> selectedOption = (KeyValuePair<string, Accessory>)dropDownLists[i].SelectedItem;
+                Accessory selectedAccessory = selectedOption.Value;
+
+                /**
+                 * Indicate which sublist to use for setting the value, based on the slot's name
+                 * We only split on the first "_"
+                 */
+                string[] fieldParts = dropDownLists[i].Name.Split(['_'], 2);
+                SetMemoryValue(fieldParts[0], fieldParts[1], selectedAccessory.value);
+            }
+
+            // Same as above for shield slots
+            for (int i = 0; i < shieldDropdowns.Count; i++) {
+                if (shieldDropdowns[i].Enabled == false) {
+                    continue;
+                }
+
+                KeyValuePair<string, Accessory> selectedOption = (KeyValuePair<string, Accessory>)shieldDropdowns[i].SelectedItem;
+                Accessory selectedShield = selectedOption.Value;
+
+                string[] fieldParts = shieldDropdowns[i].Name.Split(['_'], 2);
+                SetMemoryValue(fieldParts[0], fieldParts[1], selectedShield.value);
+            }
+
+            /**
+             * If BizHawk was not paused before setting values, unpause it
+             * Otherwise keep it paused
+             */
+            if (_bokInterface._previousIsPauseSetting == true) {
+                APIs.Client.Unpause();
+            }
+        }
+
+        ///<summary>
+        ///     Method for setting memory values.<br/>
+        ///     This is separated because we use the switch inside on different types.
+        ///</summary>
+        ///<param name="subList"><c>Sublit / dictionnary the key belongs to</c></param>
+        ///<param name="valueKey"><c>strng</c>Key withint the dictionnary</param>
+        ///<param name="value"><c>decimal</c>Value to set</param>
+        private void SetMemoryValue(string subList, string valueKey, decimal value) {
+            switch (subList) {
+                case "inventory":
+                    if (_dsAddresses.Inventory.ContainsKey(valueKey) == true) {
+                        _dsAddresses.Inventory[valueKey].Value = (uint)value;
+                    }
+                    break;
+                default: break;
+            }
+        }
+
+        protected override void SetDefaultValues() {
+
+            /**
+             * If Lucian or Aaron HP value is valid
+             * (Invalid when below 0 or above 9999, ie when switching rooms or on world map)
+             */
+            uint lucianCurrentHp = _dsAddresses.Player["lucian_current_hp"].Value,
+                aaronCurrentHp = _dsAddresses.Player.ContainsKey("aaron_current_hp") ? _dsAddresses.Player["aaron_current_hp"].Value : 0;
+            if (
+                (lucianCurrentHp > 0 && lucianCurrentHp <= 9999)
+                ||
+                (aaronCurrentHp > 0 && aaronCurrentHp <= 9999)
+            ) {
+                // Accessory slots
+                foreach (ImageComboBox dropdown in dropDownLists) {
+                    /**
+                     * Get the name of the field to retrieve the value from based on the dropdown's name (for example inventory_slotX_accessory => slotX_accessory)
+                     * Then try getting the corresponding item & preselect it
+                     */
+                    string[] fieldParts = dropdown.Name.Split(['_'], 2);
+                    Accessory? selectedAccessory = GetAccessoryByValue(_dsAddresses.Inventory[fieldParts[1]].Value);
+                    if (selectedAccessory != null) {
+                        dropdown.SelectedIndex = dropdown.FindStringExact(selectedAccessory.name);
+                    }
+                }
+
+                // Same as above for shield slots
+                foreach (ImageComboBox dropdown in shieldDropdowns) {
+                    string[] fieldParts = dropdown.Name.Split(['_'], 2);
+                    Accessory? selectedShield = GetAccessoryByValue(_dsAddresses.Inventory[fieldParts[1]].Value);
+                    if (selectedShield != null) {
+                        dropdown.SelectedIndex = dropdown.FindStringExact(selectedShield.name);
+                    }
+                }
+            } else {
+                // Otherwise set default values in the editor subwindow
+                foreach (ImageComboBox dropdown in dropDownLists) {
+                    dropdown.SelectedIndex = 0;
+                }
+
+                foreach (ImageComboBox dropdown in shieldDropdowns) {
+                    dropdown.SelectedIndex = 0;
+                }
+            }
+        }
+
+        ///<summary>Get an accessory from the accessories list by using its value</summary>
+        ///<param name="value"><c>decimal</c>Value</param>
+        ///<returns><c>Accessory</c>Accessory</returns>
+        private Accessory? GetAccessoryByValue(decimal value) {
+            foreach (KeyValuePair<string, Accessory> index in _dsAccessories.All) {
+                Accessory accessory = index.Value;
+                if (accessory.value == value) {
+                    return accessory;
+                }
+            }
+
+            return null;
+        }
+
+        #endregion
+    }
+}

@@ -26,6 +26,8 @@ namespace BokInterface.Items {
         public int buyPrice;
         /// <summary>Price when selling</summary>
         public int sellPrice;
+        /// <summary>Resource library for retrieving the icon</summary>
+        protected abstract string library { get; }
 
         public Item(string name, uint value, string icon = "", bool perishable = false, int durability = 0, Item? coveredItem = null, int buyPrice = 0) {
             this.name = name;
@@ -38,11 +40,7 @@ namespace BokInterface.Items {
             sellPrice = buyPrice > 0 ? buyPrice / 2 : 0;
 
             // If an icon was specified try getting & setting it to the property
-            if (icon != "") {
-                try {
-                    this.icon = (Image)Properties.Resources.ResourceManager.GetObject(icon);
-                } catch { }
-            }
+            SetIconResource(icon);
 
             // If this item is perishable, set the item it will turn into to the property
             if (this.perishable == true) {
@@ -72,6 +70,18 @@ namespace BokInterface.Items {
         /// <returns><c>Int</c>Covered item durability</returns>
         public int GetCoveredItemDurability() {
             return durability - durabilityOffset;
+        }
+
+        /// <summary>Simplified method for setting the instance's icon via resources</summary>
+        /// <param name="icon">Icon string</param>
+        /// <returns><c>Image</c>Resource</returns>
+        protected void SetIconResource(string iconString) {
+            icon = null;
+            if (iconString != "") {
+                try {
+                    icon = library != "" ? (Image)ResourceLoader.LoadResource(library, iconString) : (Image)Properties.Resources.ResourceManager.GetObject(iconString);
+                } catch { }
+            }
         }
     }
 }

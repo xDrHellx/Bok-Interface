@@ -19,6 +19,8 @@ namespace BokInterface.Accessories {
         public int buyPrice;
         /// <summary>Price when selling</summary>
         public int sellPrice;
+        /// <summary>Resource library for retrieving the icon</summary>
+        protected abstract string library { get; }
 
         public Accessory(string name, uint value, string type, string icon = "", int row = 1, int buyPrice = 0, bool crossOver = false) {
             this.name = name;
@@ -32,9 +34,17 @@ namespace BokInterface.Accessories {
             sellPrice = buyPrice > 0 ? buyPrice / 2 : 0;
 
             // If an icon was specified try getting & setting it to the property
-            if (icon != "") {
+            SetIconResource(icon);
+        }
+
+        /// <summary>Simplified method for setting the instance's icon via resources</summary>
+        /// <param name="icon">Icon string</param>
+        /// <returns><c>Image</c>Resource</returns>
+        protected void SetIconResource(string iconString) {
+            icon = null;
+            if (iconString != "") {
                 try {
-                    this.icon = (Image)Properties.Resources.ResourceManager.GetObject(icon);
+                    icon = library != "" ? (Image)ResourceLoader.LoadResource(library, iconString) : (Image)Properties.Resources.ResourceManager.GetObject(iconString);
                 } catch { }
             }
         }
