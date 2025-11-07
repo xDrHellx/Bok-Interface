@@ -53,20 +53,7 @@ namespace BokInterface.Inventory {
         #region Elements
 
         protected override void AddElements() {
-            InstanciateCheckGroupBoxes();
-            for (int i = 1; i < 21; i++) {
-
-                // Get the group dynamically from the property
-                PropertyInfo property = GetType().GetProperty($"slot{i}group", BindingFlags.Instance | BindingFlags.NonPublic);
-                if (property != null && property.GetValue(this) is CheckGroupBox group) {
-
-                    // Add elements
-                    dropDownLists.Add(WinFormHelpers.CreateImageDropdownList($"inventory_item_slot_{i}", 5, 19, 140, 23, group, visibleOptions: 5));
-                    WinFormHelpers.CreateLabel($"slot{i}", "Durability", 2, 50, 58, 15, group);
-                    numericUpDowns.Add(WinFormHelpers.CreateNumericUpDown($"inventory_item_slot_durability_{i}", 0, 95, 48, 50, 23, 0, _defaultMaxDurability, control: group));
-                    checkBoxes.Add(WinFormHelpers.CreateCheckBox($"item_slot_{i}_chocolate_covered", "Chocolate-covered", 12, 74, 134, 19, checkboxOnRight: true, control: group));
-                }
-            }
+            GenerateGroups();
 
             // Generate & add options to dropdowns
             GenerateDropDownOptions();
@@ -109,8 +96,8 @@ namespace BokInterface.Inventory {
             });
         }
 
-        ///<summary>Separated method for instanciating checkGroupBox instances</summary>
-        protected void InstanciateCheckGroupBoxes() {
+        ///<summary>Separated method for generating groups with subelements</summary>
+        protected void GenerateGroups() {
             int xPos = 5,
                 yPos = 5;
             for (int i = 1; i < 21; i++) {
@@ -120,6 +107,12 @@ namespace BokInterface.Inventory {
                 if (property != null) {
                     CheckGroupBox group = WinFormHelpers.CreateCheckGroupBox($"slot{i}group", $"Slot {i}", xPos, yPos, 150, 95, control: this);
                     property.SetValue(this, group);
+
+                    // Add elements
+                    dropDownLists.Add(WinFormHelpers.CreateImageDropdownList($"inventory_item_slot_{i}", 5, 19, 140, 23, group, visibleOptions: 5));
+                    WinFormHelpers.CreateLabel($"slot{i}", "Durability", 2, 50, 58, 15, group);
+                    numericUpDowns.Add(WinFormHelpers.CreateNumericUpDown($"inventory_item_slot_durability_{i}", 0, 95, 48, 50, 23, 0, _defaultMaxDurability, control: group));
+                    checkBoxes.Add(WinFormHelpers.CreateCheckBox($"item_slot_{i}_chocolate_covered", "Chocolate-covered", 12, 74, 134, 19, checkboxOnRight: true, control: group));
                 }
 
                 // Offsets for position
@@ -241,13 +234,8 @@ namespace BokInterface.Inventory {
         ///<param name="valueKey"><c>string</c>Key within the dictionnary</param>
         ///<param name="value"><c>decimal</c>Value to set</param>
         private void SetMemoryValue(string subList, string valueKey, decimal value) {
-            switch (subList) {
-                case "inventory":
-                    if (_memoryAddresses.Inventory.ContainsKey(valueKey) == true) {
-                        _memoryAddresses.Inventory[valueKey].Value = (uint)value;
-                    }
-                    break;
-                default: break;
+            if (subList == "inventory" && _memoryAddresses.Inventory.ContainsKey(valueKey) == true) {
+                _memoryAddresses.Inventory[valueKey].Value = (uint)value;
             }
         }
 

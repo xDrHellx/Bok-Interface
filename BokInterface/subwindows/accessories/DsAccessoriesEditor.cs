@@ -55,7 +55,8 @@ namespace BokInterface.Accessories {
 
             // Generate tabs, subelements & dropdown options
             GenerateTabs();
-            GenerateDropDownOptions();
+            AddDropDownOptions(dropDownLists, _dsAccessories.Equipment);
+            AddDropDownOptions(shieldDropdowns, shields);
 
             // Add warning
             Label expWarning = WinFormHelpers.CreateImageLabel("tooltip", "warning", 5, 255, this);
@@ -132,16 +133,12 @@ namespace BokInterface.Accessories {
             }
         }
 
-        ///<summary>Generates the options for the dropdowns</summary>
-        private void GenerateDropDownOptions() {
-            foreach (ImageComboBox dropdown in dropDownLists) {
-                dropdown.DataSource = new BindingSource(_dsAccessories.Equipment, null);
-                dropdown.DisplayMember = "Key";
-                dropdown.ValueMember = "Value";
-            }
-
-            foreach (ImageComboBox dropdown in shieldDropdowns) {
-                dropdown.DataSource = new BindingSource(shields, null);
+        ///<summary>Add the options for a list of dropdowns</summary>
+        ///<param name="list">List of dropdowns</param>
+        ///<param name="dictionnary">Dictionnary containing the data to use for the dropdown options</param>
+        private void AddDropDownOptions(List<ImageComboBox> list, object dictionnary) {
+            foreach (ImageComboBox dropdown in list) {
+                dropdown.DataSource = new BindingSource(dictionnary, null);
                 dropdown.DisplayMember = "Key";
                 dropdown.ValueMember = "Value";
             }
@@ -208,13 +205,8 @@ namespace BokInterface.Accessories {
         ///<param name="valueKey"><c>strng</c>Key withint the dictionnary</param>
         ///<param name="value"><c>decimal</c>Value to set</param>
         private void SetMemoryValue(string subList, string valueKey, decimal value) {
-            switch (subList) {
-                case "inventory":
-                    if (_dsAddresses.Inventory.ContainsKey(valueKey) == true) {
-                        _dsAddresses.Inventory[valueKey].Value = (uint)value;
-                    }
-                    break;
-                default: break;
+            if (subList == "inventory" && _dsAddresses.Inventory.ContainsKey(valueKey) == true) {
+                _dsAddresses.Inventory[valueKey].Value = (uint)value;
             }
         }
 

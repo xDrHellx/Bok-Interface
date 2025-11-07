@@ -5,6 +5,7 @@ using System.Windows.Forms;
 using BokInterface.Addresses;
 using BokInterface.Utils;
 using BokInterface.Items;
+using System.Reflection;
 
 namespace BokInterface.KeyItems {
     /// <summary>Key items editor for Boktai 3</summary>
@@ -41,35 +42,9 @@ namespace BokInterface.KeyItems {
 
         protected override void AddElements() {
 
-            // Instanciate checkGroupBoxes
-            InstanciateCheckGroupBoxes();
-
-            // 1st row
-            dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot1_key_item", 5, 19, 160, 23, slot1group, visibleOptions: 5));
-            dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot2_key_item", 5, 19, 160, 23, slot2group, visibleOptions: 5));
-            dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot3_key_item", 5, 19, 160, 23, slot3group, visibleOptions: 5));
-            dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot4_key_item", 5, 19, 160, 23, slot4group, visibleOptions: 5));
-
-            // 2nd row
-            dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot5_key_item", 5, 19, 160, 23, slot5group, visibleOptions: 5));
-            dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot6_key_item", 5, 19, 160, 23, slot6group, visibleOptions: 5));
-            dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot7_key_item", 5, 19, 160, 23, slot7group, visibleOptions: 5));
-            dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot8_key_item", 5, 19, 160, 23, slot8group, visibleOptions: 5));
-
-            // 3rd row
-            dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot9_key_item", 5, 19, 160, 23, slot9group, visibleOptions: 5));
-            dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot10_key_item", 5, 19, 160, 23, slot10group, visibleOptions: 5));
-            dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot11_key_item", 5, 19, 160, 23, slot11group, visibleOptions: 5));
-            dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot12_key_item", 5, 19, 160, 23, slot12group, visibleOptions: 5));
-
-            // 4th row
-            dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot13_key_item", 5, 19, 160, 23, slot13group, visibleOptions: 5));
-            dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot14_key_item", 5, 19, 160, 23, slot14group, visibleOptions: 5));
-            dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot15_key_item", 5, 19, 160, 23, slot15group, visibleOptions: 5));
-            dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot16_key_item", 5, 19, 160, 23, slot16group, visibleOptions: 5));
-
-            // Generate & add options to dropdowns
-            GenerateDropDownOptions();
+            // Generate groups with subelements & add options to dropdowns
+            GenerateGroups();
+            AddDropDownOptions(dropDownLists, _shinbokItems.KeyItems);
 
             // Set default values for each field
             SetDefaultValues();
@@ -84,30 +59,37 @@ namespace BokInterface.KeyItems {
             });
         }
 
-        ///<summary>Separated method for instanciating checkGroupBox instances</summary>
-        protected void InstanciateCheckGroupBoxes() {
-            slot1group = WinFormHelpers.CreateCheckGroupBox("slot1group", "Slot 1", 5, 5, 170, 49, control: this);
-            slot2group = WinFormHelpers.CreateCheckGroupBox("slot2group", "Slot 2", 181, 5, 170, 49, control: this);
-            slot3group = WinFormHelpers.CreateCheckGroupBox("slot3group", "Slot 3", 357, 5, 170, 49, control: this);
-            slot4group = WinFormHelpers.CreateCheckGroupBox("slot4group", "Slot 4", 533, 5, 170, 49, control: this);
-            slot5group = WinFormHelpers.CreateCheckGroupBox("slot5group", "Slot 5", 5, 57, 170, 49, control: this);
-            slot6group = WinFormHelpers.CreateCheckGroupBox("slot6group", "Slot 6", 181, 57, 170, 49, control: this);
-            slot7group = WinFormHelpers.CreateCheckGroupBox("slot7group", "Slot 7", 357, 57, 170, 49, control: this);
-            slot8group = WinFormHelpers.CreateCheckGroupBox("slot8group", "Slot 8", 533, 57, 170, 49, control: this);
-            slot9group = WinFormHelpers.CreateCheckGroupBox("slot9group", "Slot 9", 5, 109, 170, 49, control: this);
-            slot10group = WinFormHelpers.CreateCheckGroupBox("slot10group", "Slot 10", 181, 109, 170, 49, control: this);
-            slot11group = WinFormHelpers.CreateCheckGroupBox("slot11group", "Slot 11", 357, 109, 170, 49, control: this);
-            slot12group = WinFormHelpers.CreateCheckGroupBox("slot12group", "Slot 12", 533, 109, 170, 49, control: this);
-            slot13group = WinFormHelpers.CreateCheckGroupBox("slot13group", "Slot 13", 5, 161, 170, 49, control: this);
-            slot14group = WinFormHelpers.CreateCheckGroupBox("slot14group", "Slot 14", 181, 161, 170, 49, control: this);
-            slot15group = WinFormHelpers.CreateCheckGroupBox("slot15group", "Slot 15", 357, 161, 170, 49, control: this);
-            slot16group = WinFormHelpers.CreateCheckGroupBox("slot16group", "Slot 16", 533, 161, 170, 49, control: this);
+        ///<summary>Separated method for generating groups with subelements</summary>
+        protected void GenerateGroups() {
+            int xPos = 5,
+                yPos = 5;
+            for (int i = 1; i < 17; i++) {
+
+                // Generate the group for each property dynamically
+                PropertyInfo property = GetType().GetProperty($"slot{i}group", BindingFlags.Instance | BindingFlags.NonPublic);
+                if (property != null) {
+                    CheckGroupBox group = WinFormHelpers.CreateCheckGroupBox($"slot{i}group", $"Slot {i}", xPos, yPos, 170, 49, control: this);
+                    property.SetValue(this, group);
+
+                    // Add the dropdown to it
+                    dropDownLists.Add(WinFormHelpers.CreateImageDropdownList($"inventory_slot{i}_key_item", 5, 19, 160, 23, group, visibleOptions: 5));
+                }
+
+                // Offsets for position
+                xPos += 176;
+                if ((i % 4) == 0) {
+                    xPos = 5;
+                    yPos += 52;
+                }
+            }
         }
 
-        ///<summary>Generates the options for the dropdowns</summary>
-        private void GenerateDropDownOptions() {
-            foreach (ImageComboBox dropdown in dropDownLists) {
-                dropdown.DataSource = new BindingSource(_shinbokItems.KeyItems, null);
+        ///<summary>Add the options for a list of dropdowns</summary>
+        ///<param name="list">List of dropdowns</param>
+        ///<param name="dictionnary">Dictionnary containing the data to use for the dropdown options</param>
+        private void AddDropDownOptions(List<ImageComboBox> list, object dictionnary) {
+            foreach (ImageComboBox dropdown in list) {
+                dropdown.DataSource = new BindingSource(dictionnary, null);
                 dropdown.DisplayMember = "Key";
                 dropdown.ValueMember = "Value";
             }
@@ -161,23 +143,8 @@ namespace BokInterface.KeyItems {
         ///<param name="valueKey"><c>strng</c>Key withint the dictionnary</param>
         ///<param name="value"><c>decimal</c>Value to set</param>
         private void SetMemoryValue(string subList, string valueKey, decimal value) {
-            switch (subList) {
-                case "inventory":
-                    if (_memoryValues.Inventory.ContainsKey(valueKey) == true) {
-                        _memoryValues.Inventory[valueKey].Value = (uint)value;
-                    } else if (_memoryValues.U16.ContainsKey(valueKey) == true) {
-                        _memoryValues.U16[valueKey].Value = (uint)value;
-                    } else if (_memoryValues.U32.ContainsKey(valueKey) == true) {
-                        _memoryValues.U32[valueKey].Value = (uint)value;
-                    }
-                    break;
-                default:
-                    if (_memoryValues.U16.ContainsKey(valueKey) == true) {
-                        _memoryValues.U16[valueKey].Value = (uint)value;
-                    } else if (_memoryValues.U32.ContainsKey(valueKey) == true) {
-                        _memoryValues.U32[valueKey].Value = (uint)value;
-                    }
-                    break;
+            if (subList == "inventory" && _memoryValues.Inventory.ContainsKey(valueKey) == true) {
+                _memoryValues.Inventory[valueKey].Value = (uint)value;
             }
         }
 

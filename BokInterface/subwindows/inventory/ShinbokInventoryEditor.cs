@@ -5,6 +5,7 @@ using System.Windows.Forms;
 using BokInterface.Addresses;
 using BokInterface.Utils;
 using BokInterface.Items;
+using System.Reflection;
 
 namespace BokInterface.Inventory {
     /// <summary>Inventory editor for Boktai 3</summary>
@@ -49,93 +50,7 @@ namespace BokInterface.Inventory {
         #region Elements
 
         protected override void AddElements() {
-
-            // Instanciate checkGroupBoxes
-            InstanciateCheckGroupBoxes();
-
-            // 1st row
-            dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot1_item", 5, 19, 140, 23, slot1group, visibleOptions: 5));
-            WinFormHelpers.CreateLabel("slot1", "Durability", 2, 50, 58, 15, slot1group);
-            numericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("inventory_slot1_durability", 0, 95, 48, 50, 23, 0, _defaultMaxDurability, control: slot1group));
-            checkBoxes.Add(WinFormHelpers.CreateCheckBox("slot1_chocolate_covered", "Chocolate-covered", 12, 74, 134, 19, checkboxOnRight: true, control: slot1group));
-
-            dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot2_item", 5, 19, 140, 23, slot2group, visibleOptions: 5));
-            WinFormHelpers.CreateLabel("slot2", "Durability", 2, 50, 58, 15, slot2group);
-            numericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("inventory_slot2_durability", 0, 95, 48, 50, 23, 0, _defaultMaxDurability, control: slot2group));
-            checkBoxes.Add(WinFormHelpers.CreateCheckBox("slot2_chocolate_covered", "Chocolate-covered", 12, 74, 134, 19, checkboxOnRight: true, control: slot2group));
-
-            dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot3_item", 5, 19, 140, 23, slot3group, visibleOptions: 5));
-            WinFormHelpers.CreateLabel("slot3", "Durability", 2, 50, 58, 15, slot3group);
-            numericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("inventory_slot3_durability", 0, 95, 48, 50, 23, 0, _defaultMaxDurability, control: slot3group));
-            checkBoxes.Add(WinFormHelpers.CreateCheckBox("slot3_chocolate_covered", "Chocolate-covered", 12, 74, 134, 19, checkboxOnRight: true, control: slot3group));
-
-            dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot4_item", 5, 19, 140, 23, slot4group, visibleOptions: 5));
-            WinFormHelpers.CreateLabel("slot4", "Durability", 2, 50, 58, 15, slot4group);
-            numericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("inventory_slot4_durability", 0, 95, 48, 50, 23, 0, _defaultMaxDurability, control: slot4group));
-            checkBoxes.Add(WinFormHelpers.CreateCheckBox("slot4_chocolate_covered", "Chocolate-covered", 12, 74, 134, 19, checkboxOnRight: true, control: slot4group));
-
-            // 2nd row
-            dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot5_item", 5, 19, 140, 23, slot5group, visibleOptions: 5));
-            WinFormHelpers.CreateLabel("slot5", "Durability", 2, 50, 58, 15, slot5group);
-            numericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("inventory_slot5_durability", 0, 95, 48, 50, 23, 0, _defaultMaxDurability, control: slot5group));
-            checkBoxes.Add(WinFormHelpers.CreateCheckBox("slot5_chocolate_covered", "Chocolate-covered", 12, 74, 134, 19, checkboxOnRight: true, control: slot5group));
-
-            dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot6_item", 5, 19, 140, 23, slot6group, visibleOptions: 5));
-            WinFormHelpers.CreateLabel("slot6", "Durability", 2, 50, 58, 15, slot6group);
-            numericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("inventory_slot6_durability", 0, 95, 48, 50, 23, 0, _defaultMaxDurability, control: slot6group));
-            checkBoxes.Add(WinFormHelpers.CreateCheckBox("slot6_chocolate_covered", "Chocolate-covered", 12, 74, 134, 19, checkboxOnRight: true, control: slot6group));
-
-            dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot7_item", 5, 19, 140, 23, slot7group, visibleOptions: 5));
-            WinFormHelpers.CreateLabel("slot7", "Durability", 2, 50, 58, 15, slot7group);
-            numericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("inventory_slot7_durability", 0, 95, 48, 50, 23, 0, _defaultMaxDurability, control: slot7group));
-            checkBoxes.Add(WinFormHelpers.CreateCheckBox("slot7_chocolate_covered", "Chocolate-covered", 12, 74, 134, 19, checkboxOnRight: true, control: slot7group));
-
-            dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot8_item", 5, 19, 140, 23, slot8group, visibleOptions: 5));
-            WinFormHelpers.CreateLabel("slot8", "Durability", 2, 50, 58, 15, slot8group);
-            numericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("inventory_slot8_durability", 0, 95, 48, 50, 23, 0, _defaultMaxDurability, control: slot8group));
-            checkBoxes.Add(WinFormHelpers.CreateCheckBox("slot8_chocolate_covered", "Chocolate-covered", 12, 74, 134, 19, checkboxOnRight: true, control: slot8group));
-
-            // 3rd row
-            dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot9_item", 5, 19, 140, 23, slot9group, visibleOptions: 5));
-            WinFormHelpers.CreateLabel("slot9", "Durability", 2, 50, 58, 15, slot9group);
-            numericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("inventory_slot9_durability", 0, 95, 48, 50, 23, 0, _defaultMaxDurability, control: slot9group));
-            checkBoxes.Add(WinFormHelpers.CreateCheckBox("slot9_chocolate_covered", "Chocolate-covered", 12, 74, 134, 19, checkboxOnRight: true, control: slot9group));
-
-            dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot10_item", 5, 19, 140, 23, slot10group, visibleOptions: 5));
-            WinFormHelpers.CreateLabel("slot10", "Durability", 2, 50, 58, 15, slot10group);
-            numericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("inventory_slot10_durability", 0, 95, 48, 50, 23, 0, _defaultMaxDurability, control: slot10group));
-            checkBoxes.Add(WinFormHelpers.CreateCheckBox("slot10_chocolate_covered", "Chocolate-covered", 12, 74, 134, 19, checkboxOnRight: true, control: slot10group));
-
-            dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot11_item", 5, 19, 140, 23, slot11group, visibleOptions: 5));
-            WinFormHelpers.CreateLabel("slot11", "Durability", 2, 50, 58, 15, slot11group);
-            numericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("inventory_slot11_durability", 0, 95, 48, 50, 23, 0, _defaultMaxDurability, control: slot11group));
-            checkBoxes.Add(WinFormHelpers.CreateCheckBox("slot11_chocolate_covered", "Chocolate-covered", 12, 74, 134, 19, checkboxOnRight: true, control: slot11group));
-
-            dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot12_item", 5, 19, 140, 23, slot12group, visibleOptions: 5));
-            WinFormHelpers.CreateLabel("slot12", "Durability", 2, 50, 58, 15, slot12group);
-            numericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("inventory_slot12_durability", 0, 95, 48, 50, 23, 0, _defaultMaxDurability, control: slot12group));
-            checkBoxes.Add(WinFormHelpers.CreateCheckBox("slot12_chocolate_covered", "Chocolate-covered", 12, 74, 134, 19, checkboxOnRight: true, control: slot12group));
-
-            // 4th row
-            dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot13_item", 5, 19, 140, 23, slot13group, visibleOptions: 5));
-            WinFormHelpers.CreateLabel("slot13", "Durability", 2, 50, 58, 15, slot13group);
-            numericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("inventory_slot13_durability", 0, 95, 48, 50, 23, 0, _defaultMaxDurability, control: slot13group));
-            checkBoxes.Add(WinFormHelpers.CreateCheckBox("slot13_chocolate_covered", "Chocolate-covered", 12, 74, 134, 19, checkboxOnRight: true, control: slot13group));
-
-            dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot14_item", 5, 19, 140, 23, slot14group, visibleOptions: 5));
-            WinFormHelpers.CreateLabel("slot14", "Durability", 2, 50, 58, 15, slot14group);
-            numericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("inventory_slot14_durability", 0, 95, 48, 50, 23, 0, _defaultMaxDurability, control: slot14group));
-            checkBoxes.Add(WinFormHelpers.CreateCheckBox("slot14_chocolate_covered", "Chocolate-covered", 12, 74, 134, 19, checkboxOnRight: true, control: slot14group));
-
-            dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot15_item", 5, 19, 140, 23, slot15group, visibleOptions: 5));
-            WinFormHelpers.CreateLabel("slot15", "Durability", 2, 50, 58, 15, slot15group);
-            numericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("inventory_slot15_durability", 0, 95, 48, 50, 23, 0, _defaultMaxDurability, control: slot15group));
-            checkBoxes.Add(WinFormHelpers.CreateCheckBox("slot15_chocolate_covered", "Chocolate-covered", 12, 74, 134, 19, checkboxOnRight: true, control: slot15group));
-
-            dropDownLists.Add(WinFormHelpers.CreateImageDropdownList("inventory_slot16_item", 5, 19, 140, 23, slot16group, visibleOptions: 5));
-            WinFormHelpers.CreateLabel("slot16", "Durability", 2, 50, 58, 15, slot16group);
-            numericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("inventory_slot16_durability", 0, 95, 48, 50, 23, 0, _defaultMaxDurability, control: slot16group));
-            checkBoxes.Add(WinFormHelpers.CreateCheckBox("slot16_chocolate_covered", "Chocolate-covered", 12, 74, 134, 19, checkboxOnRight: true, control: slot16group));
+            GenerateGroups();
 
             // Generate & add options to dropdowns
             GenerateDropDownOptions();
@@ -174,24 +89,33 @@ namespace BokInterface.Inventory {
             });
         }
 
-        ///<summary>Separated method for instanciating checkGroupBox instances</summary>
-        protected void InstanciateCheckGroupBoxes() {
-            slot1group = WinFormHelpers.CreateCheckGroupBox("slot1group", "Slot 1", 5, 5, 150, 95, control: this);
-            slot2group = WinFormHelpers.CreateCheckGroupBox("slot2group", "Slot 2", 161, 5, 150, 95, control: this);
-            slot3group = WinFormHelpers.CreateCheckGroupBox("slot3group", "Slot 3", 317, 5, 150, 95, control: this);
-            slot4group = WinFormHelpers.CreateCheckGroupBox("slot4group", "Slot 4", 473, 5, 150, 95, control: this);
-            slot5group = WinFormHelpers.CreateCheckGroupBox("slot5group", "Slot 5", 5, 107, 150, 95, control: this);
-            slot6group = WinFormHelpers.CreateCheckGroupBox("slot6group", "Slot 6", 161, 107, 150, 95, control: this);
-            slot7group = WinFormHelpers.CreateCheckGroupBox("slot7group", "Slot 7", 317, 107, 150, 95, control: this);
-            slot8group = WinFormHelpers.CreateCheckGroupBox("slot8group", "Slot 8", 473, 107, 150, 95, control: this);
-            slot9group = WinFormHelpers.CreateCheckGroupBox("slot9group", "Slot 9", 5, 207, 150, 95, control: this);
-            slot10group = WinFormHelpers.CreateCheckGroupBox("slot10group", "Slot 10", 161, 207, 150, 95, control: this);
-            slot11group = WinFormHelpers.CreateCheckGroupBox("slot11group", "Slot 11", 317, 207, 150, 95, control: this);
-            slot12group = WinFormHelpers.CreateCheckGroupBox("slot12group", "Slot 12", 473, 207, 150, 95, control: this);
-            slot13group = WinFormHelpers.CreateCheckGroupBox("slot13group", "Slot 13", 5, 310, 150, 95, control: this);
-            slot14group = WinFormHelpers.CreateCheckGroupBox("slot14group", "Slot 14", 161, 310, 150, 95, control: this);
-            slot15group = WinFormHelpers.CreateCheckGroupBox("slot15group", "Slot 15", 317, 310, 150, 95, control: this);
-            slot16group = WinFormHelpers.CreateCheckGroupBox("slot16group", "Slot 16", 473, 310, 150, 95, control: this);
+        ///<summary>Separated method for generating groups with subelements</summary>
+        protected void GenerateGroups() {
+
+            int xPos = 5,
+                yPos = 5;
+            for (int i = 1; i < 17; i++) {
+
+                // Generate the group for each property dynamically
+                PropertyInfo property = GetType().GetProperty($"slot{i}group", BindingFlags.Instance | BindingFlags.NonPublic);
+                if (property != null) {
+                    CheckGroupBox group = WinFormHelpers.CreateCheckGroupBox($"slot{i}group", $"Slot {i}", xPos, yPos, 150, 95, control: this);
+                    property.SetValue(this, group);
+
+                    // Add elements to it
+                    dropDownLists.Add(WinFormHelpers.CreateImageDropdownList($"inventory_slot{i}_item", 5, 19, 140, 23, group, visibleOptions: 5));
+                    WinFormHelpers.CreateLabel($"slot{i}", "Durability", 2, 50, 58, 15, group);
+                    numericUpDowns.Add(WinFormHelpers.CreateNumericUpDown($"inventory_slot{i}_durability", 0, 95, 48, 50, 23, 0, _defaultMaxDurability, control: group));
+                    checkBoxes.Add(WinFormHelpers.CreateCheckBox($"slot{i}_chocolate_covered", "Chocolate-covered", 12, 74, 134, 19, checkboxOnRight: true, control: group));
+                }
+
+                // Offsets for position
+                xPos += 156;
+                if ((i % 4) == 0) {
+                    xPos = 5;
+                    yPos += 102;
+                }
+            }
         }
 
         ///<summary>Generates the options for the dropdowns</summary>
@@ -303,23 +227,8 @@ namespace BokInterface.Inventory {
         ///<param name="valueKey"><c>strng</c>Key withint the dictionnary</param>
         ///<param name="value"><c>decimal</c>Value to set</param>
         private void SetMemoryValue(string subList, string valueKey, decimal value) {
-            switch (subList) {
-                case "inventory":
-                    if (_memoryValues.Inventory.ContainsKey(valueKey) == true) {
-                        _memoryValues.Inventory[valueKey].Value = (uint)value;
-                    } else if (_memoryValues.U16.ContainsKey(valueKey) == true) {
-                        _memoryValues.U16[valueKey].Value = (uint)value;
-                    } else if (_memoryValues.U32.ContainsKey(valueKey) == true) {
-                        _memoryValues.U32[valueKey].Value = (uint)value;
-                    }
-                    break;
-                default:
-                    if (_memoryValues.U16.ContainsKey(valueKey) == true) {
-                        _memoryValues.U16[valueKey].Value = (uint)value;
-                    } else if (_memoryValues.U32.ContainsKey(valueKey) == true) {
-                        _memoryValues.U32[valueKey].Value = (uint)value;
-                    }
-                    break;
+            if (subList == "inventory" && _memoryValues.Inventory.ContainsKey(valueKey) == true) {
+                _memoryValues.Inventory[valueKey].Value = (uint)value;
             }
         }
 
