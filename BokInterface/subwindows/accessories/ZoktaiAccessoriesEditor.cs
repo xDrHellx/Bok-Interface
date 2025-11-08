@@ -29,9 +29,7 @@ namespace BokInterface.Accessories {
             Owner = _bokInterface = bokInterface;
             Icon = _bokInterface.Icon;
 
-            SetFormParameters(691, 240);
-            Text = "Protectors editor";
-
+            SetFormParameters(691, 240, name, "Protectors editor");
             AddElements();
             Show();
         }
@@ -79,17 +77,6 @@ namespace BokInterface.Accessories {
                     xPos = 5;
                     yPos += 52;
                 }
-            }
-        }
-
-        ///<summary>Add the options for a list of dropdowns</summary>
-        ///<param name="list">List of dropdowns</param>
-        ///<param name="dictionnary">Dictionnary containing the data to use for the dropdown options</param>
-        private void AddDropDownOptions(List<ImageComboBox> list, object dictionnary) {
-            foreach (ImageComboBox dropdown in list) {
-                dropdown.DataSource = new BindingSource(dictionnary, null);
-                dropdown.DisplayMember = "Key";
-                dropdown.ValueMember = "Value";
             }
         }
 
@@ -157,31 +144,15 @@ namespace BokInterface.Accessories {
                      * Then try getting the corresponding item & preselect it
                      */
                     string[] fieldParts = dropdown.Name.Split(['_'], 2);
-                    Accessory? selectedAccessory = GetAccessoryByValue(_memoryValues.Inventory[fieldParts[1]].Value);
+                    Accessory? selectedAccessory = GetAccessoryByValue(_memoryValues.Inventory[fieldParts[1]].Value, _zoktaiAccessories.All);
                     if (selectedAccessory != null) {
                         dropdown.SelectedIndex = dropdown.FindStringExact(selectedAccessory.name);
                     }
                 }
             } else {
                 // If current stat is unvalid (for example because we are on the title screen or in a room transition), use specific values
-                foreach (ImageComboBox dropdown in dropDownLists) {
-                    dropdown.SelectedIndex = 0;
-                }
+                SelectFirstDropdownsIndex(dropDownLists);
             }
-        }
-
-        ///<summary>Get an accessory from the accessories list by using its value</summary>
-        ///<param name="value"><c>decimal</c>Value</param>
-        ///<returns><c>Accessory</c>Accessory</returns>
-        private Accessory? GetAccessoryByValue(decimal value) {
-            foreach (KeyValuePair<string, Accessory> index in _zoktaiAccessories.All) {
-                Accessory accessory = index.Value;
-                if (accessory.value == value) {
-                    return accessory;
-                }
-            }
-
-            return null;
         }
 
         #endregion

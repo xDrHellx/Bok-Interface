@@ -35,7 +35,7 @@ namespace BokInterface.KeyItems {
             Owner = _bokInterface = bokInterface;
             Icon = _bokInterface.Icon;
 
-            SetFormParameters(788, 292);
+            SetFormParameters(788, 292, name, text);
             AddElements();
             Show();
         }
@@ -89,17 +89,6 @@ namespace BokInterface.KeyItems {
                     xPos = 5;
                     yPos += 52;
                 }
-            }
-        }
-
-        ///<summary>Add the options for a list of dropdowns</summary>
-        ///<param name="list">List of dropdowns</param>
-        ///<param name="dictionnary">Dictionnary containing the data to use for the dropdown options</param>
-        private void AddDropDownOptions(List<ImageComboBox> list, object dictionnary) {
-            foreach (ImageComboBox dropdown in list) {
-                dropdown.DataSource = new BindingSource(dictionnary, null);
-                dropdown.DisplayMember = "Key";
-                dropdown.ValueMember = "Value";
             }
         }
 
@@ -175,7 +164,7 @@ namespace BokInterface.KeyItems {
                      * Then try getting the corresponding item & preselect it
                      */
                     string[] fieldParts = dropdown.Name.Split(['_'], 2);
-                    Item? selectedItem = GetItemByValue(_memoryAddresses.Inventory[fieldParts[1]].Value);
+                    Item? selectedItem = GetItemByValue(_memoryAddresses.Inventory[fieldParts[1]].Value, _dsItems.KeyItems);
                     if (selectedItem != null) {
                         dropdown.SelectedIndex = dropdown.FindStringExact(selectedItem.name);
                     }
@@ -186,20 +175,6 @@ namespace BokInterface.KeyItems {
                     dropdown.SelectedIndex = 0;
                 }
             }
-        }
-
-        ///<summary>Get an item from the items list by using its value</summary>
-        ///<param name="value">Value</param>
-        ///<returns><c>Item</c>Item</returns>
-        private Item? GetItemByValue(decimal value) {
-            foreach (KeyValuePair<string, Item> index in _dsItems.KeyItems) {
-                Item item = index.Value;
-                if (item.value == value) {
-                    return item;
-                }
-            }
-
-            return null;
         }
 
         #endregion

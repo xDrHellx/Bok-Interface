@@ -17,8 +17,6 @@ namespace BokInterface.Inventory {
         private readonly BokInterface _bokInterface;
         private readonly ShinbokAddresses _shinbokAddresses;
         private readonly ShinbokItems _shinbokItems;
-
-        protected readonly List<CheckBox> checkBoxes = [];
         /// <summary>
         ///     Default maximum durability value that can be set.<br/>
         ///     This is eventually replaced based on dropdown selected items.
@@ -40,7 +38,7 @@ namespace BokInterface.Inventory {
             Owner = _bokInterface = bokInterface;
             Icon = _bokInterface.Icon;
 
-            SetFormParameters(628, 433);
+            SetFormParameters(628, 433, name, text);
             AddElements();
             Show();
         }
@@ -246,7 +244,7 @@ namespace BokInterface.Inventory {
                      * Then try getting the corresponding item & preselect it
                      */
                     string[] fieldParts = dropdown.Name.Split(['_'], 2);
-                    Item? selectedItem = GetItemByValue(_memoryValues.Inventory[fieldParts[1]].Value);
+                    Item? selectedItem = GetItemByValue(_memoryValues.Inventory[fieldParts[1]].Value, _shinbokItems.Items);
                     if (selectedItem != null) {
                         dropdown.SelectedIndex = dropdown.FindStringExact(selectedItem.name);
                     }
@@ -290,28 +288,9 @@ namespace BokInterface.Inventory {
                 }
             } else {
                 // If current stat is unvalid (for example because we are on the title screen or in a room transition), use specific values
-                foreach (ImageComboBox dropdown in dropDownLists) {
-                    dropdown.SelectedIndex = 0;
-                }
-
-                foreach (NumericUpDown durabilityField in numericUpDowns) {
-                    durabilityField.Value = 0;
-                }
+                SelectFirstDropdownsIndex(dropDownLists);
+                SetNumericUpDownsToMin(numericUpDowns);
             }
-        }
-
-        ///<summary>Get an item from the items list by using its value</summary>
-        ///<param name="value"><c>decimal</c>Value</param>
-        ///<returns><c>Item</c>Item</returns>
-        private Item? GetItemByValue(decimal value) {
-            foreach (KeyValuePair<string, Item> index in _shinbokItems.Items) {
-                Item item = index.Value;
-                if (item.value == value) {
-                    return item;
-                }
-            }
-
-            return null;
         }
 
         #endregion

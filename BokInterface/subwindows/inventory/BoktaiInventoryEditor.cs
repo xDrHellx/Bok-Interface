@@ -32,7 +32,7 @@ namespace BokInterface.Inventory {
             Owner = _bokInterface = bokInterface;
             Icon = _bokInterface.Icon;
 
-            SetFormParameters(394, 408);
+            SetFormParameters(394, 408, name, text);
             AddElements();
             Show();
         }

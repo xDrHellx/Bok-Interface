@@ -39,7 +39,7 @@ namespace BokInterface.Accessories {
             Owner = _bokInterface = bokInterface;
             Icon = _bokInterface.Icon;
 
-            SetFormParameters(726, 278);
+            SetFormParameters(726, 278, name, text);
             AddElements();
             Show();
         }
@@ -133,17 +133,6 @@ namespace BokInterface.Accessories {
             }
         }
 
-        ///<summary>Add the options for a list of dropdowns</summary>
-        ///<param name="list">List of dropdowns</param>
-        ///<param name="dictionnary">Dictionnary containing the data to use for the dropdown options</param>
-        private void AddDropDownOptions(List<ImageComboBox> list, object dictionnary) {
-            foreach (ImageComboBox dropdown in list) {
-                dropdown.DataSource = new BindingSource(dictionnary, null);
-                dropdown.DisplayMember = "Key";
-                dropdown.ValueMember = "Value";
-            }
-        }
-
         #endregion
 
         #region Values setting
@@ -230,7 +219,7 @@ namespace BokInterface.Accessories {
                      * Then try getting the corresponding item & preselect it
                      */
                     string[] fieldParts = dropdown.Name.Split(['_'], 2);
-                    Accessory? selectedAccessory = GetAccessoryByValue(_dsAddresses.Inventory[fieldParts[1]].Value);
+                    Accessory? selectedAccessory = GetAccessoryByValue(_dsAddresses.Inventory[fieldParts[1]].Value, _dsAccessories.All);
                     if (selectedAccessory != null) {
                         dropdown.SelectedIndex = dropdown.FindStringExact(selectedAccessory.name);
                     }
@@ -239,35 +228,16 @@ namespace BokInterface.Accessories {
                 // Same as above for shield slots
                 foreach (ImageComboBox dropdown in shieldDropdowns) {
                     string[] fieldParts = dropdown.Name.Split(['_'], 2);
-                    Accessory? selectedShield = GetAccessoryByValue(_dsAddresses.Inventory[fieldParts[1]].Value);
+                    Accessory? selectedShield = GetAccessoryByValue(_dsAddresses.Inventory[fieldParts[1]].Value, _dsAccessories.All);
                     if (selectedShield != null) {
                         dropdown.SelectedIndex = dropdown.FindStringExact(selectedShield.name);
                     }
                 }
             } else {
                 // Otherwise set default values in the editor subwindow
-                foreach (ImageComboBox dropdown in dropDownLists) {
-                    dropdown.SelectedIndex = 0;
-                }
-
-                foreach (ImageComboBox dropdown in shieldDropdowns) {
-                    dropdown.SelectedIndex = 0;
-                }
+                SelectFirstDropdownsIndex(dropDownLists);
+                SelectFirstDropdownsIndex(shieldDropdowns);
             }
-        }
-
-        ///<summary>Get an accessory from the accessories list by using its value</summary>
-        ///<param name="value"><c>decimal</c>Value</param>
-        ///<returns><c>Accessory</c>Accessory</returns>
-        private Accessory? GetAccessoryByValue(decimal value) {
-            foreach (KeyValuePair<string, Accessory> index in _dsAccessories.All) {
-                Accessory accessory = index.Value;
-                if (accessory.value == value) {
-                    return accessory;
-                }
-            }
-
-            return null;
         }
 
         #endregion

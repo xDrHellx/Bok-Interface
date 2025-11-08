@@ -17,10 +17,9 @@ namespace BokInterface.Inventory {
         private readonly BokInterface _bokInterface;
         private readonly ZoktaiAddresses _zoktaiAddresses;
         private readonly ZoktaiItems _zoktaiItems;
-        protected readonly List<CheckBox> checkBoxes = [];
         /// <summary>
-        /// <para>Default maximum durability value that can be set</para>
-        /// <para>This is eventually replaced based on dropdown selected items</para>
+        ///     Default maximum durability value that can be set.<br/>
+        ///     This is eventually replaced based on dropdown selected items.
         /// </summary>
         private readonly int _defaultMaxDurability = 7679;
         /// <summary>Durabiliy offset for "Chocolate-covered" items</summary>
@@ -39,7 +38,7 @@ namespace BokInterface.Inventory {
             Owner = _bokInterface = bokInterface;
             Icon = _bokInterface.Icon;
 
-            SetFormParameters(628, 433);
+            SetFormParameters(628, 433, name, text);
             AddElements();
             Show();
         }
@@ -234,7 +233,7 @@ namespace BokInterface.Inventory {
         protected override void SetDefaultValues() {
 
             // If "current stat" is a valid value, get the current inventory
-            uint currentStat = APIs.Memory.ReadU32(_zoktaiAddresses.Misc["current_stat"].Address);
+            uint currentStat = _zoktaiAddresses.Misc["current_stat"].Value;
             if (currentStat > 0) {
                 foreach (ImageComboBox dropdown in dropDownLists) {
                     /**
@@ -242,7 +241,7 @@ namespace BokInterface.Inventory {
                      * Then try getting the corresponding item & preselect it
                      */
                     string[] fieldParts = dropdown.Name.Split(['_'], 2);
-                    Item? selectedItem = GetItemByValue(_memoryValues.Inventory[fieldParts[1]].Value);
+                    Item? selectedItem = GetItemByValue(_memoryValues.Inventory[fieldParts[1]].Value, _zoktaiItems.Items);
                     if (selectedItem != null) {
                         dropdown.SelectedIndex = dropdown.FindStringExact(selectedItem.name);
                     }
@@ -282,28 +281,9 @@ namespace BokInterface.Inventory {
                 }
             } else {
                 // If current stat is unvalid (for example because we are on the title screen or in a room transition), use specific values
-                foreach (ImageComboBox dropdown in dropDownLists) {
-                    dropdown.SelectedIndex = 0;
-                }
-
-                foreach (NumericUpDown durabilityField in numericUpDowns) {
-                    durabilityField.Value = 0;
-                }
+                SelectFirstDropdownsIndex(dropDownLists);
+                SetNumericUpDownsToMin(numericUpDowns);
             }
-        }
-
-        ///<summary>Get an item from the items list by using its value</summary>
-        ///<param name="value"><c>decimal</c>Value</param>
-        ///<returns><c>Item</c>Item</returns>
-        private Item? GetItemByValue(decimal value) {
-            foreach (KeyValuePair<string, Item> index in _zoktaiItems.Items) {
-                Item item = index.Value;
-                if (item.value == value) {
-                    return item;
-                }
-            }
-
-            return null;
         }
 
         #endregion

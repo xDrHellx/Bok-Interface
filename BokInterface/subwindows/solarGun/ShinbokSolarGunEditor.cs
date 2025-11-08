@@ -12,17 +12,12 @@ namespace BokInterface.solarGun {
 
         #region Properties
 
-        protected readonly List<RadioButton> radioButtons = [];
-
         private readonly MemoryValues _memoryValues;
         private readonly BokInterface _bokInterface;
         private readonly ShinbokAddresses _shinbokAddresses;
         private readonly ShinbokGuns _shinbokGuns;
         protected readonly List<ImageComboBox> lensesDropDownLists = [],
             framesDropDownLists = [];
-        protected TabControl inventoryTabControl = new();
-        protected TabPage lensTab = new(),
-            framesTab = new();
 
         #endregion
 
@@ -37,7 +32,7 @@ namespace BokInterface.solarGun {
             Owner = _bokInterface = bokInterface;
             Icon = _bokInterface.Icon;
 
-            SetFormParameters(411, 279);
+            SetFormParameters(411, 279, name, text);
             AddElements();
             Show();
         }
@@ -105,17 +100,6 @@ namespace BokInterface.solarGun {
                     xPos = 6;
                     yPos += 52;
                 }
-            }
-        }
-
-        ///<summary>Add the options for a list of dropdowns</summary>
-        ///<param name="list">List of dropdowns</param>
-        ///<param name="dictionnary">Dictionnary containing the data to use for the dropdown options</param>
-        private void AddDropDownOptions(List<ImageComboBox> list, object dictionnary) {
-            foreach (ImageComboBox dropdown in list) {
-                dropdown.DataSource = new BindingSource(dictionnary, null);
-                dropdown.DisplayMember = "Key";
-                dropdown.ValueMember = "Value";
             }
         }
 
@@ -217,13 +201,8 @@ namespace BokInterface.solarGun {
                 }
             } else {
                 // If current stat is unvalid (for example because we are on the title screen or in a room transition), use specific values
-                foreach (ImageComboBox dropdown in lensesDropDownLists) {
-                    dropdown.SelectedIndex = 0;
-                }
-
-                foreach (ImageComboBox dropdown in framesDropDownLists) {
-                    dropdown.SelectedIndex = 0;
-                }
+                SelectFirstDropdownsIndex(lensesDropDownLists);
+                SelectFirstDropdownsIndex(framesDropDownLists);
             }
         }
 

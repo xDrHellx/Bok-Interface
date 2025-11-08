@@ -32,7 +32,7 @@ namespace BokInterface.Magics {
             Icon = _bokInterface.Icon;
             _zoktaiMagics = new();
 
-            SetFormParameters(281, 249);
+            SetFormParameters(281, 249, name, text);
             AddElements();
             Show();
         }

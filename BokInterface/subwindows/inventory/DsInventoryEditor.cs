@@ -17,7 +17,6 @@ namespace BokInterface.Inventory {
         private readonly BokInterface _bokInterface;
         private readonly DsAddresses _memoryAddresses;
         private readonly DsItems _dsItems;
-        protected readonly List<CheckBox> checkBoxes = [];
         protected CheckGroupBox? slot17group { get; set; }
         protected CheckGroupBox? slot18group { get; set; }
         protected CheckGroupBox? slot19group { get; set; }
@@ -43,7 +42,7 @@ namespace BokInterface.Inventory {
             Owner = _bokInterface = bokInterface;
             Icon = _bokInterface.Icon;
 
-            SetFormParameters(623, 538);
+            SetFormParameters(623, 538, name, text);
             AddElements();
             Show();
         }
@@ -258,7 +257,7 @@ namespace BokInterface.Inventory {
                      * Then try getting the corresponding item & preselect it
                      */
                     string[] fieldParts = dropdown.Name.Split(['_'], 2);
-                    Item? selectedItem = GetItemByValue(_memoryAddresses.Inventory[fieldParts[1]].Value);
+                    Item? selectedItem = GetItemByValue(_memoryAddresses.Inventory[fieldParts[1]].Value, _dsItems.Items);
                     if (selectedItem != null) {
                         dropdown.SelectedIndex = dropdown.FindStringExact(selectedItem.name);
                     }
@@ -303,28 +302,9 @@ namespace BokInterface.Inventory {
                 }
             } else {
                 // If current stat is unvalid (for example because we are on the title screen or in a room transition), use specific values
-                foreach (ImageComboBox dropdown in dropDownLists) {
-                    dropdown.SelectedIndex = 0;
-                }
-
-                foreach (NumericUpDown durabilityField in numericUpDowns) {
-                    durabilityField.Value = 0;
-                }
+                SelectFirstDropdownsIndex(dropDownLists);
+                SetNumericUpDownsToMin(numericUpDowns);
             }
-        }
-
-        ///<summary>Get an item from the items list by using its value</summary>
-        ///<param name="value">Value</param>
-        ///<returns><c>Item</c>Item</returns>
-        private Item? GetItemByValue(decimal value) {
-            foreach (KeyValuePair<string, Item> index in _dsItems.Items) {
-                Item item = index.Value;
-                if (item.value == value) {
-                    return item;
-                }
-            }
-
-            return null;
         }
 
         #endregion

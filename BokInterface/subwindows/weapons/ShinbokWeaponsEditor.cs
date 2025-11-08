@@ -36,7 +36,7 @@ namespace BokInterface.Weapons {
             Owner = _bokInterface = bokInterface;
             Icon = _bokInterface.Icon;
 
-            SetFormParameters(699, 312);
+            SetFormParameters(699, 312, name, text);
             AddElements();
             Show();
         }
@@ -279,7 +279,7 @@ namespace BokInterface.Weapons {
                     } else {
                         // If it's for the weapon itself, do the same as above & try preselecting the corresponding weapon
                         string key = fieldParts[1] + "_" + fieldParts[2];
-                        Weapon? selectedWeapon = GetWeaponByValue(_memoryValues.Inventory[key].Value);
+                        Weapon? selectedWeapon = GetWeaponByValue(_memoryValues.Inventory[key].Value, _shinbokWeapons.All);
                         if (selectedWeapon != null) {
                             dropdown.SelectedIndex = dropdown.FindStringExact(selectedWeapon.name);
                         }
@@ -308,34 +308,14 @@ namespace BokInterface.Weapons {
                 }
             } else {
                 // If current stat is unvalid (for example because we are on the title screen or in a room transition), use specific values
-                foreach (ImageComboBox dropdown in dropDownLists) {
-                    dropdown.SelectedIndex = 0;
-                }
-
-                foreach (NumericUpDown propertiesRelatedFields in numericUpDowns) {
-                    propertiesRelatedFields.Value = 0;
-                }
-
+                SelectFirstDropdownsIndex(dropDownLists);
+                SetNumericUpDownsToMin(numericUpDowns);
                 foreach (RadioButton refineButton in radioButtons) {
                     if ((int)refineButton.Tag == 0) {
                         refineButton.Checked = true;
                     }
                 }
             }
-        }
-
-        /// <summary>Get a weapon from the full weapons list by using its value</summary>
-        /// <param name="value"><c>decimal</c>Value</param>
-        /// <returns><c>Weapon</c>Weapon</returns>
-        private Weapon? GetWeaponByValue(decimal value) {
-            foreach (KeyValuePair<string, Weapon> index in _shinbokWeapons.All) {
-                Weapon weapon = index.Value;
-                if (weapon.value == value) {
-                    return weapon;
-                }
-            }
-
-            return null;
         }
 
         /// <summary>Get an SP ability from the weapons abilities list by using its value</summary>

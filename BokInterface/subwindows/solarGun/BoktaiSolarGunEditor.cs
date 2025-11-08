@@ -17,10 +17,7 @@ namespace BokInterface.solarGun {
         private readonly BokInterface _bokInterface;
         private readonly BoktaiAddresses _boktaiAddresses;
         private readonly BoktaiGuns _boktaiGuns;
-        protected TabControl inventoryTabControl = new();
-        protected TabPage lensTab = new(),
-            framesTab = new(),
-            batteriesTab = new(),
+        protected TabPage batteriesTab = new(),
             grenadesTab = new();
         protected readonly List<ImageCheckBox> framesCheckboxes = [],
             batteriesCheckboxes = [];
@@ -41,7 +38,7 @@ namespace BokInterface.solarGun {
             Owner = _bokInterface = bokInterface;
             Icon = _bokInterface.Icon;
 
-            SetFormParameters(408, 262);
+            SetFormParameters(408, 262, name, text);
             AddElements();
             Show();
         }
@@ -464,11 +461,7 @@ namespace BokInterface.solarGun {
                 UncheckAll(batteriesCheckboxes);
 
                 pineappleCharges.Value = 0;
-                foreach (NumericUpDown field in grenadesNumericUpDowns) {
-                    if (field.Enabled == true) {
-                        field.Value = 0;
-                    }
-                }
+                SetNumericUpDownsToMin(grenadesNumericUpDowns);
             }
         }
 

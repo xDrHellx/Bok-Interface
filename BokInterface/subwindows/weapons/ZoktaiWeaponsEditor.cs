@@ -33,7 +33,7 @@ namespace BokInterface.Weapons {
             Owner = _bokInterface = bokInterface;
             Icon = _bokInterface.Icon;
 
-            SetFormParameters(699, 326);
+            SetFormParameters(699, 326, name, text);
             AddElements();
             Show();
         }
@@ -109,7 +109,7 @@ namespace BokInterface.Weapons {
 
                 // Indicate what the dropdown field is for
                 string[] fieldParts = dropdown.Name.Split(['_'], 4);
-                if (fieldParts.Length >= 4 && fieldParts[3] != null && fieldParts[3].Substring(0, 10) == "sp_ability") {
+                if (fieldParts.Length >= 4 && fieldParts[3] != null && fieldParts[3][..10] == "sp_ability") {
                     // If dropdown is for an SP ability
                     dropdown.DataSource = new BindingSource(_zoktaiAbilities.Weapons, null);
                     dropdown.DisplayMember = "Key";
@@ -221,7 +221,7 @@ namespace BokInterface.Weapons {
         protected override void SetDefaultValues() {
 
             // If "current stat" is a valid value, get the current inventory
-            uint currentStat = APIs.Memory.ReadU32(_zoktaiAddresses.Misc["current_stat"].Address);
+            uint currentStat = _zoktaiAddresses.Misc["current_stat"].Value;
             if (currentStat > 0) {
                 foreach (ImageComboBox dropdown in dropDownLists) {
 
@@ -242,7 +242,7 @@ namespace BokInterface.Weapons {
                     } else {
                         // If it's for the weapon itself, do the same as above & try preselecting the corresponding weapon
                         string key = fieldParts[1] + "_" + fieldParts[2];
-                        Weapon? selectedWeapon = GetWeaponByValue(_memoryValues.Inventory[key].Value);
+                        Weapon? selectedWeapon = GetWeaponByValue(_memoryValues.Inventory[key].Value, _zoktaiWeapons.All);
                         if (selectedWeapon != null) {
                             dropdown.SelectedIndex = dropdown.FindStringExact(selectedWeapon.name);
                         }
@@ -268,28 +268,9 @@ namespace BokInterface.Weapons {
                 }
             } else {
                 // If current stat is unvalid (for example because we are on the title screen or in a room transition), use specific values
-                foreach (ImageComboBox dropdown in dropDownLists) {
-                    dropdown.SelectedIndex = 0;
-                }
-
-                foreach (NumericUpDown bonusRelatedField in numericUpDowns) {
-                    bonusRelatedField.Value = 0;
-                }
+                SelectFirstDropdownsIndex(dropDownLists);
+                SetNumericUpDownsToMin(numericUpDowns);
             }
-        }
-
-        /// <summary>Get a weapon from the full weapons list by using its value</summary>
-        /// <param name="value"><c>decimal</c>Value</param>
-        /// <returns><c>Weapon</c>Weapon</returns>
-        private Weapon? GetWeaponByValue(decimal value) {
-            foreach (KeyValuePair<string, Weapon> index in _zoktaiWeapons.All) {
-                Weapon weapon = index.Value;
-                if (weapon.value == value) {
-                    return weapon;
-                }
-            }
-
-            return null;
         }
 
         /// <summary>Get an SP ability from the weapons abilities list by using its value</summary>

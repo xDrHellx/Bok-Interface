@@ -1,70 +1,40 @@
 using System.Collections.Generic;
-using System.Drawing;
 using System.Windows.Forms;
-
-using BokInterface.Utils;
 
 namespace BokInterface.Weapons {
     /// <summary>Basis class for weapons editor subclasses</summary>
-    abstract class WeaponsEditor : Form {
+    abstract class WeaponsEditor : Editor {
 
         #region Properties
 
-        protected readonly string name = "weaponsEditWindow",
+        protected new readonly string name = "weaponsEditWindow",
             text = "Weapons editor";
 
         #endregion
 
         #region Form elements
 
-        protected readonly List<ImageComboBox> dropDownLists = [];
         protected readonly List<NumericUpDown> numericUpDowns = [];
         protected Panel slotsPanel = new();
-        protected CheckGroupBox? slot1group { get; set; }
-        protected CheckGroupBox? slot2group { get; set; }
-        protected CheckGroupBox? slot3group { get; set; }
-        protected CheckGroupBox? slot4group { get; set; }
-        protected CheckGroupBox? slot5group { get; set; }
-        protected CheckGroupBox? slot6group { get; set; }
-        protected CheckGroupBox? slot7group { get; set; }
-        protected CheckGroupBox? slot8group { get; set; }
-        protected CheckGroupBox? slot9group { get; set; }
-        protected CheckGroupBox? slot10group { get; set; }
-        protected CheckGroupBox? slot11group { get; set; }
-        protected CheckGroupBox? slot12group { get; set; }
-        protected CheckGroupBox? slot13group { get; set; }
-        protected CheckGroupBox? slot14group { get; set; }
-        protected CheckGroupBox? slot15group { get; set; }
-        protected CheckGroupBox? slot16group { get; set; }
 
         #endregion
 
         #region Methods
 
-        /// <summary>Sets common parameters for the form / subwindow</summary>
-        /// <param name="width">Form width</param>
-        /// <param name="height">Form height</param>
-        protected void SetFormParameters(int width, int height) {
-            Name = name;
-            Text = text;
-            AutoScaleDimensions = new SizeF(6F, 15F);
-            AutoScaleMode = AutoScaleMode.Inherit;
-            FormBorderStyle = FormBorderStyle.FixedSingle;
-            BackColor = SystemColors.Control;
-            Font = WinFormHelpers.defaultFont;
-            AutoScroll = true;
-            ClientSize = new Size(width, height);
-            MaximizeBox = false;
+        /// <summary>Get a weapon from a dictionnary by using the weapon's value</summary>
+        /// <param name="value"><c>decimal</c>Value</param>
+        /// <param name="dictionnary">Dictionnary of weapons</param>
+        /// <returns><c>Weapon</c>Weapon</returns>
+        protected Weapon? GetWeaponByValue(decimal value, Dictionary<string, Weapon> dictionnary) {
+            foreach (KeyValuePair<string, Weapon> index in dictionnary) {
+                Weapon weapon = index.Value;
+                if (weapon.value == value) {
+                    return weapon;
+                }
+            }
+
+            return null;
         }
-
-        /// <summary>Add elements to the subwindow</summary>
-        protected abstract void AddElements();
-
-        /// <summary>Set values to memory addresses</summary>
-        protected abstract void SetValues();
-
-        /// <summary>Sets default values for each field</summary>
-        protected virtual void SetDefaultValues() { }
 
         #endregion
     }
