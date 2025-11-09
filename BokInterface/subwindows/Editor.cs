@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
@@ -18,6 +19,7 @@ namespace BokInterface {
         #region Form elements
 
         protected readonly List<ImageComboBox> dropDownLists = [];
+        protected readonly List<NumericUpDown> numericUpDowns = [];
         protected CheckGroupBox? slot1group { get; set; }
         protected CheckGroupBox? slot2group { get; set; }
         protected CheckGroupBox? slot3group { get; set; }
@@ -91,6 +93,23 @@ namespace BokInterface {
             foreach (NumericUpDown field in list) {
                 field.Value = field.Minimum;
             }
+        }
+
+        /// <summary>
+        ///     Add the "Set Values" button to a subwindow.<br/>
+        ///     <i>Used for setting values to memory addresses after editing.</i>
+        /// </summary>
+        /// <param name="positionX">X position</param>
+        /// <param name="positionY">Y position</param>
+        /// <param name="form">Parent subwindow</param>
+        protected void AddSetValuesButton(int positionX, int positionY, Control subwindow) {
+            Button setValuesBtn = WinFormHelpers.CreateButton("setValuesBtn", "Set values", positionX, positionY, 75, 23, subwindow);
+            setValuesBtn.Click += new EventHandler(delegate (object sender, EventArgs e) {
+                // Write the values for 10 frames
+                for (int i = 0; i < 10; i++) {
+                    SetValues();
+                }
+            });
         }
 
         #endregion

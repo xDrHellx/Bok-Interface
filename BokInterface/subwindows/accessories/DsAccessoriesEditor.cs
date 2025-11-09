@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -65,14 +64,7 @@ namespace BokInterface.Accessories {
             // Set default values for each field
             SetDefaultValues();
 
-            // Button for setting values & its events
-            Button setValuesButton = WinFormHelpers.CreateButton("setValuesBtn", "Set values", 648, 252, 75, 23, this);
-            setValuesButton.Click += new EventHandler(delegate (object sender, EventArgs e) {
-                // Write the values for 10 frames
-                for (int i = 0; i < 10; i++) {
-                    SetValues();
-                }
-            });
+            AddSetValuesButton(648, 252, this);
         }
 
         /// <summary>Generate the dictionnary for shields (including empty slot)</summary>

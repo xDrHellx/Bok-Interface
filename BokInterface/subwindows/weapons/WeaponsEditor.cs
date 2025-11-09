@@ -14,7 +14,6 @@ namespace BokInterface.Weapons {
 
         #region Form elements
 
-        protected readonly List<NumericUpDown> numericUpDowns = [];
         protected Panel slotsPanel = new();
 
         #endregion

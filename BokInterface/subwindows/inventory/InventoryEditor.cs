@@ -16,7 +16,6 @@ namespace BokInterface.Inventory {
 
         #region Form elements
 
-        protected readonly List<NumericUpDown> numericUpDowns = [];
         protected readonly List<CheckBox> checkBoxes = [];
 
         #endregion

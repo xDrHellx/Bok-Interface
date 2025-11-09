@@ -1,6 +1,4 @@
-using System;
 using System.Collections.Generic;
-using System.Windows.Forms;
 
 using BokInterface.Addresses;
 using BokInterface.Utils;
@@ -54,14 +52,7 @@ namespace BokInterface.solarGun {
             // Set default values for each field
             SetDefaultValues();
 
-            // Button for setting values & its events
-            Button setValuesButton = WinFormHelpers.CreateButton("setStatusButton", "Set values", 349, 252, 75, 23, this);
-            setValuesButton.Click += new EventHandler(delegate (object sender, EventArgs e) {
-                // Write the values for 10 frames
-                for (int i = 0; i < 10; i++) {
-                    SetValues();
-                }
-            });
+            AddSetValuesButton(349, 252, this);
         }
 
         /// <summary>Adds generated tab for lenses</summary>

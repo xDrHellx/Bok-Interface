@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
@@ -62,14 +61,7 @@ namespace BokInterface.solarGun {
             Label expWarning = WinFormHelpers.CreateImageLabel("tooltip", "warning", 5, 232, this);
             WinFormHelpers.CreateLabel("warning", WinFormHelpers.EscapeAmpersand("Menu must be re-opened & gun parts must be equipped again for all changes to fully take effect."), 23, 222, 319, 40, this, textAlignment: "MiddleLeft");
 
-            // Button for setting values & its events
-            Button setValuesButton = WinFormHelpers.CreateButton("setStatusButton", "Set values", 346, 235, 75, 23, this);
-            setValuesButton.Click += new EventHandler(delegate (object sender, EventArgs e) {
-                // Write the values for 10 frames
-                for (int i = 0; i < 10; i++) {
-                    SetValues();
-                }
-            });
+            AddSetValuesButton(346, 235, this);
         }
 
         /// <summary>Adds generated tab for lenses</summary>

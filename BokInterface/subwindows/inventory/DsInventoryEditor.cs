@@ -85,14 +85,7 @@ namespace BokInterface.Inventory {
             Label expWarning = WinFormHelpers.CreateImageLabel("tooltip", "warning", 5, 515, this);
             WinFormHelpers.CreateLabel("warning", "Inventory will be updated upon switching tab in-game or closing and reopening the menu.", 23, 508, 503, 30, this, textAlignment: "MiddleLeft");
 
-            // Button for setting values & its events
-            Button setValuesButton = WinFormHelpers.CreateButton("setValuesButton", "Set values", 544, 511, 75, 23, this);
-            setValuesButton.Click += new EventHandler(delegate (object sender, EventArgs e) {
-                // Write the values for 10 frames
-                for (int i = 0; i < 10; i++) {
-                    SetValues();
-                }
-            });
+            AddSetValuesButton(544, 511, this);
         }
 
         ///<summary>Separated method for generating groups with subelements</summary>

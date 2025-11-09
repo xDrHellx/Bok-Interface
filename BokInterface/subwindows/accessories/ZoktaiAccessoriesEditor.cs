@@ -1,7 +1,5 @@
-using System;
 using System.Collections.Generic;
 using System.Reflection;
-using System.Windows.Forms;
 
 using BokInterface.Addresses;
 using BokInterface.Utils;
@@ -47,14 +45,7 @@ namespace BokInterface.Accessories {
             // Set default values for each field
             SetDefaultValues();
 
-            // Button for setting values & its events
-            Button setValuesButton = WinFormHelpers.CreateButton("setStatusButton", "Set values", 629, 213, 75, 23, this);
-            setValuesButton.Click += new EventHandler(delegate (object sender, EventArgs e) {
-                // Write the values for 10 frames
-                for (int i = 0; i < 10; i++) {
-                    SetValues();
-                }
-            });
+            AddSetValuesButton(629, 213, this);
         }
 
         ///<summary>Separated method for generating groups with subelements</summary>
