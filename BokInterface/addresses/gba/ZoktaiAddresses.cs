@@ -13,9 +13,6 @@ namespace BokInterface.Addresses {
         /// <summary>Inventory-related memory addresses</summary>
         public IDictionary<string, MemoryAddress> Inventory = new Dictionary<string, MemoryAddress>();
 
-        /// <summary>Magics-related memory addresses</summary>
-        public IDictionary<string, MemoryAddress> Magics = new Dictionary<string, MemoryAddress>();
-
         /// <summary>Solls-related memory addresses</summary>
         public IDictionary<string, MemoryAddress> Solls = new Dictionary<string, MemoryAddress>();
 

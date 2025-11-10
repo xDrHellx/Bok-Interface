@@ -175,7 +175,6 @@ namespace BokInterface.Tools.MemoryValuesListing {
                     GenerateRows(_memAddresses.Django, "Django");
                     GenerateRows(_memAddresses.Sabata, "Sabata");
                     GenerateRows(_memAddresses.Inventory, "Inventory");
-                    GenerateRows(_memAddresses.Magics, "Magics");
                     GenerateRows(_memAddresses.Solls, "Solls");
                     GenerateRows(_memAddresses.Misc, "Misc");
                     GenerateRows(_memAddresses.JoySpots, "Downloadable events (Joy Spots)");
