@@ -5,6 +5,7 @@ namespace BokInterface.Addresses {
         public LunarKnightsUsaAddresses() {
             InitPlayerAddresses();
             InitInventoryAddresses();
+            OrderDictionnaries();
         }
 
         private void InitPlayerAddresses() {
