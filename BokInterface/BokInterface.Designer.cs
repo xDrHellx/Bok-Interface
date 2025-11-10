@@ -248,11 +248,11 @@ namespace BokInterface {
                         AddDropdownMenuItem("editMagicsMenu", "Magics", editMenu, OpenMagicsEditor);
                     }
                 }
-
-                // Misc tools & GUI sections
-                GenerateToolsMenu();
-                GenerateGuiMenu();
             }
+
+            // Misc tools & GUI sections
+            GenerateToolsMenu();
+            GenerateGuiMenu();
         }
 
         /// <summary>Generate the menu related to misc tools</summary>
@@ -576,10 +576,10 @@ namespace BokInterface {
                 case "Shinbok":
                     memoryValuesListing = new MemoryValuesListing(this, _shinbokAddresses);
                     break;
-                // case "BoktaiDS":
-                // case "LunarKnights":
-                //     memoryValuesListing = new MemoryValuesListing(this, _dsAddresses);
-                //     break;
+                case "BoktaiDS":
+                case "LunarKnights":
+                    memoryValuesListing = new MemoryValuesListing(this, _dsAddresses);
+                    break;
                 default:
                     // If game not handled, stop
                     return;
