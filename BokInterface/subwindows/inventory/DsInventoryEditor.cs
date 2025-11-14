@@ -17,7 +17,6 @@ namespace BokInterface.Inventory {
         private readonly BokInterface _bokInterface;
         private readonly DsAddresses _memoryAddresses;
         private readonly DsItems _dsItems;
-        protected readonly List<CheckBox> checkBoxes = [];
         protected CheckGroupBox? slot17group { get; set; }
         protected CheckGroupBox? slot18group { get; set; }
         protected CheckGroupBox? slot19group { get; set; }
@@ -43,7 +42,7 @@ namespace BokInterface.Inventory {
             Owner = _bokInterface = bokInterface;
             Icon = _bokInterface.Icon;
 
-            SetFormParameters(623, 538);
+            SetFormParameters(623, 538, name, text);
             AddElements();
             Show();
         }
@@ -53,20 +52,7 @@ namespace BokInterface.Inventory {
         #region Elements
 
         protected override void AddElements() {
-            InstanciateCheckGroupBoxes();
-            for (int i = 1; i < 21; i++) {
-
-                // Get the group dynamically from the property
-                PropertyInfo property = GetType().GetProperty($"slot{i}group", BindingFlags.Instance | BindingFlags.NonPublic);
-                if (property != null && property.GetValue(this) is CheckGroupBox group) {
-
-                    // Add elements
-                    dropDownLists.Add(WinFormHelpers.CreateImageDropdownList($"inventory_item_slot_{i}", 5, 19, 140, 23, group, visibleOptions: 5));
-                    WinFormHelpers.CreateLabel($"slot{i}", "Durability", 2, 50, 58, 15, group);
-                    numericUpDowns.Add(WinFormHelpers.CreateNumericUpDown($"inventory_item_slot_durability_{i}", 0, 95, 48, 50, 23, 0, _defaultMaxDurability, control: group));
-                    checkBoxes.Add(WinFormHelpers.CreateCheckBox($"item_slot_{i}_chocolate_covered", "Chocolate-covered", 12, 74, 134, 19, checkboxOnRight: true, control: group));
-                }
-            }
+            GenerateGroups();
 
             // Generate & add options to dropdowns
             GenerateDropDownOptions();
@@ -99,18 +85,11 @@ namespace BokInterface.Inventory {
             Label expWarning = WinFormHelpers.CreateImageLabel("tooltip", "warning", 5, 515, this);
             WinFormHelpers.CreateLabel("warning", "Inventory will be updated upon switching tab in-game or closing and reopening the menu.", 23, 508, 503, 30, this, textAlignment: "MiddleLeft");
 
-            // Button for setting values & its events
-            Button setValuesButton = WinFormHelpers.CreateButton("setValuesButton", "Set values", 544, 511, 75, 23, this);
-            setValuesButton.Click += new EventHandler(delegate (object sender, EventArgs e) {
-                // Write the values for 10 frames
-                for (int i = 0; i < 10; i++) {
-                    SetValues();
-                }
-            });
+            AddSetValuesButton(544, 511, this);
         }
 
-        ///<summary>Separated method for instanciating checkGroupBox instances</summary>
-        protected void InstanciateCheckGroupBoxes() {
+        ///<summary>Separated method for generating groups with subelements</summary>
+        protected void GenerateGroups() {
             int xPos = 5,
                 yPos = 5;
             for (int i = 1; i < 21; i++) {
@@ -120,6 +99,12 @@ namespace BokInterface.Inventory {
                 if (property != null) {
                     CheckGroupBox group = WinFormHelpers.CreateCheckGroupBox($"slot{i}group", $"Slot {i}", xPos, yPos, 150, 95, control: this);
                     property.SetValue(this, group);
+
+                    // Add elements
+                    dropDownLists.Add(WinFormHelpers.CreateImageDropdownList($"inventory_item_slot_{i}", 5, 19, 140, 23, group, visibleOptions: 5));
+                    WinFormHelpers.CreateLabel($"slot{i}", "Durability", 2, 50, 58, 15, group);
+                    numericUpDowns.Add(WinFormHelpers.CreateNumericUpDown($"inventory_item_slot_durability_{i}", 0, 95, 48, 50, 23, 0, _defaultMaxDurability, control: group));
+                    checkBoxes.Add(WinFormHelpers.CreateCheckBox($"item_slot_{i}_chocolate_covered", "Chocolate-covered", 12, 74, 134, 19, checkboxOnRight: true, control: group));
                 }
 
                 // Offsets for position
@@ -241,13 +226,8 @@ namespace BokInterface.Inventory {
         ///<param name="valueKey"><c>string</c>Key within the dictionnary</param>
         ///<param name="value"><c>decimal</c>Value to set</param>
         private void SetMemoryValue(string subList, string valueKey, decimal value) {
-            switch (subList) {
-                case "inventory":
-                    if (_memoryAddresses.Inventory.ContainsKey(valueKey) == true) {
-                        _memoryAddresses.Inventory[valueKey].Value = (uint)value;
-                    }
-                    break;
-                default: break;
+            if (subList == "inventory" && _memoryAddresses.Inventory.ContainsKey(valueKey) == true) {
+                _memoryAddresses.Inventory[valueKey].Value = (uint)value;
             }
         }
 
@@ -270,7 +250,7 @@ namespace BokInterface.Inventory {
                      * Then try getting the corresponding item & preselect it
                      */
                     string[] fieldParts = dropdown.Name.Split(['_'], 2);
-                    Item? selectedItem = GetItemByValue(_memoryAddresses.Inventory[fieldParts[1]].Value);
+                    Item? selectedItem = GetItemByValue(_memoryAddresses.Inventory[fieldParts[1]].Value, _dsItems.Items);
                     if (selectedItem != null) {
                         dropdown.SelectedIndex = dropdown.FindStringExact(selectedItem.name);
                     }
@@ -315,28 +295,9 @@ namespace BokInterface.Inventory {
                 }
             } else {
                 // If current stat is unvalid (for example because we are on the title screen or in a room transition), use specific values
-                foreach (ImageComboBox dropdown in dropDownLists) {
-                    dropdown.SelectedIndex = 0;
-                }
-
-                foreach (NumericUpDown durabilityField in numericUpDowns) {
-                    durabilityField.Value = 0;
-                }
+                SelectFirstDropdownsIndex(dropDownLists);
+                SetNumericUpDownsToMin(numericUpDowns);
             }
-        }
-
-        ///<summary>Get an item from the items list by using its value</summary>
-        ///<param name="value">Value</param>
-        ///<returns><c>Item</c>Item</returns>
-        private Item? GetItemByValue(decimal value) {
-            foreach (KeyValuePair<string, Item> index in _dsItems.Items) {
-                Item item = index.Value;
-                if (item.value == value) {
-                    return item;
-                }
-            }
-
-            return null;
         }
 
         #endregion

@@ -21,7 +21,7 @@ namespace BokInterface.Weapons {
             Owner = _bokInterface = bokInterface;
             Icon = _bokInterface.Icon;
 
-            SetFormParameters(400, 400);
+            SetFormParameters(400, 400, name, text);
             AddElements();
             Show();
         }

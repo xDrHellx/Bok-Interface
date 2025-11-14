@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 
 namespace BokInterface.Addresses {
     /// <summary>Main class for Boktai 2: Solar Boy Django / Zoktai memory addresses</summary>
@@ -6,19 +7,12 @@ namespace BokInterface.Addresses {
 
         /// <summary>Django-related memory addresses</summary>
         public IDictionary<string, MemoryAddress> Django = new Dictionary<string, MemoryAddress>();
-
         /// <summary>Sabata-related memory addresses</summary>
         public IDictionary<string, MemoryAddress> Sabata = new Dictionary<string, MemoryAddress>();
-
         /// <summary>Inventory-related memory addresses</summary>
         public IDictionary<string, MemoryAddress> Inventory = new Dictionary<string, MemoryAddress>();
-
-        /// <summary>Magics-related memory addresses</summary>
-        public IDictionary<string, MemoryAddress> Magics = new Dictionary<string, MemoryAddress>();
-
         /// <summary>Solls-related memory addresses</summary>
         public IDictionary<string, MemoryAddress> Solls = new Dictionary<string, MemoryAddress>();
-
         /// <summary>
         ///     <para>Misc memory addresses</para>
         ///     <para>
@@ -27,10 +21,8 @@ namespace BokInterface.Addresses {
         ///     </para>
         /// </summary>
         public IDictionary<string, MemoryAddress> Misc = new Dictionary<string, MemoryAddress>();
-
         /// <summary>Downloadable events / JoySpots related memory addresses</summary>
         public IDictionary<string, MemoryAddress> JoySpots = new Dictionary<string, MemoryAddress>();
-
         /// <summary>Note for MemoryAddress instances (for less repetition)</summary>
         private string _note = "";
 
@@ -40,6 +32,16 @@ namespace BokInterface.Addresses {
             InitSollsAddresses();
             InitMiscAddresses();
             InitJoySpotsAddresses();
+            OrderDictionnaries();
+        }
+
+        private void OrderDictionnaries() {
+            Django = Django.OrderBy(x => x.Key).ToDictionary(x => x.Key, x => x.Value);
+            Sabata = Sabata.OrderBy(x => x.Key).ToDictionary(x => x.Key, x => x.Value);
+            Inventory = Inventory.OrderBy(x => x.Key).ToDictionary(x => x.Key, x => x.Value);
+            Solls = Solls.OrderBy(x => x.Key).ToDictionary(x => x.Key, x => x.Value);
+            Misc = Misc.OrderBy(x => x.Key).ToDictionary(x => x.Key, x => x.Value);
+            JoySpots = JoySpots.OrderBy(x => x.Key).ToDictionary(x => x.Key, x => x.Value);
         }
 
         private void InitPlayableCharactersAddresses() {

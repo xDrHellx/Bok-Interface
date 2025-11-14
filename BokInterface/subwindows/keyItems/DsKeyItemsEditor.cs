@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Reflection;
 using System.Windows.Forms;
@@ -35,7 +34,7 @@ namespace BokInterface.KeyItems {
             Owner = _bokInterface = bokInterface;
             Icon = _bokInterface.Icon;
 
-            SetFormParameters(788, 292);
+            SetFormParameters(788, 292, name, text);
             AddElements();
             Show();
         }
@@ -45,38 +44,23 @@ namespace BokInterface.KeyItems {
         #region Elements
 
         protected override void AddElements() {
-            InstanciateCheckGroupBoxes();
-            for (int i = 1; i < 21; i++) {
 
-                // Get the group dynamically from the property & add elements to it
-                PropertyInfo property = GetType().GetProperty($"slot{i}group", BindingFlags.Instance | BindingFlags.NonPublic);
-                if (property != null && property.GetValue(this) is CheckGroupBox group) {
-                    dropDownLists.Add(WinFormHelpers.CreateImageDropdownList($"inventory_key_item_slot_{i}", 5, 19, 180, 23, group, visibleOptions: 5));
-                }
-            }
+            // Generate groups with subelements & add options to dropdowns
+            GenerateGroups();
+            AddDropDownOptions(dropDownLists, _dsItems.KeyItems);
 
             // Add warning
             Label expWarning = WinFormHelpers.CreateImageLabel("tooltip", "warning", 5, 268, this);
             WinFormHelpers.CreateLabel("warning", "Inventory will be updated upon switching tab in-game or closing and reopening the menu.", 23, 261, 503, 30, this, textAlignment: "MiddleLeft");
 
-            // Generate & add options to dropdowns
-            GenerateDropDownOptions();
-
             // Set default values for each field
             SetDefaultValues();
 
-            // Button for setting values & its events
-            Button setValuesButton = WinFormHelpers.CreateButton("setValuesButton", "Set values", 709, 265, 75, 23, this);
-            setValuesButton.Click += new EventHandler(delegate (object sender, EventArgs e) {
-                // Write the values for 10 frames
-                for (int i = 0; i < 10; i++) {
-                    SetValues();
-                }
-            });
+            AddSetValuesButton(709, 265, this);
         }
 
-        ///<summary>Separated method for instanciating checkGroupBox instances</summary>
-        protected void InstanciateCheckGroupBoxes() {
+        ///<summary>Separated method for generating groups with subelements</summary>
+        protected void GenerateGroups() {
             int xPos = 5,
                 yPos = 5;
             for (int i = 1; i < 21; i++) {
@@ -86,6 +70,9 @@ namespace BokInterface.KeyItems {
                 if (property != null) {
                     CheckGroupBox group = WinFormHelpers.CreateCheckGroupBox($"slot{i}group", $"Slot {i}", xPos, yPos, 190, 49, control: this);
                     property.SetValue(this, group);
+
+                    // Add the dropdown to it
+                    dropDownLists.Add(WinFormHelpers.CreateImageDropdownList($"inventory_key_item_slot_{i}", 5, 19, 180, 23, group, visibleOptions: 5));
                 }
 
                 // Offsets for position
@@ -94,15 +81,6 @@ namespace BokInterface.KeyItems {
                     xPos = 5;
                     yPos += 52;
                 }
-            }
-        }
-
-        ///<summary>Generates the options for the dropdowns</summary>
-        private void GenerateDropDownOptions() {
-            foreach (ImageComboBox dropdown in dropDownLists) {
-                dropdown.DataSource = new BindingSource(_dsItems.KeyItems, null);
-                dropdown.DisplayMember = "Key";
-                dropdown.ValueMember = "Value";
             }
         }
 
@@ -154,13 +132,8 @@ namespace BokInterface.KeyItems {
         ///<param name="valueKey"><c>string</c>Key within the dictionnary</param>
         ///<param name="value"><c>decimal</c>Value to set</param>
         private void SetMemoryValue(string subList, string valueKey, decimal value) {
-            switch (subList) {
-                case "inventory":
-                    if (_memoryAddresses.Inventory.ContainsKey(valueKey) == true) {
-                        _memoryAddresses.Inventory[valueKey].Value = (uint)value;
-                    }
-                    break;
-                default: break;
+            if (subList == "inventory" && _memoryAddresses.Inventory.ContainsKey(valueKey) == true) {
+                _memoryAddresses.Inventory[valueKey].Value = (uint)value;
             }
         }
 
@@ -183,7 +156,7 @@ namespace BokInterface.KeyItems {
                      * Then try getting the corresponding item & preselect it
                      */
                     string[] fieldParts = dropdown.Name.Split(['_'], 2);
-                    Item? selectedItem = GetItemByValue(_memoryAddresses.Inventory[fieldParts[1]].Value);
+                    Item? selectedItem = GetItemByValue(_memoryAddresses.Inventory[fieldParts[1]].Value, _dsItems.KeyItems);
                     if (selectedItem != null) {
                         dropdown.SelectedIndex = dropdown.FindStringExact(selectedItem.name);
                     }
@@ -194,20 +167,6 @@ namespace BokInterface.KeyItems {
                     dropdown.SelectedIndex = 0;
                 }
             }
-        }
-
-        ///<summary>Get an item from the items list by using its value</summary>
-        ///<param name="value">Value</param>
-        ///<returns><c>Item</c>Item</returns>
-        private Item? GetItemByValue(decimal value) {
-            foreach (KeyValuePair<string, Item> index in _dsItems.KeyItems) {
-                Item item = index.Value;
-                if (item.value == value) {
-                    return item;
-                }
-            }
-
-            return null;
         }
 
         #endregion

@@ -32,7 +32,7 @@ namespace BokInterface.Magics {
             Icon = _bokInterface.Icon;
             _zoktaiMagics = new();
 
-            SetFormParameters(281, 249);
+            SetFormParameters(281, 249, name, text);
             AddElements();
             Show();
         }
@@ -119,14 +119,7 @@ namespace BokInterface.Magics {
             // Set default values for each field
             SetDefaultValues();
 
-            // Button for setting values & its events
-            Button setValuesButton = WinFormHelpers.CreateButton("setMagicsButton", "Set values", 202, 223, 75, 23, this);
-            setValuesButton.Click += new EventHandler(delegate (object sender, EventArgs e) {
-                // Write the values for 10 frames
-                for (int i = 0; i < 10; i++) {
-                    SetValues();
-                }
-            });
+            AddSetValuesButton(202, 223, this);
         }
 
         #endregion

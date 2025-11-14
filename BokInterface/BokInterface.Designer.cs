@@ -248,11 +248,11 @@ namespace BokInterface {
                         AddDropdownMenuItem("editMagicsMenu", "Magics", editMenu, OpenMagicsEditor);
                     }
                 }
-
-                // Misc tools & GUI sections
-                GenerateToolsMenu();
-                GenerateGuiMenu();
             }
+
+            // Misc tools & GUI sections
+            GenerateToolsMenu();
+            GenerateGuiMenu();
         }
 
         /// <summary>Generate the menu related to misc tools</summary>
@@ -361,9 +361,6 @@ namespace BokInterface {
 
             KeyItemsEditor keyItemsEditor = null;
             switch (shorterGameName) {
-                case "Boktai":
-                    keyItemsEditor = new BoktaiKeyItemsEditor(this, _memoryValues, _boktaiAddresses);
-                    break;
                 case "Zoktai":
                     keyItemsEditor = new ZoktaiKeyItemsEditor(this, _memoryValues, _zoktaiAddresses);
                     break;
@@ -375,7 +372,7 @@ namespace BokInterface {
                     keyItemsEditor = new DsKeyItemsEditor(this, _memoryValues, _dsAddresses);
                     break;
                 default:
-                    // If game is not handled, stop
+                    // If game is not handled, stop (Bok 1's item inventory contains key items)
                     return;
             }
 
@@ -579,10 +576,10 @@ namespace BokInterface {
                 case "Shinbok":
                     memoryValuesListing = new MemoryValuesListing(this, _shinbokAddresses);
                     break;
-                // case "BoktaiDS":
-                // case "LunarKnights":
-                //     memoryValuesListing = new MemoryValuesListing(this, _dsAddresses);
-                //     break;
+                case "BoktaiDS":
+                case "LunarKnights":
+                    memoryValuesListing = new MemoryValuesListing(this, _dsAddresses);
+                    break;
                 default:
                     // If game not handled, stop
                     return;

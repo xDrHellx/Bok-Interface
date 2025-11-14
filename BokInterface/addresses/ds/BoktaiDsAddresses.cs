@@ -5,6 +5,7 @@ namespace BokInterface.Addresses {
         public BoktaiDsAddresses() {
             InitPlayerAddresses();
             InitInventoryAddresses();
+            OrderDictionnaries();
         }
 
         private void InitPlayerAddresses() {

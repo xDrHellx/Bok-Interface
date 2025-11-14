@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
 
@@ -59,9 +58,9 @@ namespace BokInterface.Status {
             WinFormHelpers.CreateLabel("djangoEditEneLabel", "ENE", 7, 50, 34, 15, statusGroupBox);
             WinFormHelpers.CreateLabel("djangoEditTrcLabel", "TRC", 7, 79, 34, 15, statusGroupBox);
 
-            statusNumericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("django_current_hp", defaultValues["django_current_hp"], 68, 19, 50, 23, maxValue: 1000, control: statusGroupBox));
-            statusNumericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("django_current_ene", defaultValues["django_current_ene"], 68, 48, 50, 23, maxValue: 1000, control: statusGroupBox));
-            statusNumericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("django_current_trc", defaultValues["django_current_trc"], 68, 77, 50, 23, maxValue: 1000, control: statusGroupBox));
+            numericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("django_current_hp", defaultValues["django_current_hp"], 68, 19, 50, 23, maxValue: 1000, control: statusGroupBox));
+            numericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("django_current_ene", defaultValues["django_current_ene"], 68, 48, 50, 23, maxValue: 1000, control: statusGroupBox));
+            numericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("django_current_trc", defaultValues["django_current_trc"], 68, 77, 50, 23, maxValue: 1000, control: statusGroupBox));
 
             // Stats
             WinFormHelpers.CreateLabel("djangoEditVitLabel", "VIT", 7, 39, 27, 15, control: statsGroupBox);
@@ -72,44 +71,37 @@ namespace BokInterface.Status {
             WinFormHelpers.CreateLabel("djangoStatsCardsLabel", "Cards", 77, 19, 42, 15, control: statsGroupBox, WinFormHelpers.cardsStatColor);
 
             // Base
-            statusNumericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("misc_base_vit", defaultValues["django_base_vit"], 39, 37, 38, 23, maxValue: 100, control: statsGroupBox));
-            statusNumericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("misc_base_spr", defaultValues["django_base_spr"], 39, 66, 38, 23, maxValue: 100, control: statsGroupBox));
-            statusNumericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("misc_base_str", defaultValues["django_base_str"], 39, 95, 38, 23, maxValue: 100, control: statsGroupBox));
+            numericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("misc_base_vit", defaultValues["django_base_vit"], 39, 37, 38, 23, maxValue: 100, control: statsGroupBox));
+            numericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("misc_base_spr", defaultValues["django_base_spr"], 39, 66, 38, 23, maxValue: 100, control: statsGroupBox));
+            numericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("misc_base_str", defaultValues["django_base_str"], 39, 95, 38, 23, maxValue: 100, control: statsGroupBox));
 
             // Cards
-            statusNumericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("misc_cards_vit", defaultValues["django_cards_vit"], 81, 37, 38, 23, maxValue: 100, control: statsGroupBox));
-            statusNumericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("misc_cards_spr", defaultValues["django_cards_spr"], 81, 66, 38, 23, maxValue: 100, control: statsGroupBox));
-            statusNumericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("misc_cards_str", defaultValues["django_cards_str"], 81, 95, 38, 23, maxValue: 100, control: statsGroupBox));
+            numericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("misc_cards_vit", defaultValues["django_cards_vit"], 81, 37, 38, 23, maxValue: 100, control: statsGroupBox));
+            numericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("misc_cards_spr", defaultValues["django_cards_spr"], 81, 66, 38, 23, maxValue: 100, control: statsGroupBox));
+            numericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("misc_cards_str", defaultValues["django_cards_str"], 81, 95, 38, 23, maxValue: 100, control: statsGroupBox));
 
             // Points to allocate
-            statusNumericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("django_stat_points", defaultValues["django_stat_points"], 73, 124, 46, 23, maxValue: 196, control: statsGroupBox));
+            numericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("django_stat_points", defaultValues["django_stat_points"], 73, 124, 46, 23, maxValue: 196, control: statsGroupBox));
 
             // Level & EXP
             WinFormHelpers.CreateLabel("djangoEditLevelLabel", "Level", 2, 22, 34, 15, expGroupBox);
             WinFormHelpers.CreateLabel("djangoEditExpLabel", "EXP", 2, 50, 27, 15, expGroupBox);
-            statusNumericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("django_level", defaultValues["django_level"], 47, 19, 50, 23, control: expGroupBox));
-            statusNumericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("django_exp", defaultValues["django_exp"], 37, 48, 60, 23, minValue: 0, maxValue: 999999, control: expGroupBox));
+            numericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("django_level", defaultValues["django_level"], 47, 19, 50, 23, control: expGroupBox));
+            numericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("django_exp", defaultValues["django_exp"], 37, 48, 60, 23, minValue: 0, maxValue: 999999, control: expGroupBox));
 
             // Solls
             WinFormHelpers.CreateLabel("solarStationLbl", "Solar station", 7, 19, 72, 15, sollsGroupBox, textAlignment: "MiddleLeft");
             WinFormHelpers.CreateLabel("solarBankLbl", "Solar bank", 7, 47, 72, 15, sollsGroupBox, textAlignment: "MiddleLeft");
             WinFormHelpers.CreateLabel("darkLoansLbl", "Dark loans", 7, 76, 72, 15, sollsGroupBox, textAlignment: "MiddleLeft");
-            statusNumericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("solls_solar_station", defaultValues["solls_solar_station"], 82, 16, 50, 23, maxValue: 9999, control: sollsGroupBox));
-            statusNumericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("solls_solar_bank", defaultValues["solls_solar_bank"], 82, 45, 50, 23, maxValue: 9999, control: sollsGroupBox));
-            statusNumericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("solls_dark_loans", defaultValues["solls_dark_loans"], 82, 74, 50, 23, maxValue: 9999, control: sollsGroupBox));
+            numericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("solls_solar_station", defaultValues["solls_solar_station"], 82, 16, 50, 23, maxValue: 9999, control: sollsGroupBox));
+            numericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("solls_solar_bank", defaultValues["solls_solar_bank"], 82, 45, 50, 23, maxValue: 9999, control: sollsGroupBox));
+            numericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("solls_dark_loans", defaultValues["solls_dark_loans"], 82, 74, 50, 23, maxValue: 9999, control: sollsGroupBox));
 
             // Add tooltips & warnings
             Label expWarning = WinFormHelpers.CreateImageLabel("tooltip", "warning", 102, 51, expGroupBox);
             WinFormHelpers.AddToolTip(expWarning, "Level will be automatically adjusted if EXP is high enough to reach higher levels");
 
-            // Button for setting values & its events
-            Button setValuesButton = WinFormHelpers.CreateButton("setStatusButton", "Set values", 327, 168, 75, 23, this);
-            setValuesButton.Click += new EventHandler(delegate (object sender, EventArgs e) {
-                // Write the values for 10 frames
-                for (int i = 0; i < 10; i++) {
-                    SetValues();
-                }
-            });
+            AddSetValuesButton(327, 168, this);
         }
 
         #endregion
@@ -179,20 +171,20 @@ namespace BokInterface.Status {
             }
 
             // Sets values based on fields (numericUpDowns)
-            for (int i = 0; i < statusNumericUpDowns.Count; i++) {
+            for (int i = 0; i < numericUpDowns.Count; i++) {
 
                 // If the field is disabled, skip it
-                if (statusNumericUpDowns[i].Enabled == false) {
+                if (numericUpDowns[i].Enabled == false) {
                     continue;
                 }
 
-                decimal value = statusNumericUpDowns[i].Value;
+                decimal value = numericUpDowns[i].Value;
 
                 /**
                  * Indicate which sublist to use for setting the value, based on the input field's name
                  * The first "_" indicates the sublist while the rest indicates the key within that sublist
                  */
-                string[] fieldParts = statusNumericUpDowns[i].Name.Split(['_'], 2);
+                string[] fieldParts = numericUpDowns[i].Name.Split(['_'], 2);
                 SetMemoryValue(fieldParts[0], fieldParts[1], value);
             }
 

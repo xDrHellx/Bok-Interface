@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 
 namespace BokInterface.Addresses {
     /// <summary>Main class for Boktai 3 / Shinbok memory addresses</summary>
@@ -13,13 +14,10 @@ namespace BokInterface.Addresses {
         ///     </para>
         /// </summary>
         public IDictionary<string, MemoryAddress> Django = new Dictionary<string, MemoryAddress>();
-
         /// <summary>Solls-related memory addresses</summary>
         public IDictionary<string, MemoryAddress> Solls = new Dictionary<string, MemoryAddress>();
-
         /// <summary>Inventory-related memory addresses</summary>
         public IDictionary<string, MemoryAddress> Inventory = new Dictionary<string, MemoryAddress>();
-
         /// <summary>
         ///     <para>Bike-related memory addresses</para>
         ///     <para>
@@ -29,7 +27,6 @@ namespace BokInterface.Addresses {
         ///     </para>
         /// </summary>
         public IDictionary<string, MemoryAddress> Bike = new Dictionary<string, MemoryAddress>();
-
         /// <summary>
         ///     <para>Misc memory addresses</para>
         ///     <para>
@@ -38,7 +35,6 @@ namespace BokInterface.Addresses {
         ///     </para>
         /// </summary>
         public IDictionary<string, MemoryAddress> Misc = new Dictionary<string, MemoryAddress>();
-
         /// <summary>Note for MemoryAddress instances (for less repetition)</summary>
         private string _note = "";
 
@@ -49,6 +45,15 @@ namespace BokInterface.Addresses {
             InitGunAddresses();
             InitSollsAddresses();
             InitMiscAddresses();
+            OrderDictionnaries();
+        }
+
+        private void OrderDictionnaries() {
+            Django = Django.OrderBy(x => x.Key).ToDictionary(x => x.Key, x => x.Value);
+            Solls = Solls.OrderBy(x => x.Key).ToDictionary(x => x.Key, x => x.Value);
+            Inventory = Inventory.OrderBy(x => x.Key).ToDictionary(x => x.Key, x => x.Value);
+            Bike = Bike.OrderBy(x => x.Key).ToDictionary(x => x.Key, x => x.Value);
+            Misc = Misc.OrderBy(x => x.Key).ToDictionary(x => x.Key, x => x.Value);
         }
 
         private void InitDjangoAddresses() {

@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -39,7 +38,7 @@ namespace BokInterface.Accessories {
             Owner = _bokInterface = bokInterface;
             Icon = _bokInterface.Icon;
 
-            SetFormParameters(726, 278);
+            SetFormParameters(726, 278, name, text);
             AddElements();
             Show();
         }
@@ -55,7 +54,8 @@ namespace BokInterface.Accessories {
 
             // Generate tabs, subelements & dropdown options
             GenerateTabs();
-            GenerateDropDownOptions();
+            AddDropDownOptions(dropDownLists, _dsAccessories.Equipment);
+            AddDropDownOptions(shieldDropdowns, shields);
 
             // Add warning
             Label expWarning = WinFormHelpers.CreateImageLabel("tooltip", "warning", 5, 255, this);
@@ -64,14 +64,7 @@ namespace BokInterface.Accessories {
             // Set default values for each field
             SetDefaultValues();
 
-            // Button for setting values & its events
-            Button setValuesButton = WinFormHelpers.CreateButton("setValuesBtn", "Set values", 648, 252, 75, 23, this);
-            setValuesButton.Click += new EventHandler(delegate (object sender, EventArgs e) {
-                // Write the values for 10 frames
-                for (int i = 0; i < 10; i++) {
-                    SetValues();
-                }
-            });
+            AddSetValuesButton(648, 252, this);
         }
 
         /// <summary>Generate the dictionnary for shields (including empty slot)</summary>
@@ -129,21 +122,6 @@ namespace BokInterface.Accessories {
                     xPos = 5;
                     yPos += 52;
                 }
-            }
-        }
-
-        ///<summary>Generates the options for the dropdowns</summary>
-        private void GenerateDropDownOptions() {
-            foreach (ImageComboBox dropdown in dropDownLists) {
-                dropdown.DataSource = new BindingSource(_dsAccessories.Equipment, null);
-                dropdown.DisplayMember = "Key";
-                dropdown.ValueMember = "Value";
-            }
-
-            foreach (ImageComboBox dropdown in shieldDropdowns) {
-                dropdown.DataSource = new BindingSource(shields, null);
-                dropdown.DisplayMember = "Key";
-                dropdown.ValueMember = "Value";
             }
         }
 
@@ -208,13 +186,8 @@ namespace BokInterface.Accessories {
         ///<param name="valueKey"><c>strng</c>Key withint the dictionnary</param>
         ///<param name="value"><c>decimal</c>Value to set</param>
         private void SetMemoryValue(string subList, string valueKey, decimal value) {
-            switch (subList) {
-                case "inventory":
-                    if (_dsAddresses.Inventory.ContainsKey(valueKey) == true) {
-                        _dsAddresses.Inventory[valueKey].Value = (uint)value;
-                    }
-                    break;
-                default: break;
+            if (subList == "inventory" && _dsAddresses.Inventory.ContainsKey(valueKey) == true) {
+                _dsAddresses.Inventory[valueKey].Value = (uint)value;
             }
         }
 
@@ -238,7 +211,7 @@ namespace BokInterface.Accessories {
                      * Then try getting the corresponding item & preselect it
                      */
                     string[] fieldParts = dropdown.Name.Split(['_'], 2);
-                    Accessory? selectedAccessory = GetAccessoryByValue(_dsAddresses.Inventory[fieldParts[1]].Value);
+                    Accessory? selectedAccessory = GetAccessoryByValue(_dsAddresses.Inventory[fieldParts[1]].Value, _dsAccessories.All);
                     if (selectedAccessory != null) {
                         dropdown.SelectedIndex = dropdown.FindStringExact(selectedAccessory.name);
                     }
@@ -247,35 +220,16 @@ namespace BokInterface.Accessories {
                 // Same as above for shield slots
                 foreach (ImageComboBox dropdown in shieldDropdowns) {
                     string[] fieldParts = dropdown.Name.Split(['_'], 2);
-                    Accessory? selectedShield = GetAccessoryByValue(_dsAddresses.Inventory[fieldParts[1]].Value);
+                    Accessory? selectedShield = GetAccessoryByValue(_dsAddresses.Inventory[fieldParts[1]].Value, _dsAccessories.All);
                     if (selectedShield != null) {
                         dropdown.SelectedIndex = dropdown.FindStringExact(selectedShield.name);
                     }
                 }
             } else {
                 // Otherwise set default values in the editor subwindow
-                foreach (ImageComboBox dropdown in dropDownLists) {
-                    dropdown.SelectedIndex = 0;
-                }
-
-                foreach (ImageComboBox dropdown in shieldDropdowns) {
-                    dropdown.SelectedIndex = 0;
-                }
+                SelectFirstDropdownsIndex(dropDownLists);
+                SelectFirstDropdownsIndex(shieldDropdowns);
             }
-        }
-
-        ///<summary>Get an accessory from the accessories list by using its value</summary>
-        ///<param name="value"><c>decimal</c>Value</param>
-        ///<returns><c>Accessory</c>Accessory</returns>
-        private Accessory? GetAccessoryByValue(decimal value) {
-            foreach (KeyValuePair<string, Accessory> index in _dsAccessories.All) {
-                Accessory accessory = index.Value;
-                if (accessory.value == value) {
-                    return accessory;
-                }
-            }
-
-            return null;
         }
 
         #endregion

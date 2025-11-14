@@ -34,6 +34,7 @@ namespace BokInterface.Addresses {
                 case "Shinbok":
                     InitializeShinbokList();
                     break;
+                case "BoktaiDS":
                 case "LunarKnights":
                     InitializeLunarKnightsList();
                     break;
@@ -132,21 +133,21 @@ namespace BokInterface.Addresses {
                 int slotNumber = i + 1;
 
                 // Items, key items & accessories
-                Inventory.Add("slot" + slotNumber + "_item", new DynamicMemoryValue("slot" + slotNumber + "_item", memoryAddresses.Misc["stat"].Address, memoryAddresses.Inventory["item_slot_" + slotNumber].Address));
-                Inventory.Add("slot" + slotNumber + "_durability", new DynamicMemoryValue("slot" + slotNumber + "_durability", memoryAddresses.Misc["stat"].Address, memoryAddresses.Inventory["item_slot_durability_" + slotNumber].Address));
-                Inventory.Add("slot" + slotNumber + "_key_item", new DynamicMemoryValue("slot" + slotNumber + "_key_item", memoryAddresses.Misc["stat"].Address, memoryAddresses.Inventory["key_item_slot_" + slotNumber].Address));
-                Inventory.Add("slot" + slotNumber + "_accessory", new DynamicMemoryValue("slot" + slotNumber + "_accessory", memoryAddresses.Misc["stat"].Address, memoryAddresses.Inventory["accessory_slot_" + slotNumber].Address));
+                Inventory.Add($"slot{slotNumber}_item", new DynamicMemoryValue($"slot{slotNumber}_item", memoryAddresses.Misc["stat"].Address, memoryAddresses.Inventory[$"item_slot_{slotNumber}"].Address));
+                Inventory.Add($"slot{slotNumber}_durability", new DynamicMemoryValue($"slot{slotNumber}_durability", memoryAddresses.Misc["stat"].Address, memoryAddresses.Inventory[$"item_slot_durability_{slotNumber}"].Address));
+                Inventory.Add($"slot{slotNumber}_key_item", new DynamicMemoryValue($"slot{slotNumber}_key_item", memoryAddresses.Misc["stat"].Address, memoryAddresses.Inventory[$"key_item_slot_{slotNumber}"].Address));
+                Inventory.Add($"slot{slotNumber}_accessory", new DynamicMemoryValue($"slot{slotNumber}_accessory", memoryAddresses.Misc["stat"].Address, memoryAddresses.Inventory[$"accessory_slot_{slotNumber}"].Address));
 
                 // Weapons
-                Inventory.Add("slot" + slotNumber + "_weapon", new DynamicMemoryValue("slot" + slotNumber + "_weapon", memoryAddresses.Misc["stat"].Address, memoryAddresses.Inventory["weapon_slot_" + slotNumber].Address, type: memoryAddresses.Inventory["weapon_slot_" + slotNumber].Type));
-                Inventory.Add("slot" + slotNumber + "_weapon_bonus", new DynamicMemoryValue("slot" + slotNumber + "_weapon_bonus", memoryAddresses.Misc["stat"].Address, memoryAddresses.Inventory["weapon_slot_" + slotNumber + "_bonus"].Address, type: memoryAddresses.Inventory["weapon_slot_" + slotNumber + "_bonus"].Type));
-                Inventory.Add("slot" + slotNumber + "_weapon_durability", new DynamicMemoryValue("slot" + slotNumber + "_weapon_durability", memoryAddresses.Misc["stat"].Address, memoryAddresses.Inventory["weapon_slot_" + slotNumber + "_durability"].Address, type: memoryAddresses.Inventory["weapon_slot_" + slotNumber + "_durability"].Type));
-                Inventory.Add("slot" + slotNumber + "_weapon_forgedBy_1", new DynamicMemoryValue("slot" + slotNumber + "_weapon_forgedBy_1", memoryAddresses.Misc["stat"].Address, memoryAddresses.Inventory["weapon_slot_" + slotNumber + "_forgedBy_1"].Address, type: memoryAddresses.Inventory["weapon_slot_" + slotNumber + "_forgedBy_1"].Type));
-                Inventory.Add("slot" + slotNumber + "_weapon_forgedBy_2", new DynamicMemoryValue("slot" + slotNumber + "_weapon_forgedBy_2", memoryAddresses.Misc["stat"].Address, memoryAddresses.Inventory["weapon_slot_" + slotNumber + "_forgedBy_2"].Address, type: memoryAddresses.Inventory["weapon_slot_" + slotNumber + "_forgedBy_2"].Type));
-                Inventory.Add("slot" + slotNumber + "_weapon_forgedBy_3", new DynamicMemoryValue("slot" + slotNumber + "_weapon_forgedBy_3", memoryAddresses.Misc["stat"].Address, memoryAddresses.Inventory["weapon_slot_" + slotNumber + "_forgedBy_3"].Address, type: memoryAddresses.Inventory["weapon_slot_" + slotNumber + "_forgedBy_3"].Type));
-                Inventory.Add("slot" + slotNumber + "_weapon_sp_ability_1", new DynamicMemoryValue("slot" + slotNumber + "_weapon_sp_ability_1", memoryAddresses.Misc["stat"].Address, memoryAddresses.Inventory["weapon_slot_" + slotNumber + "_sp_ability_1"].Address, type: memoryAddresses.Inventory["weapon_slot_" + slotNumber + "_sp_ability_1"].Type));
-                Inventory.Add("slot" + slotNumber + "_weapon_sp_ability_2", new DynamicMemoryValue("slot" + slotNumber + "_weapon_sp_ability_2", memoryAddresses.Misc["stat"].Address, memoryAddresses.Inventory["weapon_slot_" + slotNumber + "_sp_ability_2"].Address, type: memoryAddresses.Inventory["weapon_slot_" + slotNumber + "_sp_ability_2"].Type));
-                Inventory.Add("slot" + slotNumber + "_weapon_sp_ability_3", new DynamicMemoryValue("slot" + slotNumber + "_weapon_sp_ability_3", memoryAddresses.Misc["stat"].Address, memoryAddresses.Inventory["weapon_slot_" + slotNumber + "_sp_ability_3"].Address, type: memoryAddresses.Inventory["weapon_slot_" + slotNumber + "_sp_ability_3"].Type));
+                Inventory.Add($"slot{slotNumber}_weapon", new DynamicMemoryValue($"slot{slotNumber}_weapon", memoryAddresses.Misc["stat"].Address, memoryAddresses.Inventory[$"weapon_slot_{slotNumber}"].Address, type: memoryAddresses.Inventory[$"weapon_slot_{slotNumber}"].Type));
+                Inventory.Add($"slot{slotNumber}_weapon_bonus", new DynamicMemoryValue($"slot{slotNumber}_weapon_bonus", memoryAddresses.Misc["stat"].Address, memoryAddresses.Inventory[$"weapon_slot_{slotNumber}_bonus"].Address, type: memoryAddresses.Inventory[$"weapon_slot_{slotNumber}_bonus"].Type));
+                Inventory.Add($"slot{slotNumber}_weapon_durability", new DynamicMemoryValue($"slot{slotNumber}_weapon_durability", memoryAddresses.Misc["stat"].Address, memoryAddresses.Inventory[$"weapon_slot_{slotNumber}_durability"].Address, type: memoryAddresses.Inventory[$"weapon_slot_{slotNumber}_durability"].Type));
+                Inventory.Add($"slot{slotNumber}_weapon_forgedBy_1", new DynamicMemoryValue($"slot{slotNumber}_weapon_forgedBy_1", memoryAddresses.Misc["stat"].Address, memoryAddresses.Inventory[$"weapon_slot_{slotNumber}_forgedBy_1"].Address, type: memoryAddresses.Inventory[$"weapon_slot_{slotNumber}_forgedBy_1"].Type));
+                Inventory.Add($"slot{slotNumber}_weapon_forgedBy_2", new DynamicMemoryValue($"slot{slotNumber}_weapon_forgedBy_2", memoryAddresses.Misc["stat"].Address, memoryAddresses.Inventory[$"weapon_slot_{slotNumber}_forgedBy_2"].Address, type: memoryAddresses.Inventory[$"weapon_slot_{slotNumber}_forgedBy_2"].Type));
+                Inventory.Add($"slot{slotNumber}_weapon_forgedBy_3", new DynamicMemoryValue($"slot{slotNumber}_weapon_forgedBy_3", memoryAddresses.Misc["stat"].Address, memoryAddresses.Inventory[$"weapon_slot_{slotNumber}_forgedBy_3"].Address, type: memoryAddresses.Inventory[$"weapon_slot_{slotNumber}_forgedBy_3"].Type));
+                Inventory.Add($"slot{slotNumber}_weapon_sp_ability_1", new DynamicMemoryValue($"slot{slotNumber}_weapon_sp_ability_1", memoryAddresses.Misc["stat"].Address, memoryAddresses.Inventory[$"weapon_slot_{slotNumber}_sp_ability_1"].Address, type: memoryAddresses.Inventory[$"weapon_slot_{slotNumber}_sp_ability_1"].Type));
+                Inventory.Add($"slot{slotNumber}_weapon_sp_ability_2", new DynamicMemoryValue($"slot{slotNumber}_weapon_sp_ability_2", memoryAddresses.Misc["stat"].Address, memoryAddresses.Inventory[$"weapon_slot_{slotNumber}_sp_ability_2"].Address, type: memoryAddresses.Inventory[$"weapon_slot_{slotNumber}_sp_ability_2"].Type));
+                Inventory.Add($"slot{slotNumber}_weapon_sp_ability_3", new DynamicMemoryValue($"slot{slotNumber}_weapon_sp_ability_3", memoryAddresses.Misc["stat"].Address, memoryAddresses.Inventory[$"weapon_slot_{slotNumber}_sp_ability_3"].Address, type: memoryAddresses.Inventory[$"weapon_slot_{slotNumber}_sp_ability_3"].Type));
             }
 
             // Magics
@@ -228,18 +229,18 @@ namespace BokInterface.Addresses {
                 int slotNumber = i + 1;
 
                 // Items, durability, key items & accessory slots
-                Inventory.Add("slot" + slotNumber + "_item", new DynamicMemoryValue("slot" + slotNumber + "_item", memoryAddresses.Misc["stat"].Address, memoryAddresses.Inventory["item_slot_" + slotNumber].Address));
-                Inventory.Add("slot" + slotNumber + "_durability", new DynamicMemoryValue("slot" + slotNumber + "_durability", memoryAddresses.Misc["stat"].Address, memoryAddresses.Inventory["item_slot_durability_" + slotNumber].Address));
-                Inventory.Add("slot" + slotNumber + "_key_item", new DynamicMemoryValue("slot" + slotNumber + "_key_item", memoryAddresses.Misc["stat"].Address, memoryAddresses.Inventory["key_item_slot_" + slotNumber].Address));
-                Inventory.Add("slot" + slotNumber + "_accessory", new DynamicMemoryValue("slot" + slotNumber + "_accessory", memoryAddresses.Misc["stat"].Address, memoryAddresses.Inventory["accessory_slot_" + slotNumber].Address));
+                Inventory.Add($"slot{slotNumber}_item", new DynamicMemoryValue($"slot{slotNumber}_item", memoryAddresses.Misc["stat"].Address, memoryAddresses.Inventory[$"item_slot_{slotNumber}"].Address));
+                Inventory.Add($"slot{slotNumber}_durability", new DynamicMemoryValue($"slot{slotNumber}_durability", memoryAddresses.Misc["stat"].Address, memoryAddresses.Inventory[$"item_slot_durability_{slotNumber}"].Address));
+                Inventory.Add($"slot{slotNumber}_key_item", new DynamicMemoryValue($"slot{slotNumber}_key_item", memoryAddresses.Misc["stat"].Address, memoryAddresses.Inventory[$"key_item_slot_{slotNumber}"].Address));
+                Inventory.Add($"slot{slotNumber}_accessory", new DynamicMemoryValue($"slot{slotNumber}_accessory", memoryAddresses.Misc["stat"].Address, memoryAddresses.Inventory[$"accessory_slot_{slotNumber}"].Address));
 
                 // Weapon slots & properties
-                Inventory.Add("slot" + slotNumber + "_weapon", new DynamicMemoryValue("slot" + slotNumber + "_weapon", memoryAddresses.Misc["stat"].Address, memoryAddresses.Inventory["weapon_slot_" + slotNumber].Address, type: memoryAddresses.Inventory["weapon_slot_" + slotNumber].Type));
-                Inventory.Add("slot" + slotNumber + "_weapon_durability", new DynamicMemoryValue("slot" + slotNumber + "_weapon_durability", memoryAddresses.Misc["stat"].Address, memoryAddresses.Inventory["weapon_slot_" + slotNumber + "_durability"].Address, type: memoryAddresses.Inventory["weapon_slot_" + slotNumber + "_durability"].Type));
-                Inventory.Add("slot" + slotNumber + "_weapon_sp_ability_1", new DynamicMemoryValue("slot" + slotNumber + "_weapon_sp_ability_1", memoryAddresses.Misc["stat"].Address, memoryAddresses.Inventory["weapon_slot_" + slotNumber + "_sp_ability_1"].Address, type: memoryAddresses.Inventory["weapon_slot_" + slotNumber + "_sp_ability_1"].Type));
-                Inventory.Add("slot" + slotNumber + "_weapon_sp_ability_2", new DynamicMemoryValue("slot" + slotNumber + "_weapon_sp_ability_2", memoryAddresses.Misc["stat"].Address, memoryAddresses.Inventory["weapon_slot_" + slotNumber + "_sp_ability_2"].Address, type: memoryAddresses.Inventory["weapon_slot_" + slotNumber + "_sp_ability_2"].Type));
-                Inventory.Add("slot" + slotNumber + "_weapon_refine", new DynamicMemoryValue("slot" + slotNumber + "_weapon_refine", memoryAddresses.Misc["stat"].Address, memoryAddresses.Inventory["weapon_slot_" + slotNumber + "_refine"].Address, type: memoryAddresses.Inventory["weapon_slot_" + slotNumber + "_refine"].Type));
-                Inventory.Add("slot" + slotNumber + "_weapon_pattern", new DynamicMemoryValue("slot" + slotNumber + "_weapon_pattern", memoryAddresses.Misc["stat"].Address, memoryAddresses.Inventory["weapon_slot_" + slotNumber + "_pattern"].Address, type: memoryAddresses.Inventory["weapon_slot_" + slotNumber + "_pattern"].Type));
+                Inventory.Add($"slot{slotNumber}_weapon", new DynamicMemoryValue($"slot{slotNumber}_weapon", memoryAddresses.Misc["stat"].Address, memoryAddresses.Inventory[$"weapon_slot_{slotNumber}"].Address, type: memoryAddresses.Inventory[$"weapon_slot_{slotNumber}"].Type));
+                Inventory.Add($"slot{slotNumber}_weapon_durability", new DynamicMemoryValue($"slot{slotNumber}_weapon_durability", memoryAddresses.Misc["stat"].Address, memoryAddresses.Inventory[$"weapon_slot_{slotNumber}_durability"].Address, type: memoryAddresses.Inventory[$"weapon_slot_{slotNumber}_durability"].Type));
+                Inventory.Add($"slot{slotNumber}_weapon_sp_ability_1", new DynamicMemoryValue($"slot{slotNumber}_weapon_sp_ability_1", memoryAddresses.Misc["stat"].Address, memoryAddresses.Inventory[$"weapon_slot_{slotNumber}_sp_ability_1"].Address, type: memoryAddresses.Inventory[$"weapon_slot_{slotNumber}_sp_ability_1"].Type));
+                Inventory.Add($"slot{slotNumber}_weapon_sp_ability_2", new DynamicMemoryValue($"slot{slotNumber}_weapon_sp_ability_2", memoryAddresses.Misc["stat"].Address, memoryAddresses.Inventory[$"weapon_slot_{slotNumber}_sp_ability_2"].Address, type: memoryAddresses.Inventory[$"weapon_slot_{slotNumber}_sp_ability_2"].Type));
+                Inventory.Add($"slot{slotNumber}_weapon_refine", new DynamicMemoryValue($"slot{slotNumber}_weapon_refine", memoryAddresses.Misc["stat"].Address, memoryAddresses.Inventory[$"weapon_slot_{slotNumber}_refine"].Address, type: memoryAddresses.Inventory[$"weapon_slot_{slotNumber}_refine"].Type));
+                Inventory.Add($"slot{slotNumber}_weapon_pattern", new DynamicMemoryValue($"slot{slotNumber}_weapon_pattern", memoryAddresses.Misc["stat"].Address, memoryAddresses.Inventory[$"weapon_slot_{slotNumber}_pattern"].Address, type: memoryAddresses.Inventory[$"weapon_slot_{slotNumber}_pattern"].Type));
             }
 
             // Gun lenses & frames inventories
@@ -247,11 +248,11 @@ namespace BokInterface.Addresses {
                 int slotNumber = i + 1;
 
                 // 12 Frame slots
-                Inventory.Add("slot" + slotNumber + "_gun_frame", new DynamicMemoryValue("slot" + slotNumber + "_gun_frame", memoryAddresses.Misc["stat"].Address, memoryAddresses.Inventory["gun_frame_slot_" + slotNumber].Address));
+                Inventory.Add($"slot{slotNumber}_gun_frame", new DynamicMemoryValue($"slot{slotNumber}_gun_frame", memoryAddresses.Misc["stat"].Address, memoryAddresses.Inventory[$"gun_frame_slot_{slotNumber}"].Address));
 
                 // 8 Lens slots
                 if (i < 8) {
-                    Inventory.Add("slot" + slotNumber + "_gun_lens", new DynamicMemoryValue("slot" + slotNumber + "_gun_lens", memoryAddresses.Misc["stat"].Address, memoryAddresses.Inventory["gun_lens_slot_" + slotNumber].Address));
+                    Inventory.Add($"slot{slotNumber}_gun_lens", new DynamicMemoryValue($"slot{slotNumber}_gun_lens", memoryAddresses.Misc["stat"].Address, memoryAddresses.Inventory[$"gun_lens_slot_{slotNumber}"].Address));
                 }
             }
 
