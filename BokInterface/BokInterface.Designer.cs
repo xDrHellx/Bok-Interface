@@ -211,6 +211,7 @@ namespace BokInterface {
                 editMenu.DropDownItems.Add(editKeyItemsMenu);
 
                 AddDropdownMenuItem("editAccessoriesMenu", WinFormHelpers.EscapeAmpersand("Accessories & Shields"), editMenu, OpenEquipsEditor);
+                AddDropdownMenuItem("editJunkPartsMenu", "Junk Parts", editMenu, OpenJunkPartsEditor);
             } else {
 
                 // GBA
@@ -416,6 +417,28 @@ namespace BokInterface {
             accessoriesEditor.FormClosing += new FormClosingEventHandler(delegate (object sender, FormClosingEventArgs e) {
                 equipsEditorOpened = menuItem.Checked = false;
                 accessoriesEditor.Dispose();
+            });
+        }
+
+        protected void OpenJunkPartsEditor(object sender, EventArgs e) {
+            if (junkPartsEditorOpened == true) {
+                ShowExistingSubwindow("BokInterface.Weapons.DsJunkPartsEditor");
+                return;
+            }
+
+            DsJunkPartsEditor junkPartsEditor = null;
+            if (_isDS == false) {
+                return;
+            }
+
+            junkPartsEditor = new DsJunkPartsEditor(this, _memoryValues, _dsAddresses);
+            _subwindows.Add(junkPartsEditor);
+            ToolStripMenuItem menuItem = (ToolStripMenuItem)sender;
+            junkPartsEditorOpened = menuItem.Checked = true;
+
+            junkPartsEditor.FormClosing += new FormClosingEventHandler(delegate (object sender, FormClosingEventArgs e) {
+                junkPartsEditorOpened = menuItem.Checked = false;
+                junkPartsEditor.Dispose();
             });
         }
 
