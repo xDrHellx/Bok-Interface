@@ -42,7 +42,7 @@ namespace BokInterface.Inventory {
             Owner = _bokInterface = bokInterface;
             Icon = _bokInterface.Icon;
 
-            SetFormParameters(623, 538, name, text);
+            SetFormParameters(628, 538, name, text);
             AddElements();
             Show();
         }
@@ -85,7 +85,7 @@ namespace BokInterface.Inventory {
             Label expWarning = WinFormHelpers.CreateImageLabel("tooltip", "warning", 5, 515, this);
             WinFormHelpers.CreateLabel("warning", "Inventory will be updated upon switching tab in-game or closing and reopening the menu.", 23, 508, 503, 30, this, textAlignment: "MiddleLeft");
 
-            AddSetValuesButton(544, 511, this);
+            AddSetValuesButton(549, 511, this);
         }
 
         ///<summary>Separated method for generating groups with subelements</summary>
