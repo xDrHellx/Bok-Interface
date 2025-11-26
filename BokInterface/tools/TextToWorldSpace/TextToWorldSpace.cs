@@ -65,13 +65,13 @@ namespace BokInterface.Tools.TextToWorldSpace {
             WriteTextToCoordinates(text, x, y, z);
         }
 
-        public TextToWorldSpace(LunarKnightsAddresses lunarKnightsAddresses, string text, double x, double y, double z, Color? textColor = null) {
+        public TextToWorldSpace(DsAddresses dsAddresses, string text, double x, double y, double z, Color? textColor = null) {
             if (text == "") {
                 return;
             }
 
             // Set memory addresses used for getting the camera coordinates
-            _memAddresses = lunarKnightsAddresses;
+            _memAddresses = dsAddresses;
             SetCameraAddresses();
 
             // Set text color & write to coordinates
