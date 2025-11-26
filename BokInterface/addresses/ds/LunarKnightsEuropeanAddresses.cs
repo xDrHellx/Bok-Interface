@@ -42,7 +42,7 @@ namespace BokInterface.Addresses {
             uint n = 0;
             foreach (KeyValuePair<string, DsJunkPart> part in junkParts.All) {
                 uint addressOffset = 0x2 * n;
-                Inventory.Add($"amount_{part.Key}", new MemoryAddress(0x1EC970 + addressOffset, "Junk part amount", domain: "Main RAM"));
+                Inventory.Add($"amount_{part.Key.ToLower()}", new MemoryAddress(0x1EC970 + addressOffset, "Junk part amount", domain: "Main RAM"));
                 n++;
             }
 
