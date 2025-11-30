@@ -574,7 +574,7 @@ namespace BokInterface {
             tileDataViewer.FormClosing += new FormClosingEventHandler(delegate (object sender, FormClosingEventArgs e) {
                 /**
                  * Remove the function from the list of functions to call each frame
-                 * Also set instance with null to prevent it from doing anything else
+                 * Also set instance to null to prevent it from doing anything else
                  */
                 tileDataViewerActive = menuItem.Checked = false;
                 functionsList.RemoveAt(tileDataViewer.index);
