@@ -87,7 +87,7 @@ namespace BokInterface.solarGun {
                 framesDropDownLists.Add(WinFormHelpers.CreateImageDropdownList($"inventory_slot{i}_gun_frame", 5, 19, 120, 23, group, visibleOptions: 5));
 
                 xPos += 134;
-                if ((i % 2) == 0) {
+                if ((i % 3) == 0) {
                     xPos = 6;
                     yPos += 52;
                 }
