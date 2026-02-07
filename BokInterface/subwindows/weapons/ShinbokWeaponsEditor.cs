@@ -275,7 +275,12 @@ namespace BokInterface.Weapons {
             // Get & set the durability
             foreach (NumericUpDown durabilityField in numericUpDowns) {
                 string[] fieldParts = durabilityField.Name.Split(['_'], 2);
-                durabilityField.Value = _memoryValues.Inventory[fieldParts[1]].Value;
+                uint ingameValue = _memoryValues.Inventory[fieldParts[1]].Value;
+
+                // If the in-game value doesn't exceeds the field's maximum value, update the field
+                if (ingameValue <= durabilityField.Maximum) {
+                    durabilityField.Value = ingameValue;
+                }
             }
 
             // Check the corresponding refine radio button

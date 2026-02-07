@@ -246,15 +246,21 @@ namespace BokInterface.Weapons {
                 string[] fieldParts = bonusRelatedField.Name.Split(['_'], 3);
                 string memValuesKey = fieldParts[1] + "_" + fieldParts[2];
 
+                // If the in-game value exceeds the field's maximum value, stop
+                uint ingameValue = _memoryValues.Inventory[memValuesKey].Value;
+                if (ingameValue > bonusRelatedField.Maximum) {
+                    continue;
+                }
+
                 /**
                  * Set the value
                  *
                  * If the field corresponds to a weapon bonus or malus, we adjust the value
                  * This is because maluses are handled differently by the game
                  *
-                 * For example : 255 = -01 & 246 = -10
+                 * For example : 255 = -01 | 246 = -10
                  */
-                bonusRelatedField.Value = fieldParts[2] == "weapon_bonus" ? Utilities.ConvertValueToWeaponBonus(_memoryValues.Inventory[memValuesKey].Value) : _memoryValues.Inventory[memValuesKey].Value;
+                bonusRelatedField.Value = fieldParts[2] == "weapon_bonus" ? Utilities.ConvertValueToWeaponBonus(ingameValue) : ingameValue;
             }
         }
 
