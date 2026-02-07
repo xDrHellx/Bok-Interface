@@ -225,57 +225,52 @@ namespace BokInterface.Inventory {
 
         protected override void SetDefaultValues() {
 
-            // If "current stat" is a valid value, get the current inventory
-            uint currentStat = _zoktaiAddresses.Misc["current_stat"].Value;
-            if (currentStat > 0) {
-                foreach (ImageComboBox dropdown in dropDownLists) {
-                    /**
-                     * Get the name of the field to retrieve the value from based on the dropdown's name (for example inventory_slotX_item => slotX_item)
-                     * Then try getting the corresponding item & preselect it
-                     */
-                    string[] fieldParts = dropdown.Name.Split(['_'], 2);
-                    Item? selectedItem = GetItemByValue(_memoryValues.Inventory[fieldParts[1]].Value, _zoktaiItems.Items);
-                    if (selectedItem != null) {
-                        dropdown.SelectedIndex = dropdown.FindStringExact(selectedItem.name);
-                    }
+            foreach (ImageComboBox dropdown in dropDownLists) {
+                /**
+                 * Get the name of the field to retrieve the value from based on the dropdown's name (for example inventory_slotX_item => slotX_item)
+                 * Then try getting the corresponding item & preselect it
+                 */
+                string[] fieldParts = dropdown.Name.Split(['_'], 2);
+                Item? selectedItem = GetItemByValue(_memoryValues.Inventory[fieldParts[1]].Value, _zoktaiItems.Items);
+                if (selectedItem != null) {
+                    dropdown.SelectedIndex = dropdown.FindStringExact(selectedItem.name);
+                }
+            }
+
+            foreach (NumericUpDown durabilityField in numericUpDowns) {
+
+                // Get the different parts of the field's name
+                string[] fieldParts = durabilityField.Name.Split(['_'], 3);
+
+                // If the current in-game value exceeds the field's maximum value, stop
+                decimal ingameValue = _memoryValues.Inventory[fieldParts[1] + "_" + fieldParts[2]].Value;
+                if (ingameValue > durabilityField.Maximum) {
+                    continue;
                 }
 
-                foreach (NumericUpDown durabilityField in numericUpDowns) {
-
-                    // Get the different parts of the field's name
-                    string[] fieldParts = durabilityField.Name.Split(['_'], 3);
-
-                    // Get the current in-game value
-                    decimal ingameValue = _memoryValues.Inventory[fieldParts[1] + "_" + fieldParts[2]].Value;
-
-                    /**
-                     * If the value is 32768 or higher : it's a chocolate-covered item
-                     *
-                     * In that case we need to pre-select the checkbox for the slot
-                     * We'll also remove the offset from the value in the durability field to keep it simple for the user
-                     */
-                    if (ingameValue >= _chocolateCoveredDurabilityOffset) {
-                        string checkboxName = fieldParts[1] + "_chocolate_covered";
-                        foreach (CheckBox checkBox in checkBoxes) {
-                            if (checkBox.Name == checkboxName) {
-                                checkBox.Checked = true;
-                                break;
-                            }
+                /**
+                 * If the value is 32768 or higher : it's a chocolate-covered item
+                 *
+                 * In that case we need to pre-select the checkbox for the slot
+                 * We'll also remove the offset from the value in the durability field to keep it simple for the user
+                 */
+                if (ingameValue >= _chocolateCoveredDurabilityOffset) {
+                    string checkboxName = fieldParts[1] + "_chocolate_covered";
+                    foreach (CheckBox checkBox in checkBoxes) {
+                        if (checkBox.Name == checkboxName) {
+                            checkBox.Checked = true;
+                            break;
                         }
-
-                        durabilityField.Value = _memoryValues.Inventory[fieldParts[1] + "_" + fieldParts[2]].Value - _chocolateCoveredDurabilityOffset;
-                    } else {
-                        /**
-                         * Otherwise it's another item : we can set the value directly
-                         * As for the chocolate-covered checkbox, it's unchecked by default
-                         */
-                        durabilityField.Value = _memoryValues.Inventory[fieldParts[1] + "_" + fieldParts[2]].Value;
                     }
+
+                    durabilityField.Value = ingameValue - _chocolateCoveredDurabilityOffset;
+                } else {
+                    /**
+                     * Otherwise it's another item : we can set the value directly
+                     * As for the chocolate-covered checkbox, it's unchecked by default
+                     */
+                    durabilityField.Value = ingameValue;
                 }
-            } else {
-                // If current stat is unvalid (for example because we are on the title screen or in a room transition), use specific values
-                SelectFirstDropdownsIndex(dropDownLists);
-                SetNumericUpDownsToMin(numericUpDowns);
             }
         }
 

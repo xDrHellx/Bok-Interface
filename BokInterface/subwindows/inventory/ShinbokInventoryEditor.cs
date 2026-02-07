@@ -225,64 +225,56 @@ namespace BokInterface.Inventory {
 
         protected override void SetDefaultValues() {
 
+            foreach (ImageComboBox dropdown in dropDownLists) {
+                /**
+                 * Get the name of the field to retrieve the value from based on the dropdown's name (for example inventory_slotX_item => slotX_item)
+                 * Then try getting the corresponding item & preselect it
+                 */
+                string[] fieldParts = dropdown.Name.Split(['_'], 2);
+                Item? selectedItem = GetItemByValue(_memoryValues.Inventory[fieldParts[1]].Value, _shinbokItems.Items);
+                if (selectedItem != null) {
+                    dropdown.SelectedIndex = dropdown.FindStringExact(selectedItem.name);
+                }
+            }
+
             /**
-             * If Django's HP value is valid
-             * (Invalid when below 0 or above 1000, ie when switching rooms, during bike races or on world map)
+             * For fields we need to handle a special case related to the "Chocolate-Covered" item
+             * For that one in particular, durability has an offset of 32768
              */
-            uint djangoCurrentHp = _memoryValues.Django["current_hp"].Value;
-            if (djangoCurrentHp >= 0 && djangoCurrentHp <= 1000) {
-                foreach (ImageComboBox dropdown in dropDownLists) {
-                    /**
-                     * Get the name of the field to retrieve the value from based on the dropdown's name (for example inventory_slotX_item => slotX_item)
-                     * Then try getting the corresponding item & preselect it
-                     */
-                    string[] fieldParts = dropdown.Name.Split(['_'], 2);
-                    Item? selectedItem = GetItemByValue(_memoryValues.Inventory[fieldParts[1]].Value, _shinbokItems.Items);
-                    if (selectedItem != null) {
-                        dropdown.SelectedIndex = dropdown.FindStringExact(selectedItem.name);
-                    }
+            foreach (NumericUpDown durabilityField in numericUpDowns) {
+
+                // Get the different parts of the field's name
+                string[] fieldParts = durabilityField.Name.Split(['_'], 3);
+
+                // If the current in-game value exceeds the field's maximum value, stop
+                decimal ingameValue = _memoryValues.Inventory[fieldParts[1] + "_" + fieldParts[2]].Value;
+                if (ingameValue > durabilityField.Maximum) {
+                    continue;
                 }
 
                 /**
-                 * For fields we need to handle a special case related to the "Chocolate-Covered" item
-                 * For that one in particular, durability has an offset of 32768
+                 * If the value is 32768 or higher : it's a chocolate-covered item
+                 *
+                 * In that case we need to pre-select the checkbox for the slot
+                 * We'll also remove the offset from the value in the durability field to keep it simple for the user
                  */
-                foreach (NumericUpDown durabilityField in numericUpDowns) {
-
-                    // Get the different parts of the field's name
-                    string[] fieldParts = durabilityField.Name.Split(['_'], 3);
-
-                    // Get the current in-game value
-                    decimal ingameValue = _memoryValues.Inventory[fieldParts[1] + "_" + fieldParts[2]].Value;
-
-                    /**
-                     * If the value is 32768 or higher : it's a chocolate-covered item
-                     *
-                     * In that case we need to pre-select the checkbox for the slot
-                     * We'll also remove the offset from the value in the durability field to keep it simple for the user
-                     */
-                    if (ingameValue >= _chocolateCoveredDurabilityOffset) {
-                        string checkboxName = fieldParts[1] + "_chocolate_covered";
-                        foreach (CheckBox checkBox in checkBoxes) {
-                            if (checkBox.Name == checkboxName) {
-                                checkBox.Checked = true;
-                                break;
-                            }
+                if (ingameValue >= _chocolateCoveredDurabilityOffset) {
+                    string checkboxName = fieldParts[1] + "_chocolate_covered";
+                    foreach (CheckBox checkBox in checkBoxes) {
+                        if (checkBox.Name == checkboxName) {
+                            checkBox.Checked = true;
+                            break;
                         }
-
-                        durabilityField.Value = _memoryValues.Inventory[fieldParts[1] + "_" + fieldParts[2]].Value - _chocolateCoveredDurabilityOffset;
-                    } else {
-                        /**
-                         * Otherwise it's another item : we can set the value directly
-                         * As for the chocolate-covered checkbox, it's unchecked by default
-                         */
-                        durabilityField.Value = _memoryValues.Inventory[fieldParts[1] + "_" + fieldParts[2]].Value;
                     }
+
+                    durabilityField.Value = ingameValue - _chocolateCoveredDurabilityOffset;
+                } else {
+                    /**
+                     * Otherwise it's another item : we can set the value directly
+                     * As for the chocolate-covered checkbox, it's unchecked by default
+                     */
+                    durabilityField.Value = ingameValue;
                 }
-            } else {
-                // If current stat is unvalid (for example because we are on the title screen or in a room transition), use specific values
-                SelectFirstDropdownsIndex(dropDownLists);
-                SetNumericUpDownsToMin(numericUpDowns);
             }
         }
 
