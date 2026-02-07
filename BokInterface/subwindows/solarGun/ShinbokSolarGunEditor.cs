@@ -162,38 +162,26 @@ namespace BokInterface.solarGun {
 
         protected override void SetDefaultValues() {
 
-            /**
-             * If Django's HP value is valid
-             * (Invalid when below 0 or above 1000, ie when switching rooms, during bike races or on world map)
-             */
-            uint djangoCurrentHp = _memoryValues.Django["current_hp"].Value;
-            if (djangoCurrentHp >= 0 && djangoCurrentHp <= 1000) {
-
-                // Lenses
-                foreach (ImageComboBox dropdown in lensesDropDownLists) {
-                    /**
-                     * Get the name of the field to retrieve the value from based on the dropdown's name (for example inventory_slotX_item => slotX_item)
-                     * Then try getting the corresponding item & preselect it
-                     */
-                    string[] fieldParts = dropdown.Name.Split(['_'], 2);
-                    ShinbokLens? selectedLens = GetLensByValue(_memoryValues.Inventory[fieldParts[1]].Value);
-                    if (selectedLens != null) {
-                        dropdown.SelectedIndex = dropdown.FindStringExact(selectedLens.name);
-                    }
+            // Lenses
+            foreach (ImageComboBox dropdown in lensesDropDownLists) {
+                /**
+                 * Get the name of the field to retrieve the value from based on the dropdown's name (for example inventory_slotX_item => slotX_item)
+                 * Then try getting the corresponding item & preselect it
+                 */
+                string[] fieldParts = dropdown.Name.Split(['_'], 2);
+                ShinbokLens? selectedLens = GetLensByValue(_memoryValues.Inventory[fieldParts[1]].Value);
+                if (selectedLens != null) {
+                    dropdown.SelectedIndex = dropdown.FindStringExact(selectedLens.name);
                 }
+            }
 
-                // Frames
-                foreach (ImageComboBox dropdown in framesDropDownLists) {
-                    string[] fieldParts = dropdown.Name.Split(['_'], 2);
-                    ShinbokFrame? selectedFrame = GetFrameByValue(_memoryValues.Inventory[fieldParts[1]].Value);
-                    if (selectedFrame != null) {
-                        dropdown.SelectedIndex = dropdown.FindStringExact(selectedFrame.name);
-                    }
+            // Frames
+            foreach (ImageComboBox dropdown in framesDropDownLists) {
+                string[] fieldParts = dropdown.Name.Split(['_'], 2);
+                ShinbokFrame? selectedFrame = GetFrameByValue(_memoryValues.Inventory[fieldParts[1]].Value);
+                if (selectedFrame != null) {
+                    dropdown.SelectedIndex = dropdown.FindStringExact(selectedFrame.name);
                 }
-            } else {
-                // If current stat is unvalid (for example because we are on the title screen or in a room transition), use specific values
-                SelectFirstDropdownsIndex(lensesDropDownLists);
-                SelectFirstDropdownsIndex(framesDropDownLists);
             }
         }
 

@@ -125,24 +125,16 @@ namespace BokInterface.Accessories {
         }
 
         protected override void SetDefaultValues() {
-
-            // If "current stat" is a valid value, get the current inventory
-            uint currentStat = APIs.Memory.ReadU32(_zoktaiAddresses.Misc["current_stat"].Address);
-            if (currentStat > 0) {
-                foreach (ImageComboBox dropdown in dropDownLists) {
-                    /**
-                     * Get the name of the field to retrieve the value from based on the dropdown's name (for example inventory_slotX_accessory => slotX_accessory)
-                     * Then try getting the corresponding item & preselect it
-                     */
-                    string[] fieldParts = dropdown.Name.Split(['_'], 2);
-                    Accessory? selectedAccessory = GetAccessoryByValue(_memoryValues.Inventory[fieldParts[1]].Value, _zoktaiAccessories.All);
-                    if (selectedAccessory != null) {
-                        dropdown.SelectedIndex = dropdown.FindStringExact(selectedAccessory.name);
-                    }
+            foreach (ImageComboBox dropdown in dropDownLists) {
+                /**
+                 * Get the name of the field to retrieve the value from based on the dropdown's name (for example inventory_slotX_accessory => slotX_accessory)
+                 * Then try getting the corresponding item & preselect it
+                 */
+                string[] fieldParts = dropdown.Name.Split(['_'], 2);
+                Accessory? selectedAccessory = GetAccessoryByValue(_memoryValues.Inventory[fieldParts[1]].Value, _zoktaiAccessories.All);
+                if (selectedAccessory != null) {
+                    dropdown.SelectedIndex = dropdown.FindStringExact(selectedAccessory.name);
                 }
-            } else {
-                // If current stat is unvalid (for example because we are on the title screen or in a room transition), use specific values
-                SelectFirstDropdownsIndex(dropDownLists);
             }
         }
 

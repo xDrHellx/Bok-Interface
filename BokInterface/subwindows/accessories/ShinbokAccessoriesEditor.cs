@@ -125,27 +125,16 @@ namespace BokInterface.Accessories {
         }
 
         protected override void SetDefaultValues() {
-
-            /**
-             * If Django's current HP is a valid, try retrieving the current accessory inventory
-             * (Django's current HP goes below 0 or above 1000 when switching rooms, during bike races or on world map)
-             */
-            uint djangoCurrentHp = _memoryValues.Django["current_hp"].Value;
-            if (djangoCurrentHp >= 0 && djangoCurrentHp <= 1000) {
-                foreach (ImageComboBox dropdown in dropDownLists) {
-                    /**
-                     * Get the name of the field to retrieve the value from based on the dropdown's name (for example inventory_slotX_accessory => slotX_accessory)
-                     * Then try getting the corresponding item & preselect it
-                     */
-                    string[] fieldParts = dropdown.Name.Split(['_'], 2);
-                    Accessory? selectedAccessory = GetAccessoryByValue(_memoryValues.Inventory[fieldParts[1]].Value, _shinbokAccessories.All);
-                    if (selectedAccessory != null) {
-                        dropdown.SelectedIndex = dropdown.FindStringExact(selectedAccessory.name);
-                    }
+            foreach (ImageComboBox dropdown in dropDownLists) {
+                /**
+                 * Get the name of the field to retrieve the value from based on the dropdown's name (for example inventory_slotX_accessory => slotX_accessory)
+                 * Then try getting the corresponding item & preselect it
+                 */
+                string[] fieldParts = dropdown.Name.Split(['_'], 2);
+                Accessory? selectedAccessory = GetAccessoryByValue(_memoryValues.Inventory[fieldParts[1]].Value, _shinbokAccessories.All);
+                if (selectedAccessory != null) {
+                    dropdown.SelectedIndex = dropdown.FindStringExact(selectedAccessory.name);
                 }
-            } else {
-                // Otherwise set default values in the editor subwindow
-                SelectFirstDropdownsIndex(dropDownLists);
             }
         }
 

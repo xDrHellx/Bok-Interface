@@ -173,28 +173,15 @@ namespace BokInterface.Magics {
 
         protected override void SetDefaultValues() {
 
-            // If "current stat" is a valid value, get the current inventory
-            uint currentStat = APIs.Memory.ReadU32(_zoktaiAddresses.Misc["current_stat"].Address);
-            if (currentStat > 0) {
-                int bitPosition = 0,
-                    magic = (int)_memoryValues.Inventory["magics"].Value;
-                foreach (CheckBox checkBox in checkBoxes) {
-                    if (checkBox.Enabled == false) {
-                        continue;
-                    }
-
-                    checkBox.Checked = Utilities.IsBitOne(magic, bitPosition);
-                    bitPosition++;
+            int bitPosition = 0,
+                magic = (int)_memoryValues.Inventory["magics"].Value;
+            foreach (CheckBox checkBox in checkBoxes) {
+                if (checkBox.Enabled == false) {
+                    continue;
                 }
-            } else {
-                // If current stat is unvalid (for example because we are on the title screen or in a room transition), uncheck all checkboxes
-                foreach (CheckBox checkBox in checkBoxes) {
-                    if (checkBox.Enabled == false) {
-                        continue;
-                    }
 
-                    checkBox.Checked = false;
-                }
+                checkBox.Checked = Utilities.IsBitOne(magic, bitPosition);
+                bitPosition++;
             }
         }
 

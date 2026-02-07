@@ -246,66 +246,50 @@ namespace BokInterface.Weapons {
 
         protected override void SetDefaultValues() {
 
-            /**
-             * If Django's current HP is a valid, try retrieving the current weapons inventory
-             * (Django's current HP goes below 0 or above 1000 when switching rooms, during bike races or on world map)
-             */
-            uint djangoCurrentHp = _memoryValues.Django["current_hp"].Value;
-            if (djangoCurrentHp >= 0 && djangoCurrentHp <= 1000) {
-                foreach (ImageComboBox dropdown in dropDownLists) {
+            foreach (ImageComboBox dropdown in dropDownLists) {
 
-                    // Indicate what the dropdown field is for
-                    string[] fieldParts = dropdown.Name.Split(['_'], 4);
-                    if (fieldParts.Length >= 4 && fieldParts[3] != null && fieldParts[3].Substring(0, 10) == "sp_ability") {
-                        /**
-                         * If it's for an SP ability
-                         *
-                         * Set the name of the key to retrieve the value from based on the dropdown's name (for example inventory_slotX_weapon => slotX_weapon)
-                         * Then try getting the corresponding ability & preselect it
-                         */
-                        string key = fieldParts[1] + "_" + fieldParts[2] + "_" + fieldParts[3];
-                        Ability? selectedAbility = GetAbilityByValue(_memoryValues.Inventory[key].Value);
-                        if (selectedAbility != null) {
-                            dropdown.SelectedIndex = dropdown.FindStringExact(selectedAbility.name);
-                        }
-                    } else {
-                        // If it's for the weapon itself, do the same as above & try preselecting the corresponding weapon
-                        string key = fieldParts[1] + "_" + fieldParts[2];
-                        Weapon? selectedWeapon = GetWeaponByValue(_memoryValues.Inventory[key].Value, _shinbokWeapons.All);
-                        if (selectedWeapon != null) {
-                            dropdown.SelectedIndex = dropdown.FindStringExact(selectedWeapon.name);
-                        }
-                    }
-                }
-
-                // Get & set the durability
-                foreach (NumericUpDown durabilityField in numericUpDowns) {
-                    string[] fieldParts = durabilityField.Name.Split(['_'], 2);
-                    durabilityField.Value = _memoryValues.Inventory[fieldParts[1]].Value;
-                }
-
-                // Check the corresponding refine radio button
-                foreach (RadioButton refineButton in radioButtons) {
-                    string[] fieldParts = refineButton.Name.Split(['_'], 5);
-                    string key = fieldParts[1] + "_" + fieldParts[2] + "_" + fieldParts[3];
-
+                // Indicate what the dropdown field is for
+                string[] fieldParts = dropdown.Name.Split(['_'], 4);
+                if (fieldParts.Length >= 4 && fieldParts[3] != null && fieldParts[3].Substring(0, 10) == "sp_ability") {
                     /**
-                     * Retrieve the current value for the slot the refine button is related to
-                     * If it matches the Tag, check the button
+                     * If it's for an SP ability
+                     *
+                     * Set the name of the key to retrieve the value from based on the dropdown's name (for example inventory_slotX_weapon => slotX_weapon)
+                     * Then try getting the corresponding ability & preselect it
                      */
-                    uint value = _memoryValues.Inventory[key].Value;
-                    if ((int)refineButton.Tag == value) {
-                        refineButton.Checked = true;
+                    string key = fieldParts[1] + "_" + fieldParts[2] + "_" + fieldParts[3];
+                    Ability? selectedAbility = GetAbilityByValue(_memoryValues.Inventory[key].Value);
+                    if (selectedAbility != null) {
+                        dropdown.SelectedIndex = dropdown.FindStringExact(selectedAbility.name);
+                    }
+                } else {
+                    // If it's for the weapon itself, do the same as above & try preselecting the corresponding weapon
+                    string key = fieldParts[1] + "_" + fieldParts[2];
+                    Weapon? selectedWeapon = GetWeaponByValue(_memoryValues.Inventory[key].Value, _shinbokWeapons.All);
+                    if (selectedWeapon != null) {
+                        dropdown.SelectedIndex = dropdown.FindStringExact(selectedWeapon.name);
                     }
                 }
-            } else {
-                // If current stat is unvalid (for example because we are on the title screen or in a room transition), use specific values
-                SelectFirstDropdownsIndex(dropDownLists);
-                SetNumericUpDownsToMin(numericUpDowns);
-                foreach (RadioButton refineButton in radioButtons) {
-                    if ((int)refineButton.Tag == 0) {
-                        refineButton.Checked = true;
-                    }
+            }
+
+            // Get & set the durability
+            foreach (NumericUpDown durabilityField in numericUpDowns) {
+                string[] fieldParts = durabilityField.Name.Split(['_'], 2);
+                durabilityField.Value = _memoryValues.Inventory[fieldParts[1]].Value;
+            }
+
+            // Check the corresponding refine radio button
+            foreach (RadioButton refineButton in radioButtons) {
+                string[] fieldParts = refineButton.Name.Split(['_'], 5);
+                string key = fieldParts[1] + "_" + fieldParts[2] + "_" + fieldParts[3];
+
+                /**
+                 * Retrieve the current value for the slot the refine button is related to
+                 * If it matches the Tag, check the button
+                 */
+                uint value = _memoryValues.Inventory[key].Value;
+                if ((int)refineButton.Tag == value) {
+                    refineButton.Checked = true;
                 }
             }
         }
