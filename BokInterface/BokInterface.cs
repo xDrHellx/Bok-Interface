@@ -27,7 +27,7 @@ namespace BokInterface {
 
         #region Tool properties
 
-        protected override string WindowTitleStatic => "Bok Interface v0.2.1";
+        protected override string WindowTitleStatic => "Bok Interface v0.2.2";
         public override bool BlocksInputWhenFocused => false;
         protected Icon? icon;
         public uint currentGameId;
