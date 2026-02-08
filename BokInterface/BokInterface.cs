@@ -27,12 +27,14 @@ namespace BokInterface {
 
         #region Tool properties
 
-        protected override string WindowTitleStatic => "Bok Interface v0.2.0";
+        protected override string WindowTitleStatic => "Bok Interface v0.2.2";
         public override bool BlocksInputWhenFocused => false;
         protected Icon? icon;
         public uint currentGameId;
         public static string currentGameName = "",
-            shorterGameName = "";
+            shorterGameName = "",
+            region = "",
+            version = "";
         private bool _supportedGame = false,
             _interfaceActivated = false,
             _isDS = false,
@@ -71,6 +73,7 @@ namespace BokInterface {
             solarGunEditorOpened = false,
             weaponsEditorOpened = false,
             magicsEditorOpened = false,
+            junkPartsEditorOpened = false,
             tileDataViewerActive = false,
             memValuesListingActive = false,
             solarBankInterestsSimActive = false;
@@ -173,8 +176,9 @@ namespace BokInterface {
                         case "Shinbok":
                             UpdateShinbokInterface();
                             break;
+                        case "BoktaiDS":
                         case "LunarKnights":
-                            UpdateLunarKnightsInterface();
+                            UpdateDsInterface();
                             break;
                         default:
                             // If game is not handled, put back the old setting for displaying messages
@@ -216,8 +220,8 @@ namespace BokInterface {
         #region Game detection
 
         /// <summary>
-        /// Detects the current game <br/>
-        /// This stores the game's ID in currentGameId and its name in currentGameName
+        ///     Detects the current game <br/>
+        ///     This stores the game's ID in currentGameId and its name in currentGameName
         /// </summary>
         protected void DetectCurrentGame() {
 
@@ -231,18 +235,18 @@ namespace BokInterface {
             }
 
             switch (currentGameId) {
-                case 1346974549:    // EU
-                case 1162425173:    // US
-                case 1246311233:    // E3 demo / beta
                 case 1246311253:    // JP
+                case 1246311233:    // E3 demo / beta
+                case 1162425173:    // US
+                case 1346974549:    // EU
                     currentGameName = "Boktai: The Sun is in Your Hand";
                     shorterGameName = "Boktai";
                     _supportedGame = true;
                     _isDS = false;
                     break;
-                case 1345467221:    // EU
-                case 1160917845:    // US
                 case 1244803925:    // JP 1.0 & 1.1
+                case 1160917845:    // US
+                case 1345467221:    // EU
                     currentGameName = "Boktai 2: Solar Boy Django";
                     shorterGameName = "Zoktai";
                     _supportedGame = true;
@@ -254,11 +258,15 @@ namespace BokInterface {
                     _supportedGame = true;
                     _isDS = false;
                     break;
-                case 1481329729:    // EU 1.1
+                case 1246448705:    // Boktai DS
+                    currentGameName = "Boktai DS: Django & Sabata";
+                    shorterGameName = "BoktaiDS";
+                    _supportedGame = _isDS = true;
+                    break;
+                case 1162562625:    // Lunar Knights US
                 case 1347112001:    // EU 1.0
-                case 1162562625:    // US
-                case 1246448705:    // JP
-                    currentGameName = "Boktai DS - Lunar Knights";
+                case 1481329729:    // EU 1.1
+                    currentGameName = "Lunar Knights";
                     shorterGameName = "LunarKnights";
                     _supportedGame = _isDS = true;
                     break;
@@ -266,13 +274,38 @@ namespace BokInterface {
                     ResetInitializationVariables();
                     break;
             }
+
+            // Get game region & version
+            region = GetRegionFromGameId();
+            version = GetVersion();
+        }
+
+        /// <summary>Get the current game's region based on the game ID</summary>
+        /// <returns><c>string</c>Region (JP, US, EU)</returns>
+        protected string GetRegionFromGameId() {
+            return currentGameId switch {
+                1246311253 or 1244803925 or 1244869461 or 1246448705 => "JP",
+                1246311233 or 1162425173 or 1160917845 or 1162562625 => "US",
+                1346974549 or 1345467221 or 1347112001 or 1481329729 => "EU",
+                _ => "",
+            };
+        }
+
+        /// <summary>Get the current game's version</summary>
+        /// <returns><c>string</c>Version (1.0, 1.1, ...)</returns>
+        protected string GetVersion() {
+            if (currentGameId == 1246311233) {
+                return "E3 demo";
+            } else {
+                return Utilities.GetGameVersion(_isDS) == 1 ? "v1.1" : "v1.0";
+            }
         }
 
         /// <summary>Resets the variables used for initializing the interface</summary>
         protected void ResetInitializationVariables() {
             _retryCount = 0;
             _isDS = _supportedGame = _interfaceActivated = _showGui = _showRtc = _showIgtFrameCounter = _showInterestRate = _showBossHp = false;
-            currentGameName = shorterGameName = "";
+            currentGameName = shorterGameName = region = version = "";
         }
 
         #endregion

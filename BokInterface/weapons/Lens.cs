@@ -12,15 +12,24 @@ namespace BokInterface.Weapons {
         public string element;
         /// <summary>Lens icon</summary>
         public Image? icon = null;
+        /// <summary>Resource library for retrieving the icon</summary>
+        protected abstract string library { get; }
 
         public Lens(string name, uint value, string element, string icon = "") {
             this.name = name;
             this.value = value;
             this.element = element;
+            SetIconResource(icon);
+        }
 
-            if (icon != "") {
+        /// <summary>Simplified method for setting the instance's icon via resources</summary>
+        /// <param name="icon">Icon string</param>
+        /// <returns><c>Image</c>Resource</returns>
+        protected void SetIconResource(string iconString) {
+            icon = null;
+            if (iconString != "" && library != "") {
                 try {
-                    this.icon = (Image)Properties.Resources.ResourceManager.GetObject(icon);
+                    icon = (Image)ResourceLoader.LoadResource(library, iconString);
                 } catch { }
             }
         }

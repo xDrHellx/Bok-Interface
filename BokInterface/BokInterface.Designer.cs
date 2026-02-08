@@ -17,6 +17,7 @@ using BokInterface.Tools.SolarBankInterestsSimulator;
 using BokInterface.Tools.TileDataViewer;
 using BokInterface.Weapons;
 using BokInterface.Accessories;
+using BizHawk.Common;
 
 /**
  * File for the external window part of the Bok interface
@@ -74,8 +75,9 @@ namespace BokInterface {
                 case "Shinbok":
                     ShowShinbokInterface();
                     break;
+                case "BoktaiDS":
                 case "LunarKnights":
-                    ShowLunarKnightsInterface();
+                    ShowDsInterface();
                     break;
                 default:
                     // If not a Boktai game, show the "Game not recognized" window & stop here
@@ -127,6 +129,16 @@ namespace BokInterface {
             MaximizeBox = MinimizeBox = false;
         }
 
+        /// <summary>Add the labels with the game info to the main window</summary>
+        private void AddCurrentGameInfo() {
+            WinFormHelpers.CreateLabel("currentGameName", WinFormHelpers.EscapeAmpersand(currentGameName), 0, _menuBar.Height, Width, 20, this, WinFormHelpers.gameNameBackground, textAlignment: "MiddleLeft");
+            Label regionVersionLabel = WinFormHelpers.CreateLabel("currentGameRegionVersion", region + " " + version, 0, _menuBar.Height, 20, 20, this, WinFormHelpers.gameVersionBackground, textAlignment: "MiddleLeft");
+            regionVersionLabel.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            regionVersionLabel.Width = TextRenderer.MeasureText(regionVersionLabel.Text, regionVersionLabel.Font).Width;
+            regionVersionLabel.Location = new Point(ClientSize.Width - regionVersionLabel.Width, regionVersionLabel.Location.Y);
+            regionVersionLabel.BringToFront();
+        }
+
         /// <summary>Adds the Misc. data section for the corresponding game</summary>
         private void AddMiscDataSection() {
 
@@ -145,6 +157,7 @@ namespace BokInterface {
                 case "Shinbok":
                     positionY = 214;
                     break;
+                case "BoktaiDS":
                 case "LunarKnights":
                     positionY = 125;
                     break;
@@ -182,19 +195,27 @@ namespace BokInterface {
         /// <summary>Generate the menu for the main window</summary>
         private void GenerateMenu() {
 
-            // No menu for Bok DS / LK yet
-            if (shorterGameName == "LunarKnights") {
-                return;
-            }
-
+            // Menu bar & Edit section
             _menuBar = WinFormHelpers.CreateMenuStrip("menuBar", "", control: this);
+            ToolStripMenuItem editMenu = WinFormHelpers.CreateToolStripMenuItem("editMenu", "Edit", menuStrip: _menuBar);
 
-            // Edit section
-            if (shorterGameName == "Zoktai" || shorterGameName == "Shinbok" || shorterGameName == "Boktai") {
+            if (_isDS == true) {
 
-                ToolStripMenuItem editMenu = WinFormHelpers.CreateToolStripMenuItem("editMenu", "Edit", menuStrip: _menuBar);
+                // DS
+                ToolStripMenuItem editItemsMenu = WinFormHelpers.CreateToolStripMenuItem("edititemsMenu", "&Items", menuItem: editMenu);
+                editItemsMenu.Click += new EventHandler(OpenInventoryEditor);
+                editMenu.DropDownItems.Add(editItemsMenu);
 
-                if (shorterGameName != "Boktai") {
+                ToolStripMenuItem editKeyItemsMenu = WinFormHelpers.CreateToolStripMenuItem("editKeyitemsMenu", "&Key items", menuItem: editMenu);
+                editKeyItemsMenu.Click += new EventHandler(OpenKeyItemsEditor);
+                editMenu.DropDownItems.Add(editKeyItemsMenu);
+
+                AddDropdownMenuItem("editAccessoriesMenu", WinFormHelpers.EscapeAmpersand("Accessories & Shields"), editMenu, OpenEquipsEditor);
+                AddDropdownMenuItem("editJunkPartsMenu", "Junk Parts", editMenu, OpenJunkPartsEditor);
+            } else {
+
+                // GBA
+                if (shorterGameName == "Zoktai" || shorterGameName == "Shinbok") {
                     ToolStripMenuItem editStatusMenu = WinFormHelpers.CreateToolStripMenuItem("editStatusMenu", "&Status", menuItem: editMenu);
                     editStatusMenu.Click += new EventHandler(OpenStatusEditor);
                     editMenu.DropDownItems.Add(editStatusMenu);
@@ -210,9 +231,11 @@ namespace BokInterface {
                     editKeyItemsMenu.Click += new EventHandler(OpenKeyItemsEditor);
                     editMenu.DropDownItems.Add(editKeyItemsMenu);
 
-                    ToolStripMenuItem editWeaponsMenu = WinFormHelpers.CreateToolStripMenuItem("editWeaponsMenu", "&Weapons", menuItem: editMenu);
-                    editWeaponsMenu.Click += new EventHandler(OpenWeaponsEditor);
-                    editMenu.DropDownItems.Add(editWeaponsMenu);
+                    if (_isDS == false) {
+                        ToolStripMenuItem editWeaponsMenu = WinFormHelpers.CreateToolStripMenuItem("editWeaponsMenu", "&Weapons", menuItem: editMenu);
+                        editWeaponsMenu.Click += new EventHandler(OpenWeaponsEditor);
+                        editMenu.DropDownItems.Add(editWeaponsMenu);
+                    }
                 }
 
                 if (shorterGameName == "Shinbok" || shorterGameName == "Boktai") {
@@ -228,17 +251,24 @@ namespace BokInterface {
                 }
             }
 
-            // Misc tools section
-            ToolStripMenuItem toolsMenu = WinFormHelpers.CreateToolStripMenuItem("toolsMenu", "Tools", menuStrip: _menuBar);
-            AddDropdownMenuItem("tileDataViewerMenu", "Tile data viewer", toolsMenu, OpenTileDataViewer);
-            AddDropdownMenuItem("memoryValuesListMenu", "Memory values list", toolsMenu, OpenMemoryValuesList);
+            // Misc tools & GUI sections
+            GenerateToolsMenu();
+            GenerateGuiMenu();
+        }
 
-            if (shorterGameName != "Boktai") {
-                AddDropdownMenuItem("solarBankInterestsSimMenu", "Solar bank interests simulator", toolsMenu, OpenSolarBankInterestsSim);
+        /// <summary>Generate the menu related to misc tools</summary>
+        private void GenerateToolsMenu() {
+
+            ToolStripMenuItem toolsMenu = WinFormHelpers.CreateToolStripMenuItem("toolsMenu", "Tools", menuStrip: _menuBar);
+            AddDropdownMenuItem("memoryValuesListMenu", "Memory values list", toolsMenu, OpenMemoryValuesList);
+            if (_isDS == true) {
+                return;
             }
 
-            // GUI
-            GenerateGuiMenu();
+            AddDropdownMenuItem("tileDataViewerMenu", "Tile data viewer", toolsMenu, OpenTileDataViewer);
+            if (shorterGameName == "Zoktai" || shorterGameName == "Shinbok") {
+                AddDropdownMenuItem("solarBankInterestsSimMenu", "Solar bank interests simulator", toolsMenu, OpenSolarBankInterestsSim);
+            }
         }
 
         #endregion
@@ -264,9 +294,10 @@ namespace BokInterface {
                 case "Shinbok":
                     statusEditor = new ShinbokStatusEditor(this, _memoryValues, _shinbokAddresses);
                     break;
-                case "LunarKnights":
-                    statusEditor = new LunarKnightsStatusEditor(this, _memoryValues, _lunarKnightsAddresses);
-                    break;
+                // case "BoktaiDS":
+                // case "LunarKnights":
+                //     statusEditor = new DsStatusEditor(this, _memoryValues, _dsAddresses);
+                //     break;
                 default:
                     // If game is not handled, stop
                     return;
@@ -304,8 +335,9 @@ namespace BokInterface {
                 case "Shinbok":
                     inventoryEditor = new ShinbokInventoryEditor(this, _memoryValues, _shinbokAddresses);
                     break;
+                case "BoktaiDS":
                 case "LunarKnights":
-                    inventoryEditor = new LunarKnightsInventoryEditor(this, _memoryValues, _lunarKnightsAddresses);
+                    inventoryEditor = new dsInventoryEditor(this, _memoryValues, _dsAddresses);
                     break;
                 default:
                     // If game is not handled, stop
@@ -330,20 +362,18 @@ namespace BokInterface {
 
             KeyItemsEditor keyItemsEditor = null;
             switch (shorterGameName) {
-                case "Boktai":
-                    keyItemsEditor = new BoktaiKeyItemsEditor(this, _memoryValues, _boktaiAddresses);
-                    break;
                 case "Zoktai":
                     keyItemsEditor = new ZoktaiKeyItemsEditor(this, _memoryValues, _zoktaiAddresses);
                     break;
                 case "Shinbok":
                     keyItemsEditor = new ShinbokKeyItemsEditor(this, _memoryValues, _shinbokAddresses);
                     break;
+                case "BoktaiDS":
                 case "LunarKnights":
-                    keyItemsEditor = new LunarKnightsKeyItemsEditor(this, _memoryValues, _lunarKnightsAddresses);
+                    keyItemsEditor = new DsKeyItemsEditor(this, _memoryValues, _dsAddresses);
                     break;
                 default:
-                    // If game is not handled, stop
+                    // If game is not handled, stop (Bok 1's item inventory contains key items)
                     return;
             }
 
@@ -371,8 +401,9 @@ namespace BokInterface {
                 case "Shinbok":
                     accessoriesEditor = new ShinbokAccessoriesEditor(this, _memoryValues, _shinbokAddresses);
                     break;
+                case "BoktaiDS":
                 case "LunarKnights":
-                    // accessoriesEditor = new LunarKnightsAccessoriesEditor(this, _memoryValues, _lunarKnightsAddresses);
+                    accessoriesEditor = new DsAccessoriesEditor(this, _memoryValues, _dsAddresses);
                     break;
                 default:
                     // If game is not handled or does not have accessories, stop
@@ -386,6 +417,28 @@ namespace BokInterface {
             accessoriesEditor.FormClosing += new FormClosingEventHandler(delegate (object sender, FormClosingEventArgs e) {
                 equipsEditorOpened = menuItem.Checked = false;
                 accessoriesEditor.Dispose();
+            });
+        }
+
+        protected void OpenJunkPartsEditor(object sender, EventArgs e) {
+            if (junkPartsEditorOpened == true) {
+                ShowExistingSubwindow("BokInterface.Weapons.DsJunkPartsEditor");
+                return;
+            }
+
+            DsJunkPartsEditor junkPartsEditor = null;
+            if (_isDS == false) {
+                return;
+            }
+
+            junkPartsEditor = new DsJunkPartsEditor(this, _memoryValues, _dsAddresses);
+            _subwindows.Add(junkPartsEditor);
+            ToolStripMenuItem menuItem = (ToolStripMenuItem)sender;
+            junkPartsEditorOpened = menuItem.Checked = true;
+
+            junkPartsEditor.FormClosing += new FormClosingEventHandler(delegate (object sender, FormClosingEventArgs e) {
+                junkPartsEditorOpened = menuItem.Checked = false;
+                junkPartsEditor.Dispose();
             });
         }
 
@@ -433,9 +486,10 @@ namespace BokInterface {
                 case "Shinbok":
                     weaponsEditor = new ShinbokWeaponsEditor(this, _memoryValues, _shinbokAddresses);
                     break;
-                case "LunarKnights":
-                    weaponsEditor = new LunarKnightsWeaponsEditor(this, _memoryValues, _lunarKnightsAddresses);
-                    break;
+                // case "BoktaiDS":
+                // case "LunarKnights":
+                //     weaponsEditor = new DsWeaponsEditor(this, _memoryValues, _dsAddresses);
+                //     break;
                 default:
                     // If game is not handled, stop
                     // Note: Bok 1 only has the solar gun
@@ -463,10 +517,9 @@ namespace BokInterface {
                 case "Zoktai":
                     magicsEditor = new ZoktaiMagicsEditor(this, _memoryValues, _zoktaiAddresses);
                     break;
-                case "Shinbok":
-                    // magicsEditor = new ShinbokMagicsEditor(this, _memoryValues, _shinbokAddresses);
-                    // break;
-                    return;
+                // case "Shinbok":
+                //     magicsEditor = new ShinbokMagicsEditor(this, _memoryValues, _dsAddresses);
+                //     break;
                 default:
                     // If game is not handled or does not have magics, stop
                     return;
@@ -503,9 +556,10 @@ namespace BokInterface {
                 case "Shinbok":
                     tileDataViewer = new ShinbokTileDataViewer(this, _shinbokAddresses);
                     break;
-                case "LunarKnights":
-                    tileDataViewer = new LunarKnightsTileDataViewer(this, _lunarKnightsAddresses);
-                    break;
+                // case "BoktaiDS":
+                // case "LunarKnights":
+                //     tileDataViewer = new DsTileDataViewer(this, _dsAddresses);
+                //     break;
                 default:
                     // If game not handled, stop
                     return;
@@ -520,7 +574,7 @@ namespace BokInterface {
             tileDataViewer.FormClosing += new FormClosingEventHandler(delegate (object sender, FormClosingEventArgs e) {
                 /**
                  * Remove the function from the list of functions to call each frame
-                 * Also set instance with null to prevent it from doing anything else
+                 * Also set instance to null to prevent it from doing anything else
                  */
                 tileDataViewerActive = menuItem.Checked = false;
                 functionsList.RemoveAt(tileDataViewer.index);
@@ -545,8 +599,9 @@ namespace BokInterface {
                 case "Shinbok":
                     memoryValuesListing = new MemoryValuesListing(this, _shinbokAddresses);
                     break;
+                case "BoktaiDS":
                 case "LunarKnights":
-                    memoryValuesListing = new MemoryValuesListing(this, _lunarKnightsAddresses);
+                    memoryValuesListing = new MemoryValuesListing(this, _dsAddresses);
                     break;
                 default:
                     // If game not handled, stop

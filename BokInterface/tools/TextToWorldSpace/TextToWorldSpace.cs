@@ -5,8 +5,8 @@ using BokInterface.Utils;
 
 namespace BokInterface.Tools.TextToWorldSpace {
     /// <summary>
-    /// <para>Allows printing text and data to world space</para>
-    /// <para>Made by Raphi, Doc & Shenef</para>
+    ///     Allows printing text and data to world space.<br/>
+    ///     <i>Made by Raphi, Doc and Shenef.</i>
     /// </summary>
     class TextToWorldSpace {
 
@@ -65,13 +65,13 @@ namespace BokInterface.Tools.TextToWorldSpace {
             WriteTextToCoordinates(text, x, y, z);
         }
 
-        public TextToWorldSpace(LunarKnightsAddresses lunarKnightsAddresses, string text, double x, double y, double z, Color? textColor = null) {
+        public TextToWorldSpace(DsAddresses dsAddresses, string text, double x, double y, double z, Color? textColor = null) {
             if (text == "") {
                 return;
             }
 
             // Set memory addresses used for getting the camera coordinates
-            _memAddresses = lunarKnightsAddresses;
+            _memAddresses = dsAddresses;
             SetCameraAddresses();
 
             // Set text color & write to coordinates
@@ -97,9 +97,8 @@ namespace BokInterface.Tools.TextToWorldSpace {
                     _cameraXposAddress = _memAddresses.Misc["x_camera"].Address;
                     _cameraYposAddress = _memAddresses.Misc["y_camera"].Address;
                     return true;
-                case "LunarKnights":
                 default:
-                    // Current not handled, not enough data available
+                    // Not handled, not enough data available or wrong game
                     _cameraXposAddress = _cameraYposAddress = 0;
                     return false;
             }
