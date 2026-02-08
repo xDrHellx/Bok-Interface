@@ -30,3 +30,7 @@ That will compile the code, copy the result to BizHawk and launch BizHawk with t
 
 - BizHawk: <https://tasvideos.org/Bizhawk>
 - .NET SDK: Run `winget install Microsoft.DotNet.SDK.8` or the installer from [here](https://dotnet.microsoft.com/en-us/download).
+
+### Regarding memory addresses
+- For GBA games, most memory addresses are the same across all versions.
+- For DS games however, memory addresses are different between each version (JP, US, EU).

@@ -1,16 +1,10 @@
-using System.Drawing;
-
 namespace BokInterface.Items {
     ///<summary>Class representing an item for Shinbok</summary>
     class ShinbokItem : Item {
 
-        public ShinbokItem(string name, uint value, string icon = "", bool perishable = false, int durability = 0, Item? coveredItem = null, int buyPrice = 0) : base(name, value, icon, perishable, durability, coveredItem, buyPrice) {
+        protected override string library { get => "ShinbokResources"; }
 
-            if (icon != "") {
-                try {
-                    this.icon = (Image)ResourceLoader.LoadResource("ShinbokResources", icon);
-                } catch { }
-            }
+        public ShinbokItem(string name, uint value, string icon = "", bool perishable = false, int durability = 0, Item? coveredItem = null, int buyPrice = 0) : base(name, value, icon, perishable, durability, coveredItem, buyPrice) {
 
             /**
              * If this item is perishable, set the item it will turn into to the property
@@ -38,7 +32,7 @@ namespace BokInterface.Items {
             return value switch {
                 // Redshroom & Blueshroom
                 23 or 24 => "Bad Mushroom",
-                // GariGari Soda & GariGari Cola
+                // GariGari Soda & GariGari Cola (can sometimes turn into "Winner Stick" too)
                 10 or 11 => "Loser Stick",
                 // Chocolate (if a Banana gets covered, it becomes a "Chocolate Banana", other items becomes "Chocolate-Covered")
                 6 => coveredItem != null ? (coveredItem.value == 20 ? "Chocolate Banana" : "Chocolate-Covered") : "Melted Chocolate",

@@ -17,6 +17,8 @@ namespace BokInterface.Utils {
 
         /// <summary>Color for the game label</summary>
         public static readonly string gameNameBackground = "#EFE6BD";
+        /// <summary>Color for the game version</summary>
+        public static readonly string gameVersionBackground = "#F3E49E";
 
         /// <summary>Color for stat points obtained through leveling up (Boktai 2, 3, LK)</summary>
         public static readonly string baseStatColor = "#FFE600";
@@ -799,6 +801,7 @@ namespace BokInterface.Utils {
                 "Boktai" => "lita",
                 "Zoktai" => "ringo",
                 "Shinbok" => "trinity",
+                "BoktaiDS" => "lucian",
                 "LunarKnights" => "lucian",
                 _ => "nero"
             };
@@ -832,6 +835,13 @@ namespace BokInterface.Utils {
                 "Zoom" => PictureBoxSizeMode.Zoom,
                 _ => PictureBoxSizeMode.AutoSize
             };
+        }
+
+        /// <summary>Escape ampersand characters within text</summary>
+        /// <param name="text">Text</param>
+        /// <returns><c>string</c>Escaped text</returns>
+        public static string EscapeAmpersand(string text) {
+            return text.Replace("&", "&&");
         }
 
         #endregion

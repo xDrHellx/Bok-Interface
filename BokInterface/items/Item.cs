@@ -26,6 +26,8 @@ namespace BokInterface.Items {
         public int buyPrice;
         /// <summary>Price when selling</summary>
         public int sellPrice;
+        /// <summary>Resource library for retrieving the icon</summary>
+        protected abstract string library { get; }
 
         public Item(string name, uint value, string icon = "", bool perishable = false, int durability = 0, Item? coveredItem = null, int buyPrice = 0) {
             this.name = name;
@@ -38,11 +40,7 @@ namespace BokInterface.Items {
             sellPrice = buyPrice > 0 ? buyPrice / 2 : 0;
 
             // If an icon was specified try getting & setting it to the property
-            if (icon != "") {
-                try {
-                    this.icon = (Image)Properties.Resources.ResourceManager.GetObject(icon);
-                } catch { }
-            }
+            SetIconResource(icon);
 
             // If this item is perishable, set the item it will turn into to the property
             if (this.perishable == true) {
@@ -58,20 +56,32 @@ namespace BokInterface.Items {
             this.durability = durability < rottenAt ? durability : 0;
         }
 
-        /// <summary>Returns the item this instance should rott into</summary>
+        /// <summary>Get the item this instance should rott into</summary>
         /// <param name="value">Instance item value</param>
         /// <returns><c>String</c>Item name</returns>
         protected abstract string GetRottsInto(uint value);
 
-        /// <summary>Returns the value at which this instance should turn into a rotten item</summary>
+        /// <summary>Get the value at which this instance should turn into a rotten item</summary>
         /// <param name="value">Instance item value</param>
         /// <returns><c>Int</c>Rottens at value</returns>
         protected abstract int GetRottensAt(uint value);
 
-        /// <summary>Returns the durability of the covered item (for "Chocolate-Covered" instances)</summary>
+        /// <summary>Get the durability of the covered item (for "Chocolate-Covered" instances)</summary>
         /// <returns><c>Int</c>Covered item durability</returns>
         public int GetCoveredItemDurability() {
             return durability - durabilityOffset;
+        }
+
+        /// <summary>Simplified method for setting the instance's icon via resources</summary>
+        /// <param name="icon">Icon string</param>
+        /// <returns><c>Image</c>Resource</returns>
+        protected void SetIconResource(string iconString) {
+            icon = null;
+            if (iconString != "") {
+                try {
+                    icon = library != "" ? (Image)ResourceLoader.LoadResource(library, iconString) : (Image)Properties.Resources.ResourceManager.GetObject(iconString);
+                } catch { }
+            }
         }
     }
 }

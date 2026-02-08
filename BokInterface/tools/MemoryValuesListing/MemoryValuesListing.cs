@@ -47,7 +47,7 @@ namespace BokInterface.Tools.MemoryValuesListing {
             InitializeSubwindowProperties();
         }
 
-        public MemoryValuesListing(BokInterface bokInterface, LunarKnightsAddresses lunarKnightsAddresses) {
+        public MemoryValuesListing(BokInterface bokInterface, DsAddresses lunarKnightsAddresses) {
             Owner = _bokInterface = bokInterface;
             _memAddresses = lunarKnightsAddresses;
             Icon = _bokInterface.Icon;
@@ -167,28 +167,29 @@ namespace BokInterface.Tools.MemoryValuesListing {
                     GenerateRows(_memAddresses.Django, "Django");
                     GenerateRows(_memAddresses.Inventory, "Inventory");
                     GenerateRows(_memAddresses.Gardening, "Gargening");
+                    GenerateRows(_memAddresses.Map, "Map");
+                    GenerateRows(_memAddresses.Coffin, "Coffin");
                     GenerateRows(_memAddresses.Misc, "Misc");
                     return true;
                 case "Zoktai":
                     GenerateRows(_memAddresses.Django, "Django");
                     GenerateRows(_memAddresses.Sabata, "Sabata");
                     GenerateRows(_memAddresses.Inventory, "Inventory");
-                    GenerateRows(_memAddresses.Magics, "Magics");
+                    GenerateRows(_memAddresses.Solls, "Solls");
                     GenerateRows(_memAddresses.Misc, "Misc");
                     GenerateRows(_memAddresses.JoySpots, "Downloadable events (Joy Spots)");
                     return true;
                 case "Shinbok":
                     GenerateRows(_memAddresses.Django, "Django");
-                    GenerateRows(_memAddresses.Solls, "Solls");
                     GenerateRows(_memAddresses.Inventory, "Inventory");
                     GenerateRows(_memAddresses.Bike, "Solar bike");
+                    GenerateRows(_memAddresses.Solls, "Solls");
                     GenerateRows(_memAddresses.Misc, "Misc");
                     return true;
+                case "BoktaiDS":
                 case "LunarKnights":
-                    GenerateRows(_memAddresses.Django, "Django");
-                    GenerateRows(_memAddresses.Sabata, "Sabata");
+                    GenerateRows(_memAddresses.Player, "Player");
                     GenerateRows(_memAddresses.Inventory, "Inventory");
-                    GenerateRows(_memAddresses.Misc, "Misc");
                     return true;
                 default:
                     // If game is not handled, do nothing
