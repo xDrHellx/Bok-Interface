@@ -233,70 +233,57 @@ namespace BokInterface.Inventory {
 
         protected override void SetDefaultValues() {
 
+            foreach (ImageComboBox dropdown in dropDownLists) {
+                /**
+                 * Get the name of the field to retrieve the value from based on the dropdown's name (for example inventory_slotX_item => slotX_item)
+                 * Then try getting the corresponding item & preselect it
+                 */
+                string[] fieldParts = dropdown.Name.Split(['_'], 2);
+                Item? selectedItem = GetItemByValue(_memoryAddresses.Inventory[fieldParts[1]].Value, _dsItems.Items);
+                if (selectedItem != null) {
+                    dropdown.SelectedIndex = dropdown.FindStringExact(selectedItem.name);
+                }
+            }
+
             /**
-             * If Lucian or Aaron HP value is valid
-             * (Invalid when below 0 or above 9999, ie when switching rooms or on world map)
+             * For fields we need to handle a special case related to the "Chocolate-Covered" item
+             * For that one in particular, durability has an offset of 32768
              */
-            uint lucianCurrentHp = _memoryAddresses.Player["lucian_current_hp"].Value,
-                aaronCurrentHp = _memoryAddresses.Player.ContainsKey("aaron_current_hp") ? _memoryAddresses.Player["aaron_current_hp"].Value : 0;
-            if (
-                (lucianCurrentHp > 0 && lucianCurrentHp <= 9999)
-                ||
-                (aaronCurrentHp > 0 && aaronCurrentHp <= 9999)
-            ) {
-                foreach (ImageComboBox dropdown in dropDownLists) {
-                    /**
-                     * Get the name of the field to retrieve the value from based on the dropdown's name (for example inventory_slotX_item => slotX_item)
-                     * Then try getting the corresponding item & preselect it
-                     */
-                    string[] fieldParts = dropdown.Name.Split(['_'], 2);
-                    Item? selectedItem = GetItemByValue(_memoryAddresses.Inventory[fieldParts[1]].Value, _dsItems.Items);
-                    if (selectedItem != null) {
-                        dropdown.SelectedIndex = dropdown.FindStringExact(selectedItem.name);
-                    }
+            foreach (NumericUpDown durabilityField in numericUpDowns) {
+
+                // Get the different parts of the field's name
+                string[] fieldParts = durabilityField.Name.Split(['_'], 2);
+
+                // If the current in-game value exceeds the field's maximum value, stop
+                decimal ingameValue = _memoryAddresses.Inventory[fieldParts[1]].Value;
+                if (ingameValue > durabilityField.Maximum) {
+                    continue;
                 }
 
                 /**
-                 * For fields we need to handle a special case related to the "Chocolate-Covered" item
-                 * For that one in particular, durability has an offset of 32768
+                 * If the value is 32768 or higher : it's a chocolate-covered item
+                 *
+                 * In that case we need to pre-select the checkbox for the slot
+                 * We'll also remove the offset from the value in the durability field to keep it simple for the user
                  */
-                foreach (NumericUpDown durabilityField in numericUpDowns) {
-
-                    // Get the different parts of the field's name
-                    string[] fieldParts = durabilityField.Name.Split(['_'], 2);
-
-                    // Get the current in-game value
-                    decimal ingameValue = _memoryAddresses.Inventory[fieldParts[1]].Value;
-
-                    /**
-                     * If the value is 32768 or higher : it's a chocolate-covered item
-                     *
-                     * In that case we need to pre-select the checkbox for the slot
-                     * We'll also remove the offset from the value in the durability field to keep it simple for the user
-                     */
-                    if (ingameValue >= _chocolateCoveredDurabilityOffset) {
-                        string[] nameParts = fieldParts[1].Split(['_'], 4);
-                        string checkboxName = nameParts[0] + "_" + nameParts[1] + "_" + nameParts[3] + "_chocolate_covered";
-                        foreach (CheckBox checkBox in checkBoxes) {
-                            if (checkBox.Name == checkboxName) {
-                                checkBox.Checked = true;
-                                break;
-                            }
+                if (ingameValue >= _chocolateCoveredDurabilityOffset) {
+                    string[] nameParts = fieldParts[1].Split(['_'], 4);
+                    string checkboxName = nameParts[0] + "_" + nameParts[1] + "_" + nameParts[3] + "_chocolate_covered";
+                    foreach (CheckBox checkBox in checkBoxes) {
+                        if (checkBox.Name == checkboxName) {
+                            checkBox.Checked = true;
+                            break;
                         }
-
-                        durabilityField.Value = _memoryAddresses.Inventory[fieldParts[1]].Value - _chocolateCoveredDurabilityOffset;
-                    } else {
-                        /**
-                         * Otherwise it's another item : we can set the value directly
-                         * As for the chocolate-covered checkbox, it's unchecked by default
-                         */
-                        durabilityField.Value = ingameValue;
                     }
+
+                    durabilityField.Value = ingameValue - _chocolateCoveredDurabilityOffset;
+                } else {
+                    /**
+                     * Otherwise it's another item : we can set the value directly
+                     * As for the chocolate-covered checkbox, it's unchecked by default
+                     */
+                    durabilityField.Value = ingameValue;
                 }
-            } else {
-                // If current stat is unvalid (for example because we are on the title screen or in a room transition), use specific values
-                SelectFirstDropdownsIndex(dropDownLists);
-                SetNumericUpDownsToMin(numericUpDowns);
             }
         }
 

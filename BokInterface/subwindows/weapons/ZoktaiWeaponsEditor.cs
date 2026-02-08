@@ -213,56 +213,54 @@ namespace BokInterface.Weapons {
 
         protected override void SetDefaultValues() {
 
-            // If "current stat" is a valid value, get the current inventory
-            uint currentStat = _zoktaiAddresses.Misc["current_stat"].Value;
-            if (currentStat > 0) {
-                foreach (ImageComboBox dropdown in dropDownLists) {
+            foreach (ImageComboBox dropdown in dropDownLists) {
 
-                    // Indicate what the dropdown field is for
-                    string[] fieldParts = dropdown.Name.Split(['_'], 4);
-                    if (fieldParts.Length >= 4 && fieldParts[3] != null && fieldParts[3].Substring(0, 10) == "sp_ability") {
-                        /**
-                         * If it's for an SP ability
-                         *
-                         * Set the name of the key to retrieve the value from based on the dropdown's name (for example inventory_slotX_weapon => slotX_weapon)
-                         * Then try getting the corresponding ability & preselect it
-                         */
-                        string key = fieldParts[1] + "_" + fieldParts[2] + "_" + fieldParts[3];
-                        Ability? selectedAbility = GetAbilityByValue(_memoryValues.Inventory[key].Value);
-                        if (selectedAbility != null) {
-                            dropdown.SelectedIndex = dropdown.FindStringExact(selectedAbility.name);
-                        }
-                    } else {
-                        // If it's for the weapon itself, do the same as above & try preselecting the corresponding weapon
-                        string key = fieldParts[1] + "_" + fieldParts[2];
-                        Weapon? selectedWeapon = GetWeaponByValue(_memoryValues.Inventory[key].Value, _zoktaiWeapons.All);
-                        if (selectedWeapon != null) {
-                            dropdown.SelectedIndex = dropdown.FindStringExact(selectedWeapon.name);
-                        }
+                // Indicate what the dropdown field is for
+                string[] fieldParts = dropdown.Name.Split(['_'], 4);
+                if (fieldParts.Length >= 4 && fieldParts[3] != null && fieldParts[3].Substring(0, 10) == "sp_ability") {
+                    /**
+                     * If it's for an SP ability
+                     *
+                     * Set the name of the key to retrieve the value from based on the dropdown's name (for example inventory_slotX_weapon => slotX_weapon)
+                     * Then try getting the corresponding ability & preselect it
+                     */
+                    string key = fieldParts[1] + "_" + fieldParts[2] + "_" + fieldParts[3];
+                    Ability? selectedAbility = GetAbilityByValue(_memoryValues.Inventory[key].Value);
+                    if (selectedAbility != null) {
+                        dropdown.SelectedIndex = dropdown.FindStringExact(selectedAbility.name);
+                    }
+                } else {
+                    // If it's for the weapon itself, do the same as above & try preselecting the corresponding weapon
+                    string key = fieldParts[1] + "_" + fieldParts[2];
+                    Weapon? selectedWeapon = GetWeaponByValue(_memoryValues.Inventory[key].Value, _zoktaiWeapons.All);
+                    if (selectedWeapon != null) {
+                        dropdown.SelectedIndex = dropdown.FindStringExact(selectedWeapon.name);
                     }
                 }
+            }
 
-                // Get the name of the field & retrieve the value for other fields
-                foreach (NumericUpDown bonusRelatedField in numericUpDowns) {
+            // Get the name of the field & retrieve the value for other fields
+            foreach (NumericUpDown bonusRelatedField in numericUpDowns) {
 
-                    // Retrieve some parts of the field's name to check if it correspond to the malus or bonus field
-                    string[] fieldParts = bonusRelatedField.Name.Split(['_'], 3);
-                    string memValuesKey = fieldParts[1] + "_" + fieldParts[2];
+                // Retrieve some parts of the field's name to check if it correspond to the malus or bonus field
+                string[] fieldParts = bonusRelatedField.Name.Split(['_'], 3);
+                string memValuesKey = fieldParts[1] + "_" + fieldParts[2];
 
-                    /**
-                     * Set the value
-                     *
-                     * If the field corresponds to a weapon bonus or malus, we adjust the value
-                     * This is because maluses are handled differently by the game
-                     *
-                     * For example : 255 = -01 & 246 = -10
-                     */
-                    bonusRelatedField.Value = fieldParts[2] == "weapon_bonus" ? Utilities.ConvertValueToWeaponBonus(_memoryValues.Inventory[memValuesKey].Value) : _memoryValues.Inventory[memValuesKey].Value;
+                // If the in-game value exceeds the field's maximum value, stop
+                uint ingameValue = _memoryValues.Inventory[memValuesKey].Value;
+                if (ingameValue > bonusRelatedField.Maximum) {
+                    continue;
                 }
-            } else {
-                // If current stat is unvalid (for example because we are on the title screen or in a room transition), use specific values
-                SelectFirstDropdownsIndex(dropDownLists);
-                SetNumericUpDownsToMin(numericUpDowns);
+
+                /**
+                 * Set the value
+                 *
+                 * If the field corresponds to a weapon bonus or malus, we adjust the value
+                 * This is because maluses are handled differently by the game
+                 *
+                 * For example : 255 = -01 | 246 = -10
+                 */
+                bonusRelatedField.Value = fieldParts[2] == "weapon_bonus" ? Utilities.ConvertValueToWeaponBonus(ingameValue) : ingameValue;
             }
         }
 

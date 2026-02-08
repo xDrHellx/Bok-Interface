@@ -138,33 +138,15 @@ namespace BokInterface.KeyItems {
         }
 
         protected override void SetDefaultValues() {
-
-            /**
-             * If Lucian or Aaron HP value is valid
-             * (Invalid when below 0 or above 9999, ie when switching rooms or on world map)
-             */
-            uint lucianCurrentHp = _memoryAddresses.Player["lucian_current_hp"].Value,
-                aaronCurrentHp = _memoryAddresses.Player.ContainsKey("aaron_current_hp") ? _memoryAddresses.Player["aaron_current_hp"].Value : 0;
-            if (
-                (lucianCurrentHp > 0 && lucianCurrentHp <= 9999)
-                ||
-                (aaronCurrentHp > 0 && aaronCurrentHp <= 9999)
-            ) {
-                foreach (ImageComboBox dropdown in dropDownLists) {
-                    /**
-                     * Get the name of the field to retrieve the value from based on the dropdown's name (for example inventory_slotX_item => slotX_item)
-                     * Then try getting the corresponding item & preselect it
-                     */
-                    string[] fieldParts = dropdown.Name.Split(['_'], 2);
-                    Item? selectedItem = GetItemByValue(_memoryAddresses.Inventory[fieldParts[1]].Value, _dsItems.KeyItems);
-                    if (selectedItem != null) {
-                        dropdown.SelectedIndex = dropdown.FindStringExact(selectedItem.name);
-                    }
-                }
-            } else {
-                // If current HP values are unvalid (for example because we are on the title screen or in a room transition), use specific values
-                foreach (ImageComboBox dropdown in dropDownLists) {
-                    dropdown.SelectedIndex = 0;
+            foreach (ImageComboBox dropdown in dropDownLists) {
+                /**
+                 * Get the name of the field to retrieve the value from based on the dropdown's name (for example inventory_slotX_item => slotX_item)
+                 * Then try getting the corresponding item & preselect it
+                 */
+                string[] fieldParts = dropdown.Name.Split(['_'], 2);
+                Item? selectedItem = GetItemByValue(_memoryAddresses.Inventory[fieldParts[1]].Value, _dsItems.KeyItems);
+                if (selectedItem != null) {
+                    dropdown.SelectedIndex = dropdown.FindStringExact(selectedItem.name);
                 }
             }
         }

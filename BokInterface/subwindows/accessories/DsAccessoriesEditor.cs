@@ -193,42 +193,26 @@ namespace BokInterface.Accessories {
 
         protected override void SetDefaultValues() {
 
-            /**
-             * If Lucian or Aaron HP value is valid
-             * (Invalid when below 0 or above 9999, ie when switching rooms or on world map)
-             */
-            uint lucianCurrentHp = _dsAddresses.Player["lucian_current_hp"].Value,
-                aaronCurrentHp = _dsAddresses.Player.ContainsKey("aaron_current_hp") ? _dsAddresses.Player["aaron_current_hp"].Value : 0;
-            if (
-                (lucianCurrentHp > 0 && lucianCurrentHp <= 9999)
-                ||
-                (aaronCurrentHp > 0 && aaronCurrentHp <= 9999)
-            ) {
-                // Accessory slots
-                foreach (ImageComboBox dropdown in dropDownLists) {
-                    /**
-                     * Get the name of the field to retrieve the value from based on the dropdown's name (for example inventory_slotX_accessory => slotX_accessory)
-                     * Then try getting the corresponding item & preselect it
-                     */
-                    string[] fieldParts = dropdown.Name.Split(['_'], 2);
-                    Accessory? selectedAccessory = GetAccessoryByValue(_dsAddresses.Inventory[fieldParts[1]].Value, _dsAccessories.All);
-                    if (selectedAccessory != null) {
-                        dropdown.SelectedIndex = dropdown.FindStringExact(selectedAccessory.name);
-                    }
+            // Accessory slots
+            foreach (ImageComboBox dropdown in dropDownLists) {
+                /**
+                 * Get the name of the field to retrieve the value from based on the dropdown's name (for example inventory_slotX_accessory => slotX_accessory)
+                 * Then try getting the corresponding item & preselect it
+                 */
+                string[] fieldParts = dropdown.Name.Split(['_'], 2);
+                Accessory? selectedAccessory = GetAccessoryByValue(_dsAddresses.Inventory[fieldParts[1]].Value, _dsAccessories.All);
+                if (selectedAccessory != null) {
+                    dropdown.SelectedIndex = dropdown.FindStringExact(selectedAccessory.name);
                 }
+            }
 
-                // Same as above for shield slots
-                foreach (ImageComboBox dropdown in shieldDropdowns) {
-                    string[] fieldParts = dropdown.Name.Split(['_'], 2);
-                    Accessory? selectedShield = GetAccessoryByValue(_dsAddresses.Inventory[fieldParts[1]].Value, _dsAccessories.All);
-                    if (selectedShield != null) {
-                        dropdown.SelectedIndex = dropdown.FindStringExact(selectedShield.name);
-                    }
+            // Same as above for shield slots
+            foreach (ImageComboBox dropdown in shieldDropdowns) {
+                string[] fieldParts = dropdown.Name.Split(['_'], 2);
+                Accessory? selectedShield = GetAccessoryByValue(_dsAddresses.Inventory[fieldParts[1]].Value, _dsAccessories.All);
+                if (selectedShield != null) {
+                    dropdown.SelectedIndex = dropdown.FindStringExact(selectedShield.name);
                 }
-            } else {
-                // Otherwise set default values in the editor subwindow
-                SelectFirstDropdownsIndex(dropDownLists);
-                SelectFirstDropdownsIndex(shieldDropdowns);
             }
         }
 
