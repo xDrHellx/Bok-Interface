@@ -1,0 +1,43 @@
+using BokInterface.Addresses;
+
+namespace BokInterface.Weapons {
+    /// <summary>Weapons editor for Lunar Knights / Boktai DS</summary>
+    class DsWeaponsEditor : WeaponsEditor {
+
+        #region Properties
+
+        private readonly MemoryValues _memoryValues;
+        private readonly BokInterface _bokInterface;
+        private readonly DsAddresses _lunarKnightsAddresses;
+
+        #endregion
+
+        #region Constructor
+
+        public DsWeaponsEditor(BokInterface bokInterface, MemoryValues memoryValues, DsAddresses LunarKnightsAddresses) {
+
+            _memoryValues = memoryValues;
+            _lunarKnightsAddresses = LunarKnightsAddresses;
+            Owner = _bokInterface = bokInterface;
+            Icon = _bokInterface.Icon;
+
+            SetFormParameters(400, 400, name, text);
+            AddElements();
+            Show();
+        }
+
+        #endregion
+
+        #region Elements
+
+        protected override void AddElements() { }
+
+        #endregion
+
+        #region Values setting
+
+        protected override void SetValues() { }
+
+        #endregion
+    }
+}

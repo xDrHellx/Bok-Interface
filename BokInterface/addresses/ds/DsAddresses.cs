@@ -1,0 +1,21 @@
+using System.Collections.Generic;
+using System.Linq;
+
+using BokInterface.JunkParts;
+
+namespace BokInterface.Addresses {
+    /// <summary>Abstract class for Boktai DS / Lunar Knights memory addresses</summary>
+    public abstract class DsAddresses {
+        /// <summary>Player-related memory addresses</summary>
+        public IDictionary<string, MemoryAddress> Player = new Dictionary<string, MemoryAddress>();
+        /// <summary>Inventory-related memory addresses</summary>
+        public IDictionary<string, MemoryAddress> Inventory = new Dictionary<string, MemoryAddress>();
+        protected string note = "";
+        protected readonly DsJunkParts junkParts = new();
+
+        protected void OrderDictionnaries() {
+            Player = Player.OrderBy(x => x.Key).ToDictionary(x => x.Key, x => x.Value);
+            Inventory = Inventory.OrderBy(x => x.Key).ToDictionary(x => x.Key, x => x.Value);
+        }
+    }
+}

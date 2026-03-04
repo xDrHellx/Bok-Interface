@@ -30,15 +30,7 @@ namespace BokInterface {
 
             GenerateMenu();
             AddBoktaiEventsMenu();
-
-            // If E3 demo / beta, update the game name label
-            string version = "";
-            if (currentGameId == 1246311233) {
-                version = " (E3 demo)";
-            }
-
-            // Current game name
-            WinFormHelpers.CreateLabel("currentGameName", currentGameName + version, 0, _menuBar.Height, Width, 20, this, WinFormHelpers.gameNameBackground, textAlignment: "MiddleLeft");
+            AddCurrentGameInfo();
 
             // Sections
             AddBoktaiCurrentStatusSection();
@@ -184,6 +176,19 @@ namespace BokInterface {
                 if (bossHp > 0 && bossHp != 16416) {
                     APIs.Gui.Text(GetScreenWidth() - 127, 1, "Boss: " + bossHp);
                 }
+            }
+
+            // Azure Sky Tower floor data
+            if (_showAstData == true) {
+                APIs.Gui.Text(3, halfScreenHeight + 30, "Floor:");
+                APIs.Gui.Text(70, halfScreenHeight + 30, _boktaiAddresses.Map["ast_current_floor"].Value.ToString());
+
+                // Get the coordinates of the enemy that drops the key
+                uint keyX = APIs.Memory.ReadU8(_boktaiAddresses.Map["ast_enemy_coordinates"].Value + (_boktaiAddresses.Map["ast_key_holder_index"].Value * 2)),
+                    keyY = APIs.Memory.ReadU8(_boktaiAddresses.Map["ast_enemy_coordinates"].Value + (_boktaiAddresses.Map["ast_key_holder_index"].Value * 2) + 1);
+
+                APIs.Gui.Text(3, halfScreenHeight + 45, "Key coordinates:");
+                APIs.Gui.Text(170, halfScreenHeight + 45, keyX + " | " + keyY);
             }
         }
 

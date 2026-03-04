@@ -1,16 +1,10 @@
-using System.Drawing;
-
 namespace BokInterface.Items {
     ///<summary>Class representing an item for Zoktai</summary>
     class ZoktaiItem : Item {
 
-        public ZoktaiItem(string name, uint value, string icon = "", bool perishable = false, int durability = 0, Item? coveredItem = null, int buyPrice = 0) : base(name, value, icon, perishable, durability, coveredItem, buyPrice) {
+        protected override string library { get => "ZoktaiResources"; }
 
-            if (icon != "") {
-                try {
-                    this.icon = (Image)ResourceLoader.LoadResource("ZoktaiResources", icon);
-                } catch { }
-            }
+        public ZoktaiItem(string name, uint value, string icon = "", bool perishable = false, int durability = 0, Item? coveredItem = null, int buyPrice = 0) : base(name, value, icon, perishable, durability, coveredItem, buyPrice) {
 
             /**
              * If this item is perishable, set the item it will turn into to the property

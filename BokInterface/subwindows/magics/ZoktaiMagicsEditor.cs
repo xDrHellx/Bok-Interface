@@ -32,7 +32,7 @@ namespace BokInterface.Magics {
             Icon = _bokInterface.Icon;
             _zoktaiMagics = new();
 
-            SetFormParameters(281, 249);
+            SetFormParameters(281, 249, name, text);
             AddElements();
             Show();
         }
@@ -108,7 +108,7 @@ namespace BokInterface.Magics {
                     checkBoxes.Add(WinFormHelpers.CreateCheckBox("magic_" + labelName, "", 122, 18 * yPositionOffset, 16, 16, control: groupBox));
                 }
 
-                // If n > 1 && n is an even number, it means we're moving to another row next
+                // If n > 1 & n is an even number, it means we're moving to another row next
                 if (n % 2 == 0 && n > 1) {
                     yPositionOffset++;
                 }
@@ -119,14 +119,7 @@ namespace BokInterface.Magics {
             // Set default values for each field
             SetDefaultValues();
 
-            // Button for setting values & its events
-            Button setValuesButton = WinFormHelpers.CreateButton("setMagicsButton", "Set values", 202, 223, 75, 23, this);
-            setValuesButton.Click += new EventHandler(delegate (object sender, EventArgs e) {
-                // Write the values for 10 frames
-                for (int i = 0; i < 10; i++) {
-                    SetValues();
-                }
-            });
+            AddSetValuesButton(202, 223, this);
         }
 
         #endregion
@@ -180,28 +173,15 @@ namespace BokInterface.Magics {
 
         protected override void SetDefaultValues() {
 
-            // If "current stat" is a valid value, get the current inventory
-            uint currentStat = APIs.Memory.ReadU32(_zoktaiAddresses.Misc["current_stat"].Address);
-            if (currentStat > 0) {
-                int bitPosition = 0,
-                    magic = (int)_memoryValues.Inventory["magics"].Value;
-                foreach (CheckBox checkBox in checkBoxes) {
-                    if (checkBox.Enabled == false) {
-                        continue;
-                    }
-
-                    checkBox.Checked = Utilities.IsBitOne(magic, bitPosition);
-                    bitPosition++;
+            int bitPosition = 0,
+                magic = (int)_memoryValues.Inventory["magics"].Value;
+            foreach (CheckBox checkBox in checkBoxes) {
+                if (checkBox.Enabled == false) {
+                    continue;
                 }
-            } else {
-                // If current stat is unvalid (for example because we are on the title screen or in a room transition), uncheck all checkboxes
-                foreach (CheckBox checkBox in checkBoxes) {
-                    if (checkBox.Enabled == false) {
-                        continue;
-                    }
 
-                    checkBox.Checked = false;
-                }
+                checkBox.Checked = Utilities.IsBitOne(magic, bitPosition);
+                bitPosition++;
             }
         }
 

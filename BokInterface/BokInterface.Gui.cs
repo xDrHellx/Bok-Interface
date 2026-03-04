@@ -19,7 +19,8 @@ namespace BokInterface {
             _showRtc,
             _showIgtFrameCounter,
             _showInterestRate,
-            _showBossHp;
+            _showBossHp,
+            _showAstData;
 
         #endregion
 
@@ -58,7 +59,7 @@ namespace BokInterface {
 
         /// <summary>Generate the menu related to the GUI data</summary>
         private void GenerateGuiMenu() {
-            if (shorterGameName == "LunarKnights") {
+            if (_isDS == true) {
                 return;
             }
 
@@ -70,6 +71,7 @@ namespace BokInterface {
 
             if (shorterGameName == "Boktai") {
                 AddDropdownMenuItem("showBossHp", "Boss HP", guiMenu, (sender, e) => ToggleGuiData(sender, ref _showBossHp), "Only visible when data is available");
+                AddDropdownMenuItem("showAstData", "AST Data", guiMenu, (sender, e) => ToggleGuiData(sender, ref _showAstData), "Azure Sky Tower floor data");
             }
         }
 
