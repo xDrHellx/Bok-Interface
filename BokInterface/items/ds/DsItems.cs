@@ -14,7 +14,7 @@ namespace BokInterface.Items {
 
         ///<summary>Init items instances</summary>
         private void InitItems() {
-            Items.Add("Empty Slot", new DsItem("Empty Slot", 65535));
+            Items.Add("Empty slot", new DsItem("Empty slot", 65535));
             Items.Add("Rotten Fruit", new DsItem("Rotten Fruit", 0, "rotten_fruit"));
             Items.Add("Rotten Meat", new DsItem("Rotten Meat", 1, "rotten_meat"));
             Items.Add("Cure Drop", new DsItem("Cure Drop", 2, "cure_drop"));
@@ -123,7 +123,7 @@ namespace BokInterface.Items {
 
         ///<summary>Init key items instances</summary>
         private void InitKeyItems() {
-            KeyItems.Add("Empty slot", new DsItem("Empty Slot", 65535));
+            KeyItems.Add("Empty slot", new DsItem("Empty slot", 65535));
             KeyItems.Add("Mobile Unit", new DsItem("Mobile Unit", 96, "mobile_unit"));
             KeyItems.Add("Solar Goggles", new DsItem("Solar Goggles", 97, "solar_goggles"));
             KeyItems.Add("Paper Bag", new DsItem("Paper Bag", 98, "paper_bag"));
