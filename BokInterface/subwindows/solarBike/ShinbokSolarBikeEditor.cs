@@ -44,6 +44,8 @@ namespace BokInterface.solarBike {
 
         #endregion
 
+        #region Form
+
         public ShinbokSolarBikeEditor(BokInterface bokInterface, MemoryValues memoryValues, ShinbokAddresses ShinbokAddresses) {
 
             _memoryValues = memoryValues;
@@ -72,6 +74,10 @@ namespace BokInterface.solarBike {
             AutoScroll = true;
             ClientSize = new Size(width, height);
         }
+
+        #endregion
+
+        #region Elements
 
         protected void AddElements() {
 
@@ -149,6 +155,10 @@ namespace BokInterface.solarBike {
                 dropdown.ValueMember = "Value";
             }
         }
+
+        #endregion
+
+        #region Values setting
 
         protected void SetValues() {
 
@@ -267,5 +277,7 @@ namespace BokInterface.solarBike {
 
             return null;
         }
+
+        #endregion
     }
 }
