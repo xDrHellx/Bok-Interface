@@ -17,6 +17,8 @@ using BokInterface.Tools.SolarBankInterestsSimulator;
 using BokInterface.Tools.TileDataViewer;
 using BokInterface.Weapons;
 using BokInterface.Accessories;
+using BokInterface.solarBike;
+
 using BizHawk.Common;
 
 /**
@@ -248,6 +250,12 @@ namespace BokInterface {
                     if (shorterGameName == "Zoktai") {
                         AddDropdownMenuItem("editMagicsMenu", "Magics", editMenu, OpenMagicsEditor);
                     }
+                }
+
+                if (shorterGameName == "Shinbok") {
+                    ToolStripMenuItem editSolarBikeMenu = WinFormHelpers.CreateToolStripMenuItem("editSolarBikeMenu", "&Solar bike", menuItem: editMenu);
+                    editSolarBikeMenu.Click += new EventHandler(OpenBikeEditor);
+                    editMenu.DropDownItems.Add(editSolarBikeMenu);
                 }
             }
 
@@ -532,6 +540,29 @@ namespace BokInterface {
             magicsEditor.FormClosing += new FormClosingEventHandler(delegate (object sender, FormClosingEventArgs e) {
                 magicsEditorOpened = menuItem.Checked = false;
                 magicsEditor.Dispose();
+            });
+        }
+
+        protected void OpenBikeEditor(object sender, EventArgs e) {
+            if (solarBikeEditorOpened == true) {
+                ShowExistingSubwindow("BokInterface.solarBike.ShinbokSolarBikeEditor");
+                return;
+            }
+
+            ShinbokSolarBikeEditor solarBikeEditor = null;
+            if (shorterGameName != "Shinbok") {
+                return;
+            }
+
+            solarBikeEditor = new ShinbokSolarBikeEditor(this, _memoryValues, _shinbokAddresses);
+            _subwindows.Add(solarBikeEditor);
+
+            ToolStripMenuItem menuItem = (ToolStripMenuItem)sender;
+            solarBikeEditorOpened = menuItem.Checked = true;
+
+            solarBikeEditor.FormClosing += new FormClosingEventHandler(delegate (object sender, FormClosingEventArgs e) {
+                solarBikeEditorOpened = menuItem.Checked = false;
+                solarBikeEditor.Dispose();
             });
         }
 

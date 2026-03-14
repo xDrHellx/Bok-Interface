@@ -14,7 +14,7 @@ namespace BokInterface.Items {
 
         ///<summary>Init items instances</summary>
         private void InitItems() {
-            Items.Add("Empty slot", new ShinbokItem("Empty Slot", 65535));
+            Items.Add("Empty slot", new ShinbokItem("Empty slot", 65535));
             Items.Add("Healer", new ShinbokItem("Healer", 0, "healer"));
             Items.Add("Earthly Nut", new ShinbokItem("Earthly Nut", 1, "earthly_nut", true));
             Items.Add("Rotten Nut", new ShinbokItem("Rotten Nut", 2, "rotten_nut"));
@@ -58,7 +58,7 @@ namespace BokInterface.Items {
 
         ///<summary>Init key items instances</summary>
         private void InitKeyItems() {
-            KeyItems.Add("Empty slot", new ShinbokItem("Empty Slot", 65535));
+            KeyItems.Add("Empty slot", new ShinbokItem("Empty slot", 65535));
             KeyItems.Add("Dark Card", new ShinbokItem("Dark Card", 39, "dark_card"));
             KeyItems.Add("Sword License", new ShinbokItem("Sword License", 41, "sword_license"));
             KeyItems.Add("PET", new ShinbokItem("PET", 42, "pet"));
