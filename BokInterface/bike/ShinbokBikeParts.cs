@@ -82,7 +82,7 @@ namespace BokInterface.Bike {
         protected void InitOptions() {
             string type = "option";
             Options.Add("No option", new ShinbokBikePart("No option", 65535, type));
-            Options.Add("Magic Handle", new ShinbokBikePart("Magic Handle", 0, type, "ATK & SPECIAL ATK +40"));
+            Options.Add("Magic Handle", new ShinbokBikePart("Magic Handle", 0, type, "ATK & SPECIAL ATK +20"));
             Options.Add("Magic Step", new ShinbokBikePart("Magic Step", 1, type, "ATK & SPECIAL ATK +40"));
             Options.Add("Rock Emblem", new ShinbokBikePart("Rock Emblem", 2, type, "ATK & SPECIAL ATK +70"));
             Options.Add("Platinum Plug", new ShinbokBikePart("Platinum Plug", 3, type, "ACCEL +60%"));
