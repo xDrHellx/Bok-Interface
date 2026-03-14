@@ -41,7 +41,7 @@ namespace BokInterface.solarBike {
             _option2 = new(),
             _option3 = new(),
             _option4 = new();
-        private ToolTip _toolTip = new();
+        private readonly ToolTip _toolTip = new();
 
         #endregion
 
@@ -156,26 +156,34 @@ namespace BokInterface.solarBike {
                 dropdown.ValueMember = "Value";
 
                 // Shenanigans for showing the effect of a part when hovering over it
-                dropdown.DrawMode = DrawMode.OwnerDrawFixed;
-                dropdown.DrawItem += (s, e) => {
-                    if (e.Index < 0) {
-                        return;
-                    }
-
-                    // Get the bike part where the mouse is
-                    ComboBox dropdown = (ComboBox)s;
-                    KeyValuePair<string, ShinbokBikePart> item = (KeyValuePair<string, ShinbokBikePart>)dropdown.Items[e.Index];
-
-                    e.DrawBackground();
-                    e.Graphics.DrawString(item.Key, e.Font, Brushes.Black, e.Bounds);
-                    e.DrawFocusRectangle();
-
-                    // If it has an effect, show the tooltip
-                    if (item.Value.effect != "" && (e.State & DrawItemState.Selected) == DrawItemState.Selected) {
-                        _toolTip.Show(item.Value.effect, dropdown, dropdown.Width, dropdown.Height, 2000);
-                    }
-                };
+                AddDropdownItemsTooltips<ShinbokBikePart>(dropdown, x => x.effect);
             }
+        }
+
+        /// <summary>Add tooltips to a Combobox's (dropdown) items</summary>
+        /// <param name="dropdown">ComboBox</param>
+        /// <param name="toolTipContent">Content shown via the tooltip</param>
+        protected void AddDropdownItemsTooltips<T>(ComboBox dropdown, Func<T, string> toolTipContent) {
+            dropdown.DrawMode = DrawMode.OwnerDrawFixed;
+            dropdown.DrawItem += (s, e) => {
+                if (e.Index < 0) {
+                    return;
+                }
+
+                // Get the info about the bike part (where the mouse is)
+                ComboBox dropdown = (ComboBox)s;
+                KeyValuePair<string, T> item = (KeyValuePair<string, T>)dropdown.Items[e.Index];
+                string? toolTipText = toolTipContent(item.Value)?.ToString();
+
+                e.DrawBackground();
+                e.Graphics.DrawString(item.Key, e.Font, Brushes.Black, e.Bounds);
+                e.DrawFocusRectangle();
+
+                // If there is text, show the tooltip
+                if (string.IsNullOrEmpty(toolTipText) == false && (e.State & DrawItemState.Selected) == DrawItemState.Selected) {
+                    _toolTip.Show(toolTipText, dropdown, dropdown.Width, dropdown.Height, 2000);
+                }
+            };
         }
 
         #endregion
