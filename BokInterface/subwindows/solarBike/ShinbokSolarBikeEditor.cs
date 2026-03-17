@@ -56,7 +56,7 @@ namespace BokInterface.solarBike {
             Owner = _bokInterface = bokInterface;
             Icon = _bokInterface.Icon;
 
-            SetFormParameters(373, 175);
+            SetFormParameters(396, 245);
             AddElements();
             Show();
         }
@@ -83,19 +83,20 @@ namespace BokInterface.solarBike {
         protected void AddElements() {
 
             // Init groups & add them to the editor subwindow
-            _mainGroup = WinFormHelpers.CreateCheckGroupBox("main_group", "Main parts", 5, 5, 203, 166, control: this);
-            _optionsGroup = WinFormHelpers.CreateCheckGroupBox("options_group", "Options", 214, 5, 154, 137, control: this);
+            _mainGroup = WinFormHelpers.CreateCheckGroupBox("main_group", "Main parts", 5, 70, 203, 166, control: this);
+            _optionsGroup = WinFormHelpers.CreateCheckGroupBox("options_group", "Options", 237, 70, 154, 137, control: this);
 
-            // Init dropdowns, generate & add options to them, then add the labels
+            // Init dropdowns, generate & add options to them, then add the labels & informative text
             InitDropDowns();
             GenerateDropDownOptions();
             InitLabels();
+            AddInformativeText();
 
             // Set default values for each field
             SetDefaultValues();
 
             // Button for setting values & its events
-            Button setValuesButton = WinFormHelpers.CreateButton("setBikePartsButton", "Set values", 294, 148, 75, 23, this);
+            Button setValuesButton = WinFormHelpers.CreateButton("setBikePartsButton", "Set values", 317, 218, 75, 23, this);
             setValuesButton.Click += new EventHandler(delegate (object sender, EventArgs e) {
                 // Write the values for 10 frames
                 for (int i = 0; i < 10; i++) {
@@ -170,7 +171,7 @@ namespace BokInterface.solarBike {
                     return;
                 }
 
-                // Get the info about the bike part (where the mouse is)
+                // Get the info about the hovered option (where the mouse is)
                 ComboBox dropdown = (ComboBox)s;
                 KeyValuePair<string, T> item = (KeyValuePair<string, T>)dropdown.Items[e.Index];
                 string? toolTipText = toolTipContent(item.Value)?.ToString();
@@ -184,6 +185,15 @@ namespace BokInterface.solarBike {
                     _toolTip.Show(toolTipText, dropdown, dropdown.Width, dropdown.Height, 2000);
                 }
             };
+        }
+
+        /// <summary>Add informative text regarding bike menu</summary>
+        protected void AddInformativeText() {
+            WinFormHelpers.CreateTextBox("bikeMenuText",
+                "Regarding bike parts :"
+                + "\r\nOpening the bike menu in-game will reset the bike to its previous state due to the game checking if parts have been unlocked legitamately.",
+                5, 5, 386, 53, this
+            );
         }
 
         #endregion
