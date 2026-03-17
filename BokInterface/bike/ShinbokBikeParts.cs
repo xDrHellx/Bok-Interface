@@ -39,7 +39,7 @@ namespace BokInterface.Bike {
             Tires.Add("Standard 2", new ShinbokBikePart("Standard 2", 1, type, "STEERING: 34 | BRAKES: 116 | ENE/BOOST: 102"));
             Tires.Add("Trail", new ShinbokBikePart("Trail", 2, type, "STEERING: 38 | BRAKES: 87 | ENE/BOOST: 68 | Drive over dirt."));
             Tires.Add("Chain", new ShinbokBikePart("Chain", 3, type, "STEERING: 36 | BRAKES: 90 | ENE/BOOST: 68 | Drive over ice."));
-            Tires.Add("Multi-purpose", new ShinbokBikePart("Multi-purpose", 4, type, "STEERING: 58 | BRAKES: 116 | ENE/BOOST: 88 | Drive over dirt & ice."));
+            Tires.Add("Multi-purpose", new ShinbokBikePart("Multi-purpose", 4, type, "STEERING: 58 | BRAKES: 116 | ENE/BOOST: 88"));
             Tires.Add("Booster", new ShinbokBikePart("Booster", 5, type, "STEERING: 28 | BRAKES: 77 | ENE/BOOST: 44"));
         }
 
