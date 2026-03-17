@@ -5,7 +5,7 @@ namespace BokInterface.Abilities {
         public readonly string name = name;
         ///<summary>Value (decimal)<summary>
         public readonly decimal value = value;
-        /// <summary>Description (usually corresponds to the in-game text</summary>
+        /// <summary>Description (usually corresponds to the in-game text)</summary>
         public readonly string description = description;
     }
 }

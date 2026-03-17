@@ -14,7 +14,7 @@ namespace BokInterface.Items {
 
         ///<summary>Init items instances</summary>
         private void InitItems() {
-            Items.Add("Empty slot", new ZoktaiItem("Empty Slot", 65535));
+            Items.Add("Empty slot", new ZoktaiItem("Empty slot", 65535));
             Items.Add("Earthly Nut", new ZoktaiItem("Earthly Nut", 0, "earthly_nut", true));
             Items.Add("Solar Nut", new ZoktaiItem("Solar Nut", 1, "solar_nut", true));
             Items.Add("Speed Nut", new ZoktaiItem("Speed Nut", 2, "speed_nut", true));
@@ -68,7 +68,7 @@ namespace BokInterface.Items {
 
         ///<summary>Init key items instances</summary>
         private void InitKeyItems() {
-            KeyItems.Add("Empty slot", new ZoktaiItem("Empty Slot", 65535));
+            KeyItems.Add("Empty slot", new ZoktaiItem("Empty slot", 65535));
             KeyItems.Add("Dark Card", new ZoktaiItem("Dark Card", 49, "dark_card"));
             KeyItems.Add("Pet", new ZoktaiItem("Pet", 50, "pet"));
             KeyItems.Add("Spade Emblem", new ZoktaiItem("Spade Emblem", 51, "spade_emblem"));

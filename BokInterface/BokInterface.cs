@@ -73,6 +73,7 @@ namespace BokInterface {
             solarGunEditorOpened = false,
             weaponsEditorOpened = false,
             magicsEditorOpened = false,
+            solarBikeEditorOpened = false,
             junkPartsEditorOpened = false,
             tileDataViewerActive = false,
             memValuesListingActive = false,
