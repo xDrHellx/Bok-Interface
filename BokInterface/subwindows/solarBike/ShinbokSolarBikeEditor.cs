@@ -9,12 +9,12 @@ using BokInterface.Utils;
 
 namespace BokInterface.solarBike {
     /// <summary>Solar bike editor for Boktai 3</summary>
-    class ShinbokSolarBikeEditor : Form {
+    class ShinbokSolarBikeEditor : Editor {
 
         #region Properties
 
-        protected readonly string name = "solarBikeEditWindow";
-        protected readonly string text = "Solar bike editor";
+        protected new readonly string name = "solarBikeEditWindow";
+        protected new readonly string text = "Solar bike editor";
 
         #endregion
 
@@ -61,26 +61,11 @@ namespace BokInterface.solarBike {
             Show();
         }
 
-        ///<summary>Sets common parameters for the form / subwindow</summary>
-        ///<param name="width">Form width</param>
-        ///<param name="height">Form height</param>
-        protected void SetFormParameters(int width, int height) {
-            Name = name;
-            Text = text;
-            AutoScaleDimensions = new SizeF(6F, 15F);
-            AutoScaleMode = AutoScaleMode.Inherit;
-            FormBorderStyle = FormBorderStyle.FixedSingle;
-            BackColor = SystemColors.Control;
-            Font = WinFormHelpers.defaultFont;
-            AutoScroll = true;
-            ClientSize = new Size(width, height);
-        }
-
         #endregion
 
         #region Elements
 
-        protected void AddElements() {
+        protected override void AddElements() {
 
             // Init groups & add them to the editor subwindow
             _mainGroup = WinFormHelpers.CreateCheckGroupBox("main_group", "Main parts", 5, 70, 203, 166, control: this);
@@ -200,7 +185,7 @@ namespace BokInterface.solarBike {
 
         #region Values setting
 
-        protected void SetValues() {
+        protected override void SetValues() {
 
             // Store the previous setting for BizHawk being paused
             _bokInterface._previousIsPauseSetting = APIs.Client.IsPaused();
@@ -237,34 +222,19 @@ namespace BokInterface.solarBike {
         }
 
         ///<summary>
-        ///<para>Method for setting memory values</para>
-        ///<para>This is separated because we use the switch inside on different types</para>
+        ///     Method for setting memory values.<br/>
+        ///     This is separated because we use the switch inside on different types.
         ///</summary>
-        ///<param name="subList"><c>Sublit / dictionnary the key belongs to</c></param>
-        ///<param name="valueKey"><c>strng</c>Key withint the dictionnary</param>
-        ///<param name="value"><c>decimal</c>Value to set</param>
+        ///<param name="subList">Sublist / dictionnary the key belongs to</param>
+        ///<param name="valueKey">Key within the dictionnary</param>
+        ///<param name="value">Value to set</param>
         private void SetMemoryValue(string subList, string valueKey, decimal value) {
-            switch (subList) {
-                case "bike":
-                    if (_memoryValues.Bike.ContainsKey(valueKey) == true) {
-                        _memoryValues.Bike[valueKey].Value = (uint)value;
-                    } else if (_memoryValues.U16.ContainsKey(valueKey) == true) {
-                        _memoryValues.U16[valueKey].Value = (uint)value;
-                    } else if (_memoryValues.U32.ContainsKey(valueKey) == true) {
-                        _memoryValues.U32[valueKey].Value = (uint)value;
-                    }
-                    break;
-                default:
-                    if (_memoryValues.U16.ContainsKey(valueKey) == true) {
-                        _memoryValues.U16[valueKey].Value = (uint)value;
-                    } else if (_memoryValues.U32.ContainsKey(valueKey) == true) {
-                        _memoryValues.U32[valueKey].Value = (uint)value;
-                    }
-                    break;
+            if (subList == "bike" && _memoryValues.Bike.ContainsKey(valueKey) == true) {
+                _memoryValues.Bike[valueKey].Value = (uint)value;
             }
         }
 
-        protected void SetDefaultValues() {
+        protected override void SetDefaultValues() {
             foreach (ComboBox dropdown in _dropDownList) {
                 /**
                  * Get the name of the field to retrieve the value from based on the dropdown's name (for example inventory_slotX_item => slotX_item)
