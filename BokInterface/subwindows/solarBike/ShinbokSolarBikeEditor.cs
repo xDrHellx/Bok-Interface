@@ -56,7 +56,7 @@ namespace BokInterface.solarBike {
             Owner = _bokInterface = bokInterface;
             Icon = _bokInterface.Icon;
 
-            SetFormParameters(396, 245);
+            SetFormParameters(396, 245, name, text);
             AddElements();
             Show();
         }
