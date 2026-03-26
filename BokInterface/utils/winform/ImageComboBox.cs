@@ -6,10 +6,14 @@ using BokInterface.Items;
 using BokInterface.Weapons;
 using BokInterface.Abilities;
 using BokInterface.Accessories;
+using System.Reflection;
+using System;
 
 namespace BokInterface.Utils {
     ///<summary>Class for ComboBox with images next to selectable options</summary>
     public class ImageComboBox : ComboBox {
+
+        private readonly ToolTip _toolTip = new();
 
         // Draws the items into the object
         protected override void OnDrawItem(DrawItemEventArgs e) {
@@ -18,98 +22,106 @@ namespace BokInterface.Utils {
 
             /**
              * Draw the value for the item in the list
-             * Depending on the type of the item in the list we show different things
+             * Depending on the item's type we may show different things
              */
-            if (Items[e.Index].GetType() == typeof(KeyValuePair<string, Item>)) {
-
-                // For Boktai items
-                KeyValuePair<string, Item> option = (KeyValuePair<string, Item>)Items[e.Index];
-                Item optionItem = option.Value;
-
-                /**
-                 * Draw the item's name & icon (if it has one)
-                 * We always add the space an icon would take so that elements are aligned properly
-                 */
-                e.Graphics.DrawString(optionItem.name, e.Font, new SolidBrush(e.ForeColor), e.Bounds.Left + 16, e.Bounds.Top + 1);
-                if (optionItem.icon != null) {
-                    e.Graphics.DrawImage(optionItem.icon, e.Bounds.Left, e.Bounds.Top + 1);
-                }
-            } else if (Items[e.Index].GetType() == typeof(KeyValuePair<string, Weapon>)) {
-
-                // For Boktai weapons
-                KeyValuePair<string, Weapon> option = (KeyValuePair<string, Weapon>)Items[e.Index];
-                Weapon optionItem = option.Value;
-                e.Graphics.DrawString(optionItem.name, e.Font, new SolidBrush(e.ForeColor), e.Bounds.Left + 16, e.Bounds.Top + 1);
-                if (optionItem.icon != null) {
-                    e.Graphics.DrawImage(optionItem.icon, e.Bounds.Left, e.Bounds.Top + 1);
-                }
-            } else if (Items[e.Index].GetType() == typeof(KeyValuePair<string, Ability>)) {
-
-                // For Weapon SP abilities (Bok 2 & 3)
-                KeyValuePair<string, Ability> option = (KeyValuePair<string, Ability>)Items[e.Index];
-                Ability optionItem = option.Value;
-                e.Graphics.DrawString(optionItem.name, e.Font, new SolidBrush(e.ForeColor), e.Bounds.Left, e.Bounds.Top + 1);
-            } else if (Items[e.Index].GetType() == typeof(KeyValuePair<string, Accessory>)) {
-
-                // For Boktai accessories
-                KeyValuePair<string, Accessory> option = (KeyValuePair<string, Accessory>)Items[e.Index];
-                Accessory optionItem = option.Value;
-                e.Graphics.DrawString(optionItem.name, e.Font, new SolidBrush(e.ForeColor), e.Bounds.Left + 16, e.Bounds.Top + 1);
-                if (optionItem.icon != null) {
-                    e.Graphics.DrawImage(optionItem.icon, e.Bounds.Left, e.Bounds.Top + 1);
-                }
-            } else if (Items[e.Index].GetType() == typeof(KeyValuePair<string, ShinbokLens>)) {
-
-                // For Shinbok gun lenses
-                KeyValuePair<string, ShinbokLens> option = (KeyValuePair<string, ShinbokLens>)Items[e.Index];
-                ShinbokLens optionItem = option.Value;
-                e.Graphics.DrawString(optionItem.name, e.Font, new SolidBrush(e.ForeColor), e.Bounds.Left + 16, e.Bounds.Top + 1);
-                if (optionItem.icon != null) {
-                    e.Graphics.DrawImage(optionItem.icon, e.Bounds.Left, e.Bounds.Top + 1);
-                }
-            } else if (Items[e.Index].GetType() == typeof(KeyValuePair<string, ShinbokFrame>)) {
-
-                // For Shinbok gun frames
-                KeyValuePair<string, ShinbokFrame> option = (KeyValuePair<string, ShinbokFrame>)Items[e.Index];
-                ShinbokFrame optionItem = option.Value;
-                e.Graphics.DrawString(optionItem.name, e.Font, new SolidBrush(e.ForeColor), e.Bounds.Left + 16, e.Bounds.Top + 1);
-                if (optionItem.icon != null) {
-                    e.Graphics.DrawImage(optionItem.icon, e.Bounds.Left, e.Bounds.Top + 1);
-                }
-            } else if (Items[e.Index].GetType() == typeof(KeyValuePair<string, BoktaiItem>)) {
-
-                // For Boktai: TSiiYH items
-                KeyValuePair<string, BoktaiItem> option = (KeyValuePair<string, BoktaiItem>)Items[e.Index];
-                BoktaiItem optionItem = option.Value;
-                e.Graphics.DrawString(optionItem.name, e.Font, new SolidBrush(e.ForeColor), e.Bounds.Left + 16, e.Bounds.Top + 1);
-                if (optionItem.icon != null) {
-                    e.Graphics.DrawImage(optionItem.icon, e.Bounds.Left, e.Bounds.Top + 1);
-                }
-
-            } else {
-                // Default item
-                ImageComboBoxItem item = new(Items[e.Index].ToString());
-                e.Graphics.DrawString(item.Value, e.Font, new SolidBrush(e.ForeColor), e.Bounds.Left, e.Bounds.Top + 2);
+            object item = Items[e.Index];
+            switch (item) {
+                case KeyValuePair<string, Item> kvp:             // Boktai (series) items
+                    DrawItemWithIcon(kvp.Value, e);
+                    break;
+                case KeyValuePair<string, Weapon> kvp:           // Bok 2 & 3 weapons
+                    DrawItemWithIcon(kvp.Value, e);
+                    break;
+                case KeyValuePair<string, ShinbokLens> kvp:      // Bok 3 gun lenses
+                    DrawItemWithIcon(kvp.Value, e);
+                    break;
+                case KeyValuePair<string, ShinbokFrame> kvp:     // Bok 3 gun frames
+                    DrawItemWithIcon(kvp.Value, e);
+                    break;
+                case KeyValuePair<string, Accessory> kvp:        // Bok 2, 3, DS accessories
+                    DrawItemWithIcon(kvp.Value, e);
+                    GenerateToolTip(kvp.Value, e, BokInterface.shorterGameName == "Zoktai" ? ["defense", "weight", "effect"] : ["effect"]);
+                    break;
+                case KeyValuePair<string, Ability> kvp:          // Bok 2 & 3 weapon SP abilities
+                    using (SolidBrush brush = new(e.ForeColor)) {
+                        e.Graphics.DrawString(kvp.Value.name, e.Font, brush, e.Bounds.Left, e.Bounds.Top + 1);
+                    }
+                    break;
+                default:                                        // Default ImageComboBox items
+                    using (SolidBrush brush = new(e.ForeColor)) {
+                        e.Graphics.DrawString(item?.ToString(), e.Font, brush, e.Bounds.Left, e.Bounds.Top + 2);
+                    }
+                    break;
             }
 
             base.OnDrawItem(e);
         }
-    }
 
-    ///<summary>Class for default options shown in ImageComboBox's dropdown list</summary>
-    public class ImageComboBoxItem(string val) {
+        /// <summary>Draw the option for an ImageComboBoxItem</summary>
+        /// <param name="item">ImageComboBoxItem</param>
+        /// <param name="e">DrawItemEventArgs reference for drawing</param>
+        /// <param name="leftBoundOffset">Left offset for drawing (by default 16px)/param>
+        /// <param name="topBoundOffset">Top offset for drawing (by default 1px)</param>
+        protected void DrawItemWithIcon<T>(T item, DrawItemEventArgs e, int leftBoundOffset = 16, int topBoundOffset = 1) {
+            if (item == null) {
+                return;
+            }
 
-        private string _value = val;
+            // Check if the item has the required fields
+            FieldInfo nameField = item.GetType().GetField("name", BindingFlags.FlattenHierarchy | BindingFlags.Instance | BindingFlags.Public);
+            FieldInfo iconField = item.GetType().GetField("icon", BindingFlags.FlattenHierarchy | BindingFlags.Instance | BindingFlags.Public);
+            if (nameField == null || iconField == null) {
+                return;
+            }
 
-        public string Value {
-            get { return _value; }
-            set { _value = value; }
+            // Retrieve & draw the item's name
+            string name = (string)nameField.GetValue(item);
+            if (string.IsNullOrEmpty(name) == true) {
+                return;
+            }
+
+            using SolidBrush brush = new(e.ForeColor);
+            e.Graphics.DrawString(name, e.Font, brush, e.Bounds.Left + leftBoundOffset, e.Bounds.Top + topBoundOffset);
+
+            // Same as above for the item's icon
+            Image icon = (Image)iconField.GetValue(item);
+            if (icon != null) {
+                e.Graphics.DrawImage(icon, e.Bounds.Left, e.Bounds.Top + topBoundOffset);
+            }
         }
 
-        public ImageComboBoxItem() : this("") { }
+        /// <summary>Generate a tooltip for an ImageComboBoxItem</summary>
+        /// <param name="item">ImageComboBoxItem</param>
+        /// <param name="e">DrawItemEventArgs reference for drawing</param>
+        /// <param name="fields">Fields to show in the tooltip (each will be separated by "|")</param>
+        protected void GenerateToolTip<T>(T item, DrawItemEventArgs e, params string[] fields) {
+            if (item == null || fields.Length == 0) {
+                return;
+            }
 
-        public override string ToString() {
-            return _value;
+            // Check if the item has each field & construct the text for the tooltip
+            string text = "";
+            Type type = item.GetType();
+            foreach (string field in fields) {
+                FieldInfo info = type.GetField(field, BindingFlags.FlattenHierarchy | BindingFlags.Instance | BindingFlags.Public);
+                if (info == null) {
+                    return;
+                }
+
+                string value = info.GetValue(item).ToString();
+                if (string.IsNullOrEmpty(value) == false) {
+                    text += (text != "" ? " | " : "") + field switch {
+                        "defense" => $"DEF: {value}",
+                        "weight" => $"WEIGHT: {value}",
+                        _ => value
+                    };
+                }
+            }
+
+            // Add the tooltip if there is text to show
+            if (text != "" && (e.State & DrawItemState.Selected) == DrawItemState.Selected) {
+                _toolTip.Show(text, this, e.Bounds.Right, e.Bounds.Bottom, 2000);
+            }
         }
     }
 }
