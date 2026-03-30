@@ -228,8 +228,8 @@ namespace BokInterface.Utils {
         #region Formatting
 
         /// <summary>
-        /// <para>Format a memory address name for better readability</para>
-        /// <example>Example: "django_first_slot" => "Django first slot"</example>
+        ///     <para>Format a memory address name for better readability</para>
+        ///     <example>Example: "django_first_slot" => "Django first slot"</example>
         /// </summary>
         /// <param name="name">Name to format</param>
         /// <returns><c>String</c>Formatted name</returns>
@@ -259,9 +259,7 @@ namespace BokInterface.Utils {
         #region Weapon bonuses
 
         /// <summary>
-        ///     <para>
-        ///         Convert a value to its bonus or malus equivalent
-        ///     </para>
+        ///     <para>Convert a value to its bonus or malus equivalent</para>
         ///     <example>
         ///         Example :
         ///         <code>246 => -10</code>
@@ -284,9 +282,7 @@ namespace BokInterface.Utils {
         }
 
         /// <summary>
-        ///     <para>
-        ///         Convert a decimal to a weapon bonus or malus
-        ///     </para>
+        ///     <para>Convert a decimal to a weapon bonus or malus</para>
         ///     <example>
         ///         Example :
         ///         <code>5 => 5</code>
@@ -320,7 +316,7 @@ namespace BokInterface.Utils {
 
         /// <summary>Get the Solar bank's interest rate from the value stored in memory</summary>
         /// <param name="storedInterestRateValue">Value stored in memory (for example 66 for 3.125000)</param>
-        /// <returns><c>string</c>Solar bank interest rate</returns>
+        /// <returns><c>string</c>Solar Bank interest rate</returns>
         public static string GetInterestRateFromValue(uint storedInterestRateValue) {
             return (((storedInterestRateValue / 64.0) - 1.0) * 100.0).ToString("F6", System.Globalization.CultureInfo.InvariantCulture);
         }
