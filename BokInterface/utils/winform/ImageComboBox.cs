@@ -28,6 +28,7 @@ namespace BokInterface.Utils {
             switch (item) {
                 case KeyValuePair<string, Item> kvp:             // Boktai (series) items
                     DrawItemWithIcon(kvp.Value, e);
+                    GenerateToolTip(kvp.Value, e, ["effect"]);
                     break;
                 case KeyValuePair<string, Weapon> kvp:           // Bok 2 & 3 weapons
                     DrawItemWithIcon(kvp.Value, e);
