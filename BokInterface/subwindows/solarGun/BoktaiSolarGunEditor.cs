@@ -416,7 +416,7 @@ namespace BokInterface.solarGun {
                     }
 
                     // Check the corresponding button
-                    RadioButton btn = lensesButtons.Where(X => X.Name == btnName).FirstOrDefault();
+                    RadioButton btn = lensesButtons.FirstOrDefault(x => x.Name == btnName);
                     if (btn != null) {
                         btn.Checked = true;
                     }
@@ -443,7 +443,7 @@ namespace BokInterface.solarGun {
                  * uncheck all checkboxes & set grenades to 0
                  */
                 foreach (KeyValuePair<string, BoktaiLens> lens in _boktaiGuns.Lenses) {
-                    RadioButton btn = lensesButtons.Where(X => X.Name == lens.Key + "_none").FirstOrDefault();
+                    RadioButton btn = lensesButtons.FirstOrDefault(x => x.Name == lens.Key + "_none");
                     if (btn != null) {
                         btn.Checked = true;
                     }

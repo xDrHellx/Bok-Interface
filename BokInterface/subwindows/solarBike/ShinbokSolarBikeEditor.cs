@@ -167,7 +167,7 @@ namespace BokInterface.solarBike {
 
                 // If there is text, show the tooltip
                 if (string.IsNullOrEmpty(toolTipText) == false && (e.State & DrawItemState.Selected) == DrawItemState.Selected) {
-                    _toolTip.Show(toolTipText, dropdown, dropdown.Width, dropdown.Height, 2000);
+                    _toolTip.Show(toolTipText, dropdown, e.Bounds.Right, e.Bounds.Bottom, 2000);
                 }
             };
         }

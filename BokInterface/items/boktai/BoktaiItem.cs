@@ -1,6 +1,6 @@
 namespace BokInterface.Items {
     ///<summary>Class representing an item for Boktai</summary>
-    class BoktaiItem(string name, uint value, string icon = "", int amount = 0, int slot = 0) : Item(name, value, icon) {
+    class BoktaiItem(string name, uint value, string icon = "", string effect = "", int amount = 0, int slot = 0) : Item(name, value, icon, effect) {
 
         /// <summary>Amount for this item</summary>
         public int amount = amount;

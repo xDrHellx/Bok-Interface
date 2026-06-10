@@ -12,6 +12,8 @@ namespace BokInterface.Accessories {
         public string type;
         /// <summary>Accessory Icon</summary>
         public Image? icon = null;
+        /// <summary>Accessory effect(s)</summary>
+        public string effect;
         public int row;
         /// <summary>Indicates if obtained via CrossOver points</summary>
         public bool crossOver;
@@ -22,10 +24,11 @@ namespace BokInterface.Accessories {
         /// <summary>Resource library for retrieving the icon</summary>
         protected abstract string library { get; }
 
-        public Accessory(string name, uint value, string type, string icon = "", int row = 1, int buyPrice = 0, bool crossOver = false) {
+        public Accessory(string name, uint value, string type, string icon = "", string effect = "", int row = 1, int buyPrice = 0, bool crossOver = false) {
             this.name = name;
             this.value = value;
             this.type = type;
+            this.effect = effect;
             this.row = row;
             this.crossOver = crossOver;
             this.buyPrice = buyPrice;

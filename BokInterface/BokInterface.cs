@@ -221,8 +221,8 @@ namespace BokInterface {
         #region Game detection
 
         /// <summary>
-        ///     Detects the current game <br/>
-        ///     This stores the game's ID in currentGameId and its name in currentGameName
+        ///     Detects the current game.<br/>
+        ///     This stores the game's ID in currentGameId and its name in currentGameName.
         /// </summary>
         protected void DetectCurrentGame() {
 
@@ -253,7 +253,7 @@ namespace BokInterface {
                     _supportedGame = true;
                     _isDS = false;
                     break;
-                case 1244869461:
+                case 1244869461:    // JP
                     currentGameName = "Boktai 3: Sabata's Counterattack";
                     shorterGameName = "Shinbok";
                     _supportedGame = true;
