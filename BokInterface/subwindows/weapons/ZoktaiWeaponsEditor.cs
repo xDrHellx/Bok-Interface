@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 using System.Windows.Forms;
 
@@ -33,7 +34,7 @@ namespace BokInterface.Weapons {
             Owner = _bokInterface = bokInterface;
             Icon = _bokInterface.Icon;
 
-            SetFormParameters(699, 326, name, text);
+            SetFormParameters(699, 341, name, text);
             AddElements();
             Show();
         }
@@ -45,7 +46,7 @@ namespace BokInterface.Weapons {
         protected override void AddElements() {
 
             // Add Panel, slot groups & options for dropdowns
-            slotsPanel = WinFormHelpers.CreatePanel("slots_panel", 5, 79, 690, 243, this);
+            slotsPanel = WinFormHelpers.CreatePanel("slots_panel", 5, 94, 690, 244, this);
             GenerateGroups();
             GenerateDropDownOptions();
 
@@ -55,7 +56,7 @@ namespace BokInterface.Weapons {
             // Set default values for each field
             SetDefaultValues();
 
-            AddSetValuesButton(620, 50, this);
+            AddSetValuesButton(620, 65, this);
         }
 
         /// <summary>Separated method for generating groups with subelements</summary>
@@ -76,9 +77,15 @@ namespace BokInterface.Weapons {
                     // Bonus / malus & durability
                     CheckGroupBox bonusGroup = WinFormHelpers.CreateCheckGroupBox($"slot{i}_bonus_group", "Bonus | Malus", 5, 48, 150, 77, control: group);
                     WinFormHelpers.CreateLabel($"slot{i}_bonus_label", "Bonus | malus", 2, 21, 81, 15, control: bonusGroup);
-                    numericUpDowns.Add(WinFormHelpers.CreateNumericUpDown($"inventory_slot{i}_weapon_bonus", 0, 98, 19, 47, 23, -10, 10, control: bonusGroup, enabled: false));
+
+                    NumericUpDown bonusField = WinFormHelpers.CreateNumericUpDown($"inventory_slot{i}_weapon_bonus", 0, 98, 19, 47, 23, -10, 10, control: bonusGroup, enabled: false);
+                    bonusField.ValueChanged += UpdateDurabilityField;
+                    numericUpDowns.Add(bonusField);
+
                     WinFormHelpers.CreateLabel($"slot{i}_durability_label", "Durability", 2, 50, 58, 15, control: bonusGroup);
-                    numericUpDowns.Add(WinFormHelpers.CreateNumericUpDown($"inventory_slot{i}_weapon_durability", 0, 98, 48, 47, 23, maxValue: 200, control: bonusGroup, enabled: false));
+                    NumericUpDown durabilityField = WinFormHelpers.CreateNumericUpDown($"inventory_slot{i}_weapon_durability", 0, 98, 48, 47, 23, maxValue: 200, control: bonusGroup, enabled: false);
+                    durabilityField.ValueChanged += UpdateDurabilityBasedOnBonusField;
+                    numericUpDowns.Add(durabilityField);
 
                     // SP abilities
                     CheckGroupBox spAbilitiesGroup = WinFormHelpers.CreateCheckGroupBox($"slot{i}_sp_abilities_group", "SP abilities", 5, 129, 150, 107, control: group);
@@ -122,8 +129,9 @@ namespace BokInterface.Weapons {
                 "Regarding SP abilities and bonus or malus for a weapon :"
                 + "\r\n- A weapon can have SP abilities and a bonus or malus"
                 + "\r\n- Weapons with a bonus or malus have a durability value"
-                + "\r\n- When the value reaches a certain threshold, the bonus decreases by 1",
-                5, 5, 424, 68, this, readOnly: true
+                + "\r\n- When the value reaches a certain threshold, the bonus decreases by 1"
+                + "\r\n- If there is a malus (or just no bonus), durability will be set to 0 (game behavior)",
+                5, 5, 434, 83, this, readOnly: true
             );
         }
 
@@ -308,6 +316,40 @@ namespace BokInterface.Weapons {
                 _memoryValues.Inventory["slot" + slot + "_weapon_forgedBy_2"].Value = 1699637359;
                 _memoryValues.Inventory["slot" + slot + "_weapon_forgedBy_3"].Value = 1802663796;
             }
+        }
+
+        /// <summary>Update durability field based on related bonus | malus field</summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void UpdateDurabilityField(object sender, EventArgs e) {
+            NumericUpDown bonusField = (NumericUpDown)sender;
+            if (bonusField.Value > 0) {
+                return;
+            }
+
+            // If the bonus | malus is 0, set durability to 0 (simulating intended game behavior)
+            string[] keyParts = bonusField.Name.Split(['_'], 3);
+            NumericUpDown durabilityField = numericUpDowns.FirstOrDefault(x => x.Name == (keyParts[0] + "_" + keyParts[1] + "_" + "weapon_durability"));
+            if (durabilityField != null) {
+                durabilityField.Value = 0;
+            }
+        }
+
+        /// <summary>Update durability field based on bonus | malus field</summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void UpdateDurabilityBasedOnBonusField(object sender, EventArgs e) {
+            NumericUpDown durabilityField = (NumericUpDown)sender;
+
+            // Get the related bonus | malus field
+            string[] keyParts = durabilityField.Name.Split(['_'], 3);
+            NumericUpDown bonusField = numericUpDowns.FirstOrDefault(x => x.Name == (keyParts[0] + "_" + keyParts[1] + "_weapon_bonus"));
+            if (bonusField == null || bonusField.Value > 0) {
+                return;
+            }
+
+            // If bonus | malus is less or equal to 0, set durability to 0 (simulating intended game behavior)
+            durabilityField.Value = 0;
         }
 
         #endregion
