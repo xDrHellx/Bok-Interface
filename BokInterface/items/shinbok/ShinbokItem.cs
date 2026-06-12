@@ -4,7 +4,7 @@ namespace BokInterface.Items {
 
         protected override string library { get => "ShinbokResources"; }
 
-        public ShinbokItem(string name, uint value, string icon = "", bool perishable = false, int durability = 0, Item? coveredItem = null, int buyPrice = 0) : base(name, value, icon, perishable, durability, coveredItem, buyPrice) {
+        public ShinbokItem(string name, uint value, string icon = "", string effect = "", bool perishable = false, int durability = 0, Item? coveredItem = null, int buyPrice = 0) : base(name, value, icon, effect, perishable, durability, coveredItem, buyPrice) {
 
             /**
              * If this item is perishable, set the item it will turn into to the property

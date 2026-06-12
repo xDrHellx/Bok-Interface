@@ -8,6 +8,8 @@ namespace BokInterface.Items {
         public string name;
         ///<summary>Value (decimal)<summary>
         public uint value;
+        /// <summary>Item effect(s)</summary>
+        public string effect;
         ///<summary>Indicates if the item can is perishable (becomes rotten or melts)</summary>
         public bool perishable;
         ///<summary>Item durability if it can melt or become rotten</summary>
@@ -29,9 +31,10 @@ namespace BokInterface.Items {
         /// <summary>Resource library for retrieving the icon</summary>
         protected abstract string library { get; }
 
-        public Item(string name, uint value, string icon = "", bool perishable = false, int durability = 0, Item? coveredItem = null, int buyPrice = 0) {
+        public Item(string name, uint value, string icon = "", string effect = "", bool perishable = false, int durability = 0, Item? coveredItem = null, int buyPrice = 0) {
             this.name = name;
             this.value = value;
+            this.effect = effect;
             this.perishable = perishable;
             this.coveredItem = coveredItem;
             this.buyPrice = buyPrice;
