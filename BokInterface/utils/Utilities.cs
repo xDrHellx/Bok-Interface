@@ -32,7 +32,7 @@ namespace BokInterface.Utils {
 
         /// <summary>Shortcut method for retrieving the value of a memory address</summary>
         /// <param name="address">Address to read</param>
-        /// <param name="type">Type of method to use for reading the address (by default "U16" because it is the most common one)</param>
+        /// <param name="type">Type of method to use for reading the address (by default "U16" because it is the most common one in this case)</param>
         /// <param name="domain">Domain the address belongs to (by default none is specified because it is not always necessary)</param>
         /// <returns><c>uint</c>Value</returns>
         public static uint ReadMemoryAddress(uint address, string type = "U16", string? domain = null) {
@@ -46,7 +46,7 @@ namespace BokInterface.Utils {
 
         /// <summary>Shortcut method for retrieving the value of a memory address</summary>
         /// <param name="address">Address to read</param>
-        /// <param name="type">Type of method to use for reading the address (by default "S16" because it is the most common one)</param>
+        /// <param name="type">Type of method to use for reading the address (by default "S16" because it is the most common one in this case)</param>
         /// <param name="domain">Domain the address belongs to (by default none is specified because it is not always necessary)</param>
         /// <returns><c>int</c>Value</returns>
         public static int ReadMemoryAddress(int address, string type = "S16", string? domain = null) {
@@ -61,7 +61,7 @@ namespace BokInterface.Utils {
         /// <summary>Shortcut method for setting the value of a memory address</summary>
         /// <param name="address">Address to write to</param>
         /// <param name="value">Value to set</param>
-        /// <param name="type">Type of method to use for writing to the address (by default "U16" because it is the most common one)</param>
+        /// <param name="type">Type of method to use for writing to the address (by default "U16" because it is the most common one in this case)</param>
         /// <param name="domain">Domain the address belongs to (by default none is specified because it is not always necessary)</param>
         /// <returns><c>uint</c>Value</returns>
         public static void WriteMemoryAddress(uint address, uint value, string type = "U16", string? domain = null) {
@@ -84,7 +84,7 @@ namespace BokInterface.Utils {
         /// <summary>Shortcut method for setting the value of a memory address</summary>
         /// <param name="address">Address to write to</param>
         /// <param name="value">Value to set</param>
-        /// <param name="type">Type of method to use for writing to the address (by default "S16" because it is the most common one)</param>
+        /// <param name="type">Type of method to use for writing to the address (by default "S16" because it is the most common one in this case)</param>
         /// <param name="domain">Domain the address belongs to (by default none is specified because it is not always necessary)</param>
         /// <returns><c>uint</c>Value</returns>
         public static void WriteMemoryAddress(uint address, int value, string type = "S16", string? domain = null) {
@@ -228,8 +228,8 @@ namespace BokInterface.Utils {
         #region Formatting
 
         /// <summary>
-        /// <para>Format a memory address name for better readability</para>
-        /// <example>Example: "django_first_slot" => "Django first slot"</example>
+        ///     <para>Format a memory address name for better readability</para>
+        ///     <example>Example: "django_first_slot" => "Django first slot"</example>
         /// </summary>
         /// <param name="name">Name to format</param>
         /// <returns><c>String</c>Formatted name</returns>
@@ -239,7 +239,7 @@ namespace BokInterface.Utils {
             }
 
             string formattedName = name.Replace("_", " ");
-            return string.Concat(formattedName[0].ToString().ToUpper(), formattedName.Substring(1));
+            return string.Concat(formattedName[0].ToString().ToUpper(), formattedName[1..]);
         }
 
         /// <summary>Format time to a proper 24h format</summary>
@@ -259,9 +259,7 @@ namespace BokInterface.Utils {
         #region Weapon bonuses
 
         /// <summary>
-        ///     <para>
-        ///         Convert a value to its bonus or malus equivalent
-        ///     </para>
+        ///     <para>Convert a value to its bonus or malus equivalent</para>
         ///     <example>
         ///         Example :
         ///         <code>246 => -10</code>
@@ -284,9 +282,7 @@ namespace BokInterface.Utils {
         }
 
         /// <summary>
-        ///     <para>
-        ///         Convert a decimal to a weapon bonus or malus
-        ///     </para>
+        ///     <para>Convert a decimal to a weapon bonus or malus</para>
         ///     <example>
         ///         Example :
         ///         <code>5 => 5</code>
@@ -320,7 +316,7 @@ namespace BokInterface.Utils {
 
         /// <summary>Get the Solar bank's interest rate from the value stored in memory</summary>
         /// <param name="storedInterestRateValue">Value stored in memory (for example 66 for 3.125000)</param>
-        /// <returns><c>string</c>Solar bank interest rate</returns>
+        /// <returns><c>string</c>Solar Bank interest rate</returns>
         public static string GetInterestRateFromValue(uint storedInterestRateValue) {
             return (((storedInterestRateValue / 64.0) - 1.0) * 100.0).ToString("F6", System.Globalization.CultureInfo.InvariantCulture);
         }

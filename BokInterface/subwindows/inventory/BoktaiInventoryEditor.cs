@@ -17,6 +17,7 @@ namespace BokInterface.Inventory {
         private readonly BoktaiAddresses _boktaiAddresses;
         private readonly BoktaiItems _boktaiItems;
         protected TabControl inventoryTabControl = new();
+        private readonly ToolTip _toolTip = new();
 
         #endregion
 
@@ -51,7 +52,7 @@ namespace BokInterface.Inventory {
             SetDefaultValues();
 
             // Add warning
-            Label expWarning = WinFormHelpers.CreateImageLabel("tooltip", "warning", 5, 382, this);
+            WinFormHelpers.CreateImageLabel("tooltip", "warning", 5, 382, this);
             WinFormHelpers.CreateLabel("warning", "Graphics will be updated upon switching tab in-game.", 23, 375, 293, 30, this, textAlignment: "MiddleLeft");
 
             AddSetValuesButton(315, 382, this);
@@ -75,8 +76,11 @@ namespace BokInterface.Inventory {
 
                 // Add fields for that item
                 CheckGroupBox group = WinFormHelpers.CreateCheckGroupBox(entry.Key + "_grp", item.name, posX, posY, 110, 64, control: itemsTab);
-                WinFormHelpers.CreatePictureBox(entry.Key + "_img", item.icon, 8, 24, group);
+                PictureBox icon = WinFormHelpers.CreatePictureBox(entry.Key + "_img", item.icon, 8, 24, group);
                 WinFormHelpers.CreateLabel(entry.Key + "_label", "Amount", 54, 17, 55, 18, group);
+                if (item.effect != null) {
+                    _toolTip.SetToolTip(icon, item.effect);
+                }
 
                 NumericUpDown amountField = WinFormHelpers.CreateNumericUpDown(entry.Key + "_amount", 0, 61, 35, 44, 18, control: group);
                 amountField.Tag = item.value;
@@ -108,8 +112,11 @@ namespace BokInterface.Inventory {
                 }
 
                 CheckGroupBox group = WinFormHelpers.CreateCheckGroupBox(entry.Key + "_grp", keyItem.name, posX, posY, 120, 64, control: keyItemsTab);
-                WinFormHelpers.CreatePictureBox(entry.Key + "_img", keyItem.icon, 8, 24, group);
+                PictureBox icon = WinFormHelpers.CreatePictureBox(entry.Key + "_img", keyItem.icon, 8, 24, group);
                 WinFormHelpers.CreateLabel(entry.Key + "_label", "Amount", 64, 17, 55, 18, group);
+                if (keyItem.effect != null) {
+                    _toolTip.SetToolTip(icon, keyItem.effect);
+                }
 
                 NumericUpDown amountField = WinFormHelpers.CreateNumericUpDown(entry.Key + "_amount", 0, 71, 35, 44, 18, control: group);
                 amountField.Tag = keyItem.value;
