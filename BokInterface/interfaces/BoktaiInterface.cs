@@ -144,13 +144,13 @@ namespace BokInterface {
                  * If the downloadable event is already enabled, check the menu item & stop
                  * That event cannot be disabled except by deleting savefiles or loading savestates
                  */
-                if (_memoryValues.Misc["astro_battery_unlocked"].Value == _boktaiAddresses.Misc["astro_battery_unlock_value"].Value) {
+                if (_memoryValues.Misc["astro_battery_unlock_password"].Value == _boktaiAddresses.Misc["astro_battery_unlock_event"].Value) {
                     _enableAstroBattery.Checked = true;
                     return;
                 }
 
                 _enableAstroBattery.Checked = !_enableAstroBattery.Checked;
-                _memoryValues.Misc["astro_battery_unlocked"].Value = _enableAstroBattery.Checked == true ? _boktaiAddresses.Misc["astro_battery_unlock_value"].Value : 0x0;
+                _boktaiAddresses.Misc["astro_battery_unlock_event"].Value = _enableAstroBattery.Checked == true ? _memoryValues.Misc["astro_battery_unlock_password"].Value : 0x0;
             };
         }
 
