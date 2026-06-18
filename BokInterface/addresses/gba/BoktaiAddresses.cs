@@ -129,8 +129,8 @@ namespace BokInterface.Addresses {
             Misc.Add("x_camera", new MemoryAddress(0x030046E8, "Camera X position", domain: "IWRAM"));
             Misc.Add("y_camera", new MemoryAddress(0x030046EA, "Camera Y position", domain: "IWRAM"));
             Misc.Add("z_camera", new MemoryAddress(0x030046EC, "Camera Z position", domain: "IWRAM"));
-            Misc.Add("astro_battery_unlock_password", new MemoryAddress(0x7DC, "Password for unlocking the Astro Battery", type: "U32", domain: "IWRAM"));
-            Misc.Add("astro_battery_unlock_value", new MemoryAddress(0x0203D8B0, "Must be set to the password address to unlock the Astro Battery", "U32", "EWRAM"));
+            Misc.Add("astro_battery_unlock_password", new MemoryAddress(0x7DC, "Part of the password for unlocking the Astro Battery", type: "U32", domain: "IWRAM"));
+            Misc.Add("astro_battery_unlock_event", new MemoryAddress(0x0203D8B0, "Must be set to the value of (actor + astro_battery_unlock_password combined) addresses to enable the Astro Battery event", "U32", "EWRAM"));
             Misc.Add("action_difficulty", new MemoryAddress(0x0203E8BC, "Action difficulty setting (0 = Easy | 1 = Normal | 2 = Hard)", domain: "System Bus"));
             Misc.Add("rng_index", new MemoryAddress(0x03004620, type: "U32", domain: "IWRAM"));
         }

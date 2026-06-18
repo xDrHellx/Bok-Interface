@@ -63,8 +63,8 @@ namespace BokInterface.Addresses {
         private void InitializeBoktaiList() {
             BoktaiAddresses memoryAddresses = new();
 
-            // Astro battery
-            Misc.Add("astro_battery_unlocked", new DynamicMemoryValue("astro_battery_unlocked", memoryAddresses.Misc["actor"].Address, memoryAddresses.Misc["astro_battery_unlock_password"].Address, memoryAddresses.Misc["actor"].Type));
+            // Astro battery event
+            Misc.Add("astro_battery_unlock_password", new DynamicMemoryValue("astro_battery_unlock_password", memoryAddresses.Misc["actor"].Address, memoryAddresses.Misc["astro_battery_unlock_password"].Address, memoryAddresses.Misc["actor"].Type));
 
             // Coffin
             Coffin.Add("damage", new DynamicMemoryValue("damage", memoryAddresses.Coffin["actor"].Address, memoryAddresses.Coffin["damage"].Address));
