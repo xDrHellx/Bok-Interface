@@ -1,25 +1,25 @@
 using System.Collections.Generic;
 using System.Windows.Forms;
 
-namespace BokInterface.Magics {
-    /// <summary>Basis class for magics editor subclasses</summary>
-    abstract class MagicsEditor : Editor {
+namespace BokInterface.Magics;
 
-        #region Properties
+/// <summary>Basis class for magics editor subclasses</summary>
+abstract class MagicsEditor : Editor {
 
-        protected new readonly string name = "magicsEditWindow",
-            text = "Magics editor";
+    #region Properties
 
-        #endregion
+    protected new readonly string name = "magicsEditWindow",
+        text = "Magics editor";
 
-        #region Form elements
+    #endregion
 
-        protected readonly List<CheckBox> checkBoxes = [];
+    #region Form elements
 
-        #endregion
+    protected readonly List<CheckBox> checkBoxes = [];
 
-        #region Methods
+    #endregion
 
-        #endregion
-    }
+    #region Methods
+
+    #endregion
 }

@@ -8,350 +8,350 @@ using BokInterface.Abilities;
 using BokInterface.Addresses;
 using BokInterface.Utils;
 
-namespace BokInterface.Weapons {
-    /// <summary>Weapons editor for Boktai 2</summary>
-    class ZoktaiWeaponsEditor : WeaponsEditor {
+namespace BokInterface.Weapons;
 
-        #region Properties
+/// <summary>Weapons editor for Boktai 2</summary>
+class ZoktaiWeaponsEditor : WeaponsEditor {
 
-        private readonly MemoryValues _memoryValues;
-        private readonly BokInterface _bokInterface;
-        private readonly ZoktaiAddresses _zoktaiAddresses;
-        private readonly ZoktaiWeapons _zoktaiWeapons;
-        private readonly ZoktaiAbilities _zoktaiAbilities;
+    #region Properties
 
-        #endregion
+    private readonly MemoryValues _memoryValues;
+    private readonly BokInterface _bokInterface;
+    private readonly ZoktaiAddresses _zoktaiAddresses;
+    private readonly ZoktaiWeapons _zoktaiWeapons;
+    private readonly ZoktaiAbilities _zoktaiAbilities;
 
-        #region Constructor
+    #endregion
 
-        public ZoktaiWeaponsEditor(BokInterface bokInterface, MemoryValues memoryValues, ZoktaiAddresses zoktaiAddresses) {
+    #region Constructor
 
-            _memoryValues = memoryValues;
-            _zoktaiAddresses = zoktaiAddresses;
-            _zoktaiWeapons = new();
-            _zoktaiAbilities = new();
+    public ZoktaiWeaponsEditor(BokInterface bokInterface, MemoryValues memoryValues, ZoktaiAddresses zoktaiAddresses) {
 
-            Owner = _bokInterface = bokInterface;
-            Icon = _bokInterface.Icon;
+        _memoryValues = memoryValues;
+        _zoktaiAddresses = zoktaiAddresses;
+        _zoktaiWeapons = new();
+        _zoktaiAbilities = new();
 
-            SetFormParameters(699, 341, name, text);
-            AddElements();
-            Show();
-        }
+        Owner = _bokInterface = bokInterface;
+        Icon = _bokInterface.Icon;
 
-        #endregion
+        SetFormParameters(699, 341, name, text);
+        AddElements();
+        Show();
+    }
 
-        #region Elements
+    #endregion
 
-        protected override void AddElements() {
+    #region Elements
 
-            // Add Panel, slot groups & options for dropdowns
-            slotsPanel = WinFormHelpers.CreatePanel("slots_panel", 5, 94, 690, 244, this);
-            GenerateGroups();
-            GenerateDropDownOptions();
+    protected override void AddElements() {
 
-            // Add informative text
-            AddInformativeText();
+        // Add Panel, slot groups & options for dropdowns
+        slotsPanel = WinFormHelpers.CreatePanel("slots_panel", 5, 94, 690, 244, this);
+        GenerateGroups();
+        GenerateDropDownOptions();
 
-            // Set default values for each field
-            SetDefaultValues();
+        // Add informative text
+        AddInformativeText();
 
-            AddSetValuesButton(620, 65, this);
-        }
+        // Set default values for each field
+        SetDefaultValues();
 
-        /// <summary>Separated method for generating groups with subelements</summary>
-        protected void GenerateGroups() {
-            int xPos = 0,
-                yPos = 3;
-            for (int i = 1; i < 17; i++) {
+        AddSetValuesButton(620, 65, this);
+    }
 
-                // Generate group
-                PropertyInfo property = GetType().GetProperty($"slot{i}group", BindingFlags.Instance | BindingFlags.NonPublic);
-                if (property != null) {
-                    CheckGroupBox group = WinFormHelpers.CreateCheckGroupBox($"slot{i}group", $"Slot {i}", xPos, yPos, 160, 241, control: slotsPanel);
-                    property.SetValue(this, group);
+    /// <summary>Separated method for generating groups with subelements</summary>
+    protected void GenerateGroups() {
+        int xPos = 0,
+            yPos = 3;
+        for (int i = 1; i < 17; i++) {
 
-                    // Dropdown
-                    dropDownLists.Add(WinFormHelpers.CreateImageDropdownList($"inventory_slot{i}_weapon", 5, 19, 150, 23, group, visibleOptions: 5, enabled: false));
+            // Generate group
+            PropertyInfo property = GetType().GetProperty($"slot{i}group", BindingFlags.Instance | BindingFlags.NonPublic);
+            if (property != null) {
+                CheckGroupBox group = WinFormHelpers.CreateCheckGroupBox($"slot{i}group", $"Slot {i}", xPos, yPos, 160, 241, control: slotsPanel);
+                property.SetValue(this, group);
 
-                    // Bonus / malus & durability
-                    CheckGroupBox bonusGroup = WinFormHelpers.CreateCheckGroupBox($"slot{i}_bonus_group", "Bonus | Malus", 5, 48, 150, 77, control: group);
-                    WinFormHelpers.CreateLabel($"slot{i}_bonus_label", "Bonus | malus", 2, 21, 81, 15, control: bonusGroup);
+                // Dropdown
+                dropDownLists.Add(WinFormHelpers.CreateImageDropdownList($"inventory_slot{i}_weapon", 5, 19, 150, 23, group, visibleOptions: 5, enabled: false));
 
-                    NumericUpDown bonusField = WinFormHelpers.CreateNumericUpDown($"inventory_slot{i}_weapon_bonus", 0, 98, 19, 47, 23, -10, 10, control: bonusGroup, enabled: false);
-                    bonusField.ValueChanged += UpdateDurabilityField;
-                    numericUpDowns.Add(bonusField);
+                // Bonus / malus & durability
+                CheckGroupBox bonusGroup = WinFormHelpers.CreateCheckGroupBox($"slot{i}_bonus_group", "Bonus | Malus", 5, 48, 150, 77, control: group);
+                WinFormHelpers.CreateLabel($"slot{i}_bonus_label", "Bonus | malus", 2, 21, 81, 15, control: bonusGroup);
 
-                    WinFormHelpers.CreateLabel($"slot{i}_durability_label", "Durability", 2, 50, 58, 15, control: bonusGroup);
-                    NumericUpDown durabilityField = WinFormHelpers.CreateNumericUpDown($"inventory_slot{i}_weapon_durability", 0, 98, 48, 47, 23, maxValue: 200, control: bonusGroup, enabled: false);
-                    durabilityField.ValueChanged += UpdateDurabilityBasedOnBonusField;
-                    numericUpDowns.Add(durabilityField);
+                NumericUpDown bonusField = WinFormHelpers.CreateNumericUpDown($"inventory_slot{i}_weapon_bonus", 0, 98, 19, 47, 23, -10, 10, control: bonusGroup, enabled: false);
+                bonusField.ValueChanged += UpdateDurabilityField;
+                numericUpDowns.Add(bonusField);
 
-                    // SP abilities
-                    CheckGroupBox spAbilitiesGroup = WinFormHelpers.CreateCheckGroupBox($"slot{i}_sp_abilities_group", "SP abilities", 5, 129, 150, 107, control: group);
-                    dropDownLists.Add(WinFormHelpers.CreateImageDropdownList($"inventory_slot{i}_weapon_sp_ability_1", 5, 19, 140, 23, spAbilitiesGroup, visibleOptions: 5, dropDownWidth: 350, enabled: false));
-                    dropDownLists.Add(WinFormHelpers.CreateImageDropdownList($"inventory_slot{i}_weapon_sp_ability_2", 5, 48, 140, 23, spAbilitiesGroup, visibleOptions: 5, dropDownWidth: 350, enabled: false));
-                    dropDownLists.Add(WinFormHelpers.CreateImageDropdownList($"inventory_slot{i}_weapon_sp_ability_3", 5, 77, 140, 23, spAbilitiesGroup, visibleOptions: 5, dropDownWidth: 350, enabled: false));
-                }
+                WinFormHelpers.CreateLabel($"slot{i}_durability_label", "Durability", 2, 50, 58, 15, control: bonusGroup);
+                NumericUpDown durabilityField = WinFormHelpers.CreateNumericUpDown($"inventory_slot{i}_weapon_durability", 0, 98, 48, 47, 23, maxValue: 200, control: bonusGroup, enabled: false);
+                durabilityField.ValueChanged += UpdateDurabilityBasedOnBonusField;
+                numericUpDowns.Add(durabilityField);
 
-                // Offsets for position
-                xPos += 166;
-                if ((i % 4) == 0) {
-                    xPos = 0;
-                    yPos += 248;
-                }
-            }
-        }
-
-        /// <summary>Generate the options for the weapon selection and SP abilities dropdowns</summary>
-        private void GenerateDropDownOptions() {
-            foreach (ImageComboBox dropdown in dropDownLists) {
-
-                // Indicate what the dropdown field is for
-                string[] fieldParts = dropdown.Name.Split(['_'], 4);
-                if (fieldParts.Length >= 4 && fieldParts[3] != null && fieldParts[3][..10] == "sp_ability") {
-                    // If dropdown is for an SP ability
-                    dropdown.DataSource = new BindingSource(_zoktaiAbilities.Weapons, null);
-                    dropdown.DisplayMember = "Key";
-                    dropdown.ValueMember = "Value";
-                } else {
-                    // If dropdown is for the weapon itself
-                    dropdown.DataSource = new BindingSource(_zoktaiWeapons.All, null);
-                    dropdown.DisplayMember = "Key";
-                    dropdown.ValueMember = "Value";
-                }
-            }
-        }
-
-        /// <summary>Add informative text regarding weapons</summary>
-        protected void AddInformativeText() {
-            WinFormHelpers.CreateTextBox("weaponInfoText",
-                "Regarding SP abilities and bonus or malus for a weapon :"
-                + "\r\n- A weapon can have SP abilities and a bonus or malus"
-                + "\r\n- Weapons with a bonus or malus have a durability value"
-                + "\r\n- When the value reaches a certain threshold, the bonus decreases by 1"
-                + "\r\n- If there is a malus (or just no bonus), durability will be set to 0 (game behavior)",
-                5, 5, 434, 83, this, readOnly: true
-            );
-        }
-
-        #endregion
-
-        #region Values setting
-
-        protected override void SetValues() {
-
-            // Store the previous setting for BizHawk being paused
-            _bokInterface._previousIsPauseSetting = APIs.Client.IsPaused();
-
-            // Pause BizHawk
-            APIs.Client.Pause();
-
-            // Sets values for each slot's dropdown
-            for (int i = 0; i < dropDownLists.Count; i++) {
-
-                // If the dropdown is disabled, skip it
-                if (dropDownLists[i].Enabled == false) {
-                    continue;
-                }
-
-                /**
-                 * Indicate which sublist to use for setting the value, based on the slot's name
-                 * Also indicate if we're setting the value for a weapon or an SP ability
-                 */
-                string[] fieldParts = dropDownLists[i].Name.Split(['_'], 4);
-                if (fieldParts.Length >= 4 && fieldParts[3] != null && fieldParts[3].Substring(0, 10) == "sp_ability") {
-                    // SP ability
-                    string key = fieldParts[1] + "_" + fieldParts[2] + "_" + fieldParts[3];
-                    KeyValuePair<string, Ability> selectedOption = (KeyValuePair<string, Ability>)dropDownLists[i].SelectedItem;
-                    Ability selectedItem = selectedOption.Value;
-                    SetMemoryValue(fieldParts[0], key, selectedItem.value);
-                } else {
-                    // Weapon
-                    string key = fieldParts[1] + "_" + fieldParts[2];
-                    KeyValuePair<string, Weapon> selectedOption = (KeyValuePair<string, Weapon>)dropDownLists[i].SelectedItem;
-                    Weapon selectedItem = selectedOption.Value;
-                    SetMemoryValue(fieldParts[0], key, selectedItem.value);
-
-                    // In this case also set the "Forged by" name on the weapon
-                    string slotNumber = fieldParts[1].Substring(4, fieldParts[1].Length == 6 ? 2 : 1);
-                    SetWeaponForgedByName(Convert.ToInt32(slotNumber));
-                }
+                // SP abilities
+                CheckGroupBox spAbilitiesGroup = WinFormHelpers.CreateCheckGroupBox($"slot{i}_sp_abilities_group", "SP abilities", 5, 129, 150, 107, control: group);
+                dropDownLists.Add(WinFormHelpers.CreateImageDropdownList($"inventory_slot{i}_weapon_sp_ability_1", 5, 19, 140, 23, spAbilitiesGroup, visibleOptions: 5, dropDownWidth: 350, enabled: false));
+                dropDownLists.Add(WinFormHelpers.CreateImageDropdownList($"inventory_slot{i}_weapon_sp_ability_2", 5, 48, 140, 23, spAbilitiesGroup, visibleOptions: 5, dropDownWidth: 350, enabled: false));
+                dropDownLists.Add(WinFormHelpers.CreateImageDropdownList($"inventory_slot{i}_weapon_sp_ability_3", 5, 77, 140, 23, spAbilitiesGroup, visibleOptions: 5, dropDownWidth: 350, enabled: false));
             }
 
-            // Repeat the above process for bonuses / maluses & durabilities (numericUpDowns)
-            for (int i = 0; i < numericUpDowns.Count; i++) {
+            // Offsets for position
+            xPos += 166;
+            if ((i % 4) == 0) {
+                xPos = 0;
+                yPos += 248;
+            }
+        }
+    }
 
-                if (numericUpDowns[i].Enabled == false) {
-                    continue;
-                }
+    /// <summary>Generate the options for the weapon selection and SP abilities dropdowns</summary>
+    private void GenerateDropDownOptions() {
+        foreach (ImageComboBox dropdown in dropDownLists) {
 
-                // Get the field's value & indicate which sublist to use for setting the value to the memory
-                decimal value = numericUpDowns[i].Value;
-                string[] fieldParts = numericUpDowns[i].Name.Split(['_'], 2);
-                SetMemoryValue(fieldParts[0], fieldParts[1], value);
+            // Indicate what the dropdown field is for
+            string[] fieldParts = dropdown.Name.Split(['_'], 4);
+            if (fieldParts.Length >= 4 && fieldParts[3] != null && fieldParts[3][..10] == "sp_ability") {
+                // If dropdown is for an SP ability
+                dropdown.DataSource = new BindingSource(_zoktaiAbilities.Weapons, null);
+                dropdown.DisplayMember = "Key";
+                dropdown.ValueMember = "Value";
+            } else {
+                // If dropdown is for the weapon itself
+                dropdown.DataSource = new BindingSource(_zoktaiWeapons.All, null);
+                dropdown.DisplayMember = "Key";
+                dropdown.ValueMember = "Value";
+            }
+        }
+    }
+
+    /// <summary>Add informative text regarding weapons</summary>
+    protected void AddInformativeText() {
+        WinFormHelpers.CreateTextBox("weaponInfoText",
+            "Regarding SP abilities and bonus or malus for a weapon :"
+            + "\r\n- A weapon can have SP abilities and a bonus or malus"
+            + "\r\n- Weapons with a bonus or malus have a durability value"
+            + "\r\n- When the value reaches a certain threshold, the bonus decreases by 1"
+            + "\r\n- If there is a malus (or just no bonus), durability will be set to 0 (game behavior)",
+            5, 5, 434, 83, this, readOnly: true
+        );
+    }
+
+    #endregion
+
+    #region Values setting
+
+    protected override void SetValues() {
+
+        // Store the previous setting for BizHawk being paused
+        _bokInterface._previousIsPauseSetting = APIs.Client.IsPaused();
+
+        // Pause BizHawk
+        APIs.Client.Pause();
+
+        // Sets values for each slot's dropdown
+        for (int i = 0; i < dropDownLists.Count; i++) {
+
+            // If the dropdown is disabled, skip it
+            if (dropDownLists[i].Enabled == false) {
+                continue;
             }
 
             /**
-             * If BizHawk was not paused before setting values, unpause it
-             * Otherwise keep it paused
+             * Indicate which sublist to use for setting the value, based on the slot's name
+             * Also indicate if we're setting the value for a weapon or an SP ability
              */
-            if (_bokInterface._previousIsPauseSetting == true) {
-                APIs.Client.Unpause();
+            string[] fieldParts = dropDownLists[i].Name.Split(['_'], 4);
+            if (fieldParts.Length >= 4 && fieldParts[3] != null && fieldParts[3].Substring(0, 10) == "sp_ability") {
+                // SP ability
+                string key = fieldParts[1] + "_" + fieldParts[2] + "_" + fieldParts[3];
+                KeyValuePair<string, Ability> selectedOption = (KeyValuePair<string, Ability>)dropDownLists[i].SelectedItem;
+                Ability selectedItem = selectedOption.Value;
+                SetMemoryValue(fieldParts[0], key, selectedItem.value);
+            } else {
+                // Weapon
+                string key = fieldParts[1] + "_" + fieldParts[2];
+                KeyValuePair<string, Weapon> selectedOption = (KeyValuePair<string, Weapon>)dropDownLists[i].SelectedItem;
+                Weapon selectedItem = selectedOption.Value;
+                SetMemoryValue(fieldParts[0], key, selectedItem.value);
+
+                // In this case also set the "Forged by" name on the weapon
+                string slotNumber = fieldParts[1].Substring(4, fieldParts[1].Length == 6 ? 2 : 1);
+                SetWeaponForgedByName(Convert.ToInt32(slotNumber));
             }
         }
 
-        /// <summary>
-        ///     Method for setting memory values.<br/>
-        ///     This is separated because we use the switch inside on different types.
-        /// </summary>
-        /// <param name="subList"><c>Sublit / dictionnary the key belongs to</c></param>
-        /// <param name="valueKey"><c>strng</c>Key withint the dictionnary</param>
-        /// <param name="value"><c>decimal</c>Value to set</param>
-        private void SetMemoryValue(string subList, string valueKey, decimal value) {
-            if (subList == "inventory" && _memoryValues.Inventory.ContainsKey(valueKey) == true) {
+        // Repeat the above process for bonuses / maluses & durabilities (numericUpDowns)
+        for (int i = 0; i < numericUpDowns.Count; i++) {
+
+            if (numericUpDowns[i].Enabled == false) {
+                continue;
+            }
+
+            // Get the field's value & indicate which sublist to use for setting the value to the memory
+            decimal value = numericUpDowns[i].Value;
+            string[] fieldParts = numericUpDowns[i].Name.Split(['_'], 2);
+            SetMemoryValue(fieldParts[0], fieldParts[1], value);
+        }
+
+        /**
+         * If BizHawk was not paused before setting values, unpause it
+         * Otherwise keep it paused
+         */
+        if (_bokInterface._previousIsPauseSetting == true) {
+            APIs.Client.Unpause();
+        }
+    }
+
+    /// <summary>
+    ///     Method for setting memory values.<br/>
+    ///     This is separated because we use the switch inside on different types.
+    /// </summary>
+    /// <param name="subList"><c>Sublit / dictionnary the key belongs to</c></param>
+    /// <param name="valueKey"><c>strng</c>Key withint the dictionnary</param>
+    /// <param name="value"><c>decimal</c>Value to set</param>
+    private void SetMemoryValue(string subList, string valueKey, decimal value) {
+        if (subList == "inventory" && _memoryValues.Inventory.ContainsKey(valueKey) == true) {
+            /**
+             * Split the key to check if it corresponds to a weapon bonus or malus
+             * If it does, the value needs to be converted
+             */
+            string[] keyParts = valueKey.Split(['_'], 2);
+            _memoryValues.Inventory[valueKey].Value = keyParts[1] == "weapon_bonus" ? Utilities.ConvertWeaponBonusToValue(value) : (uint)value;
+        }
+    }
+
+    protected override void SetDefaultValues() {
+
+        foreach (ImageComboBox dropdown in dropDownLists) {
+
+            // Indicate what the dropdown field is for
+            string[] fieldParts = dropdown.Name.Split(['_'], 4);
+            if (fieldParts.Length >= 4 && fieldParts[3] != null && fieldParts[3].Substring(0, 10) == "sp_ability") {
                 /**
-                 * Split the key to check if it corresponds to a weapon bonus or malus
-                 * If it does, the value needs to be converted
+                 * If it's for an SP ability
+                 *
+                 * Set the name of the key to retrieve the value from based on the dropdown's name (for example inventory_slotX_weapon => slotX_weapon)
+                 * Then try getting the corresponding ability & preselect it
                  */
-                string[] keyParts = valueKey.Split(['_'], 2);
-                _memoryValues.Inventory[valueKey].Value = keyParts[1] == "weapon_bonus" ? Utilities.ConvertWeaponBonusToValue(value) : (uint)value;
-            }
-        }
-
-        protected override void SetDefaultValues() {
-
-            foreach (ImageComboBox dropdown in dropDownLists) {
-
-                // Indicate what the dropdown field is for
-                string[] fieldParts = dropdown.Name.Split(['_'], 4);
-                if (fieldParts.Length >= 4 && fieldParts[3] != null && fieldParts[3].Substring(0, 10) == "sp_ability") {
-                    /**
-                     * If it's for an SP ability
-                     *
-                     * Set the name of the key to retrieve the value from based on the dropdown's name (for example inventory_slotX_weapon => slotX_weapon)
-                     * Then try getting the corresponding ability & preselect it
-                     */
-                    string key = fieldParts[1] + "_" + fieldParts[2] + "_" + fieldParts[3];
-                    Ability? selectedAbility = GetAbilityByValue(_memoryValues.Inventory[key].Value);
-                    if (selectedAbility != null) {
-                        dropdown.SelectedIndex = dropdown.FindStringExact(selectedAbility.name);
-                    }
-                } else {
-                    // If it's for the weapon itself, do the same as above & try preselecting the corresponding weapon
-                    string key = fieldParts[1] + "_" + fieldParts[2];
-                    Weapon? selectedWeapon = GetWeaponByValue(_memoryValues.Inventory[key].Value, _zoktaiWeapons.All);
-                    if (selectedWeapon != null) {
-                        dropdown.SelectedIndex = dropdown.FindStringExact(selectedWeapon.name);
-                    }
+                string key = fieldParts[1] + "_" + fieldParts[2] + "_" + fieldParts[3];
+                Ability? selectedAbility = GetAbilityByValue(_memoryValues.Inventory[key].Value);
+                if (selectedAbility != null) {
+                    dropdown.SelectedIndex = dropdown.FindStringExact(selectedAbility.name);
+                }
+            } else {
+                // If it's for the weapon itself, do the same as above & try preselecting the corresponding weapon
+                string key = fieldParts[1] + "_" + fieldParts[2];
+                Weapon? selectedWeapon = GetWeaponByValue(_memoryValues.Inventory[key].Value, _zoktaiWeapons.All);
+                if (selectedWeapon != null) {
+                    dropdown.SelectedIndex = dropdown.FindStringExact(selectedWeapon.name);
                 }
             }
-
-            // Get the name of the field & retrieve the value for other fields
-            foreach (NumericUpDown bonusRelatedField in numericUpDowns) {
-
-                // Retrieve some parts of the field's name to check if it correspond to the malus or bonus field
-                string[] fieldParts = bonusRelatedField.Name.Split(['_'], 3);
-                string memValuesKey = fieldParts[1] + "_" + fieldParts[2];
-
-                // If the in-game value exceeds the field's maximum value, stop
-                uint ingameValue = _memoryValues.Inventory[memValuesKey].Value;
-                if (ingameValue > bonusRelatedField.Maximum) {
-                    continue;
-                }
-
-                /**
-                 * Set the value
-                 *
-                 * If the field corresponds to a weapon bonus or malus, we adjust the value
-                 * This is because maluses are handled differently by the game
-                 *
-                 * For example : 255 = -01 | 246 = -10
-                 */
-                bonusRelatedField.Value = fieldParts[2] == "weapon_bonus" ? Utilities.ConvertValueToWeaponBonus(ingameValue) : ingameValue;
-            }
         }
 
-        /// <summary>Get an SP ability from the weapons abilities list by using its value</summary>
-        /// <param name="value"><c>decimal</c>Value</param>
-        /// <returns><c>Ability</c>Ability</returns>
-        private Ability? GetAbilityByValue(decimal value) {
+        // Get the name of the field & retrieve the value for other fields
+        foreach (NumericUpDown bonusRelatedField in numericUpDowns) {
+
+            // Retrieve some parts of the field's name to check if it correspond to the malus or bonus field
+            string[] fieldParts = bonusRelatedField.Name.Split(['_'], 3);
+            string memValuesKey = fieldParts[1] + "_" + fieldParts[2];
+
+            // If the in-game value exceeds the field's maximum value, stop
+            uint ingameValue = _memoryValues.Inventory[memValuesKey].Value;
+            if (ingameValue > bonusRelatedField.Maximum) {
+                continue;
+            }
 
             /**
-             * For some reason there are duplicates within the game,
-             * so in these cases we set it to the "original" instead of keeping the duplicate's value
+             * Set the value
              *
-             * This is also to prevent having to show duplicate SP abilities in dropdown lists
+             * If the field corresponds to a weapon bonus or malus, we adjust the value
+             * This is because maluses are handled differently by the game
+             *
+             * For example : 255 = -01 | 246 = -10
              */
-            switch (value) {
-                case 6:             // Uses Solar Station energy for enchants
-                case 7:
-                    value = 5;
-                    break;
-                case 14:            // Damage bonus based on solar gauge
-                    value = 1;
-                    break;
-                case 15:            // +10 damage at night
-                    value = 2;
-                    break;
-                default:
-                    break;
-            }
+            bonusRelatedField.Value = fieldParts[2] == "weapon_bonus" ? Utilities.ConvertValueToWeaponBonus(ingameValue) : ingameValue;
+        }
+    }
 
-            foreach (KeyValuePair<string, Ability> index in _zoktaiAbilities.Weapons) {
-                Ability ability = index.Value;
-                if (ability.value == value) {
-                    return ability;
-                }
-            }
+    /// <summary>Get an SP ability from the weapons abilities list by using its value</summary>
+    /// <param name="value"><c>decimal</c>Value</param>
+    /// <returns><c>Ability</c>Ability</returns>
+    private Ability? GetAbilityByValue(decimal value) {
 
-            return null;
+        /**
+         * For some reason there are duplicates within the game,
+         * so in these cases we set it to the "original" instead of keeping the duplicate's value
+         *
+         * This is also to prevent having to show duplicate SP abilities in dropdown lists
+         */
+        switch (value) {
+            case 6:             // Uses Solar Station energy for enchants
+            case 7:
+                value = 5;
+                break;
+            case 14:            // Damage bonus based on solar gauge
+                value = 1;
+                break;
+            case 15:            // +10 damage at night
+                value = 2;
+                break;
+            default:
+                break;
         }
 
-        /// <summary>Sets the "Forged by" name on the weapon in the specified slot to "TaiyohNetwrk"</summary>
-        /// <param name="slot">Slot number</param>
-        private void SetWeaponForgedByName(int slot) {
-            if (slot > 0 && slot < 17) {
-                _memoryValues.Inventory["slot" + slot + "_weapon_forgedBy_1"].Value = 2036949332;
-                _memoryValues.Inventory["slot" + slot + "_weapon_forgedBy_2"].Value = 1699637359;
-                _memoryValues.Inventory["slot" + slot + "_weapon_forgedBy_3"].Value = 1802663796;
-            }
-        }
-
-        /// <summary>Update durability field based on related bonus | malus field</summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void UpdateDurabilityField(object sender, EventArgs e) {
-            NumericUpDown bonusField = (NumericUpDown)sender;
-            if (bonusField.Value > 0) {
-                return;
-            }
-
-            // If the bonus | malus is 0, set durability to 0 (simulating intended game behavior)
-            string[] keyParts = bonusField.Name.Split(['_'], 3);
-            NumericUpDown durabilityField = numericUpDowns.FirstOrDefault(x => x.Name == (keyParts[0] + "_" + keyParts[1] + "_" + "weapon_durability"));
-            if (durabilityField != null) {
-                durabilityField.Value = 0;
+        foreach (KeyValuePair<string, Ability> index in _zoktaiAbilities.Weapons) {
+            Ability ability = index.Value;
+            if (ability.value == value) {
+                return ability;
             }
         }
 
-        /// <summary>Update durability field based on bonus | malus field</summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void UpdateDurabilityBasedOnBonusField(object sender, EventArgs e) {
-            NumericUpDown durabilityField = (NumericUpDown)sender;
+        return null;
+    }
 
-            // Get the related bonus | malus field
-            string[] keyParts = durabilityField.Name.Split(['_'], 3);
-            NumericUpDown bonusField = numericUpDowns.FirstOrDefault(x => x.Name == (keyParts[0] + "_" + keyParts[1] + "_weapon_bonus"));
-            if (bonusField == null || bonusField.Value > 0) {
-                return;
-            }
+    /// <summary>Sets the "Forged by" name on the weapon in the specified slot to "TaiyohNetwrk"</summary>
+    /// <param name="slot">Slot number</param>
+    private void SetWeaponForgedByName(int slot) {
+        if (slot > 0 && slot < 17) {
+            _memoryValues.Inventory["slot" + slot + "_weapon_forgedBy_1"].Value = 2036949332;
+            _memoryValues.Inventory["slot" + slot + "_weapon_forgedBy_2"].Value = 1699637359;
+            _memoryValues.Inventory["slot" + slot + "_weapon_forgedBy_3"].Value = 1802663796;
+        }
+    }
 
-            // If bonus | malus is less or equal to 0, set durability to 0 (simulating intended game behavior)
+    /// <summary>Update durability field based on related bonus | malus field</summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
+    private void UpdateDurabilityField(object sender, EventArgs e) {
+        NumericUpDown bonusField = (NumericUpDown)sender;
+        if (bonusField.Value > 0) {
+            return;
+        }
+
+        // If the bonus | malus is 0, set durability to 0 (simulating intended game behavior)
+        string[] keyParts = bonusField.Name.Split(['_'], 3);
+        NumericUpDown durabilityField = numericUpDowns.FirstOrDefault(x => x.Name == (keyParts[0] + "_" + keyParts[1] + "_" + "weapon_durability"));
+        if (durabilityField != null) {
             durabilityField.Value = 0;
         }
-
-        #endregion
     }
+
+    /// <summary>Update durability field based on bonus | malus field</summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
+    private void UpdateDurabilityBasedOnBonusField(object sender, EventArgs e) {
+        NumericUpDown durabilityField = (NumericUpDown)sender;
+
+        // Get the related bonus | malus field
+        string[] keyParts = durabilityField.Name.Split(['_'], 3);
+        NumericUpDown bonusField = numericUpDowns.FirstOrDefault(x => x.Name == (keyParts[0] + "_" + keyParts[1] + "_weapon_bonus"));
+        if (bonusField == null || bonusField.Value > 0) {
+            return;
+        }
+
+        // If bonus | malus is less or equal to 0, set durability to 0 (simulating intended game behavior)
+        durabilityField.Value = 0;
+    }
+
+    #endregion
 }

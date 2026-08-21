@@ -1,43 +1,43 @@
 using BokInterface.Addresses;
 
-namespace BokInterface.Weapons {
-    /// <summary>Weapons editor for Lunar Knights / Boktai DS</summary>
-    class DsWeaponsEditor : WeaponsEditor {
+namespace BokInterface.Weapons;
 
-        #region Properties
+/// <summary>Weapons editor for Lunar Knights / Boktai DS</summary>
+class DsWeaponsEditor : WeaponsEditor {
 
-        private readonly MemoryValues _memoryValues;
-        private readonly BokInterface _bokInterface;
-        private readonly DsAddresses _lunarKnightsAddresses;
+    #region Properties
 
-        #endregion
+    private readonly MemoryValues _memoryValues;
+    private readonly BokInterface _bokInterface;
+    private readonly DsAddresses _lunarKnightsAddresses;
 
-        #region Constructor
+    #endregion
 
-        public DsWeaponsEditor(BokInterface bokInterface, MemoryValues memoryValues, DsAddresses LunarKnightsAddresses) {
+    #region Constructor
 
-            _memoryValues = memoryValues;
-            _lunarKnightsAddresses = LunarKnightsAddresses;
-            Owner = _bokInterface = bokInterface;
-            Icon = _bokInterface.Icon;
+    public DsWeaponsEditor(BokInterface bokInterface, MemoryValues memoryValues, DsAddresses LunarKnightsAddresses) {
 
-            SetFormParameters(400, 400, name, text);
-            AddElements();
-            Show();
-        }
+        _memoryValues = memoryValues;
+        _lunarKnightsAddresses = LunarKnightsAddresses;
+        Owner = _bokInterface = bokInterface;
+        Icon = _bokInterface.Icon;
 
-        #endregion
-
-        #region Elements
-
-        protected override void AddElements() { }
-
-        #endregion
-
-        #region Values setting
-
-        protected override void SetValues() { }
-
-        #endregion
+        SetFormParameters(400, 400, name, text);
+        AddElements();
+        Show();
     }
+
+    #endregion
+
+    #region Elements
+
+    protected override void AddElements() { }
+
+    #endregion
+
+    #region Values setting
+
+    protected override void SetValues() { }
+
+    #endregion
 }
