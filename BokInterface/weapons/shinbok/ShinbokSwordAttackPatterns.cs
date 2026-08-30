@@ -83,7 +83,7 @@ class ShinbokSwordAttackPatterns {
         All.Add("V4--H4--H4------P6", new ShinbokSwordAttackPattern("V4--H4--H4------P6", 42));
         All.Add("V4--H4--H4--V4--P6", new ShinbokSwordAttackPattern("V4--H4--H4--V4--P6", 43));
         All.Add("------V4--V6", new ShinbokSwordAttackPattern("------V4--V6", 44));
-        All.Add("------V4--V6 ?", new ShinbokSwordAttackPattern("------V4--V6 ?", 45));
+        All.Add("------V4--V6 ?", new ShinbokSwordAttackPattern("------V4--V6 ?", 45)); // Extra knockback on 2nd hit
         All.Add("------V4--V4------V6", new ShinbokSwordAttackPattern("------V4--V4------V6", 46));
         All.Add("----V4--V4------V6", new ShinbokSwordAttackPattern("----V4--V4------V6", 47));
         All.Add("----V4--V4--V4------V6", new ShinbokSwordAttackPattern("----V4--V4--V4------V6", 48));
