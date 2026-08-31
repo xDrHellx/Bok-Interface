@@ -27,7 +27,7 @@ public partial class BokInterface : ToolFormBase, IExternalToolForm {
 
     #region Tool properties
 
-    protected override string WindowTitleStatic => "Bok Interface v0.2.4";
+    protected override string WindowTitleStatic => "Bok Interface v0.2.5";
     public override bool BlocksInputWhenFocused => false;
     protected Icon? icon;
     public uint currentGameId;
