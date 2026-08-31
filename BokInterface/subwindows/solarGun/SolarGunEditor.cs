@@ -1,26 +1,26 @@
 using System.Windows.Forms;
 
-namespace BokInterface.solarGun {
-    /// <summary>Basis class for solar gun editor subclasses</summary>
-    abstract class SolarGunEditor : Editor {
+namespace BokInterface.solarGun;
 
-        #region Properties
+/// <summary>Basis class for solar gun editor subclasses</summary>
+abstract class SolarGunEditor : Editor {
 
-        protected new readonly string name = "solarGunEditWindow",
-            text = "Solar gun editor";
+    #region Properties
 
-        #endregion
+    protected new readonly string name = "solarGunEditWindow",
+        text = "Solar gun editor";
 
-        #region Form elements
+    #endregion
 
-        protected TabControl inventoryTabControl = new();
-        protected TabPage lensTab = new(),
-            framesTab = new();
+    #region Form elements
 
-        #endregion
+    protected TabControl inventoryTabControl = new();
+    protected TabPage lensTab = new(),
+        framesTab = new();
 
-        #region Methods
+    #endregion
 
-        #endregion
-    }
+    #region Methods
+
+    #endregion
 }

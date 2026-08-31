@@ -1,5 +1,7 @@
 using System.Resources;
 
+namespace BokInterface.Properties;
+
 public class ResourceLoader {
     public static object LoadResource(string resourceName, string resourceKey) {
         try {

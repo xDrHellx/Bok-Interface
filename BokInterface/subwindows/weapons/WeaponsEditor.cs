@@ -1,40 +1,40 @@
 using System.Collections.Generic;
 using System.Windows.Forms;
 
-namespace BokInterface.Weapons {
-    /// <summary>Basis class for weapons editor subclasses</summary>
-    abstract class WeaponsEditor : Editor {
+namespace BokInterface.Weapons;
 
-        #region Properties
+/// <summary>Basis class for weapons editor subclasses</summary>
+abstract class WeaponsEditor : Editor {
 
-        protected new readonly string name = "weaponsEditWindow",
-            text = "Weapons editor";
+    #region Properties
 
-        #endregion
+    protected new readonly string name = "weaponsEditWindow",
+        text = "Weapons editor";
 
-        #region Form elements
+    #endregion
 
-        protected Panel slotsPanel = new();
+    #region Form elements
 
-        #endregion
+    protected Panel slotsPanel = new();
 
-        #region Methods
+    #endregion
 
-        /// <summary>Get a weapon from a dictionnary by using the weapon's value</summary>
-        /// <param name="value"><c>decimal</c>Value</param>
-        /// <param name="dictionnary">Dictionnary of weapons</param>
-        /// <returns><c>Weapon</c>Weapon</returns>
-        protected Weapon? GetWeaponByValue(decimal value, Dictionary<string, Weapon> dictionnary) {
-            foreach (KeyValuePair<string, Weapon> index in dictionnary) {
-                Weapon weapon = index.Value;
-                if (weapon.value == value) {
-                    return weapon;
-                }
+    #region Methods
+
+    /// <summary>Get a weapon from a dictionnary by using the weapon's value</summary>
+    /// <param name="value"><c>decimal</c>Value</param>
+    /// <param name="dictionnary">Dictionnary of weapons</param>
+    /// <returns><c>Weapon</c>Weapon</returns>
+    protected Weapon? GetWeaponByValue(decimal value, Dictionary<string, Weapon> dictionnary) {
+        foreach (KeyValuePair<string, Weapon> index in dictionnary) {
+            Weapon weapon = index.Value;
+            if (weapon.value == value) {
+                return weapon;
             }
-
-            return null;
         }
 
-        #endregion
+        return null;
     }
+
+    #endregion
 }

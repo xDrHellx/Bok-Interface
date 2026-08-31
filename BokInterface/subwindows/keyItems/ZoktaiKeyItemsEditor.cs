@@ -5,143 +5,143 @@ using BokInterface.Utils;
 using BokInterface.Items;
 using System.Reflection;
 
-namespace BokInterface.KeyItems {
-    /// <summary>Key items editor for Boktai 2</summary>
-    class ZoktaiKeyItemsEditor : KeyItemsEditor {
+namespace BokInterface.KeyItems;
 
-        #region Properties
+/// <summary>Key items editor for Boktai 2</summary>
+class ZoktaiKeyItemsEditor : KeyItemsEditor {
 
-        private readonly MemoryValues _memoryValues;
-        private readonly BokInterface _bokInterface;
-        private readonly ZoktaiAddresses _zoktaiAddresses;
-        private readonly ZoktaiItems _zoktaiItems;
+    #region Properties
 
-        #endregion
+    private readonly MemoryValues _memoryValues;
+    private readonly BokInterface _bokInterface;
+    private readonly ZoktaiAddresses _zoktaiAddresses;
+    private readonly ZoktaiItems _zoktaiItems;
 
-        #region Constructor
+    #endregion
 
-        public ZoktaiKeyItemsEditor(BokInterface bokInterface, MemoryValues memoryValues, ZoktaiAddresses zoktaiAddresses) {
+    #region Constructor
 
-            _memoryValues = memoryValues;
-            _zoktaiAddresses = zoktaiAddresses;
-            _zoktaiItems = new();
+    public ZoktaiKeyItemsEditor(BokInterface bokInterface, MemoryValues memoryValues, ZoktaiAddresses zoktaiAddresses) {
 
-            Owner = _bokInterface = bokInterface;
-            Icon = _bokInterface.Icon;
+        _memoryValues = memoryValues;
+        _zoktaiAddresses = zoktaiAddresses;
+        _zoktaiItems = new();
 
-            SetFormParameters(691, 240, name, text);
-            AddElements();
-            Show();
-        }
+        Owner = _bokInterface = bokInterface;
+        Icon = _bokInterface.Icon;
 
-        #endregion
+        SetFormParameters(691, 240, name, text);
+        AddElements();
+        Show();
+    }
 
-        #region Elements
+    #endregion
 
-        protected override void AddElements() {
+    #region Elements
 
-            // Generate groups with subelements & add options to dropdowns
-            GenerateGroups();
-            AddDropDownOptions(dropDownLists, _zoktaiItems.KeyItems);
+    protected override void AddElements() {
 
-            // Set default values for each field
-            SetDefaultValues();
+        // Generate groups with subelements & add options to dropdowns
+        GenerateGroups();
+        AddDropDownOptions(dropDownLists, _zoktaiItems.KeyItems);
 
-            AddSetValuesButton(629, 213, this);
-        }
+        // Set default values for each field
+        SetDefaultValues();
 
-        ///<summary>Separated method for generating groups with subelements</summary>
-        protected void GenerateGroups() {
-            int xPos = 5,
-                yPos = 5;
-            for (int i = 1; i < 17; i++) {
+        AddSetValuesButton(629, 213, this);
+    }
 
-                // Generate the group for each property dynamically
-                PropertyInfo property = GetType().GetProperty($"slot{i}group", BindingFlags.Instance | BindingFlags.NonPublic);
-                if (property != null) {
-                    CheckGroupBox group = WinFormHelpers.CreateCheckGroupBox($"slot{i}group", $"Slot {i}", xPos, yPos, 170, 49, control: this);
-                    property.SetValue(this, group);
+    ///<summary>Separated method for generating groups with subelements</summary>
+    protected void GenerateGroups() {
+        int xPos = 5,
+            yPos = 5;
+        for (int i = 1; i < 17; i++) {
 
-                    // Add the dropdown to it
-                    dropDownLists.Add(WinFormHelpers.CreateImageDropdownList($"inventory_slot{i}_key_item", 5, 19, 160, 23, group, visibleOptions: 5));
-                }
+            // Generate the group for each property dynamically
+            PropertyInfo property = GetType().GetProperty($"slot{i}group", BindingFlags.Instance | BindingFlags.NonPublic);
+            if (property != null) {
+                CheckGroupBox group = WinFormHelpers.CreateCheckGroupBox($"slot{i}group", $"Slot {i}", xPos, yPos, 170, 49, control: this);
+                property.SetValue(this, group);
 
-                // Offsets for position
-                xPos += 176;
-                if ((i % 4) == 0) {
-                    xPos = 5;
-                    yPos += 52;
-                }
+                // Add the dropdown to it
+                dropDownLists.Add(WinFormHelpers.CreateImageDropdownList($"inventory_slot{i}_key_item", 5, 19, 160, 23, group, visibleOptions: 5));
+            }
+
+            // Offsets for position
+            xPos += 176;
+            if ((i % 4) == 0) {
+                xPos = 5;
+                yPos += 52;
             }
         }
+    }
 
-        #endregion
+    #endregion
 
-        #region Values setting
+    #region Values setting
 
-        protected override void SetValues() {
+    protected override void SetValues() {
 
-            // Store the previous setting for BizHawk being paused
-            _bokInterface._previousIsPauseSetting = APIs.Client.IsPaused();
+        // Store the previous setting for BizHawk being paused
+        _bokInterface._previousIsPauseSetting = APIs.Client.IsPaused();
 
-            // Pause BizHawk
-            APIs.Client.Pause();
+        // Pause BizHawk
+        APIs.Client.Pause();
 
-            // Sets values for each slot (dropdown)
-            for (int i = 0; i < dropDownLists.Count; i++) {
+        // Sets values for each slot (dropdown)
+        for (int i = 0; i < dropDownLists.Count; i++) {
 
-                // If the slot is disabled, skip it
-                if (dropDownLists[i].Enabled == false) {
-                    continue;
-                }
-
-                KeyValuePair<string, Item> selectedOption = (KeyValuePair<string, Item>)dropDownLists[i].SelectedItem;
-                Item selectedItem = selectedOption.Value;
-
-                /**
-                 * Indicate which sublist to use for setting the value, based on the slot's name
-                 * We only split on the first "_"
-                 */
-                string[] fieldParts = dropDownLists[i].Name.Split(['_'], 2);
-                SetMemoryValue(fieldParts[0], fieldParts[1], selectedItem.value);
+            // If the slot is disabled, skip it
+            if (dropDownLists[i].Enabled == false) {
+                continue;
             }
+
+            KeyValuePair<string, Item> selectedOption = (KeyValuePair<string, Item>)dropDownLists[i].SelectedItem;
+            Item selectedItem = selectedOption.Value;
 
             /**
-             * If BizHawk was not paused before setting values, unpause it
-             * Otherwise keep it paused
+             * Indicate which sublist to use for setting the value, based on the slot's name
+             * We only split on the first "_"
              */
-            if (_bokInterface._previousIsPauseSetting == true) {
-                APIs.Client.Unpause();
-            }
+            string[] fieldParts = dropDownLists[i].Name.Split(['_'], 2);
+            SetMemoryValue(fieldParts[0], fieldParts[1], selectedItem.value);
         }
 
-        ///<summary>
-        ///     Method for setting memory values.<br/>
-        ///     This is separated to keep things simple.
-        ///</summary>
-        ///<param name="subList"><c>Dictionnary the key belongs to</c></param>
-        ///<param name="valueKey"><c>string</c>Key within the dictionnary</param>
-        ///<param name="value"><c>decimal</c>Value to set</param>
-        private void SetMemoryValue(string subList, string valueKey, decimal value) {
-            if (subList == "inventory" && _memoryValues.Inventory.ContainsKey(valueKey) == true) {
-                _memoryValues.Inventory[valueKey].Value = (uint)value;
-            }
+        /**
+         * If BizHawk was not paused before setting values, unpause it
+         * Otherwise keep it paused
+         */
+        if (_bokInterface._previousIsPauseSetting == true) {
+            APIs.Client.Unpause();
         }
-
-        protected override void SetDefaultValues() {
-            foreach (ImageComboBox dropdown in dropDownLists) {
-                /**
-                 * Get the name of the field to retrieve the value from based on the dropdown's name (for example inventory_slotX_item => slotX_item)
-                 * Then try getting the corresponding item & preselect it
-                 */
-                string[] fieldParts = dropdown.Name.Split(['_'], 2);
-                Item? selectedItem = GetItemByValue(_memoryValues.Inventory[fieldParts[1]].Value, _zoktaiItems.KeyItems);
-                if (selectedItem != null) {
-                    dropdown.SelectedIndex = dropdown.FindStringExact(selectedItem.name);
-                }
-            }
-        }
-
-        #endregion
     }
+
+    ///<summary>
+    ///     Method for setting memory values.<br/>
+    ///     This is separated to keep things simple.
+    ///</summary>
+    ///<param name="subList"><c>Dictionnary the key belongs to</c></param>
+    ///<param name="valueKey"><c>string</c>Key within the dictionnary</param>
+    ///<param name="value"><c>decimal</c>Value to set</param>
+    private void SetMemoryValue(string subList, string valueKey, decimal value) {
+        if (subList == "inventory" && _memoryValues.Inventory.ContainsKey(valueKey) == true) {
+            _memoryValues.Inventory[valueKey].Value = (uint)value;
+        }
+    }
+
+    protected override void SetDefaultValues() {
+        foreach (ImageComboBox dropdown in dropDownLists) {
+            /**
+             * Get the name of the field to retrieve the value from based on the dropdown's name (for example inventory_slotX_item => slotX_item)
+             * Then try getting the corresponding item & preselect it
+             */
+            string[] fieldParts = dropdown.Name.Split(['_'], 2);
+            Item? selectedItem = GetItemByValue(_memoryValues.Inventory[fieldParts[1]].Value, _zoktaiItems.KeyItems);
+            if (selectedItem != null) {
+                dropdown.SelectedIndex = dropdown.FindStringExact(selectedItem.name);
+            }
+        }
+    }
+
+    #endregion
 }
