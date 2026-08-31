@@ -61,7 +61,7 @@ class ShinbokSwordAttackPatterns {
         All.Add("H2,H3--H6----H6------V6", new ShinbokSwordAttackPattern("H2,H3--H6----H6------V6", 20));
         All.Add("H2,H3,H4--H4----V6", new ShinbokSwordAttackPattern("H2,H3,H4--H4----V6", 21));
         All.Add("H2,H3,H4--V4----H6", new ShinbokSwordAttackPattern("H2,H3,H4--V4----H6", 22));
-        All.Add("H3 ?", new ShinbokSwordAttackPattern("H3 ?", 23));
+        All.Add("H3 ?", new ShinbokSwordAttackPattern("H3 ?", 23));
         All.Add("H2------V4", new ShinbokSwordAttackPattern("H2------V4", 24));
         All.Add("H2--V3", new ShinbokSwordAttackPattern("H2--V3", 25));
         All.Add("H2--V2----P6", new ShinbokSwordAttackPattern("H2--V2----P6", 26));
@@ -83,7 +83,7 @@ class ShinbokSwordAttackPatterns {
         All.Add("V4--H4--H4------P6", new ShinbokSwordAttackPattern("V4--H4--H4------P6", 42));
         All.Add("V4--H4--H4--V4--P6", new ShinbokSwordAttackPattern("V4--H4--H4--V4--P6", 43));
         All.Add("------V4--V6", new ShinbokSwordAttackPattern("------V4--V6", 44));
-        All.Add("------V4--V6 ?", new ShinbokSwordAttackPattern("------V4--V6 ?", 45));
+        All.Add("------V4--V6 ?", new ShinbokSwordAttackPattern("------V4--V6 ?", 45)); // Extra knockback on 2nd hit
         All.Add("------V4--V4------V6", new ShinbokSwordAttackPattern("------V4--V4------V6", 46));
         All.Add("----V4--V4------V6", new ShinbokSwordAttackPattern("----V4--V4------V6", 47));
         All.Add("----V4--V4--V4------V6", new ShinbokSwordAttackPattern("----V4--V4--V4------V6", 48));

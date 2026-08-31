@@ -43,5 +43,12 @@ class ShinbokAbilities {
         Weapons.Add("Lowers Frost resistance", new Ability("Lowers Frost resistance", 20, "Makes you weak to Frost"));
         Weapons.Add("Lowers Cloud resistance", new Ability("Lowers Cloud resistance", 21, "Makes you weak to Cloud"));
         Weapons.Add("Lowers Earth resistance", new Ability("Lowers Earth resistance", 22, "Makes you weak to Earth"));
+
+        // Exists in theory, but haven't been tested
+        // Weapons.Add("???", new Ability("???", 23, "???")); // Lowers Sol resistance ?
+        // Weapons.Add("???", new Ability("???", 24, "???")); // Lowers Dark resistance ?
+
+        // Exclusive to Rockbuster
+        Weapons.Add("Higher HP = higher damage (Rockbuster-only, hardcoded)", new Ability("Higher HP = higher damage (Rockbuster-only, hardcoded)", 25, "Gains power as your Life increases"));
     }
 }

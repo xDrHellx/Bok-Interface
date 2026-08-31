@@ -1,4 +1,6 @@
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 using System.Windows.Forms;
 
@@ -74,7 +76,9 @@ class ShinbokWeaponsEditor : WeaponsEditor {
                 property.SetValue(this, group);
 
                 // Dropdown
-                dropDownLists.Add(WinFormHelpers.CreateImageDropdownList($"inventory_slot{i}_weapon", 5, 19, 150, 23, group, visibleOptions: 5, enabled: false));
+                ImageComboBox dropdown = WinFormHelpers.CreateImageDropdownList($"inventory_slot{i}_weapon", 5, 19, 150, 23, group, visibleOptions: 5, enabled: false);
+                dropdown.SelectionChangeCommitted += UpdatePropertiesGroup;
+                dropDownLists.Add(dropdown);
 
                 // Refine & durability
                 CheckGroupBox propertiesGroup = WinFormHelpers.CreateCheckGroupBox($"slot{i}_properties_group", "Properties", 5, 48, 150, 77, control: group);
@@ -312,6 +316,29 @@ class ShinbokWeaponsEditor : WeaponsEditor {
         }
 
         return null;
+    }
+
+    /// <summary>Update the "Properties" group of a weapon based on its ID</summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
+    private void UpdatePropertiesGroup(object sender, EventArgs e) {
+        ImageComboBox dropdown = (ImageComboBox)sender;
+
+        // Retrieve the slot number from the dropdown's name
+        string[] nameParts = dropdown.Name.Split(['_'], 3);
+        string slotString = nameParts[1];
+
+        // Retrieve the Properties group for that slot
+        if (dropdown.Parent.Controls.Find($"{slotString}_properties_group", true).FirstOrDefault(c => c is CheckGroupBox) is not CheckGroupBox group) {
+            return;
+        }
+
+        // Get the selected weapon ID & enable / disable the group based on it
+        KeyValuePair<string, Weapon> selectedOption = (KeyValuePair<string, Weapon>)dropdown.SelectedItem;
+        ShinbokWeapon selectedWeapon = (ShinbokWeapon)selectedOption.Value;
+
+        // We precisely check for ID 48: Rockbuster, as it doesn't have an attack pattern & is hardcoded to function like the Solar Gun instead
+        group.Enabled = selectedWeapon == null || selectedWeapon.value != 48;
     }
 
     #endregion
