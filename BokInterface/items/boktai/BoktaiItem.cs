@@ -1,23 +1,23 @@
-namespace BokInterface.Items {
-    ///<summary>Class representing an item for Boktai</summary>
-    class BoktaiItem(string name, uint value, string icon = "", string effect = "", int amount = 0, int slot = 0) : Item(name, value, icon, effect) {
+namespace BokInterface.Items;
 
-        /// <summary>Amount for this item</summary>
-        public int amount = amount;
-        /// <summary>Slot (position) in the inventory</summary>
-        public int slot = slot;
-        protected override string library { get => "BoktaiResources"; }
+///<summary>Class representing an item for Boktai</summary>
+class BoktaiItem(string name, uint value, string icon = "", string effect = "", int amount = 0, int slot = 0) : Item(name, value, icon, effect) {
 
-        #region Unused in Bok 1
+    /// <summary>Amount for this item</summary>
+    public int amount = amount;
+    /// <summary>Slot (position) in the inventory</summary>
+    public int slot = slot;
+    protected override string library { get => "BoktaiResources"; }
 
-        protected override string GetRottsInto(uint value) {
-            return "";
-        }
+    #region Unused in Bok 1
 
-        protected override int GetRottensAt(uint value) {
-            return 0;
-        }
-
-        #endregion
+    protected override string GetRottsInto(uint value) {
+        return "";
     }
+
+    protected override int GetRottensAt(uint value) {
+        return 0;
+    }
+
+    #endregion
 }

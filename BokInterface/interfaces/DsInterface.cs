@@ -5,46 +5,46 @@ using BokInterface.Utils;
  * File for the Boktai DS / Lunar Knights interface itself
  */
 
-namespace BokInterface {
-    partial class BokInterface {
+namespace BokInterface;
 
-        #region Properties
+partial class BokInterface {
 
-        private DsAddresses _dsAddresses = new BoktaiDsAddresses();
+    #region Properties
 
-        #endregion
+    private DsAddresses _dsAddresses = new BoktaiDsAddresses();
 
-        #region Show interface
+    #endregion
 
-        private void ShowDsInterface() {
+    #region Show interface
 
-            // Memory addresses are different for each version of LK / Bok DS
-            if (shorterGameName == "BoktaiDS") {
-                _dsAddresses = new BoktaiDsAddresses();
-            } else {
-                _dsAddresses = region == "US" ? new LunarKnightsUsaAddresses() : new LunarKnightsEuropeanAddresses();
-            }
+    private void ShowDsInterface() {
 
-            GenerateMenu();
-            AddCurrentGameInfo();
-
-            WinFormHelpers.CreateLabel("extraText", "No data available to show for this game.", 0, 20 + _menuBar.Height, Width, 20, this, WinFormHelpers.gameNameBackground, textAlignment: "MiddleLeft");
-
-            // Main window
-            SetMainWindow("Bok Interface", 236, 40 + _menuBar.Height);
-            ResumeLayout(false);
+        // Memory addresses are different for each version of LK / Bok DS
+        if (shorterGameName == "BoktaiDS") {
+            _dsAddresses = new BoktaiDsAddresses();
+        } else {
+            _dsAddresses = region == "US" ? new LunarKnightsUsaAddresses() : new LunarKnightsEuropeanAddresses();
         }
 
-        #endregion
+        GenerateMenu();
+        AddCurrentGameInfo();
 
-        #region Update
+        WinFormHelpers.CreateLabel("extraText", "No data available to show for this game.", 0, 20 + _menuBar.Height, Width, 20, this, WinFormHelpers.gameNameBackground, textAlignment: "MiddleLeft");
 
-        private void UpdateDsInterface() { }
-
-        #endregion
-
-        #region Elements
-
-        #endregion
+        // Main window
+        SetMainWindow("Bok Interface", 236, 40 + _menuBar.Height);
+        ResumeLayout(false);
     }
+
+    #endregion
+
+    #region Update
+
+    private void UpdateDsInterface() { }
+
+    #endregion
+
+    #region Elements
+
+    #endregion
 }

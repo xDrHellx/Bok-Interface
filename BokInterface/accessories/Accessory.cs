@@ -1,55 +1,57 @@
 using System.Drawing;
 
-namespace BokInterface.Accessories {
-    ///<summary>Base class for representing an accessory</summary>
-    abstract class Accessory {
+using BokInterface.Properties;
 
-        ///<summary>Weapon name</summary>
-        public string name;
-        ///<summary>Value (decimal)<summary>
-        public uint value;
-        /// <summary>Accessory type (Head, Body, Hand, Foot)</summary>
-        public string type;
-        /// <summary>Accessory Icon</summary>
-        public Image? icon = null;
-        /// <summary>Accessory effect(s)</summary>
-        public string effect;
-        public int row;
-        /// <summary>Indicates if obtained via CrossOver points</summary>
-        public bool crossOver;
-        /// <summary>Price when buying</summary>
-        public int buyPrice;
-        /// <summary>Price when selling</summary>
-        public int sellPrice;
-        /// <summary>Resource library for retrieving the icon</summary>
-        protected abstract string library { get; }
+namespace BokInterface.Accessories;
 
-        public Accessory(string name, uint value, string type, string icon = "", string effect = "", int row = 1, int buyPrice = 0, bool crossOver = false) {
-            this.name = name;
-            this.value = value;
-            this.type = type;
-            this.effect = effect;
-            this.row = row;
-            this.crossOver = crossOver;
-            this.buyPrice = buyPrice;
+///<summary>Base class for representing an accessory</summary>
+abstract class Accessory {
 
-            // Price for selling is always the buying price divided by 2 (or 0 if it cannot be sold)
-            sellPrice = buyPrice > 0 ? buyPrice / 2 : 0;
+    ///<summary>Weapon name</summary>
+    public string name;
+    ///<summary>Value (decimal)<summary>
+    public uint value;
+    /// <summary>Accessory type (Head, Body, Hand, Foot)</summary>
+    public string type;
+    /// <summary>Accessory Icon</summary>
+    public Image? icon = null;
+    /// <summary>Accessory effect(s)</summary>
+    public string effect;
+    public int row;
+    /// <summary>Indicates if obtained via CrossOver points</summary>
+    public bool crossOver;
+    /// <summary>Price when buying</summary>
+    public int buyPrice;
+    /// <summary>Price when selling</summary>
+    public int sellPrice;
+    /// <summary>Resource library for retrieving the icon</summary>
+    protected abstract string library { get; }
 
-            // If an icon was specified try getting & setting it to the property
-            SetIconResource(icon);
-        }
+    public Accessory(string name, uint value, string type, string icon = "", string effect = "", int row = 1, int buyPrice = 0, bool crossOver = false) {
+        this.name = name;
+        this.value = value;
+        this.type = type;
+        this.effect = effect;
+        this.row = row;
+        this.crossOver = crossOver;
+        this.buyPrice = buyPrice;
 
-        /// <summary>Simplified method for setting the instance's icon via resources</summary>
-        /// <param name="icon">Icon string</param>
-        /// <returns><c>Image</c>Resource</returns>
-        protected void SetIconResource(string iconString) {
-            icon = null;
-            if (iconString != "") {
-                try {
-                    icon = library != "" ? (Image)ResourceLoader.LoadResource(library, iconString) : (Image)Properties.Resources.ResourceManager.GetObject(iconString);
-                } catch { }
-            }
+        // Price for selling is always the buying price divided by 2 (or 0 if it cannot be sold)
+        sellPrice = buyPrice > 0 ? buyPrice / 2 : 0;
+
+        // If an icon was specified try getting & setting it to the property
+        SetIconResource(icon);
+    }
+
+    /// <summary>Simplified method for setting the instance's icon via resources</summary>
+    /// <param name="icon">Icon string</param>
+    /// <returns><c>Image</c>Resource</returns>
+    protected void SetIconResource(string iconString) {
+        icon = null;
+        if (iconString != "") {
+            try {
+                icon = library != "" ? (Image)ResourceLoader.LoadResource(library, iconString) : (Image)Properties.Resources.ResourceManager.GetObject(iconString);
+            } catch { }
         }
     }
 }
