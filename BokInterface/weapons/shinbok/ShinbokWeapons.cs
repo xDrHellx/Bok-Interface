@@ -61,7 +61,7 @@ class ShinbokWeapons {
         Katanas.Add("Shinzan", new ShinbokWeapon("Shinzan", 21, type, "shinzan", level: 30, baseDamage: 35, attackPatterns: ["V2,H3--P4", "V2,H3,V3--P4", "V2,H3,H3,H4,V4"]));
 
         // Known as "Sakurabana" in most FAQs (mistranslation due to lack of context: apparently all katanas names could be derived from combat ships or aircraft)
-        Katanas.Add("Ohka", new ShinbokWeapon("Ohka", 28, type, "sakurabana", level: 40, baseDamage: 45, attackPatterns: ["V2,H3,V3--P4", "V2,H3,H3,H4,V4", "V2,H3--H3,V4--P4"]));
+        Katanas.Add("Ohka (Sakurabana)", new ShinbokWeapon("Ohka (Sakurabana)", 28, type, "sakurabana", level: 40, baseDamage: 45, attackPatterns: ["V2,H3,V3--P4", "V2,H3,H3,H4,V4", "V2,H3--H3,V4--P4"]));
 
         Katanas.Add("Shuusui", new ShinbokWeapon("Shuusui", 36, type, "shuusui", level: 50, baseDamage: 55, attackPatterns: ["H2,V4", "H2,V4--P4", "H2,V4,H4--P4"]));
         Katanas.Add("Murasame", new ShinbokWeapon("Murasame", 42, type, "murasame", level: 55, baseDamage: 60, attackPatterns: ["V2,H3,H3,H4,V4", "V2,H3--H3,V4--P4", "V2,H3,V3--H4--P4"]));
