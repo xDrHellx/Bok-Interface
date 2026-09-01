@@ -217,9 +217,9 @@ class ShinbokWeaponsEditor : WeaponsEditor {
                 continue;
             }
 
-            // Get the pattern instance
+            // Get the pattern instance, if null: skip (shouldn't happen unless messing with value via BizHawk tools beforehand)
             string patternKey = selectedWeapon.attackPatterns[value];
-            ShinbokSwordAttackPattern attackPattern = _shinbokSwordAttackPatterns.All[patternKey];
+            ShinbokSwordAttackPattern attackPattern = _shinbokSwordAttackPatterns.All.Values.FirstOrDefault(x => x.pattern == patternKey);
             if (attackPattern == null) {
                 continue;
             }
