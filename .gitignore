@@ -2,3 +2,4 @@ bin/
 obj/
 BizHawk/*
 GBAHawk/*
+/BizHawk_2_9_1
