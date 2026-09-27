@@ -240,7 +240,7 @@ static class Utilities {
         }
 
         string formattedName = name.Replace("_", " ");
-        return string.Concat(formattedName[0].ToString().ToUpper(), formattedName[1..]);
+        return string.Concat(formattedName[0].ToString().ToUpper(), formattedName.Substring(1));
     }
 
     /// <summary>Format time to a proper 24h format</summary>

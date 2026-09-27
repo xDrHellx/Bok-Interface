@@ -110,7 +110,7 @@ class ZoktaiWeaponsEditor : WeaponsEditor {
 
             // Indicate what the dropdown field is for
             string[] fieldParts = dropdown.Name.Split(['_'], 4);
-            if (fieldParts.Length >= 4 && fieldParts[3] != null && fieldParts[3][..10] == "sp_ability") {
+            if (fieldParts.Length >= 4 && fieldParts[3] != null && fieldParts[3].Substring(0, 10) == "sp_ability") {
                 // If dropdown is for an SP ability
                 dropdown.DataSource = new BindingSource(_zoktaiAbilities.Weapons, null);
                 dropdown.DisplayMember = "Key";
