@@ -27,7 +27,7 @@ public partial class BokInterface : ToolFormBase, IExternalToolForm {
 
     #region Tool properties
 
-    protected override string WindowTitleStatic => "Bok Interface v0.2.5a";
+    protected override string WindowTitleStatic => "Bok Interface v0.2.6";
     public override bool BlocksInputWhenFocused => false;
     protected Icon? icon;
     public uint currentGameId;
@@ -108,14 +108,11 @@ public partial class BokInterface : ToolFormBase, IExternalToolForm {
 
     /// <summary>Executed once after the constructor, and again every time a rom is loaded or reloaded</summary>
     public override void Restart() {
-
-        // Update the APIs, as some of them might not be available if a game is not loaded
-        APIs.Update(MainForm);
-
-        // Reset the variables for initializing the corresponding game's interface
+        /**
+         * Reset the variables for initializing the corresponding game's interface
+         * Then try initializing the BokInterface again
+         */
         ResetInitializationVariables();
-
-        // Try initializing the interface again
         InitializeInterface();
     }
 
