@@ -260,6 +260,16 @@ class MemoryValues {
             }
         }
 
+        // Coffin
+        Coffin.Add("damage", new DynamicMemoryValue("damage", memoryAddresses.Coffin["actor"].Address, memoryAddresses.Coffin["damage"].Address));
+        Coffin.Add("windup_timer", new DynamicMemoryValue("windup_timer", memoryAddresses.Coffin["actor"].Address, memoryAddresses.Coffin["windup_timer"].Address));
+        Coffin.Add("shake_timer", new DynamicMemoryValue("shake_timer", memoryAddresses.Coffin["actor"].Address, memoryAddresses.Coffin["shake_timer"].Address));
+        Coffin.Add("shake_duration", new DynamicMemoryValue("shake_duration", memoryAddresses.Coffin["actor"].Address, memoryAddresses.Coffin["shake_duration"].Address));
+        Coffin.Add("own_movement_timer", new DynamicMemoryValue("own_movement_timer", memoryAddresses.Coffin["actor"].Address, memoryAddresses.Coffin["own_movement_timer"].Address));
+        Coffin.Add("x_position", new DynamicMemoryValue("x_position", memoryAddresses.Coffin["actor"].Address, memoryAddresses.Coffin["x_position"].Address));
+        Coffin.Add("y_position", new DynamicMemoryValue("y_position", memoryAddresses.Coffin["actor"].Address, memoryAddresses.Coffin["y_position"].Address));
+        Coffin.Add("z_position", new DynamicMemoryValue("z_position", memoryAddresses.Coffin["actor"].Address, memoryAddresses.Coffin["z_position"].Address));
+
         // U32
         U32.Add("total_exp_until_next_level", memoryAddresses.Django["total_exp_until_next_level"]);
     }

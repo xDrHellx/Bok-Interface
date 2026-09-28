@@ -36,6 +36,8 @@ public class ShinbokAddresses {
     ///     </para>
     /// </summary>
     public IDictionary<string, MemoryAddress> Misc = new Dictionary<string, MemoryAddress>();
+    /// <summary>Coffin-related memory addresses</summary>
+    public IDictionary<string, MemoryAddress> Coffin = new Dictionary<string, MemoryAddress>();
     /// <summary>Note for MemoryAddress instances (for less repetition)</summary>
     string _note = "";
 
@@ -46,6 +48,7 @@ public class ShinbokAddresses {
         InitGunAddresses();
         InitSollsAddresses();
         InitMiscAddresses();
+        InitCoffinAddresses();
         OrderDictionnaries();
     }
 
@@ -55,6 +58,7 @@ public class ShinbokAddresses {
         Inventory = Inventory.OrderBy(x => x.Key).ToDictionary(x => x.Key, x => x.Value);
         Bike = Bike.OrderBy(x => x.Key).ToDictionary(x => x.Key, x => x.Value);
         Misc = Misc.OrderBy(x => x.Key).ToDictionary(x => x.Key, x => x.Value);
+        Coffin = Coffin.OrderBy(x => x.Key).ToDictionary(x => x.Key, x => x.Value);
     }
 
     void InitDjangoAddresses() {
@@ -194,5 +198,19 @@ public class ShinbokAddresses {
         Misc.Add("rtc_frames", new MemoryAddress(0x03005437, type: "U8", domain: "IWRAM"));
         Misc.Add("igt_frame_counter", new MemoryAddress(0x614, "In-Game Time frame counter for the current save file", "U32", "EWRAM"));
     }
+
+    void InitCoffinAddresses() {
+        Coffin.Add("time_until_despawn", new MemoryAddress(0x02004158, "Time until the coffin despawns (starts at 0, despawns at 18000)", "U32", "EWRAM"));
+        Coffin.Add("respawn_room_id", new MemoryAddress(0x0203DBC8, "ID of the room the coffin will respawn in", domain: "EWRAM"));
+        Coffin.Add("actors_check", new MemoryAddress(0x02002290, "When player & coffin are in the same room, value becomes 2", domain: "EWRAM"));
+        Coffin.Add("actor", new MemoryAddress(0x02000488, type: "U32", domain: "EWRAM"));
+        Coffin.Add("x_position", new MemoryAddress(0x50)); // Distance between coffin & player ?
+        Coffin.Add("y_position", new MemoryAddress(0x4));
+        Coffin.Add("z_position", new MemoryAddress(0x2));
+        Coffin.Add("damage", new MemoryAddress(0x336, "Stun/Damage dealt to the coffin (coffin becomes stunned when the value reaches 1200 and then stays stunned for that duration, resets to 0 when coffin goes into shaking phase)"));
+        Coffin.Add("windup_timer", new MemoryAddress(0x3A8, "Frames until the coffin goes into the windup phase (increases only while Django holds the chain)"));
+        Coffin.Add("shake_timer", new MemoryAddress(0x3AE, "Time before the coffin is able to damage Django and becomes immovable (ranges from 0-128 and resets to 0 when the coffin goes into the shake phase)"));
+        Coffin.Add("shake_duration", new MemoryAddress(0x3B0, "Duration of the shake (seems to be randomly chosen when entering rooms and after shaking)"));
+        Coffin.Add("own_movement_timer", new MemoryAddress(0x3BC, "Frames until the coffin starts moving on its own"));
     }
 }
