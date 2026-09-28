@@ -158,6 +158,8 @@ partial class BokInterface {
                 break;
             case "Shinbok":
                 positionY = 214;
+                groupHeight = 164;
+                enableCoffinSection = true;
                 break;
             case "BoktaiDS":
             case "LunarKnights":

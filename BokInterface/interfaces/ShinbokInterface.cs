@@ -1,4 +1,5 @@
 using System;
+using System.Drawing;
 using System.Windows.Forms;
 
 using BokInterface.Addresses;
@@ -48,7 +49,7 @@ partial class BokInterface {
         AddMiscDataSection();
 
         // Main window
-        SetMainWindow("Bok Interface", 236, 249 + _menuBar.Height);
+        SetMainWindow("Bok Interface", 236, 358 + _menuBar.Height);
         ResumeLayout(false);
     }
 
@@ -103,6 +104,24 @@ partial class BokInterface {
             // Update the fields
             _currentSpeedLabel.Text = "Current movement speed : " + Math.Round(speed3D, 3);
             _averageSpeedLabel.Text = "Average over 60 frames : " + averageSpeed.ToString();
+        }
+
+        // If the coffin data if available
+        uint coffinActorPointer = _shinbokAddresses.Coffin["actor"].Value;
+        if (coffinActorPointer > 0) {
+
+            // Calculate the distance to the coffin
+            double distance = Utilities.GetDistance(
+                new Point((int)_memoryValues.Coffin["x_position"].Value, (int)_memoryValues.Coffin["y_position"].Value),
+                new Point((int)_shinbokAddresses.Django["x_position"].Value, (int)_shinbokAddresses.Django["y_position"].Value)
+            );
+
+            _coffinDamageLabel.Text = "Damage : " + _memoryValues.Coffin["damage"].Value + " / 1200";
+            _coffinWindupTimerLabel.Text = "Windup begins in : " + _memoryValues.Coffin["windup_timer"].Value;
+            _coffinShakeTimerLabel.Text = "Windup : " + _memoryValues.Coffin["shake_timer"].Value + " / 127";
+            _coffinShakeDurationLabel.Text = "Duration : " + _memoryValues.Coffin["shake_duration"].Value;
+            _coffinEscapeTimerLabel.Text = "Begins escaping in : " + _memoryValues.Coffin["own_movement_timer"].Value;
+            _coffinDistanceLabel.Text = "Distance : " + distance;
         }
 
         if (_showGui == true) {
