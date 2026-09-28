@@ -25,7 +25,7 @@ public class ZoktaiAddresses {
     /// <summary>Downloadable events / JoySpots related memory addresses</summary>
     public IDictionary<string, MemoryAddress> JoySpots = new Dictionary<string, MemoryAddress>();
     /// <summary>Note for MemoryAddress instances (for less repetition)</summary>
-    private string _note = "";
+    string _note = "";
 
     public ZoktaiAddresses() {
         InitPlayableCharactersAddresses();
@@ -36,7 +36,7 @@ public class ZoktaiAddresses {
         OrderDictionnaries();
     }
 
-    private void OrderDictionnaries() {
+    void OrderDictionnaries() {
         Django = Django.OrderBy(x => x.Key).ToDictionary(x => x.Key, x => x.Value);
         Sabata = Sabata.OrderBy(x => x.Key).ToDictionary(x => x.Key, x => x.Value);
         Inventory = Inventory.OrderBy(x => x.Key).ToDictionary(x => x.Key, x => x.Value);
@@ -45,7 +45,7 @@ public class ZoktaiAddresses {
         JoySpots = JoySpots.OrderBy(x => x.Key).ToDictionary(x => x.Key, x => x.Value);
     }
 
-    private void InitPlayableCharactersAddresses() {
+    void InitPlayableCharactersAddresses() {
 
         // Position coordinates
         Django.Add("x_position", new MemoryAddress(0x30, "Django X position", domain: "EWRAM"));
@@ -54,12 +54,12 @@ public class ZoktaiAddresses {
 
         // Current stats
         _note = "Used for damage calculations, will be copied to its Persistent equivalent on screen transition. Must be combined with the \"stat\" memory address' value";
-        Django.Add("current_hp", new MemoryAddress(0x364, note: _note, domain: "EWRAM"));
-        Django.Add("current_ene", new MemoryAddress(0x368, note: _note, domain: "EWRAM"));
-        Django.Add("current_vit", new MemoryAddress(0x35C, note: _note, domain: "EWRAM"));
-        Django.Add("current_spr", new MemoryAddress(0x35E, note: _note, domain: "EWRAM"));
-        Django.Add("current_str", new MemoryAddress(0x360, note: _note, domain: "EWRAM"));
-        Django.Add("current_agi", new MemoryAddress(0x362, note: _note, domain: "EWRAM"));
+        Django.Add("current_hp", new MemoryAddress(0x364, _note, domain: "EWRAM"));
+        Django.Add("current_ene", new MemoryAddress(0x368, _note, domain: "EWRAM"));
+        Django.Add("current_vit", new MemoryAddress(0x35C, _note, domain: "EWRAM"));
+        Django.Add("current_spr", new MemoryAddress(0x35E, _note, domain: "EWRAM"));
+        Django.Add("current_str", new MemoryAddress(0x360, _note, domain: "EWRAM"));
+        Django.Add("current_agi", new MemoryAddress(0x362, _note, domain: "EWRAM"));
         Django.Add("max_hp", new MemoryAddress(0x366, _note, domain: "EWRAM"));
         Django.Add("max_ene", new MemoryAddress(0x36A, _note, domain: "EWRAM"));
 
@@ -111,7 +111,7 @@ public class ZoktaiAddresses {
         */
     }
 
-    private void InitInventoryAddresses() {
+    void InitInventoryAddresses() {
         _note = "ForgedBy Name (added when forging & used for the multiplayer shop)";
 
         for (int i = 0; i < 16; i++) {
@@ -128,7 +128,7 @@ public class ZoktaiAddresses {
             addressOffset = 0x1C * (uint)i;
 
             // Slot & bonus / malus (1 byte each)
-            Inventory.Add("weapon_slot_" + slotNumber + "", new MemoryAddress(0x3D0 + addressOffset, "Weapon slot", "U8", domain: "EWRAM"));
+            Inventory.Add("weapon_slot_" + slotNumber + "", new MemoryAddress(0x3D0 + addressOffset, "Weapon slot", "U8", "EWRAM"));
             Inventory.Add("weapon_slot_" + slotNumber + "_bonus", new MemoryAddress(0x3D1 + addressOffset, "Bonus / malus (ex: +10 or -03)", "U8", "EWRAM"));
 
             // Durability if bonus or malus is applied (2 bytes)
@@ -149,7 +149,7 @@ public class ZoktaiAddresses {
         Inventory.Add("magics", new MemoryAddress(0x54, "Magics", "U32", "EWRAM"));
     }
 
-    private void InitMiscAddresses() {
+    void InitMiscAddresses() {
         Misc.Add("stat", new MemoryAddress(0x030046A0, "For persistent stats & inventory", "U32", "IWRAM"));
         Misc.Add("world_state", new MemoryAddress(0x03004698, "Story progress & dungeon states", "U32", "IWRAM"));
         Misc.Add("scratch", new MemoryAddress(0x03004690, type: "U32", domain: "IWRAM"));
@@ -170,14 +170,14 @@ public class ZoktaiAddresses {
         // Misc.Add("exp_table", new MemoryAddress(0x08CE3238));
     }
 
-    private void InitSollsAddresses() {
+    void InitSollsAddresses() {
         Solls.Add("solar_station", new MemoryAddress(0x3BC, "Solar station balance", "U32", "EWRAM"));
         Solls.Add("solar_bank", new MemoryAddress(0x910, "Solar bank balance", "U32", "EWRAM"));
         Solls.Add("dark_loans", new MemoryAddress(0x1C4, "Dark loans", "EWRAM"));
         Solls.Add("interest_rate", new MemoryAddress(0x23A, "Solar Bank interest rate", domain: "EWRAM"));
     }
 
-    private void InitJoySpotsAddresses() {
+    void InitJoySpotsAddresses() {
         // Note: These events could be activated from "Joy Spots" in Japan with the wireless adapter
         JoySpots.Add("blindbox_lvl_3", new MemoryAddress(0x030016D8, "Blindbox Lv. 3 from ??? (set value to 0x8E67 to activate)", domain: "System Bus"));
         JoySpots.Add("blindbox_lvl_4", new MemoryAddress(0x030016DA, "Blindbox Lv. 4 from ??? (set value to 0x8FAA to activate)", domain: "System Bus"));

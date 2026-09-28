@@ -14,10 +14,10 @@ class dsInventoryEditor : InventoryEditor {
 
     #region Properties
 
-    private readonly MemoryValues _memoryValues;
-    private readonly BokInterface _bokInterface;
-    private readonly DsAddresses _memoryAddresses;
-    private readonly DsItems _dsItems;
+    readonly MemoryValues _memoryValues;
+    readonly BokInterface _bokInterface;
+    readonly DsAddresses _memoryAddresses;
+    readonly DsItems _dsItems;
     protected CheckGroupBox? slot17group { get; set; }
     protected CheckGroupBox? slot18group { get; set; }
     protected CheckGroupBox? slot19group { get; set; }
@@ -26,9 +26,9 @@ class dsInventoryEditor : InventoryEditor {
     ///     Default maximum durability value that can be set.<br/>
     ///     This is eventually replaced based on dropdown selected items.
     /// </summary>
-    private readonly int _defaultMaxDurability = 8704;
+    readonly int _defaultMaxDurability = 8704;
     /// <summary>Durabiliy offset for "Chocolate-covered" items</summary>
-    private readonly int _chocolateCoveredDurabilityOffset = 32768;
+    readonly int _chocolateCoveredDurabilityOffset = 32768;
 
     #endregion
 
@@ -118,7 +118,7 @@ class dsInventoryEditor : InventoryEditor {
     }
 
     ///<summary>Generates the options for the dropdowns</summary>
-    private void GenerateDropDownOptions() {
+    void GenerateDropDownOptions() {
         foreach (ImageComboBox dropdown in dropDownLists) {
             dropdown.DataSource = new BindingSource(_dsItems.Items, null);
             dropdown.DisplayMember = "Key";
@@ -128,7 +128,7 @@ class dsInventoryEditor : InventoryEditor {
 
     /// <summary>Updates the Maximum parameter for a durability field</summary>
     /// <param name="dropdown">The dropdown that the durability field is related to</param>
-    private void UpdateMaxDurabilityField(ImageComboBox dropdown) {
+    void UpdateMaxDurabilityField(ImageComboBox dropdown) {
 
         // Separate the dropdown's name into parts & get the selected item
         string[] fieldParts = dropdown.Name.Split(['_'], 4);
@@ -226,7 +226,7 @@ class dsInventoryEditor : InventoryEditor {
     ///<param name="subList"><c>Dictionnary the key belongs to</c></param>
     ///<param name="valueKey"><c>string</c>Key within the dictionnary</param>
     ///<param name="value"><c>decimal</c>Value to set</param>
-    private void SetMemoryValue(string subList, string valueKey, decimal value) {
+    void SetMemoryValue(string subList, string valueKey, decimal value) {
         if (subList == "inventory" && _memoryAddresses.Inventory.ContainsKey(valueKey) == true) {
             _memoryAddresses.Inventory[valueKey].Value = (uint)value;
         }

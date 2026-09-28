@@ -14,17 +14,17 @@ class ShinbokInventoryEditor : InventoryEditor {
 
     #region Properties
 
-    private readonly MemoryValues _memoryValues;
-    private readonly BokInterface _bokInterface;
-    private readonly ShinbokAddresses _shinbokAddresses;
-    private readonly ShinbokItems _shinbokItems;
+    readonly MemoryValues _memoryValues;
+    readonly BokInterface _bokInterface;
+    readonly ShinbokAddresses _shinbokAddresses;
+    readonly ShinbokItems _shinbokItems;
     /// <summary>
     ///     Default maximum durability value that can be set.<br/>
     ///     This is eventually replaced based on dropdown selected items.
     /// </summary>
-    private readonly int _defaultMaxDurability = 7679;
+    readonly int _defaultMaxDurability = 7679;
     /// <summary>Durabiliy offset for "Chocolate-covered" items</summary>
-    private readonly int _chocolateCoveredDurabilityOffset = 32768;
+    readonly int _chocolateCoveredDurabilityOffset = 32768;
 
     #endregion
 
@@ -111,7 +111,7 @@ class ShinbokInventoryEditor : InventoryEditor {
     }
 
     ///<summary>Generates the options for the dropdowns</summary>
-    private void GenerateDropDownOptions() {
+    void GenerateDropDownOptions() {
         foreach (ImageComboBox dropdown in dropDownLists) {
             dropdown.DataSource = new BindingSource(_shinbokItems.Items, null);
             dropdown.DisplayMember = "Key";
@@ -121,7 +121,7 @@ class ShinbokInventoryEditor : InventoryEditor {
 
     /// <summary>Updates the Maximum parameter for a durability field</summary>
     /// <param name="dropdown">The dropdown that the durability field is related to</param>
-    private void UpdateMaxDurabilityField(ImageComboBox dropdown) {
+    void UpdateMaxDurabilityField(ImageComboBox dropdown) {
 
         // Separate the dropdown's name into parts & get the selected item
         string[] fieldParts = dropdown.Name.Split(['_'], 3);
@@ -218,7 +218,7 @@ class ShinbokInventoryEditor : InventoryEditor {
     ///<param name="subList"><c>Sublit / dictionnary the key belongs to</c></param>
     ///<param name="valueKey"><c>strng</c>Key withint the dictionnary</param>
     ///<param name="value"><c>decimal</c>Value to set</param>
-    private void SetMemoryValue(string subList, string valueKey, decimal value) {
+    void SetMemoryValue(string subList, string valueKey, decimal value) {
         if (subList == "inventory" && _memoryValues.Inventory.ContainsKey(valueKey) == true) {
             _memoryValues.Inventory[valueKey].Value = (uint)value;
         }

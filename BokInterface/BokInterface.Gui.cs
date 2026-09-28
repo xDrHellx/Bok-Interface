@@ -15,7 +15,7 @@ partial class BokInterface {
     public static readonly int gbaScreenWidth = 0xF0,
         gbaScreenHeight = 0xA0;
 
-    private bool _showGui,
+    bool _showGui,
         _showRtc,
         _showIgtFrameCounter,
         _showInterestRate,
@@ -27,7 +27,7 @@ partial class BokInterface {
     #region Interface indicator
 
     /// <summary>Shows the indicator for the Bok Interface</summary>
-    private void ShowInterfaceIndicator() {
+    void ShowInterfaceIndicator() {
         APIs.Gui.Text(3, 1, "Bok ON", System.Drawing.Color.Orange, "bottomright");
 
         // On DS add the indicator on the top screen too
@@ -43,13 +43,13 @@ partial class BokInterface {
     /// <summary>Returns game screen height</summary>
     /// <param name="top">Set to true to return the height of the top screen for DS games</param>
     /// <returns><c>int</c>Height</returns>
-    private int GetScreenHeight(bool top = false) {
+    int GetScreenHeight(bool top = false) {
         return top == true ? APIs.Client.ScreenHeight() / 2 : APIs.Client.ScreenHeight();
     }
 
     /// <summary>Returns game screen width</summary>
     /// <returns><c>int</c>Width</returns>
-    private int GetScreenWidth() {
+    int GetScreenWidth() {
         return APIs.Client.ScreenWidth();
     }
 
@@ -58,7 +58,7 @@ partial class BokInterface {
     #region GUI data
 
     /// <summary>Generate the menu related to the GUI data</summary>
-    private void GenerateGuiMenu() {
+    void GenerateGuiMenu() {
         if (_isDS == true) {
             return;
         }

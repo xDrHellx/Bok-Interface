@@ -8,7 +8,7 @@ namespace BokInterface.Utils;
 public class ImageCheckBox : PictureBox {
 
     /// <summary>CheckBox instance</summary>
-    private readonly CheckBox _checkBoxInstance;
+    readonly CheckBox _checkBoxInstance;
     /// <summary>Indicate if the checkbox is triggered when clicking on the image instead (True by default)</summary>
     public bool CheckWithImage = true;
 

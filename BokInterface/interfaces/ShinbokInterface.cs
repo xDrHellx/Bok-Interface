@@ -14,8 +14,8 @@ partial class BokInterface {
 
     #region Properties
 
-    private readonly ShinbokAddresses _shinbokAddresses = new();
-    private Label _bok3_currentStatusHpValue = new(),
+    readonly ShinbokAddresses _shinbokAddresses = new();
+    Label _bok3_currentStatusHpValue = new(),
         _bok3_currentStatusEneValue = new(),
         _bok3_currentStatusTrcValue = new(),
         _bok3_djangoLevel = new(),
@@ -37,7 +37,7 @@ partial class BokInterface {
 
     #region Show interface
 
-    private void ShowShinbokInterface() {
+    void ShowShinbokInterface() {
 
         GenerateMenu();
         AddCurrentGameInfo();
@@ -56,7 +56,7 @@ partial class BokInterface {
 
     #region Update
 
-    private void UpdateShinbokInterface() {
+    void UpdateShinbokInterface() {
 
         /**
          * Preparing memory addresses
@@ -114,7 +114,7 @@ partial class BokInterface {
 
     #region Elements
 
-    private void AddShinbokCurrentStatusSection() {
+    void AddShinbokCurrentStatusSection() {
 
         // Section
         _currentStatusGroupBox = WinFormHelpers.CreateGroupBox("currentStatus", "Current status", 5, 45, 226, 70, this);
@@ -134,7 +134,7 @@ partial class BokInterface {
         _bok3_djangoExp = WinFormHelpers.CreateLabel("djangoCurrentExpValue", "", 162, 34, 43, 15, _currentStatusGroupBox, textAlignment: "MiddleRight");
     }
 
-    private void AddShinbokCurrentStatsSection() {
+    void AddShinbokCurrentStatsSection() {
 
         // Section
         _currentStatsGroupBox = WinFormHelpers.CreateGroupBox("currentStats", "Stats", 5, 121, 184, 87, this);
@@ -171,7 +171,7 @@ partial class BokInterface {
 
     #region GUI
 
-    private void ShowShinbokGui() {
+    void ShowShinbokGui() {
 
         // RTC
         int halfScreenHeight = GetScreenHeight() / 2;

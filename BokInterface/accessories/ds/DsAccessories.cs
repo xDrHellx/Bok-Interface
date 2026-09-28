@@ -23,7 +23,7 @@ class DsAccessories {
     }
 
     ///<summary>Init accessory instances for Head accessories</summary>
-    private void InitHeadList() {
+    void InitHeadList() {
         string type = "head";
         Head.Add("Dark Eye", new DsAccessory("Dark Eye", 0, type, "dark_eye", "+2 SPR"));
         Head.Add("Training Goggles", new DsAccessory("Training Goggles", 1, type, "training_goggles", "+4 SPR"));
@@ -45,7 +45,7 @@ class DsAccessories {
     }
 
     ///<summary>Init accessory instances for Torso accessories</summary>
-    private void InitTorsoList() {
+    void InitTorsoList() {
         string type = "torso";
         Torso.Add("Leather Suit", new DsAccessory("Leather Suit", 17, type, "leather_suit", "+2 VIT"));
         Torso.Add("Battle Suit", new DsAccessory("Battle Suit", 18, type, "battle_suit", "+4 VIT"));
@@ -67,7 +67,7 @@ class DsAccessories {
     }
 
     ///<summary>Init accessory instances for Foot accessories</summary>
-    private void InitFootList() {
+    void InitFootList() {
         string type = "foot";
         Foot.Add("Leather Boots", new DsAccessory("Leather Boots", 34, type, "leather_boots", "+2 SKILL"));
         Foot.Add("Battle Boots", new DsAccessory("Battle Boots", 35, type, "battle_boots", "+4 SKILL"));
@@ -89,7 +89,7 @@ class DsAccessories {
     }
 
     ///<summary>Init accessory instances for shields</summary>
-    private void InitShieldList() {
+    void InitShieldList() {
         Shield.Add("Silver Star", new DsShield("Silver Star", 51, "silver_star", "Increases TRC rate when guarding"));
         Shield.Add("Red Cross", new DsShield("Red Cross", 52, "red_cross", "Increases status ailments resistance | Restores Life when guarding"));
         Shield.Add("Snake Eyes", new DsShield("Snake Eyes", 53, "snake_eyes", "Automatically guards when raising shield"));
@@ -98,7 +98,7 @@ class DsAccessories {
     }
 
     ///<summary>Init the list containing Equipments accessories related to equipments (mostly used for editors)</summary>
-    private void InitEquipmentsList() {
+    void InitEquipmentsList() {
         Equipment.Add("Empty slot", new DsAccessory("Empty slot", 65535, ""));
         Equipment = Equipment
             .Concat(Head)
@@ -108,7 +108,7 @@ class DsAccessories {
     }
 
     ///<summary>Init the full list containing all accessories (mostly used for editors)</summary>
-    private void InitFullList() {
+    void InitFullList() {
         All = Equipment
             .Concat(Shield)
             .ToDictionary(e => e.Key, e => e.Value);

@@ -11,7 +11,7 @@ namespace BokInterface.Accessories {
         }
 
         ///<summary>Init accessory instances for protectors</summary>
-        private void InitProtectorsList() {
+        void InitProtectorsList() {
             All.Add("Empty slot", new ZoktaiAccessory("Empty slot", 65535));
             All.Add("Cloth Armor", new ZoktaiAccessory("Cloth Armor", 0, "cloth_armor", defense: 10, weight: 5));
             All.Add("Leather Armor", new ZoktaiAccessory("Leather Armor", 1, "leather_armor", defense: 15, weight: 10));

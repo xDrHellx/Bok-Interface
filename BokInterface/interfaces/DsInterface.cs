@@ -11,13 +11,13 @@ partial class BokInterface {
 
     #region Properties
 
-    private DsAddresses _dsAddresses = new BoktaiDsAddresses();
+    DsAddresses _dsAddresses = new BoktaiDsAddresses();
 
     #endregion
 
     #region Show interface
 
-    private void ShowDsInterface() {
+    void ShowDsInterface() {
 
         // Memory addresses are different for each version of LK / Bok DS
         if (shorterGameName == "BoktaiDS") {
@@ -40,7 +40,7 @@ partial class BokInterface {
 
     #region Update
 
-    private void UpdateDsInterface() { }
+    void UpdateDsInterface() { }
 
     #endregion
 

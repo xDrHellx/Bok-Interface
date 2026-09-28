@@ -13,12 +13,12 @@ class BoktaiInventoryEditor : InventoryEditor {
 
     #region Properties
 
-    private readonly MemoryValues _memoryValues;
-    private readonly BokInterface _bokInterface;
-    private readonly BoktaiAddresses _boktaiAddresses;
-    private readonly BoktaiItems _boktaiItems;
+    readonly MemoryValues _memoryValues;
+    readonly BokInterface _bokInterface;
+    readonly BoktaiAddresses _boktaiAddresses;
+    readonly BoktaiItems _boktaiItems;
     protected TabControl inventoryTabControl = new();
-    private readonly ToolTip _toolTip = new();
+    readonly ToolTip _toolTip = new();
 
     #endregion
 
@@ -59,7 +59,7 @@ class BoktaiInventoryEditor : InventoryEditor {
         AddSetValuesButton(315, 382, this);
     }
 
-    private void AddItems() {
+    void AddItems() {
 
         TabPage itemsTab = WinFormHelpers.CreateTabPage("items_tab", "Items", tabControl: inventoryTabControl);
         itemsTab.AutoScroll = true;
@@ -97,7 +97,7 @@ class BoktaiInventoryEditor : InventoryEditor {
         }
     }
 
-    private void AddKeyItems() {
+    void AddKeyItems() {
 
         TabPage keyItemsTab = WinFormHelpers.CreateTabPage("key_items_tab", "Key items", tabControl: inventoryTabControl);
         keyItemsTab.AutoScroll = true;
@@ -270,7 +270,7 @@ class BoktaiInventoryEditor : InventoryEditor {
 
     /// <summary>Get the current inventory and store its data in a list</summary>
     /// <returns><c>Dictionary</c>Dictionnary of BoktaiItem instances</returns>
-    private Dictionary<string, BoktaiItem> GetCurrentInventory() {
+    Dictionary<string, BoktaiItem> GetCurrentInventory() {
 
         Dictionary<string, BoktaiItem> inventory = [];
 
@@ -305,7 +305,7 @@ class BoktaiInventoryEditor : InventoryEditor {
     ///<summary>Get an item from the items list by using its value</summary>
     ///<param name="value"><c>decimal</c>Value</param>
     ///<returns><c>Item</c>Item</returns>
-    private BoktaiItem? GetItemByValue(decimal value) {
+    BoktaiItem? GetItemByValue(decimal value) {
         foreach (KeyValuePair<string, BoktaiItem> index in _boktaiItems.All) {
             BoktaiItem item = index.Value;
             if (item.value == value) {

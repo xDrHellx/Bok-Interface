@@ -14,10 +14,10 @@ class MemoryValuesListing : Form {
     #region Properties
 
     public int index = 0;
-    private readonly DataTable _dataTable = new();
-    private DataGridView? _dataGridView;
-    private readonly BokInterface _bokInterface;
-    private readonly dynamic? _memAddresses;
+    readonly DataTable _dataTable = new();
+    DataGridView? _dataGridView;
+    readonly BokInterface _bokInterface;
+    readonly dynamic? _memAddresses;
     protected string name = "memoryValuesListing",
         title = "Memory Values List";
     protected int width = 650,
@@ -86,7 +86,7 @@ class MemoryValuesListing : Form {
     #region DataTable generation
 
     /// <summary>Generate the Data Table containing the memory addresses, values and infos</summary>
-    private void GenerateDataTable() {
+    void GenerateDataTable() {
 
         // Clear the table & subwindow
         _dataTable.Columns.Clear();
@@ -108,7 +108,7 @@ class MemoryValuesListing : Form {
     }
 
     /// <summary>Simplified method for generating columns for the data table</summary>
-    private void GenerateColumns() {
+    void GenerateColumns() {
         _dataTable.Columns.Add("Dictionnary");
         _dataTable.Columns.Add("Name");
         _dataTable.Columns.Add("Address");
@@ -118,7 +118,7 @@ class MemoryValuesListing : Form {
     }
 
     /// <summary>Set columns styles (width, text-alignment, ...)</summary>
-    private void SetColumnsStyle() {
+    void SetColumnsStyle() {
         if (_dataGridView != null) {
 
             // Width
@@ -136,7 +136,7 @@ class MemoryValuesListing : Form {
     }
 
     /// <summary>Simplified method for generating rows for the data table from a dictionnary</summary>
-    private void GenerateRows(IDictionary<string, MemoryAddress> dictionnary, string dictionnaryName = "") {
+    void GenerateRows(IDictionary<string, MemoryAddress> dictionnary, string dictionnaryName = "") {
         foreach (KeyValuePair<string, MemoryAddress> row in dictionnary) {
             try {
                 // Try getting the MemoryAddress instance & adding the row
@@ -158,7 +158,7 @@ class MemoryValuesListing : Form {
 
     /// <summary>Generate the table data for the corresponding game</summary>
     /// <returns><c>bool</c>True if rows were generated, false otherwise</returns>
-    private bool GenerateTableData() {
+    bool GenerateTableData() {
         if (_memAddresses == null) {
             return false;
         }

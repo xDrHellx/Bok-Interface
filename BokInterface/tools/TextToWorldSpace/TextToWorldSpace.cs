@@ -16,8 +16,8 @@ class TextToWorldSpace {
     protected double planeScale = (double)0x30 / 0x100,
         heightScale = (double)0x18 / 0x100;
     protected Color textColor = new();
-    private readonly dynamic? _memAddresses;
-    private uint _cameraXposAddress = 0,
+    readonly dynamic? _memAddresses;
+    uint _cameraXposAddress = 0,
         _cameraYposAddress = 0;
 
     #endregion
@@ -86,7 +86,7 @@ class TextToWorldSpace {
 
     /// <summary>Set camera memory addresses used for writing position</summary>
     /// <returns><c>bool</c>True if addresses were set, false otherwise</return>
-    private bool SetCameraAddresses() {
+    bool SetCameraAddresses() {
         if (_memAddresses == null) {
             return false;
         }

@@ -12,10 +12,10 @@ class ZoktaiMagicsEditor : MagicsEditor {
 
     #region Properties
 
-    private readonly MemoryValues _memoryValues;
-    private readonly BokInterface _bokInterface;
-    private readonly ZoktaiAddresses _zoktaiAddresses;
-    private readonly ZoktaiMagics _zoktaiMagics;
+    readonly MemoryValues _memoryValues;
+    readonly BokInterface _bokInterface;
+    readonly ZoktaiAddresses _zoktaiAddresses;
+    readonly ZoktaiMagics _zoktaiMagics;
     protected GroupBox lunaGroupBox = new(),
         solGroupBox = new(),
         darkGroupBox = new(),

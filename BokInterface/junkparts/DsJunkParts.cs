@@ -12,7 +12,7 @@ public class DsJunkParts {
     }
 
     ///<summary>Init the list containing all instances for Junk Parts</summary>
-    private void InitFullList() {
+    void InitFullList() {
         All.Add("Iron", new DsJunkPart("Iron"));
         All.Add("Steel", new DsJunkPart("Steel"));
         All.Add("Solvent", new DsJunkPart("Solvent"));

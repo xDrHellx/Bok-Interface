@@ -21,13 +21,13 @@ public static class APIs {
 
     #region Only if game loaded
 
-    private static IMainFormForTools? s_mainFormForTools;
-    private static ApiContainer? s_apiContainer;
-    private static IEmuClientApi? s_clientApi;
-    private static IEmulationApi? s_emulationApi;
-    private static ISaveStateApi? s_saveStateApi;
-    private static IMemoryApi? s_memoryApi;
-    private static IGuiApi? s_guiApi;
+    static IMainFormForTools? s_mainFormForTools;
+    static ApiContainer? s_apiContainer;
+    static IEmuClientApi? s_clientApi;
+    static IEmulationApi? s_emulationApi;
+    static ISaveStateApi? s_saveStateApi;
+    static IMemoryApi? s_memoryApi;
+    static IGuiApi? s_guiApi;
     public static IMainFormForTools MainFormForTools => Require(s_mainFormForTools);
     public static MainForm MainForm => (MainForm)MainFormForTools;
     public static ApiContainer ApiContainer => Require(s_apiContainer);
@@ -57,7 +57,7 @@ public static class APIs {
         s_mainFormForTools = mainForm;
     }
 
-    private static T Require<T>(T? value) where T : class {
+    static T Require<T>(T? value) where T : class {
         return value ?? throw new InvalidOperationException($"{typeof(T).Name} is not available. Accessed before tool has been initialized?");
     }
 

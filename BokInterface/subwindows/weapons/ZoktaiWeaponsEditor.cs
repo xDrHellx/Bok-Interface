@@ -15,11 +15,11 @@ class ZoktaiWeaponsEditor : WeaponsEditor {
 
     #region Properties
 
-    private readonly MemoryValues _memoryValues;
-    private readonly BokInterface _bokInterface;
-    private readonly ZoktaiAddresses _zoktaiAddresses;
-    private readonly ZoktaiWeapons _zoktaiWeapons;
-    private readonly ZoktaiAbilities _zoktaiAbilities;
+    readonly MemoryValues _memoryValues;
+    readonly BokInterface _bokInterface;
+    readonly ZoktaiAddresses _zoktaiAddresses;
+    readonly ZoktaiWeapons _zoktaiWeapons;
+    readonly ZoktaiAbilities _zoktaiAbilities;
 
     #endregion
 
@@ -105,7 +105,7 @@ class ZoktaiWeaponsEditor : WeaponsEditor {
     }
 
     /// <summary>Generate the options for the weapon selection and SP abilities dropdowns</summary>
-    private void GenerateDropDownOptions() {
+    void GenerateDropDownOptions() {
         foreach (ImageComboBox dropdown in dropDownLists) {
 
             // Indicate what the dropdown field is for
@@ -209,7 +209,7 @@ class ZoktaiWeaponsEditor : WeaponsEditor {
     /// <param name="subList"><c>Sublit / dictionnary the key belongs to</c></param>
     /// <param name="valueKey"><c>strng</c>Key withint the dictionnary</param>
     /// <param name="value"><c>decimal</c>Value to set</param>
-    private void SetMemoryValue(string subList, string valueKey, decimal value) {
+    void SetMemoryValue(string subList, string valueKey, decimal value) {
         if (subList == "inventory" && _memoryValues.Inventory.ContainsKey(valueKey) == true) {
             /**
              * Split the key to check if it corresponds to a weapon bonus or malus
@@ -276,7 +276,7 @@ class ZoktaiWeaponsEditor : WeaponsEditor {
     /// <summary>Get an SP ability from the weapons abilities list by using its value</summary>
     /// <param name="value"><c>decimal</c>Value</param>
     /// <returns><c>Ability</c>Ability</returns>
-    private Ability? GetAbilityByValue(decimal value) {
+    Ability? GetAbilityByValue(decimal value) {
 
         /**
          * For some reason there are duplicates within the game,
@@ -311,7 +311,7 @@ class ZoktaiWeaponsEditor : WeaponsEditor {
 
     /// <summary>Sets the "Forged by" name on the weapon in the specified slot to "TaiyohNetwrk"</summary>
     /// <param name="slot">Slot number</param>
-    private void SetWeaponForgedByName(int slot) {
+    void SetWeaponForgedByName(int slot) {
         if (slot > 0 && slot < 17) {
             _memoryValues.Inventory["slot" + slot + "_weapon_forgedBy_1"].Value = 2036949332;
             _memoryValues.Inventory["slot" + slot + "_weapon_forgedBy_2"].Value = 1699637359;
@@ -322,7 +322,7 @@ class ZoktaiWeaponsEditor : WeaponsEditor {
     /// <summary>Update durability field based on related bonus | malus field</summary>
     /// <param name="sender"></param>
     /// <param name="e"></param>
-    private void UpdateDurabilityField(object sender, EventArgs e) {
+    void UpdateDurabilityField(object sender, EventArgs e) {
         NumericUpDown bonusField = (NumericUpDown)sender;
         if (bonusField.Value > 0) {
             return;
@@ -339,7 +339,7 @@ class ZoktaiWeaponsEditor : WeaponsEditor {
     /// <summary>Update durability field based on bonus | malus field</summary>
     /// <param name="sender"></param>
     /// <param name="e"></param>
-    private void UpdateDurabilityBasedOnBonusField(object sender, EventArgs e) {
+    void UpdateDurabilityBasedOnBonusField(object sender, EventArgs e) {
         NumericUpDown durabilityField = (NumericUpDown)sender;
 
         // Get the related bonus | malus field

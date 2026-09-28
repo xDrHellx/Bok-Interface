@@ -25,7 +25,7 @@ class ShinbokWeapons {
     }
 
     ///<summary>Init weapon instances for Fencing Swords</summary>
-    private void InitFencingSwords() {
+    void InitFencingSwords() {
         string type = "Fencing sword";
         FencingSwords.Add("Estoc", new ShinbokWeapon("Estoc", 1, type, "estoc", level: 5, baseDamage: 10, attackPatterns: ["P1----P3", "P1,P2------P4", "P1,P2,P4"]));
         FencingSwords.Add("Rapier", new ShinbokWeapon("Rapier", 5, type, "rapier", level: 10, baseDamage: 15, attackPatterns: ["P1,P2------P4", "P1,P2------H4", "P1,P2,P4"]));
@@ -40,7 +40,7 @@ class ShinbokWeapons {
     }
 
     ///<summary>Init weapon instances for Curved Swords</summary>
-    private void InitCurvedSwords() {
+    void InitCurvedSwords() {
         string type = "Curved sword";
         CurvedSwords.Add("Kopis", new ShinbokWeapon("Kopis", 2, type, "kopis", level: 5, baseDamage: 10, attackPatterns: ["H3", "H2,H3", "H2,H3------H6"]));
         CurvedSwords.Add("Bronze Edge", new ShinbokWeapon("Bronze Edge", 6, type, "bronze_edge", level: 10, baseDamage: 15, attackPatterns: ["H2,H3", "H2,H3------H6", "H2--H3----H4"]));
@@ -54,7 +54,7 @@ class ShinbokWeapons {
     }
 
     ///<summary>Init weapon instances for Katanas</summary>
-    private void InitKatanas() {
+    void InitKatanas() {
         string type = "Katana";
         Katanas.Add("Kagerou", new ShinbokWeapon("Kagerou", 7, type, "kagerou", level: 10, baseDamage: 15, attackPatterns: ["V2,H3", "V2,H3--P4", "V2,H3,V3--P4"]));
         Katanas.Add("Shiranui", new ShinbokWeapon("Shiranui", 14, type, "shiranui", level: 20, baseDamage: 25, attackPatterns: ["H2--P4", "H2,V4", "H2,V4--P4"]));
@@ -68,7 +68,7 @@ class ShinbokWeapons {
     }
 
     ///<summary>Init weapon instances for Long Swords</summary>
-    private void InitLongSwords() {
+    void InitLongSwords() {
         string type = "Long sword";
         LongSwords.Add("Gradius", new ShinbokWeapon("Gradius", 0, type, "gradius", level: 1, baseDamage: 6, attackPatterns: ["H3 ?", "H2------V4", "H2--V3"]));
         LongSwords.Add("Short Sword", new ShinbokWeapon("Short Sword", 3, type, "short_sword", level: 5, baseDamage: 10, attackPatterns: ["H3 ?", "H2------V4", "H2--V3"]));
@@ -86,7 +86,7 @@ class ShinbokWeapons {
     }
 
     ///<summary>Init weapon instances for Great Swords</summary>
-    private void InitGreatSwords() {
+    void InitGreatSwords() {
         string type = "Great sword";
         GreatSwords.Add("Zweihander", new ShinbokWeapon("Zweihander", 4, type, "zweihander", level: 5, baseDamage: 12, attackPatterns: ["--V4", "V4", "--V4--H6"]));
         GreatSwords.Add("Iron Sword", new ShinbokWeapon("Iron Sword", 9, type, "iron_sword", level: 10, baseDamage: 17, attackPatterns: ["--V4", "------V4--V6", "------V4--V6 ?"]));
@@ -101,12 +101,12 @@ class ShinbokWeapons {
     }
 
     ///<summary>Init weapon instances for LargeGuns</summary>
-    private void InitLargeGuns() {
+    void InitLargeGuns() {
         LargeGuns.Add("Rockbuster", new ShinbokWeapon("Rockbuster", 48, "Large gun", "rockbuster", adjustToLevel: true, baseDamage: 6));
     }
 
     ///<summary>Init the full list containing all weapons (mostly used for editors)</summary>
-    private void InitFullList() {
+    void InitFullList() {
         All.Add("Empty slot", new ShinbokWeapon("Empty slot", 255, ""));
         All = All
             .Concat(FencingSwords)

@@ -13,10 +13,10 @@ class DsKeyItemsEditor : KeyItemsEditor {
 
     #region Properties
 
-    private readonly MemoryValues _memoryValues;
-    private readonly BokInterface _bokInterface;
-    private readonly DsAddresses _memoryAddresses;
-    private readonly DsItems _dsItems;
+    readonly MemoryValues _memoryValues;
+    readonly BokInterface _bokInterface;
+    readonly DsAddresses _memoryAddresses;
+    readonly DsItems _dsItems;
     protected CheckGroupBox? slot17group { get; set; }
     protected CheckGroupBox? slot18group { get; set; }
     protected CheckGroupBox? slot19group { get; set; }
@@ -132,7 +132,7 @@ class DsKeyItemsEditor : KeyItemsEditor {
     ///<param name="subList"><c>Dictionnary the key belongs to</c></param>
     ///<param name="valueKey"><c>string</c>Key within the dictionnary</param>
     ///<param name="value"><c>decimal</c>Value to set</param>
-    private void SetMemoryValue(string subList, string valueKey, decimal value) {
+    void SetMemoryValue(string subList, string valueKey, decimal value) {
         if (subList == "inventory" && _memoryAddresses.Inventory.ContainsKey(valueKey) == true) {
             _memoryAddresses.Inventory[valueKey].Value = (uint)value;
         }

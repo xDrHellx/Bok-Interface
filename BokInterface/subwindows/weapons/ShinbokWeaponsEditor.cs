@@ -15,12 +15,12 @@ class ShinbokWeaponsEditor : WeaponsEditor {
 
     #region Properties
 
-    private readonly MemoryValues _memoryValues;
-    private readonly BokInterface _bokInterface;
-    private readonly ShinbokAddresses _shinbokAddresses;
-    private readonly ShinbokWeapons _shinbokWeapons;
-    private readonly ShinbokAbilities _shinbokAbilities;
-    private readonly ShinbokSwordAttackPatterns _shinbokSwordAttackPatterns;
+    readonly MemoryValues _memoryValues;
+    readonly BokInterface _bokInterface;
+    readonly ShinbokAddresses _shinbokAddresses;
+    readonly ShinbokWeapons _shinbokWeapons;
+    readonly ShinbokAbilities _shinbokAbilities;
+    readonly ShinbokSwordAttackPatterns _shinbokSwordAttackPatterns;
     protected readonly List<RadioButton> radioButtons = [];
 
     #endregion
@@ -105,7 +105,7 @@ class ShinbokWeaponsEditor : WeaponsEditor {
     }
 
     /// <summary>Generate the options for the weapon selection and SP abilities dropdowns</summary>
-    private void GenerateDropDownOptions() {
+    void GenerateDropDownOptions() {
         foreach (ImageComboBox dropdown in dropDownLists) {
 
             // Indicate what the dropdown field is for
@@ -243,7 +243,7 @@ class ShinbokWeaponsEditor : WeaponsEditor {
     /// <param name="subList"><c>Sublit / dictionnary the key belongs to</c></param>
     /// <param name="valueKey"><c>strng</c>Key within the dictionnary</param>
     /// <param name="value"><c>decimal</c>Value to set</param>
-    private void SetMemoryValue(string subList, string valueKey, decimal value) {
+    void SetMemoryValue(string subList, string valueKey, decimal value) {
         if (subList == "inventory" && _memoryValues.Inventory.ContainsKey(valueKey) == true) {
             _memoryValues.Inventory[valueKey].Value = (uint)value;
         }
@@ -307,7 +307,7 @@ class ShinbokWeaponsEditor : WeaponsEditor {
     /// <summary>Get an SP ability from the weapons abilities list by using its value</summary>
     /// <param name="value"><c>decimal</c>Value</param>
     /// <returns><c>Ability</c>Ability</returns>
-    private Ability? GetAbilityByValue(decimal value) {
+    Ability? GetAbilityByValue(decimal value) {
         foreach (KeyValuePair<string, Ability> index in _shinbokAbilities.Weapons) {
             Ability ability = index.Value;
             if (ability.value == value) {
@@ -321,7 +321,7 @@ class ShinbokWeaponsEditor : WeaponsEditor {
     /// <summary>Update the "Properties" group of a weapon based on its ID</summary>
     /// <param name="sender"></param>
     /// <param name="e"></param>
-    private void UpdatePropertiesGroup(object sender, EventArgs e) {
+    void UpdatePropertiesGroup(object sender, EventArgs e) {
         ImageComboBox dropdown = (ImageComboBox)sender;
 
         // Retrieve the slot number from the dropdown's name

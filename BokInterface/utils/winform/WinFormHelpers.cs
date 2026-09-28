@@ -811,7 +811,7 @@ static class WinFormHelpers {
     /// <summary>Get the corresponding text alignment based on a string</summary>
     /// <param name="value">Text alignment string</param>
     /// <returns><c>System.Drawing.ContentAlignment</c>Text alignment object</returns>
-    private static ContentAlignment GetTextAlignment(string value) {
+    static ContentAlignment GetTextAlignment(string value) {
         return value switch {
             "BottomCenter" => ContentAlignment.BottomCenter,
             "BottomLeft" => ContentAlignment.BottomLeft,
@@ -828,7 +828,7 @@ static class WinFormHelpers {
     /// <summary>Get the corresponding PictureBoxSizeMode based on a string</summary>
     /// <param name="value">SizeMode string</param>
     /// <returns><c>System.Windows.Forms.PictureBoxSizeMode</c>SizeMode object</returns>
-    private static PictureBoxSizeMode GetSizeMode(string value) {
+    static PictureBoxSizeMode GetSizeMode(string value) {
         return value switch {
             "CenterImage" => PictureBoxSizeMode.CenterImage,
             "Normal" => PictureBoxSizeMode.Normal,

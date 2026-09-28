@@ -12,7 +12,7 @@ class ShinbokSwordAttackPatterns {
     }
 
     ///<summary>Init the full list containing all sword attack patterns</summary>
-    private void InitAll() {
+    void InitAll() {
 
         /*
             How to read patterns :

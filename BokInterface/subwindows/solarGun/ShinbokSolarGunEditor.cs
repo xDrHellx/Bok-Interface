@@ -11,10 +11,10 @@ class ShinbokSolarGunEditor : SolarGunEditor {
 
     #region Properties
 
-    private readonly MemoryValues _memoryValues;
-    private readonly BokInterface _bokInterface;
-    private readonly ShinbokAddresses _shinbokAddresses;
-    private readonly ShinbokGuns _shinbokGuns;
+    readonly MemoryValues _memoryValues;
+    readonly BokInterface _bokInterface;
+    readonly ShinbokAddresses _shinbokAddresses;
+    readonly ShinbokGuns _shinbokGuns;
     protected readonly List<ImageComboBox> lensesDropDownLists = [],
         framesDropDownLists = [];
 
@@ -155,7 +155,7 @@ class ShinbokSolarGunEditor : SolarGunEditor {
     ///<param name="subList"><c>Sublit / dictionnary the key belongs to</c></param>
     ///<param name="valueKey"><c>strng</c>Key withint the dictionnary</param>
     ///<param name="value"><c>decimal</c>Value to set</param>
-    private void SetMemoryValue(string subList, string valueKey, decimal value) {
+    void SetMemoryValue(string subList, string valueKey, decimal value) {
         if (subList == "inventory" && _memoryValues.Inventory.ContainsKey(valueKey) == true) {
             _memoryValues.Inventory[valueKey].Value = (uint)value;
         }
@@ -189,7 +189,7 @@ class ShinbokSolarGunEditor : SolarGunEditor {
     ///<summary>Get a lens from the lenses list by using its value</summary>
     ///<param name="value"><c>decimal</c>Value</param>
     ///<returns><c>ShinbokLens</c>Lens</returns>
-    private ShinbokLens? GetLensByValue(decimal value) {
+    ShinbokLens? GetLensByValue(decimal value) {
         foreach (KeyValuePair<string, ShinbokLens> index in _shinbokGuns.Lenses) {
             ShinbokLens lens = index.Value;
             if (lens.value == value) {
@@ -203,7 +203,7 @@ class ShinbokSolarGunEditor : SolarGunEditor {
     ///<summary>Get a frame from the frames list by using its value</summary>
     ///<param name="value"><c>decimal</c>Value</param>
     ///<returns><c>ShinbokFrame</c>Frame</returns>
-    private ShinbokFrame? GetFrameByValue(decimal value) {
+    ShinbokFrame? GetFrameByValue(decimal value) {
         foreach (KeyValuePair<string, ShinbokFrame> index in _shinbokGuns.Frames) {
             ShinbokFrame frame = index.Value;
             if (frame.value == value) {

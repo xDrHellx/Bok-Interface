@@ -47,7 +47,7 @@ class MemoryValues {
     #endregion
 
     /// <summary>Clears all lists</summary>
-    private void ClearLists() {
+    void ClearLists() {
         Django.Clear();
         Sabata.Clear();
         Inventory.Clear();
@@ -61,7 +61,7 @@ class MemoryValues {
 
     #region Bok 1 lists init
 
-    private void InitializeBoktaiList() {
+    void InitializeBoktaiList() {
         BoktaiAddresses memoryAddresses = new();
 
         // Astro battery event
@@ -81,7 +81,7 @@ class MemoryValues {
 
     #region Bok 2 lists init
 
-    private void InitializeZoktaiList() {
+    void InitializeZoktaiList() {
         ZoktaiAddresses memoryAddresses = new();
 
         Django.Add("x_position", new DynamicMemoryValue("x_position", memoryAddresses.Misc["stat"].Address, memoryAddresses.Django["x_position"].Address));
@@ -165,7 +165,7 @@ class MemoryValues {
 
     #region Bok 3 lists init
 
-    private void InitializeShinbokList() {
+    void InitializeShinbokList() {
         ShinbokAddresses memoryAddresses = new();
 
         Django.Add("x_position", new DynamicMemoryValue("x_position", memoryAddresses.Misc["actor"].Address, memoryAddresses.Django["x_position"].Address));
@@ -268,7 +268,7 @@ class MemoryValues {
 
     #region Bok DS / LK lists init
 
-    private void InitializeLunarKnightsList() { }
+    void InitializeLunarKnightsList() { }
 
     #endregion
 }

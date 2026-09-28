@@ -10,8 +10,8 @@ class ZoktaiTileDataViewer : TileDataViewer {
 
     #region Properties
 
-    private readonly BokInterface _bokInterface;
-    private readonly ZoktaiAddresses _memAddresses;
+    readonly BokInterface _bokInterface;
+    readonly ZoktaiAddresses _memAddresses;
 
     #endregion
 

@@ -14,7 +14,7 @@ class ShinbokGuns {
     }
 
     /// <summary>Init instances for Lenses</summary>
-    private void InitLenses() {
+    void InitLenses() {
         Lenses.Add("Empty slot", new ShinbokLens("Empty slot", 65535, ""));
         Lenses.Add("Sol", new ShinbokLens("Sol", 0, "sol", "sol_lens"));
         Lenses.Add("Luna", new ShinbokLens("Luna", 1, "luna", "luna_lens"));
@@ -28,7 +28,7 @@ class ShinbokGuns {
     }
 
     /// <summary>Init instances for Frames</summary>
-    private void InitFrames() {
+    void InitFrames() {
         Frames.Add("Empty slot", new ShinbokFrame("Empty slot", 0, "", ""));
         Frames.Add("Fighter", new ShinbokFrame("Fighter", 1, "C", "S", "fighter"));
         Frames.Add("Calamity", new ShinbokFrame("Calamity", 2, "C", "A", "calamity"));

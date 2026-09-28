@@ -110,7 +110,7 @@ public class ShinbokBikeParts {
     }
 
     ///<summary>Init the full list containing all bike parts (mostly used for editors)</summary>
-    private void InitFullList() {
+    void InitFullList() {
         All.Add("Empty slot", new ShinbokBikePart("Empty slot", 0, ""));
         All = All
             .Concat(Front)

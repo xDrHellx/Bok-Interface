@@ -12,7 +12,7 @@ class ShinbokAbilities {
     }
 
     ///<summary>Init ability instances for weapon effects</summary>
-    private void InitWeaponAbilitiesList() {
+    void InitWeaponAbilitiesList() {
         Weapons.Add("No ability", new Ability("No ability", 0));
 
         // Exclusive to "La Vie En Rose"

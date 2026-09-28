@@ -21,7 +21,7 @@ class ShinbokAccessories {
     }
 
     ///<summary>Init accessory instances for Head accessories</summary>
-    private void InitHeadList() {
+    void InitHeadList() {
         string type = "head";
         Head.Add("Circlet", new ShinbokAccessory("Circlet", 0, type, "circlet", "+4 SPR | Halves item drop rate", level: 10));
         Head.Add("Cool Bandana", new ShinbokAccessory("Cool Bandana", 1, type, "cool_bandana", "+8 SPR | -50% TRC rate", level: 20));
@@ -37,7 +37,7 @@ class ShinbokAccessories {
     }
 
     ///<summary>Init accessory instances for Head accessories</summary>
-    private void InitTorsoList() {
+    void InitTorsoList() {
         string type = "torso";
         Torso.Add("Leather Armor", new ShinbokAccessory("Leather Armor", 11, type, "leather_armor", "+2 VIT", level: 10));
         Torso.Add("Chain Mail", new ShinbokAccessory("Chain Mail", 12, type, "chain_mail", "+4 VIT", level: 20));
@@ -58,7 +58,7 @@ class ShinbokAccessories {
     }
 
     ///<summary>Init accessory instances for Head accessories</summary>
-    private void InitArmList() {
+    void InitArmList() {
         string type = "arm";
         Arm.Add("Power Wrist", new ShinbokAccessory("Power Wrist", 27, type, "power_wrist", "+4 STR | Swords breaks twice as fast", level: 10));
         Arm.Add("Bracelet", new ShinbokAccessory("Bracelet", 28, type, "bracelet", "+8 STR | ENE consumption is doubled", level: 20));
@@ -74,7 +74,7 @@ class ShinbokAccessories {
     }
 
     ///<summary>Init accessory instances for Head accessories</summary>
-    private void InitFootList() {
+    void InitFootList() {
         string type = "foot";
         Foot.Add("Iron Clogs", new ShinbokAccessory("Iron Clogs", 38, type, "iron_clogs", "Slow walking speed | Unaffected by Solar Wind", level: 10));
         Foot.Add("Funny Shoes", new ShinbokAccessory("Funny Shoes", 39, type, "funny_shoes", "+2 VIT | +2 STR | Footsteps makes noise", level: 20));
@@ -89,7 +89,7 @@ class ShinbokAccessories {
     }
 
     ///<summary>Init the full list containing all accessories (mostly used for editors)</summary>
-    private void InitFullList() {
+    void InitFullList() {
         All.Add("Empty slot", new ShinbokAccessory("Empty slot", 65535, ""));
         All = All
             .Concat(Head)

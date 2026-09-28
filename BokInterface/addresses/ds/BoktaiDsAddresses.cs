@@ -13,7 +13,7 @@ public class BoktaiDsAddresses : DsAddresses {
         OrderDictionnaries();
     }
 
-    private void InitPlayerAddresses() {
+    void InitPlayerAddresses() {
 
         // TODO Need find proper addresses, with pointer to data (currently player values cannot be updated)
         // Current stats
@@ -25,7 +25,7 @@ public class BoktaiDsAddresses : DsAddresses {
         // note = "Also corresponds to values from Save Data";
     }
 
-    private void InitInventoryAddresses() {
+    void InitInventoryAddresses() {
         for (int i = 0; i < 20; i++) {
             int slotNumber = 1 + i;
 

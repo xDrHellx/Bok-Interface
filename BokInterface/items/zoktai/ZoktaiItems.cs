@@ -14,7 +14,7 @@ class ZoktaiItems {
     }
 
     ///<summary>Init items instances</summary>
-    private void InitItems() {
+    void InitItems() {
         Items.Add("Empty slot", new ZoktaiItem("Empty slot", 65535));
         Items.Add("Earthly Nut", new ZoktaiItem("Earthly Nut", 0, "earthly_nut", "Recover 40% Life", true));
         Items.Add("Solar Nut", new ZoktaiItem("Solar Nut", 1, "solar_nut", "Recover 40% ENE as Red Django | Lose 40% ENE as Black Django or Sabata", true));
@@ -68,7 +68,7 @@ class ZoktaiItems {
     }
 
     ///<summary>Init key items instances</summary>
-    private void InitKeyItems() {
+    void InitKeyItems() {
         KeyItems.Add("Empty slot", new ZoktaiItem("Empty slot", 65535));
         KeyItems.Add("Dark Card", new ZoktaiItem("Dark Card", 49, "dark_card", "Dark Loan"));
         KeyItems.Add("Pet", new ZoktaiItem("Pet", 50, "pet", "Enable postgame ShadeMan.EXE sidequest"));

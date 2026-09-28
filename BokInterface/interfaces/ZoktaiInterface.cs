@@ -14,8 +14,8 @@ partial class BokInterface {
 
     #region Properties
 
-    private readonly ZoktaiAddresses _zoktaiAddresses = new();
-    private Label _bok2_currentStatusHpValue = new(),
+    readonly ZoktaiAddresses _zoktaiAddresses = new();
+    Label _bok2_currentStatusHpValue = new(),
         _bok2_currentStatusEneValue = new(),
         _bok2_djangoLevel = new(),
         _bok2_djangoExp = new(),
@@ -29,8 +29,8 @@ partial class BokInterface {
         _bok2_djangoHammerSkill = new(),
         _bok2_djangoFistsSkill = new(),
         _bok2_djangoGunSkill = new();
-    private GroupBox _bok2_currentSkillGroupBox = new();
-    private ToolStripMenuItem _enableBlindboxLvl3 = new(),
+    GroupBox _bok2_currentSkillGroupBox = new();
+    ToolStripMenuItem _enableBlindboxLvl3 = new(),
         _enableBlindboxLvl4 = new(),
         _enableBlindboxLvl5ValentineDay = new(),
         _enableStarPiece = new();
@@ -39,7 +39,7 @@ partial class BokInterface {
 
     #region Show interface
 
-    private void ShowZoktaiInterface() {
+    void ShowZoktaiInterface() {
 
         GenerateMenu();
         AddZoktaiDownloadableEventsMenu();
@@ -60,7 +60,7 @@ partial class BokInterface {
 
     #region Update
 
-    private void UpdateZoktaiInterface() {
+    void UpdateZoktaiInterface() {
 
         // Get one of the values used for reading current stats
         uint currentStat = _zoktaiAddresses.Misc["current_stat"].Value;
@@ -126,7 +126,7 @@ partial class BokInterface {
 
     #region Elements
 
-    private void AddZoktaiCurrentStatusSection() {
+    void AddZoktaiCurrentStatusSection() {
 
         // Section
         _currentStatusGroupBox = WinFormHelpers.CreateGroupBox("currentStatus", "Current status", 5, 45, 226, 55, this);
@@ -144,7 +144,7 @@ partial class BokInterface {
         _bok2_djangoExp = WinFormHelpers.CreateLabel("djangoCurrentExpValue", "", 162, 34, 43, 15, _currentStatusGroupBox, textAlignment: "MiddleRight");
     }
 
-    private void AddZoktaiCurrentSkillSection() {
+    void AddZoktaiCurrentSkillSection() {
 
         // Section
         _bok2_currentSkillGroupBox = WinFormHelpers.CreateGroupBox("currentSkill", "Skill", 92, 106, 110, 104, this);
@@ -170,7 +170,7 @@ partial class BokInterface {
         _bok2_djangoGunSkill = WinFormHelpers.CreateLabel("djangoGunSkill", "", 60, 79, 41, 15, _bok2_currentSkillGroupBox, WinFormHelpers.totalStatColor, textAlignment: "MiddleLeft");
     }
 
-    private void AddZoktaiCurrentStatsSection() {
+    void AddZoktaiCurrentStatsSection() {
 
         // Section
         _currentStatsGroupBox = WinFormHelpers.CreateGroupBox("currentStats", "Stats", 5, 106, 75, 106, this);
@@ -200,7 +200,7 @@ partial class BokInterface {
 
     #region Game-specific menus
 
-    private void AddZoktaiDownloadableEventsMenu() {
+    void AddZoktaiDownloadableEventsMenu() {
         if (shorterGameName != "Zoktai") {
             return;
         }
@@ -225,7 +225,7 @@ partial class BokInterface {
     /// <param name="menuItem">Menu item</param>
     /// <param name="memKey">Related key within the _zoktaiAddresses.JoySpots dictionnary</param>
     /// <param name="onCheckedValue">Value to set on the key when the menu item is checked</param>
-    private void AddZoktaiJoySpotsEventHandler(ToolStripMenuItem menuItem, string memKey, uint onCheckedValue, uint onUncheckedValue = 0x0) {
+    void AddZoktaiJoySpotsEventHandler(ToolStripMenuItem menuItem, string memKey, uint onCheckedValue, uint onUncheckedValue = 0x0) {
         if (shorterGameName != "Zoktai" || _zoktaiAddresses.JoySpots.ContainsKey(memKey) == false) {
             return;
         }
@@ -250,7 +250,7 @@ partial class BokInterface {
     /// <param name="menuItem">Menu item</param>
     /// <param name="memKey">Related key within the _zoktaiAddresses.JoySpots dictionnary</param>
     /// <param name="onCheckedValue">Value used for enabling the downloadable event</param>
-    private void UpdateZoktaiEvent(ToolStripMenuItem menuItem, string memKey, uint onCheckedValue) {
+    void UpdateZoktaiEvent(ToolStripMenuItem menuItem, string memKey, uint onCheckedValue) {
         if (shorterGameName != "Zoktai" || _zoktaiAddresses.JoySpots.ContainsKey(memKey) == false) {
             return;
         }
@@ -263,7 +263,7 @@ partial class BokInterface {
 
     #region GUI
 
-    private void ShowZoktaiGui() {
+    void ShowZoktaiGui() {
 
         // RTC
         int halfScreenHeight = GetScreenHeight() / 2;

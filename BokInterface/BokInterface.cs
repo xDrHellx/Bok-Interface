@@ -35,11 +35,11 @@ public partial class BokInterface : ToolFormBase, IExternalToolForm {
         shorterGameName = "",
         region = "",
         version = "";
-    private bool _supportedGame = false,
+    bool _supportedGame = false,
         _interfaceActivated = false,
         _isDS = false,
         _previousDisplayMessagesSetting = true;
-    private int _retryCount = 0;
+    int _retryCount = 0;
     public bool _previousIsPauseSetting = false;
     /// <summary>List of functions to call each frame</summary>
     public static List<Action> functionsList = [];
@@ -57,15 +57,15 @@ public partial class BokInterface : ToolFormBase, IExternalToolForm {
     ///     List of MemoryValues instances.<br/>
     ///     These are used for simplyfing getting and setting values from memory addresses that are "dynamic."
     /// </summary>
-    private MemoryValues _memoryValues = new("");
+    MemoryValues _memoryValues = new("");
     /// <summary>Movement calculator instance</summary>
-    private MovementCalculator _movementCalculator = new();
+    MovementCalculator _movementCalculator = new();
 
     #endregion
 
     #region Subwindows
 
-    private readonly List<Form> _subwindows = [];
+    readonly List<Form> _subwindows = [];
     public bool statusEditorOpened = false,
         inventoryEditorOpened = false,
         keyItemsEditorOpened = false,
@@ -83,13 +83,13 @@ public partial class BokInterface : ToolFormBase, IExternalToolForm {
 
     #region Common elements
 
-    private MenuStrip _menuBar = new();
-    private GroupBox _currentStatusGroupBox = new(),
+    MenuStrip _menuBar = new();
+    GroupBox _currentStatusGroupBox = new(),
         _currentStatsGroupBox = new(),
         _miscDataGroupBox = new();
 
     // Misc data labels
-    private Label _averageSpeedLabel = new(),
+    Label _averageSpeedLabel = new(),
         _currentSpeedLabel = new(),
         _coffinDamageLabel = new(),
         _coffinWindupTimerLabel = new(),

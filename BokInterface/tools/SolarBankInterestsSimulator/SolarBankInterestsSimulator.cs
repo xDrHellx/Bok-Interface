@@ -16,12 +16,12 @@ class SolarBankInterestsSimulator : Form {
     protected string name = "solarBankInterestsSimulator",
         title = "Solar bank interests simulator";
 
-    private readonly DataTable _dataTable = new();
-    private DataGridView? _dataGridView;
-    private NumericUpDown _baseSollsNumDown = new();
-    private Button _calculateInterestsBtn = new();
-    private ComboBox _interestsRateDropDown = new();
-    private readonly Dictionary<int, double> _interestsRates = new() {
+    readonly DataTable _dataTable = new();
+    DataGridView? _dataGridView;
+    NumericUpDown _baseSollsNumDown = new();
+    Button _calculateInterestsBtn = new();
+    ComboBox _interestsRateDropDown = new();
+    readonly Dictionary<int, double> _interestsRates = new() {
         {1, 1.562500},
         {3, 3.125000},
         {4, 4.687500},
@@ -62,7 +62,7 @@ class SolarBankInterestsSimulator : Form {
     }
 
     /// <summary>Add the form control</summary>
-    private void AddControls() {
+    void AddControls() {
         WinFormHelpers.CreateLabel("interestsRateLbl", "Interests rate", 5, 105, 80, 15, this, textAlignment: "MiddleRight");
         WinFormHelpers.CreateLabel("baseSollsLbl", "Solls", 5, 132, 80, 15, this, textAlignment: "MiddleRight");
         WinFormHelpers.CreateTextBox("info",
@@ -95,7 +95,7 @@ class SolarBankInterestsSimulator : Form {
     #region DataTable generation
 
     /// <summary>Generate the Data Table containing the memory addresses, values and infos</summary>
-    private void GenerateDataTable() {
+    void GenerateDataTable() {
 
         // Clear the table & subwindow
         _dataTable.Columns.Clear();
@@ -110,7 +110,7 @@ class SolarBankInterestsSimulator : Form {
     }
 
     /// <summary>Set columns styles (width, text-alignment, ...)</summary>
-    private void SetColumnsStyle() {
+    void SetColumnsStyle() {
         if (_dataGridView != null) {
             for (int i = 0; i < 10; i++) {
                 if (_dataGridView.Columns.Contains((i + 1).ToString())) {
@@ -122,7 +122,7 @@ class SolarBankInterestsSimulator : Form {
     }
 
     /// <summary>Generate the table data</summary>
-    private void GenerateTableData() {
+    void GenerateTableData() {
 
         // Get values from fields
         KeyValuePair<int, double> selectedRate = (KeyValuePair<int, double>)_interestsRateDropDown.SelectedItem;

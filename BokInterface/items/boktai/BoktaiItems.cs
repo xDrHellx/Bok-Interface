@@ -17,7 +17,7 @@ class BoktaiItems {
     }
 
     ///<summary>Init items instances</summary>
-    private void InitItems() {
+    void InitItems() {
         Items.Add("Green Apple", new BoktaiItem("Green Apple", 0, "green_apple", "Recover 10% Life"));
         Items.Add("Red Apple", new BoktaiItem("Red Apple", 1, "red_apple", "Recover 20% Life"));
         Items.Add("Golden Apple", new BoktaiItem("Golden Apple", 2, "golden_apple", "Recover 50% Life"));
@@ -48,7 +48,7 @@ class BoktaiItems {
     }
 
     ///<summary>Init key items instances</summary>
-    private void InitKeyItems() {
+    void InitKeyItems() {
         KeyItems.Add("Star Card", new BoktaiItem("Star Card", 27, "star_card", "Used for obtaining Astro Battery"));
         KeyItems.Add("Fool Card", new BoktaiItem("Fool Card", 28, "fool_card", "Reload current room"));
         KeyItems.Add("Dark Card", new BoktaiItem("Dark Card", 29, "dark_card", "Dark Loan"));
@@ -66,7 +66,7 @@ class BoktaiItems {
         KeyItems.Add("Dark Emblem", new BoktaiItem("Dark Emblem", 41, "dark_emblem"));
     }
 
-    private void InitFullList() {
+    void InitFullList() {
         All = All
             .Concat(Items)
             .Concat(KeyItems)

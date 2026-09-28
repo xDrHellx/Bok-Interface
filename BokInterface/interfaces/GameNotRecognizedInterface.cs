@@ -9,7 +9,7 @@ namespace BokInterface;
 partial class BokInterface {
 
     /// <summary>Shows the "Game not recognized" window</summary>
-    private void ShowGameNotRecognizedWindow() {
+    void ShowGameNotRecognizedWindow() {
 
         // Text
         WinFormHelpers.CreateLabel("currentGameName", "Game not recognized!", 0, 0, Width, 20, this, WinFormHelpers.gameNameBackground, textAlignment: "MiddleLeft");

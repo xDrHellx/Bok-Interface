@@ -10,9 +10,9 @@ class BoktaiStatusEditor : StatusEditor {
 
     #region Properties
 
-    private readonly MemoryValues _memoryValues;
-    private readonly BokInterface _bokInterface;
-    private readonly BoktaiAddresses _boktaiAddresses;
+    readonly MemoryValues _memoryValues;
+    readonly BokInterface _bokInterface;
+    readonly BoktaiAddresses _boktaiAddresses;
 
     #endregion
 

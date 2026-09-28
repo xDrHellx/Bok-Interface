@@ -19,9 +19,9 @@ class ShinbokStatusEditor : StatusEditor {
 
     #region Properties
 
-    private readonly MemoryValues _memoryValues;
-    private readonly BokInterface _bokInterface;
-    private readonly ShinbokAddresses _shinbokAddresses;
+    readonly MemoryValues _memoryValues;
+    readonly BokInterface _bokInterface;
+    readonly ShinbokAddresses _shinbokAddresses;
 
     #endregion
 
@@ -214,7 +214,7 @@ class ShinbokStatusEditor : StatusEditor {
     ///<param name="subList"><c>Sublit / dictionnary the key belongs to</c></param>
     ///<param name="valueKey"><c>strng</c>Key withint the dictionnary</param>
     ///<param name="value"><c>decimal</c>Value to set</param>
-    private void SetMemoryValue(string subList, string valueKey, decimal value) {
+    void SetMemoryValue(string subList, string valueKey, decimal value) {
         switch (subList) {
             case "django":
                 if (_memoryValues.Django.ContainsKey(valueKey) == true) {
@@ -277,7 +277,7 @@ class ShinbokStatusEditor : StatusEditor {
 
     /// <summary>Updates the sum of base + card points for a stat</summary>
     /// <param name="stat">Stat to update (str, spr, str)</param>
-    private void UpdateSumBaseCardStat(string stat, uint basePoints, uint cardPoints) {
+    void UpdateSumBaseCardStat(string stat, uint basePoints, uint cardPoints) {
         string key = "sum_base_cards_" + stat;
         if (_memoryValues.Django.ContainsKey(key) == true) {
             _memoryValues.Django[key].Value = basePoints + cardPoints;

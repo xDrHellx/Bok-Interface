@@ -23,7 +23,7 @@ class ZoktaiWeapons {
     }
 
     ///<summary>Init weapon instances for Swords</summary>
-    private void InitSwords() {
+    void InitSwords() {
         string type = "Sword";
         Swords.Add("Gradius", new ZoktaiWeapon("Gradius", 1, type, "gradius"));
         Swords.Add("Short Sword", new ZoktaiWeapon("Short Sword", 2, type, "short_sword"));
@@ -47,7 +47,7 @@ class ZoktaiWeapons {
     }
 
     ///<summary>Init weapon instances for Spears</summary>
-    private void InitSpears() {
+    void InitSpears() {
         string type = "Spear";
         Spears.Add("Short Spear", new ZoktaiWeapon("Short Spear", 20, type, "short_spear"));
         Spears.Add("Glaive", new ZoktaiWeapon("Glaive", 21, type, "glaive"));
@@ -71,7 +71,7 @@ class ZoktaiWeapons {
     }
 
     ///<summary>Init weapon instances for Hammers</summary>
-    private void InitHammers() {
+    void InitHammers() {
         string type = "Hammer";
         Hammers.Add("Club", new ZoktaiWeapon("Club", 39, type, "club"));
         Hammers.Add("Hammer", new ZoktaiWeapon("Hammer", 40, type, "hammer"));
@@ -95,7 +95,7 @@ class ZoktaiWeapons {
     }
 
     ///<summary>Init weapon instances for Guns</summary>
-    private void InitGuns() {
+    void InitGuns() {
         string type = "Gun";
         Guns.Add("Broken Solar Gun", new ZoktaiWeapon("Broken Solar Gun", 58, type, "broken_solar_gun"));
         Guns.Add("Gun Del Sol", new ZoktaiWeapon("Gun Del Sol", 59, type, "gun_del_sol"));
@@ -107,7 +107,7 @@ class ZoktaiWeapons {
     ///<para>Init weapon instances for Misc (ex: Astro weapons)</para>
     ///<remarks>These do not count towards Library completion</remarks>
     ///</summary>
-    private void InitMisc() {
+    void InitMisc() {
         Misc.Add("Star Piece", new ZoktaiWeapon("Star Piece", 62, "", "star_piece", eventWeapon: true));
         Misc.Add("Astro Sword", new ZoktaiWeapon("Astro Sword", 63, "Sword", "astro_sword", eventWeapon: true, adjustToLevel: true));
         Misc.Add("Astro Spear", new ZoktaiWeapon("Astro Spear", 64, "Spear", "astro_spear", eventWeapon: true, adjustToLevel: true));
@@ -115,7 +115,7 @@ class ZoktaiWeapons {
     }
 
     ///<summary>Init the full list containing all weapons (mostly used for editors)</summary>
-    private void InitFullList() {
+    void InitFullList() {
         All.Add("Empty slot", new ZoktaiWeapon("Empty slot", 0, ""));
         All = All
             .Concat(Swords)

@@ -21,7 +21,7 @@ class ZoktaiMagics {
     }
 
     ///<summary>Init magic instances for Luna magics</summary>
-    private void InitLunaMagics() {
+    void InitLunaMagics() {
         Luna.Add("Enchant Sol", new ZoktaiMagic("Enchant Sol", "Luna", "enchant_sol"));
         Luna.Add("Enchant Dark", new ZoktaiMagic("Enchant Dark", "Luna", "enchant_dark"));
         Luna.Add("Enchant Flame", new ZoktaiMagic("Enchant Flame", "Luna", "enchant_flame"));
@@ -33,7 +33,7 @@ class ZoktaiMagics {
     }
 
     ///<summary>Init magic instances for Sol magics</summary>
-    private void InitSolMagics() {
+    void InitSolMagics() {
         Sol.Add("Freeze", new ZoktaiMagic("Freeze", "Sol", "freeze"));
         Sol.Add("Dash", new ZoktaiMagic("Dash", "Sol", "dash"));
         Sol.Add("Healing", new ZoktaiMagic("Healing", "Sol", "healing"));
@@ -41,7 +41,7 @@ class ZoktaiMagics {
     }
 
     ///<summary>Init magic instances for Dark magics</summary>
-    private void InitDarkMagics() {
+    void InitDarkMagics() {
         Dark.Add("Sleeping", new ZoktaiMagic("Sleeping", "Dark", "sleeping"));
         Dark.Add("Change Bat", new ZoktaiMagic("Change Bat", "Dark", "change_bat"));
         Dark.Add("Change Mouse", new ZoktaiMagic("Change Mouse", "Dark", "change_mouse"));
@@ -49,13 +49,13 @@ class ZoktaiMagics {
     }
 
     ///<summary>Init magic instances for Sabata</summary>
-    private void InitSabataMagics() {
+    void InitSabataMagics() {
         Sabata.Add("Zero Shift", new ZoktaiMagic("Zero Shift", "Sabata", "zero_shift"));
         Sabata.Add("Dark Sun", new ZoktaiMagic("Dark Sun", "Sabata", "dark_sun"));
     }
 
     ///<summary>Init the full list containing all magics (mostly used for editors)</summary>
-    private void InitFullList() {
+    void InitFullList() {
         All = All
             .Concat(Luna)
             .Concat(Sabata)

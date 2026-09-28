@@ -12,10 +12,10 @@ class DsAccessoriesEditor : AccessoriesEditor {
 
     #region Properties
 
-    private readonly MemoryValues _memoryValues;
-    private readonly BokInterface _bokInterface;
-    private readonly DsAddresses _dsAddresses;
-    private readonly DsAccessories _dsAccessories;
+    readonly MemoryValues _memoryValues;
+    readonly BokInterface _bokInterface;
+    readonly DsAddresses _dsAddresses;
+    readonly DsAccessories _dsAccessories;
     protected readonly List<ImageComboBox> shieldDropdowns = [];
     protected Dictionary<string, Accessory> shields = [];
     protected TabControl inventoryTabControl = new();
@@ -186,7 +186,7 @@ class DsAccessoriesEditor : AccessoriesEditor {
     ///<param name="subList"><c>Sublit / dictionnary the key belongs to</c></param>
     ///<param name="valueKey"><c>strng</c>Key withint the dictionnary</param>
     ///<param name="value"><c>decimal</c>Value to set</param>
-    private void SetMemoryValue(string subList, string valueKey, decimal value) {
+    void SetMemoryValue(string subList, string valueKey, decimal value) {
         if (subList == "inventory" && _dsAddresses.Inventory.ContainsKey(valueKey) == true) {
             _dsAddresses.Inventory[valueKey].Value = (uint)value;
         }

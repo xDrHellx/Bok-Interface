@@ -9,8 +9,8 @@ class DsTileDataViewer : TileDataViewer {
 
     #region Properties
 
-    private readonly BokInterface _bokInterface;
-    private readonly DsAddresses _memAddresses;
+    readonly BokInterface _bokInterface;
+    readonly DsAddresses _memAddresses;
 
     #endregion
 

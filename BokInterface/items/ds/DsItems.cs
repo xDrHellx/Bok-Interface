@@ -14,7 +14,7 @@ class DsItems {
     }
 
     ///<summary>Init items instances</summary>
-    private void InitItems() {
+    void InitItems() {
         Items.Add("Empty slot", new DsItem("Empty slot", 65535));
         Items.Add("Rotten Fruit", new DsItem("Rotten Fruit", 0, "rotten_fruit", "Recover 5% Life & give poison status"));
         Items.Add("Rotten Meat", new DsItem("Rotten Meat", 1, "rotten_meat", "Recover 5% Life & give poison status"));
@@ -123,7 +123,7 @@ class DsItems {
     }
 
     ///<summary>Init key items instances</summary>
-    private void InitKeyItems() {
+    void InitKeyItems() {
         KeyItems.Add("Empty slot", new DsItem("Empty slot", 65535));
         KeyItems.Add("Mobile Unit", new DsItem("Mobile Unit", 96, "mobile_unit"));
         KeyItems.Add("Solar Goggles", new DsItem("Solar Goggles", 97, "solar_goggles"));

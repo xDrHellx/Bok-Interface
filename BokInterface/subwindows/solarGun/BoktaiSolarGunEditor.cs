@@ -13,10 +13,10 @@ class BoktaiSolarGunEditor : SolarGunEditor {
 
     #region Properties
 
-    private readonly MemoryValues _memoryValues;
-    private readonly BokInterface _bokInterface;
-    private readonly BoktaiAddresses _boktaiAddresses;
-    private readonly BoktaiGuns _boktaiGuns;
+    readonly MemoryValues _memoryValues;
+    readonly BokInterface _bokInterface;
+    readonly BoktaiAddresses _boktaiAddresses;
+    readonly BoktaiGuns _boktaiGuns;
     protected TabPage batteriesTab = new(),
         grenadesTab = new();
     protected readonly List<ImageCheckBox> framesCheckboxes = [],
@@ -253,7 +253,7 @@ class BoktaiSolarGunEditor : SolarGunEditor {
     }
 
     /// <summary>Set values related to lenses</summary>
-    private void SetLensesValues() {
+    void SetLensesValues() {
 
         int bitPosition = 0,
             lensIndex = 0;
@@ -320,7 +320,7 @@ class BoktaiSolarGunEditor : SolarGunEditor {
     }
 
     /// <summary>Set values related to frames</summary>
-    private void SetFramesValues() {
+    void SetFramesValues() {
 
         int bitPosition = 0;
         uint newFramesValue = _boktaiAddresses.Inventory["frames"].Value;
@@ -347,7 +347,7 @@ class BoktaiSolarGunEditor : SolarGunEditor {
     }
 
     /// <summary>Set values related to batteries</summary>
-    private void SetBatteriesValues() {
+    void SetBatteriesValues() {
 
         int bitPosition = 0;
         uint newBatteriesValue = _boktaiAddresses.Inventory["batteries"].Value;
@@ -365,7 +365,7 @@ class BoktaiSolarGunEditor : SolarGunEditor {
     }
 
     /// <summary>Set values related to grenades</summary>
-    private void SetGrenadesValues() {
+    void SetGrenadesValues() {
 
         int bitPosition = 0;
         foreach (NumericUpDown field in grenadesNumericUpDowns) {
@@ -461,7 +461,7 @@ class BoktaiSolarGunEditor : SolarGunEditor {
     /// <summary>Check ImageCheckBoxes in a list based on the corresponding bitmask's value</summary>
     /// <param name="list">List of ImageCheckBox instances</param>
     /// <param name="bitmaskValue">Bitmask value</param>
-    private void CheckBasedOnBitmaskValue(List<ImageCheckBox> list, int bitmaskValue) {
+    void CheckBasedOnBitmaskValue(List<ImageCheckBox> list, int bitmaskValue) {
         int bitPosition = 0;
         foreach (ImageCheckBox checkBox in list) {
             if (checkBox.Enabled == false) {
@@ -475,7 +475,7 @@ class BoktaiSolarGunEditor : SolarGunEditor {
 
     /// <summary>Uncheck all ImageCheckBoxes in a list</summary>
     /// <param name="list">List of ImageCheckBox instances</param>
-    private void UncheckAll(List<ImageCheckBox> list) {
+    void UncheckAll(List<ImageCheckBox> list) {
         foreach (ImageCheckBox checkBox in list) {
             if (checkBox.Enabled == false) {
                 continue;

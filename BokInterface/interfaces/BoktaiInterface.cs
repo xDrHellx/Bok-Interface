@@ -17,17 +17,17 @@ partial class BokInterface {
 
     #region Properties
 
-    private readonly BoktaiAddresses _boktaiAddresses = new();
-    private readonly BoktaiGuns _boktaiGuns = new();
-    private Label _bok1_currentStatusHpValue = new(),
+    readonly BoktaiAddresses _boktaiAddresses = new();
+    readonly BoktaiGuns _boktaiGuns = new();
+    Label _bok1_currentStatusHpValue = new(),
         _bok1_currentStatusEneValue = new();
-    private ToolStripMenuItem _enableAstroBattery = new();
+    ToolStripMenuItem _enableAstroBattery = new();
 
     #endregion
 
     #region Show interface
 
-    private void ShowBoktaiInterface() {
+    void ShowBoktaiInterface() {
 
         GenerateMenu();
         AddBoktaiEventsMenu();
@@ -46,7 +46,7 @@ partial class BokInterface {
 
     #region Update
 
-    private void UpdateBoktaiInterface() {
+    void UpdateBoktaiInterface() {
         /**
          * Check if the pointer to the stat structure is available, ie if the value is "valid"
          * The value for the stat structure would be 0 during room transitions or at the title screen
@@ -114,7 +114,7 @@ partial class BokInterface {
 
     #region Elements
 
-    private void AddBoktaiCurrentStatusSection() {
+    void AddBoktaiCurrentStatusSection() {
 
         // Section
         _currentStatusGroupBox = WinFormHelpers.CreateGroupBox("currentStatus", "Current status", 5, 45, 226, 55, this);
@@ -132,7 +132,7 @@ partial class BokInterface {
 
     #region Game-specific menus
 
-    private void AddBoktaiEventsMenu() {
+    void AddBoktaiEventsMenu() {
         if (shorterGameName != "Boktai") {
             return;
         }
@@ -159,7 +159,7 @@ partial class BokInterface {
 
     #region GUI
 
-    private void ShowBoktaiGui() {
+    void ShowBoktaiGui() {
 
         // Frames since game start
         int halfScreenHeight = GetScreenHeight() / 2;

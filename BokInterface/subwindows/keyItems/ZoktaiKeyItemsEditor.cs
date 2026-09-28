@@ -12,10 +12,10 @@ class ZoktaiKeyItemsEditor : KeyItemsEditor {
 
     #region Properties
 
-    private readonly MemoryValues _memoryValues;
-    private readonly BokInterface _bokInterface;
-    private readonly ZoktaiAddresses _zoktaiAddresses;
-    private readonly ZoktaiItems _zoktaiItems;
+    readonly MemoryValues _memoryValues;
+    readonly BokInterface _bokInterface;
+    readonly ZoktaiAddresses _zoktaiAddresses;
+    readonly ZoktaiItems _zoktaiItems;
 
     #endregion
 
@@ -123,7 +123,7 @@ class ZoktaiKeyItemsEditor : KeyItemsEditor {
     ///<param name="subList"><c>Dictionnary the key belongs to</c></param>
     ///<param name="valueKey"><c>string</c>Key within the dictionnary</param>
     ///<param name="value"><c>decimal</c>Value to set</param>
-    private void SetMemoryValue(string subList, string valueKey, decimal value) {
+    void SetMemoryValue(string subList, string valueKey, decimal value) {
         if (subList == "inventory" && _memoryValues.Inventory.ContainsKey(valueKey) == true) {
             _memoryValues.Inventory[valueKey].Value = (uint)value;
         }

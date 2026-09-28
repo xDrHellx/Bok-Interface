@@ -13,14 +13,14 @@ public class LunarKnightsUsaAddresses : DsAddresses {
         OrderDictionnaries();
     }
 
-    private void InitPlayerAddresses() {
+    void InitPlayerAddresses() {
 
         // Current stats
         note = "Used for damage calculations, will be copied to its Persistent equivalent on screen transition. Must be combined with the \"stat\" memory address' value";
         Player.Add("lucian_current_hp", new MemoryAddress(0x313C94, note, domain: "Main RAM"));
     }
 
-    private void InitInventoryAddresses() {
+    void InitInventoryAddresses() {
         for (int i = 0; i < 20; i++) {
             int slotNumber = 1 + i;
 

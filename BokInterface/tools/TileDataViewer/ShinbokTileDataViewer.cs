@@ -10,8 +10,8 @@ class ShinbokTileDataViewer : TileDataViewer {
 
     #region Properties
 
-    private readonly BokInterface _bokInterface;
-    private readonly ShinbokAddresses _memAddresses;
+    readonly BokInterface _bokInterface;
+    readonly ShinbokAddresses _memAddresses;
 
     #endregion
 

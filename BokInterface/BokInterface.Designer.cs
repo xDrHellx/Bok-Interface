@@ -32,7 +32,7 @@ partial class BokInterface {
     #region Designer variable
 
     /// <summary>Required designer variable</summary>
-    private IContainer _components = null;
+    IContainer _components = null;
 
     #endregion
 
@@ -49,7 +49,7 @@ partial class BokInterface {
     #region WinForm Designer
 
     /// <summary>Required method for Designer support - do not modify the contents of this method with the code editor</summary>
-    private void InitializeComponent() {
+    void InitializeComponent() {
 
         /**
          * Clear the interface
@@ -96,7 +96,7 @@ partial class BokInterface {
     #region Clearing methods
 
     /// <summary>Clears the interface window and all other sections within it</summary>
-    private void ClearInterface() {
+    void ClearInterface() {
 
         // Close all subwindows
         foreach (Form subwindow in _subwindows) {
@@ -120,7 +120,7 @@ partial class BokInterface {
     /// <param name="name">Window name</param>
     /// <param name="width">Width</param>
     /// <param name="height">Height</param>
-    private void SetMainWindow(string name, Int32 width, Int32 height) {
+    void SetMainWindow(string name, Int32 width, Int32 height) {
         Name = name;
         AutoScaleDimensions = new System.Drawing.SizeF(6F, 15F);
         AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit;
@@ -132,7 +132,7 @@ partial class BokInterface {
     }
 
     /// <summary>Add the labels with the game info to the main window</summary>
-    private void AddCurrentGameInfo() {
+    void AddCurrentGameInfo() {
         WinFormHelpers.CreateLabel("currentGameName", WinFormHelpers.EscapeAmpersand(currentGameName), 0, _menuBar.Height, Width, 20, this, WinFormHelpers.gameNameBackground, textAlignment: "MiddleLeft");
         Label regionVersionLabel = WinFormHelpers.CreateLabel("currentGameRegionVersion", region + " " + version, 0, _menuBar.Height, 20, 20, this, WinFormHelpers.gameVersionBackground, textAlignment: "MiddleLeft");
         regionVersionLabel.Anchor = AnchorStyles.Top | AnchorStyles.Right;
@@ -142,7 +142,7 @@ partial class BokInterface {
     }
 
     /// <summary>Adds the Misc. data section for the corresponding game</summary>
-    private void AddMiscDataSection() {
+    void AddMiscDataSection() {
 
         int positionY = 110,
             groupHeight = 55;
@@ -195,7 +195,7 @@ partial class BokInterface {
     #region Menu
 
     /// <summary>Generate the menu for the main window</summary>
-    private void GenerateMenu() {
+    void GenerateMenu() {
 
         // Menu bar & Edit section
         _menuBar = WinFormHelpers.CreateMenuStrip("menuBar", "", control: this);
@@ -265,7 +265,7 @@ partial class BokInterface {
     }
 
     /// <summary>Generate the menu related to misc tools</summary>
-    private void GenerateToolsMenu() {
+    void GenerateToolsMenu() {
 
         ToolStripMenuItem toolsMenu = WinFormHelpers.CreateToolStripMenuItem("toolsMenu", "Tools", menuStrip: _menuBar);
         AddDropdownMenuItem("memoryValuesListMenu", "Memory values list", toolsMenu, OpenMemoryValuesList);
@@ -570,7 +570,7 @@ partial class BokInterface {
 
     #region Openers - Tools
 
-    private void OpenTileDataViewer(object sender, EventArgs e) {
+    void OpenTileDataViewer(object sender, EventArgs e) {
         if (tileDataViewerActive == true) {
             ShowExistingSubwindow("BokInterface.Tools.TileDataViewer.TileDataViewer");
             return;
@@ -613,7 +613,7 @@ partial class BokInterface {
         });
     }
 
-    private void OpenMemoryValuesList(object sender, EventArgs e) {
+    void OpenMemoryValuesList(object sender, EventArgs e) {
         if (memValuesListingActive == true) {
             ShowExistingSubwindow("BokInterface.Tools.MemoryValuesListing.MemoryValuesListing");
             return;
@@ -649,7 +649,7 @@ partial class BokInterface {
         });
     }
 
-    private void OpenSolarBankInterestsSim(object sender, EventArgs e) {
+    void OpenSolarBankInterestsSim(object sender, EventArgs e) {
         if (solarBankInterestsSimActive == true) {
             ShowExistingSubwindow("BokInterface.Tools.SolarBankInterestsSimulator.SolarBankInterestsSimulator");
             return;
@@ -682,7 +682,7 @@ partial class BokInterface {
 
     /// <summary>Show an already existing subwindow</summary>
     /// <param name="type">Full type of the subwindow with namespace</param>
-    private void ShowExistingSubwindow(string type) {
+    void ShowExistingSubwindow(string type) {
 
         // Store the type into a proper variable
         Type instanceType = Type.GetType(type);
@@ -709,7 +709,7 @@ partial class BokInterface {
     /// <param name="parent">Menu the submenu is attached to</param>
     /// <param name="onClick">OnClick event</param>
     /// <param name="tooltip">ToolTipText (by default none)</param>
-    private void AddDropdownMenuItem(string name, string text, ToolStripMenuItem parent, EventHandler onClick, string tooltip = "") {
+    void AddDropdownMenuItem(string name, string text, ToolStripMenuItem parent, EventHandler onClick, string tooltip = "") {
         ToolStripMenuItem menuItem = WinFormHelpers.CreateToolStripMenuItem(name, "&" + text, toolTipText: tooltip, menuItem: parent);
         menuItem.Click += new EventHandler(onClick);
         parent.DropDownItems.Add(menuItem);
@@ -718,7 +718,7 @@ partial class BokInterface {
     /// <summary>Reusable method for toggling the property and MenuItem related to GUI data shown on screen</summary>
     /// <param name="menuItem">Menu / submenu</param>
     /// <param name="property">Property</param>
-    private void ToggleGuiData(object menuItem, ref bool property) {
+    void ToggleGuiData(object menuItem, ref bool property) {
         if (menuItem is ToolStripMenuItem menu) {
             menu.Checked = property = !property;
         }

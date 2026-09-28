@@ -14,7 +14,7 @@ namespace BokInterface.Utils;
 ///<summary>Class for ComboBox with images next to selectable options</summary>
 public class ImageComboBox : ComboBox {
 
-    private readonly ToolTip _toolTip = new();
+    readonly ToolTip _toolTip = new();
 
     // Draws the items into the object
     protected override void OnDrawItem(DrawItemEventArgs e) {

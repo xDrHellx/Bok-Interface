@@ -14,7 +14,7 @@ class ShinbokItems {
     }
 
     ///<summary>Init items instances</summary>
-    private void InitItems() {
+    void InitItems() {
         Items.Add("Empty slot", new ShinbokItem("Empty slot", 65535));
         Items.Add("Healer", new ShinbokItem("Healer", 0, "healer", "Recover 20% Life"));
         Items.Add("Earthly Nut", new ShinbokItem("Earthly Nut", 1, "earthly_nut", "Recover 40% Life", true));
@@ -58,7 +58,7 @@ class ShinbokItems {
     }
 
     ///<summary>Init key items instances</summary>
-    private void InitKeyItems() {
+    void InitKeyItems() {
         KeyItems.Add("Empty slot", new ShinbokItem("Empty slot", 65535));
         KeyItems.Add("Dark Card", new ShinbokItem("Dark Card", 39, "dark_card", "Dark Loan"));
         KeyItems.Add("Master Otenko", new ShinbokItem("Master Otenko", 40, effect: "Unused item"));

@@ -7,9 +7,9 @@ class DsWeaponsEditor : WeaponsEditor {
 
     #region Properties
 
-    private readonly MemoryValues _memoryValues;
-    private readonly BokInterface _bokInterface;
-    private readonly DsAddresses _lunarKnightsAddresses;
+    readonly MemoryValues _memoryValues;
+    readonly BokInterface _bokInterface;
+    readonly DsAddresses _lunarKnightsAddresses;
 
     #endregion
 

@@ -15,10 +15,10 @@ class DsJunkPartsEditor : Editor {
     protected new readonly string name = "junkPartsEditWindow",
         text = "Junk Parts editor";
 
-    private readonly MemoryValues _memoryValues;
-    private readonly BokInterface _bokInterface;
-    private readonly DsAddresses _memoryAddresses;
-    private readonly DsJunkParts _junkParts;
+    readonly MemoryValues _memoryValues;
+    readonly BokInterface _bokInterface;
+    readonly DsAddresses _memoryAddresses;
+    readonly DsJunkParts _junkParts;
     protected readonly List<CheckBox> checkBoxes = [];
 
     #endregion

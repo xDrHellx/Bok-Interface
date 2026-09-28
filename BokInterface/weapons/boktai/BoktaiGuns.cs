@@ -18,7 +18,7 @@ class BoktaiGuns {
     }
 
     /// <summary>Init instances for Lenses</summary>
-    private void InitLenses() {
+    void InitLenses() {
         Lenses.Add("Sol", new BoktaiLens("Sol", 0, "sol", "sol_lens"));
         Lenses.Add("Luna", new BoktaiLens("Luna", 1, "luna", "luna_lens"));
         Lenses.Add("Flame", new BoktaiLens("Flame", 2, "flame", "flame_lens"));
@@ -30,7 +30,7 @@ class BoktaiGuns {
     }
 
     /// <summary>Init instances for Frames</summary>
-    private void InitFrames() {
+    void InitFrames() {
         string type = "Spread";
         Frames.Add("Fighter", new BoktaiFrame("Fighter", "", "E", type, "fighter"));
         Frames.Add("Knight", new BoktaiFrame("Knight", "E", "E", type, "knight"));
@@ -71,7 +71,7 @@ class BoktaiGuns {
     }
 
     /// <summary>Init instances for Batteries</summary>
-    private void InitBatteries() {
+    void InitBatteries() {
         Batteries.Add("Single", new BoktaiBattery("Single", 1, "single_battery"));
         Batteries.Add("Double", new BoktaiBattery("Double", 2, "double_battery"));
         Batteries.Add("Triple", new BoktaiBattery("Triple", 3, "triple_battery"));
@@ -83,7 +83,7 @@ class BoktaiGuns {
     }
 
     /// <summary>Init instances for Grenades</summary>
-    private void InitGrenades() {
+    void InitGrenades() {
         // Grenades.Add("No grenade", new BoktaiGrenade("No grenade"));
         Grenades.Add("Bomb", new BoktaiGrenade("Bomb", "bomb"));
         Grenades.Add("Pineapple", new BoktaiGrenade("Pineapple", "pineapple"));

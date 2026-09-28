@@ -21,19 +21,19 @@ class ShinbokSolarBikeEditor : Editor {
 
     #region Instances
 
-    private readonly MemoryValues _memoryValues;
-    private readonly BokInterface _bokInterface;
-    private readonly ShinbokAddresses _shinbokAddresses;
-    private readonly ShinbokBikeParts _shinbokBikeParts;
+    readonly MemoryValues _memoryValues;
+    readonly BokInterface _bokInterface;
+    readonly ShinbokAddresses _shinbokAddresses;
+    readonly ShinbokBikeParts _shinbokBikeParts;
 
     #endregion
 
     #region Form elements
 
-    private GroupBox _mainGroup = new(),
+    GroupBox _mainGroup = new(),
         _optionsGroup = new();
-    private readonly List<ComboBox> _dropDownList = [];
-    private ComboBox _frontPart = new(),
+    readonly List<ComboBox> _dropDownList = [];
+    ComboBox _frontPart = new(),
         _tiresPart = new(),
         _bodyPart = new(),
         _specialPart = new(),
@@ -42,7 +42,7 @@ class ShinbokSolarBikeEditor : Editor {
         _option2 = new(),
         _option3 = new(),
         _option4 = new();
-    private readonly ToolTip _toolTip = new();
+    readonly ToolTip _toolTip = new();
 
     #endregion
 
@@ -129,7 +129,7 @@ class ShinbokSolarBikeEditor : Editor {
     }
 
     ///<summary>Generate the options for the dropdowns</summary>
-    private void GenerateDropDownOptions() {
+    void GenerateDropDownOptions() {
         foreach (ComboBox dropdown in _dropDownList) {
             dropdown.DataSource = dropdown.Name switch {
                 "bike_front" => new BindingSource(_shinbokBikeParts.Front, null),
@@ -229,7 +229,7 @@ class ShinbokSolarBikeEditor : Editor {
     ///<param name="subList">Sublist / dictionnary the key belongs to</param>
     ///<param name="valueKey">Key within the dictionnary</param>
     ///<param name="value">Value to set</param>
-    private void SetMemoryValue(string subList, string valueKey, decimal value) {
+    void SetMemoryValue(string subList, string valueKey, decimal value) {
         if (subList == "bike" && _memoryValues.Bike.ContainsKey(valueKey) == true) {
             _memoryValues.Bike[valueKey].Value = (uint)value;
         }
@@ -253,7 +253,7 @@ class ShinbokSolarBikeEditor : Editor {
     ///<param name="value"><c>decimal</c>Value</param>
     ///<param name="dictionnaryName">Related dictionnary to search into</param>
     ///<returns><c>ShinbokBikePart</c>Bike part</returns>
-    private ShinbokBikePart? GetBikePartByValue(decimal value, string dictionnaryName) {
+    ShinbokBikePart? GetBikePartByValue(decimal value, string dictionnaryName) {
 
         Dictionary<string, ShinbokBikePart> dictionnary;
         switch (dictionnaryName) {

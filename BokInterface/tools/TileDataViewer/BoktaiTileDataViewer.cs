@@ -10,8 +10,8 @@ class BoktaiTileDataViewer : TileDataViewer {
 
     #region Properties
 
-    private readonly BokInterface _bokInterface;
-    private readonly BoktaiAddresses _memAddresses;
+    readonly BokInterface _bokInterface;
+    readonly BoktaiAddresses _memAddresses;
 
     #endregion
 

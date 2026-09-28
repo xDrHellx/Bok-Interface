@@ -37,7 +37,7 @@ public class ShinbokAddresses {
     /// </summary>
     public IDictionary<string, MemoryAddress> Misc = new Dictionary<string, MemoryAddress>();
     /// <summary>Note for MemoryAddress instances (for less repetition)</summary>
-    private string _note = "";
+    string _note = "";
 
     public ShinbokAddresses() {
         InitDjangoAddresses();
@@ -49,7 +49,7 @@ public class ShinbokAddresses {
         OrderDictionnaries();
     }
 
-    private void OrderDictionnaries() {
+    void OrderDictionnaries() {
         Django = Django.OrderBy(x => x.Key).ToDictionary(x => x.Key, x => x.Value);
         Solls = Solls.OrderBy(x => x.Key).ToDictionary(x => x.Key, x => x.Value);
         Inventory = Inventory.OrderBy(x => x.Key).ToDictionary(x => x.Key, x => x.Value);
@@ -57,7 +57,7 @@ public class ShinbokAddresses {
         Misc = Misc.OrderBy(x => x.Key).ToDictionary(x => x.Key, x => x.Value);
     }
 
-    private void InitDjangoAddresses() {
+    void InitDjangoAddresses() {
 
         // Position coordinates
         Django.Add("x_position", new MemoryAddress(0x30, "Django X position", domain: "EWRAM"));
@@ -95,24 +95,24 @@ public class ShinbokAddresses {
         Django.Add("persistent_cards_str", new MemoryAddress(0x24, "Stat points from cards, " + _note.ToLower(), domain: "EWRAM"));
     }
 
-    private void InitBikeAddresses() {
+    void InitBikeAddresses() {
 
-        // Bike.Add("name", new MemoryAddress(0x780, note: "Bike name", domain: "EWRAM"));
-        Bike.Add("points", new MemoryAddress(0x7B2, note: "Points from races", domain: "EWRAM"));
-        Bike.Add("battle_matches", new MemoryAddress(0x7B4, note: "Number of Bike Battles matches", domain: "EWRAM"));
-        Bike.Add("battle_wins", new MemoryAddress(0x7B6, note: "Number of Bike Battles won", domain: "EWRAM"));
+        // Bike.Add("name", new MemoryAddress(0x780, "Bike name", domain: "EWRAM"));
+        Bike.Add("points", new MemoryAddress(0x7B2, "Points from races", domain: "EWRAM"));
+        Bike.Add("battle_matches", new MemoryAddress(0x7B4, "Number of Bike Battles matches", domain: "EWRAM"));
+        Bike.Add("battle_wins", new MemoryAddress(0x7B6, "Number of Bike Battles won", domain: "EWRAM"));
 
         // Bike parts
         _note = "Equipped bike part";
-        Bike.Add("front", new MemoryAddress(0x7A0, note: _note, domain: "EWRAM"));
-        Bike.Add("tires", new MemoryAddress(0x7A2, note: _note, domain: "EWRAM"));
-        Bike.Add("body", new MemoryAddress(0x7A4, note: _note, domain: "EWRAM"));
-        Bike.Add("special", new MemoryAddress(0x7A6, note: _note, domain: "EWRAM"));
-        Bike.Add("color", new MemoryAddress(0x81A, note: _note, domain: "EWRAM"));
-        Bike.Add("option_1", new MemoryAddress(0x7A8, note: _note, domain: "EWRAM"));
-        Bike.Add("option_2", new MemoryAddress(0x7AA, note: _note, domain: "EWRAM"));
-        Bike.Add("option_3", new MemoryAddress(0x7AC, note: _note, domain: "EWRAM"));
-        Bike.Add("option_4", new MemoryAddress(0x7AE, note: _note, domain: "EWRAM"));
+        Bike.Add("front", new MemoryAddress(0x7A0, _note, domain: "EWRAM"));
+        Bike.Add("tires", new MemoryAddress(0x7A2, _note, domain: "EWRAM"));
+        Bike.Add("body", new MemoryAddress(0x7A4, _note, domain: "EWRAM"));
+        Bike.Add("special", new MemoryAddress(0x7A6, _note, domain: "EWRAM"));
+        Bike.Add("color", new MemoryAddress(0x81A, _note, domain: "EWRAM"));
+        Bike.Add("option_1", new MemoryAddress(0x7A8, _note, domain: "EWRAM"));
+        Bike.Add("option_2", new MemoryAddress(0x7AA, _note, domain: "EWRAM"));
+        Bike.Add("option_3", new MemoryAddress(0x7AC, _note, domain: "EWRAM"));
+        Bike.Add("option_4", new MemoryAddress(0x7AE, _note, domain: "EWRAM"));
 
         // Selected parts in bike menus
         // _note = "Selected bike part in menus";
@@ -126,60 +126,60 @@ public class ShinbokAddresses {
     }
 
     /// <summary>Init Inventory-related memory addresses</summary>
-    private void InitInventoryAddresses() {
+    void InitInventoryAddresses() {
         for (int i = 0; i < 16; i++) {
             int slotNumber = 1 + i;
 
             // Items, durability, key items & accessories (2 bytes each)
             uint addressOffset = 0x2 * (uint)i;
-            Inventory.Add("item_slot_" + slotNumber, new MemoryAddress(0xA0 + addressOffset, note: "Item slot", domain: "EWRAM"));
-            Inventory.Add("item_slot_durability_" + slotNumber, new MemoryAddress(0x100 + addressOffset, note: "Item durability (for spoiling)", domain: "EWRAM"));
-            Inventory.Add("key_item_slot_" + slotNumber, new MemoryAddress(0x838 + addressOffset, note: "Key item inventory slot", domain: "EWRAM"));
-            Inventory.Add("accessory_slot_" + slotNumber, new MemoryAddress(0x160 + addressOffset, note: "Accessory inventory slot", domain: "EWRAM"));
+            Inventory.Add("item_slot_" + slotNumber, new MemoryAddress(0xA0 + addressOffset, "Item slot", domain: "EWRAM"));
+            Inventory.Add("item_slot_durability_" + slotNumber, new MemoryAddress(0x100 + addressOffset, "Item durability (for spoiling)", domain: "EWRAM"));
+            Inventory.Add("key_item_slot_" + slotNumber, new MemoryAddress(0x838 + addressOffset, "Key item inventory slot", domain: "EWRAM"));
+            Inventory.Add("accessory_slot_" + slotNumber, new MemoryAddress(0x160 + addressOffset, "Accessory inventory slot", domain: "EWRAM"));
 
             // Weapon inventory slots & durability
             addressOffset = 0x10 * (uint)i;
-            Inventory.Add("weapon_slot_" + slotNumber, new MemoryAddress(0x1C0 + addressOffset, note: "Weapon inventory slot", domain: "EWRAM"));
-            Inventory.Add("weapon_slot_" + slotNumber + "_durability", new MemoryAddress(0x1C2 + addressOffset, note: "Weapon durability", domain: "EWRAM"));
+            Inventory.Add("weapon_slot_" + slotNumber, new MemoryAddress(0x1C0 + addressOffset, "Weapon inventory slot", domain: "EWRAM"));
+            Inventory.Add("weapon_slot_" + slotNumber + "_durability", new MemoryAddress(0x1C2 + addressOffset, "Weapon durability", domain: "EWRAM"));
 
             // SP effects
-            Inventory.Add("weapon_slot_" + slotNumber + "_sp_ability_1", new MemoryAddress(0x1C4 + addressOffset, note: "1st SP ability", domain: "EWRAM"));
-            Inventory.Add("weapon_slot_" + slotNumber + "_sp_ability_2", new MemoryAddress(0x1C8 + addressOffset, note: "2nd SP ability", domain: "EWRAM"));
+            Inventory.Add("weapon_slot_" + slotNumber + "_sp_ability_1", new MemoryAddress(0x1C4 + addressOffset, "1st SP ability", domain: "EWRAM"));
+            Inventory.Add("weapon_slot_" + slotNumber + "_sp_ability_2", new MemoryAddress(0x1C8 + addressOffset, "2nd SP ability", domain: "EWRAM"));
 
             // Refine & weapon attack pattern
-            Inventory.Add("weapon_slot_" + slotNumber + "_refine", new MemoryAddress(0x1CC + addressOffset, note: "Refine", domain: "EWRAM", type: "U8")); // 1 = II, 2 = III, others = normal weapon
-            Inventory.Add("weapon_slot_" + slotNumber + "_pattern", new MemoryAddress(0x1CD + addressOffset, note: "Attack pattern ID", domain: "EWRAM", type: "U8"));
+            Inventory.Add("weapon_slot_" + slotNumber + "_refine", new MemoryAddress(0x1CC + addressOffset, "Refine", "U8", "EWRAM")); // 1 = II, 2 = III, others = normal weapon
+            Inventory.Add("weapon_slot_" + slotNumber + "_pattern", new MemoryAddress(0x1CD + addressOffset, "Attack pattern ID", "U8", "EWRAM"));
         }
     }
 
     /// <summary>Init Gun-related memory addresses</summary>
-    private void InitGunAddresses() {
+    void InitGunAddresses() {
         for (int i = 0; i < 12; i++) {
             int slotNumber = 1 + i;
             uint addressOffset = 0x2 * (uint)i;
 
             // 12 Frame slots
-            Inventory.Add("gun_frame_slot_" + slotNumber, new MemoryAddress(0x4C0 + addressOffset, note: "Gun frame inventory slot", domain: "EWRAM"));
+            Inventory.Add("gun_frame_slot_" + slotNumber, new MemoryAddress(0x4C0 + addressOffset, "Gun frame inventory slot", domain: "EWRAM"));
 
             // 8 Lens slots
             if (i < 8) {
-                Inventory.Add("gun_lens_slot_" + slotNumber, new MemoryAddress(0x828 + addressOffset, note: "Gun lens inventory slot", domain: "EWRAM"));
+                Inventory.Add("gun_lens_slot_" + slotNumber, new MemoryAddress(0x828 + addressOffset, "Gun lens inventory slot", domain: "EWRAM"));
             }
         }
     }
 
-    private void InitSollsAddresses() {
+    void InitSollsAddresses() {
         Solls.Add("solar_station", new MemoryAddress(0x77C, "Solar station balance", domain: "EWRAM"));
         Solls.Add("solar_bank", new MemoryAddress(0x7B0, "Solar bank balance", domain: "EWRAM"));
         Solls.Add("dark_loans", new MemoryAddress(0x50C, "Dark loans", domain: "EWRAM"));
         Solls.Add("interest_rate", new MemoryAddress(0x598, "Solar Bank interest rate", domain: "EWRAM"));
     }
 
-    private void InitMiscAddresses() {
+    void InitMiscAddresses() {
         // Misc.Add("equips_stat", 0x02004094);
-        Misc.Add("actor", new MemoryAddress(0x02000580, "Pointer to Django's actor data", type: "U32", domain: "EWRAM"));
-        Misc.Add("stat", new MemoryAddress(0x02000710, "Stats & inventory", type: "U32", domain: "EWRAM"));
-        Misc.Add("world_state", new MemoryAddress(0x0203DB08, "Story progress & dungeon states", type: "U32", domain: "EWRAM"));
+        Misc.Add("actor", new MemoryAddress(0x02000580, "Pointer to Django's actor data", "U32", "EWRAM"));
+        Misc.Add("stat", new MemoryAddress(0x02000710, "Stats & inventory", "U32", "EWRAM"));
+        Misc.Add("world_state", new MemoryAddress(0x0203DB08, "Story progress & dungeon states", "U32", "EWRAM"));
         Misc.Add("scratch", new MemoryAddress(0x0203E308, type: "U32", domain: "EWRAM"));
         Misc.Add("map_data", new MemoryAddress(0x030052F4, type: "U32", domain: "IWRAM"));
         // Misc.Add("boss_hp", new MemoryAddress(0x0200EEC0, domain: "EWRAM")); // Incorrect address
@@ -187,11 +187,12 @@ public class ShinbokAddresses {
         Misc.Add("y_camera", new MemoryAddress(0x0300541A, "Camera Y position", domain: "IWRAM"));
         Misc.Add("z_camera", new MemoryAddress(0x0300541C, "Camera Z position", domain: "IWRAM"));
         Misc.Add("rng_index", new MemoryAddress(0x03005308, type: "U32", domain: "IWRAM"));
-        Misc.Add("rtc_date", new MemoryAddress(0x03005430, "Binary-code decimal (yyyymmdd format)", type: "U32", domain: "IWRAM"));
+        Misc.Add("rtc_date", new MemoryAddress(0x03005430, "Binary-code decimal (yyyymmdd format)", "U32", "IWRAM"));
         Misc.Add("rtc_hours", new MemoryAddress(0x03005434, type: "U8", domain: "IWRAM"));
         Misc.Add("rtc_minutes", new MemoryAddress(0x03005435, type: "U8", domain: "IWRAM"));
         Misc.Add("rtc_seconds", new MemoryAddress(0x03005436, type: "U8", domain: "IWRAM"));
         Misc.Add("rtc_frames", new MemoryAddress(0x03005437, type: "U8", domain: "IWRAM"));
-        Misc.Add("igt_frame_counter", new MemoryAddress(0x614, "In-Game Time frame counter for the current save file", type: "U32", domain: "EWRAM"));
+        Misc.Add("igt_frame_counter", new MemoryAddress(0x614, "In-Game Time frame counter for the current save file", "U32", "EWRAM"));
+    }
     }
 }

@@ -12,7 +12,7 @@ class ZoktaiAbilities {
     }
 
     ///<summary>Init ability instances for weapon effects</summary>
-    private void InitWeaponAbilitiesList() {
+    void InitWeaponAbilitiesList() {
         Weapons.Add("No ability", new Ability("No ability", 0));
         Weapons.Add("Damage increases based on solar gauge", new Ability("Damage increases based on solar gauge", 1, "Increases attack power based on sunlight"));
         Weapons.Add("+10 damage at night", new Ability("+10 damage at night", 2, "Increases attack power at night"));

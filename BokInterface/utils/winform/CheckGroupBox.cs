@@ -8,7 +8,7 @@ namespace BokInterface.Utils;
 public class CheckGroupBox : GroupBox {
 
     /// <summary>CheckBox instance</summary>
-    private readonly CheckBox _checkBoxInstance;
+    readonly CheckBox _checkBoxInstance;
 
     public CheckGroupBox() {
         _checkBoxInstance = new CheckBox {
@@ -38,7 +38,7 @@ public class CheckGroupBox : GroupBox {
     }
 
     /// <summary>Enable/disable contained controls</summary>
-    private void EnableDisableControls() {
+    void ToggleControls() {
         foreach (Control control in Controls) {
             if (control != _checkBoxInstance) {
                 try {
@@ -51,8 +51,8 @@ public class CheckGroupBox : GroupBox {
     /// <summary>Enable/disable contained controls</summary>
     /// <param name="sender">Sender</param>
     /// <param name="e">Events args</param>
-    private void CheckBoxInstance_CheckedChanged(object sender, EventArgs e) {
-        EnableDisableControls();
+    void CheckBoxInstance_CheckedChanged(object sender, EventArgs e) {
+        ToggleControls();
     }
 
     /// <summary>
@@ -61,8 +61,8 @@ public class CheckGroupBox : GroupBox {
     /// </summary>
     /// <param name="sender">Sender</param>
     /// <param name="e">Layout events args</param>
-    private void CheckBoxInstance_Layout(object sender, LayoutEventArgs e) {
-        EnableDisableControls();
+    void CheckBoxInstance_Layout(object sender, LayoutEventArgs e) {
+        ToggleControls();
     }
 
     protected override void OnPaint(PaintEventArgs e) {
