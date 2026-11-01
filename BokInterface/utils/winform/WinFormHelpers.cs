@@ -15,25 +15,19 @@ static class WinFormHelpers {
 
     /// <summary>Tooltip for values that only updates after switching rooms</summary>
     public static ToolTip toolTip = CreateToolTip();
-
     /// <summary>Color for the game label</summary>
     public static readonly string gameNameBackground = "#EFE6BD";
     /// <summary>Color for the game version</summary>
     public static readonly string gameVersionBackground = "#F3E49E";
-
     /// <summary>Color for stat points obtained through leveling up (Boktai 2, 3, LK)</summary>
     public static readonly string baseStatColor = "#FFE600";
-
     /// <summary>Color for stat points obtained from cards (Boktai 3)</summary>
     public static readonly string cardsStatColor = "#F7DF02";
-
     /// <summary>Color for stat points from accessories (Boktai 3) <br/></summary>
     /// <remarks><i>Note: STR points from accessories are broken in Boktai 3 and will not affect anything</i></remarks>
     public static string equipsStatColor = "#FFA529";
-
     /// <summary>Color for the total amount of points for a specific stat (Boktai 2, 3, LK)</summary>
     public static string totalStatColor = "#D3D3D3";
-
     public static Font defaultFont = new("Segoe UI", 9, FontStyle.Regular, GraphicsUnit.Point);
     public static Padding defaultMargin = new(3, 0, 3, 0);
     public static AnchorStyles defaultAnchor = AnchorStyles.Top | AnchorStyles.Left;
@@ -45,18 +39,16 @@ static class WinFormHelpers {
     /// <summary>Simplified method for creating a group box</summary>
     /// <param name="name">Group name</param>
     /// <param name="text">Group text</param>
-    /// <param name="positionX">X position</param>
-    /// <param name="positionY">Y position</param>
-    /// <param name="width">Width (in pixels)</param>
-    /// <param name="height">Height (in pixels)</param>
+    /// <param name="position">Position</param>
+    /// <param name="size">Size (in pixels)</param>
     /// <param name="control">Control instance if the element is to be attached to it directly</param>
     /// <returns><c>GroupBox</c>Instance</returns>
-    public static GroupBox CreateGroupBox(string name, string text, int positionX, int positionY, int width, int height, Control? control = null) {
+    public static GroupBox CreateGroupBox(string name, string text, Point position, Size size, Control? control = null) {
         GroupBox groupBox = new() {
             Name = name,
             Text = text,
-            Location = new Point(positionX, positionY),
-            Size = new Size(width, height),
+            Location = position,
+            Size = size,
             AutoSize = false,
             TabIndex = 1,
             Anchor = defaultAnchor,
@@ -71,21 +63,19 @@ static class WinFormHelpers {
     /// <summary>Simplified method for creating a label</summary>
     /// <param name="name">Label name</param>
     /// <param name="text">Label text</param>
-    /// <param name="positionX">X position</param>
-    /// <param name="positionY">Y position</param>
-    /// <param name="width">Width (in pixels)</param>
-    /// <param name="height">Height (in pixels)</param>
+    /// <param name="position">Position</param>
+    /// <param name="size">Size (in pixels)</param>
     /// <param name="control">Control instance if the element is to be attached to it directly</param>
     /// <param name="colorHex">Set the background color for the label</param>
     /// <param name="margin">Margin (by default Padding(0, 3, 0, 3), the default value in Visual Studio)</param>
     /// <param name="textAlignment">Text alignment, by default "MiddleCenter" (see System.Drawing.ContentAlignment for possible values)</param>
     /// <returns><c>Label</c>Instance</returns>
-    public static Label CreateLabel(string name, string text, int positionX, int positionY, int width, int height, Control? control = null, string colorHex = "", Padding margin = new Padding(), string textAlignment = "MiddleCenter") {
+    public static Label CreateLabel(string name, string text, Point position, Size size, Control? control = null, string colorHex = "", Padding margin = new Padding(), string textAlignment = "MiddleCenter") {
         Label label = new() {
             Name = name,
             Text = text,
-            Location = new Point(positionX, positionY),
-            Size = new Size(width, height),
+            Location = position,
+            Size = size,
             AutoSize = false,
             TabIndex = 2,
             Anchor = defaultAnchor,
@@ -111,16 +101,15 @@ static class WinFormHelpers {
 
     /// <summary>Simplified method for creating a separator via a label</summary>
     /// <param name="name">Label name</param>
-    /// <param name="positionX">X position</param>
-    /// <param name="positionY">Y position</param>
+    /// <param name="position">Position</param>
     /// <param name="length">Length (in pixels)</param>
     /// <param name="control">Control instance if the element is to be attached to it directly</param>
     /// <param name="vertical">True if the separator should be vertical (False by default)</param>
     /// <returns><c>Label</c>Instance</returns>
-    public static Label CreateSeparator(string name, int positionX, int positionY, int length, Control? control = null, bool vertical = false) {
+    public static Label CreateSeparator(string name, Point position, int length, Control? control = null, bool vertical = false) {
         Label separator = new() {
             Name = name,
-            Location = new Point(positionX, positionY),
+            Location = position,
             Size = vertical == false ? new Size(length, 1) : new Size(1, length),
             AutoSize = false,
             TabIndex = 2,
@@ -137,22 +126,20 @@ static class WinFormHelpers {
     /// <summary>Simplified method for creating a button</summary>
     /// <param name="name">Label name</param>
     /// <param name="text">Label text</param>
-    /// <param name="positionX">X position</param>
-    /// <param name="positionY">Y position</param>
-    /// <param name="width">Width (in pixels)</param>
-    /// <param name="height">Height (in pixels)</param>
+    /// <param name="position">Position</param>
+    /// <param name="size">Size (in pixels)</param>
     /// <param name="control">Control instance if the element is to be attached to it directly</param>
     /// <param name="colorHex">Set the background color for the label</param>
     /// <param name="margin">Margin (by default Padding(0, 3, 0, 3), the default value in Visual Studio)</param>
     /// <param name="textAlignment">Text alignment, by default "MiddleCenter" (see System.Drawing.ContentAlignment for possible values)</param>
     /// <param name="enabled">True if it should be enabled (True by default)</param>
     /// <returns><c>Button</c>Instance</returns>
-    public static Button CreateButton(string name, string text, int positionX, int positionY, int width, int height, Control? control = null, string colorHex = "", Padding margin = new Padding(), string textAlignment = "MiddleCenter", bool enabled = true) {
+    public static Button CreateButton(string name, string text, Point position, Size size, Control? control = null, string colorHex = "", Padding margin = new Padding(), string textAlignment = "MiddleCenter", bool enabled = true) {
         Button btn = new() {
             Name = name,
             Text = text,
-            Location = new Point(positionX, positionY),
-            Size = new Size(width, height),
+            Location = position,
+            Size = size,
             AutoSize = false,
             TabIndex = 2,
             Anchor = defaultAnchor,
@@ -180,14 +167,13 @@ static class WinFormHelpers {
     /// <summary>Simplified method for creating a new sub window (AKA windows form)</summary>
     /// <param name="name">Subwindow name</param>
     /// <param name="title">Subwindow title</param>
-    /// <param name="width">Width (in pixels)</param>
-    /// <param name="height">Height (in pixels)</param>
+    /// <param name="size">Size (in pixels)</param>
     /// <param name="parentForm">Form the subwindow is attached to (this will make the subwindow always show in front of its parent, by default it shows in front of the main window)</param>
     /// <param name="icon">Subwindow icon (by default retrieves the one from the main interface window)</param>
     /// <param name="maximizeBtn">Enable maximize button (True by default)</param>
     /// <param name="minimizeBtn">Enable minimize button (True by default)</param>
     /// <returns><c>Form</c>Instance</returns>
-    public static Form CreateSubWindow(string name, string title, int width, int height, Form? parentForm = null, string icon = "", bool maximizeBtn = true, bool minimizeBtn = true) {
+    public static Form CreateSubWindow(string name, string title, Size size, Form? parentForm = null, string icon = "", bool maximizeBtn = true, bool minimizeBtn = true) {
         return new() {
             Name = name,
             Text = title,
@@ -197,7 +183,7 @@ static class WinFormHelpers {
             FormBorderStyle = FormBorderStyle.FixedSingle,
             BackColor = SystemColors.Control,
             Font = defaultFont,
-            ClientSize = new Size(width, height),
+            ClientSize = size,
             Owner = parentForm,
             MaximizeBox = maximizeBtn,
             MinimizeBox = minimizeBtn
@@ -207,10 +193,8 @@ static class WinFormHelpers {
     /// <summary>Simplified method for creating a numeric input field</summary>
     /// <param name="name">Field name</param>
     /// <param name="defaultValue">Default value</param>
-    /// <param name="positionX">X position</param>
-    /// <param name="positionY">Y position</param>
-    /// <param name="width">Width (in pixels)</param>
-    /// <param name="height">Height (in pixels)</param>
+    /// <param name="position">Position</param>
+    /// <param name="size">Size (in pixels)</param>
     /// <param name="minValue">Minimum settable value</param>
     /// <param name="maxValue">Maximum settable value</param>
     /// <param name="nbDecimals">Number of decimals (0 by default)</param>
@@ -220,14 +204,14 @@ static class WinFormHelpers {
     /// <param name="valueAlignment">Value alignment, by default "Left" (see HorizontalAlignment for possible values)</param>
     /// <param name="enabled">True if it should be enabled (True by default)</param>
     /// <returns><c>NumericUpDown</c>Instance</returns>
-    public static NumericUpDown CreateNumericUpDown(string name, decimal defaultValue, int positionX, int positionY, int width, int height, decimal minValue = 0, decimal maxValue = 99, int nbDecimals = 0, Control? control = null, string colorHex = "", Padding margin = new Padding(), string valueAlignment = "Left", bool enabled = true) {
+    public static NumericUpDown CreateNumericUpDown(string name, decimal defaultValue, Point position, Size size, decimal minValue = 0, decimal maxValue = 99, int nbDecimals = 0, Control? control = null, string colorHex = "", Padding margin = new Padding(), string valueAlignment = "Left", bool enabled = true) {
         NumericUpDown numUpDown = new() {
             Name = name,
             Minimum = minValue,
             Maximum = maxValue,
             Value = defaultValue,
-            Location = new Point(positionX, positionY),
-            Size = new Size(width, height),
+            Location = position,
+            Size = size,
             AutoSize = false,
             TabIndex = 2,
             Anchor = defaultAnchor,
@@ -261,22 +245,20 @@ static class WinFormHelpers {
     /// <summary>Simplified method for creating a CheckBox</summary>
     /// <param name="name">Field name</param>
     /// <param name="text">Field text</param>
-    /// <param name="positionX">X position</param>
-    /// <param name="positionY">Y position</param>
-    /// <param name="width">Width (in pixels)</param>
-    /// <param name="height">Height (in pixels)</param>
+    /// <param name="position">Position</param>
+    /// <param name="size">Size (in pixels)</param>
     /// <param name="isCheckedByDefault">Set to true if the CheckBox has to be checked when initiated</param>
     /// <param name="checkboxOnRight">Set to true if the Checkbox has to be on the right of the text</param>
     /// <param name="control">Control instance if the element is to be attached to it directly</param>
     /// <returns><c>CheckBox</c>Instance</returns>
-    public static CheckBox CreateCheckBox(string name, string text, int positionX, int positionY, int width, int height, bool isCheckedByDefault = false, bool checkboxOnRight = false, Control? control = null) {
+    public static CheckBox CreateCheckBox(string name, string text, Point position, Size size, bool isCheckedByDefault = false, bool checkboxOnRight = false, Control? control = null) {
         CheckBox checkBox = new() {
             Name = name,
             Text = text,
             Checked = isCheckedByDefault,
             RightToLeft = checkboxOnRight == true ? RightToLeft.Yes : RightToLeft.No,
-            Location = new Point(positionX, positionY),
-            Size = new Size(width, height),
+            Location = position,
+            Size = size,
             TabIndex = 1,
             AutoSize = false,
             Anchor = defaultAnchor,
@@ -303,19 +285,17 @@ static class WinFormHelpers {
     /// <summary>Simplified method for creating a data grid view</summary>
     /// <param name="name">Group name</param>
     /// <param name="data">Data to show</param>
-    /// <param name="positionX">X position</param>
-    /// <param name="positionY">Y position</param>
-    /// <param name="width">Width (in pixels)</param>
-    /// <param name="height">Height (in pixels)</param>
+    /// <param name="position">Position</param>
+    /// <param name="size">Size (in pixels)</param>
     /// <param name="control">Control instance if the element is to be attached to it directly</param>
     /// <param name="dockStyle">DockStyle (by default None)</param>
     /// <returns><c>DataGridView</c>Instance</returns>
-    public static DataGridView CreateDataGridView(string name, DataTable data, int positionX, int positionY, int width, int height, Control? control = null, DockStyle dockStyle = DockStyle.None) {
+    public static DataGridView CreateDataGridView(string name, DataTable data, Point position, Size size, Control? control = null, DockStyle dockStyle = DockStyle.None) {
         DataGridView gridView = new() {
             Name = name,
             DataSource = data,
-            Location = new Point(positionX, positionY),
-            Size = new Size(width, height),
+            Location = position,
+            Size = size,
             AutoSize = false,
             TabIndex = 1,
             Anchor = defaultAnchor,
@@ -337,27 +317,25 @@ static class WinFormHelpers {
 
     /// <summary>Simplified method for creating a dropdown list</summary>
     /// <param name="name">Dropdown name</param>
-    /// <param name="positionX">X position</param>
-    /// <param name="positionY">Y position</param>
-    /// <param name="width">Width (in pixels)</param>
-    /// <param name="height">Height (in pixels)</param>
+    /// <param name="position">Position</param>
+    /// <param name="size">Size (in pixels)</param>
     /// <param name="control">Control instance if the element is to be attached to it directly</param>
     /// <param name="dropDownWidth">Dropdown Width (in pixels, if not specified will take use the element's width as reference)</param>
     /// <param name="dropDownHeight">Dropdown Height (in pixels, if not specified will take use the element's height as reference)</param>
     /// <param name="visibleOptions">Amount of options visible without needing to scroll (will take priority over dropDownHeight parameters if specified)</param>
     /// <param name="enabled">True if it should be enabled (True by default)</param>
     /// <returns><c>ComboBox</c>Instance</returns>
-    public static ComboBox CreateDropDownList(string name, int positionX, int positionY, int width, int height, Control? control = null, int dropDownWidth = 0, int dropDownHeight = 0, int visibleOptions = 0, bool enabled = true) {
+    public static ComboBox CreateDropDownList(string name, Point position, Size size, Control? control = null, int dropDownWidth = 0, int dropDownHeight = 0, int visibleOptions = 0, bool enabled = true) {
         ComboBox dropDownList = new() {
             Name = name,
-            Location = new Point(positionX, positionY),
-            Size = new Size(width, height),
+            Location = position,
+            Size = size,
             DropDownStyle = ComboBoxStyle.DropDownList,
             TabIndex = 1,
             Anchor = defaultAnchor,
             Font = defaultFont,
             // If DropDownWidth was specified, use it, otherwise use the element's width
-            DropDownWidth = dropDownWidth > 0 ? dropDownWidth : width,
+            DropDownWidth = dropDownWidth > 0 ? dropDownWidth : size.Width,
             Enabled = enabled
         };
 
@@ -366,9 +344,9 @@ static class WinFormHelpers {
          * Otherwise handle the DropDownHeight the same way as the DropDownWidth
          */
         if (visibleOptions > 0) {
-            dropDownList.DropDownHeight = (height - 4) * visibleOptions;
+            dropDownList.DropDownHeight = (size.Height - 4) * visibleOptions;
         } else {
-            dropDownList.DropDownHeight = dropDownHeight > 0 ? dropDownHeight : height;
+            dropDownList.DropDownHeight = dropDownHeight > 0 ? dropDownHeight : size.Height;
         }
 
         // If a Control instance is passed, add the generated element to it
@@ -378,19 +356,17 @@ static class WinFormHelpers {
 
     /// <summary>Simplified method for creating a Panel</summary>
     /// <param name="name">Panel name</param>
-    /// <param name="positionX">X position</param>
-    /// <param name="positionY">Y position</param>
-    /// <param name="width">Width (in pixels)</param>
-    /// <param name="height">Height (in pixels)</param>
+    /// <param name="position">Position</param>
+    /// <param name="size">Size (in pixels)</param>
     /// <param name="autoScroll">True if AutoScroll should be active (True by default)</param>
     /// <param name="control">Control instance if the element is to be attached to it directly</param>
     /// <param name="enabled">True if it should be enabled (True by default)</param>
     /// <returns><c>Panel</c>Instance</returns>
-    public static Panel CreatePanel(string name, int positionX, int positionY, int width, int height, Control? control = null, bool autoScroll = true, bool enabled = true) {
+    public static Panel CreatePanel(string name, Point position, Size size, Control? control = null, bool autoScroll = true, bool enabled = true) {
         Panel panel = new() {
             Name = name,
-            Location = new Point(positionX, positionY),
-            Size = new Size(width, height),
+            Location = position,
+            Size = size,
             TabIndex = 1,
             Anchor = defaultAnchor,
             Font = defaultFont,
@@ -405,19 +381,17 @@ static class WinFormHelpers {
     /// <summary>Simplified method for creating a TextBox</summary>
     /// <param name="name">TextBox name</param>
     /// <param name="text">TextBox text</param>
-    /// <param name="positionX">X position</param>
-    /// <param name="positionY">Y position</param>
-    /// <param name="width">Width (in pixels)</param>
-    /// <param name="height">Height (in pixels)</param>
+    /// <param name="position">Position</param>
+    /// <param name="size">Size (in pixels)</param>
     /// <param name="control">Control instance if the element is to be attached to it directly</param>
     /// <param name="multiLine">True if text added should take multiple lines (True by default)</param>
     /// <param name="readOnly">True if text should be readonly (True by default)</param>
     /// <returns><c>TextBox</c>Instance</returns>
-    public static TextBox CreateTextBox(string name, string text, int positionX, int positionY, int width, int height, Control? control = null, bool multiLine = true, bool readOnly = true) {
+    public static TextBox CreateTextBox(string name, string text, Point position, Size size, Control? control = null, bool multiLine = true, bool readOnly = true) {
         TextBox textBox = new() {
             Name = name,
-            Location = new Point(positionX, positionY),
-            Size = new Size(width, height),
+            Location = position,
+            Size = size,
             TabIndex = 1,
             Anchor = defaultAnchor,
             Font = defaultFont,
@@ -433,22 +407,20 @@ static class WinFormHelpers {
     /// <summary>Simplified method for creating a RadioButton</summary>
     /// <param name="name">RadioButton name</param>
     /// <param name="text">RadioButton text</param>
-    /// <param name="positionX">X position</param>
-    /// <param name="positionY">Y position</param>
-    /// <param name="width">Width (in pixels)</param>
-    /// <param name="height">Height (in pixels)</param>
+    /// <param name="position">Position</param>
+    /// <param name="size">Size (in pixels)</param>
     /// <param name="control">Control instance if the element is to be attached to it directly</param>
     /// <param name="tag">Tag (used to store a value if necessary)</param>
     /// <param name="isCheckedByDefault">Set to true if the CheckBox has to be checked when initiated</param>
     /// <returns><c>RadioButton</c>Instance</returns>
-    public static RadioButton CreateRadioButton(string name, string text, int positionX, int positionY, int width, int height, Control? control = null, object? tag = null, bool isCheckedByDefault = false) {
+    public static RadioButton CreateRadioButton(string name, string text, Point position, Size size, Control? control = null, object? tag = null, bool isCheckedByDefault = false) {
         RadioButton radioBtn = new() {
             Name = name,
             Text = text,
             Checked = isCheckedByDefault,
             Tag = tag,
-            Location = new Point(positionX, positionY),
-            Size = new Size(width, height),
+            Location = position,
+            Size = size,
             TabIndex = 1,
             AutoSize = false,
             Anchor = defaultAnchor,
@@ -462,18 +434,16 @@ static class WinFormHelpers {
 
     /// <summary>Simplified method for creating a TabControl</summary>
     /// <param name="name">TabControl name</param>
-    /// <param name="positionX">X position</param>
-    /// <param name="positionY">Y position</param>
-    /// <param name="width">Width (in pixels)</param>
-    /// <param name="height">Height (in pixels)</param>
+    /// <param name="position">Position</param>
+    /// <param name="size">Size (in pixels)</param>
     /// <param name="control">Control instance if the element is to be attached to it directly</param>
     /// <param name="selectedIndex">Selected index at start (by default none)</param>
     /// <returns><c>TabControl</c>Instance</returns>
-    public static TabControl CreateTabControl(string name, int positionX, int positionY, int width, int height, Control? control = null, int selectedIndex = -1) {
+    public static TabControl CreateTabControl(string name, Point position, Size size, Control? control = null, int selectedIndex = -1) {
         TabControl tabCtrl = new() {
             Name = name,
-            Location = new Point(positionX, positionY),
-            Size = new Size(width, height),
+            Location = position,
+            Size = size,
             TabIndex = 1,
             AutoSize = false,
             Anchor = defaultAnchor,
@@ -558,20 +528,19 @@ static class WinFormHelpers {
     /// <summary>Simplified method for creating a PictureBox</summary>
     /// <param name="name">PictureBox name</param>
     /// <param name="image">PictureBox image</param>
-    /// <param name="positionX">X position</param>
-    /// <param name="positionY">Y position</param>
+    /// <param name="position">Position</param>
     /// <param name="control"></param>
     /// <param name="sizeMode">SizeMode, by default "AutoSize" (see System.Windows.Forms.PictureBoxSizeMode for possible values)</param>
     /// <param name="width">Width if SizeMode is not set to "AutoSize"</param>
     /// <param name="height">Height if SizeMode is not set to "AutoSize"</param>
     /// <param name="bgColorHex">Background color (hex code)</param>
     /// <returns><c>PictureBox</c>Instance</returns>
-    public static PictureBox CreatePictureBox(string name, Image image, int positionX, int positionY, Control? control = null, string sizeMode = "AutoSize", int width = 0, int height = 0, string bgColorHex = "") {
+    public static PictureBox CreatePictureBox(string name, Image image, Point position, Control? control = null, string sizeMode = "AutoSize", int width = 0, int height = 0, string bgColorHex = "") {
         PictureBox pictureBox = new() {
             Name = name,
             Image = image,
             SizeMode = GetSizeMode(sizeMode),
-            Location = new Point(positionX, positionY),
+            Location = position,
             AutoSize = false,
             Anchor = defaultAnchor,
             Margin = defaultMargin,
@@ -597,11 +566,10 @@ static class WinFormHelpers {
     /// <summary>Simplified method for creating a label containing an image</summary>
     /// <param name="name">Label name</param>
     /// <param name="imgName">Image name</param>
-    /// <param name="positionX">X position</param>
-    /// <param name="positionY">Y position</param>
+    /// <param name="position">Position</param>
     /// <param name="control">Control instance if the element is to be attached to it directly</param>
     /// <returns><c>Label</c>Instance</returns>
-    public static Label CreateImageLabel(string name, string imgName, int positionX, int positionY, Control? control = null) {
+    public static Label CreateImageLabel(string name, string imgName, Point position, Control? control = null) {
 
         // Get image
         Image img = (Image)Properties.Resources.ResourceManager.GetObject(imgName);
@@ -609,7 +577,7 @@ static class WinFormHelpers {
         // Create label
         Label label = new() {
             Name = name,
-            Location = new Point(positionX, positionY),
+            Location = position,
             Size = new Size(img.Width, img.Height),
             Image = img,
             AutoSize = false,
@@ -628,14 +596,13 @@ static class WinFormHelpers {
     /// <summary>Simplified method for creating a label containing an image</summary>
     /// <param name="name">Label name</param>
     /// <param name="img">Image</param>
-    /// <param name="positionX">X position</param>
-    /// <param name="positionY">Y position</param>
+    /// <param name="position">Position</param>
     /// <param name="control">Control instance if the element is to be attached to it directly</param>
     /// <returns><c>Label</c>Instance</returns>
-    public static Label CreateImageLabel(string name, Image? img, int positionX, int positionY, Control? control = null) {
+    public static Label CreateImageLabel(string name, Image? img, Point position, Control? control = null) {
         Label label = new() {
             Name = name,
-            Location = new Point(positionX, positionY),
+            Location = position,
             AutoSize = false,
             TabIndex = 2,
             ImageAlign = ContentAlignment.MiddleCenter,
@@ -656,28 +623,26 @@ static class WinFormHelpers {
 
     /// <summary>Simplified method for creating a dropdown list that can have images next to items (options)</summary>
     /// <param name="name">Dropdown name</param>
-    /// <param name="positionX">X position</param>
-    /// <param name="positionY">Y position</param>
-    /// <param name="width">Width (in pixels)</param>
-    /// <param name="height">Height (in pixels)</param>
+    /// <param name="position">Position</param>
+    /// <param name="size">Size (in pixels)</param>
     /// <param name="control">Control instance if the element is to be attached to it directly</param>
     /// <param name="dropDownWidth">Dropdown Width (in pixels, if not specified will take use the element's width as reference)</param>
     /// <param name="dropDownHeight">Dropdown Height (in pixels, if not specified will take use the element's height as reference)</param>
     /// <param name="visibleOptions">Amount of options visible without needing to scroll (will take priority over dropDownHeight parameters if specified)</param>
     /// <param name="enabled">True if it should be enabled (True by default)</param>
     /// <returns><c>ComboBox</c>Instance</returns>
-    public static ImageComboBox CreateImageDropdownList(string name, int positionX, int positionY, int width, int height, Control? control = null, int dropDownWidth = 0, int dropDownHeight = 0, int visibleOptions = 0, bool enabled = true) {
+    public static ImageComboBox CreateImageDropdownList(string name, Point position, Size size, Control? control = null, int dropDownWidth = 0, int dropDownHeight = 0, int visibleOptions = 0, bool enabled = true) {
         ImageComboBox dropDownList = new() {
             Name = name,
-            Location = new Point(positionX, positionY),
-            Size = new Size(width, height),
+            Location = position,
+            Size = size,
             DropDownStyle = ComboBoxStyle.DropDownList,
             DrawMode = DrawMode.OwnerDrawVariable,
             TabIndex = 1,
             Anchor = defaultAnchor,
             Font = defaultFont,
             // If DropDownWidth was specified, use it, otherwise use the element's width
-            DropDownWidth = dropDownWidth > 0 ? dropDownWidth : width,
+            DropDownWidth = dropDownWidth > 0 ? dropDownWidth : size.Width,
             Enabled = enabled
         };
 
@@ -686,9 +651,9 @@ static class WinFormHelpers {
          * Otherwise handle the DropDownHeight the same way as the DropDownWidth
          */
         if (visibleOptions > 0) {
-            dropDownList.DropDownHeight = (height - 4) * visibleOptions;
+            dropDownList.DropDownHeight = (size.Height - 4) * visibleOptions;
         } else {
-            dropDownList.DropDownHeight = dropDownHeight > 0 ? dropDownHeight : height;
+            dropDownList.DropDownHeight = dropDownHeight > 0 ? dropDownHeight : size.Height;
         }
 
         // If a Control instance is passed, add the generated element to it
@@ -699,20 +664,18 @@ static class WinFormHelpers {
     /// <summary>Simplified method for creating a groupbox with a checkbox attached to it</summary>
     /// <param name="name">Field name</param>
     /// <param name="text">Field text</param>
-    /// <param name="positionX">X position</param>
-    /// <param name="positionY">Y position</param>
-    /// <param name="width">Width (in pixels)</param>
-    /// <param name="height">Height (in pixels)</param>
+    /// <param name="position">Position</param>
+    /// <param name="size">Size (in pixels)</param>
     /// <param name="isCheckedByDefault">Set to true if the CheckGroupBox has to be checked when initiated</param>
     /// <param name="control">Control instance if the element is to be attached to it directly</param>
     /// <returns><c>CheckGroupBox</c>Instance</returns>
-    public static CheckGroupBox CreateCheckGroupBox(string name, string text, int positionX, int positionY, int width, int height, bool isCheckedByDefault = false, Control? control = null) {
+    public static CheckGroupBox CreateCheckGroupBox(string name, string text, Point position, Size size, bool isCheckedByDefault = false, Control? control = null) {
         CheckGroupBox checkGroupBox = new() {
             Name = name,
             Text = text,
             Checked = isCheckedByDefault,
-            Location = new Point(positionX, positionY),
-            Size = new Size(width, height),
+            Location = position,
+            Size = size,
             TabIndex = 1,
             AutoSize = false,
             Anchor = defaultAnchor,
@@ -731,29 +694,27 @@ static class WinFormHelpers {
     /// </summary>
     /// <param name="name">Element name</param>
     /// <param name="image">Image</param>
-    /// <param name="positionX">X position</param>
-    /// <param name="positionY">Y position</param>
+    /// <param name="position">Position</param>
     /// <param name="isCheckedByDefault">Set to true if the CheckBox has to be checked when initiated</param>
     /// <param name="control">Control instance if the element is to be attached to it directly</param>
     /// <param name="clickOnImage">Set to true if the checkbox can be checked by clicking on the image (True by default)</param>
     /// <param name="sizeMode">SizeMode, by default "AutoSize" (see System.Windows.Forms.PictureBoxSizeMode for possible values)</param>
-    /// <param name="width">Width if SizeMode is not set to "AutoSize"</param>
-    /// <param name="height">Height if SizeMode is not set to "AutoSize"</param>
+    /// <param name="size">Size if SizeMode is not set to "AutoSize"</param>
     /// <param name="bgColorHex">Background color (hex code)</param>
     /// <returns><c>ImageCheckBox</c>Instance</returns>
-    public static ImageCheckBox CreateImageCheckBox(string name, Image image, int positionX, int positionY, bool isCheckedByDefault = false, Control? control = null, bool clickOnImage = true, string sizeMode = "AutoSize", int width = 0, int height = 0, string bgColorHex = "") {
+    public static ImageCheckBox CreateImageCheckBox(string name, Image image, Point position, bool isCheckedByDefault = false, Control? control = null, bool clickOnImage = true, string sizeMode = "AutoSize", Size? size = null, string bgColorHex = "") {
         ImageCheckBox imageCheckBox = new() {
             Name = name,
             Image = image,
-            Location = new Point(positionX, positionY),
+            Location = position,
             AutoSize = false,
             SizeMode = GetSizeMode(sizeMode),
             Checked = isCheckedByDefault,
             CheckWithImage = clickOnImage
         };
 
-        if (sizeMode != "AutoSize") {
-            imageCheckBox.Size = new Size(width, height);
+        if (sizeMode != "AutoSize" && size != null) {
+            imageCheckBox.Size = (Size)size;
         }
 
         if (bgColorHex != "") {
@@ -790,7 +751,7 @@ static class WinFormHelpers {
 
     /// <summary>Get the specified icon if it exist</summary>
     /// <param name="fileName">File name (without .ico extension)</param>
-    /// <returns><c>System.Drawing.Icon</c>Specified Icon instance (or default if the specified icon could not be found)</returns>
+    /// <returns><c>Icon</c>Specified Icon instance (or default if the specified icon could not be found)</returns>
     public static Icon? GetIcon(string fileName) {
         return fileName == "" ? null : (Icon)Properties.Resources.ResourceManager.GetObject(fileName);
     }
@@ -810,7 +771,7 @@ static class WinFormHelpers {
 
     /// <summary>Get the corresponding text alignment based on a string</summary>
     /// <param name="value">Text alignment string</param>
-    /// <returns><c>System.Drawing.ContentAlignment</c>Text alignment object</returns>
+    /// <returns><c>ContentAlignment</c>Text alignment object</returns>
     static ContentAlignment GetTextAlignment(string value) {
         return value switch {
             "BottomCenter" => ContentAlignment.BottomCenter,
@@ -827,7 +788,7 @@ static class WinFormHelpers {
 
     /// <summary>Get the corresponding PictureBoxSizeMode based on a string</summary>
     /// <param name="value">SizeMode string</param>
-    /// <returns><c>System.Windows.Forms.PictureBoxSizeMode</c>SizeMode object</returns>
+    /// <returns><c>PictureBoxSizeMode</c>SizeMode object</returns>
     static PictureBoxSizeMode GetSizeMode(string value) {
         return value switch {
             "CenterImage" => PictureBoxSizeMode.CenterImage,

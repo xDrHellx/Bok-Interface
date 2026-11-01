@@ -4,6 +4,7 @@ using System.Windows.Forms;
 using BokInterface.Addresses;
 using BokInterface.Utils;
 using BokInterface.Tables;
+using System.Drawing;
 
 /**
  * Note :
@@ -49,60 +50,60 @@ class ShinbokStatusEditor : StatusEditor {
         IDictionary<string, decimal> defaultValues = GetDefaultValues();
 
         // Sections
-        statusGroupBox = WinFormHelpers.CreateCheckGroupBox("editStatusGroup", "Status", 5, 5, 123, 106, control: this);
-        statsGroupBox = WinFormHelpers.CreateCheckGroupBox("editStatsGroup", "Stats", 134, 5, 124, 153, control: this);
-        expGroupBox = WinFormHelpers.CreateCheckGroupBox("editExpGroup", WinFormHelpers.EscapeAmpersand("Level & EXP"), 5, 114, 123, 77, control: this);
-        sollsGroupBox = WinFormHelpers.CreateCheckGroupBox("editSollsGroup", "Solls", 264, 5, 137, 103, control: this);
+        statusGroupBox = WinFormHelpers.CreateCheckGroupBox("editStatusGroup", "Status", new Point(5, 5), new Size(123, 106), control: this);
+        statsGroupBox = WinFormHelpers.CreateCheckGroupBox("editStatsGroup", "Stats", new Point(134, 5), new Size(124, 153), control: this);
+        expGroupBox = WinFormHelpers.CreateCheckGroupBox("editExpGroup", WinFormHelpers.EscapeAmpersand("Level & EXP"), new Point(5, 114), new Size(123, 77), control: this);
+        sollsGroupBox = WinFormHelpers.CreateCheckGroupBox("editSollsGroup", "Solls", new Point(264, 5), new Size(137, 103), control: this);
 
         // Status
-        WinFormHelpers.CreateLabel("djangoEditHpLabel", "LIFE", 7, 22, 34, 15, statusGroupBox);
-        WinFormHelpers.CreateLabel("djangoEditEneLabel", "ENE", 7, 50, 34, 15, statusGroupBox);
-        WinFormHelpers.CreateLabel("djangoEditTrcLabel", "TRC", 7, 79, 34, 15, statusGroupBox);
+        WinFormHelpers.CreateLabel("djangoEditHpLabel", "LIFE", new Point(7, 22), new Size(34, 15), statusGroupBox);
+        WinFormHelpers.CreateLabel("djangoEditEneLabel", "ENE", new Point(7, 50), new Size(34, 15), statusGroupBox);
+        WinFormHelpers.CreateLabel("djangoEditTrcLabel", "TRC", new Point(7, 79), new Size(34, 15), statusGroupBox);
 
-        numericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("django_current_hp", defaultValues["django_current_hp"], 68, 19, 50, 23, maxValue: 1000, control: statusGroupBox));
-        numericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("django_current_ene", defaultValues["django_current_ene"], 68, 48, 50, 23, maxValue: 1000, control: statusGroupBox));
-        numericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("django_current_trc", defaultValues["django_current_trc"], 68, 77, 50, 23, maxValue: 1000, control: statusGroupBox));
+        numericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("django_current_hp", defaultValues["django_current_hp"], new Point(68, 19), new Size(50, 23), maxValue: 1000, control: statusGroupBox));
+        numericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("django_current_ene", defaultValues["django_current_ene"], new Point(68, 48), new Size(50, 23), maxValue: 1000, control: statusGroupBox));
+        numericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("django_current_trc", defaultValues["django_current_trc"], new Point(68, 77), new Size(50, 23), maxValue: 1000, control: statusGroupBox));
 
         // Stats
-        WinFormHelpers.CreateLabel("djangoEditVitLabel", "VIT", 7, 39, 27, 15, control: statsGroupBox);
-        WinFormHelpers.CreateLabel("djangoEditSprLabel", "SPR", 7, 68, 27, 15, control: statsGroupBox);
-        WinFormHelpers.CreateLabel("djangoEditStrLabel", "STR", 7, 97, 27, 15, control: statsGroupBox);
-        WinFormHelpers.CreateLabel("djangoEditStatPointsLabel", "Points", 7, 126, 40, 15, control: statsGroupBox);
-        WinFormHelpers.CreateLabel("djangoStatsBaseLabel", "Base", 35, 19, 42, 15, control: statsGroupBox, WinFormHelpers.baseStatColor);
-        WinFormHelpers.CreateLabel("djangoStatsCardsLabel", "Cards", 77, 19, 42, 15, control: statsGroupBox, WinFormHelpers.cardsStatColor);
+        WinFormHelpers.CreateLabel("djangoEditVitLabel", "VIT", new Point(7, 39), new Size(27, 15), control: statsGroupBox);
+        WinFormHelpers.CreateLabel("djangoEditSprLabel", "SPR", new Point(7, 68), new Size(27, 15), control: statsGroupBox);
+        WinFormHelpers.CreateLabel("djangoEditStrLabel", "STR", new Point(7, 97), new Size(27, 15), control: statsGroupBox);
+        WinFormHelpers.CreateLabel("djangoEditStatPointsLabel", "Points", new Point(7, 126), new Size(40, 15), control: statsGroupBox);
+        WinFormHelpers.CreateLabel("djangoStatsBaseLabel", "Base", new Point(35, 19), new Size(42, 15), control: statsGroupBox, WinFormHelpers.baseStatColor);
+        WinFormHelpers.CreateLabel("djangoStatsCardsLabel", "Cards", new Point(77, 19), new Size(42, 15), control: statsGroupBox, WinFormHelpers.cardsStatColor);
 
         // Base
-        numericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("misc_base_vit", defaultValues["django_base_vit"], 39, 37, 38, 23, maxValue: 100, control: statsGroupBox));
-        numericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("misc_base_spr", defaultValues["django_base_spr"], 39, 66, 38, 23, maxValue: 100, control: statsGroupBox));
-        numericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("misc_base_str", defaultValues["django_base_str"], 39, 95, 38, 23, maxValue: 100, control: statsGroupBox));
+        numericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("misc_base_vit", defaultValues["django_base_vit"], new Point(39, 37), new Size(38, 23), maxValue: 100, control: statsGroupBox));
+        numericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("misc_base_spr", defaultValues["django_base_spr"], new Point(39, 66), new Size(38, 23), maxValue: 100, control: statsGroupBox));
+        numericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("misc_base_str", defaultValues["django_base_str"], new Point(39, 95), new Size(38, 23), maxValue: 100, control: statsGroupBox));
 
         // Cards
-        numericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("misc_cards_vit", defaultValues["django_cards_vit"], 81, 37, 38, 23, maxValue: 100, control: statsGroupBox));
-        numericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("misc_cards_spr", defaultValues["django_cards_spr"], 81, 66, 38, 23, maxValue: 100, control: statsGroupBox));
-        numericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("misc_cards_str", defaultValues["django_cards_str"], 81, 95, 38, 23, maxValue: 100, control: statsGroupBox));
+        numericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("misc_cards_vit", defaultValues["django_cards_vit"], new Point(81, 37), new Size(38, 23), maxValue: 100, control: statsGroupBox));
+        numericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("misc_cards_spr", defaultValues["django_cards_spr"], new Point(81, 66), new Size(38, 23), maxValue: 100, control: statsGroupBox));
+        numericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("misc_cards_str", defaultValues["django_cards_str"], new Point(81, 95), new Size(38, 23), maxValue: 100, control: statsGroupBox));
 
         // Points to allocate
-        numericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("django_stat_points", defaultValues["django_stat_points"], 73, 124, 46, 23, maxValue: 196, control: statsGroupBox));
+        numericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("django_stat_points", defaultValues["django_stat_points"], new Point(73, 124), new Size(46, 23), maxValue: 196, control: statsGroupBox));
 
         // Level & EXP
-        WinFormHelpers.CreateLabel("djangoEditLevelLabel", "Level", 2, 22, 34, 15, expGroupBox);
-        WinFormHelpers.CreateLabel("djangoEditExpLabel", "EXP", 2, 50, 27, 15, expGroupBox);
-        numericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("django_level", defaultValues["django_level"], 47, 19, 50, 23, control: expGroupBox));
-        numericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("django_exp", defaultValues["django_exp"], 37, 48, 60, 23, minValue: 0, maxValue: 999999, control: expGroupBox));
+        WinFormHelpers.CreateLabel("djangoEditLevelLabel", "Level", new Point(2, 22), new Size(34, 15), expGroupBox);
+        WinFormHelpers.CreateLabel("djangoEditExpLabel", "EXP", new Point(2, 50), new Size(27, 15), expGroupBox);
+        numericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("django_level", defaultValues["django_level"], new Point(47, 19), new Size(50, 23), control: expGroupBox));
+        numericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("django_exp", defaultValues["django_exp"], new Point(37, 48), new Size(60, 23), minValue: 0, maxValue: 999999, control: expGroupBox));
 
         // Solls
-        WinFormHelpers.CreateLabel("solarStationLbl", "Solar station", 7, 19, 72, 15, sollsGroupBox, textAlignment: "MiddleLeft");
-        WinFormHelpers.CreateLabel("solarBankLbl", "Solar bank", 7, 47, 72, 15, sollsGroupBox, textAlignment: "MiddleLeft");
-        WinFormHelpers.CreateLabel("darkLoansLbl", "Dark loans", 7, 76, 72, 15, sollsGroupBox, textAlignment: "MiddleLeft");
-        numericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("solls_solar_station", defaultValues["solls_solar_station"], 82, 16, 50, 23, maxValue: 9999, control: sollsGroupBox));
-        numericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("solls_solar_bank", defaultValues["solls_solar_bank"], 82, 45, 50, 23, maxValue: 9999, control: sollsGroupBox));
-        numericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("solls_dark_loans", defaultValues["solls_dark_loans"], 82, 74, 50, 23, maxValue: 9999, control: sollsGroupBox));
+        WinFormHelpers.CreateLabel("solarStationLbl", "Solar station", new Point(7, 19), new Size(72, 15), sollsGroupBox, textAlignment: "MiddleLeft");
+        WinFormHelpers.CreateLabel("solarBankLbl", "Solar bank", new Point(7, 47), new Size(72, 15), sollsGroupBox, textAlignment: "MiddleLeft");
+        WinFormHelpers.CreateLabel("darkLoansLbl", "Dark loans", new Point(7, 76), new Size(72, 15), sollsGroupBox, textAlignment: "MiddleLeft");
+        numericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("solls_solar_station", defaultValues["solls_solar_station"], new Point(82, 16), new Size(50, 23), maxValue: 9999, control: sollsGroupBox));
+        numericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("solls_solar_bank", defaultValues["solls_solar_bank"], new Point(82, 45), new Size(50, 23), maxValue: 9999, control: sollsGroupBox));
+        numericUpDowns.Add(WinFormHelpers.CreateNumericUpDown("solls_dark_loans", defaultValues["solls_dark_loans"], new Point(82, 74), new Size(50, 23), maxValue: 9999, control: sollsGroupBox));
 
         // Add tooltips & warnings
-        Label expWarning = WinFormHelpers.CreateImageLabel("tooltip", "warning", 102, 51, expGroupBox);
+        Label expWarning = WinFormHelpers.CreateImageLabel("tooltip", "warning", new Point(102, 51), expGroupBox);
         WinFormHelpers.AddToolTip(expWarning, "Level will be automatically adjusted if EXP is high enough to reach higher levels");
 
-        AddSetValuesButton(327, 168, this);
+        AddSetValuesButton(new Point(327, 168), this);
     }
 
     #endregion

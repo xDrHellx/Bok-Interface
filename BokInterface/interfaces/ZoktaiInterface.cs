@@ -1,4 +1,5 @@
 using System;
+using System.Drawing;
 using System.Windows.Forms;
 
 using BokInterface.Addresses;
@@ -129,71 +130,71 @@ partial class BokInterface {
     void AddZoktaiCurrentStatusSection() {
 
         // Section
-        _currentStatusGroupBox = WinFormHelpers.CreateGroupBox("currentStatus", "Current status", 5, 45, 226, 55, this);
+        _currentStatusGroupBox = WinFormHelpers.CreateGroupBox("currentStatus", "Current status", new Point(5, 45), new Size(226, 55), this);
 
         // Current status labels
-        WinFormHelpers.CreateLabel("djangoCurrentHpLabel", "LIFE :", 7, 19, 34, 15, _currentStatusGroupBox);
-        WinFormHelpers.CreateLabel("djangoCurrentEneLabel", "ENE :", 7, 34, 34, 15, _currentStatusGroupBox);
-        WinFormHelpers.CreateLabel("djangoCurrentLevelLabel", "Level :", 123, 19, 40, 15, _currentStatusGroupBox);
-        WinFormHelpers.CreateLabel("djangoCurrentExpLabel", "EXP :", 123, 34, 33, 15, _currentStatusGroupBox);
+        WinFormHelpers.CreateLabel("djangoCurrentHpLabel", "LIFE :", new Point(7, 19), new Size(34, 15), _currentStatusGroupBox);
+        WinFormHelpers.CreateLabel("djangoCurrentEneLabel", "ENE :", new Point(7, 34), new Size(34, 15), _currentStatusGroupBox);
+        WinFormHelpers.CreateLabel("djangoCurrentLevelLabel", "Level :", new Point(123, 19), new Size(40, 15), _currentStatusGroupBox);
+        WinFormHelpers.CreateLabel("djangoCurrentExpLabel", "EXP :", new Point(123, 34), new Size(33, 15), _currentStatusGroupBox);
 
         // Current status values
-        _bok2_currentStatusHpValue = WinFormHelpers.CreateLabel("djangoCurrentHpValue", "", 44, 19, 72, 15, _currentStatusGroupBox, textAlignment: "MiddleLeft");
-        _bok2_currentStatusEneValue = WinFormHelpers.CreateLabel("djangoCurrentHpValue", "", 44, 34, 72, 15, _currentStatusGroupBox, textAlignment: "MiddleLeft");
-        _bok2_djangoLevel = WinFormHelpers.CreateLabel("djangoCurrentLevelValue", "", 174, 19, 31, 15, _currentStatusGroupBox, textAlignment: "MiddleRight");
-        _bok2_djangoExp = WinFormHelpers.CreateLabel("djangoCurrentExpValue", "", 162, 34, 43, 15, _currentStatusGroupBox, textAlignment: "MiddleRight");
+        _bok2_currentStatusHpValue = WinFormHelpers.CreateLabel("djangoCurrentHpValue", "", new Point(44, 19), new Size(72, 15), _currentStatusGroupBox, textAlignment: "MiddleLeft");
+        _bok2_currentStatusEneValue = WinFormHelpers.CreateLabel("djangoCurrentHpValue", "", new Point(44, 34), new Size(72, 15), _currentStatusGroupBox, textAlignment: "MiddleLeft");
+        _bok2_djangoLevel = WinFormHelpers.CreateLabel("djangoCurrentLevelValue", "", new Point(174, 19), new Size(31, 15), _currentStatusGroupBox, textAlignment: "MiddleRight");
+        _bok2_djangoExp = WinFormHelpers.CreateLabel("djangoCurrentExpValue", "", new Point(162, 34), new Size(43, 15), _currentStatusGroupBox, textAlignment: "MiddleRight");
     }
 
     void AddZoktaiCurrentSkillSection() {
 
         // Section
-        _bok2_currentSkillGroupBox = WinFormHelpers.CreateGroupBox("currentSkill", "Skill", 92, 106, 110, 104, this);
+        _bok2_currentSkillGroupBox = WinFormHelpers.CreateGroupBox("currentSkill", "Skill", new Point(92, 106), new Size(110, 104), this);
 
         // Sword
-        WinFormHelpers.CreateLabel("swordSkillLabel", "Sword", 6, 20, 54, 15, _bok2_currentSkillGroupBox, textAlignment: "MiddleLeft");
-        _bok2_djangoSwordSkill = WinFormHelpers.CreateLabel("djangoSwordSkill", "", 60, 19, 41, 15, _bok2_currentSkillGroupBox, WinFormHelpers.totalStatColor, textAlignment: "MiddleLeft");
+        WinFormHelpers.CreateLabel("swordSkillLabel", "Sword", new Point(6, 20), new Size(54, 15), _bok2_currentSkillGroupBox, textAlignment: "MiddleLeft");
+        _bok2_djangoSwordSkill = WinFormHelpers.CreateLabel("djangoSwordSkill", "", new Point(60, 19), new Size(41, 15), _bok2_currentSkillGroupBox, WinFormHelpers.totalStatColor, textAlignment: "MiddleLeft");
 
         // Spear
-        WinFormHelpers.CreateLabel("spearSkillLabel", "Spear", 6, 34, 54, 15, _bok2_currentSkillGroupBox, textAlignment: "MiddleLeft");
-        _bok2_djangoSpearSkill = WinFormHelpers.CreateLabel("djangoSpearSkill", "", 60, 34, 41, 15, _bok2_currentSkillGroupBox, WinFormHelpers.totalStatColor, textAlignment: "MiddleLeft");
+        WinFormHelpers.CreateLabel("spearSkillLabel", "Spear", new Point(6, 34), new Size(54, 15), _bok2_currentSkillGroupBox, textAlignment: "MiddleLeft");
+        _bok2_djangoSpearSkill = WinFormHelpers.CreateLabel("djangoSpearSkill", "", new Point(60, 34), new Size(41, 15), _bok2_currentSkillGroupBox, WinFormHelpers.totalStatColor, textAlignment: "MiddleLeft");
 
         // Hammer
-        WinFormHelpers.CreateLabel("hammerSkillLabel", "Hammer", 6, 49, 54, 15, _bok2_currentSkillGroupBox, textAlignment: "MiddleLeft");
-        _bok2_djangoHammerSkill = WinFormHelpers.CreateLabel("djangoHammerSkill", "", 60, 49, 41, 15, _bok2_currentSkillGroupBox, WinFormHelpers.totalStatColor, textAlignment: "MiddleLeft");
+        WinFormHelpers.CreateLabel("hammerSkillLabel", "Hammer", new Point(6, 49), new Size(54, 15), _bok2_currentSkillGroupBox, textAlignment: "MiddleLeft");
+        _bok2_djangoHammerSkill = WinFormHelpers.CreateLabel("djangoHammerSkill", "", new Point(60, 49), new Size(41, 15), _bok2_currentSkillGroupBox, WinFormHelpers.totalStatColor, textAlignment: "MiddleLeft");
 
         // Fists
-        WinFormHelpers.CreateLabel("fistsSkillLabel", "Fists", 6, 64, 54, 15, _bok2_currentSkillGroupBox, textAlignment: "MiddleLeft");
-        _bok2_djangoFistsSkill = WinFormHelpers.CreateLabel("djangoFistsSkill", "", 60, 64, 41, 15, _bok2_currentSkillGroupBox, WinFormHelpers.totalStatColor, textAlignment: "MiddleLeft");
+        WinFormHelpers.CreateLabel("fistsSkillLabel", "Fists", new Point(6, 64), new Size(54, 15), _bok2_currentSkillGroupBox, textAlignment: "MiddleLeft");
+        _bok2_djangoFistsSkill = WinFormHelpers.CreateLabel("djangoFistsSkill", "", new Point(60, 64), new Size(41, 15), _bok2_currentSkillGroupBox, WinFormHelpers.totalStatColor, textAlignment: "MiddleLeft");
 
         // Gun
-        WinFormHelpers.CreateLabel("gunSkillLabel", "Gun", 6, 79, 54, 15, _bok2_currentSkillGroupBox, textAlignment: "MiddleLeft");
-        _bok2_djangoGunSkill = WinFormHelpers.CreateLabel("djangoGunSkill", "", 60, 79, 41, 15, _bok2_currentSkillGroupBox, WinFormHelpers.totalStatColor, textAlignment: "MiddleLeft");
+        WinFormHelpers.CreateLabel("gunSkillLabel", "Gun", new Point(6, 79), new Size(54, 15), _bok2_currentSkillGroupBox, textAlignment: "MiddleLeft");
+        _bok2_djangoGunSkill = WinFormHelpers.CreateLabel("djangoGunSkill", "", new Point(60, 79), new Size(41, 15), _bok2_currentSkillGroupBox, WinFormHelpers.totalStatColor, textAlignment: "MiddleLeft");
     }
 
     void AddZoktaiCurrentStatsSection() {
 
         // Section
-        _currentStatsGroupBox = WinFormHelpers.CreateGroupBox("currentStats", "Stats", 5, 106, 75, 106, this);
+        _currentStatsGroupBox = WinFormHelpers.CreateGroupBox("currentStats", "Stats", new Point(5, 106), new Size(75, 106), this);
 
         // VIT
-        WinFormHelpers.CreateLabel("vitRowLabel", "VIT", 6, 19, 27, 15, _currentStatsGroupBox, textAlignment: "MiddleLeft");
-        _bok2_djangoVit = WinFormHelpers.CreateLabel("djangoVit", "", 35, 19, 31, 15, _currentStatsGroupBox, WinFormHelpers.baseStatColor, textAlignment: "MiddleRight");
+        WinFormHelpers.CreateLabel("vitRowLabel", "VIT", new Point(6, 19), new Size(27, 15), _currentStatsGroupBox, textAlignment: "MiddleLeft");
+        _bok2_djangoVit = WinFormHelpers.CreateLabel("djangoVit", "", new Point(35, 19), new Size(31, 15), _currentStatsGroupBox, WinFormHelpers.baseStatColor, textAlignment: "MiddleRight");
 
         // SPR
-        WinFormHelpers.CreateLabel("sprRowLabel", "SPR", 6, 34, 27, 15, _currentStatsGroupBox, textAlignment: "MiddleLeft");
-        _bok2_djangoSpr = WinFormHelpers.CreateLabel("djangoSpr", "", 35, 34, 31, 15, _currentStatsGroupBox, WinFormHelpers.baseStatColor, textAlignment: "MiddleRight");
+        WinFormHelpers.CreateLabel("sprRowLabel", "SPR", new Point(6, 34), new Size(27, 15), _currentStatsGroupBox, textAlignment: "MiddleLeft");
+        _bok2_djangoSpr = WinFormHelpers.CreateLabel("djangoSpr", "", new Point(35, 34), new Size(31, 15), _currentStatsGroupBox, WinFormHelpers.baseStatColor, textAlignment: "MiddleRight");
 
         // STR
-        WinFormHelpers.CreateLabel("strRowLabel", "STR", 6, 49, 27, 15, _currentStatsGroupBox, textAlignment: "MiddleLeft");
-        _bok2_djangoStr = WinFormHelpers.CreateLabel("djangoStr", "", 35, 49, 31, 15, _currentStatsGroupBox, WinFormHelpers.baseStatColor, textAlignment: "MiddleRight");
+        WinFormHelpers.CreateLabel("strRowLabel", "STR", new Point(6, 49), new Size(27, 15), _currentStatsGroupBox, textAlignment: "MiddleLeft");
+        _bok2_djangoStr = WinFormHelpers.CreateLabel("djangoStr", "", new Point(35, 49), new Size(31, 15), _currentStatsGroupBox, WinFormHelpers.baseStatColor, textAlignment: "MiddleRight");
 
         // AGI
-        WinFormHelpers.CreateLabel("agiRowLabel", "AGI", 6, 64, 27, 15, _currentStatsGroupBox, textAlignment: "MiddleLeft");
-        _bok2_djangoAgi = WinFormHelpers.CreateLabel("djangoAgi", "", 35, 64, 31, 15, _currentStatsGroupBox, WinFormHelpers.baseStatColor, textAlignment: "MiddleRight");
+        WinFormHelpers.CreateLabel("agiRowLabel", "AGI", new Point(6, 64), new Size(27, 15), _currentStatsGroupBox, textAlignment: "MiddleLeft");
+        _bok2_djangoAgi = WinFormHelpers.CreateLabel("djangoAgi", "", new Point(35, 64), new Size(31, 15), _currentStatsGroupBox, WinFormHelpers.baseStatColor, textAlignment: "MiddleRight");
 
         // Stat points to allocate
-        WinFormHelpers.CreateLabel("statPointsLabel", "Add", 6, 84, 29, 15, _currentStatsGroupBox, textAlignment: "MiddleLeft");
-        _bok2_djangoStatPoints = WinFormHelpers.CreateLabel("djangoStatPoints", "", 35, 84, 31, 15, _currentStatsGroupBox, WinFormHelpers.totalStatColor, textAlignment: "MiddleRight");
+        WinFormHelpers.CreateLabel("statPointsLabel", "Add", new Point(6, 84), new Size(29, 15), _currentStatsGroupBox, textAlignment: "MiddleLeft");
+        _bok2_djangoStatPoints = WinFormHelpers.CreateLabel("djangoStatPoints", "", new Point(35, 84), new Size(31, 15), _currentStatsGroupBox, WinFormHelpers.totalStatColor, textAlignment: "MiddleRight");
     }
 
     #endregion

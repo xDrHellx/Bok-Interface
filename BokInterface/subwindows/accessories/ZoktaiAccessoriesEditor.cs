@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Drawing;
 using System.Reflection;
 
 using BokInterface.Addresses;
@@ -46,7 +47,7 @@ class ZoktaiAccessoriesEditor : AccessoriesEditor {
         // Set default values for each field
         SetDefaultValues();
 
-        AddSetValuesButton(629, 213, this);
+        AddSetValuesButton(new Point(629, 213), this);
     }
 
     ///<summary>Separated method for generating groups with subelements</summary>
@@ -58,9 +59,9 @@ class ZoktaiAccessoriesEditor : AccessoriesEditor {
             // Generate the group for each property dynamically & add the dropdown to it
             PropertyInfo property = GetType().GetProperty($"slot{i}group", BindingFlags.Instance | BindingFlags.NonPublic);
             if (property != null) {
-                CheckGroupBox group = WinFormHelpers.CreateCheckGroupBox($"slot{i}group", $"Slot {i}", xPos, yPos, 170, 49, control: this);
+                CheckGroupBox group = WinFormHelpers.CreateCheckGroupBox($"slot{i}group", $"Slot {i}", new Point(xPos, yPos), new Size(170, 49), control: this);
                 property.SetValue(this, group);
-                dropDownLists.Add(WinFormHelpers.CreateImageDropdownList($"inventory_slot{i}_accessory", 5, 19, 160, 23, group, visibleOptions: 5));
+                dropDownLists.Add(WinFormHelpers.CreateImageDropdownList($"inventory_slot{i}_accessory", new Point(5, 19), new Size(160, 23), group, visibleOptions: 5));
             }
 
             // Offsets for position

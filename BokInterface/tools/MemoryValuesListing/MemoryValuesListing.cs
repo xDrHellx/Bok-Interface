@@ -102,7 +102,7 @@ class MemoryValuesListing : Form {
         }
 
         // Show table in subwindow, prevent preselecting the first row when opening the list & set columns styles
-        _dataGridView = WinFormHelpers.CreateDataGridView("mvlGrid", _dataTable, 5, 5, ClientSize.Width - 10, ClientSize.Height - 10, this, DockStyle.Fill);
+        _dataGridView = WinFormHelpers.CreateDataGridView("mvlGrid", _dataTable, new Point(5, 5), new Size(ClientSize.Width - 10, ClientSize.Height - 10), this, DockStyle.Fill);
         _dataGridView.ClearSelection();
         SetColumnsStyle();
     }

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Reflection;
 using System.Windows.Forms;
 
@@ -83,10 +84,10 @@ class dsInventoryEditor : InventoryEditor {
         }
 
         // Add warning
-        Label expWarning = WinFormHelpers.CreateImageLabel("tooltip", "warning", 5, 515, this);
-        WinFormHelpers.CreateLabel("warning", "Inventory will be updated upon switching tab in-game or closing and reopening the menu.", 23, 508, 503, 30, this, textAlignment: "MiddleLeft");
+        Label expWarning = WinFormHelpers.CreateImageLabel("tooltip", "warning", new Point(5, 515), this);
+        WinFormHelpers.CreateLabel("warning", "Inventory will be updated upon switching tab in-game or closing and reopening the menu.", new Point(23, 508), new Size(503, 30), this, textAlignment: "MiddleLeft");
 
-        AddSetValuesButton(549, 511, this);
+        AddSetValuesButton(new Point(549, 511), this);
     }
 
     ///<summary>Separated method for generating groups with subelements</summary>
@@ -98,14 +99,14 @@ class dsInventoryEditor : InventoryEditor {
             // Generate the group for each property dynamically
             PropertyInfo property = GetType().GetProperty($"slot{i}group", BindingFlags.Instance | BindingFlags.NonPublic);
             if (property != null) {
-                CheckGroupBox group = WinFormHelpers.CreateCheckGroupBox($"slot{i}group", $"Slot {i}", xPos, yPos, 150, 95, control: this);
+                CheckGroupBox group = WinFormHelpers.CreateCheckGroupBox($"slot{i}group", $"Slot {i}", new Point(xPos, yPos), new Size(150, 95), control: this);
                 property.SetValue(this, group);
 
                 // Add elements
-                dropDownLists.Add(WinFormHelpers.CreateImageDropdownList($"inventory_item_slot_{i}", 5, 19, 140, 23, group, visibleOptions: 5));
-                WinFormHelpers.CreateLabel($"slot{i}", "Durability", 2, 50, 58, 15, group);
-                numericUpDowns.Add(WinFormHelpers.CreateNumericUpDown($"inventory_item_slot_durability_{i}", 0, 95, 48, 50, 23, 0, _defaultMaxDurability, control: group));
-                checkBoxes.Add(WinFormHelpers.CreateCheckBox($"item_slot_{i}_chocolate_covered", "Chocolate-covered", 12, 74, 134, 19, checkboxOnRight: true, control: group));
+                dropDownLists.Add(WinFormHelpers.CreateImageDropdownList($"inventory_item_slot_{i}", new Point(5, 19), new Size(140, 23), group, visibleOptions: 5));
+                WinFormHelpers.CreateLabel($"slot{i}", "Durability", new Point(2, 50), new Size(58, 15), group);
+                numericUpDowns.Add(WinFormHelpers.CreateNumericUpDown($"inventory_item_slot_durability_{i}", 0, new Point(95, 48), new Size(50, 23), 0, _defaultMaxDurability, control: group));
+                checkBoxes.Add(WinFormHelpers.CreateCheckBox($"item_slot_{i}_chocolate_covered", "Chocolate-covered", new Point(12, 74), new Size(134, 19), checkboxOnRight: true, control: group));
             }
 
             // Offsets for position

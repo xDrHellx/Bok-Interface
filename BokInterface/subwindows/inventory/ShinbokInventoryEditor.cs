@@ -6,6 +6,7 @@ using BokInterface.Addresses;
 using BokInterface.Utils;
 using BokInterface.Items;
 using System.Reflection;
+using System.Drawing;
 
 namespace BokInterface.Inventory;
 
@@ -78,7 +79,7 @@ class ShinbokInventoryEditor : InventoryEditor {
             UpdateMaxDurabilityField(dropdown);
         }
 
-        AddSetValuesButton(549, 406, this);
+        AddSetValuesButton(new Point(549, 406), this);
     }
 
     ///<summary>Separated method for generating groups with subelements</summary>
@@ -91,14 +92,14 @@ class ShinbokInventoryEditor : InventoryEditor {
             // Generate the group for each property dynamically
             PropertyInfo property = GetType().GetProperty($"slot{i}group", BindingFlags.Instance | BindingFlags.NonPublic);
             if (property != null) {
-                CheckGroupBox group = WinFormHelpers.CreateCheckGroupBox($"slot{i}group", $"Slot {i}", xPos, yPos, 150, 95, control: this);
+                CheckGroupBox group = WinFormHelpers.CreateCheckGroupBox($"slot{i}group", $"Slot {i}", new Point(xPos, yPos), new Size(150, 95), control: this);
                 property.SetValue(this, group);
 
                 // Add elements to it
-                dropDownLists.Add(WinFormHelpers.CreateImageDropdownList($"inventory_slot{i}_item", 5, 19, 140, 23, group, visibleOptions: 5));
-                WinFormHelpers.CreateLabel($"slot{i}", "Durability", 2, 50, 58, 15, group);
-                numericUpDowns.Add(WinFormHelpers.CreateNumericUpDown($"inventory_slot{i}_durability", 0, 95, 48, 50, 23, 0, _defaultMaxDurability, control: group));
-                checkBoxes.Add(WinFormHelpers.CreateCheckBox($"slot{i}_chocolate_covered", "Chocolate-covered", 12, 74, 134, 19, checkboxOnRight: true, control: group));
+                dropDownLists.Add(WinFormHelpers.CreateImageDropdownList($"inventory_slot{i}_item", new Point(5, 19), new Size(140, 23), group, visibleOptions: 5));
+                WinFormHelpers.CreateLabel($"slot{i}", "Durability", new Point(2, 50), new Size(58, 15), group);
+                numericUpDowns.Add(WinFormHelpers.CreateNumericUpDown($"inventory_slot{i}_durability", 0, new Point(95, 48), new Size(50, 23), 0, _defaultMaxDurability, control: group));
+                checkBoxes.Add(WinFormHelpers.CreateCheckBox($"slot{i}_chocolate_covered", "Chocolate-covered", new Point(12, 74), new Size(134, 19), checkboxOnRight: true, control: group));
             }
 
             // Offsets for position

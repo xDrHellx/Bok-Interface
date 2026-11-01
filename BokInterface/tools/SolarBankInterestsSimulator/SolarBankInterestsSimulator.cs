@@ -63,8 +63,8 @@ class SolarBankInterestsSimulator : Form {
 
     /// <summary>Add the form control</summary>
     void AddControls() {
-        WinFormHelpers.CreateLabel("interestsRateLbl", "Interests rate", 5, 105, 80, 15, this, textAlignment: "MiddleRight");
-        WinFormHelpers.CreateLabel("baseSollsLbl", "Solls", 5, 132, 80, 15, this, textAlignment: "MiddleRight");
+        WinFormHelpers.CreateLabel("interestsRateLbl", "Interests rate", new Point(5, 105), new Size(80, 15), this, textAlignment: "MiddleRight");
+        WinFormHelpers.CreateLabel("baseSollsLbl", "Solls", new Point(5, 132), new Size(80, 15), this, textAlignment: "MiddleRight");
         WinFormHelpers.CreateTextBox("info",
             "Regarding interest and rate:"
             + "\r\n- Interest accumulates when the day rolls over at midnight in-game."
@@ -72,16 +72,16 @@ class SolarBankInterestsSimulator : Form {
             + "\r\n- The game also gives 1 Soll for free each time."
             + "\r\n- Rate is constant over multiple days of accumulation."
             + "\r\n- Truncated when displayed at the bank (i.e. it may display 15%, but may actually be 15.7%).",
-            0, 0, ClientSize.Width, 98, this
+            new Point(0, 0), new Size(ClientSize.Width, 98), this
         );
 
-        _interestsRateDropDown = WinFormHelpers.CreateDropDownList("interestsRate", 86, 103, 50, 23, this, visibleOptions: 10);
+        _interestsRateDropDown = WinFormHelpers.CreateDropDownList("interestsRate", new Point(86, 103), new Size(50, 23), this, visibleOptions: 10);
         _interestsRateDropDown.DataSource = new BindingSource(_interestsRates, null);
         _interestsRateDropDown.DisplayMember = "Key";
         _interestsRateDropDown.ValueMember = "Value";
-        _baseSollsNumDown = WinFormHelpers.CreateNumericUpDown("baseSolls", 1000, 86, 130, 50, 23, 1, 9999, control: this);
+        _baseSollsNumDown = WinFormHelpers.CreateNumericUpDown("baseSolls", 1000, new Point(86, 130), new Size(50, 23), 1, 9999, control: this);
 
-        _calculateInterestsBtn = WinFormHelpers.CreateButton("calculateInterestsBtn", "Calculate solar bank interests", 145, 103, 350, 50, this);
+        _calculateInterestsBtn = WinFormHelpers.CreateButton("calculateInterestsBtn", "Calculate solar bank interests", new Point(145, 103), new Size(350, 50), this);
         _calculateInterestsBtn.Click += new EventHandler(delegate (object sender, EventArgs e) {
             GenerateDataTable();
         });
@@ -103,7 +103,7 @@ class SolarBankInterestsSimulator : Form {
         _dataTable.Clear();
 
         // Generate table data for the current game
-        _dataGridView = WinFormHelpers.CreateDataGridView("interestsGrid", _dataTable, 0, 162, ClientSize.Width, 46, this);
+        _dataGridView = WinFormHelpers.CreateDataGridView("interestsGrid", _dataTable, new Point(0, 162), new Size(ClientSize.Width, 46), this);
         _dataGridView.TopLeftHeaderCell.Value = "Day";
         GenerateTableData();
         SetColumnsStyle();

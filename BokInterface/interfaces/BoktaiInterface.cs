@@ -117,15 +117,15 @@ partial class BokInterface {
     void AddBoktaiCurrentStatusSection() {
 
         // Section
-        _currentStatusGroupBox = WinFormHelpers.CreateGroupBox("currentStatus", "Current status", 5, 45, 226, 55, this);
+        _currentStatusGroupBox = WinFormHelpers.CreateGroupBox("currentStatus", "Current status", new Point(5, 45), new Size(226, 55), this);
 
         // Current status labels
-        WinFormHelpers.CreateLabel("djangoCurrentHpLabel", "LIFE :", 7, 19, 34, 15, _currentStatusGroupBox);
-        WinFormHelpers.CreateLabel("djangoCurrentEneLabel", "ENE :", 7, 34, 34, 15, _currentStatusGroupBox);
+        WinFormHelpers.CreateLabel("djangoCurrentHpLabel", "LIFE :", new Point(7, 19), new Size(34, 15), _currentStatusGroupBox);
+        WinFormHelpers.CreateLabel("djangoCurrentEneLabel", "ENE :", new Point(7, 34), new Size(34, 15), _currentStatusGroupBox);
 
         // Current status values
-        _bok1_currentStatusHpValue = WinFormHelpers.CreateLabel("djangoCurrentHpValue", "", 44, 19, 67, 15, _currentStatusGroupBox, textAlignment: "MiddleRight");
-        _bok1_currentStatusEneValue = WinFormHelpers.CreateLabel("djangoCurrentEneValue", "", 44, 34, 67, 15, _currentStatusGroupBox, textAlignment: "MiddleRight");
+        _bok1_currentStatusHpValue = WinFormHelpers.CreateLabel("djangoCurrentHpValue", "", new Point(44, 19), new Size(67, 15), _currentStatusGroupBox, textAlignment: "MiddleRight");
+        _bok1_currentStatusEneValue = WinFormHelpers.CreateLabel("djangoCurrentEneValue", "", new Point(44, 34), new Size(67, 15), _currentStatusGroupBox, textAlignment: "MiddleRight");
     }
 
     #endregion
