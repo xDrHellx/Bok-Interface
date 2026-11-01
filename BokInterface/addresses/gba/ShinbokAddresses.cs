@@ -194,5 +194,4 @@ public class ShinbokAddresses {
         Misc.Add("rtc_frames", new MemoryAddress(0x03005437, type: "U8", domain: "IWRAM"));
         Misc.Add("igt_frame_counter", new MemoryAddress(0x614, "In-Game Time frame counter for the current save file", "U32", "EWRAM"));
     }
-    }
 }
