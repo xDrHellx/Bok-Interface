@@ -67,7 +67,7 @@ class BoktaiTileDataViewer : TileDataViewer {
                          * - Print its values on-screen & show its position on the tilemap to study it
                          */
                         string hex = Utilities.IntToHex(tileEffect);
-                        APIs.Gui.AddMessage("bit : " + i + " | hex : " + hex.ToString() + " ( uint : " + tileEffect + ")");
+                        APIs.Gui.AddMessage($"bit: {i} | hex: {hex} (uint: {tileEffect})");
                         DrawTileImage(e, "qmark", posX * scale, posY * scale);
                     }
                     break;

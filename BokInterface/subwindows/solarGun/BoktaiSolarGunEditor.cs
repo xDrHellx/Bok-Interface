@@ -84,12 +84,12 @@ class BoktaiSolarGunEditor : SolarGunEditor {
             }
 
             // Add the group containing the lens icon & radio buttons
-            GroupBox lensGroup = WinFormHelpers.CreateGroupBox(entry.Key + "_group", lens.name, new Point(posX, posY), new Size(97, 92), lensTab);
-            WinFormHelpers.CreatePictureBox(entry.Key + "_img", lens.icon, new Point(5, 15), lensGroup);
-            lensesButtons.Add(WinFormHelpers.CreateRadioButton(entry.Key + "_none", "N/A", new Point(48, 10), new Size(48, 20), lensGroup, 0));
-            lensesButtons.Add(WinFormHelpers.CreateRadioButton(entry.Key + "_lvl_1", "Lvl 1", new Point(48, 30), new Size(48, 20), lensGroup, 1));
-            lensesButtons.Add(WinFormHelpers.CreateRadioButton(entry.Key + "_lvl_2", "Lvl 2", new Point(48, 50), new Size(48, 20), lensGroup, 2));
-            lensesButtons.Add(WinFormHelpers.CreateRadioButton(entry.Key + "_lvl_3", "Lvl 3", new Point(48, 70), new Size(48, 20), lensGroup, 3));
+            GroupBox lensGroup = WinFormHelpers.CreateGroupBox($"{entry.Key}_group", lens.name, new Point(posX, posY), new Size(97, 92), lensTab);
+            WinFormHelpers.CreatePictureBox($"{entry.Key}_img", lens.icon, new Point(5, 15), lensGroup);
+            lensesButtons.Add(WinFormHelpers.CreateRadioButton($"{entry.Key}_none", "N/A", new Point(48, 10), new Size(48, 20), lensGroup, 0));
+            lensesButtons.Add(WinFormHelpers.CreateRadioButton($"{entry.Key}_lvl_1", "Lvl 1", new Point(48, 30), new Size(48, 20), lensGroup, 1));
+            lensesButtons.Add(WinFormHelpers.CreateRadioButton($"{entry.Key}_lvl_2", "Lvl 2", new Point(48, 50), new Size(48, 20), lensGroup, 2));
+            lensesButtons.Add(WinFormHelpers.CreateRadioButton($"{entry.Key}_lvl_3", "Lvl 3", new Point(48, 70), new Size(48, 20), lensGroup, 3));
 
             // Increment position values for the next lens
             posX += 101;
@@ -121,8 +121,8 @@ class BoktaiSolarGunEditor : SolarGunEditor {
             }
 
             // Add the checkbox & label for that frame
-            ImageCheckBox frameCheckBox = WinFormHelpers.CreateImageCheckBox(entry.Key + "_check", frame.icon, new Point(posX, posY + (frame.name == "Guardian" ? 5 : 0)), control: framesTab);
-            Label frameLabel = WinFormHelpers.CreateLabel(entry.Key + "_label", frame.name, new Point(posX, posY + 44), new Size(80, 18), framesTab, textAlignment: "MiddleLeft");
+            ImageCheckBox frameCheckBox = WinFormHelpers.CreateImageCheckBox($"{entry.Key}_check", frame.icon, new Point(posX, posY + (frame.name == "Guardian" ? 5 : 0)), control: framesTab);
+            Label frameLabel = WinFormHelpers.CreateLabel($"{entry.Key}_label", frame.name, new Point(posX, posY + 44), new Size(80, 18), framesTab, textAlignment: "MiddleLeft");
             framesCheckboxes.Add(frameCheckBox);
 
             // Increment position values for the next frame
@@ -166,8 +166,8 @@ class BoktaiSolarGunEditor : SolarGunEditor {
             }
 
             // Add the checkbox & label
-            ImageCheckBox batteryCheckbox = WinFormHelpers.CreateImageCheckBox(entry.Key + "_checkbox", battery.icon, new Point(posX, cboxHeight), control: batteriesTab);
-            WinFormHelpers.CreateLabel(entry.Key + "_label", battery.name, new Point(posX, 53), new Size(50, 18), batteriesTab, textAlignment: "MiddleLeft");
+            ImageCheckBox batteryCheckbox = WinFormHelpers.CreateImageCheckBox($"{entry.Key}_checkbox", battery.icon, new Point(posX, cboxHeight), control: batteriesTab);
+            WinFormHelpers.CreateLabel($"{entry.Key}_label", battery.name, new Point(posX, 53), new Size(50, 18), batteriesTab, textAlignment: "MiddleLeft");
             batteriesCheckboxes.Add(batteryCheckbox);
 
             // Increment n & position for the next battery
@@ -198,15 +198,15 @@ class BoktaiSolarGunEditor : SolarGunEditor {
             }
 
             // Add the group containg the icon & amount
-            GroupBox group = WinFormHelpers.CreateGroupBox(entry.Key + "_grp", grenade.name, new Point(posX, posY), new Size(90, n == 1 ? 105 : 68), grenadesTab);
-            WinFormHelpers.CreatePictureBox(entry.Key + "_img", grenade.icon, new Point(5, 20), group);
-            WinFormHelpers.CreateLabel(entry.Key + "_label", "Amount", new Point(34, 15), new Size(55, 20), group);
-            grenadesNumericUpDowns.Add(WinFormHelpers.CreateNumericUpDown(entry.Key + "_amount", 0, new Point(44, 35), new Size(40, 18), control: group));
+            GroupBox group = WinFormHelpers.CreateGroupBox($"{entry.Key}_grp", grenade.name, new Point(posX, posY), new Size(90, n == 1 ? 105 : 68), grenadesTab);
+            WinFormHelpers.CreatePictureBox($"{entry.Key}_img", grenade.icon, new Point(5, 20), group);
+            WinFormHelpers.CreateLabel($"{entry.Key}_label", "Amount", new Point(34, 15), new Size(55, 20), group);
+            grenadesNumericUpDowns.Add(WinFormHelpers.CreateNumericUpDown($"{entry.Key}_amount", 0, new Point(44, 35), new Size(40, 18), control: group));
 
             // Add charges for pineapple grenades
             if (n == 1) {
-                WinFormHelpers.CreateLabel(entry.Key + "_charges_label", "Charges", new Point(34, 56), new Size(55, 20), group);
-                pineappleCharges = WinFormHelpers.CreateNumericUpDown(entry.Key + "_charges", 0, new Point(45, 76), new Size(40, 18), maxValue: 5, control: group);
+                WinFormHelpers.CreateLabel($"{entry.Key}_charges_label", "Charges", new Point(34, 56), new Size(55, 20), group);
+                pineappleCharges = WinFormHelpers.CreateNumericUpDown($"{entry.Key}_charges", 0, new Point(45, 76), new Size(40, 18), maxValue: 5, control: group);
             }
 
             // Increment position values for the next grenade

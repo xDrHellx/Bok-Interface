@@ -74,9 +74,9 @@ partial class BokInterface {
          * For example Django's current HP goes below 0 or above 1000 when switching rooms, during bike races or on world map
          */
         if (djangoCurrentHp >= 0 && djangoCurrentHp <= 1000) {
-            _bok3_currentStatusHpValue.Text = djangoCurrentHp + " / " + _memoryValues.Django["max_hp"].Value;
-            _bok3_currentStatusEneValue.Text = _memoryValues.Django["current_ene"].Value + " / " + _memoryValues.Django["max_ene"].Value;
-            _bok3_currentStatusTrcValue.Text = _memoryValues.Django["current_trc"].Value + " / 1000";
+            _bok3_currentStatusHpValue.Text = $"{djangoCurrentHp} / {_memoryValues.Django["max_hp"].Value}";
+            _bok3_currentStatusEneValue.Text = $"{_memoryValues.Django["current_ene"].Value} / {_memoryValues.Django["max_ene"].Value}";
+            _bok3_currentStatusTrcValue.Text = $"{_memoryValues.Django["current_trc"].Value} / 1000";
             _bok3_djangoLevel.Text = _memoryValues.Django["level"].Value.ToString();
             _bok3_djangoExp.Text = _memoryValues.Django["exp"].Value.ToString();
             _bok3_djangoBaseVit.Text = _memoryValues.Misc["base_vit"].Value.ToString();
@@ -102,8 +102,8 @@ partial class BokInterface {
                 averageSpeed = Math.Round(_movementCalculator.GetAverageSpeed(speed3D, 60), 3);
 
             // Update the fields
-            _currentSpeedLabel.Text = "Current movement speed : " + Math.Round(speed3D, 3);
-            _averageSpeedLabel.Text = "Average over 60 frames : " + averageSpeed.ToString();
+            _currentSpeedLabel.Text = $"Current movement speed: {Math.Round(speed3D, 3)}";
+            _averageSpeedLabel.Text = $"Average over 60 frames: {averageSpeed}";
         }
 
         if (_showGui == true) {
@@ -121,11 +121,11 @@ partial class BokInterface {
         _currentStatusGroupBox = WinFormHelpers.CreateGroupBox("currentStatus", "Current status", new Point(5, 45), new Size(226, 70), this);
 
         // Current status labels
-        WinFormHelpers.CreateLabel("djangoCurrentHpLabel", "LIFE :", new Point(7, 19), new Size(34, 15), _currentStatusGroupBox);
-        WinFormHelpers.CreateLabel("djangoCurrentEneLabel", "ENE :", new Point(7, 34), new Size(34, 15), _currentStatusGroupBox);
-        WinFormHelpers.CreateLabel("currentGameNameTrcLabel", "TRC :", new Point(7, 49), new Size(34, 15), _currentStatusGroupBox);
-        WinFormHelpers.CreateLabel("djangoCurrentLevelLabel", "Level :", new Point(123, 19), new Size(40, 15), _currentStatusGroupBox);
-        WinFormHelpers.CreateLabel("djangoCurrentExpLabel", "EXP :", new Point(123, 34), new Size(33, 15), _currentStatusGroupBox);
+        WinFormHelpers.CreateLabel("djangoCurrentHpLabel", "LIFE:", new Point(7, 19), new Size(34, 15), _currentStatusGroupBox);
+        WinFormHelpers.CreateLabel("djangoCurrentEneLabel", "ENE:", new Point(7, 34), new Size(34, 15), _currentStatusGroupBox);
+        WinFormHelpers.CreateLabel("currentGameNameTrcLabel", "TRC:", new Point(7, 49), new Size(34, 15), _currentStatusGroupBox);
+        WinFormHelpers.CreateLabel("djangoCurrentLevelLabel", "Level:", new Point(123, 19), new Size(40, 15), _currentStatusGroupBox);
+        WinFormHelpers.CreateLabel("djangoCurrentExpLabel", "EXP:", new Point(123, 34), new Size(33, 15), _currentStatusGroupBox);
 
         // Current status values
         _bok3_currentStatusHpValue = WinFormHelpers.CreateLabel("djangoCurrentHpValue", "", new Point(44, 19), new Size(72, 15), _currentStatusGroupBox, textAlignment: "MiddleLeft");

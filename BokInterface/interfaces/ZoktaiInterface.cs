@@ -73,8 +73,8 @@ partial class BokInterface {
          * For example "stat" is 0 during room transitions or at the title screen
          */
         if (currentStat > 0) {
-            _bok2_currentStatusHpValue.Text = _memoryValues.Django["current_hp"].Value + " / " + _memoryValues.Django["max_hp"].Value;
-            _bok2_currentStatusEneValue.Text = _memoryValues.Django["current_ene"].Value + " / " + _memoryValues.Django["max_ene"].Value;
+            _bok2_currentStatusHpValue.Text = $"{_memoryValues.Django["current_hp"].Value} / {_memoryValues.Django["max_hp"].Value}";
+            _bok2_currentStatusEneValue.Text = $"{_memoryValues.Django["current_ene"].Value} / {_memoryValues.Django["max_ene"].Value}";
 
             _bok2_djangoLevel.Text = _memoryValues.Django["level"].Value.ToString();
             _bok2_djangoExp.Text = _memoryValues.Django["exp"].Value.ToString();
@@ -92,11 +92,11 @@ partial class BokInterface {
             _bok2_djangoGunSkill.Text = Utilities.ExpToLevel(_memoryValues.Django["gun_skill"].Value).ToString();
 
             // Add / refresh tooltips for skill containing the EXP amount
-            WinFormHelpers.AddToolTip(_bok2_djangoSwordSkill, _memoryValues.Django["sword_skill"].Value + " EXP");
-            WinFormHelpers.AddToolTip(_bok2_djangoSpearSkill, _memoryValues.Django["spear_skill"].Value + " EXP");
-            WinFormHelpers.AddToolTip(_bok2_djangoHammerSkill, _memoryValues.Django["hammer_skill"].Value + " EXP");
-            WinFormHelpers.AddToolTip(_bok2_djangoFistsSkill, _memoryValues.Django["fists_skill"].Value + " EXP");
-            WinFormHelpers.AddToolTip(_bok2_djangoGunSkill, _memoryValues.Django["gun_skill"].Value + " EXP");
+            WinFormHelpers.AddToolTip(_bok2_djangoSwordSkill, $"{_memoryValues.Django["sword_skill"].Value} EXP");
+            WinFormHelpers.AddToolTip(_bok2_djangoSpearSkill, $"{_memoryValues.Django["spear_skill"].Value} EXP");
+            WinFormHelpers.AddToolTip(_bok2_djangoHammerSkill, $"{_memoryValues.Django["hammer_skill"].Value} EXP");
+            WinFormHelpers.AddToolTip(_bok2_djangoFistsSkill, $"{_memoryValues.Django["fists_skill"].Value} EXP");
+            WinFormHelpers.AddToolTip(_bok2_djangoGunSkill, $"{_memoryValues.Django["gun_skill"].Value} EXP");
 
             // Update the current & average speed
             int positionX = (int)_memoryValues.Django["x_position"].Value,
@@ -108,8 +108,8 @@ partial class BokInterface {
                 averageSpeed = Math.Round(_movementCalculator.GetAverageSpeed(speed3D, 60), 3);
 
             // Update the fields
-            _currentSpeedLabel.Text = "Current movement speed : " + Math.Round(speed3D, 3);
-            _averageSpeedLabel.Text = "Average over 60 frames : " + averageSpeed.ToString();
+            _currentSpeedLabel.Text = "Current movement speed: " + Math.Round(speed3D, 3);
+            _averageSpeedLabel.Text = "Average over 60 frames: " + averageSpeed.ToString();
         }
 
         // Update the menus for in-game events
@@ -133,10 +133,10 @@ partial class BokInterface {
         _currentStatusGroupBox = WinFormHelpers.CreateGroupBox("currentStatus", "Current status", new Point(5, 45), new Size(226, 55), this);
 
         // Current status labels
-        WinFormHelpers.CreateLabel("djangoCurrentHpLabel", "LIFE :", new Point(7, 19), new Size(34, 15), _currentStatusGroupBox);
-        WinFormHelpers.CreateLabel("djangoCurrentEneLabel", "ENE :", new Point(7, 34), new Size(34, 15), _currentStatusGroupBox);
-        WinFormHelpers.CreateLabel("djangoCurrentLevelLabel", "Level :", new Point(123, 19), new Size(40, 15), _currentStatusGroupBox);
-        WinFormHelpers.CreateLabel("djangoCurrentExpLabel", "EXP :", new Point(123, 34), new Size(33, 15), _currentStatusGroupBox);
+        WinFormHelpers.CreateLabel("djangoCurrentHpLabel", "LIFE:", new Point(7, 19), new Size(34, 15), _currentStatusGroupBox);
+        WinFormHelpers.CreateLabel("djangoCurrentEneLabel", "ENE:", new Point(7, 34), new Size(34, 15), _currentStatusGroupBox);
+        WinFormHelpers.CreateLabel("djangoCurrentLevelLabel", "Level:", new Point(123, 19), new Size(40, 15), _currentStatusGroupBox);
+        WinFormHelpers.CreateLabel("djangoCurrentExpLabel", "EXP:", new Point(123, 34), new Size(33, 15), _currentStatusGroupBox);
 
         // Current status values
         _bok2_currentStatusHpValue = WinFormHelpers.CreateLabel("djangoCurrentHpValue", "", new Point(44, 19), new Size(72, 15), _currentStatusGroupBox, textAlignment: "MiddleLeft");

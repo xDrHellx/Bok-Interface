@@ -176,7 +176,7 @@ class ShinbokSolarBikeEditor : Editor {
     /// <summary>Add informative text regarding bike menu</summary>
     protected void AddInformativeText() {
         WinFormHelpers.CreateTextBox("bikeMenuText",
-            "Regarding bike parts :"
+            "Regarding bike parts:"
             + "\r\nOpening the bike menu in-game will reset the bike to its previous state due to the game checking if parts have been unlocked legitamately.",
             new Point(5, 5), new Size(386, 53), this
         );

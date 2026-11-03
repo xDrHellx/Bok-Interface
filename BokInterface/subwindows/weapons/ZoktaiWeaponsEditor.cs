@@ -128,7 +128,7 @@ class ZoktaiWeaponsEditor : WeaponsEditor {
     /// <summary>Add informative text regarding weapons</summary>
     protected void AddInformativeText() {
         WinFormHelpers.CreateTextBox("weaponInfoText",
-            "Regarding SP abilities and bonus or malus for a weapon :"
+            "Regarding SP abilities and bonus or malus for a weapon:"
             + "\r\n- A weapon can have SP abilities and a bonus or malus"
             + "\r\n- Weapons with a bonus or malus have a durability value"
             + "\r\n- When the value reaches a certain threshold, the bonus decreases by 1"
@@ -164,13 +164,13 @@ class ZoktaiWeaponsEditor : WeaponsEditor {
             string[] fieldParts = dropDownLists[i].Name.Split(['_'], 4);
             if (fieldParts.Length >= 4 && fieldParts[3] != null && fieldParts[3].Substring(0, 10) == "sp_ability") {
                 // SP ability
-                string key = fieldParts[1] + "_" + fieldParts[2] + "_" + fieldParts[3];
+                string key = $"{fieldParts[1]}_{fieldParts[2]}_{fieldParts[3]}";
                 KeyValuePair<string, Ability> selectedOption = (KeyValuePair<string, Ability>)dropDownLists[i].SelectedItem;
                 Ability selectedItem = selectedOption.Value;
                 SetMemoryValue(fieldParts[0], key, selectedItem.value);
             } else {
                 // Weapon
-                string key = fieldParts[1] + "_" + fieldParts[2];
+                string key = $"{fieldParts[1]}_{fieldParts[2]}";
                 KeyValuePair<string, Weapon> selectedOption = (KeyValuePair<string, Weapon>)dropDownLists[i].SelectedItem;
                 Weapon selectedItem = selectedOption.Value;
                 SetMemoryValue(fieldParts[0], key, selectedItem.value);
@@ -234,14 +234,14 @@ class ZoktaiWeaponsEditor : WeaponsEditor {
                  * Set the name of the key to retrieve the value from based on the dropdown's name (for example inventory_slotX_weapon => slotX_weapon)
                  * Then try getting the corresponding ability & preselect it
                  */
-                string key = fieldParts[1] + "_" + fieldParts[2] + "_" + fieldParts[3];
+                string key = $"{fieldParts[1]}_{fieldParts[2]}_{fieldParts[3]}";
                 Ability? selectedAbility = GetAbilityByValue(_memoryValues.Inventory[key].Value);
                 if (selectedAbility != null) {
                     dropdown.SelectedIndex = dropdown.FindStringExact(selectedAbility.name);
                 }
             } else {
                 // If it's for the weapon itself, do the same as above & try preselecting the corresponding weapon
-                string key = fieldParts[1] + "_" + fieldParts[2];
+                string key = $"{fieldParts[1]}_{fieldParts[2]}";
                 Weapon? selectedWeapon = GetWeaponByValue(_memoryValues.Inventory[key].Value, _zoktaiWeapons.All);
                 if (selectedWeapon != null) {
                     dropdown.SelectedIndex = dropdown.FindStringExact(selectedWeapon.name);
@@ -254,7 +254,7 @@ class ZoktaiWeaponsEditor : WeaponsEditor {
 
             // Retrieve some parts of the field's name to check if it correspond to the malus or bonus field
             string[] fieldParts = bonusRelatedField.Name.Split(['_'], 3);
-            string memValuesKey = fieldParts[1] + "_" + fieldParts[2];
+            string memValuesKey = $"{fieldParts[1]}_{fieldParts[2]}";
 
             // If the in-game value exceeds the field's maximum value, stop
             uint ingameValue = _memoryValues.Inventory[memValuesKey].Value;
@@ -314,9 +314,9 @@ class ZoktaiWeaponsEditor : WeaponsEditor {
     /// <param name="slot">Slot number</param>
     void SetWeaponForgedByName(int slot) {
         if (slot > 0 && slot < 17) {
-            _memoryValues.Inventory["slot" + slot + "_weapon_forgedBy_1"].Value = 2036949332;
-            _memoryValues.Inventory["slot" + slot + "_weapon_forgedBy_2"].Value = 1699637359;
-            _memoryValues.Inventory["slot" + slot + "_weapon_forgedBy_3"].Value = 1802663796;
+            _memoryValues.Inventory[$"slot{slot}_weapon_forgedBy_1"].Value = 2036949332;
+            _memoryValues.Inventory[$"slot{slot}_weapon_forgedBy_2"].Value = 1699637359;
+            _memoryValues.Inventory[$"slot{slot}_weapon_forgedBy_3"].Value = 1802663796;
         }
     }
 
@@ -331,7 +331,7 @@ class ZoktaiWeaponsEditor : WeaponsEditor {
 
         // If the bonus | malus is 0, set durability to 0 (simulating intended game behavior)
         string[] keyParts = bonusField.Name.Split(['_'], 3);
-        NumericUpDown durabilityField = numericUpDowns.FirstOrDefault(x => x.Name == (keyParts[0] + "_" + keyParts[1] + "_" + "weapon_durability"));
+        NumericUpDown durabilityField = numericUpDowns.FirstOrDefault(x => x.Name == $"{keyParts[0]}_{keyParts[1]}_weapon_durability");
         if (durabilityField != null) {
             durabilityField.Value = 0;
         }
@@ -345,7 +345,7 @@ class ZoktaiWeaponsEditor : WeaponsEditor {
 
         // Get the related bonus | malus field
         string[] keyParts = durabilityField.Name.Split(['_'], 3);
-        NumericUpDown bonusField = numericUpDowns.FirstOrDefault(x => x.Name == (keyParts[0] + "_" + keyParts[1] + "_weapon_bonus"));
+        NumericUpDown bonusField = numericUpDowns.FirstOrDefault(x => x.Name == $"{keyParts[0]}_{keyParts[1]}_weapon_bonus");
         if (bonusField == null || bonusField.Value > 0) {
             return;
         }

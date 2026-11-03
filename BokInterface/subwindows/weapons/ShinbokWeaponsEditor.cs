@@ -128,7 +128,7 @@ class ShinbokWeaponsEditor : WeaponsEditor {
     /// <summary>Add informative text regarding weapons</summary>
     protected void AddInformativeText() {
         WinFormHelpers.CreateTextBox("weaponInfoText",
-            "Regarding weapons :"
+            "Regarding weapons:"
             + "\r\n- A weapon becomes broken (reduced base attack) once its durability value reaches 0 (except La Vie En Rose)"
             + "\r\n- SP effects that lowers resistance to an element will stack everytime the weapon is equipped (game bug)"
             + "\r\n- These effects goes back to normal when switching rooms"
@@ -164,13 +164,13 @@ class ShinbokWeaponsEditor : WeaponsEditor {
             string[] fieldParts = dropDownLists[i].Name.Split(['_'], 4);
             if (fieldParts.Length >= 4 && fieldParts[3] != null && fieldParts[3].Substring(0, 10) == "sp_ability") {
                 // SP ability
-                string key = fieldParts[1] + "_" + fieldParts[2] + "_" + fieldParts[3];
+                string key = $"{fieldParts[1]}_{fieldParts[2]}_{fieldParts[3]}";
                 KeyValuePair<string, Ability> selectedOption = (KeyValuePair<string, Ability>)dropDownLists[i].SelectedItem;
                 Ability selectedItem = selectedOption.Value;
                 SetMemoryValue(fieldParts[0], key, selectedItem.value);
             } else {
                 // Weapon
-                string key = fieldParts[1] + "_" + fieldParts[2];
+                string key = $"{fieldParts[1]}_{fieldParts[2]}";
                 KeyValuePair<string, Weapon> selectedOption = (KeyValuePair<string, Weapon>)dropDownLists[i].SelectedItem;
                 Weapon selectedItem = selectedOption.Value;
                 SetMemoryValue(fieldParts[0], key, selectedItem.value);
@@ -202,10 +202,10 @@ class ShinbokWeaponsEditor : WeaponsEditor {
             int value = (int)radioButtons[i].Tag;
 
             // Set the value to the memory address
-            SetMemoryValue(fieldParts[0], fieldParts[1] + "_" + fieldParts[2] + "_" + fieldParts[3], value);
+            SetMemoryValue(fieldParts[0], $"{fieldParts[1]}_{fieldParts[2]}_{fieldParts[3]}", value);
 
             // Get the selected weapon to retrieve the list of possible attack patterns
-            string dropdownName = fieldParts[0] + "_" + fieldParts[1] + "_" + fieldParts[2];
+            string dropdownName = $"{fieldParts[0]}_{fieldParts[1]}_{fieldParts[2]}";
             ImageComboBox dropdown = dropDownLists.Find(i => i.Name == dropdownName);
             if (dropdown == null) {
                 continue;
@@ -225,7 +225,7 @@ class ShinbokWeaponsEditor : WeaponsEditor {
                 continue;
             }
 
-            SetMemoryValue(fieldParts[0], fieldParts[1] + "_weapon_pattern", attackPattern.value);
+            SetMemoryValue(fieldParts[0], $"{fieldParts[1]}_weapon_pattern", attackPattern.value);
         }
 
         /**
@@ -263,14 +263,14 @@ class ShinbokWeaponsEditor : WeaponsEditor {
                  * Set the name of the key to retrieve the value from based on the dropdown's name (for example inventory_slotX_weapon => slotX_weapon)
                  * Then try getting the corresponding ability & preselect it
                  */
-                string key = fieldParts[1] + "_" + fieldParts[2] + "_" + fieldParts[3];
+                string key = $"{fieldParts[1]}_{fieldParts[2]}_{fieldParts[3]}";
                 Ability? selectedAbility = GetAbilityByValue(_memoryValues.Inventory[key].Value);
                 if (selectedAbility != null) {
                     dropdown.SelectedIndex = dropdown.FindStringExact(selectedAbility.name);
                 }
             } else {
                 // If it's for the weapon itself, do the same as above & try preselecting the corresponding weapon
-                string key = fieldParts[1] + "_" + fieldParts[2];
+                string key = $"{fieldParts[1]}_{fieldParts[2]}";
                 Weapon? selectedWeapon = GetWeaponByValue(_memoryValues.Inventory[key].Value, _shinbokWeapons.All);
                 if (selectedWeapon != null) {
                     dropdown.SelectedIndex = dropdown.FindStringExact(selectedWeapon.name);
@@ -292,7 +292,7 @@ class ShinbokWeaponsEditor : WeaponsEditor {
         // Check the corresponding refine radio button
         foreach (RadioButton refineButton in radioButtons) {
             string[] fieldParts = refineButton.Name.Split(['_'], 5);
-            string key = fieldParts[1] + "_" + fieldParts[2] + "_" + fieldParts[3];
+            string key = $"{fieldParts[1]}_{fieldParts[2]}_{fieldParts[3]}";
 
             /**
              * Retrieve the current value for the slot the refine button is related to

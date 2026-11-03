@@ -131,7 +131,7 @@ class ZoktaiInventoryEditor : InventoryEditor {
         if (selectedItem != null) {
 
             // Get the related durability field by using the dropdown's name
-            string durabilityFieldName = fieldParts[0] + "_" + fieldParts[1] + "_durability";
+            string durabilityFieldName = $"{fieldParts[0]}_{fieldParts[1]}_durability";
             foreach (NumericUpDown field in numericUpDowns) {
                 /**
                  * If it's the field we're looking for,
@@ -187,7 +187,7 @@ class ZoktaiInventoryEditor : InventoryEditor {
 
             // Check if the chocolate-covered checkbox is enabled & checked
             bool isChocolateCovered = false;
-            string checkboxName = fieldParts[1] + "_chocolate_covered";
+            string checkboxName = $"{fieldParts[1]}_chocolate_covered";
             foreach (CheckBox checkBox in checkBoxes) {
                 if (checkBox.Name == checkboxName && checkBox.Checked == true) {
                     isChocolateCovered = true;
@@ -200,7 +200,7 @@ class ZoktaiInventoryEditor : InventoryEditor {
              * Then set the value to the memory address
              */
             decimal value = numericUpDowns[i].Value + (isChocolateCovered == true ? _chocolateCoveredDurabilityOffset : 0);
-            SetMemoryValue(fieldParts[0], fieldParts[1] + "_" + fieldParts[2], value);
+            SetMemoryValue(fieldParts[0], $"{fieldParts[1]}_{fieldParts[2]}", value);
         }
 
         /**
@@ -245,7 +245,7 @@ class ZoktaiInventoryEditor : InventoryEditor {
             string[] fieldParts = durabilityField.Name.Split(['_'], 3);
 
             // If the current in-game value exceeds the field's maximum value, stop
-            decimal ingameValue = _memoryValues.Inventory[fieldParts[1] + "_" + fieldParts[2]].Value;
+            decimal ingameValue = _memoryValues.Inventory[$"{fieldParts[1]}_{fieldParts[2]}"].Value;
             if (ingameValue > durabilityField.Maximum) {
                 continue;
             }
@@ -257,7 +257,7 @@ class ZoktaiInventoryEditor : InventoryEditor {
              * We'll also remove the offset from the value in the durability field to keep it simple for the user
              */
             if (ingameValue >= _chocolateCoveredDurabilityOffset) {
-                string checkboxName = fieldParts[1] + "_chocolate_covered";
+                string checkboxName = $"{fieldParts[1]}_chocolate_covered";
                 foreach (CheckBox checkBox in checkBoxes) {
                     if (checkBox.Name == checkboxName) {
                         checkBox.Checked = true;

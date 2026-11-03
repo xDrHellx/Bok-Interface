@@ -75,12 +75,12 @@ public class ShinbokAddresses {
         Django.Add("exp", new MemoryAddress(0x48, type: "U32", domain: "EWRAM"));
         Django.Add("total_exp_until_next_level", new MemoryAddress(0x1BC8, type: "U32", domain: "EWRAM"));
         Django.Add("stat_points", new MemoryAddress(0x42, domain: "EWRAM"));
-        Django.Add("current_equips_vit", new MemoryAddress(0x332, "Stat points from accessories, " + _note.ToLower(), domain: "EWRAM"));
-        Django.Add("current_equips_spr", new MemoryAddress(0x334, "Stat points from accessories, " + _note.ToLower(), domain: "EWRAM"));
-        Django.Add("current_equips_str", new MemoryAddress(0x336, "Stat points from accessories, " + _note.ToLower(), domain: "EWRAM"));
-        Django.Add("current_sum_base_cards_vit", new MemoryAddress(0x41C, "Sum of base stat & points from cards, " + _note.ToLower(), domain: "EWRAM"));
-        Django.Add("current_sum_base_cards_spr", new MemoryAddress(0x41E, "Sum of base stat & points from cards, " + _note.ToLower(), domain: "EWRAM"));
-        Django.Add("current_sum_base_cards_str", new MemoryAddress(0x420, "Sum of base stat & points from cards, " + _note.ToLower(), domain: "EWRAM"));
+        Django.Add("current_equips_vit", new MemoryAddress(0x332, $"Stat points from accessories, {_note.ToLower()}", domain: "EWRAM"));
+        Django.Add("current_equips_spr", new MemoryAddress(0x334, $"Stat points from accessories, {_note.ToLower()}", domain: "EWRAM"));
+        Django.Add("current_equips_str", new MemoryAddress(0x336, $"Stat points from accessories, {_note.ToLower()}", domain: "EWRAM"));
+        Django.Add("current_sum_base_cards_vit", new MemoryAddress(0x41C, $"Sum of base stat & points from cards, {_note.ToLower()}", domain: "EWRAM"));
+        Django.Add("current_sum_base_cards_spr", new MemoryAddress(0x41E, $"Sum of base stat & points from cards, {_note.ToLower()}", domain: "EWRAM"));
+        Django.Add("current_sum_base_cards_str", new MemoryAddress(0x420, $"Sum of base stat & points from cards, {_note.ToLower()}", domain: "EWRAM"));
 
         // Persistent stats (used on screen transitions & save data)
         _note = "Also corresponds to values from Save Data";
@@ -90,9 +90,9 @@ public class ShinbokAddresses {
         Django.Add("persistent_base_vit", new MemoryAddress(0x18, _note, domain: "EWRAM"));
         Django.Add("persistent_base_spr", new MemoryAddress(0x1A, _note, domain: "EWRAM"));
         Django.Add("persistent_base_str", new MemoryAddress(0x1C, _note, domain: "EWRAM"));
-        Django.Add("persistent_cards_vit", new MemoryAddress(0x20, "Stat points from cards, " + _note.ToLower(), domain: "EWRAM"));
-        Django.Add("persistent_cards_spr", new MemoryAddress(0x22, "Stat points from cards, " + _note.ToLower(), domain: "EWRAM"));
-        Django.Add("persistent_cards_str", new MemoryAddress(0x24, "Stat points from cards, " + _note.ToLower(), domain: "EWRAM"));
+        Django.Add("persistent_cards_vit", new MemoryAddress(0x20, $"Stat points from cards, {_note.ToLower()}", domain: "EWRAM"));
+        Django.Add("persistent_cards_spr", new MemoryAddress(0x22, $"Stat points from cards, {_note.ToLower()}", domain: "EWRAM"));
+        Django.Add("persistent_cards_str", new MemoryAddress(0x24, $"Stat points from cards, {_note.ToLower()}", domain: "EWRAM"));
     }
 
     void InitBikeAddresses() {
@@ -132,23 +132,23 @@ public class ShinbokAddresses {
 
             // Items, durability, key items & accessories (2 bytes each)
             uint addressOffset = 0x2 * (uint)i;
-            Inventory.Add("item_slot_" + slotNumber, new MemoryAddress(0xA0 + addressOffset, "Item slot", domain: "EWRAM"));
-            Inventory.Add("item_slot_durability_" + slotNumber, new MemoryAddress(0x100 + addressOffset, "Item durability (for spoiling)", domain: "EWRAM"));
-            Inventory.Add("key_item_slot_" + slotNumber, new MemoryAddress(0x838 + addressOffset, "Key item inventory slot", domain: "EWRAM"));
-            Inventory.Add("accessory_slot_" + slotNumber, new MemoryAddress(0x160 + addressOffset, "Accessory inventory slot", domain: "EWRAM"));
+            Inventory.Add($"item_slot_{slotNumber}", new MemoryAddress(0xA0 + addressOffset, "Item slot", domain: "EWRAM"));
+            Inventory.Add($"item_slot_durability_{slotNumber}", new MemoryAddress(0x100 + addressOffset, "Item durability (for spoiling)", domain: "EWRAM"));
+            Inventory.Add($"key_item_slot_{slotNumber}", new MemoryAddress(0x838 + addressOffset, "Key item inventory slot", domain: "EWRAM"));
+            Inventory.Add($"accessory_slot_{slotNumber}", new MemoryAddress(0x160 + addressOffset, "Accessory inventory slot", domain: "EWRAM"));
 
             // Weapon inventory slots & durability
             addressOffset = 0x10 * (uint)i;
-            Inventory.Add("weapon_slot_" + slotNumber, new MemoryAddress(0x1C0 + addressOffset, "Weapon inventory slot", domain: "EWRAM"));
-            Inventory.Add("weapon_slot_" + slotNumber + "_durability", new MemoryAddress(0x1C2 + addressOffset, "Weapon durability", domain: "EWRAM"));
+            Inventory.Add($"weapon_slot_{slotNumber}", new MemoryAddress(0x1C0 + addressOffset, "Weapon inventory slot", domain: "EWRAM"));
+            Inventory.Add($"weapon_slot_{slotNumber}_durability", new MemoryAddress(0x1C2 + addressOffset, "Weapon durability", domain: "EWRAM"));
 
             // SP effects
-            Inventory.Add("weapon_slot_" + slotNumber + "_sp_ability_1", new MemoryAddress(0x1C4 + addressOffset, "1st SP ability", domain: "EWRAM"));
-            Inventory.Add("weapon_slot_" + slotNumber + "_sp_ability_2", new MemoryAddress(0x1C8 + addressOffset, "2nd SP ability", domain: "EWRAM"));
+            Inventory.Add($"weapon_slot_{slotNumber}_sp_ability_1", new MemoryAddress(0x1C4 + addressOffset, "1st SP ability", domain: "EWRAM"));
+            Inventory.Add($"weapon_slot_{slotNumber}_sp_ability_2", new MemoryAddress(0x1C8 + addressOffset, "2nd SP ability", domain: "EWRAM"));
 
             // Refine & weapon attack pattern
-            Inventory.Add("weapon_slot_" + slotNumber + "_refine", new MemoryAddress(0x1CC + addressOffset, "Refine", "U8", "EWRAM")); // 1 = II, 2 = III, others = normal weapon
-            Inventory.Add("weapon_slot_" + slotNumber + "_pattern", new MemoryAddress(0x1CD + addressOffset, "Attack pattern ID", "U8", "EWRAM"));
+            Inventory.Add($"weapon_slot_{slotNumber}_refine", new MemoryAddress(0x1CC + addressOffset, "Refine (1 = II, 2 = III, others = normal weaspon)", "U8", "EWRAM"));
+            Inventory.Add($"weapon_slot_{slotNumber}_pattern", new MemoryAddress(0x1CD + addressOffset, "Attack pattern ID", "U8", "EWRAM"));
         }
     }
 
@@ -159,11 +159,11 @@ public class ShinbokAddresses {
             uint addressOffset = 0x2 * (uint)i;
 
             // 12 Frame slots
-            Inventory.Add("gun_frame_slot_" + slotNumber, new MemoryAddress(0x4C0 + addressOffset, "Gun frame inventory slot", domain: "EWRAM"));
+            Inventory.Add($"gun_frame_slot_{slotNumber}", new MemoryAddress(0x4C0 + addressOffset, "Gun frame inventory slot", domain: "EWRAM"));
 
             // 8 Lens slots
             if (i < 8) {
-                Inventory.Add("gun_lens_slot_" + slotNumber, new MemoryAddress(0x828 + addressOffset, "Gun lens inventory slot", domain: "EWRAM"));
+                Inventory.Add($"gun_lens_slot_{slotNumber}", new MemoryAddress(0x828 + addressOffset, "Gun lens inventory slot", domain: "EWRAM"));
             }
         }
     }

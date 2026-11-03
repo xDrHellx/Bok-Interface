@@ -67,7 +67,7 @@ partial class BokInterface {
             } else {
                 // Otherwise get the capacity for that battery
                 int capacity = _boktaiGuns.Batteries.ElementAt((int)battery).Value.capacity;
-                _bok1_currentStatusEneValue.Text = APIs.Memory.ReadU16(_boktaiAddresses.Inventory["battery_charges"].Address + (battery * 2)) + " / " + (capacity * 1024);
+                _bok1_currentStatusEneValue.Text = $"{APIs.Memory.ReadU16(_boktaiAddresses.Inventory["battery_charges"].Address + (battery * 2))} / {capacity * 1024}";
             }
 
             // Update the current & average speed
@@ -80,8 +80,8 @@ partial class BokInterface {
                 averageSpeed = Math.Round(_movementCalculator.GetAverageSpeed(speed3D, 60), 3);
 
             // Update the fields
-            _currentSpeedLabel.Text = "Current movement speed : " + Math.Round(speed3D, 3);
-            _averageSpeedLabel.Text = "Average over 60 frames : " + averageSpeed.ToString();
+            _currentSpeedLabel.Text = $"Current movement speed: {Math.Round(speed3D, 3)}";
+            _averageSpeedLabel.Text = $"Average over 60 frames: {averageSpeed}";
 
             // Indicate if the Astro Battery event is enabled
             _enableAstroBattery.Checked = _memoryValues.Misc["astro_battery_unlocked"].Value == _boktaiAddresses.Misc["astro_battery_unlock_value"].Value;
@@ -97,12 +97,12 @@ partial class BokInterface {
                 new Point((int)_boktaiAddresses.Django["x_position"].Value, (int)_boktaiAddresses.Django["y_position"].Value)
             );
 
-            _coffinDamageLabel.Text = "Damage : " + _memoryValues.Coffin["damage"].Value + " / 1200";
-            _coffinWindupTimerLabel.Text = "Windup begins in : " + _memoryValues.Coffin["windup_timer"].Value;
-            _coffinShakeTimerLabel.Text = "Windup : " + _memoryValues.Coffin["shake_timer"].Value + " / 127";
-            _coffinShakeDurationLabel.Text = "Duration : " + _memoryValues.Coffin["shake_duration"].Value;
-            _coffinEscapeTimerLabel.Text = "Begins escaping in : " + _memoryValues.Coffin["own_movement_timer"].Value;
-            _coffinDistanceLabel.Text = "Distance : " + distance;
+            _coffinDamageLabel.Text = $"Damage: {_memoryValues.Coffin["damage"].Value} / 1200";
+            _coffinWindupTimerLabel.Text = $"Windup begins in: {_memoryValues.Coffin["windup_timer"].Value}";
+            _coffinShakeTimerLabel.Text = $"Windup: {_memoryValues.Coffin["shake_timer"].Value} / 127";
+            _coffinShakeDurationLabel.Text = $"Duration: {_memoryValues.Coffin["shake_duration"].Value}";
+            _coffinEscapeTimerLabel.Text = $"Begins escaping in: {_memoryValues.Coffin["own_movement_timer"].Value}";
+            _coffinDistanceLabel.Text = $"Distance: {distance}";
         }
 
         if (_showGui == true) {
@@ -120,8 +120,8 @@ partial class BokInterface {
         _currentStatusGroupBox = WinFormHelpers.CreateGroupBox("currentStatus", "Current status", new Point(5, 45), new Size(226, 55), this);
 
         // Current status labels
-        WinFormHelpers.CreateLabel("djangoCurrentHpLabel", "LIFE :", new Point(7, 19), new Size(34, 15), _currentStatusGroupBox);
-        WinFormHelpers.CreateLabel("djangoCurrentEneLabel", "ENE :", new Point(7, 34), new Size(34, 15), _currentStatusGroupBox);
+        WinFormHelpers.CreateLabel("djangoCurrentHpLabel", "LIFE:", new Point(7, 19), new Size(34, 15), _currentStatusGroupBox);
+        WinFormHelpers.CreateLabel("djangoCurrentEneLabel", "ENE:", new Point(7, 34), new Size(34, 15), _currentStatusGroupBox);
 
         // Current status values
         _bok1_currentStatusHpValue = WinFormHelpers.CreateLabel("djangoCurrentHpValue", "", new Point(44, 19), new Size(67, 15), _currentStatusGroupBox, textAlignment: "MiddleRight");
@@ -175,7 +175,7 @@ partial class BokInterface {
         if (_showBossHp == true) {
             uint bossHp = _boktaiAddresses.Misc["boss_hp"].Value;
             if (bossHp > 0 && bossHp != 16416) {
-                APIs.Gui.Text(GetScreenWidth() - 127, 1, "Boss: " + bossHp);
+                APIs.Gui.Text(GetScreenWidth() - 127, 1, $"Boss: {bossHp}");
             }
         }
 

@@ -245,7 +245,7 @@ class ShinbokStatusEditor : StatusEditor {
                             string statKey = valueKeyParts[1];
 
                             _memoryValues.Misc[valueKey].Value = (uint)value;
-                            UpdateSumBaseCardStat(statKey, _memoryValues.Misc["base_" + statKey].Value, _memoryValues.Misc["cards_" + statKey].Value);
+                            UpdateSumBaseCardStat(statKey, _memoryValues.Misc[$"base_{statKey}"].Value, _memoryValues.Misc[$"cards_{statKey}"].Value);
                             break;
                         default:                        // Default treatment
                             _memoryValues.Misc[valueKey].Value = (uint)value;
@@ -279,7 +279,7 @@ class ShinbokStatusEditor : StatusEditor {
     /// <summary>Updates the sum of base + card points for a stat</summary>
     /// <param name="stat">Stat to update (str, spr, str)</param>
     void UpdateSumBaseCardStat(string stat, uint basePoints, uint cardPoints) {
-        string key = "sum_base_cards_" + stat;
+        string key = $"sum_base_cards_{stat}";
         if (_memoryValues.Django.ContainsKey(key) == true) {
             _memoryValues.Django[key].Value = basePoints + cardPoints;
         }

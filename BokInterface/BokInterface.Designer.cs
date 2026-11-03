@@ -134,7 +134,7 @@ partial class BokInterface {
     /// <summary>Add the labels with the game info to the main window</summary>
     void AddCurrentGameInfo() {
         WinFormHelpers.CreateLabel("currentGameName", WinFormHelpers.EscapeAmpersand(currentGameName), new Point(0, _menuBar.Height), new Size(Width, 20), this, WinFormHelpers.gameNameBackground, textAlignment: "MiddleLeft");
-        Label regionVersionLabel = WinFormHelpers.CreateLabel("currentGameRegionVersion", region + " " + version, new Point(0, _menuBar.Height), new Size(20, 20), this, WinFormHelpers.gameVersionBackground, textAlignment: "MiddleLeft");
+        Label regionVersionLabel = WinFormHelpers.CreateLabel("currentGameRegionVersion", $"{region} {version}", new Point(0, _menuBar.Height), new Size(20, 20), this, WinFormHelpers.gameVersionBackground, textAlignment: "MiddleLeft");
         regionVersionLabel.Anchor = AnchorStyles.Top | AnchorStyles.Right;
         regionVersionLabel.Width = TextRenderer.MeasureText(regionVersionLabel.Text, regionVersionLabel.Font).Width;
         regionVersionLabel.Location = new Point(ClientSize.Width - regionVersionLabel.Width, regionVersionLabel.Location.Y);
@@ -171,8 +171,8 @@ partial class BokInterface {
         _miscDataGroupBox = WinFormHelpers.CreateGroupBox("miscData", "Misc. data", new Point(5, positionY), new Size(226, groupHeight), this);
 
         // Average speed
-        _currentSpeedLabel = WinFormHelpers.CreateLabel("currentMovementSpeed", "Current movement speed : ", new Point(7, 19), new Size(200, 15), _miscDataGroupBox, textAlignment: "MiddleLeft");
-        _averageSpeedLabel = WinFormHelpers.CreateLabel("averageMovementSpeed", "Average over 60 frames : ", new Point(7, 34), new Size(200, 15), _miscDataGroupBox, textAlignment: "MiddleLeft");
+        _currentSpeedLabel = WinFormHelpers.CreateLabel("currentMovementSpeed", "Current movement speed: ", new Point(7, 19), new Size(200, 15), _miscDataGroupBox, textAlignment: "MiddleLeft");
+        _averageSpeedLabel = WinFormHelpers.CreateLabel("averageMovementSpeed", "Average over 60 frames: ", new Point(7, 34), new Size(200, 15), _miscDataGroupBox, textAlignment: "MiddleLeft");
 
         // Add the coffin section if enabled
         if (enableCoffinSection == true) {
@@ -181,12 +181,12 @@ partial class BokInterface {
             WinFormHelpers.CreateLabel("coffinSection", "Coffin data", new Point(5, 53), new Size(80, 15), _miscDataGroupBox, textAlignment: "MiddleLeft").Font = new("Segoe UI", 9, FontStyle.Underline, GraphicsUnit.Point);
 
             // Coffin data
-            _coffinDamageLabel = WinFormHelpers.CreateLabel("coffinDamage", "Damage : ", new Point(5, 68), new Size(200, 15), _miscDataGroupBox, textAlignment: "MiddleLeft");
-            _coffinWindupTimerLabel = WinFormHelpers.CreateLabel("coffinWindupTimer", "Windup begins in : ", new Point(5, 83), new Size(200, 15), _miscDataGroupBox, textAlignment: "MiddleLeft");
-            _coffinShakeTimerLabel = WinFormHelpers.CreateLabel("coffnShakeTimer", "Windup : ", new Point(5, 98), new Size(200, 15), _miscDataGroupBox, textAlignment: "MiddleLeft");
-            _coffinShakeDurationLabel = WinFormHelpers.CreateLabel("coffinShakeDuration", "Duration : ", new Point(5, 113), new Size(200, 15), _miscDataGroupBox, textAlignment: "MiddleLeft");
-            _coffinEscapeTimerLabel = WinFormHelpers.CreateLabel("coffinEscapeTimer", "Begins escaping in : ", new Point(5, 128), new Size(200, 15), _miscDataGroupBox, textAlignment: "MiddleLeft");
-            _coffinDistanceLabel = WinFormHelpers.CreateLabel("coffinDistance", "Distance : ", new Point(5, 143), new Size(200, 15), _miscDataGroupBox, textAlignment: "MiddleLeft");
+            _coffinDamageLabel = WinFormHelpers.CreateLabel("coffinDamage", "Damage: ", new Point(5, 68), new Size(200, 15), _miscDataGroupBox, textAlignment: "MiddleLeft");
+            _coffinWindupTimerLabel = WinFormHelpers.CreateLabel("coffinWindupTimer", "Windup begins in: ", new Point(5, 83), new Size(200, 15), _miscDataGroupBox, textAlignment: "MiddleLeft");
+            _coffinShakeTimerLabel = WinFormHelpers.CreateLabel("coffnShakeTimer", "Windup: ", new Point(5, 98), new Size(200, 15), _miscDataGroupBox, textAlignment: "MiddleLeft");
+            _coffinShakeDurationLabel = WinFormHelpers.CreateLabel("coffinShakeDuration", "Duration: ", new Point(5, 113), new Size(200, 15), _miscDataGroupBox, textAlignment: "MiddleLeft");
+            _coffinEscapeTimerLabel = WinFormHelpers.CreateLabel("coffinEscapeTimer", "Begins escaping in: ", new Point(5, 128), new Size(200, 15), _miscDataGroupBox, textAlignment: "MiddleLeft");
+            _coffinDistanceLabel = WinFormHelpers.CreateLabel("coffinDistance", "Distance: ", new Point(5, 143), new Size(200, 15), _miscDataGroupBox, textAlignment: "MiddleLeft");
         }
     }
 
@@ -246,7 +246,7 @@ partial class BokInterface {
 
             if (shorterGameName != "Boktai") {
 
-                AddDropdownMenuItem("editAccessoriesMenu", shorterGameName == "Zoktai" ? "Protectors" : "Accessories", editMenu, OpenEquipsEditor);
+                AddDropdownMenuItem("editAccessoriesMenu", shorterGameName == "Zoktai" ? "Protectors": "Accessories", editMenu, OpenEquipsEditor);
                 if (shorterGameName == "Zoktai") {
                     AddDropdownMenuItem("editMagicsMenu", "Magics", editMenu, OpenMagicsEditor);
                 }
@@ -710,7 +710,7 @@ partial class BokInterface {
     /// <param name="onClick">OnClick event</param>
     /// <param name="tooltip">ToolTipText (by default none)</param>
     void AddDropdownMenuItem(string name, string text, ToolStripMenuItem parent, EventHandler onClick, string tooltip = "") {
-        ToolStripMenuItem menuItem = WinFormHelpers.CreateToolStripMenuItem(name, "&" + text, toolTipText: tooltip, menuItem: parent);
+        ToolStripMenuItem menuItem = WinFormHelpers.CreateToolStripMenuItem(name, $"&{text}", toolTipText: tooltip, menuItem: parent);
         menuItem.Click += new EventHandler(onClick);
         parent.DropDownItems.Add(menuItem);
     }

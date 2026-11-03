@@ -138,7 +138,7 @@ class dsInventoryEditor : InventoryEditor {
         if (selectedItem != null) {
 
             // Get the related durability field by using the dropdown's name
-            string durabilityFieldName = fieldParts[0] + "_" + fieldParts[1] + "_" + fieldParts[2] + "_durability_" + fieldParts[3];
+            string durabilityFieldName = $"{fieldParts[0]}_{fieldParts[1]}_{fieldParts[2]}_durability_{fieldParts[3]}";
             foreach (NumericUpDown field in numericUpDowns) {
                 /**
                  * If it's the field we're looking for,
@@ -195,7 +195,7 @@ class dsInventoryEditor : InventoryEditor {
             // Check if the chocolate-covered checkbox is enabled & checked
             bool isChocolateCovered = false;
             string[] nameParts = fieldParts[1].Split(['_'], 4);
-            string checkboxName = nameParts[0] + "_" + nameParts[1] + "_" + nameParts[3] + "_chocolate_covered";
+            string checkboxName = $"{nameParts[0]}_{nameParts[1]}_{nameParts[3]}_chocolate_covered";
             foreach (CheckBox checkBox in checkBoxes) {
                 if (checkBox.Name == checkboxName && checkBox.Checked == true) {
                     isChocolateCovered = true;
@@ -270,7 +270,7 @@ class dsInventoryEditor : InventoryEditor {
              */
             if (ingameValue >= _chocolateCoveredDurabilityOffset) {
                 string[] nameParts = fieldParts[1].Split(['_'], 4);
-                string checkboxName = nameParts[0] + "_" + nameParts[1] + "_" + nameParts[3] + "_chocolate_covered";
+                string checkboxName = $"{nameParts[0]}_{nameParts[1]}_{nameParts[3]}_chocolate_covered";
                 foreach (CheckBox checkBox in checkBoxes) {
                     if (checkBox.Name == checkboxName) {
                         checkBox.Checked = true;

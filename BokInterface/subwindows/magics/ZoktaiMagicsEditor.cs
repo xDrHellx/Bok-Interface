@@ -100,14 +100,14 @@ class ZoktaiMagicsEditor : MagicsEditor {
             // Label with image & checkbox
             if (n % 2 == 0) {
                 // Even (right side)
-                WinFormHelpers.CreateImageLabel(labelName + "_img", magic.icon, new Point(146, 18 * yPositionOffset), groupBox);
+                WinFormHelpers.CreateImageLabel($"{labelName}_img", magic.icon, new Point(146, 18 * yPositionOffset), groupBox);
                 WinFormHelpers.CreateLabel(labelName, magic.name, new Point(162, 18 * yPositionOffset), new Size(85, 15), groupBox, textAlignment: "MiddleLeft");
-                checkBoxes.Add(WinFormHelpers.CreateCheckBox("magic_" + labelName, "", new Point(253, 18 * yPositionOffset), new Size(16, 16), control: groupBox));
+                checkBoxes.Add(WinFormHelpers.CreateCheckBox($"magic_{labelName}", "", new Point(253, 18 * yPositionOffset), new Size(16, 16), control: groupBox));
             } else {
                 // Odd (left side)
-                WinFormHelpers.CreateImageLabel(labelName + "_img", magic.icon, new Point(5, 18 * yPositionOffset), groupBox);
+                WinFormHelpers.CreateImageLabel($"{labelName}_img", magic.icon, new Point(5, 18 * yPositionOffset), groupBox);
                 WinFormHelpers.CreateLabel(labelName, magic.name, new Point(21, 18 * yPositionOffset), new Size(95, 15), groupBox, textAlignment: "MiddleLeft");
-                checkBoxes.Add(WinFormHelpers.CreateCheckBox("magic_" + labelName, "", new Point(122, 18 * yPositionOffset), new Size(16, 16), control: groupBox));
+                checkBoxes.Add(WinFormHelpers.CreateCheckBox($"magic_{labelName}", "", new Point(122, 18 * yPositionOffset), new Size(16, 16), control: groupBox));
             }
 
             // If n > 1 & n is an even number, it means we're moving to another row next
