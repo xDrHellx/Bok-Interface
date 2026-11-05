@@ -119,30 +119,30 @@ public class ZoktaiAddresses {
 
             // Items, durability, key items & accessories (2 bytes each)
             uint addressOffset = 0x2 * (uint)i;
-            Inventory.Add("item_slot_" + slotNumber, new MemoryAddress(0x70 + addressOffset, "Item slot", domain: "EWRAM"));
-            Inventory.Add("item_slot_durability_" + slotNumber, new MemoryAddress(0xD0 + addressOffset, "Item durability (for spoiling)", domain: "EWRAM"));
-            Inventory.Add("key_item_slot_" + slotNumber, new MemoryAddress(0x130 + addressOffset, "Key item inventory slot", domain: "EWRAM"));
-            Inventory.Add("accessory_slot_" + slotNumber, new MemoryAddress(0x150 + addressOffset, "Accessory inventory slot", domain: "EWRAM"));
+            Inventory.Add($"item_slot_{slotNumber}", new MemoryAddress(0x70 + addressOffset, "Item slot", domain: "EWRAM"));
+            Inventory.Add($"item_slot_durability_{slotNumber}", new MemoryAddress(0xD0 + addressOffset, "Item durability (for spoiling)", domain: "EWRAM"));
+            Inventory.Add($"key_item_slot_{slotNumber}", new MemoryAddress(0x130 + addressOffset, "Key item inventory slot", domain: "EWRAM"));
+            Inventory.Add($"accessory_slot_{slotNumber}", new MemoryAddress(0x150 + addressOffset, "Accessory inventory slot", domain: "EWRAM"));
 
             // Weapons & parameters
             addressOffset = 0x1C * (uint)i;
 
             // Slot & bonus / malus (1 byte each)
-            Inventory.Add("weapon_slot_" + slotNumber + "", new MemoryAddress(0x3D0 + addressOffset, "Weapon slot", "U8", "EWRAM"));
-            Inventory.Add("weapon_slot_" + slotNumber + "_bonus", new MemoryAddress(0x3D1 + addressOffset, "Bonus / malus (ex: +10 or -03)", "U8", "EWRAM"));
+            Inventory.Add($"weapon_slot_{slotNumber}", new MemoryAddress(0x3D0 + addressOffset, "Weapon slot", "U8", "EWRAM"));
+            Inventory.Add($"weapon_slot_{slotNumber}_bonus", new MemoryAddress(0x3D1 + addressOffset, "Bonus / malus (ex: +10 or -03)", "U8", "EWRAM"));
 
             // Durability if bonus or malus is applied (2 bytes)
-            Inventory.Add("weapon_slot_" + slotNumber + "_durability", new MemoryAddress(0x3D2 + addressOffset, "Durability (for the bonus / malus)", domain: "EWRAM"));
+            Inventory.Add($"weapon_slot_{slotNumber}_durability", new MemoryAddress(0x3D2 + addressOffset, "Durability (for the bonus / malus)", domain: "EWRAM"));
 
             // Forged by, simplified into 3 addresses (4 bytes each)
-            Inventory.Add("weapon_slot_" + slotNumber + "_forgedBy_1", new MemoryAddress(0x3D4 + addressOffset, _note + "(part 1)", "U32", "EWRAM"));
-            Inventory.Add("weapon_slot_" + slotNumber + "_forgedBy_2", new MemoryAddress(0x3D8 + addressOffset, _note + "(part 2)", "U32", "EWRAM"));
-            Inventory.Add("weapon_slot_" + slotNumber + "_forgedBy_3", new MemoryAddress(0x3DC + addressOffset, _note + "(part 3)", "U32", "EWRAM"));
+            Inventory.Add($"weapon_slot_{slotNumber}_forgedBy_1", new MemoryAddress(0x3D4 + addressOffset, $"{_note} - part 1", "U32", "EWRAM"));
+            Inventory.Add($"weapon_slot_{slotNumber}_forgedBy_2", new MemoryAddress(0x3D8 + addressOffset, $"{_note} - part 2", "U32", "EWRAM"));
+            Inventory.Add($"weapon_slot_{slotNumber}_forgedBy_3", new MemoryAddress(0x3DC + addressOffset, $"{_note} - part 3", "U32", "EWRAM"));
 
             // Sp ability (4 bytes each, but we'll only read 1 to get a proper SP ability value)
-            Inventory.Add("weapon_slot_" + slotNumber + "_sp_ability_1", new MemoryAddress(0x3E0 + addressOffset, "1st SP ability (of the current weapon itself)", "U8", "EWRAM"));
-            Inventory.Add("weapon_slot_" + slotNumber + "_sp_ability_2", new MemoryAddress(0x3E4 + addressOffset, "2nd SP ability (inherited through forging)", "U8", "EWRAM"));
-            Inventory.Add("weapon_slot_" + slotNumber + "_sp_ability_3", new MemoryAddress(0x3E8 + addressOffset, "3rd SP ability (inherited through forging)", "U8", "EWRAM"));
+            Inventory.Add($"weapon_slot_{slotNumber}_sp_ability_1", new MemoryAddress(0x3E0 + addressOffset, "1st SP ability (of the current weapon itself)", "U8", "EWRAM"));
+            Inventory.Add($"weapon_slot_{slotNumber}_sp_ability_2", new MemoryAddress(0x3E4 + addressOffset, "2nd SP ability (inherited through forging)", "U8", "EWRAM"));
+            Inventory.Add($"weapon_slot_{slotNumber}_sp_ability_3", new MemoryAddress(0x3E8 + addressOffset, "3rd SP ability (inherited through forging)", "U8", "EWRAM"));
         }
 
         // Magics (32 bytes, bitmask with 4 bytes values)

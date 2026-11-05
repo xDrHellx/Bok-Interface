@@ -6,6 +6,7 @@ using BokInterface.Addresses;
 using BokInterface.Utils;
 using BokInterface.Items;
 using System.Reflection;
+using System.Drawing;
 
 namespace BokInterface.Inventory;
 
@@ -78,7 +79,7 @@ class ZoktaiInventoryEditor : InventoryEditor {
             UpdateMaxDurabilityField(dropdown);
         }
 
-        AddSetValuesButton(549, 406, this);
+        AddSetValuesButton(new Point(549, 406), this);
     }
 
     ///<summary>Separated method for generating groups with subelements</summary>
@@ -91,14 +92,14 @@ class ZoktaiInventoryEditor : InventoryEditor {
             // Generate the group for each property dynamically
             PropertyInfo property = GetType().GetProperty($"slot{i}group", BindingFlags.Instance | BindingFlags.NonPublic);
             if (property != null) {
-                CheckGroupBox group = WinFormHelpers.CreateCheckGroupBox($"slot{i}group", $"Slot {i}", xPos, yPos, 150, 95, control: this);
+                CheckGroupBox group = WinFormHelpers.CreateCheckGroupBox($"slot{i}group", $"Slot {i}", new Point(xPos, yPos), new Size(150, 95), control: this);
                 property.SetValue(this, group);
 
                 // Add elements to it
-                dropDownLists.Add(WinFormHelpers.CreateImageDropdownList($"inventory_slot{i}_item", 5, 19, 140, 23, group, visibleOptions: 5));
-                WinFormHelpers.CreateLabel($"slot{i}", "Durability", 2, 50, 58, 15, group);
-                numericUpDowns.Add(WinFormHelpers.CreateNumericUpDown($"inventory_slot{i}_durability", 0, 95, 48, 50, 23, 0, _defaultMaxDurability, control: group));
-                checkBoxes.Add(WinFormHelpers.CreateCheckBox($"slot{i}_chocolate_covered", "Chocolate-covered", 12, 74, 134, 19, checkboxOnRight: true, control: group));
+                dropDownLists.Add(WinFormHelpers.CreateImageDropdownList($"inventory_slot{i}_item", new Point(5, 19), new Size(140, 23), group, visibleOptions: 5));
+                WinFormHelpers.CreateLabel($"slot{i}", "Durability", new Point(2, 50), new Size(58, 15), group);
+                numericUpDowns.Add(WinFormHelpers.CreateNumericUpDown($"inventory_slot{i}_durability", 0, new Point(95, 48), new Size(50, 23), 0, _defaultMaxDurability, control: group));
+                checkBoxes.Add(WinFormHelpers.CreateCheckBox($"slot{i}_chocolate_covered", "Chocolate-covered", new Point(12, 74), new Size(134, 19), checkboxOnRight: true, control: group));
             }
 
             // Offsets for position
@@ -130,7 +131,7 @@ class ZoktaiInventoryEditor : InventoryEditor {
         if (selectedItem != null) {
 
             // Get the related durability field by using the dropdown's name
-            string durabilityFieldName = fieldParts[0] + "_" + fieldParts[1] + "_durability";
+            string durabilityFieldName = $"{fieldParts[0]}_{fieldParts[1]}_durability";
             foreach (NumericUpDown field in numericUpDowns) {
                 /**
                  * If it's the field we're looking for,
@@ -186,7 +187,7 @@ class ZoktaiInventoryEditor : InventoryEditor {
 
             // Check if the chocolate-covered checkbox is enabled & checked
             bool isChocolateCovered = false;
-            string checkboxName = fieldParts[1] + "_chocolate_covered";
+            string checkboxName = $"{fieldParts[1]}_chocolate_covered";
             foreach (CheckBox checkBox in checkBoxes) {
                 if (checkBox.Name == checkboxName && checkBox.Checked == true) {
                     isChocolateCovered = true;
@@ -199,7 +200,7 @@ class ZoktaiInventoryEditor : InventoryEditor {
              * Then set the value to the memory address
              */
             decimal value = numericUpDowns[i].Value + (isChocolateCovered == true ? _chocolateCoveredDurabilityOffset : 0);
-            SetMemoryValue(fieldParts[0], fieldParts[1] + "_" + fieldParts[2], value);
+            SetMemoryValue(fieldParts[0], $"{fieldParts[1]}_{fieldParts[2]}", value);
         }
 
         /**
@@ -244,7 +245,7 @@ class ZoktaiInventoryEditor : InventoryEditor {
             string[] fieldParts = durabilityField.Name.Split(['_'], 3);
 
             // If the current in-game value exceeds the field's maximum value, stop
-            decimal ingameValue = _memoryValues.Inventory[fieldParts[1] + "_" + fieldParts[2]].Value;
+            decimal ingameValue = _memoryValues.Inventory[$"{fieldParts[1]}_{fieldParts[2]}"].Value;
             if (ingameValue > durabilityField.Maximum) {
                 continue;
             }
@@ -256,7 +257,7 @@ class ZoktaiInventoryEditor : InventoryEditor {
              * We'll also remove the offset from the value in the durability field to keep it simple for the user
              */
             if (ingameValue >= _chocolateCoveredDurabilityOffset) {
-                string checkboxName = fieldParts[1] + "_chocolate_covered";
+                string checkboxName = $"{fieldParts[1]}_chocolate_covered";
                 foreach (CheckBox checkBox in checkBoxes) {
                     if (checkBox.Name == checkboxName) {
                         checkBox.Checked = true;

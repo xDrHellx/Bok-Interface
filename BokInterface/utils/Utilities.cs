@@ -252,7 +252,7 @@ static class Utilities {
         string hoursString = (hours < 10 ? "0" : "") + hours,
             minutesString = (minutes < 10 ? "0" : "") + minutes,
             secondsString = (seconds < 10 ? "0" : "") + seconds;
-        return hoursString + ":" + minutesString + ":" + secondsString;
+        return $"{hoursString}:{minutesString}:{secondsString}";
     }
 
     #endregion

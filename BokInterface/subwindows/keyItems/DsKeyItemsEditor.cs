@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Drawing;
 using System.Reflection;
 using System.Windows.Forms;
 
@@ -51,13 +52,13 @@ class DsKeyItemsEditor : KeyItemsEditor {
         AddDropDownOptions(dropDownLists, _dsItems.KeyItems);
 
         // Add warning
-        Label expWarning = WinFormHelpers.CreateImageLabel("tooltip", "warning", 5, 268, this);
-        WinFormHelpers.CreateLabel("warning", "Inventory will be updated upon switching tab in-game or closing and reopening the menu.", 23, 261, 503, 30, this, textAlignment: "MiddleLeft");
+        Label expWarning = WinFormHelpers.CreateImageLabel("tooltip", "warning", new Point(5, 268), this);
+        WinFormHelpers.CreateLabel("warning", "Inventory will be updated upon switching tab in-game or closing and reopening the menu.", new Point(23, 261), new Size(503, 30), this, textAlignment: "MiddleLeft");
 
         // Set default values for each field
         SetDefaultValues();
 
-        AddSetValuesButton(709, 265, this);
+        AddSetValuesButton(new Point(709, 265), this);
     }
 
     ///<summary>Separated method for generating groups with subelements</summary>
@@ -69,11 +70,11 @@ class DsKeyItemsEditor : KeyItemsEditor {
             // Generate the group for each property dynamically
             PropertyInfo property = GetType().GetProperty($"slot{i}group", BindingFlags.Instance | BindingFlags.NonPublic);
             if (property != null) {
-                CheckGroupBox group = WinFormHelpers.CreateCheckGroupBox($"slot{i}group", $"Slot {i}", xPos, yPos, 190, 49, control: this);
+                CheckGroupBox group = WinFormHelpers.CreateCheckGroupBox($"slot{i}group", $"Slot {i}", new Point(xPos, yPos), new Size(190, 49), control: this);
                 property.SetValue(this, group);
 
                 // Add the dropdown to it
-                dropDownLists.Add(WinFormHelpers.CreateImageDropdownList($"inventory_key_item_slot_{i}", 5, 19, 180, 23, group, visibleOptions: 5));
+                dropDownLists.Add(WinFormHelpers.CreateImageDropdownList($"inventory_key_item_slot_{i}", new Point(5, 19), new Size(180, 23), group, visibleOptions: 5));
             }
 
             // Offsets for position

@@ -4,6 +4,7 @@ using BokInterface.Addresses;
 using BokInterface.Utils;
 using BokInterface.Items;
 using System.Reflection;
+using System.Drawing;
 
 namespace BokInterface.KeyItems;
 
@@ -48,7 +49,7 @@ class ZoktaiKeyItemsEditor : KeyItemsEditor {
         // Set default values for each field
         SetDefaultValues();
 
-        AddSetValuesButton(629, 213, this);
+        AddSetValuesButton(new Point(629, 213), this);
     }
 
     ///<summary>Separated method for generating groups with subelements</summary>
@@ -60,11 +61,11 @@ class ZoktaiKeyItemsEditor : KeyItemsEditor {
             // Generate the group for each property dynamically
             PropertyInfo property = GetType().GetProperty($"slot{i}group", BindingFlags.Instance | BindingFlags.NonPublic);
             if (property != null) {
-                CheckGroupBox group = WinFormHelpers.CreateCheckGroupBox($"slot{i}group", $"Slot {i}", xPos, yPos, 170, 49, control: this);
+                CheckGroupBox group = WinFormHelpers.CreateCheckGroupBox($"slot{i}group", $"Slot {i}", new Point(xPos, yPos), new Size(170, 49), control: this);
                 property.SetValue(this, group);
 
                 // Add the dropdown to it
-                dropDownLists.Add(WinFormHelpers.CreateImageDropdownList($"inventory_slot{i}_key_item", 5, 19, 160, 23, group, visibleOptions: 5));
+                dropDownLists.Add(WinFormHelpers.CreateImageDropdownList($"inventory_slot{i}_key_item", new Point(5, 19), new Size(160, 23), group, visibleOptions: 5));
             }
 
             // Offsets for position

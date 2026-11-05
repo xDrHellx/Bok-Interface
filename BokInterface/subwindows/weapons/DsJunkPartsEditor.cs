@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Drawing;
 using System.Windows.Forms;
 
 using BokInterface.Addresses;
@@ -57,10 +58,10 @@ class DsJunkPartsEditor : Editor {
         foreach (KeyValuePair<string, DsJunkPart> part in _junkParts.All) {
 
             string partName = part.Key.ToLower();
-            CheckGroupBox group = WinFormHelpers.CreateCheckGroupBox($"group_{partName}", part.Key, posX, posY, 184, 48, control: this);
-            WinFormHelpers.CreateLabel($"lbl_amount_{partName}", "Amount", 2, 21, 51, 15, group);
-            numericUpDowns.Add(WinFormHelpers.CreateNumericUpDown($"amount_{partName}", 0, 60, 19, 39, 23, control: group));
-            checkBoxes.Add(WinFormHelpers.CreateCheckBox($"unlock_{partName}", "Unlocked", 104, 20, 76, 19, control: group, checkboxOnRight: true));
+            CheckGroupBox group = WinFormHelpers.CreateCheckGroupBox($"group_{partName}", part.Key, new Point(posX, posY), new Size(184, 48), control: this);
+            WinFormHelpers.CreateLabel($"lbl_amount_{partName}", "Amount", new Point(2, 21), new Size(51, 15), group);
+            numericUpDowns.Add(WinFormHelpers.CreateNumericUpDown($"amount_{partName}", 0, new Point(60, 19), new Size(39, 23), control: group));
+            checkBoxes.Add(WinFormHelpers.CreateCheckBox($"unlock_{partName}", "Unlocked", new Point(104, 20), new Size(76, 19), control: group, checkboxOnRight: true));
 
             posX += 189;
 
@@ -74,11 +75,11 @@ class DsJunkPartsEditor : Editor {
         }
 
         // Add warning
-        WinFormHelpers.CreateImageLabel("tooltip", "warning", 5, 272, this);
-        WinFormHelpers.CreateLabel("warning", "Screen will be updated upon switching tab in-game or closing and reopening the menu.", 23, 265, 471, 30, this, textAlignment: "MiddleLeft");
+        WinFormHelpers.CreateImageLabel("tooltip", "warning", new Point(5, 272), this);
+        WinFormHelpers.CreateLabel("warning", "Screen will be updated upon switching tab in-game or closing and reopening the menu.", new Point(23, 265), new Size(471, 30), this, textAlignment: "MiddleLeft");
 
         SetDefaultValues();
-        AddSetValuesButton(493, 268, this);
+        AddSetValuesButton(new Point(493, 268), this);
     }
 
     #endregion

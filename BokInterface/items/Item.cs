@@ -85,7 +85,7 @@ abstract class Item {
         icon = null;
         if (iconString != "") {
             try {
-                icon = library != "" ? (Image)ResourceLoader.LoadResource(library, iconString) : (Image)Properties.Resources.ResourceManager.GetObject(iconString);
+                icon = library != "" ? (Image)ResourceLoader.LoadResource(library, iconString) : (Image)Resources.ResourceManager.GetObject(iconString);
             } catch { }
         }
     }

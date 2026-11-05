@@ -1,3 +1,5 @@
+using System.Drawing;
+
 using BokInterface.Addresses;
 using BokInterface.Utils;
 
@@ -29,7 +31,7 @@ partial class BokInterface {
         GenerateMenu();
         AddCurrentGameInfo();
 
-        WinFormHelpers.CreateLabel("extraText", "No data available to show for this game.", 0, 20 + _menuBar.Height, Width, 20, this, WinFormHelpers.gameNameBackground, textAlignment: "MiddleLeft");
+        WinFormHelpers.CreateLabel("extraText", "No data available to show for this game.", new Point(0, 20 + _menuBar.Height), new Size(Width, 20), this, WinFormHelpers.gameNameBackground, textAlignment: "MiddleLeft");
 
         // Main window
         SetMainWindow("Bok Interface", 236, 40 + _menuBar.Height);
