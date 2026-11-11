@@ -1,3 +1,5 @@
+using System.Drawing;
+
 using BokInterface.Utils;
 
 /**
@@ -12,8 +14,8 @@ partial class BokInterface {
     void ShowGameNotRecognizedWindow() {
 
         // Text
-        WinFormHelpers.CreateLabel("currentGameName", "Game not recognized!", 0, 0, Width, 20, this, WinFormHelpers.gameNameBackground, textAlignment: "MiddleLeft");
-        WinFormHelpers.CreateLabel("extraText", "This tool only supports Boktai games.", 0, 20, Width, 20, this, WinFormHelpers.gameNameBackground, textAlignment: "MiddleLeft");
+        WinFormHelpers.CreateLabel("currentGameName", "Game not recognized!", new Point(0, 0), new Size(Width, 20), this, WinFormHelpers.gameNameBackground, textAlignment: "MiddleLeft");
+        WinFormHelpers.CreateLabel("extraText", "This tool only supports Boktai games.", new Point(0, 20), new Size(Width, 20), this, WinFormHelpers.gameNameBackground, textAlignment: "MiddleLeft");
 
         // Window
         SetMainWindow("Bok Interface", 236, 40);

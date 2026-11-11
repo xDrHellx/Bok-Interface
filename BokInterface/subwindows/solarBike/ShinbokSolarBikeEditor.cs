@@ -69,8 +69,8 @@ class ShinbokSolarBikeEditor : Editor {
     protected override void AddElements() {
 
         // Init groups & add them to the editor subwindow
-        _mainGroup = WinFormHelpers.CreateCheckGroupBox("main_group", "Main parts", 5, 70, 203, 166, control: this);
-        _optionsGroup = WinFormHelpers.CreateCheckGroupBox("options_group", "Options", 237, 70, 154, 137, control: this);
+        _mainGroup = WinFormHelpers.CreateCheckGroupBox("main_group", "Main parts", new Point(5, 70), new Size(203, 166), control: this);
+        _optionsGroup = WinFormHelpers.CreateCheckGroupBox("options_group", "Options", new Point(237, 70), new Size(154, 137), control: this);
 
         // Init dropdowns, generate & add options to them, then add the labels & informative text
         InitDropDowns();
@@ -82,7 +82,7 @@ class ShinbokSolarBikeEditor : Editor {
         SetDefaultValues();
 
         // Button for setting values & its events
-        Button setValuesButton = WinFormHelpers.CreateButton("setBikePartsButton", "Set values", 317, 218, 75, 23, this);
+        Button setValuesButton = WinFormHelpers.CreateButton("setBikePartsButton", "Set values", new Point(317, 218), new Size(75, 23), this);
         setValuesButton.Click += new EventHandler(delegate (object sender, EventArgs e) {
             // Write the values for 10 frames
             for (int i = 0; i < 10; i++) {
@@ -93,28 +93,28 @@ class ShinbokSolarBikeEditor : Editor {
 
     /// <summary>Add the labels</summary>
     protected void InitLabels() {
-        WinFormHelpers.CreateLabel("bike_front_label", "Front", 4, 23, 44, 15, _mainGroup, textAlignment: "MiddleLeft");
-        WinFormHelpers.CreateLabel("bike_tires_label", "Tires", 4, 52, 44, 15, _mainGroup, textAlignment: "MiddleLeft");
-        WinFormHelpers.CreateLabel("bike_body_label", "Body", 4, 81, 44, 15, _mainGroup, textAlignment: "MiddleLeft");
-        WinFormHelpers.CreateLabel("bike_special_label", "Special", 4, 111, 44, 15, _mainGroup, textAlignment: "MiddleLeft");
-        WinFormHelpers.CreateLabel("bike_color_label", "Color", 4, 138, 44, 15, _mainGroup, textAlignment: "MiddleLeft");
+        WinFormHelpers.CreateLabel("bike_front_label", "Front", new Point(4, 23), new Size(44, 15), _mainGroup, textAlignment: "MiddleLeft");
+        WinFormHelpers.CreateLabel("bike_tires_label", "Tires", new Point(4, 52), new Size(44, 15), _mainGroup, textAlignment: "MiddleLeft");
+        WinFormHelpers.CreateLabel("bike_body_label", "Body", new Point(4, 81), new Size(44, 15), _mainGroup, textAlignment: "MiddleLeft");
+        WinFormHelpers.CreateLabel("bike_special_label", "Special", new Point(4, 111), new Size(44, 15), _mainGroup, textAlignment: "MiddleLeft");
+        WinFormHelpers.CreateLabel("bike_color_label", "Color", new Point(4, 138), new Size(44, 15), _mainGroup, textAlignment: "MiddleLeft");
     }
 
     /// <summary>Initialize the dropdowns</summary>
     protected void InitDropDowns() {
 
         // Main parts
-        _frontPart = WinFormHelpers.CreateDropDownList("bike_front", 57, 19, 140, 23, _mainGroup, visibleOptions: 6);
-        _tiresPart = WinFormHelpers.CreateDropDownList("bike_tires", 57, 48, 140, 23, _mainGroup, visibleOptions: 6);
-        _bodyPart = WinFormHelpers.CreateDropDownList("bike_body", 57, 77, 140, 23, _mainGroup, visibleOptions: 6);
-        _specialPart = WinFormHelpers.CreateDropDownList("bike_special", 57, 107, 140, 23, _mainGroup, visibleOptions: 6);
-        _bikeColor = WinFormHelpers.CreateDropDownList("bike_color", 57, 136, 140, 23, _mainGroup, visibleOptions: 6);
+        _frontPart = WinFormHelpers.CreateDropDownList("bike_front", new Point(57, 19), new Size(140, 23), _mainGroup, visibleOptions: 6);
+        _tiresPart = WinFormHelpers.CreateDropDownList("bike_tires", new Point(57, 48), new Size(140, 23), _mainGroup, visibleOptions: 6);
+        _bodyPart = WinFormHelpers.CreateDropDownList("bike_body", new Point(57, 77), new Size(140, 23), _mainGroup, visibleOptions: 6);
+        _specialPart = WinFormHelpers.CreateDropDownList("bike_special", new Point(57, 107), new Size(140, 23), _mainGroup, visibleOptions: 6);
+        _bikeColor = WinFormHelpers.CreateDropDownList("bike_color", new Point(57, 136), new Size(140, 23), _mainGroup, visibleOptions: 6);
 
         // Options
-        _option1 = WinFormHelpers.CreateDropDownList("bike_option_1", 8, 19, 140, 23, _optionsGroup, visibleOptions: 6);
-        _option2 = WinFormHelpers.CreateDropDownList("bike_option_2", 8, 48, 140, 23, _optionsGroup, visibleOptions: 6);
-        _option3 = WinFormHelpers.CreateDropDownList("bike_option_3", 8, 77, 140, 23, _optionsGroup, visibleOptions: 6);
-        _option4 = WinFormHelpers.CreateDropDownList("bike_option_4", 8, 107, 140, 23, _optionsGroup, visibleOptions: 6);
+        _option1 = WinFormHelpers.CreateDropDownList("bike_option_1", new Point(8, 19), new Size(140, 23), _optionsGroup, visibleOptions: 6);
+        _option2 = WinFormHelpers.CreateDropDownList("bike_option_2", new Point(8, 48), new Size(140, 23), _optionsGroup, visibleOptions: 6);
+        _option3 = WinFormHelpers.CreateDropDownList("bike_option_3", new Point(8, 77), new Size(140, 23), _optionsGroup, visibleOptions: 6);
+        _option4 = WinFormHelpers.CreateDropDownList("bike_option_4", new Point(8, 107), new Size(140, 23), _optionsGroup, visibleOptions: 6);
 
         // Add to the dropdown list to loop over it later
         _dropDownList.Add(_frontPart);
@@ -176,9 +176,9 @@ class ShinbokSolarBikeEditor : Editor {
     /// <summary>Add informative text regarding bike menu</summary>
     protected void AddInformativeText() {
         WinFormHelpers.CreateTextBox("bikeMenuText",
-            "Regarding bike parts :"
+            "Regarding bike parts:"
             + "\r\nOpening the bike menu in-game will reset the bike to its previous state due to the game checking if parts have been unlocked legitamately.",
-            5, 5, 386, 53, this
+            new Point(5, 5), new Size(386, 53), this
         );
     }
 

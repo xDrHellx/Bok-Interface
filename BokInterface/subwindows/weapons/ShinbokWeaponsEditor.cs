@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Reflection;
 using System.Windows.Forms;
@@ -50,7 +51,7 @@ class ShinbokWeaponsEditor : WeaponsEditor {
     protected override void AddElements() {
 
         // Add Panel, slot groups & options for dropdowns
-        slotsPanel = WinFormHelpers.CreatePanel("slots_panel", 5, 94, 690, 214, this);
+        slotsPanel = WinFormHelpers.CreatePanel("slots_panel", new Point(5, 94), new Size(690, 214), this);
         GenerateGroups();
         GenerateDropDownOptions();
 
@@ -60,7 +61,7 @@ class ShinbokWeaponsEditor : WeaponsEditor {
         // Set default values for each field
         SetDefaultValues();
 
-        AddSetValuesButton(620, 65, this);
+        AddSetValuesButton(new Point(620, 65), this);
     }
 
     /// <summary>Separated method for generating groups with subelements</summary>
@@ -72,27 +73,27 @@ class ShinbokWeaponsEditor : WeaponsEditor {
             // Generate group
             PropertyInfo property = GetType().GetProperty($"slot{i}group", BindingFlags.Instance | BindingFlags.NonPublic);
             if (property != null) {
-                CheckGroupBox group = WinFormHelpers.CreateCheckGroupBox($"slot{i}group", $"Slot {i}", xPos, yPos, 160, 212, control: slotsPanel);
+                CheckGroupBox group = WinFormHelpers.CreateCheckGroupBox($"slot{i}group", $"Slot {i}", new Point(xPos, yPos), new Size(160, 212), control: slotsPanel);
                 property.SetValue(this, group);
 
                 // Dropdown
-                ImageComboBox dropdown = WinFormHelpers.CreateImageDropdownList($"inventory_slot{i}_weapon", 5, 19, 150, 23, group, visibleOptions: 5, enabled: false);
+                ImageComboBox dropdown = WinFormHelpers.CreateImageDropdownList($"inventory_slot{i}_weapon", new Point(5, 19), new Size(150, 23), group, visibleOptions: 5, enabled: false);
                 dropdown.SelectionChangeCommitted += UpdatePropertiesGroup;
                 dropDownLists.Add(dropdown);
 
                 // Refine & durability
-                CheckGroupBox propertiesGroup = WinFormHelpers.CreateCheckGroupBox($"slot{i}_properties_group", "Properties", 5, 48, 150, 77, control: group);
-                WinFormHelpers.CreateLabel($"slot{i}_refine_label", "Refine", 2, 19, 40, 15, propertiesGroup);
-                radioButtons.Add(WinFormHelpers.CreateRadioButton($"inventory_slot{i}_weapon_refine_option_1", "I", 52, 19, 24, 19, propertiesGroup, 0));
-                radioButtons.Add(WinFormHelpers.CreateRadioButton($"inventory_slot{i}_weapon_refine_option_2", "II", 81, 19, 31, 19, propertiesGroup, 1));
-                radioButtons.Add(WinFormHelpers.CreateRadioButton($"inventory_slot{i}_weapon_refine_option_3", "III", 113, 19, 34, 19, propertiesGroup, 2));
-                WinFormHelpers.CreateLabel($"slot{i}_durability_label", "Durability", 2, 50, 58, 15, control: propertiesGroup);
-                numericUpDowns.Add(WinFormHelpers.CreateNumericUpDown($"inventory_slot{i}_weapon_durability", 0, 98, 48, 47, 23, maxValue: 1000, control: propertiesGroup, enabled: false));
+                CheckGroupBox propertiesGroup = WinFormHelpers.CreateCheckGroupBox($"slot{i}_properties_group", "Properties", new Point(5, 48), new Size(150, 77), control: group);
+                WinFormHelpers.CreateLabel($"slot{i}_refine_label", "Refine", new Point(2, 19), new Size(40, 15), propertiesGroup);
+                radioButtons.Add(WinFormHelpers.CreateRadioButton($"inventory_slot{i}_weapon_refine_option_1", "I", new Point(52, 19), new Size(24, 19), propertiesGroup, 0));
+                radioButtons.Add(WinFormHelpers.CreateRadioButton($"inventory_slot{i}_weapon_refine_option_2", "II", new Point(81, 19), new Size(31, 19), propertiesGroup, 1));
+                radioButtons.Add(WinFormHelpers.CreateRadioButton($"inventory_slot{i}_weapon_refine_option_3", "III", new Point(113, 19), new Size(34, 19), propertiesGroup, 2));
+                WinFormHelpers.CreateLabel($"slot{i}_durability_label", "Durability", new Point(2, 50), new Size(58, 15), control: propertiesGroup);
+                numericUpDowns.Add(WinFormHelpers.CreateNumericUpDown($"inventory_slot{i}_weapon_durability", 0, new Point(98, 48), new Size(47, 23), maxValue: 1000, control: propertiesGroup, enabled: false));
 
                 // SP abilities
-                CheckGroupBox spAbilitiesGroup = WinFormHelpers.CreateCheckGroupBox($"slot{i}_sp_abilities_group", "SP abilities", 5, 129, 150, 78, control: group);
-                dropDownLists.Add(WinFormHelpers.CreateImageDropdownList($"inventory_slot{i}_weapon_sp_ability_1", 5, 19, 140, 23, spAbilitiesGroup, visibleOptions: 5, dropDownWidth: 350, enabled: false));
-                dropDownLists.Add(WinFormHelpers.CreateImageDropdownList($"inventory_slot{i}_weapon_sp_ability_2", 5, 48, 140, 23, spAbilitiesGroup, visibleOptions: 5, dropDownWidth: 350, enabled: false));
+                CheckGroupBox spAbilitiesGroup = WinFormHelpers.CreateCheckGroupBox($"slot{i}_sp_abilities_group", "SP abilities", new Point(5, 129), new Size(150, 78), control: group);
+                dropDownLists.Add(WinFormHelpers.CreateImageDropdownList($"inventory_slot{i}_weapon_sp_ability_1", new Point(5, 19), new Size(140, 23), spAbilitiesGroup, visibleOptions: 5, dropDownWidth: 350, enabled: false));
+                dropDownLists.Add(WinFormHelpers.CreateImageDropdownList($"inventory_slot{i}_weapon_sp_ability_2", new Point(5, 48), new Size(140, 23), spAbilitiesGroup, visibleOptions: 5, dropDownWidth: 350, enabled: false));
             }
 
             // Offsets for position
@@ -127,12 +128,12 @@ class ShinbokWeaponsEditor : WeaponsEditor {
     /// <summary>Add informative text regarding weapons</summary>
     protected void AddInformativeText() {
         WinFormHelpers.CreateTextBox("weaponInfoText",
-            "Regarding weapons :"
+            "Regarding weapons:"
             + "\r\n- A weapon becomes broken (reduced base attack) once its durability value reaches 0 (except La Vie En Rose)"
             + "\r\n- SP effects that lowers resistance to an element will stack everytime the weapon is equipped (game bug)"
             + "\r\n- These effects goes back to normal when switching rooms"
             + "\r\n- If you want a weapon to have its proper attack pattern, set the refine for it",
-            5, 5, 611, 82, this
+            new Point(5, 5), new Size(611, 82), this
         );
     }
 
@@ -163,13 +164,13 @@ class ShinbokWeaponsEditor : WeaponsEditor {
             string[] fieldParts = dropDownLists[i].Name.Split(['_'], 4);
             if (fieldParts.Length >= 4 && fieldParts[3] != null && fieldParts[3].Substring(0, 10) == "sp_ability") {
                 // SP ability
-                string key = fieldParts[1] + "_" + fieldParts[2] + "_" + fieldParts[3];
+                string key = $"{fieldParts[1]}_{fieldParts[2]}_{fieldParts[3]}";
                 KeyValuePair<string, Ability> selectedOption = (KeyValuePair<string, Ability>)dropDownLists[i].SelectedItem;
                 Ability selectedItem = selectedOption.Value;
                 SetMemoryValue(fieldParts[0], key, selectedItem.value);
             } else {
                 // Weapon
-                string key = fieldParts[1] + "_" + fieldParts[2];
+                string key = $"{fieldParts[1]}_{fieldParts[2]}";
                 KeyValuePair<string, Weapon> selectedOption = (KeyValuePair<string, Weapon>)dropDownLists[i].SelectedItem;
                 Weapon selectedItem = selectedOption.Value;
                 SetMemoryValue(fieldParts[0], key, selectedItem.value);
@@ -201,10 +202,10 @@ class ShinbokWeaponsEditor : WeaponsEditor {
             int value = (int)radioButtons[i].Tag;
 
             // Set the value to the memory address
-            SetMemoryValue(fieldParts[0], fieldParts[1] + "_" + fieldParts[2] + "_" + fieldParts[3], value);
+            SetMemoryValue(fieldParts[0], $"{fieldParts[1]}_{fieldParts[2]}_{fieldParts[3]}", value);
 
             // Get the selected weapon to retrieve the list of possible attack patterns
-            string dropdownName = fieldParts[0] + "_" + fieldParts[1] + "_" + fieldParts[2];
+            string dropdownName = $"{fieldParts[0]}_{fieldParts[1]}_{fieldParts[2]}";
             ImageComboBox dropdown = dropDownLists.Find(i => i.Name == dropdownName);
             if (dropdown == null) {
                 continue;
@@ -224,7 +225,7 @@ class ShinbokWeaponsEditor : WeaponsEditor {
                 continue;
             }
 
-            SetMemoryValue(fieldParts[0], fieldParts[1] + "_weapon_pattern", attackPattern.value);
+            SetMemoryValue(fieldParts[0], $"{fieldParts[1]}_weapon_pattern", attackPattern.value);
         }
 
         /**
@@ -262,14 +263,14 @@ class ShinbokWeaponsEditor : WeaponsEditor {
                  * Set the name of the key to retrieve the value from based on the dropdown's name (for example inventory_slotX_weapon => slotX_weapon)
                  * Then try getting the corresponding ability & preselect it
                  */
-                string key = fieldParts[1] + "_" + fieldParts[2] + "_" + fieldParts[3];
+                string key = $"{fieldParts[1]}_{fieldParts[2]}_{fieldParts[3]}";
                 Ability? selectedAbility = GetAbilityByValue(_memoryValues.Inventory[key].Value);
                 if (selectedAbility != null) {
                     dropdown.SelectedIndex = dropdown.FindStringExact(selectedAbility.name);
                 }
             } else {
                 // If it's for the weapon itself, do the same as above & try preselecting the corresponding weapon
-                string key = fieldParts[1] + "_" + fieldParts[2];
+                string key = $"{fieldParts[1]}_{fieldParts[2]}";
                 Weapon? selectedWeapon = GetWeaponByValue(_memoryValues.Inventory[key].Value, _shinbokWeapons.All);
                 if (selectedWeapon != null) {
                     dropdown.SelectedIndex = dropdown.FindStringExact(selectedWeapon.name);
@@ -291,7 +292,7 @@ class ShinbokWeaponsEditor : WeaponsEditor {
         // Check the corresponding refine radio button
         foreach (RadioButton refineButton in radioButtons) {
             string[] fieldParts = refineButton.Name.Split(['_'], 5);
-            string key = fieldParts[1] + "_" + fieldParts[2] + "_" + fieldParts[3];
+            string key = $"{fieldParts[1]}_{fieldParts[2]}_{fieldParts[3]}";
 
             /**
              * Retrieve the current value for the slot the refine button is related to

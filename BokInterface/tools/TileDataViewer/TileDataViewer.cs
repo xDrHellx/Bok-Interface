@@ -195,7 +195,7 @@ abstract class TileDataViewer : Form {
     /// <param name="scale">Scale (used for drawing)</param>
     protected void DrawStairsIcon(PaintEventArgs e, uint stairsValue, int posX, int posY, int scale) {
         if (stairsValue > 0) {
-            DrawTileImage(e, "stairs" + stairsValue, posX * scale, 1 + posY * scale);
+            DrawTileImage(e, $"stairs{stairsValue}", posX * scale, 1 + posY * scale);
         }
     }
 
@@ -253,7 +253,7 @@ abstract class TileDataViewer : Form {
         imgNb = frameCount >= 0 && frameCount < 30 ? 1 : 2;
         DrawTileImage(
             e,
-            "django" + imgNb,
+            $"django{imgNb}",
             (int)(5 + posX / 256 * scale - scale / 4),
             (int)(4 + posY / 256 * scale - scale / 4)
         );
