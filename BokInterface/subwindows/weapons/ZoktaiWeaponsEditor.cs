@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Reflection;
 using System.Windows.Forms;
@@ -47,7 +48,7 @@ class ZoktaiWeaponsEditor : WeaponsEditor {
     protected override void AddElements() {
 
         // Add Panel, slot groups & options for dropdowns
-        slotsPanel = WinFormHelpers.CreatePanel("slots_panel", 5, 94, 690, 244, this);
+        slotsPanel = WinFormHelpers.CreatePanel("slots_panel", new Point(5, 94), new Size(690, 244), this);
         GenerateGroups();
         GenerateDropDownOptions();
 
@@ -57,7 +58,7 @@ class ZoktaiWeaponsEditor : WeaponsEditor {
         // Set default values for each field
         SetDefaultValues();
 
-        AddSetValuesButton(620, 65, this);
+        AddSetValuesButton(new Point(620, 65), this);
     }
 
     /// <summary>Separated method for generating groups with subelements</summary>
@@ -69,30 +70,30 @@ class ZoktaiWeaponsEditor : WeaponsEditor {
             // Generate group
             PropertyInfo property = GetType().GetProperty($"slot{i}group", BindingFlags.Instance | BindingFlags.NonPublic);
             if (property != null) {
-                CheckGroupBox group = WinFormHelpers.CreateCheckGroupBox($"slot{i}group", $"Slot {i}", xPos, yPos, 160, 241, control: slotsPanel);
+                CheckGroupBox group = WinFormHelpers.CreateCheckGroupBox($"slot{i}group", $"Slot {i}", new Point(xPos, yPos), new Size(160, 241), control: slotsPanel);
                 property.SetValue(this, group);
 
                 // Dropdown
-                dropDownLists.Add(WinFormHelpers.CreateImageDropdownList($"inventory_slot{i}_weapon", 5, 19, 150, 23, group, visibleOptions: 5, enabled: false));
+                dropDownLists.Add(WinFormHelpers.CreateImageDropdownList($"inventory_slot{i}_weapon", new Point(5, 19), new Size(150, 23), group, visibleOptions: 5, enabled: false));
 
                 // Bonus / malus & durability
-                CheckGroupBox bonusGroup = WinFormHelpers.CreateCheckGroupBox($"slot{i}_bonus_group", "Bonus | Malus", 5, 48, 150, 77, control: group);
-                WinFormHelpers.CreateLabel($"slot{i}_bonus_label", "Bonus | malus", 2, 21, 81, 15, control: bonusGroup);
+                CheckGroupBox bonusGroup = WinFormHelpers.CreateCheckGroupBox($"slot{i}_bonus_group", "Bonus | Malus", new Point(5, 48), new Size(150, 77), control: group);
+                WinFormHelpers.CreateLabel($"slot{i}_bonus_label", "Bonus | malus", new Point(2, 21), new Size(81, 15), control: bonusGroup);
 
-                NumericUpDown bonusField = WinFormHelpers.CreateNumericUpDown($"inventory_slot{i}_weapon_bonus", 0, 98, 19, 47, 23, -10, 10, control: bonusGroup, enabled: false);
+                NumericUpDown bonusField = WinFormHelpers.CreateNumericUpDown($"inventory_slot{i}_weapon_bonus", 0, new Point(98, 19), new Size(47, 23), -10, 10, control: bonusGroup, enabled: false);
                 bonusField.ValueChanged += UpdateDurabilityField;
                 numericUpDowns.Add(bonusField);
 
-                WinFormHelpers.CreateLabel($"slot{i}_durability_label", "Durability", 2, 50, 58, 15, control: bonusGroup);
-                NumericUpDown durabilityField = WinFormHelpers.CreateNumericUpDown($"inventory_slot{i}_weapon_durability", 0, 98, 48, 47, 23, maxValue: 200, control: bonusGroup, enabled: false);
+                WinFormHelpers.CreateLabel($"slot{i}_durability_label", "Durability", new Point(2, 50), new Size(58, 15), control: bonusGroup);
+                NumericUpDown durabilityField = WinFormHelpers.CreateNumericUpDown($"inventory_slot{i}_weapon_durability", 0, new Point(98, 48), new Size(47, 23), maxValue: 200, control: bonusGroup, enabled: false);
                 durabilityField.ValueChanged += UpdateDurabilityBasedOnBonusField;
                 numericUpDowns.Add(durabilityField);
 
                 // SP abilities
-                CheckGroupBox spAbilitiesGroup = WinFormHelpers.CreateCheckGroupBox($"slot{i}_sp_abilities_group", "SP abilities", 5, 129, 150, 107, control: group);
-                dropDownLists.Add(WinFormHelpers.CreateImageDropdownList($"inventory_slot{i}_weapon_sp_ability_1", 5, 19, 140, 23, spAbilitiesGroup, visibleOptions: 5, dropDownWidth: 350, enabled: false));
-                dropDownLists.Add(WinFormHelpers.CreateImageDropdownList($"inventory_slot{i}_weapon_sp_ability_2", 5, 48, 140, 23, spAbilitiesGroup, visibleOptions: 5, dropDownWidth: 350, enabled: false));
-                dropDownLists.Add(WinFormHelpers.CreateImageDropdownList($"inventory_slot{i}_weapon_sp_ability_3", 5, 77, 140, 23, spAbilitiesGroup, visibleOptions: 5, dropDownWidth: 350, enabled: false));
+                CheckGroupBox spAbilitiesGroup = WinFormHelpers.CreateCheckGroupBox($"slot{i}_sp_abilities_group", "SP abilities", new Point(5, 129), new Size(150, 107), control: group);
+                dropDownLists.Add(WinFormHelpers.CreateImageDropdownList($"inventory_slot{i}_weapon_sp_ability_1", new Point(5, 19), new Size(140, 23), spAbilitiesGroup, visibleOptions: 5, dropDownWidth: 350, enabled: false));
+                dropDownLists.Add(WinFormHelpers.CreateImageDropdownList($"inventory_slot{i}_weapon_sp_ability_2", new Point(5, 48), new Size(140, 23), spAbilitiesGroup, visibleOptions: 5, dropDownWidth: 350, enabled: false));
+                dropDownLists.Add(WinFormHelpers.CreateImageDropdownList($"inventory_slot{i}_weapon_sp_ability_3", new Point(5, 77), new Size(140, 23), spAbilitiesGroup, visibleOptions: 5, dropDownWidth: 350, enabled: false));
             }
 
             // Offsets for position
@@ -127,12 +128,12 @@ class ZoktaiWeaponsEditor : WeaponsEditor {
     /// <summary>Add informative text regarding weapons</summary>
     protected void AddInformativeText() {
         WinFormHelpers.CreateTextBox("weaponInfoText",
-            "Regarding SP abilities and bonus or malus for a weapon :"
+            "Regarding SP abilities and bonus or malus for a weapon:"
             + "\r\n- A weapon can have SP abilities and a bonus or malus"
             + "\r\n- Weapons with a bonus or malus have a durability value"
             + "\r\n- When the value reaches a certain threshold, the bonus decreases by 1"
             + "\r\n- If there is a malus (or just no bonus), durability will be set to 0 (game behavior)",
-            5, 5, 434, 83, this, readOnly: true
+            new Point(5, 5), new Size(434, 83), this, readOnly: true
         );
     }
 
@@ -163,13 +164,13 @@ class ZoktaiWeaponsEditor : WeaponsEditor {
             string[] fieldParts = dropDownLists[i].Name.Split(['_'], 4);
             if (fieldParts.Length >= 4 && fieldParts[3] != null && fieldParts[3].Substring(0, 10) == "sp_ability") {
                 // SP ability
-                string key = fieldParts[1] + "_" + fieldParts[2] + "_" + fieldParts[3];
+                string key = $"{fieldParts[1]}_{fieldParts[2]}_{fieldParts[3]}";
                 KeyValuePair<string, Ability> selectedOption = (KeyValuePair<string, Ability>)dropDownLists[i].SelectedItem;
                 Ability selectedItem = selectedOption.Value;
                 SetMemoryValue(fieldParts[0], key, selectedItem.value);
             } else {
                 // Weapon
-                string key = fieldParts[1] + "_" + fieldParts[2];
+                string key = $"{fieldParts[1]}_{fieldParts[2]}";
                 KeyValuePair<string, Weapon> selectedOption = (KeyValuePair<string, Weapon>)dropDownLists[i].SelectedItem;
                 Weapon selectedItem = selectedOption.Value;
                 SetMemoryValue(fieldParts[0], key, selectedItem.value);
@@ -233,14 +234,14 @@ class ZoktaiWeaponsEditor : WeaponsEditor {
                  * Set the name of the key to retrieve the value from based on the dropdown's name (for example inventory_slotX_weapon => slotX_weapon)
                  * Then try getting the corresponding ability & preselect it
                  */
-                string key = fieldParts[1] + "_" + fieldParts[2] + "_" + fieldParts[3];
+                string key = $"{fieldParts[1]}_{fieldParts[2]}_{fieldParts[3]}";
                 Ability? selectedAbility = GetAbilityByValue(_memoryValues.Inventory[key].Value);
                 if (selectedAbility != null) {
                     dropdown.SelectedIndex = dropdown.FindStringExact(selectedAbility.name);
                 }
             } else {
                 // If it's for the weapon itself, do the same as above & try preselecting the corresponding weapon
-                string key = fieldParts[1] + "_" + fieldParts[2];
+                string key = $"{fieldParts[1]}_{fieldParts[2]}";
                 Weapon? selectedWeapon = GetWeaponByValue(_memoryValues.Inventory[key].Value, _zoktaiWeapons.All);
                 if (selectedWeapon != null) {
                     dropdown.SelectedIndex = dropdown.FindStringExact(selectedWeapon.name);
@@ -253,7 +254,7 @@ class ZoktaiWeaponsEditor : WeaponsEditor {
 
             // Retrieve some parts of the field's name to check if it correspond to the malus or bonus field
             string[] fieldParts = bonusRelatedField.Name.Split(['_'], 3);
-            string memValuesKey = fieldParts[1] + "_" + fieldParts[2];
+            string memValuesKey = $"{fieldParts[1]}_{fieldParts[2]}";
 
             // If the in-game value exceeds the field's maximum value, stop
             uint ingameValue = _memoryValues.Inventory[memValuesKey].Value;
@@ -313,9 +314,9 @@ class ZoktaiWeaponsEditor : WeaponsEditor {
     /// <param name="slot">Slot number</param>
     void SetWeaponForgedByName(int slot) {
         if (slot > 0 && slot < 17) {
-            _memoryValues.Inventory["slot" + slot + "_weapon_forgedBy_1"].Value = 2036949332;
-            _memoryValues.Inventory["slot" + slot + "_weapon_forgedBy_2"].Value = 1699637359;
-            _memoryValues.Inventory["slot" + slot + "_weapon_forgedBy_3"].Value = 1802663796;
+            _memoryValues.Inventory[$"slot{slot}_weapon_forgedBy_1"].Value = 2036949332;
+            _memoryValues.Inventory[$"slot{slot}_weapon_forgedBy_2"].Value = 1699637359;
+            _memoryValues.Inventory[$"slot{slot}_weapon_forgedBy_3"].Value = 1802663796;
         }
     }
 
@@ -330,7 +331,7 @@ class ZoktaiWeaponsEditor : WeaponsEditor {
 
         // If the bonus | malus is 0, set durability to 0 (simulating intended game behavior)
         string[] keyParts = bonusField.Name.Split(['_'], 3);
-        NumericUpDown durabilityField = numericUpDowns.FirstOrDefault(x => x.Name == (keyParts[0] + "_" + keyParts[1] + "_" + "weapon_durability"));
+        NumericUpDown durabilityField = numericUpDowns.FirstOrDefault(x => x.Name == $"{keyParts[0]}_{keyParts[1]}_weapon_durability");
         if (durabilityField != null) {
             durabilityField.Value = 0;
         }
@@ -344,7 +345,7 @@ class ZoktaiWeaponsEditor : WeaponsEditor {
 
         // Get the related bonus | malus field
         string[] keyParts = durabilityField.Name.Split(['_'], 3);
-        NumericUpDown bonusField = numericUpDowns.FirstOrDefault(x => x.Name == (keyParts[0] + "_" + keyParts[1] + "_weapon_bonus"));
+        NumericUpDown bonusField = numericUpDowns.FirstOrDefault(x => x.Name == $"{keyParts[0]}_{keyParts[1]}_weapon_bonus");
         if (bonusField == null || bonusField.Value > 0) {
             return;
         }

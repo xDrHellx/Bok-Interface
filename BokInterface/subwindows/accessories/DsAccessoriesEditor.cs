@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Reflection;
 using System.Windows.Forms;
@@ -59,13 +60,13 @@ class DsAccessoriesEditor : AccessoriesEditor {
         AddDropDownOptions(shieldDropdowns, shields);
 
         // Add warning
-        Label expWarning = WinFormHelpers.CreateImageLabel("tooltip", "warning", 5, 255, this);
-        WinFormHelpers.CreateLabel("warning", "Inventory will be updated upon switching tab in-game or closing and reopening the menu.", 23, 248, 503, 30, this, textAlignment: "MiddleLeft");
+        Label expWarning = WinFormHelpers.CreateImageLabel("tooltip", "warning", new Point(5, 255), this);
+        WinFormHelpers.CreateLabel("warning", "Inventory will be updated upon switching tab in-game or closing and reopening the menu.", new Point(23, 248), new Size(503, 30), this, textAlignment: "MiddleLeft");
 
         // Set default values for each field
         SetDefaultValues();
 
-        AddSetValuesButton(648, 252, this);
+        AddSetValuesButton(new Point(648, 252), this);
     }
 
     /// <summary>Generate the dictionnary for shields (including empty slot)</summary>
@@ -80,7 +81,7 @@ class DsAccessoriesEditor : AccessoriesEditor {
     protected void GenerateTabs() {
 
         // Tabs
-        inventoryTabControl = WinFormHelpers.CreateTabControl("inventory_ctrl", 5, 5, 718, 243, this);
+        inventoryTabControl = WinFormHelpers.CreateTabControl("inventory_ctrl", new Point(5, 5), new Size(718, 243), this);
         accessoriesTab = WinFormHelpers.CreateTabPage("accessories_tab", "Accessories", tabControl: inventoryTabControl);
         shieldsTab = WinFormHelpers.CreateTabPage("shields_tab", "Shields", tabControl: inventoryTabControl);
 
@@ -92,9 +93,9 @@ class DsAccessoriesEditor : AccessoriesEditor {
             // Generate the group for each property dynamically & add the dropdown to it
             PropertyInfo property = GetType().GetProperty($"slot{i}group", BindingFlags.Instance | BindingFlags.NonPublic);
             if (property != null) {
-                CheckGroupBox group = WinFormHelpers.CreateCheckGroupBox($"slot{i}group", $"Slot {i}", xPos, yPos, 170, 49, control: accessoriesTab);
+                CheckGroupBox group = WinFormHelpers.CreateCheckGroupBox($"slot{i}group", $"Slot {i}", new Point(xPos, yPos), new Size(170, 49), control: accessoriesTab);
                 property.SetValue(this, group);
-                dropDownLists.Add(WinFormHelpers.CreateImageDropdownList($"inventory_accessory_slot_{i}", 5, 19, 160, 23, group, visibleOptions: 5));
+                dropDownLists.Add(WinFormHelpers.CreateImageDropdownList($"inventory_accessory_slot_{i}", new Point(5, 19), new Size(160, 23), group, visibleOptions: 5));
             }
 
             // Offsets for position
@@ -112,9 +113,9 @@ class DsAccessoriesEditor : AccessoriesEditor {
             // Generate the group for each property dynamically & add the dropdown to it
             PropertyInfo property = GetType().GetProperty($"shieldSlot{i}group", BindingFlags.Instance | BindingFlags.NonPublic);
             if (property != null) {
-                CheckGroupBox group = WinFormHelpers.CreateCheckGroupBox($"shieldSlot{i}group", $"Slot {i}", xPos, yPos, 170, 49, control: shieldsTab);
+                CheckGroupBox group = WinFormHelpers.CreateCheckGroupBox($"shieldSlot{i}group", $"Slot {i}", new Point(xPos, yPos), new Size(170, 49), control: shieldsTab);
                 property.SetValue(this, group);
-                shieldDropdowns.Add(WinFormHelpers.CreateImageDropdownList($"inventory_shield_slot_{i}", 5, 19, 160, 23, group, visibleOptions: 5));
+                shieldDropdowns.Add(WinFormHelpers.CreateImageDropdownList($"inventory_shield_slot_{i}", new Point(5, 19), new Size(160, 23), group, visibleOptions: 5));
             }
 
             // Offsets for position

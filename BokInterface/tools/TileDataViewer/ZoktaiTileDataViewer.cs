@@ -93,7 +93,7 @@ class ZoktaiTileDataViewer : TileDataViewer {
                 default:
                     // If tile effect is currently not handled, print its values on-screen & show its position on the tilemap to study it
                     if (_debugMode == true) {
-                        APIs.Gui.AddMessage("hex : " + hex.ToString() + " ( uint : " + tileEffect + ")");
+                        APIs.Gui.AddMessage($"hex: {hex} (uint: {tileEffect})");
                         DrawTileImage(e, "qmark", posX * scale, posY * scale);
                     }
                     break;

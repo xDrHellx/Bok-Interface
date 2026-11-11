@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 
@@ -45,7 +46,7 @@ class BoktaiInventoryEditor : InventoryEditor {
     protected override void AddElements() {
 
         // Add tabs & fields
-        inventoryTabControl = WinFormHelpers.CreateTabControl("inventory_ctrl", 5, 5, 387, 375, this);
+        inventoryTabControl = WinFormHelpers.CreateTabControl("inventory_ctrl", new Point(5, 5), new Size(387, 375), this);
         AddItems();
         AddKeyItems();
 
@@ -53,10 +54,10 @@ class BoktaiInventoryEditor : InventoryEditor {
         SetDefaultValues();
 
         // Add warning
-        WinFormHelpers.CreateImageLabel("tooltip", "warning", 5, 382, this);
-        WinFormHelpers.CreateLabel("warning", "Graphics will be updated upon switching tab in-game.", 23, 375, 293, 30, this, textAlignment: "MiddleLeft");
+        WinFormHelpers.CreateImageLabel("tooltip", "warning", new Point(5, 382), this);
+        WinFormHelpers.CreateLabel("warning", "Graphics will be updated upon switching tab in-game.", new Point(23, 375), new Size(293, 30), this, textAlignment: "MiddleLeft");
 
-        AddSetValuesButton(315, 382, this);
+        AddSetValuesButton(new Point(315, 382), this);
     }
 
     void AddItems() {
@@ -76,14 +77,14 @@ class BoktaiInventoryEditor : InventoryEditor {
             }
 
             // Add fields for that item
-            CheckGroupBox group = WinFormHelpers.CreateCheckGroupBox(entry.Key + "_grp", item.name, posX, posY, 110, 64, control: itemsTab);
-            PictureBox icon = WinFormHelpers.CreatePictureBox(entry.Key + "_img", item.icon, 8, 24, group);
-            WinFormHelpers.CreateLabel(entry.Key + "_label", "Amount", 54, 17, 55, 18, group);
+            CheckGroupBox group = WinFormHelpers.CreateCheckGroupBox($"{entry.Key}_grp", item.name, new Point(posX, posY), new Size(110, 64), control: itemsTab);
+            PictureBox icon = WinFormHelpers.CreatePictureBox($"{entry.Key}_img", item.icon, new Point(8, 24), group);
+            WinFormHelpers.CreateLabel($"{entry.Key}_label", "Amount", new Point(54, 17), new Size(55, 18), group);
             if (item.effect != null) {
                 _toolTip.SetToolTip(icon, item.effect);
             }
 
-            NumericUpDown amountField = WinFormHelpers.CreateNumericUpDown(entry.Key + "_amount", 0, 61, 35, 44, 18, control: group);
+            NumericUpDown amountField = WinFormHelpers.CreateNumericUpDown($"{entry.Key}_amount", 0, new Point(61, 35), new Size(44, 18), control: group);
             amountField.Tag = item.value;
             numericUpDowns.Add(amountField);
 
@@ -112,14 +113,14 @@ class BoktaiInventoryEditor : InventoryEditor {
                 continue;
             }
 
-            CheckGroupBox group = WinFormHelpers.CreateCheckGroupBox(entry.Key + "_grp", keyItem.name, posX, posY, 120, 64, control: keyItemsTab);
-            PictureBox icon = WinFormHelpers.CreatePictureBox(entry.Key + "_img", keyItem.icon, 8, 24, group);
-            WinFormHelpers.CreateLabel(entry.Key + "_label", "Amount", 64, 17, 55, 18, group);
+            CheckGroupBox group = WinFormHelpers.CreateCheckGroupBox($"{entry.Key}_grp", keyItem.name, new Point(posX, posY), new Size(120, 64), control: keyItemsTab);
+            PictureBox icon = WinFormHelpers.CreatePictureBox($"{entry.Key}_img", keyItem.icon, new Point(8, 24), group);
+            WinFormHelpers.CreateLabel($"{entry.Key}_label", "Amount", new Point(64, 17), new Size(55, 18), group);
             if (keyItem.effect != null) {
                 _toolTip.SetToolTip(icon, keyItem.effect);
             }
 
-            NumericUpDown amountField = WinFormHelpers.CreateNumericUpDown(entry.Key + "_amount", 0, 71, 35, 44, 18, control: group);
+            NumericUpDown amountField = WinFormHelpers.CreateNumericUpDown($"{entry.Key}_amount", 0, new Point(71, 35), new Size(44, 18), control: group);
             amountField.Tag = keyItem.value;
 
             // Restrict the maximum amount that can be set for everything except Keys & Silver Coins

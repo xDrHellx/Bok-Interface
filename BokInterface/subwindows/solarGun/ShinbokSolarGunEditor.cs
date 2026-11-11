@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Drawing;
 
 using BokInterface.Addresses;
 using BokInterface.Utils;
@@ -42,7 +43,7 @@ class ShinbokSolarGunEditor : SolarGunEditor {
 
     protected override void AddElements() {
 
-        inventoryTabControl = WinFormHelpers.CreateTabControl("inventory_ctrl", 5, 5, 420, 244, this);
+        inventoryTabControl = WinFormHelpers.CreateTabControl("inventory_ctrl", new Point(5, 5), new Size(420, 244), this);
         AddLensTab();
         AddFramesTab();
 
@@ -53,7 +54,7 @@ class ShinbokSolarGunEditor : SolarGunEditor {
         // Set default values for each field
         SetDefaultValues();
 
-        AddSetValuesButton(349, 252, this);
+        AddSetValuesButton(new Point(349, 252), this);
     }
 
     /// <summary>Adds generated tab for lenses</summary>
@@ -65,8 +66,8 @@ class ShinbokSolarGunEditor : SolarGunEditor {
         for (int i = 1; i < 9; i++) {
 
             // Generate the group & the dropdown to it
-            CheckGroupBox group = WinFormHelpers.CreateCheckGroupBox($"lens_slot{i}_group", $"Slot {i}", xPos, yPos, 130, 48, control: lensTab);
-            lensesDropDownLists.Add(WinFormHelpers.CreateImageDropdownList($"inventory_slot{i}_gun_lens", 5, 19, 120, 23, group, visibleOptions: 5));
+            CheckGroupBox group = WinFormHelpers.CreateCheckGroupBox($"lens_slot{i}_group", $"Slot {i}", new Point(xPos, yPos), new Size(130, 48), control: lensTab);
+            lensesDropDownLists.Add(WinFormHelpers.CreateImageDropdownList($"inventory_slot{i}_gun_lens", new Point(5, 19), new Size(120, 23), group, visibleOptions: 5));
 
             // Offsets for position
             xPos += 134;
@@ -84,8 +85,8 @@ class ShinbokSolarGunEditor : SolarGunEditor {
         int xPos = 6,
             yPos = 6;
         for (int i = 1; i < 13; i++) {
-            CheckGroupBox group = WinFormHelpers.CreateCheckGroupBox($"frame_slot{i}_group", $"Slot {i}", xPos, yPos, 130, 48, control: framesTab);
-            framesDropDownLists.Add(WinFormHelpers.CreateImageDropdownList($"inventory_slot{i}_gun_frame", 5, 19, 120, 23, group, visibleOptions: 5));
+            CheckGroupBox group = WinFormHelpers.CreateCheckGroupBox($"frame_slot{i}_group", $"Slot {i}", new Point(xPos, yPos), new Size(130, 48), control: framesTab);
+            framesDropDownLists.Add(WinFormHelpers.CreateImageDropdownList($"inventory_slot{i}_gun_frame", new Point(5, 19), new Size(120, 23), group, visibleOptions: 5));
 
             xPos += 134;
             if ((i % 3) == 0) {

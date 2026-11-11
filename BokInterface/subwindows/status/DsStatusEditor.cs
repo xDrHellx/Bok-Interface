@@ -39,7 +39,7 @@ class DsStatusEditor : StatusEditor {
         // Get default values, depending on availability, these can be the current in-game values
         IDictionary<string, decimal> defaultValues = GetDefaultValues();
 
-        // AddSetValuesButton(147, 121, this);
+        // AddSetValuesButton(new Point(147, 121), this);
     }
 
     #endregion
