@@ -43,20 +43,19 @@ abstract class Editor : Form {
     #region Methods
 
     /// <summary>Sets common parameters for the form / subwindow</summary>
-    /// <param name="width">Form width</param>
-    /// <param name="height">Form height</param>
-    /// <param name="name">Form name</param>
-    /// <param name="title">Form title</param>
-    protected void SetFormParameters(int width, int height, string name = "", string title = "") {
+    /// <param name="size">Size</param>
+    /// <param name="name">Name</param>
+    /// <param name="title">Title</param>
+    protected void SetFormParameters(Size size, string name = "", string title = "") {
         Name = name != "" ? name : this.name;
         Text = title != "" ? title : text;
+        ClientSize = size;
         AutoScaleDimensions = new SizeF(6F, 15F);
         AutoScaleMode = AutoScaleMode.Inherit;
         FormBorderStyle = FormBorderStyle.FixedSingle;
         BackColor = SystemColors.Control;
         Font = WinFormHelpers.defaultFont;
         AutoScroll = true;
-        ClientSize = new Size(width, height);
         MaximizeBox = false;
     }
 

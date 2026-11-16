@@ -44,7 +44,7 @@ class dsInventoryEditor : InventoryEditor {
         Owner = _bokInterface = bokInterface;
         Icon = _bokInterface.Icon;
 
-        SetFormParameters(628, 538, name, text);
+        SetFormParameters(new Size(628, 538), name, text);
         AddElements();
         Show();
     }

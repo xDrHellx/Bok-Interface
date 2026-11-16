@@ -40,7 +40,7 @@ class ZoktaiInventoryEditor : InventoryEditor {
         Owner = _bokInterface = bokInterface;
         Icon = _bokInterface.Icon;
 
-        SetFormParameters(628, 433, name, text);
+        SetFormParameters(new Size(628, 433), name, text);
         AddElements();
         Show();
     }

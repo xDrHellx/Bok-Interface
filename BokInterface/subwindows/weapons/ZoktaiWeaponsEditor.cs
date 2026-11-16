@@ -36,7 +36,7 @@ class ZoktaiWeaponsEditor : WeaponsEditor {
         Owner = _bokInterface = bokInterface;
         Icon = _bokInterface.Icon;
 
-        SetFormParameters(699, 341, name, text);
+        SetFormParameters(new Size(699, 341), name, text);
         AddElements();
         Show();
     }

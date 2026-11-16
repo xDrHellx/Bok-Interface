@@ -30,7 +30,7 @@ class ZoktaiStatusEditor : StatusEditor {
         Owner = _bokInterface = bokInterface;
         Icon = _bokInterface.Icon;
 
-        SetFormParameters(447, 279);
+        SetFormParameters(new Size(447, 279));
         AddElements();
         Show();
     }

@@ -35,7 +35,7 @@ class DsJunkPartsEditor : Editor {
         Owner = _bokInterface = bokInterface;
         Icon = _bokInterface.Icon;
 
-        SetFormParameters(572, 295, name, text);
+        SetFormParameters(new Size(572, 295), name, text);
         AddElements();
         Show();
     }

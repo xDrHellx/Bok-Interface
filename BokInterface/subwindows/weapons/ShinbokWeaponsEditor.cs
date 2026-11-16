@@ -39,7 +39,7 @@ class ShinbokWeaponsEditor : WeaponsEditor {
         Owner = _bokInterface = bokInterface;
         Icon = _bokInterface.Icon;
 
-        SetFormParameters(699, 312, name, text);
+        SetFormParameters(new Size(699, 312), name, text);
         AddElements();
         Show();
     }

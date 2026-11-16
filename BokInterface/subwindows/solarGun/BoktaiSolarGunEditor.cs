@@ -39,7 +39,7 @@ class BoktaiSolarGunEditor : SolarGunEditor {
         Owner = _bokInterface = bokInterface;
         Icon = _bokInterface.Icon;
 
-        SetFormParameters(408, 262, name, text);
+        SetFormParameters(new Size(408, 262), name, text);
         AddElements();
         Show();
     }

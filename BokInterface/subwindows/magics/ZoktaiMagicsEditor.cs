@@ -34,7 +34,7 @@ class ZoktaiMagicsEditor : MagicsEditor {
         Icon = _bokInterface.Icon;
         _zoktaiMagics = new();
 
-        SetFormParameters(281, 249, name, text);
+        SetFormParameters(new Size(281, 249), name, text);
         AddElements();
         Show();
     }

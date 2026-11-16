@@ -36,7 +36,7 @@ class DsKeyItemsEditor : KeyItemsEditor {
         Owner = _bokInterface = bokInterface;
         Icon = _bokInterface.Icon;
 
-        SetFormParameters(788, 292, name, text);
+        SetFormParameters(new Size(788, 292), name, text);
         AddElements();
         Show();
     }

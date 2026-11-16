@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Drawing;
 
 using BokInterface.Addresses;
 using BokInterface.Utils;
@@ -25,7 +26,7 @@ class BoktaiStatusEditor : StatusEditor {
         Owner = _bokInterface = bokInterface;
         Icon = _bokInterface.Icon;
 
-        SetFormParameters(203, 144);
+        SetFormParameters(new Size(203, 144));
         AddElements();
         Show();
     }

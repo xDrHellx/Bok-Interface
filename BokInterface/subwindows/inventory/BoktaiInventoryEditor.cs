@@ -34,7 +34,7 @@ class BoktaiInventoryEditor : InventoryEditor {
         Owner = _bokInterface = bokInterface;
         Icon = _bokInterface.Icon;
 
-        SetFormParameters(394, 408, name, text);
+        SetFormParameters(new Size(394, 408), name, text);
         AddElements();
         Show();
     }

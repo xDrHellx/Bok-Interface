@@ -57,7 +57,7 @@ class ShinbokSolarBikeEditor : Editor {
         Owner = _bokInterface = bokInterface;
         Icon = _bokInterface.Icon;
 
-        SetFormParameters(396, 245, name, text);
+        SetFormParameters(new Size(396, 245), name, text);
         AddElements();
         Show();
     }

@@ -32,7 +32,7 @@ class ShinbokSolarGunEditor : SolarGunEditor {
         Owner = _bokInterface = bokInterface;
         Icon = _bokInterface.Icon;
 
-        SetFormParameters(411, 279, name, text);
+        SetFormParameters(new Size(411, 279), name, text);
         AddElements();
         Show();
     }

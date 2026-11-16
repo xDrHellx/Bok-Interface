@@ -35,7 +35,7 @@ class ShinbokStatusEditor : StatusEditor {
         Owner = _bokInterface = bokInterface;
         Icon = _bokInterface.Icon;
 
-        SetFormParameters(406, 195);
+        SetFormParameters(new Size(406, 195));
         AddElements();
         Show();
     }

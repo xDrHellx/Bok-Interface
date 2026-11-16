@@ -29,7 +29,7 @@ class ZoktaiAccessoriesEditor : AccessoriesEditor {
         Owner = _bokInterface = bokInterface;
         Icon = _bokInterface.Icon;
 
-        SetFormParameters(691, 240, name, "Protectors editor");
+        SetFormParameters(new Size(691, 240), name, "Protectors editor");
         AddElements();
         Show();
     }

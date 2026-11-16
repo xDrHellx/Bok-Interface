@@ -29,7 +29,7 @@ class ShinbokAccessoriesEditor : AccessoriesEditor {
         Owner = _bokInterface = bokInterface;
         Icon = _bokInterface.Icon;
 
-        SetFormParameters(691, 240, name, text);
+        SetFormParameters(new Size(691, 240), name, text);
         AddElements();
         Show();
     }

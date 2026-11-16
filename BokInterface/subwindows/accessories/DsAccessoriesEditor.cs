@@ -40,7 +40,7 @@ class DsAccessoriesEditor : AccessoriesEditor {
         Owner = _bokInterface = bokInterface;
         Icon = _bokInterface.Icon;
 
-        SetFormParameters(726, 278, name, text);
+        SetFormParameters(new Size(726, 278), name, text);
         AddElements();
         Show();
     }

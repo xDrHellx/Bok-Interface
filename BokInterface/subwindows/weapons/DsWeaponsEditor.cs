@@ -1,3 +1,5 @@
+using System.Drawing;
+
 using BokInterface.Addresses;
 
 namespace BokInterface.Weapons;
@@ -22,7 +24,7 @@ class DsWeaponsEditor : WeaponsEditor {
         Owner = _bokInterface = bokInterface;
         Icon = _bokInterface.Icon;
 
-        SetFormParameters(400, 400, name, text);
+        SetFormParameters(new Size(400, 400), name, text);
         AddElements();
         Show();
     }
