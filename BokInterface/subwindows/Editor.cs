@@ -100,12 +100,12 @@ abstract class Editor : Form {
     ///     <i>Used for setting values to memory addresses after editing.</i>
     /// </summary>
     /// <param name="position">Position</param>
-    /// <param name="form">Parent subwindow</param>
-    protected void AddSetValuesButton(Point position, Control subwindow) {
-        Button setValuesBtn = WinFormHelpers.CreateButton("setValuesBtn", "Set values", position, new Size(75, 23), subwindow);
+    /// <param name="parent">Parent subwindow</param>
+    /// <param name="nbFrames">Number of frames where values will be written</param>
+    protected void AddSetValuesButton(Point position, Control parent, int nbFrames = 10) {
+        Button setValuesBtn = WinFormHelpers.CreateButton("setValuesBtn", "Set values", position, new Size(75, 23), parent);
         setValuesBtn.Click += new EventHandler(delegate (object sender, EventArgs e) {
-            // Write the values for 10 frames
-            for (int i = 0; i < 10; i++) {
+            for (int i = 0; i < nbFrames; i++) {
                 SetValues();
             }
         });
